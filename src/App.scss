@@ -1,0 +1,101 @@
+@import "~antd/dist/antd.css";
+
+.App {
+}
+
+.container {
+    width: 100%;
+    padding-right: 16px;
+    padding-left: 16px;
+    margin-right: auto;
+    margin-left: auto;
+    position: relative;
+}
+
+.btn-trans {
+    color: #a7d4cc;
+    background: transparent;
+    border-radius: 8px;
+    border: 1px solid #8fccc3;
+    &:hover,
+    &:focus {
+        color: #61867f;
+        border: 1px solid #8fccc3;
+        background: transparent;
+    }
+}
+
+.btn-green {
+    color: #fff;
+    background: #48c4b1;
+    border-radius: 99px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.41);
+    border: none;
+    &:hover,
+    &:focus {
+        color: #fff;
+        background: #3dab9a;
+    }
+}
+
+.text-align-left {
+    text-align: left;
+}
+
+.text-align-right {
+    text-align: right;
+}
+
+@media (min-width: 576px) {
+    .container {
+        max-width: 540px;
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        max-width: 720px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        max-width: 960px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1100px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .container {
+        max-width: 1300px;
+    }
+}
+
+@media (min-width: 1600px) {
+    .container {
+        max-width: 1500px;
+    }
+}
+
+.content-container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 992px){
+    .content-container{
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .content-container{
+        width: 95%;
+    }
+}
+

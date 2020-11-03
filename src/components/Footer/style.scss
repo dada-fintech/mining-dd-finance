@@ -1,0 +1,25 @@
+.footer{
+    border-top: 1px solid #707070;
+    padding: 24px 0;
+    ul{
+        padding: 0;
+        li{
+            list-style: none;
+            color: #707070;
+            font-size: 20px;
+            line-height: 27px;
+        }
+    }
+    .social-icon{
+        max-width: 240px;
+    }
+    @media screen and (max-width: 768px){
+        .text-align-right{
+            text-align: left;
+            img{
+                margin: 16px auto;
+        
+            }
+        }
+    }
+}
