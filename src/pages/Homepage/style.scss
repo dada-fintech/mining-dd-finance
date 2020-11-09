@@ -1,4 +1,5 @@
 .homepage {
+    background: linear-gradient(25deg,#f8f8f8 70%, #bef2ea 70%,#fff 100%);
     .section-title {
         color: #010101;
         font-size: 20px;
@@ -15,7 +16,7 @@
     .banner {
         text-align: center;
         padding: 0 0 170px;
-        background: radial-gradient(circle, #dff6f4 0%, #bef2ea 46%, #ffffff 100%);
+        //background: radial-gradient(circle at 100px 100px, #dff6f4 0%, #bef2ea 46%, #ffffff 100%) ;
         .title {
             font-size: 30px;
             line-height: 40px;
@@ -41,6 +42,7 @@
         .feature-item {
             border: 1px solid #707070;
             padding: 4px 12px 20px;
+            cursor: pointer;
             .title {
                 font-size: 20px;
                 line-height: 27px;

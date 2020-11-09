@@ -1,8 +1,13 @@
 import React from 'react'
 import { Row, Col } from 'antd'
 import SocialIcons from '../../assets/socials.png'
+import FaceBook from '../../assets/socials/facebook.svg'
+import Twiiter from '../../assets/socials/twiiter.svg'
+import WeChat from '../../assets/socials/wechat.svg'
+import WeiBo from '../../assets/socials/weibo.svg'
 
 import './style.scss'
+import Logo from "../../assets/logo.png";
 
 export default function Footer() {
 
@@ -37,7 +42,10 @@ export default function Footer() {
                     </ul>
                 </Col>
                 <Col xs={24} md={8} className="text-align-right">
-                    <img alt="" className="social-icon" src={SocialIcons} />
+                    <img src={FaceBook} className="social-icon"/>
+                    <img src={Twiiter} className="social-icon"/>
+                    <img src={WeChat} className="social-icon"/>
+                    <img src={WeiBo} className="social-icon"/>
                 </Col>
             </Row>
         </footer>

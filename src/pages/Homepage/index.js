@@ -63,20 +63,20 @@ export default function Homepage() {
                 <div className="content-container">
                     <h2 className="section-title">ACTIVE PROJECT</h2>
                     <div className="section-subtitle">
-                        Projects under mobilization
+                        Projects in progress
             </div>
                     <div className="project-item">
                         <div className="top">
                             <div className="title">
-                                MINE FUND
+                                MINE FUND APG
                     </div>
                             <div className="info">
-                                <div className="apy">Except APY 30%</div>
+                                <div className="apy">Except APY 15%</div>
                                 <div className="date">October 01, 2020</div>
                             </div>
                         </div>
                         <div className="desc">
-                            The fund will provide investors with access to physical mines, quality mines and miners that will provide rich returns for each investor.
+                            The fund will provide investors access to buy the newest miners. The fund will be distributed into 3 stages.
                 </div>
                         <div className="bottom">
                             <Button className="btn-trans">View project</Button>
@@ -89,12 +89,12 @@ export default function Homepage() {
                                 Sichuan Mine Construction
                     </div>
                             <div className="info">
-                                <div className="apy">Except APY 30%</div>
+                                <div className="apy">Except APY 25%</div>
                                 <div className="date">October 01, 2020</div>
                             </div>
                         </div>
                         <div className="desc">
-                            The fund will provide investors with access to physical mines, quality mines and miners that will provide rich returns for each investor.
+                            The fund is dedicated to building a government-proved data center in Sichuan.
                 </div>
                         <div className="bottom">
                             <Button className="btn-trans">View project</Button>
@@ -112,7 +112,7 @@ export default function Homepage() {
                 <div className="content-container">
                     <h2 className="section-title">VOTING PROJECT</h2>
                     <div className="section-subtitle">
-                        Some
+                        Projects under verification
             </div>
                     <div className="project-item">
                         <div className="top">
