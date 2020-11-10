@@ -7,16 +7,41 @@ import Footer from '../../components/Footer'
 import './style.scss'
 
 export default function Homepage() {
+
+    //实现project-item的随滚轮渐入效果
+    const rows = document.querySelectorAll('.project-item');
+    const elem = document.documentElement;
+
+    document.addEventListener('scroll',(e) =>{
+        let scrolled = elem.scrollTop / (elem.scrollHeight - elem.clientHeight);
+
+        let total = 0.8 / rows.length;
+
+        for (let [index, row] of rows.entries()){
+            let start = total * index;
+            let end = total * (index + 1);
+
+            let progress = (scrolled - start) / (end - start);
+
+            if(progress >= 1) progress = 1;
+            if(progress <= 0) progress = 0;
+
+            row.style.setProperty('--progress' , progress)
+        }
+    })
+    //
+
+
     // const wallet = useWallet()
     return (<div className="homepage">
         <div className="banner">
             <Header />
             <div className="container">
                 <div className="title">
-                    MINING ECOLOGICAL AGGREGATOR
+                    MINING ECOSYSTEM AGGREGATOR
             </div>
                 <div className="subtitle">
-                    We find a good investment for every investor
+                    Find the best investment for every investor
             </div>
                 <Button className="btn-green">Connect wallet and find more</Button>
                 {/* {wallet.status === 'connected' ?  : <div></div>} */}
