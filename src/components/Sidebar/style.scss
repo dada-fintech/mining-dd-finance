@@ -1,0 +1,32 @@
+.sidebar{
+    color: #010101;
+    .block{
+        .title{
+            color: #010101;
+            font-weight: 800;
+            font-size: 20px;
+            line-height: 27px;
+            margin-bottom: 8px;
+        }
+        .box{
+            border: 1px solid #b9b9b9;
+            background: #fff;
+            padding: 16px 12px;
+            font-size: 14px;
+            line-height: 25px;
+            margin-bottom: 24px;
+            .box-item{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                .status-pass{
+                    color: #28BC81;
+                }
+                .status-fail{
+                    color: #BE2828;
+                }
+            }
+        }
+    }
+
+}

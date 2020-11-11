@@ -6,6 +6,7 @@ import {
 import './App.scss';
 
 import Homepage from './pages/Homepage'
+import Dashboard from './pages/Dashboard'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Redirect to="/home" />
           </Route> */}
           <Route exact path="/" component={Homepage} />
+          <Route exact path="/dashboard" component={Dashboard} />
         </Switch>
       </Router>
     </div>
