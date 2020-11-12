@@ -1,6 +1,8 @@
 .dashboard-page {
     background: #f1f1f1;
     .project-intro {
+        margin-top: 200px;
+        margin-bottom: 20px;
         padding: 16px 24px;
         background: #fff;
         border: 1px solid #b9b9b9;
@@ -24,7 +26,8 @@
             font-size: 18px;
             line-height: 24px;
             color: #707070;
-            margin-bottom: 12px;
+            margin-top: 18px;
+            margin-bottom: 58px;
         }
         .tabs{
             padding: 0;
@@ -33,7 +36,7 @@
                 display: inline-block;
                 font-size: 20px;
                 line-height: 27px;
-                color: #707070;
+                color: #b5b5b5;
                 cursor: pointer;
                 margin-right: 80px;
                 &.active{
@@ -43,9 +46,9 @@
         }
     }
     .project-content{
-        border-left: 1px solid #B9B9B9;
-        border-right: 1px solid #B9B9B9;
-        border-bottom: 1px solid #B9B9B9;
+        margin-bottom: 10vh;
+        min-height: 150vh;
+        border: 1px solid #B9B9B9;
         padding: 36px 24px;
         background: #fff;
 

@@ -96,11 +96,11 @@ export default function Homepage() {
                     <div className="project-item">
                         <div className="top">
                             <div className="title">
-                                MINE FUND APG
-                    </div>
+                                <div className="project-name">MINE FUND APG</div>
+                                <div className="date">&nbsp;- October 01, 2020</div>
+                            </div>
                             <div className="info">
-                                <div className="apy">Except APY 15%</div>
-                                <div className="date">October 01, 2020</div>
+                                <div className="apy">Expected APY 15%</div>
                             </div>
                         </div>
                         <div className="desc">
@@ -108,17 +108,17 @@ export default function Homepage() {
                 </div>
                         <div className="bottom">
                             <Button className="btn-trans">View project</Button>
-                            <Progress strokeColor="#3FAA4D" percent={42} className="progress-bar" />
+                            <Progress strokeColor="#3FAA4D" status="active" percent={42} className="progress-bar" />
                         </div>
                     </div>
                     <div className="project-item">
                         <div className="top">
                             <div className="title">
-                                Sichuan Mine Construction
-                    </div>
+                                <div className="project-name">Sichuan Mine Construction</div>
+                                <div className="date">&nbsp;- October 01, 2020</div>
+                            </div>
                             <div className="info">
-                                <div className="apy">Except APY 25%</div>
-                                <div className="date">October 01, 2020</div>
+                                <div className="apy">Expected APY 25%</div>
                             </div>
                         </div>
                         <div className="desc">
@@ -126,7 +126,7 @@ export default function Homepage() {
                 </div>
                         <div className="bottom">
                             <Button className="btn-trans">View project</Button>
-                            <Progress strokeColor="#3FAA4D" percent={56} className="progress-bar" />
+                            <Progress strokeColor="#3FAA4D" status="active" percent={56} className="progress-bar" />
                         </div>
                     </div>
                 </div>
@@ -145,8 +145,9 @@ export default function Homepage() {
                     <div className="project-item">
                         <div className="top">
                             <div className="title">
-                                MINE FUND - PIP-3 - October 01, 2020
-                    </div>
+                                <div className="project-name">MINE FUND - PIP-3</div>
+                                <div className="date">&nbsp;- October 01, 2020</div>
+                            </div>
                             <div className="info">
                                 <div className="votes-available">YOU HAVE 1,592 VOTES</div>
                             </div>
@@ -164,8 +165,9 @@ export default function Homepage() {
                     <div className="project-item">
                         <div className="top">
                             <div className="title">
-                                MINE FUND - PIP-21 - November 11, 2020
-                    </div>
+                                <div className="project-name">MINE FUND - PIP-21</div>
+                                <div className="date">&nbsp;- November 11, 2020</div>
+                            </div>
                             <div className="info">
                                 <div className="votes-none">YOU HAVE NO VOTES</div>
                             </div>

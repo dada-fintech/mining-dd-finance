@@ -47,11 +47,11 @@ export default function Sidebar() {
             </div>
         </div>
         <div className="block">
-            <div className="title">History</div>
+            <div className="title">Doc</div>
             <div className="box">
                 <div className="box-item">
                     <div>
-                        PIP-7
+                        WhitePaper.docx
                     </div>
                     <div className="status-pass">
                         PASS
@@ -67,26 +67,47 @@ export default function Sidebar() {
                 </div>
             </div>
         </div>
-        <div className="block">
-            <div className="title">Stats</div>
-            <div className="box">
-                <div className="box-item">
-                    <div>
-                        Total asset
-                    </div>
-                    <div>
-                        1,000,000 USD
-                    </div>
-                </div>
-                <div className="box-item">
-                    <div>
-                        Total Vote
-                    </div>
-                    <div>
-                        1,000,000 DUSD
-                    </div>
-                </div>
-            </div>
-        </div>
+        {/*<div className="block">*/}
+        {/*    <div className="title">History</div>*/}
+        {/*    <div className="box">*/}
+        {/*        <div className="box-item">*/}
+        {/*            <div>*/}
+        {/*                PIP-7*/}
+        {/*            </div>*/}
+        {/*            <div className="status-pass">*/}
+        {/*                PASS*/}
+        {/*            </div>*/}
+        {/*        </div>*/}
+        {/*        <div className="box-item">*/}
+        {/*            <div>*/}
+        {/*                PIP-1*/}
+        {/*            </div>*/}
+        {/*            <div className="status-fail">*/}
+        {/*                FAIL*/}
+        {/*            </div>*/}
+        {/*        </div>*/}
+        {/*    </div>*/}
+        {/*</div>*/}
+        {/*<div className="block">*/}
+        {/*    <div className="title">Stats</div>*/}
+        {/*    <div className="box">*/}
+        {/*        <div className="box-item">*/}
+        {/*            <div>*/}
+        {/*                Total asset*/}
+        {/*            </div>*/}
+        {/*            <div>*/}
+        {/*                1,000,000 USD*/}
+        {/*            </div>*/}
+        {/*        </div>*/}
+        {/*        <div className="box-item">*/}
+        {/*            <div>*/}
+        {/*                Total Vote*/}
+        {/*            </div>*/}
+        {/*            <div>*/}
+        {/*                1,000,000 DUSD*/}
+        {/*            </div>*/}
+        {/*        </div>*/}
+        {/*    </div>*/}
+        {/*</div>*/}
     </div>)
 }
