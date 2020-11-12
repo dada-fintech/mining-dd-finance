@@ -5,6 +5,8 @@ import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import Sidebar from '../../components/Sidebar'
 import VoteModule from './modules/Vote'
+import ProcessModule from './modules/Process'
+
 
 import './style.scss'
 
@@ -33,6 +35,7 @@ export default function Dashboard() {
                     </div>
                     <div className="project-content">
                         {currentTab === 'vote' && <VoteModule/>}
+                        {currentTab === 'process' && <ProcessModule/>}
                     </div>
                 </Col>
                 <Col md={6}>
