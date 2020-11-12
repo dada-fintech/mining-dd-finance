@@ -14,7 +14,7 @@ import CommentsModule from './modules/Comments'
 import './style.scss'
 
 export default function Dashboard() {
-    const [currentTab, setCurrentTab] = useState('vote')
+    const [currentTab, setCurrentTab] = useState('process')
     return (<div className="dashboard-page">
         <Header />
 
@@ -24,15 +24,15 @@ export default function Dashboard() {
                     <div className="project-intro">
                         <div className="top">
                             <div className="title">MINE FUND - October 01, 2020</div>
-                            <div className="apy">Except APY 15%</div>
+                            <div className="apy">Expected APY 15%</div>
                         </div>
                         <div className="desc">
                             The fund will provide investors with access to physical mines, quality mines and miners that will provide rich returns for each investor.
                         </div>
                         <ul className="tabs">
-                            <li className={currentTab === 'vote' && 'active'} onClick={() => { setCurrentTab('vote') }}>Vote</li>
                             <li className={currentTab === 'process' && 'active'} onClick={() => { setCurrentTab('process') }}>Process</li>
-                            <li className={currentTab === 'detail' && 'active'} onClick={() => { setCurrentTab('detail') }}>Project detail</li>
+                            <li className={currentTab === 'detail' && 'active'} onClick={() => { setCurrentTab('detail') }}>Detail</li>
+                            <li className={currentTab === 'vote' && 'active'} onClick={() => { setCurrentTab('vote') }}>Vote</li>
                             <li className={currentTab === 'comments' && 'active'} onClick={() => { setCurrentTab('comments') }}>Comments</li>
                         </ul>
                     </div>
