@@ -6,6 +6,9 @@ import Footer from '../../components/Footer'
 import Sidebar from '../../components/Sidebar'
 import VoteModule from './modules/Vote'
 import ProcessModule from './modules/Process'
+import DetailModule from './modules/Detail'
+import CommentsModule from './modules/Comments'
+
 
 
 import './style.scss'
@@ -36,6 +39,8 @@ export default function Dashboard() {
                     <div className="project-content">
                         {currentTab === 'vote' && <VoteModule/>}
                         {currentTab === 'process' && <ProcessModule/>}
+                        {currentTab === 'detail' && <DetailModule/>}
+                        {currentTab === 'comments' && <CommentsModule/>}
                     </div>
                 </Col>
                 <Col md={6}>
