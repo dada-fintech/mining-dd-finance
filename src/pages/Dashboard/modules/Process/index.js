@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Input, Select, Button } from 'antd'
+import ConfirmVote from '../../modals/ConfirmVote'
 import './style.scss'
 
 const processList = [
@@ -7,7 +8,7 @@ const processList = [
         title: 'Process #1',
         date: 'October 10, 2020 - October 25, 2020',
         status: 'planning',
-        description: `This step will unlock 30% of the fund to pay for the mining machinery purchase fund, and the purchase contract will be uploaded after the purchase plan is determined and the purchase details are finalized. The planned release date is October 25, 2020.<br/><br/>contact address: 0x654asd798FASDF4654sadf411sfasdfFDAds`,
+        description: `Unlock Value: <strong>300,000USDT(30%)</strong><br/><br/>This step will unlock 30% of the fund to pay for the mining machinery purchase fund, and the purchase contract will be uploaded after the purchase plan is determined and the purchase details are finalized. The planned release date is October 25, 2020.<br/><br/>contact address: 0x654asd798FASDF4654sadf411sfasdfFDAds`,
         target: 100,
         voted: 70,
     },
@@ -24,6 +25,7 @@ const tokenSelect = (
 )
 
 export default function Vote() {
+    const [confirmVoteVisible, setConfirmVoteVisible] = useState(false)
 
     return (<div className="process-module">
         {processList.map(item => (
@@ -43,15 +45,17 @@ export default function Vote() {
                 <div className="description" dangerouslySetInnerHTML={{ __html: item.description }}></div>
                 <div className="handle-area">
                     <Input addonAfter={tokenSelect} />
-                    <Button className="btn-green">Approve</Button>
+                    <Button className="btn-green" onClick={() => { setConfirmVoteVisible(true) }}>Lock</Button>
                 </div>
                 <div className="votes-bar">
                     <div className="done" style={{ width: (item.voted / item.target) * 100 + '%' }}></div>
                 </div>
-                <div className="process-tag" style={{ marginLeft: (item.voted / item.target) * 100 - 5 + '%'}}>
-                        {Number((item.voted / item.target) * 100).toFixed(2)}%
+                <div className="process-tag" style={{ marginLeft: (item.voted / item.target) * 100 - 5 + '%' }}>
+                    {Number((item.voted / item.target) * 100).toFixed(2)}%
                 </div>
             </div>
         ))}
+
+        {confirmVoteVisible && <ConfirmVote onCancel={() => { setConfirmVoteVisible(false) }} />}
     </div>)
 }

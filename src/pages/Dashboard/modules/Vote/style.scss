@@ -44,27 +44,6 @@
             line-height: 24px;
             margin-bottom: 12px;
         }
-        .votes-bar {
-            border-radius: 5px;
-            height: 10px;
-            margin-bottom: 10px;
-            display: flex;
-            overflow: hidden;
-            .approve {
-                background: #28bc81;
-                height: 10px;
-            }
-            .object {
-                background: #be2828;
-                height: 10px;
-            }
-        }
-        .votes-analyze{
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-size: 18px;
-            color: #707070;
-        }
+     
     }
 }
