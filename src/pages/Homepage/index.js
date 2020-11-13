@@ -1,5 +1,6 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { Button, Row, Col, Progress } from 'antd'
+import { useWallet } from 'use-wallet'
 // import { useWallet } from 'use-wallet'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
@@ -7,6 +8,8 @@ import Footer from '../../components/Footer'
 import './style.scss'
 
 export default function Homepage() {
+    const wallet = useWallet()
+
     useEffect(() => {
 
         //实现project-item的随滚轮渐入效果
@@ -46,7 +49,7 @@ export default function Homepage() {
                 <div className="subtitle">
                     Find the best investment for every investor
             </div>
-                <Button className="btn-green">Connect wallet and find more</Button>
+                {wallet.status === 'connected' ? <Button className="btn-green">Wallet Connected</Button> : <Button className="btn-green" onClick={() => { wallet.connect() }}>Connect wallet and find more</Button>}
                 {/* {wallet.status === 'connected' ?  : <div></div>} */}
             </div>
         </div>

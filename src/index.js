@@ -3,13 +3,15 @@ import ReactDOM from 'react-dom';
 // import { UseWalletProvider } from 'use-wallet'
 import './index.css';
 import App from './App';
+import { UseWalletProvider } from 'use-wallet'
+
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <UseWalletProvider> */}
+    <UseWalletProvider>
       <App />
-    {/* </UseWalletProvider> */}
+    </UseWalletProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

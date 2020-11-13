@@ -16,11 +16,11 @@ const processList = [
 ]
 
 const tokenSelect = (
-    <Select defaultValue="BTC">
-        <Select.Option value="BTC">BTC</Select.Option>
+    <Select defaultValue="USDT">
+        {/* <Select.Option value="BTC">BTC</Select.Option> */}
         <Select.Option value="USDT">USDT</Select.Option>
-        <Select.Option value="USDC">USDC</Select.Option>
-        <Select.Option value="ETC">ETC</Select.Option>
+        {/* <Select.Option value="USDC">USDC</Select.Option>
+        <Select.Option value="ETC">ETC</Select.Option> */}
     </Select>
 )
 
