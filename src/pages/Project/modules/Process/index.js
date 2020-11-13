@@ -17,12 +17,12 @@ import './style.scss'
 // )
 
 export default function Process(props) {
-    const {process} = props
+    const { process } = props
     const [confirmVoteVisible, setConfirmVoteVisible] = useState(false)
     const [lockNum, setLockedNum] = useState('')
     const [contract, setContract] = useState('')
 
-    useEffect(async() => {
+    useEffect(async () => {
         const provider = await detectEthereumProvider(
             'wss://mainnet.infura.io/ws/v3/89db527f19e14a00902a439ae587a25b',
         )
@@ -75,15 +75,15 @@ export default function Process(props) {
 
     return (<div className="process-module">
         {/* {processList.map(item => ( */}
-            <div className="process-item">
-                <div className="text-area"> 
-                <strong>{process.title}</strong><br/>
-                <strong>项目募集金额</strong>:{process.amount}<br/>
-                <strong>年化收益率</strong>:{process.apy}<br/>
+        <div className="process-item">
+            <div className="text-area">
+                <strong>{process.title}</strong><br />
+                <strong>项目募集金额</strong>:{process.amount}<br />
+                <strong>年化收益率</strong>:{process.apy}<br />
                 <strong>赎回日期</strong>:{process.date}
-                </div>
-              
-                {/* <div className="top">
+            </div>
+
+            {/* <div className="top">
                     <div className="title">{item.title}</div>
                     <div>
                         <div className="date">{item.date} </div>
@@ -92,21 +92,21 @@ export default function Process(props) {
                         </div>
                     </div>
                 </div> */}
-                {/* <div className="desc-title">
+            {/* <div className="desc-title">
                     Description
                 </div>
                 <div className="description" dangerouslySetInnerHTML={{ __html: item.description }}></div> */}
-                <div className="handle-area">
-                    <Input value={lockNum} onChange={(event) => { setLockedNum(event.target.value) }} suffix="USDT" />
-                    <Button className="btn-green" onClick={() => { doLock() }}>投资</Button>
-                </div>
-                <div className="votes-bar">
-                    <div className="done" style={{ width: (process.voted / process.target) * 100 + '%' }}></div>
-                </div>
-                <div className="process-tag" style={{ marginLeft: (process.voted / process.target) * 100 + '%' }}>
-                    {Number((process.voted / process.target) * 100).toFixed(2)}%
-                </div>
+            <div className="handle-area">
+                <Input value={lockNum} onChange={(event) => { setLockedNum(event.target.value) }} suffix="USDT" />
+                <Button className="btn-green" onClick={() => { doLock() }}>投资</Button>
             </div>
+            <div className="votes-bar">
+                <div className="done" style={{ width: (process.voted / process.target) * 100 + '%' }}></div>
+            </div>
+            <div className="process-tag" style={{ marginLeft: ((process.voted / process.target) * 100 > 50 ? ((process.voted / process.target) * 100 - 7) : (process.voted / process.target) * 100) + '%' }}>
+                {Number((process.voted / process.target) * 100).toFixed(2)}%
+                </div>
+        </div>
         {/* ))} */}
 
         {confirmVoteVisible && <ConfirmVote onCancel={() => { setConfirmVoteVisible(false) }} />}
