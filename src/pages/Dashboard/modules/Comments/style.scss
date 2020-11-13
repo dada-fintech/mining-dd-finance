@@ -14,18 +14,31 @@
             .id {
             }
             .address {
-                font-weight: 800;
-                font-size: 18px;
+                font-weight: 500;
+                font-size: 16px;
                 line-height: 34px;
+                &:hover{
+                    color: #3dab9a;
+                    cursor: pointer;
+                }
             }
         }
         .description {
+            font-size: 16px;
+            color: rgba(0,0,0,0.7);
             margin-bottom: 12px;
         }
-        .date {
-            text-align: right;
-            font-weight: 800;
+        .content-text{
+            font-weight: 700;
             font-size: 18px;
+            margin-top: 5px;
+            color: rgba(0,0,0,0.9);
+        }
+        .date {
+            color: rgba(0,0,0,0.5);
+            text-align: right;
+            font-weight: 600;
+            font-size: 14px;
             line-height: 34px;
         }
     }

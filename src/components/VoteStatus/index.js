@@ -11,7 +11,7 @@ export default function VoteStatus(props) {
             </div>
             <div className="votes-analyze">
                 <div>
-                    {approve} confirm
+                    {approve} approve
         </div>
                 <div>
                     {object} object
