@@ -68,7 +68,7 @@ export default function Project() {
             `,
             process: {
                 title: '募集完成',
-                amount: '200,000 USDT',
+                amount: '100,000 USDT',
                 apy: '10%',
                 date: '2021年11月12日',
                 target: 100,
@@ -106,7 +106,7 @@ export default function Project() {
             <img class="mining-full" src="/img/mining-3.jpeg"/>
             </div>
             
-            <p>    本项目拟采购50台蚂蚁T19作为投资标的矿机，蚂蚁矿机作为比特大陆的明星产品，多年来占有大量市场份额，19系列更是当前最高性价比的大算力机型之一。</p>
+            <p>本项目拟采购50台蚂蚁T19作为投资标的矿机，蚂蚁矿机作为比特大陆的明星产品，多年来占有大量市场份额，19系列更是当前最高性价比的大算力机型之一。</p>
             <p>本项目所采购的型号参数如下：</p>
             <div class="detail-line">
                 <div>
@@ -125,7 +125,7 @@ export default function Project() {
             `,
             process: {
                 title: '募资进行中',
-                amount: '100,000 USDT',
+                amount: '200,000 USDT',
                 apy: '15%',
                 date: '2021年11月12日',
                 target: 100,

@@ -16,10 +16,10 @@ export default function Footer() {
             <Row>
                 <Col xs={12} md={4}>
                     <ul>
-                        <li>Resources</li>
-                        <li>Doc</li>
-                        <li>FAQs</li>
-                        <li>Service Status</li>
+                        {/* <li>Resources</li> */}
+                        <li><a target="_blank" href="https://doc.dd.finance">Doc</a></li>
+                        {/* <li>FAQs</li>
+                        <li>Service Status</li> */}
                     </ul>
                 </Col>
                 <Col xs={12} md={4}>
@@ -42,10 +42,12 @@ export default function Footer() {
                     </ul>
                 </Col>
                 <Col xs={24} md={8} className="text-align-right">
-                    <img src={FaceBook} className="social-icon"/>
-                    <img src={Twiiter} className="social-icon"/>
-                    <img src={WeChat} className="social-icon"/>
-                    <img src={WeiBo} className="social-icon"/>
+                    <img src={FaceBook} className="social-icon" />
+                    <a target="_blank" href="https://twitter.com/FinanceDada">
+                        <img src={Twiiter} className="social-icon" />
+                    </a>
+                    <img src={WeChat} className="social-icon" />
+                    <img src={WeiBo} className="social-icon" />
                 </Col>
             </Row>
         </footer>
