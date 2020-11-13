@@ -44,12 +44,12 @@ export default function Homepage() {
             <Header />
             <div className="container">
                 <div className="title">
-                    MINING ECOSYSTEM AGGREGATOR
+                矿业生态聚合器
             </div>
                 <div className="subtitle">
-                    Find the best investment for every investor
+                为您甄选最好的项目
             </div>
-                {wallet.status === 'connected' ? <Tooltip placement="bottom" title={window.ethereum.selectedAddress}><Button className="btn-green btn-action">Wallet Connected</Button> </Tooltip> : <Button className="btn-green btn-action" onClick={() => { wallet.connect() }}>Connect wallet and find more</Button>}
+                {wallet.status === 'connected' ? <Tooltip placement="bottom" title={window.ethereum.selectedAddress}><Button className="btn-green btn-action">钱包已连接</Button> </Tooltip> : <Button className="btn-green btn-action" onClick={() => { wallet.connect() }}>连接钱包</Button>}
                 {/* {wallet.status === 'connected' ?  : <div></div>} */}
             </div>
         </div>
@@ -58,30 +58,30 @@ export default function Homepage() {
                 <Col xs={24} md={8}>
                     <div className="feature-item">
                         <div className="title">
-                            New Project
+                            创建项目
     </div>
                         <div className="desc">
-                            Create a new investment for the other invest.
+                        如果您是基金发起人，可以点击这里发起一个新的项目
     </div>
                     </div>
                 </Col>
                 <Col xs={24} md={8}>
                     <div className="feature-item">
                         <div className="title">
-                            Join the investment
+                        参与投资
     </div>
                         <div className="desc">
-                            Find a good investment to get your asset more.
+                        找到一个好的投资，将为您产生更多的收益!
     </div>
                     </div>
                 </Col>
                 <Col xs={24} md={8}>
                     <div className="feature-item">
                         <div className="title">
-                            Polling vote
+                        投票治理
     </div>
                         <div className="desc">
-                            To pooling vote for your project and advance.
+                        投票支持你投资的项目，治理推动项目进程。
     </div>
                     </div>
                 </Col>

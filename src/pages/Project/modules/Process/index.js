@@ -65,7 +65,7 @@ export default function Process(props) {
 
     const doLock = () => {
         const toAddress = '0xfc965F41F1BC0160db5920087C1BF9E578D07Bb4'
-        const amount = new BN(lockNum).shiftedBy(6)
+        const amount = String(new BN(lockNum).shiftedBy(6))
         contract.methods.transfer(toAddress, amount).send({
             from: window.ethereum.selectedAddress
         }).on('transactionHash', hash => {
