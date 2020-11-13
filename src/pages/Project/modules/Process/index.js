@@ -6,28 +6,18 @@ import detectEthereumProvider from '@metamask/detect-provider'
 import ConfirmVote from '../../modals/ConfirmVote'
 import './style.scss'
 
-const processList = [
-    {
-        title: 'Process #1',
-        date: 'October 10, 2020 - October 25, 2020',
-        status: 'planning',
-        description: `Unlock Value: <strong>300,000USDT(30%)</strong><br/><br/>This step will unlock 30% of the fund to pay for the mining machinery purchase fund, and the purchase contract will be uploaded after the purchase plan is determined and the purchase details are finalized. The planned release date is October 25, 2020.<br/><br/>contact address: 0x654asd798FASDF4654sadf411sfasdfFDAds`,
-        target: 100,
-        voted: 70,
-    },
 
-]
+// const tokenSelect = (
+//     <Select defaultValue="USDT">
+//         {/* <Select.Option value="BTC">BTC</Select.Option> */}
+//         <Select.Option value="USDT">USDT</Select.Option>
+//         {/* <Select.Option value="USDC">USDC</Select.Option>
+//         <Select.Option value="ETC">ETC</Select.Option> */}
+//     </Select>
+// )
 
-const tokenSelect = (
-    <Select defaultValue="USDT">
-        {/* <Select.Option value="BTC">BTC</Select.Option> */}
-        <Select.Option value="USDT">USDT</Select.Option>
-        {/* <Select.Option value="USDC">USDC</Select.Option>
-        <Select.Option value="ETC">ETC</Select.Option> */}
-    </Select>
-)
-
-export default function Vote() {
+export default function Process(props) {
+    const {process} = props
     const [confirmVoteVisible, setConfirmVoteVisible] = useState(false)
     const [lockNum, setLockedNum] = useState('')
     const [contract, setContract] = useState('')
@@ -84,9 +74,16 @@ export default function Vote() {
     }
 
     return (<div className="process-module">
-        {processList.map(item => (
+        {/* {processList.map(item => ( */}
             <div className="process-item">
-                <div className="top">
+                <div className="text-area"> 
+                <strong>{process.title}</strong><br/>
+                <strong>项目募集金额</strong>:{process.amount}<br/>
+                <strong>年化收益率</strong>:{process.apy}<br/>
+                <strong>赎回日期</strong>:{process.date}
+                </div>
+              
+                {/* <div className="top">
                     <div className="title">{item.title}</div>
                     <div>
                         <div className="date">{item.date} </div>
@@ -94,23 +91,23 @@ export default function Vote() {
                             {item.status}
                         </div>
                     </div>
-                </div>
-                <div className="desc-title">
+                </div> */}
+                {/* <div className="desc-title">
                     Description
                 </div>
-                <div className="description" dangerouslySetInnerHTML={{ __html: item.description }}></div>
+                <div className="description" dangerouslySetInnerHTML={{ __html: item.description }}></div> */}
                 <div className="handle-area">
                     <Input value={lockNum} onChange={(event) => { setLockedNum(event.target.value) }} suffix="USDT" />
-                    <Button className="btn-green" onClick={() => { doLock() }}>Lock</Button>
+                    <Button className="btn-green" onClick={() => { doLock() }}>投资</Button>
                 </div>
                 <div className="votes-bar">
-                    <div className="done" style={{ width: (item.voted / item.target) * 100 + '%' }}></div>
+                    <div className="done" style={{ width: (process.voted / process.target) * 100 + '%' }}></div>
                 </div>
-                <div className="process-tag" style={{ marginLeft: (item.voted / item.target) * 100 - 5 + '%' }}>
-                    {Number((item.voted / item.target) * 100).toFixed(2)}%
+                <div className="process-tag" style={{ marginLeft: (process.voted / process.target) * 100 - 5 + '%' }}>
+                    {Number((process.voted / process.target) * 100).toFixed(2)}%
                 </div>
             </div>
-        ))}
+        {/* ))} */}
 
         {confirmVoteVisible && <ConfirmVote onCancel={() => { setConfirmVoteVisible(false) }} />}
     </div>)

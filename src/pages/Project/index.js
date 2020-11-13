@@ -49,7 +49,15 @@ export default function Project() {
             　　
             <img src="/img/return-table-1.png"/><br/>
             
-            `
+            `,
+            process: {
+                title: '募资进行中',
+                amount: '200,000 USDT',
+                apy: '15%',
+                date: '2021年11月12日',
+                target: 100,
+                voted: 89,
+            }
         }
     } else if (id == 2) {
         project = {
@@ -81,7 +89,15 @@ export default function Project() {
             </div>
             　　
             <img src="/img/return-table-2.png"/><br/>
-            `
+            `,
+            process: {
+                title: '募资进行中',
+                amount: '100,000 USDT',
+                apy: '18%',
+                date: '2021年11月12日',
+                target: 100,
+                voted: 70,
+            }
         }
     }
 
@@ -106,7 +122,7 @@ export default function Project() {
                     </div>
                     <div className="project-content">
                         {/* {currentTab === 'vote' && <VoteModule/>} */}
-                        {currentTab === 'process' && <ProcessModule />}
+                        {currentTab === 'process' && <ProcessModule process={project.process}/>}
                         {currentTab === 'detail' && <DetailModule fullDesc={project.fullDesc} />}
                         {/* {currentTab === 'comments' && <CommentsModule/>} */}
                     </div>
