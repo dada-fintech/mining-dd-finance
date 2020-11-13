@@ -51,12 +51,12 @@ export default function Project() {
             
             `,
             process: {
-                title: '募资进行中',
+                title: '募集完成',
                 amount: '200,000 USDT',
                 apy: '15%',
                 date: '2021年11月12日',
                 target: 100,
-                voted: 89,
+                voted: 100,
             }
         }
     } else if (id == 2) {
