@@ -75,6 +75,16 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            .status{
+                font-size: 20px;
+                line-height: 27px;
+                &.red{
+                    color: #c73737;
+                }
+                &.green{
+                    color: #2fbf47;
+                }
+            }
             .title {
                 color: #010101;
                 font-size: 20px;

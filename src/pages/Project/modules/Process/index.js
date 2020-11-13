@@ -103,7 +103,7 @@ export default function Process(props) {
                 <div className="votes-bar">
                     <div className="done" style={{ width: (process.voted / process.target) * 100 + '%' }}></div>
                 </div>
-                <div className="process-tag" style={{ marginLeft: (process.voted / process.target) * 100 - 5 + '%' }}>
+                <div className="process-tag" style={{ marginLeft: (process.voted / process.target) * 100 - 7 + '%' }}>
                     {Number((process.voted / process.target) * 100).toFixed(2)}%
                 </div>
             </div>

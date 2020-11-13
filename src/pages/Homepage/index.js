@@ -102,6 +102,7 @@ export default function Homepage() {
                                 <div className="project-name">BTC矿机托管项目</div>
                                 <div className="date">&nbsp; - 2020年11月13日</div>
                             </div>
+                            <div className="status red">已满额</div>
                             <div className="info">
                                 <div className="apy">年化收益率 10%</div>
                             </div>
@@ -122,6 +123,8 @@ export default function Homepage() {
                                 <div className="project-name">BTC矿机托管项目</div>
                                 <div className="date">&nbsp; - 2020年11月13日</div>
                             </div>
+                            <div className="status green">尚未开放</div>
+
                             <div className="info">
                                 <div className="apy">年化收益率 15%</div>
                             </div>

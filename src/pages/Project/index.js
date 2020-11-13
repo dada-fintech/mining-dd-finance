@@ -129,7 +129,7 @@ export default function Project() {
                 apy: '15%',
                 date: '2021年11月12日',
                 target: 100,
-                voted: 70,
+                voted: 0,
             }
         }
     }

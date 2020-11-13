@@ -19,6 +19,9 @@ export default function Header() {
             </a>
             <nav>
                 {/* <a style={{ marginRight: '16px' }}>Project</a> */}
+                <span className="hint">
+                本站所示内容不构成任何投资建议
+                </span>
                 {wallet.status === 'connected' ? <Tooltip title={window.ethereum.selectedAddress}>
                     <Button className="btn-green">{window.ethereum.selectedAddress.slice(0, 4) + '...' + window.ethereum.selectedAddress.slice(-4)}</Button>
                 </Tooltip>
