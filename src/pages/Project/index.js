@@ -22,7 +22,7 @@ export default function Project() {
     if (id == 1) {
         project = {
             title: 'BTC矿机托管项目 - 2020年11月13日',
-            apy: '18%',
+            apy: '10%',
             desc: '新疆矿场50台神马M20s矿机托管项目<br/> 该项目将会采购50台神马M20s矿机并托管在位于新疆的矿场，限量10w美金。',
             fullDesc: `
             <div class="text-line">
@@ -40,7 +40,7 @@ export default function Project() {
 
             <div class="text-line">
             <div class="title">项目策略</div>
-            <p>当前神马矿机报价约为6000-8000元/台，故本项目拟筹资100000美金作为项目启动费用，其中50000美金作为矿机采购费用，另外50000美金作为套保币价使用。收益周期为12个月，年化收益率为18%，届时将会公示采购及收益记录。</p>
+            <p>当前神马矿机报价约为6000-8000元/台，故本项目拟筹资100000美金作为项目启动费用，其中50000美金作为矿机采购费用，另外50000美金作为套保币价使用。收益周期为12个月，年化收益率为10%，届时将会公示采购及收益记录。</p>
             
             </div>
             <div class="detail-line">
@@ -69,7 +69,7 @@ export default function Project() {
             process: {
                 title: '募集完成',
                 amount: '200,000 USDT',
-                apy: '15%',
+                apy: '10%',
                 date: '2021年11月12日',
                 target: 100,
                 voted: 100,
@@ -78,7 +78,7 @@ export default function Project() {
     } else if (id == 2) {
         project = {
             title: 'BTC矿机托管项目 - 2020年11月13日',
-            apy: '20%',
+            apy: '15%',
             desc: '新疆矿场50台蚂蚁T19矿机托管项目<br/>该项目将会采购50台蚂蚁T19矿机并托管在位于新疆阿克苏的矿场，限量20w美金。',
             fullDesc: `
             <div class="text-line">
@@ -99,8 +99,7 @@ export default function Project() {
             <div class="title">
             项目策略
             </div>
-            <p>当前神马矿机报价约为15000-17000元/台，故本项目拟筹资200000美金作为项目启动费用，其中100000美金作为矿机采购费用，另外100000美金作为套保币价使用。收益周期为12个月，年化收益率为20%，届时将会公示采购及收益记录。</p>
-            
+            <p>当前神马矿机报价约为15000-17000元/台，故本项目拟筹资200000美金作为项目启动费用，其中100000美金作为矿机采购费用，另外100000美金作为套保币价使用。收益周期为12个月，年化收益率为15%，届时将会公示采购及收益记录。</p>
             
             </div>
             <div class="detail-line">
@@ -127,7 +126,7 @@ export default function Project() {
             process: {
                 title: '募资进行中',
                 amount: '100,000 USDT',
-                apy: '18%',
+                apy: '15%',
                 date: '2021年11月12日',
                 target: 100,
                 voted: 70,

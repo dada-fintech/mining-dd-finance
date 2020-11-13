@@ -103,7 +103,7 @@ export default function Homepage() {
                                 <div className="date">&nbsp; - 2020年11月13日</div>
                             </div>
                             <div className="info">
-                                <div className="apy">年化收益率 18%</div>
+                                <div className="apy">年化收益率 10%</div>
                             </div>
                         </div>
                         <div className="desc">
@@ -123,7 +123,7 @@ export default function Homepage() {
                                 <div className="date">&nbsp; - 2020年11月13日</div>
                             </div>
                             <div className="info">
-                                <div className="apy">年化收益率 20%</div>
+                                <div className="apy">年化收益率 15%</div>
                             </div>
                         </div>
                         <div className="desc">
