@@ -14,9 +14,11 @@ export default function Header() {
     }, [])
     return (<header className="header">
         <div className="container">
-            <img src={Logo} className="logo" />
+            <a href="/">
+                <img src={Logo} className="logo" />
+            </a>
             <nav>
-                <a style={{ marginRight: '8px' }}>Project</a>
+                <a style={{ marginRight: '16px' }}>Project</a>
                 {wallet.status === 'connected' ? <Tooltip title={window.ethereum.selectedAddress}>
                     <Button className="btn-green">{window.ethereum.selectedAddress.slice(0, 4) + '...' + window.ethereum.selectedAddress.slice(-4)}</Button>
                 </Tooltip>

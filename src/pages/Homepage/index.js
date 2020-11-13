@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Button, Row, Col, Progress } from 'antd'
+import { Button, Row, Col, Tooltip } from 'antd'
 import { useWallet } from 'use-wallet'
 // import { useWallet } from 'use-wallet'
 import Header from '../../components/Header'
@@ -49,7 +49,7 @@ export default function Homepage() {
                 <div className="subtitle">
                     Find the best investment for every investor
             </div>
-                {wallet.status === 'connected' ? <Button className="btn-green">Wallet Connected</Button> : <Button className="btn-green" onClick={() => { wallet.connect() }}>Connect wallet and find more</Button>}
+                {wallet.status === 'connected' ? <Tooltip placement="bottom" title={window.ethereum.selectedAddress}><Button className="btn-green btn-action">Wallet Connected</Button> </Tooltip> : <Button className="btn-green btn-action" onClick={() => { wallet.connect() }}>Connect wallet and find more</Button>}
                 {/* {wallet.status === 'connected' ?  : <div></div>} */}
             </div>
         </div>
@@ -92,44 +92,48 @@ export default function Homepage() {
         <div className="active-project-section">
             <div className="container">
                 <div className="content-container">
-                    <h2 className="section-title">ACTIVE PROJECT</h2>
-                    <div className="section-subtitle">
+                    <h2 className="section-title">进行中的项目</h2>
+                    {/* <div className="section-subtitle">
                         Projects in progress
-            </div>
+            </div> */}
                     <div className="project-item">
                         <div className="top">
                             <div className="title">
-                                <div className="project-name">MINE FUND APG</div>
-                                <div className="date">&nbsp;- October 01, 2020</div>
+                                <div className="project-name">BTC矿机托管项目</div>
+                                <div className="date">&nbsp; - 2020年11月13日</div>
                             </div>
                             <div className="info">
-                                <div className="apy">Expected APY 15%</div>
+                                <div className="apy">年化收益率 18%</div>
                             </div>
                         </div>
                         <div className="desc">
-                            The fund will provide investors access to buy the newest miners. The fund will be distributed into 3 stages.
+                            新疆矿场50台神马M20s矿机托管项目<br />该项目将会采购50台神马M20s矿机并托管在位于新疆准东的矿场，限量10w美金。
                 </div>
                         <div className="bottom">
-                            <Button className="btn-trans">View project</Button>
-                            <Progress strokeColor="#3FAA4D" status="active" percent={42} className="progress-bar" />
+                            <a href="/project/1">
+                                <Button className="btn-trans">项目详情</Button>
+                            </a>
+                            {/* <Progress strokeColor="#3FAA4D" status="active" percent={42} className="progress-bar" /> */}
                         </div>
                     </div>
                     <div className="project-item">
                         <div className="top">
                             <div className="title">
-                                <div className="project-name">Sichuan Mine Construction</div>
-                                <div className="date">&nbsp;- October 01, 2020</div>
+                                <div className="project-name">BTC矿机托管项目</div>
+                                <div className="date">&nbsp; - 2020年11月13日</div>
                             </div>
                             <div className="info">
-                                <div className="apy">Expected APY 25%</div>
+                                <div className="apy">年化收益率 20%</div>
                             </div>
                         </div>
                         <div className="desc">
-                            The fund is dedicated to building a government-proved data center in Sichuan.
+                            新疆矿场50台蚂蚁T19矿机托管项目<br />该项目将会采购50台蚂蚁T19矿机并托管在位于新疆阿克苏的矿场，限量20w美金。
                 </div>
                         <div className="bottom">
-                            <Button className="btn-trans">View project</Button>
-                            <Progress strokeColor="#3FAA4D" status="active" percent={56} className="progress-bar" />
+                            <a href="/project/2">
+                                <Button className="btn-trans">项目详情</Button>
+                            </a>
+                            {/* <Progress strokeColor="#3FAA4D" status="active" percent={56} className="progress-bar" /> */}
                         </div>
                     </div>
                 </div>
@@ -137,7 +141,7 @@ export default function Homepage() {
 
         </div>
 
-
+        {/* 
         <div className="voting-project-section">
             <div className="container">
                 <div className="content-container">
@@ -188,6 +192,8 @@ export default function Homepage() {
                 </div>
             </div>
         </div>
+        
+         */}
         <Footer />
-    </div>)
+    </div >)
 }
