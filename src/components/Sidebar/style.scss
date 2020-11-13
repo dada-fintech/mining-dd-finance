@@ -1,6 +1,10 @@
 .sidebar{
-    margin-top: 200px;
+    position: fixed;
+    margin-top: 50px;
     color: #010101;
+    width: 16vw;
+    padding: 2px;
+    //background: rgba(0,0,0,0.01);
     .block{
         .title{
             color: #010101;
@@ -10,16 +14,22 @@
             margin-bottom: 8px;
         }
         .box{
-            border: 1px solid #b9b9b9;
-            background: #fff;
+            //border: 1px solid #b9b9b9;
+            background: rgba(255,255,255,0.1);
             padding: 16px 12px;
             font-size: 14px;
             line-height: 25px;
             margin-bottom: 24px;
             .box-item{
+                background: rgba(255,255,255,0.65);
+                margin-top: 5px;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
+                cursor: pointer;
+                &:hover{
+                    color:darkcyan;
+                }
                 .status-pass{
                     color: #28BC81;
                 }
@@ -27,13 +37,53 @@
                     color: #BE2828;
                 }
             }
+            .box-item-doc{
+                //background: rgba(255,255,255,0.65);
+                margin-top: 5px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                cursor: pointer;
+                &:hover{
+                    color:darkcyan;
+                }
+            }
         }
         .supporter-box{
+            overflow: auto;
+            max-height: 300px;
             padding: 0;
             border-bottom: none;
+            //overflow滚动条样式
+            &::-webkit-scrollbar {
+                width: 14px;
+                height: 14px;
+            }
+
+            &::-webkit-scrollbar-track,
+            &::-webkit-scrollbar-thumb {
+                border-radius: 999px;
+                border: 5px solid transparent;
+            }
+
+            &::-webkit-scrollbar-track {
+                box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2) inset;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                min-height: 20px;
+                background-clip: content-box;
+                box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.2) inset;
+            }
+
+            &::-webkit-scrollbar-corner {
+                background: transparent;
+            }
+            //overflow滚动条样式
+
             .box-item{
                 padding: 4px 6px;
-                border-bottom: 1px solid #B9B9B9;
+                //border-bottom: 1px solid #B9B9B9;
                 position: relative;
                 .progress{
                     background: #B1DAF2;
