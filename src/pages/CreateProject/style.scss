@@ -1,0 +1,166 @@
+.create-project-page {
+    background: #f1f1f1;
+    color: #707070;
+    .create-project-main {
+        padding: 64px 0;
+    }
+    .add-item-box {
+        border: 1px solid #707070;
+        background: #f9f9f9;
+        padding: 40px 0;
+        text-align: center;
+        font-size: 36px;
+        cursor: pointer;
+    }
+    .form-item {
+        margin-bottom: 20px;
+        .label {
+            font-size: 20px;
+            line-height: 27px;
+            margin-bottom: 8px;
+        }
+        .hint {
+            margin-top: 5px;
+            font-size: 14px;
+            line-height: 25px;
+            color: #010101;
+            &.red {
+                color: #ff0000;
+            }
+        }
+        .handle-icon {
+            font-size: 20px;
+            margin-left: 8px;
+            cursor: pointer;
+            vertical-align: middle;
+        }
+    }
+    .assets-rule-title {
+        font-size: 20px;
+        margin-bottom: 32px;
+        line-height: 27px;
+    }
+    .asset-id {
+        font-size: 20px;
+        line-height: 27px;
+        margin-bottom: 10px;
+    }
+    .assets-rule-item {
+        border: 1px solid #707070;
+        background: #f9f9f9;
+        padding: 14px 24px;
+        margin-bottom: 16px;
+        .ant-picker {
+            width: 100%;
+        }
+    }
+ 
+    .step-0 {
+        font-size: 20px;
+        line-height: 27px;
+    }
+    .step-6 {
+        font-size: 20px;
+        line-height: 27px;
+        .title {
+            margin-bottom: 15px;
+        }
+
+        .confirm-box {
+            border: 1px solid #707070;
+            background: #f9f9f9;
+            padding: 18px 22px;
+            margin-bottom: 16px;
+            .line {
+                display: flex;
+                margin: 8px auto;
+                .name {
+                    flex: 1;
+                    color: #b7b7b7;
+                }
+                .value {
+                    flex: 2;
+                    color: #3a3a3a;
+                }
+            }
+        }
+        .process-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+    }
+    .step-pay {
+        text-align: center;
+        .dada-circle {
+            width: 200px;
+            height: 200px;
+            border: 6px solid #48cccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 32px;
+            border-radius: 100%;
+            font-size: 20px;
+        }
+        .pay-hint {
+            color: #010101;
+            font-size: 14px;
+            line-height: 25px;
+            width: 80%;
+            margin: 0 auto;
+        }
+    }
+    .step-control {
+        width: 100%;
+        margin: 64px auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .hint{
+            color: #010101;
+            margin-right: 12px;
+        }
+
+        .ant-btn {
+            border-radius: 10px;
+            height: 36px;
+            padding: 0 36px;
+            font-size: 18px;
+            box-shadow: none;
+        }
+    }
+    .step-sidebar {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        li {
+            margin-bottom: 32px;
+        }
+
+        .circle {
+            width: 32px;
+            height: 32px;
+            background: #c5c5c5;
+            border-radius: 100%;
+            display: inline-block;
+            margin-right: 12px;
+            vertical-align: middle;
+            &.active {
+                border: 6px solid #48cccc;
+                background: #f1f1f1;
+            }
+            &.done {
+                background: #48cccc;
+            }
+        }
+        span {
+            font-size: 18px;
+            line-height: 26px;
+            vertical-align: middle;
+            color: #707070;
+        }
+    }
+}

@@ -7,6 +7,7 @@ import './App.scss';
 
 import Homepage from './pages/Homepage'
 import Dashboard from './pages/Dashboard'
+import CreateProject from './pages/CreateProject'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           </Route> */}
           <Route exact path="/" component={Homepage} />
           <Route exact path="/dashboard" component={Dashboard} />
+          <Route exact path="/create-project" component={CreateProject} />
         </Switch>
       </Router>
     </div>
