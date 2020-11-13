@@ -77,7 +77,7 @@ export default function Project() {
         }
     } else if (id == 2) {
         project = {
-            title: 'BTC矿机托管项目 - 2020年11月13日',
+            title: 'BTC矿机托管项目 - 2020年11月28日',
             apy: '15%',
             desc: '新疆矿场50台蚂蚁T19矿机托管项目<br/>该项目将会采购50台蚂蚁T19矿机并托管在位于新疆阿克苏的矿场，限量20w美金。',
             fullDesc: `

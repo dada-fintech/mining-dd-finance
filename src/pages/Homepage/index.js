@@ -121,7 +121,7 @@ export default function Homepage() {
                         <div className="top">
                             <div className="title">
                                 <div className="project-name">BTC矿机托管项目</div>
-                                <div className="date">&nbsp; - 2020年11月13日</div>
+                                <div className="date">&nbsp; - 2020年11月28日</div>
                             </div>
                             <div className="status green">尚未开放</div>
 
