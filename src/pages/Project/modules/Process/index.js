@@ -98,7 +98,7 @@ export default function Process(props) {
                 <div className="description" dangerouslySetInnerHTML={{ __html: item.description }}></div> */}
             <div className="handle-area">
                 <Input value={lockNum} onChange={(event) => { setLockedNum(event.target.value) }} suffix="USDT" />
-                <Button className="btn-green" onClick={() => { doLock() }}>投资</Button>
+                <Button disabled={process.done} className="btn-green" onClick={() => { doLock() }}>投资</Button>
             </div>
             <div className="votes-bar">
                 <div className="done" style={{ width: (process.voted / process.target) * 100 + '%' }}></div>

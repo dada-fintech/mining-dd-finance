@@ -67,6 +67,8 @@ export default function Project() {
             
             `,
             process: {
+            done: true,
+
                 title: '募集完成',
                 amount: '100,000 USDT',
                 apy: '10%',
@@ -124,7 +126,8 @@ export default function Project() {
             <img src="/img/return-table-2.png"/><br/>
             `,
             process: {
-                title: '募资进行中',
+            done: false,
+            title: '募资进行中',
                 amount: '200,000 USDT',
                 apy: '15%',
                 date: '2021年11月12日',
