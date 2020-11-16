@@ -5,10 +5,10 @@ import { useParams } from 'react-router-dom'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import Sidebar from '../../components/Sidebar'
-// import VoteModule from './modules/Vote'
+import VoteModule from './modules/Vote'
 import ProcessModule from './modules/Process'
 import DetailModule from './modules/Detail'
-// import CommentsModule from './modules/Comments'
+import CommentsModule from './modules/Comments'
 
 
 
@@ -67,7 +67,7 @@ export default function Project() {
             
             `,
             process: {
-            done: true,
+                done: true,
 
                 title: '募集完成',
                 amount: '100,000 USDT',
@@ -126,8 +126,8 @@ export default function Project() {
             <img src="/img/return-table-2.png"/><br/>
             `,
             process: {
-            done: false,
-            title: '募资进行中',
+                done: false,
+                title: '募资进行中',
                 amount: '200,000 USDT',
                 apy: '15%',
                 date: '2021年11月12日',
@@ -142,32 +142,32 @@ export default function Project() {
 
         <div className="container">
             <div className="project-main">
-                {/* <Row gutter={24}>
-                <Col md={18}> */}
-                <div className="project-intro">
-                    <div className="top">
-                        <div className="title">{project.title}</div>
-                        <div className="apy">年化收益率 {project.apy}</div>
-                    </div>
-                    <div className="desc" dangerouslySetInnerHTML={{ __html: project.desc }}></div>
-                    <ul className="tabs">
-                        <li className={currentTab === 'process' && 'active'} onClick={() => { setCurrentTab('process') }}>项目进程</li>
-                        <li className={currentTab === 'detail' && 'active'} onClick={() => { setCurrentTab('detail') }}>项目详情</li>
-                        {/* <li className={currentTab === 'vote' && 'active'} onClick={() => { setCurrentTab('vote') }}>Vote</li> */}
-                        {/* <li className={currentTab === 'comments' && 'active'} onClick={() => { setCurrentTab('comments') }}>Comments</li> */}
-                    </ul>
-                </div>
-                <div className="project-content">
-                    {/* {currentTab === 'vote' && <VoteModule/>} */}
-                    {currentTab === 'process' && <ProcessModule process={project.process} />}
-                    {currentTab === 'detail' && <DetailModule fullDesc={project.fullDesc} />}
-                    {/* {currentTab === 'comments' && <CommentsModule/>} */}
-                </div>
-                {/* </Col>
-                <Col md={6}>
-                    <Sidebar />
-                </Col>
-            </Row> */}
+                <Row gutter={24}>
+                    <Col md={18}>
+                        <div className="project-intro">
+                            <div className="top">
+                                <div className="title">{project.title}</div>
+                                <div className="apy">年化收益率 {project.apy}</div>
+                            </div>
+                            <div className="desc" dangerouslySetInnerHTML={{ __html: project.desc }}></div>
+                            <ul className="tabs">
+                                <li className={currentTab === 'process' && 'active'} onClick={() => { setCurrentTab('process') }}>项目进程</li>
+                                <li className={currentTab === 'detail' && 'active'} onClick={() => { setCurrentTab('detail') }}>项目详情</li>
+                                <li className={currentTab === 'vote' && 'active'} onClick={() => { setCurrentTab('vote') }}>Vote</li>
+                                <li className={currentTab === 'comments' && 'active'} onClick={() => { setCurrentTab('comments') }}>Comments</li>
+                            </ul>
+                        </div>
+                        <div className="project-content">
+                            {currentTab === 'vote' && <VoteModule />}
+                            {currentTab === 'process' && <ProcessModule process={project.process} />}
+                            {currentTab === 'detail' && <DetailModule fullDesc={project.fullDesc} />}
+                            {currentTab === 'comments' && <CommentsModule />}
+                        </div>
+                    </Col>
+                    <Col md={6}>
+                        <Sidebar />
+                    </Col>
+                </Row>
             </div>
 
         </div>

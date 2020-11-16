@@ -1,6 +1,6 @@
 yarn build
 ssh df "
-  rm -rf /var/www/mining-dd-finance-test
+  rm -rf /var/www/mining-test-dd-finance
   exit
 "
-scp -r build df:/var/www/mining-dd-finance-test
+scp -r build df:/var/www/mining-test-dd-finance
