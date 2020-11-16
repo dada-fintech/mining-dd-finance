@@ -12,6 +12,7 @@ import message from './i18n'
 import Homepage from './pages/Homepage'
 import Project from './pages/Project'
 import CreateProject from './pages/CreateProject'
+import CreateVote from './pages/CreateVote'
 
 const language = localStorage.getItem('language') || 'zh'
 
@@ -37,6 +38,7 @@ function App() {
           <Route exact path="/" component={Homepage} />
           <Route exact path="/project/:id" component={Project} />
           <Route exact path="/create-project" component={CreateProject} />
+          <Route exact path="/create-vote" component={CreateVote} />
         </Switch>
       </Router>
     </div>
