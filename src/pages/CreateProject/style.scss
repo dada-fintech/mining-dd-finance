@@ -3,6 +3,7 @@
     color: #707070;
     .create-project-main {
         padding: 64px 0;
+        min-height: 73vh;
     }
     .add-item-box {
         border: 1px solid #707070;
@@ -15,7 +16,8 @@
     .form-item {
         margin-bottom: 20px;
         .label {
-            font-size: 20px;
+            margin-top: 30px;
+            font-size: 18px;
             line-height: 27px;
             margin-bottom: 8px;
         }
@@ -56,11 +58,11 @@
     }
  
     .step-0 {
-        font-size: 20px;
+        font-size: 16px;
         line-height: 27px;
     }
     .step-6 {
-        font-size: 20px;
+        font-size: 16px;
         line-height: 27px;
         .title {
             margin-bottom: 15px;
@@ -103,7 +105,7 @@
             justify-content: center;
             margin: 0 auto 32px;
             border-radius: 100%;
-            font-size: 20px;
+            font-size: 16px;
         }
         .pay-hint {
             color: #010101;
@@ -133,11 +135,12 @@
         }
     }
     .step-sidebar {
-        margin: 0;
+        position: sticky;
+        top: 10vh;
         padding: 0;
         list-style: none;
         li {
-            margin-bottom: 32px;
+            margin-bottom: 50px;
         }
 
         .circle {

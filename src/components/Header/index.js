@@ -23,9 +23,9 @@ export default function Header() {
                 Project in working progress
                 </span>
                 {wallet.status === 'connected' ? <Tooltip title={window.ethereum.selectedAddress}>
-                    <Button className="btn-green">{window.ethereum.selectedAddress.slice(0, 4) + '...' + window.ethereum.selectedAddress.slice(-4)}</Button>
+                    <Button className="btn-green btn-green-wallet">{window.ethereum.selectedAddress.slice(0, 4) + '...' + window.ethereum.selectedAddress.slice(-4)}</Button>
                 </Tooltip>
-                    : <Button className="btn-green" onClick={() => { wallet.connect() }}>Connect Wallet</Button>}
+                    : <Button className="btn-green btn-green-wallet" onClick={() => { wallet.connect() }}>Connect Wallet</Button>}
             </nav>
         </div>
     </header>)
