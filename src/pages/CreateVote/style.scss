@@ -3,19 +3,19 @@
     color: #707070;
     .create-vote-main {
         padding: 64px 0;
+        min-height: 73vh;
     }
     .add-item-box {
         border: 1px solid #707070;
         background: #f9f9f9;
         padding: 40px 0;
         text-align: center;
-        font-size: 36px;
         cursor: pointer;
     }
     .form-item {
         margin-bottom: 20px;
         .label {
-            font-size: 20px;
+            font-size: 18px;
             line-height: 27px;
             margin-bottom: 8px;
         }
@@ -56,11 +56,11 @@
     }
  
     .step-0 {
-        font-size: 20px;
+        font-size: 18px;
         line-height: 27px;
     }
     .step-1 {
-        font-size: 20px;
+        font-size: 16px;
         line-height: 27px;
         .title {
             margin-bottom: 15px;
@@ -78,7 +78,7 @@
             .status{
                 position: absolute;
                 top:8px;
-                font-size:20px;
+                font-size:16px;
                 font-weight: 800;
                 right: 8px;
                 &.finish{
@@ -150,7 +150,8 @@
         }
     }
     .step-sidebar {
-        margin: 0;
+        position: sticky;
+        top: 10vh;
         padding: 0;
         list-style: none;
         li {
