@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Row, Col, Input, Upload, message, DatePicker } from 'antd'
+import { Button, Row, Col, Input, Upload, message, DatePicker, Tooltip } from 'antd'
 import { PlusCircleOutlined } from '@ant-design/icons'
 // import { useWallet } from 'use-wallet'
 import Header from '../../components/Header'
@@ -60,8 +60,8 @@ export default function CreateProject() {
         <Header />
 
         <div className="container create-project-main">
-            <Row gutter={{ md: 44, lg: 64 }}>
-                <Col md={18}>
+            <Row gutter={{ md: 32 }}>
+                <Col xs={24} md={18}>
                     <div className="main-content">
                         {currentStep === 0 && <div className="step-0">
                             Create a new DAO for your Project<br /><br />
@@ -188,7 +188,7 @@ export default function CreateProject() {
                         </div>}
                         {currentStep === 6 && <div className="step-6">
                             <div className="title">FUND INFORMATION</div>
-                            <div className="confirm-box">
+                            <div className="confirm-box confirm-box-long">
                                 <div className="line">
                                     <div className="name">Fund Name</div>
                                     <div className="value">MINING FUND</div>
@@ -219,11 +219,12 @@ export default function CreateProject() {
                                 </div>
                                 <div className="line">
                                     <div className="name">Fund Holding Address</div>
-                                    <div className="value">0xaaAAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+                                    <div className="value"><Tooltip title="0xaaAAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa">0xaa...aaa</Tooltip></div>
                                 </div>
                                 <div className="line">
                                     <div className="name">Council Member Address</div>
-                                    <div className="value">0xbbBBbbbbbbbbbbbbbbbbbbbbbbbbbbb<br />0xbbBBbbbbbbbbbbbbbbbbbbbbbbbbbbb</div>
+                                    <div className="value"><Tooltip title="0xaaAAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa">0xaa...aaa</Tooltip><br />
+                                    <Tooltip title="0xaaAAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa">0xaa...aaa</Tooltip></div>
                                 </div>
                             </div>
                             <div className="title" style={{ marginTop: '56px' }}>ASSETS RULE</div>
@@ -283,7 +284,7 @@ export default function CreateProject() {
                         </div>}
                     </div>
                 </Col>
-                <Col md={6}>
+                <Col xs={24} md={6}>
                     <ul className="step-sidebar">
                         {sidebarList.map((item, index) => <li>
                             <div className={'circle ' + (currentStep === index ? 'active ' : '') + (currentStep > index ? 'done' : '')}></div>

@@ -20,8 +20,25 @@
             margin-right: 12px;
             font-size: 12px;
         }
+        .mobile-hint{
+            display: none;
+            margin-top: 8px;
+            font-size: 12px;
+
+        }
         .ant-btn{
             vertical-align: middle;
+        }
+    }
+    @media screen and (max-width: 768px){
+        nav{
+            text-align: right;
+            .hint{
+                display: none;
+            }
+            .mobile-hint{
+                display: block;
+            }
         }
     }
 }

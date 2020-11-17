@@ -36,8 +36,8 @@ export default function CreateVote() {
         <Header />
 
         <div className="container create-vote-main">
-            <Row gutter={{ md: 44, lg: 64 }}>
-                <Col md={18}>
+            <Row gutter={{ md: 32 }}>
+                <Col xs={24} md={18}>
                     <div className="main-content">
                         {currentStep === 0 && <div className="step-0">
                             Create a new poll for your Project<br /><br />
@@ -45,7 +45,7 @@ export default function CreateVote() {
                         </div>}
 
                         {currentStep === 1 && <div className="step-1">
-                            <div className="title" style={{ marginTop: '56px' }}>ASSETS RULE</div>
+                            <div className="title">ASSETS RULE</div>
                             {assetsRuleList.map(item => <>
                                 <div className="process-top">
                                     <div>Process #{item.id}</div>
@@ -147,7 +147,7 @@ export default function CreateVote() {
                         </div>}
                     </div>
                 </Col>
-                <Col md={6}>
+                <Col xs={24} md={6}>
                     <ul className="step-sidebar">
                         {sidebarList.map((item, index) => <li>
                             <div className={'circle ' + (currentStep === index ? 'active ' : '') + (currentStep > index ? 'done' : '')}></div>

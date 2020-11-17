@@ -83,4 +83,15 @@
             color: #707070;
         }
     }
+    @media screen and (max-width: 992px){
+        .process-item{
+            .text-area{
+                font-size: 16px;
+            }
+            .handle-area{
+                margin: 24px 0;
+                
+            }
+        }
+    }
 }

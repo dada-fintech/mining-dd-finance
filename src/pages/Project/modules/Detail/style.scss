@@ -30,4 +30,19 @@
             }
         }
     }
+    @media screen and (max-width: 992px){
+        .article{
+            font-size: 16px;
+            line-height: 28px;
+        }
+        .detail-line{
+            .mining-img{
+                height: 200px;
+            }
+            .mining-rig{
+                width: 25%;
+            }
+
+        }
+    }
 }

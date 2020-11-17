@@ -1,12 +1,12 @@
 .project-page {
     background: linear-gradient(12deg, #e3e3e3, #f8f8f8, #f8f8f8);
-    .project-main{
+    .project-main {
         width: 90%;
         margin: 0 auto;
     }
-  
+
     .project-intro {
-        margin-top: 200px;
+        margin-top: 120px;
         margin-bottom: 20px;
         padding: 16px 24px;
         background: #fff;
@@ -27,35 +27,61 @@
                 font-size: 18px;
             }
         }
-        .desc{
+        .desc {
             font-size: 18px;
-            line-height: 24px;
+            line-height: 28px;
             color: #707070;
             margin-top: 18px;
             margin-bottom: 58px;
         }
-        .tabs{
+        .tabs {
             padding: 0;
             margin: 0;
-            li{
+            li {
                 display: inline-block;
                 font-size: 20px;
                 line-height: 27px;
                 color: #b5b5b5;
                 cursor: pointer;
-                margin-right: 80px;
-                &.active{
+                margin-right: 64px;
+                &.active {
                     color: #010101;
                 }
             }
         }
     }
-    .project-content{
-        margin-bottom: 10vh;
-        min-height: 150vh;
-        border: 1px solid #B9B9B9;
+    .project-content {
+        // margin-bottom: 10vh;
+        // min-height: 150vh;
+        border: 1px solid #b9b9b9;
         padding: 36px 24px;
         background: #fff;
+    }
+    @media screen and (max-width: 992px) {
+        .project-main {
+            width: 100%;
+        }
+        .project-intro {
+            .desc {
+                margin-bottom: 32px;
 
+            }
+            .top {
+                display: block;
+
+                .title {
+                    font-size: 18px;
+                }
+                .apy {
+                    font-size: 16px;
+                }
+            }
+            .tabs {
+                li {
+                    font-size: 16px;
+                    margin-right: 24px;
+                }
+            }
+        }
     }
 }

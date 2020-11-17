@@ -60,7 +60,7 @@ export default function Project() {
                 
                 　　功耗比：48W/T<br/>
                 </div>
-                <img src="/img/mining-rig-1.png"/><br/>
+                <img class="mining-rig" src="/img/mining-rig-1.png"/><br/>
             </div>
             　　
             <img src="/img/return-table-1.png"/><br/>
@@ -120,7 +120,7 @@ export default function Project() {
                 
                 　　功耗比：37.5W/T<br/>
                 </div>
-                <img src="/img/mining-rig-2.png"/><br/>
+                <img class="mining-rig" src="/img/mining-rig-2.png"/><br/>
             </div>
             　　
             <img src="/img/return-table-2.png"/><br/>
@@ -142,8 +142,8 @@ export default function Project() {
 
         <div className="container">
             <div className="project-main">
-                <Row gutter={24}>
-                    <Col md={18}>
+                <Row gutter={{md: 24, lg: 24}}>
+                    <Col xs={24} md={16} lg={18}>
                         <div className="project-intro">
                             <div className="top">
                                 <div className="title">{project.title}</div>
@@ -153,8 +153,8 @@ export default function Project() {
                             <ul className="tabs">
                                 <li className={currentTab === 'process' && 'active'} onClick={() => { setCurrentTab('process') }}>项目进程</li>
                                 <li className={currentTab === 'detail' && 'active'} onClick={() => { setCurrentTab('detail') }}>项目详情</li>
-                                <li className={currentTab === 'vote' && 'active'} onClick={() => { setCurrentTab('vote') }}>Vote</li>
-                                <li className={currentTab === 'comments' && 'active'} onClick={() => { setCurrentTab('comments') }}>Comments</li>
+                                <li className={currentTab === 'vote' && 'active'} onClick={() => { setCurrentTab('vote') }}>投票</li>
+                                <li className={currentTab === 'comments' && 'active'} onClick={() => { setCurrentTab('comments') }}>评论</li>
                             </ul>
                         </div>
                         <div className="project-content">
@@ -164,7 +164,7 @@ export default function Project() {
                             {currentTab === 'comments' && <CommentsModule />}
                         </div>
                     </Col>
-                    <Col md={6}>
+                    <Col xs={24} md={8} lg={6}>
                         <Sidebar />
                     </Col>
                 </Row>

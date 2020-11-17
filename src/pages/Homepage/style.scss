@@ -32,13 +32,12 @@
             margin-bottom: 106px;
         }
         .btn-action {
-            width: 15vw;
             font-size: 16px;
-            height: 55px;
-            padding: 0 20px;
+            height: 44px;
+            padding: 0 32px;
         }
         .btn-green-wallet {
-            width: 11vw;
+            padding: 0 12px;
         }
     }
     .feature-list {
@@ -163,6 +162,9 @@
         margin-bottom: 200px;
     }
     @media screen and (max-width: 768px) {
+        .banner{
+            padding: 0 0 72px;
+        }
         .section-title {
             font-size: 18px;
             line-height: 22px;
@@ -181,7 +183,7 @@
         }
         .project-item {
             margin: 32px auto;
-            width: 85%;
+            width: 100%;
             .desc{
                 font-size: 14px;
                 line-height: 18px;
