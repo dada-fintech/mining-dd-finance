@@ -1,53 +1,51 @@
 import React from 'react'
 import { Row, Col } from 'antd'
-import SocialIcons from '../../assets/socials.png'
-import FaceBook from '../../assets/socials/facebook.svg'
-import Twiiter from '../../assets/socials/twiiter.svg'
-import WeChat from '../../assets/socials/wechat.svg'
-import WeiBo from '../../assets/socials/weibo.svg'
+// import SocialIcons from '../../assets/socials.png'
+import Twiiter from '../../assets/socials/twitter.svg'
+import Discord from '../../assets/socials/discord.svg'
+import Medium from '../../assets/socials/medium.svg'
+import Telegram from '../../assets/socials/telegram.svg'
 
 import './style.scss'
-import Logo from "../../assets/logo.png";
+import LogoBlue from "../../assets/logo-blue.png";
 
 export default function Footer() {
 
     return (<div className="container">
         <footer className="footer">
             <Row>
-                <Col xs={12} md={4}>
+                <Col xs={12} md={6}>
+                    <img src={LogoBlue} className="footer-logo" />
+                </Col>
+                <Col xs={12} md={6}>
                     <ul>
-                        {/* <li>Resources</li> */}
-                        <li><a target="_blank" href="https://doc.dd.finance">Doc</a></li>
-                        {/* <li>FAQs</li>
-                        <li>Service Status</li> */}
+                        <li>
+                            <a href="https://dd.finance/app">DeFi APP</a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="https://doc.dd.finance">Doc</a>
+                        </li>
                     </ul>
                 </Col>
-                <Col xs={12} md={4}>
+                <Col xs={12} md={6}>
                     <ul>
-                        <li>Product</li>
+                        <li><a href="mailto:contact@dd.finance">contact@dd.finance</a></li>
+                        <li><a href="mailto:media@dd.finance">media@dd.finance</a></li>
                     </ul>
                 </Col>
-                <Col xs={12} md={4}>
-                    <ul>
-                        <li>Developers</li>
-
-                    </ul>
-                </Col>
-                <Col xs={12} md={4}>
-                    <ul>
-                        <li>Foundation</li>
-                        <li>Team</li>
-                        <li>Careers</li>
-                        <li>Contact</li>
-                    </ul>
-                </Col>
-                <Col xs={24} md={8} className="text-align-right">
-                    <img src={FaceBook} className="social-icon" />
+                <Col xs={24} md={6} className="text-align-right">
                     <a target="_blank" href="https://twitter.com/FinanceDada">
                         <img src={Twiiter} className="social-icon" />
                     </a>
-                    <img src={WeChat} className="social-icon" />
-                    <img src={WeiBo} className="social-icon" />
+                    <a target="_blank">
+                        <img src={Discord} className="social-icon" />
+                    </a>
+                    <a target="_blank">
+                        <img src={Medium} className="social-icon" />
+                    </a>
+                    <a target="_blank">
+                        <img src={Telegram} className="social-icon" />
+                    </a>
                 </Col>
             </Row>
         </footer>

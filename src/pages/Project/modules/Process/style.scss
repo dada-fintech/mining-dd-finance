@@ -4,6 +4,9 @@
         border: 1px solid #707070;
         color: #707070;
         margin-bottom: 32px;
+        &:last-child{
+            margin-bottom:  0;
+        }
        
         .text-area{
             font-size: 20px;

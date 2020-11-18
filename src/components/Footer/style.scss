@@ -3,19 +3,26 @@
     bottom: 0;
     border-top: 1px solid #707070;
     padding: 24px 0;
+    .footer-logo{
+        width: 120px;
+    }
     ul{
         padding: 0;
         li{
             list-style: none;
             color: #707070;
             font-size: 20px;
+            margin-bottom: 8px;
             line-height: 27px;
+            a{
+                color: #707070;
+            }
         }
     }
     .social-icon{
-        height: 30px;
-        max-width: 240px;
-        padding-left: 30px;
+        height: 40px;
+        width: 40px;
+        margin-right: 20px;
     }
     @media screen and (max-width: 768px){
         .text-align-right{
