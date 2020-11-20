@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Row, Col, Input, Upload, message, DatePicker } from 'antd'
+import { useTranslation } from 'react-i18next'
 import { PlusCircleOutlined } from '@ant-design/icons'
 // import { useWallet } from 'use-wallet'
 import Header from '../../components/Header'
@@ -31,6 +32,7 @@ const assetsRuleList = [
 
 export default function CreateVote() {
     const [currentStep, setCurrentStep] = useState(0)
+    const { t } = useTranslation()
 
     return (<div className="create-vote-page">
         <Header />
@@ -39,35 +41,29 @@ export default function CreateVote() {
             <Row gutter={{ md: 32 }}>
                 <Col xs={24} md={18}>
                     <div className="main-content">
-                        {currentStep === 0 && <div className="step-0">
-                            Create a new poll for your Project<br /><br />
-                        Please fill out the following form carefully and ensure the accuracy of the information, the platform will be based on the data you fill in according to the rules to create the corresponding smart contract and update your project!
+                        {currentStep === 0 && <div className="step-0" dangerouslySetInnerHTML={{ __html: t('createVote.hint') }}>
                         </div>}
 
                         {currentStep === 1 && <div className="step-1">
-                            <div className="title">ASSETS RULE</div>
+                            <div className="title">{t('createVote.projectInfo')}</div>
                             {assetsRuleList.map(item => <>
                                 <div className="process-top">
-                                    <div>Process #{item.id}</div>
+                                    <div>{t('project.progress')} #{item.id}</div>
                                 </div>
                                 <div className="confirm-box">
                                     <div className="status finish">
                                         FINISH
                                     </div>
                                     <div className="line">
-                                        <div className="name">Unlock Value</div>
+                                        <div className="name">{t('project.unlockingAmount')}</div>
                                         <div className="value">{item.value}</div>
                                     </div>
                                     <div className="line">
-                                        <div className="name">Unlock Time</div>
+                                        <div className="name">{t('project.unlockingTime')}</div>
                                         <div className="value">{item.time}</div>
                                     </div>
                                     <div className="line">
-                                        <div className="name">Vote Period</div>
-                                        <div className="value">{item.period}</div>
-                                    </div>
-                                    <div className="line">
-                                        <div className="name">Description</div>
+                                        <div className="name">{t('project.event')}</div>
                                         <div className="value">{item.desc}</div>
                                     </div>
                                 </div>
@@ -78,72 +74,67 @@ export default function CreateVote() {
                             </div>
                             <div className="description-block">
                                 <div className="process-top">
-                                    <div>Edit Description</div>
+                                    <div>{t('createVote.editDescription')}</div>
                                 </div>
                                 <Input.TextArea autoSize={{ minRows: 5 }} />
                             </div>
 
                             <div className="form-item">
-                                <div className="label">Upload The Supplementary file</div>
+                                <div className="label">{t('createVote.additionalDoc')}</div>
                                 <Upload>
-                                    <Button className="btn-white" style={{ padding: '0 44px' }}>Upload</Button>
+                                    <Button className="btn-white" style={{ padding: '0 44px' }}>{t('common.upload')}</Button>
                                 </Upload>
                             </div>
                         </div>}
 
                         {currentStep === 2 && <div className="step-1">
-                            <div className="title" style={{ marginTop: '56px' }}>ASSETS RULE</div>
+                            <div className="title" style={{ marginTop: '56px' }}>{t('createVote.projectInfo')}</div>
                             {assetsRuleList.map(item => <>
                                 <div className="process-top">
-                                    <div>Process #{item.id}</div>
+                                    <div>{t('project.progress')} #{item.id}</div>
                                 </div>
                                 <div className="confirm-box">
                                     <div className="line">
-                                        <div className="name">Unlock Value</div>
+                                        <div className="name">{t('project.unlockingAmount')}</div>
                                         <div className="value">{item.value}</div>
                                     </div>
                                     <div className="line">
-                                        <div className="name">Unlock Time</div>
+                                        <div className="name">{t('project.unlockingTime')}</div>
                                         <div className="value">{item.time}</div>
                                     </div>
                                     <div className="line">
-                                        <div className="name">Vote Period</div>
-                                        <div className="value">{item.period}</div>
-                                    </div>
-                                    <div className="line">
-                                        <div className="name">Description</div>
+                                        <div className="name">{t('project.event')}</div>
                                         <div className="value">{item.desc}</div>
                                     </div>
                                 </div>
-
                             </>)}
-                            <div className="title" style={{ marginTop: '56px' }}>Other files</div>
+                            <div className="title" style={{ marginTop: '56px' }}>{t('createVote.additionalDoc')}</div>
                             <div className="confirm-box">
                                 WHITEPAPER.DOCX<br />
                                 LICENSE.JPG
                             </div>
                             <div className="description-block">
                                 <div className="process-top">
-                                    <div>Description</div>
+                                    <div>{t('common.description')}</div>
                                 </div>
-                                <div className="">
+                                <div>
                                     Since the project has entered the site and the project is progressing rapidly, 10% of the fund originally scheduled to be released on October 10 is about 100000 US dollars, and the deposit needs to be unlocked in advance. Therefore, the proposal is applied. After the proposal takes effect, the unlocking plan of October 10 will be cancelled and the follow-up plan will be advanced.
                                 </div>
                             </div>
 
-                        
+
                         </div>}
                     </div>
                     <div className="step-control">
                         <div>
-                            {currentStep > 0 && <Button onClick={() => { setCurrentStep(prev => prev - 1) }} className="btn-grey">BACK</Button>}
+                            {currentStep > 0 && <Button onClick={() => { setCurrentStep(prev => prev - 1) }} className="btn-grey">{t('common.back')}</Button>}
                         </div>
                         {currentStep < 2 && <div>
-                            <Button onClick={() => { setCurrentStep(prev => prev + 1) }} className="btn-green">NEXT</Button>
+                            <Button onClick={() => { setCurrentStep(prev => prev + 1) }} className="btn-green">{t('common.next')}</Button>
                         </div>}
                         {currentStep == 2 && <div>
-                            <span className="hint">It will cost a certain amount of gas fee to create polling.</span>
-                            <Button onClick={() => { message.success('Confirmed!') }} className="btn-green">CONFIRM INFO</Button>
+                            <span className="hint">{t('common.gasFeeHint')}</span>
+                            <Button onClick={() => { message.success('Confirmed!') }} className="btn-green">{t('common.confirmInfo')}</Button>
                         </div>}
                     </div>
                 </Col>

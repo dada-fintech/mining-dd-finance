@@ -8,6 +8,7 @@ export default {
                 apy: 'APY',
                 invest: 'Invest',
                 description: 'Description',
+                editDescription: 'Edit Description',
                 votes: 'Votes',
                 next: 'Next',
                 back: 'Back',
@@ -67,8 +68,8 @@ export default {
                 boardMembersHint: 'Create addresses for 3 board members, who are allowed to vote only.',
                 fundraisingPeriod: 'Fundrasing Period',
                 fundraisingPeriodHint: 'Confirm the date to start and date to end for the fundraising campaign.',
-                fundraisingGoal:'Fundraising Goal',
-                fundraisingGoalHint:' This is the soft cap of the fund raised for this project.',
+                fundraisingGoal: 'Fundraising Goal',
+                fundraisingGoalHint: ' This is the soft cap of the fund raised for this project.',
                 fundraisingLimit: 'Fundraising Limit',
                 fundraisingLimitHint: 'This is the hard cap of the fund raised for this project.',
                 redemptionDate: 'Redemption Date',
@@ -83,12 +84,13 @@ export default {
                 fundAddress: 'Fund Holding Address',
                 councilAddress: 'Council Member Address',
                 payHint: 'Buy DADA amounts to 0.5% of your total funds needed for the fundraising, and submit the proposal to the DADA DAO Committee for approval and verification. '
-
-
-
-
-
-
+            },
+            createVote: {
+                hint: `
+                Create a New Ballot for the Project<br/><br/>
+                Please make sure that you provide truthful information. The Mining Ecosystem Aggregator platform will create a corresponding smart contract with your data and update your project. 
+                `,
+                additionalDoc: 'Additional Documents',
 
             }
         }
@@ -102,6 +104,7 @@ export default {
                 apy: '年化收益率',
                 invest: '投资',
                 description: '描述',
+                editDescription: '编辑描述',
                 votes: '投票',
                 next: '下一步',
                 back: '上一步',
@@ -109,9 +112,6 @@ export default {
                 confirmInfo: '确认信息',
                 gasFeeHint: '创建项目将会耗费一些 Gas fee',
                 upload: '上传',
-
-
-
             },
             sidebar: {
                 yourShares: '你的份额',
@@ -164,8 +164,8 @@ export default {
                 boardMembersHint: '创建最多3个理事会成员地址，只有创建投票的权限。',
                 fundraisingPeriod: '筹款期',
                 fundraisingPeriodHint: '确认筹款开始及结束的日期。',
-                fundraisingGoal:'筹款目标',
-                fundraisingGoalHint:'这是该项目的最低筹资限额。',
+                fundraisingGoal: '筹款目标',
+                fundraisingGoalHint: '这是该项目的最低筹资限额。',
                 fundraisingLimit: '筹款限制',
                 fundraisingLimitHint: '这是这个项目的硬顶筹款。',
                 redemptionDate: '回款日期',
@@ -181,6 +181,14 @@ export default {
                 councilAddress: '理事会成员地址',
                 payHint: '您需要购买/募集所需募集金额的0.5%的DADA，将提案提交给治理委员会进行批准/验证。'
 
+
+            },
+            createVote: {
+                hint: `
+                为项目创建一个新的投票<br/><br/>
+                请认真填写以下表格并确保信息的准确性，平台将根据您填写的数据按照规则创建相应的智能合约并更新您的项目!
+                `,
+                projectInfo: '项目信息',
 
             }
 
