@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Input, Select, Button } from 'antd'
 import Web3 from 'web3'
 import BN from 'bignumber.js'
+import { useTranslation } from 'react-i18next'
 import detectEthereumProvider from '@metamask/detect-provider'
 import ConfirmVote from '../../modals/ConfirmVote'
 import './style.scss'
@@ -21,6 +22,7 @@ export default function Process(props) {
     const [confirmVoteVisible, setConfirmVoteVisible] = useState(false)
     const [lockNum, setLockedNum] = useState('')
     const [contract, setContract] = useState('')
+    const { t } = useTranslation()
 
     let finalProcessList = processList.map(item => {
         return {
@@ -87,22 +89,22 @@ export default function Process(props) {
         {finalProcessList.map((process, index) => (
             <div className="process-item">
                 <div className="top">
-                    <div className="title">进程#{index + 1}</div>
+                    <div className="title">{t('project.progress')} #{index + 1}</div>
                     <div className="date">{new Date(process.vote_start_time * 1000).toLocaleDateString()} - {new Date(process.vote_end_time * 1000).toLocaleDateString()}</div>
                 </div>
                 <div className="text-area">
-                    <strong>解锁数额</strong>:{process.unlock_value}USDT({process.unlock_percentage}%)<br />
-                    <strong>解锁时间</strong>:{new Date(process.unlock_time * 1000).toLocaleDateString()}<br />
-                    <strong>描述</strong>:{process.description}<br />
-                    <strong>投票结果</strong>:{process.affirmative_vote}支持 / {process.dissenting_vote}反对
+                    <strong>{t('project.unlockingAmount')}</strong>: {process.unlock_value}USDT({process.unlock_percentage}%)<br />
+                    <strong>{t('project.unlockingTime')}</strong>: {new Date(process.unlock_time * 1000).toLocaleDateString()}<br />
+                    <strong>{t('project.event')}</strong>: {process.description}<br />
+                    <strong>{t('project.voteResult')}</strong>: {process.affirmative_vote} {t('project.approve')} / {process.dissenting_vote} {t('project.object')}
                 </div>
                 <div className="vs-bar">
-                    <div className="yes" style={{ width: process.yesPercent + '%' }}>{process.yesPercent >= 10 && (process.yesPercent + '%')} Approve</div>
-                    <div className="no" style={{ width: process.noPercent + '%' }}>{process.noPercent >= 10 && (process.noPercent + '%')} Object</div>
+                    <div className="yes" style={{ width: process.yesPercent + '%' }}>{process.yesPercent >= 10 && (process.yesPercent + '%')} {t('project.approve')}</div>
+                    <div className="no" style={{ width: process.noPercent + '%' }}>{process.noPercent >= 10 && (process.noPercent + '%')} {t('project.object')}</div>
                 </div>
                 <div className="handle-area">
                     <Input value={lockNum} onChange={(event) => { setLockedNum(event.target.value) }} suffix="USDT" />
-                    <Button disabled={process.done} className="btn-green" onClick={() => { doLock() }}>投资</Button>
+                    <Button disabled={process.done} className="btn-green" onClick={() => { doLock() }}>{t('common.invest')}</Button>
                 </div>
 
             </div>

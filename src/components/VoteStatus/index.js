@@ -1,8 +1,11 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import './style.scss'
 
 export default function VoteStatus(props) {
     const { approve, object } = props
+    const { t } = useTranslation()
+
     return (
         <div className="vote-status">
             <div className="votes-bar">
@@ -11,10 +14,10 @@ export default function VoteStatus(props) {
             </div>
             <div className="votes-analyze">
                 <div>
-                    {approve} approve
+                    {approve} {t('project.approve')}
         </div>
                 <div>
-                    {object} object
+                    {object} {t('project.object')}
         </div>
             </div>
         </div>

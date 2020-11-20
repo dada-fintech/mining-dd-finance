@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Row, Col, Progress } from 'antd'
 import { useParams } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import axios from 'utils/axios'
 // import { useWallet } from 'use-wallet'
 import Header from '../../components/Header'
@@ -19,12 +20,14 @@ export default function Project() {
     const [currentTab, setCurrentTab] = useState('process')
     const [project, setProject] = useState({})
     const { id } = useParams()
+    const { t } = useTranslation()
     useEffect(() => {
         axios.get('/project/detail/' + id).then(res => {
             setProject({
                 ...res.data,
                 percent: parseInt((res.data.fundraising.current_raised_money / res.data.fundraising.hardtop) * 100),
                 fullDesc: `
+                        <div>(此处为示范，后期会改成PDF形式)<br/><br/></div>
                         <div class="text-line">
                         <div class="title">基金发起人</div>
                         <p>
@@ -80,7 +83,7 @@ export default function Project() {
                         <div className="project-intro">
                             <div className="top">
                                 <div className="title">{project.project_info && project.project_info.project_name}</div>
-                                <div className="apy">年化收益率 {project.project_info && project.project_info.expected_apy}%</div>
+                                <div className="apy">{t('common.apy')} {project.project_info && project.project_info.expected_apy}%</div>
                             </div>
                             <div className="desc" dangerouslySetInnerHTML={{ __html: project.project_info && project.project_info.description }}></div>
                             <div className="votes-bar">
@@ -90,10 +93,10 @@ export default function Project() {
                                 {project.percent}%
                 </div>
                             <ul className="tabs">
-                                <li className={currentTab === 'process' && 'active'} onClick={() => { setCurrentTab('process') }}>项目进程</li>
-                                <li className={currentTab === 'detail' && 'active'} onClick={() => { setCurrentTab('detail') }}>项目详情</li>
-                                <li className={currentTab === 'vote' && 'active'} onClick={() => { setCurrentTab('vote') }}>投票</li>
-                                <li className={currentTab === 'comments' && 'active'} onClick={() => { setCurrentTab('comments') }}>评论</li>
+                                <li className={currentTab === 'process' && 'active'} onClick={() => { setCurrentTab('process') }}>{t('project.progress')}</li>
+                                <li className={currentTab === 'detail' && 'active'} onClick={() => { setCurrentTab('detail') }}>{t('project.details')}</li>
+                                <li className={currentTab === 'vote' && 'active'} onClick={() => { setCurrentTab('vote') }}>{t('project.vote')}</li>
+                                <li className={currentTab === 'comments' && 'active'} onClick={() => { setCurrentTab('comments') }}>{t('project.comments')}</li>
                             </ul>
                         </div>
                         <div className="project-content">

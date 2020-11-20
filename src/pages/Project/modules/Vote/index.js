@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons'
 import VoteStatus from '../../../../components/VoteStatus'
 import './style.scss'
@@ -35,6 +36,7 @@ const voteList = [
 ]
 
 export default function Vote() {
+    const { t } = useTranslation()
 
     return (<div className="vote-module">
         {voteList.map(item => (
@@ -49,14 +51,14 @@ export default function Vote() {
                     </div>
                 </div>
                 <div className="desc-title">
-                    Description
+                    {t('common.description')}
                 </div>
                 <div className="description" dangerouslySetInnerHTML={{ __html: item.description }}></div>
                 <div className="votes-title">
-                    VOTES
+                    {t('common.votes')}
                 </div>
-                <VoteStatus approve={item.approve} object={item.object}/>
-             
+                <VoteStatus approve={item.approve} object={item.object} />
+
             </div>
         ))}
     </div>)

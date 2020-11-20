@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Row, Col, Tooltip, Progress } from 'antd'
+import { useTranslation } from 'react-i18next'
 import { useWallet } from 'use-wallet'
 // import { useWallet } from 'use-wallet'
 import Header from '../../components/Header'
@@ -11,6 +12,7 @@ import './style.scss'
 export default function Homepage() {
     const wallet = useWallet()
     const [projectList, setProjectList] = useState([])
+    const { t } = useTranslation()
 
     useEffect(() => {
         axios.get('/project/active-items').then(res => {
@@ -53,12 +55,12 @@ export default function Homepage() {
             <Header />
             <div className="container">
                 <div className="title">
-                    矿业生态聚合器
-            </div>
+                    {t('banner.title')}
+                </div>
                 <div className="subtitle">
-                    为您甄选最好的项目
-            </div>
-                {wallet.status === 'connected' ? <Tooltip placement="bottom" title={window.ethereum.selectedAddress}><Button className="btn-green btn-action">钱包已连接</Button> </Tooltip> : <Button className="btn-green btn-action" onClick={() => { wallet.connect() }}>连接钱包</Button>}
+                    {t('banner.subtitle')}
+                </div>
+                {wallet.status === 'connected' ? <Tooltip placement="bottom" title={window.ethereum.selectedAddress}><Button className="btn-green btn-action">{t('common.walletConnected')}</Button> </Tooltip> : <Button className="btn-green btn-action" onClick={() => { wallet.connect() }}>{t('common.connectWallet')}</Button>}
                 {/* {wallet.status === 'connected' ?  : <div></div>} */}
             </div>
         </div>
@@ -67,31 +69,33 @@ export default function Homepage() {
                 <Col xs={24} md={8}>
                     <div className="feature-item">
                         <div className="title">
-                            创建项目
-    </div>
+                            {t('feature.1.title')}
+                        </div>
                         <div className="desc">
-                            如果您是基金发起人，可以点击这里发起一个新的项目
-    </div>
+                            {t('feature.1.desc')}
+                        </div>
                     </div>
                 </Col>
                 <Col xs={24} md={8}>
                     <div className="feature-item">
                         <div className="title">
-                            参与投资
-    </div>
+                            {t('feature.2.title')}
+                        </div>
                         <div className="desc">
-                            找到一个好的投资，将为您产生更多的收益!
-    </div>
+                            {t('feature.2.desc')}
+                        </div>
                     </div>
                 </Col>
                 <Col xs={24} md={8}>
                     <div className="feature-item">
                         <div className="title">
-                            投票治理
-    </div>
+                            {t('feature.3.title')}
+
+                        </div>
                         <div className="desc">
-                            投票支持你投资的项目，治理推动项目进程。
-    </div>
+                            {t('feature.3.desc')}
+
+                        </div>
                     </div>
                 </Col>
             </Row>
@@ -101,10 +105,7 @@ export default function Homepage() {
         <div className="active-project-section">
             <div className="container">
                 <div className="content-container">
-                    <h2 className="section-title">进行中的项目</h2>
-                    {/* <div className="section-subtitle">
-                        Projects in progress
-            </div> */}
+                    <h2 className="section-title">{t('onGoingProjects')}</h2>
                     {projectList.map(item => (
                         <div className="project-item">
                             <div className="top">
@@ -113,7 +114,7 @@ export default function Homepage() {
                                     <div className="date">&nbsp; - {new Date(item.start_time * 1000).toLocaleDateString()}</div>
                                 </div>
                                 <div className="info">
-                                    <div className="apy">年化收益率 {item.expected_apy}%</div>
+                                    <div className="apy">{t('common.apy')} {item.expected_apy}%</div>
                                 </div>
                             </div>
                             <div className="desc">
@@ -121,9 +122,9 @@ export default function Homepage() {
                             </div>
                             <div className="bottom">
                                 <a href={'/project/' + item.project_uniq_id}>
-                                    <Button className="btn-trans">项目详情</Button>
+                                    <Button className="btn-trans">{t('common.viewAll')}</Button>
                                 </a>
-                                <Progress strokeColor="#3FAA4D" status="active" percent={((item.current_raised_money / item.hardtop)*100).toFixed(0)} className="progress-bar" />
+                                <Progress strokeColor="#3FAA4D" status="active" percent={((item.current_raised_money / item.hardtop) * 100).toFixed(0)} className="progress-bar" />
                             </div>
                         </div>
                     ))}
