@@ -9,7 +9,18 @@ export default {
                 invest: 'Invest',
                 description: 'Description',
                 votes: 'Votes',
+                next: 'Next',
+                back: 'Back',
+                pay: 'Pay',
+                confirmInfo: 'Confirm Info',
+                gasFeeHint: 'It will cost a certain amount of gas fee to create.',
+                upload: 'Upload',
 
+            },
+            sidebar: {
+                yourShares: 'Your Shares',
+                investors: 'Investors',
+                documents: 'Documents',
             },
             banner: {
                 title: 'Mining Ecosystem Aggregator',
@@ -30,17 +41,54 @@ export default {
                 }
             },
             onGoingProjects: 'The On-going Projects',
-            project:{
-               progress: 'Progress',
-               details: 'Details',
-               vote: 'Vote',
-               comments: 'Comments', 
-               unlockingAmount: 'Unlocking Amount',
-               unlockingTime: 'Unlocking Time',
-               event: 'Event',
-               voteResult: 'Vote Result',
-               approve: 'Approve',
-               object: 'Object',
+            project: {
+                progress: 'Progress',
+                details: 'Details',
+                vote: 'Vote',
+                comments: 'Comments',
+                unlockingAmount: 'Unlocking Amount',
+                unlockingTime: 'Unlocking Time',
+                event: 'Event',
+                voteResult: 'Vote Result',
+                approve: 'Approve',
+                object: 'Object',
+            },
+            createProject: {
+                hint: `Create a new DAO for your Project<br /><br />
+                Please fill out the following form carefully and ensure the accuracy of the information, the platform will be based on the data you fill in according to the rules to create the corresponding smart contract and upload the data to the blockchain! <br /><br />
+                You needs to buy/raise 0.5% of the desired raising amount worth of DADA to submit the proposal to the governance council for approval/verification. You can click here to swap some DADA.`,
+                projectName: 'Project Name',
+                projectIntro: 'Project Introduction',
+                whitepaper: 'Whitepaper',
+                nameOfToken: 'Name of the Token',
+                addWallet: 'Add the Wallet Address for Holding the Fund',
+                addWalletHint: 'This is your only address for holding the Fund.',
+                boardMembers: 'Create Addresses for Board Members',
+                boardMembersHint: 'Create addresses for 3 board members, who are allowed to vote only.',
+                fundraisingPeriod: 'Fundrasing Period',
+                fundraisingPeriodHint: 'Confirm the date to start and date to end for the fundraising campaign.',
+                fundraisingGoal:'Fundraising Goal',
+                fundraisingGoalHint:' This is the soft cap of the fund raised for this project.',
+                fundraisingLimit: 'Fundraising Limit',
+                fundraisingLimitHint: 'This is the hard cap of the fund raised for this project.',
+                redemptionDate: 'Redemption Date',
+                assetsRuleHint: 'Set the unlock rules according to your fundraising plans. ',
+                unlockDate: 'Unlock date',
+                shares: 'Shares',
+                votingDate: 'Voting Date',
+                additionalDoc: 'Additional Documents',
+                additionalDocHint: "Please upload other relevant documents, including the whitepaper, photos, manager's portfolio, etc. ",
+                projectInfo: 'Project Info',
+                tokenName: 'Token Name',
+                fundAddress: 'Fund Holding Address',
+                councilAddress: 'Council Member Address',
+                payHint: 'Buy DADA amounts to 0.5% of your total funds needed for the fundraising, and submit the proposal to the DADA DAO Committee for approval and verification. '
+
+
+
+
+
+
 
             }
         }
@@ -55,7 +103,20 @@ export default {
                 invest: '投资',
                 description: '描述',
                 votes: '投票',
+                next: '下一步',
+                back: '上一步',
+                pay: '支付',
+                confirmInfo: '确认信息',
+                gasFeeHint: '创建项目将会耗费一些 Gas fee',
+                upload: '上传',
 
+
+
+            },
+            sidebar: {
+                yourShares: '你的份额',
+                investors: '投资人',
+                documents: '文件',
             },
             banner: {
                 title: '矿业生态聚合器',
@@ -77,18 +138,52 @@ export default {
                 }
             },
             onGoingProjects: '进行中的项目',
-            project:{
+            project: {
                 progress: '进程',
                 details: '详情',
                 vote: '投票',
-                comments: '评论', 
+                comments: '评论',
                 unlockingAmount: '解锁数额',
                 unlockingTime: '解锁时间',
                 event: '描述',
                 voteResult: '投票结果',
                 approve: '支持',
                 object: '反对',
-             }
+            },
+            createProject: {
+                hint: `创建一个新的项目<br /><br />
+                请仔细填写以下表格并确保信息的准确性，平台将根据您填写的数据按照规则创建相应的智能合约并将数据上传到区块链!<br /><br />
+                您提交项目时，需要购买或募集所需募集金额0.5%的DADA，将提案提交给治理委员会进行批准/验证。`,
+                projectName: '项目名称',
+                projectIntro: '项目简介',
+                whitepaper: '白皮书文件',
+                nameOfToken: '项目币名称',
+                addWallet: '添加基金持有地址',
+                addWalletHint: '此地址将是持有本基金的唯一地址。',
+                boardMembers: '添加理事会成员地址',
+                boardMembersHint: '创建最多3个理事会成员地址，只有创建投票的权限。',
+                fundraisingPeriod: '筹款期',
+                fundraisingPeriodHint: '确认筹款开始及结束的日期。',
+                fundraisingGoal:'筹款目标',
+                fundraisingGoalHint:'这是该项目的最低筹资限额。',
+                fundraisingLimit: '筹款限制',
+                fundraisingLimitHint: '这是这个项目的硬顶筹款。',
+                redemptionDate: '回款日期',
+                assetsRuleHint: '请根据您的募资计划配置基金解锁规则。',
+                unlockDate: '解锁时间',
+                shares: '份额',
+                votingDate: '投票期',
+                additionalDoc: '其他文件',
+                additionalDocHint: '请上传关于这个项目的其他文件。包括白皮书，照片，经理作品集，或其他有关项目信息的文件。',
+                projectInfo: '项目信息',
+                tokenName: '项目币名称',
+                fundAddress: '基金持有地址',
+                councilAddress: '理事会成员地址',
+                payHint: '您需要购买/募集所需募集金额的0.5%的DADA，将提案提交给治理委员会进行批准/验证。'
+
+
+            }
+
 
         }
     }

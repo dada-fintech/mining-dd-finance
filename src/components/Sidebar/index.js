@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import './style.scss'
 
 const supporterList = [
@@ -60,9 +61,11 @@ supporterList.map(item => {
 })
 
 export default function Sidebar() {
+    const { t } = useTranslation()
+
     return (<div className="sidebar">
         <div className="block">
-            <div className="title">Your Shares</div>
+            <div className="title">{t('sidebar.yourShares')}</div>
             <div className="box supporter-box">
                 {supporterOwner.map(item => (
                     <div className="box-item">
@@ -75,7 +78,7 @@ export default function Sidebar() {
                     </div>
                 ))}
             </div>
-            <div className="title">Supporters</div>
+            <div className="title">{t('sidebar.investors')}</div>
             <div className="box supporter-box">
 
                 {supporterList.map(item => (
@@ -91,7 +94,7 @@ export default function Sidebar() {
             </div>
         </div>
         <div className="block">
-            <div className="title">Doc</div>
+            <div className="title">{t('sidebar.documents')}</div>
             <div className="box">
                 <div className="box-item-doc">
                     <div>
