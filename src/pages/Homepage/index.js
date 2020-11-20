@@ -1,14 +1,23 @@
-import React, { useEffect } from 'react'
-import { Button, Row, Col, Tooltip } from 'antd'
+import React, { useEffect, useState } from 'react'
+import { Button, Row, Col, Tooltip, Progress } from 'antd'
 import { useWallet } from 'use-wallet'
 // import { useWallet } from 'use-wallet'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
+import axios from 'utils/axios'
 
 import './style.scss'
 
 export default function Homepage() {
     const wallet = useWallet()
+    const [projectList, setProjectList] = useState([])
+
+    useEffect(() => {
+        axios.get('/project/active-items').then(res => {
+            setProjectList(res.data.ActiveProjectOut)
+        })
+
+    }, [])
 
     useEffect(() => {
 
@@ -44,10 +53,10 @@ export default function Homepage() {
             <Header />
             <div className="container">
                 <div className="title">
-                矿业生态聚合器
+                    矿业生态聚合器
             </div>
                 <div className="subtitle">
-                为您甄选最好的项目
+                    为您甄选最好的项目
             </div>
                 {wallet.status === 'connected' ? <Tooltip placement="bottom" title={window.ethereum.selectedAddress}><Button className="btn-green btn-action">钱包已连接</Button> </Tooltip> : <Button className="btn-green btn-action" onClick={() => { wallet.connect() }}>连接钱包</Button>}
                 {/* {wallet.status === 'connected' ?  : <div></div>} */}
@@ -61,27 +70,27 @@ export default function Homepage() {
                             创建项目
     </div>
                         <div className="desc">
-                        如果您是基金发起人，可以点击这里发起一个新的项目
+                            如果您是基金发起人，可以点击这里发起一个新的项目
     </div>
                     </div>
                 </Col>
                 <Col xs={24} md={8}>
                     <div className="feature-item">
                         <div className="title">
-                        参与投资
+                            参与投资
     </div>
                         <div className="desc">
-                        找到一个好的投资，将为您产生更多的收益!
+                            找到一个好的投资，将为您产生更多的收益!
     </div>
                     </div>
                 </Col>
                 <Col xs={24} md={8}>
                     <div className="feature-item">
                         <div className="title">
-                        投票治理
+                            投票治理
     </div>
                         <div className="desc">
-                        投票支持你投资的项目，治理推动项目进程。
+                            投票支持你投资的项目，治理推动项目进程。
     </div>
                     </div>
                 </Col>
@@ -96,49 +105,28 @@ export default function Homepage() {
                     {/* <div className="section-subtitle">
                         Projects in progress
             </div> */}
-                    <div className="project-item">
-                        <div className="top">
-                            <div className="title">
-                                <div className="project-name">BTC矿机托管项目</div>
-                                <div className="date">&nbsp; - 2020年11月13日</div>
+                    {projectList.map(item => (
+                        <div className="project-item">
+                            <div className="top">
+                                <div className="title">
+                                    <div className="project-name">{item.project_name}</div>
+                                    <div className="date">&nbsp; - {new Date(item.start_time * 1000).toLocaleDateString()}</div>
+                                </div>
+                                <div className="info">
+                                    <div className="apy">年化收益率 {item.expected_apy}%</div>
+                                </div>
                             </div>
-                            <div className="status red">已满额</div>
-                            <div className="info">
-                                <div className="apy">年化收益率 10%</div>
+                            <div className="desc">
+                                {item.description}
                             </div>
-                        </div>
-                        <div className="desc">
-                            新疆矿场50台神马M20s矿机托管项目<br />该项目将会采购50台神马M20s矿机并托管在位于新疆准东的矿场，限量10w美金。
-                </div>
-                        <div className="bottom">
-                            <a href="/project/1">
-                                <Button className="btn-trans">项目详情</Button>
-                            </a>
-                            {/* <Progress strokeColor="#3FAA4D" status="active" percent={42} className="progress-bar" /> */}
-                        </div>
-                    </div>
-                    <div className="project-item">
-                        <div className="top">
-                            <div className="title">
-                                <div className="project-name">BTC矿机托管项目</div>
-                                <div className="date">&nbsp; - 2020年11月28日</div>
-                            </div>
-                            <div className="status green">尚未开放</div>
-
-                            <div className="info">
-                                <div className="apy">年化收益率 15%</div>
+                            <div className="bottom">
+                                <a href={'/project/' + item.project_uniq_id}>
+                                    <Button className="btn-trans">项目详情</Button>
+                                </a>
+                                <Progress strokeColor="#3FAA4D" status="active" percent={((item.current_raised_money / item.hardtop)*100).toFixed(0)} className="progress-bar" />
                             </div>
                         </div>
-                        <div className="desc">
-                            新疆矿场50台蚂蚁T19矿机托管项目<br />该项目将会采购50台蚂蚁T19矿机并托管在位于新疆阿克苏的矿场，限量20w美金。
-                </div>
-                        <div className="bottom">
-                            <a href="/project/2">
-                                <Button className="btn-trans">项目详情</Button>
-                            </a>
-                            {/* <Progress strokeColor="#3FAA4D" status="active" percent={56} className="progress-bar" /> */}
-                        </div>
-                    </div>
+                    ))}
                 </div>
             </div>
 

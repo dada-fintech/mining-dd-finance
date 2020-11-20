@@ -17,10 +17,20 @@ import './style.scss'
 // )
 
 export default function Process(props) {
-    const { process } = props
+    const { processList } = props
     const [confirmVoteVisible, setConfirmVoteVisible] = useState(false)
     const [lockNum, setLockedNum] = useState('')
     const [contract, setContract] = useState('')
+
+    let finalProcessList = processList.map(item => {
+        return {
+            ...item,
+            totalVote: Number(item.affirmative_vote) + Number(item.dissenting_vote),
+            yesPercent: (item.affirmative_vote / (Number(item.affirmative_vote) + Number(item.dissenting_vote))) * 100,
+            noPercent: (item.dissenting_vote / (Number(item.affirmative_vote) + Number(item.dissenting_vote))) * 100,
+        }
+
+    })
 
     useEffect(async () => {
         const provider = await detectEthereumProvider(
@@ -74,41 +84,30 @@ export default function Process(props) {
     }
 
     return (<div className="process-module">
-        {/* {processList.map(item => ( */}
-        <div className="process-item">
-            <div className="text-area">
-                <strong>{process.title}</strong><br />
-                <strong>项目募集金额</strong>:{process.amount}<br />
-                <strong>年化收益率</strong>:{process.apy}<br />
-                <strong>赎回日期</strong>:{process.date}
-            </div>
-
-            {/* <div className="top">
-                    <div className="title">{item.title}</div>
-                    <div>
-                        <div className="date">{item.date} </div>
-                        <div className={'status ' + item.status} >
-                            {item.status}
-                        </div>
-                    </div>
-                </div> */}
-            {/* <div className="desc-title">
-                    Description
+        {finalProcessList.map((process, index) => (
+            <div className="process-item">
+                <div className="top">
+                    <div className="title">进程#{index + 1}</div>
+                    <div className="date">{new Date(process.vote_start_time * 1000).toLocaleDateString()} - {new Date(process.vote_end_time * 1000).toLocaleDateString()}</div>
                 </div>
-                <div className="description" dangerouslySetInnerHTML={{ __html: item.description }}></div> */}
-            <div className="handle-area">
-                <Input value={lockNum} onChange={(event) => { setLockedNum(event.target.value) }} suffix="USDT" />
-                <Button disabled={process.done} className="btn-green" onClick={() => { doLock() }}>投资</Button>
-            </div>
-            <div className="votes-bar">
-                <div className="done" style={{ width: (process.voted / process.target) * 100 + '%' }}></div>
-            </div>
-            <div className="process-tag" style={{ marginLeft: ((process.voted / process.target) * 100 > 50 ? ((process.voted / process.target) * 100 - 10) : (process.voted / process.target) * 100) + '%' }}>
-                {Number((process.voted / process.target) * 100).toFixed(2)}%
+                <div className="text-area">
+                    <strong>解锁数额</strong>:{process.unlock_value}USDT({process.unlock_percentage}%)<br />
+                    <strong>解锁时间</strong>:{new Date(process.unlock_time * 1000).toLocaleDateString()}<br />
+                    <strong>描述</strong>:{process.description}<br />
+                    <strong>投票结果</strong>:{process.affirmative_vote}支持 / {process.dissenting_vote}反对
                 </div>
-        </div>
-        {/* ))} */}
+                <div className="vs-bar">
+                    <div className="yes" style={{ width: process.yesPercent + '%' }}>{process.yesPercent >= 10 && (process.yesPercent + '%')} Approve</div>
+                    <div className="no" style={{ width: process.noPercent + '%' }}>{process.noPercent >= 10 && (process.noPercent + '%')} Object</div>
+                </div>
+                <div className="handle-area">
+                    <Input value={lockNum} onChange={(event) => { setLockedNum(event.target.value) }} suffix="USDT" />
+                    <Button disabled={process.done} className="btn-green" onClick={() => { doLock() }}>投资</Button>
+                </div>
 
-        {confirmVoteVisible && <ConfirmVote onCancel={() => { setConfirmVoteVisible(false) }} />}
+            </div>
+        ))}
+
+        { confirmVoteVisible && <ConfirmVote onCancel={() => { setConfirmVoteVisible(false) }} />}
     </div>)
 }

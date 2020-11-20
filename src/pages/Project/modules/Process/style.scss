@@ -7,16 +7,35 @@
         &:last-child{
             margin-bottom:  0;
         }
+        .vs-bar{
+            display: flex;
+            color: #fff;
+            height: 24px;
+            overflow: hidden;
+            border-radius: 12px;
+            margin: 8px auto 0;
+            .yes{
+                background: green;
+                text-align: right;
+                padding: 0 12px;
+            }
+            .no{
+                background: red;
+                text-align: left;
+                padding: 0 12px;
+            }
+        }
        
         .text-area{
-            font-size: 20px;
-            line-height: 40px;
+            font-size: 18px;
+            line-height: 36px;
         }
         .top {
             display: flex;
             align-items: flex-start;
             justify-content: space-between;
             font-weight: 800;
+            margin-bottom: 12px;
             .title {
                 font-size: 20px;
                 line-height: 27px;
@@ -55,36 +74,19 @@
             line-height: 24px;
             margin-bottom: 12px;
         }
-        .votes-bar {
-            border-radius: 5px;
-            height: 10px;
-            margin-bottom: 10px;
-            display: flex;
-            overflow: hidden;
-            background:#D2D2D2;
-            .done {
-                background: #28bc81;
-                height: 10px;
-            }
-            .undone {
-                background:#D2D2D2;
-                height: 10px;
-            }
-        }
+      
         .handle-area{
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin: 40px 0;
+            margin: 24px 0 32px;
+            
             .btn-green{
                 min-width: 120px;
                 margin-left: 44px;
             }
         }
-        .process-tag{
-            font-size: 14px;
-            color: #707070;
-        }
+      
     }
     @media screen and (max-width: 992px){
         .process-item{
