@@ -8,9 +8,6 @@ import Footer from '../../components/Footer'
 
 import './style.scss'
 
-const sidebarList = [
-    'Create a new pool', 'Project portfolio', 'Confirm Project Info'
-]
 
 const assetsRuleList = [
     {
@@ -32,7 +29,15 @@ const assetsRuleList = [
 
 export default function CreateVote() {
     const [currentStep, setCurrentStep] = useState(0)
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
+
+    console.log(i18n, 'bbbzz')
+
+    const sidebarList = i18n.language === 'en' ? [
+        'Create the Voting', 'Project Info', 'Confirmation'
+    ] : [
+            '创建投票', '项目信息', '确认信息'
+        ]
 
     return (<div className="create-vote-page">
         <Header />

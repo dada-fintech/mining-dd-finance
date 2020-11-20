@@ -66,7 +66,7 @@ export default {
                 addWalletHint: 'This is your only address for holding the Fund.',
                 boardMembers: 'Create Addresses for Board Members',
                 boardMembersHint: 'Create addresses for 3 board members, who are allowed to vote only.',
-                fundraisingPeriod: 'Fundrasing Period',
+                fundraisingPeriod: 'Fundraising Period',
                 fundraisingPeriodHint: 'Confirm the date to start and date to end for the fundraising campaign.',
                 fundraisingGoal: 'Fundraising Goal',
                 fundraisingGoalHint: ' This is the soft cap of the fund raised for this project.',

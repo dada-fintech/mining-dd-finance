@@ -8,9 +8,7 @@ import Footer from '../../components/Footer'
 
 import './style.scss'
 
-const sidebarList = [
-    'Create a project', 'Project portfolio', 'Add Council Address', 'Fundrasing Info', 'Assets Rule', 'Upload other file', 'Confirm Project Info'
-]
+
 
 const confirmAssetsRuleList = [
     {
@@ -47,11 +45,17 @@ const confirmAssetsRuleList = [
 export default function CreateProject() {
     const [currentStep, setCurrentStep] = useState(0)
     const [councilMemberAddressList, setCouncilMemberAddressList] = useState([''])
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
 
     const addCouncilMemberAddress = () => {
         message.info('Function under development')
     }
+
+    const sidebarList = i18n.language === 'en' ? [
+        'Create the project', 'Project Info', 'Add Addresses', 'Fundraising Info', 'Rules for Unlock', 'Upload Files', 'Confirmation'
+    ] : [
+            '创建项目', '项目信息', '添加地址', '筹款信息', '解锁规则', '上传文件', '确认信息'
+        ]
 
     const assetsRuleList = [
         { id: 1 },
