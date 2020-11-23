@@ -21,14 +21,6 @@ export default function Header() {
         i18n.changeLanguage(language)
     }
 
-    const languageMenu = <Menu>
-        <Menu.Item>
-            <a onClick={() => { changeLanguage('zh') }}>简体中文</a>
-        </Menu.Item>
-        <Menu.Item>
-            <a onClick={() => { changeLanguage('en') }}>English</a>
-        </Menu.Item>
-    </Menu>
 
     return (<header className="header">
         <div className="container">
@@ -36,22 +28,14 @@ export default function Header() {
                 <img src={Logo} className="logo" />
             </a>
             <nav>
-                {/* <a style={{ marginRight: '16px' }}>Project</a> */}
-                {/* <span className="hint">
-                    Project in working progress
-                </span> */}
-                <Dropdown overlay={languageMenu}>
-                    <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-                        {i18n.language === 'en' ? 'English' : '简体中文'} <DownOutlined className="dropdown-icon" />
-                    </a>
-                </Dropdown>
+                <a>项目列表</a>
                 {wallet.status === 'connected' ? <Tooltip title={window.ethereum.selectedAddress}>
-                    <Button className="btn-green btn-green-wallet">{window.ethereum.selectedAddress.slice(0, 4) + '...' + window.ethereum.selectedAddress.slice(-4)}</Button>
+                    <a className="line-btn">{window.ethereum.selectedAddress.slice(0, 4) + '...' + window.ethereum.selectedAddress.slice(-4)}</a>
                 </Tooltip>
-                    : <Button className="btn-green btn-green-wallet" onClick={() => { wallet.connect() }}>Connect Wallet</Button>}
-                <div className="mobile-hint">
-                    Project in working progress
-                </div>
+                    : <a onClick={() => { wallet.connect() }}>Connect Wallet</a>}
+                <a onClick={() => { changeLanguage(i18n.language === 'en' ? 'zh' : 'en') }}>
+                    {i18n.language === 'en' ? 'English' : '简体中文'}
+                </a>
             </nav>
         </div>
     </header>)

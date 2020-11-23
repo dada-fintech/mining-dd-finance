@@ -11,35 +11,27 @@
         width: 80px;
     }
     nav {
-        font-size: 18px;
         a {
-            color: #707070;
+            font-size: 18px;
+            // line-height: 24px;
+            color: #000;
+            font-weight: 800;
             vertical-align: middle;
-        }
-        .ant-dropdown-link{
-            margin-right: 12px;
-        }
-        .hint{
-            margin-right: 12px;
-            font-size: 12px;
-        }
-        .mobile-hint{
-            display: none;
-            margin-top: 8px;
-            font-size: 12px;
-
-        }
-        .ant-btn{
-            vertical-align: middle;
+            margin-left: 24px;
+            padding: 8px 4px;
+            &.highlight{
+                
+              
+            }
         }
     }
-    @media screen and (max-width: 768px){
-        nav{
+    @media screen and (max-width: 768px) {
+        nav {
             text-align: right;
-            .hint{
+            .hint {
                 display: none;
             }
-            .mobile-hint{
+            .mobile-hint {
                 display: block;
             }
         }

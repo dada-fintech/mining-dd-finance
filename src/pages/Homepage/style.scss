@@ -1,74 +1,123 @@
 .homepage {
-    background: linear-gradient(25deg, #f8f8f8 70%, #bef2ea 70%, #fff 100%);
-
+    color: #273460;
     .section-title {
-        color: #010101;
-        font-size: 20px;
+        font-size: 36px;
+        line-height: 49px;
         font-weight: 800;
-        line-height: 27px;
-        margin-bottom: 24px;
+        display: inline-block;
+        position: relative;
+        span {
+            z-index: 10;
+            position: relative;
+        }
+        &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            bottom: 6px;
+            left: 28px;
+            height: 8px;
+            width: 100%;
+            background: #3dffbe;
+        }
     }
-    .section-subtitle {
-        color: #707070;
-        font-size: 20px;
-        line-height: 27px;
-        margin-bottom: 56px;
-    }
-    .banner {
-        text-align: center;
-        padding: 0 0 170px;
-        .title {
-            font-size: 50px;
-            line-height: 40px;
-            font-weight: 800;
-            margin-top: 240px;
-            margin-bottom: 30px;
-        }
-        .subtitle {
-            color: #707070;
-            font-size: 20px;
-            line-height: 27px;
-            margin-bottom: 106px;
-        }
-        .btn-action {
-            font-size: 16px;
-            height: 44px;
-            padding: 0 32px;
-        }
-        .btn-green-wallet {
-            padding: 0 12px;
-        }
+    .handle-btn {
+        border-top: 1px solid #707070;
+        border-bottom: 1px solid #707070;
+        font-size: 32px;
+        font-weight: 800;
+        padding: 16px 0;
     }
     .feature-list {
-        color: #707070;
-        margin: 66px auto 120px;
-        .feature-item {
-            border: 2px solid #ececec;
-            padding: 4px 12px 20px;
-            cursor: pointer;
-            &:hover {
-                box-shadow: 2px 2px 17px #d6d6d6;
+        li {
+            font-size: 26px;
+            line-height: 44px;
+            font-weight: 600;
+        }
+    }
+
+    .banner {
+        background: #f9f9f9;
+        & > .container {
+            padding: 132px 0;
+        }
+        .banner-title {
+            font-size: 80px;
+            line-height: 106px;
+            font-weight: 800;
+            margin-bottom: 64px;
+            .highlight {
+                color: #f9f9f9;
+                vertical-align: text-top;
+                font-size: 130px;
+                text-shadow: 3px 3px #3dffbe, -3px -3px #3dffbe, 3px -3px #3dffbe, -3px 3px #3dffbe;
             }
-            .title {
-                text-align: center;
-                font-size: 20px;
-                line-height: 27px;
-                margin-bottom: 12px;
+        }
+        .banner-btn {
+            background: #fff;
+            font-size: 36px;
+            font-weight: 800;
+            width: 400px;
+            height: 210px;
+            float: right;
+            position: relative;
+            div {
+                position: absolute;
+                left: 32px;
+                padding-top: 64px;
+                img {
+                    vertical-align: top;
+                    margin-right: 24px;
+                }
             }
-            .desc {
-                color: rgba(0, 0, 0, 0.4);
-                font-size: 16px;
-                line-height: 21px;
+            &::after {
+                content: "";
+                display: block;
+                width: 400px;
+                height: 210px;
+
+                border: 10px solid #48cccc;
+                position: absolute;
+                left: -36px;
+                top: -36px;
             }
         }
     }
-    .active-project-section {
-        margin-bottom: 200px;
+    .section-projects {
+        & > .container {
+            padding: 132px 0;
+        }
+        .section-title {
+            margin-bottom: 44px;
+        }
+        .feature-list {
+            margin-bottom: 64px;
+        }
     }
+    .section-ongoing {
+        background: #f9f9f9;
+        & > .container {
+            padding: 132px 0;
+        }
+        .section-title {
+            margin-bottom: 44px;
+        }
+        .feature-list {
+            margin-bottom: 64px;
+        }
+    }
+    .section-about {
+    }
+
+    .section-contact {
+        background: #f9f9f9;
+    }
+
     .project-item {
-        --progress: 1;
-        border: 1px solid #707070;
-        padding: 16px 20px;
+        // --progress: 1;
+        // border: 1px solid #707070;
+        box-shadow: rgba(0, 0, 0, 0.16) 0 3px 6px;
+        padding: 20px 20px;
         margin-bottom: 55px;
         transition: 0.25s transform ease-in-out;
         //动效
@@ -136,7 +185,8 @@
             color: #707070;
             font-size: 18px;
             line-height: 24px;
-            margin: 8px auto;
+            margin: 24px 0 16px;
+            width: 70%;
         }
         .bottom {
             display: flex;
