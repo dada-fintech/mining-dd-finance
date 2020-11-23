@@ -19,4 +19,17 @@
         font-size: 20px;
         padding: 44px 0 12px;
     }
+    @media screen and (max-width: 768px){
+        .footer-logo{
+            margin: 0 24px;
+            width: 90px;
+        }
+        a{
+            font-size: 18px;
+        }
+        .copyright{
+            font-size: 16px;
+            padding: 24px 0 8px;
+        }
+    }
 }
