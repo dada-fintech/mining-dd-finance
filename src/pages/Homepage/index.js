@@ -1,11 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Row, Col, Tooltip, Progress } from 'antd'
+import { Button, Row, Col, Tooltip, Progress, Input, Checkbox, message } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { useWallet } from 'use-wallet'
 // import { useWallet } from 'use-wallet'
 import Header from '../../components/Header'
 import LinkArrow from 'assets/link-arrow.svg'
 import OngoingImg from 'assets/ongoing-img.svg'
+import AboutImg from 'assets/about-img.svg'
+import Twiiter from '../../assets/socials/twitter.svg'
+import Discord from '../../assets/socials/discord.svg'
+import Medium from '../../assets/socials/medium.svg'
+import Telegram from '../../assets/socials/telegram.svg'
+
+import ProjectListTriangle from '../../assets/project-list-triangle.svg'
+import OngoingTriangle from '../../assets/ongoing-triangle.svg'
+
+
 import Footer from '../../components/Footer'
 import axios from 'utils/axios'
 
@@ -14,6 +24,7 @@ import './style.scss'
 export default function Homepage() {
     const wallet = useWallet()
     const [projectList, setProjectList] = useState([])
+    const [comment, setComment] = useState({})
     const { t } = useTranslation()
 
     useEffect(() => {
@@ -22,6 +33,22 @@ export default function Homepage() {
         })
 
     }, [])
+
+    const leaveComment = () => {
+        axios.post('/comment/main-page', comment).then(res => {
+            message.success('留言成功！')
+            setComment({})
+        })
+    }
+
+    const commentChange = (name, value) => {
+        setComment(prev => {
+            return {
+                ...prev,
+                [name]: value,
+            }
+        })
+    }
 
     // useEffect(() => {
 
@@ -83,6 +110,7 @@ export default function Homepage() {
             </div>
         </div>
         <div className="section-projects">
+            <img src={ProjectListTriangle} className="triangle" />
             <div className="container">
                 <Row gutter={92}>
                     <Col md={18} style={{ marginTop: '120px' }}>
@@ -131,6 +159,7 @@ export default function Homepage() {
 
         </div>
         <div className="section-ongoing">
+            <img src={OngoingTriangle} className="triangle" />
             <div className="container">
                 <Row gutter={44}>
                     <Col md={6}>
@@ -154,9 +183,119 @@ export default function Homepage() {
             </div>
         </div>
         <div className="section-about">
+            <div className="container">
+                <div style={{ textAlign: 'center' }}>
+                    <div className="section-title">
+                        <span>
+                            关于安全达（SAFD）
+                    </span>
+                    </div>
+                </div>
+                <Row align="middle">
+                    <Col md={12}>
+                        <div className="desc">
+                            安全达（SAFD）是DADA推出的一项为保障投资人本金而设立的专项赔付体系，为此我们做了充足的准备，为每一位投资人提供最安心的投资保障。
+                        </div>
+                        <div className="slogan">
+                            为共同构建最优质的信誉体系<br />
+                            <div style={{ textAlign: 'right', marginTop: '8px' }}>
+                                <div className="with-line"><span>提供最充足的保障</span></div>
+                            </div>
+                        </div>
+                        <div className="handle-btn">
+                            <img src={LinkArrow} /> 了解更多
+                    </div>
+
+                    </Col>
+                    <Col md={12} style={{ textAlign: 'center' }}>
+                        <img src={AboutImg} className="about-img" />
+                    </Col>
+                </Row>
+            </div>
 
         </div>
         <div className="section-contact">
+            <div className="container">
+                <Row>
+                    <Col md={12}>
+                        <div className="section-title">
+                            <span>联系我们</span>
+                        </div>
+                        <div className="desc">
+                            如果您对我们感兴趣<br />
+                        如果您对我们有建议<br />
+                        如果您对我们有帮助<br /><br />
+                        欢迎联系我们！
+                    </div>
+
+                        <div className="social-icons">
+                            <a target="_blank" href="https://twitter.com/FinanceDada">
+                                <img src={Twiiter} className="social-icon" />
+                            </a>
+                            <a target="_blank">
+                                <img src={Discord} className="social-icon" />
+                            </a>
+                            <a target="_blank">
+                                <img src={Medium} className="social-icon" />
+                            </a>
+                            <a target="_blank">
+                                <img src={Telegram} className="social-icon" />
+                            </a>
+                        </div>
+
+                        <ul className="emails">
+                            <li><a href="mailto:contact@dd.finance">contact@dd.finance</a></li>
+                            <li><a href="mailto:media@dd.finance">media@dd.finance</a></li>
+                        </ul>
+
+
+
+                    </Col>
+                    <Col md={12}>
+                        <div className="form-title">
+                            非常感谢您对我们的支持！
+                    </div>
+                        <Row gutter={32}>
+                            <Col md={10}>
+                                <div className="form-item">
+                                    <div className="form-item-title">
+                                        姓
+                                </div>
+                                    <Input className="form-input" value={comment.first_name} onChange={e => commentChange('first_name', e.target.value)} />
+                                </div>
+                            </Col>
+                            <Col md={14}>
+                                <div className="form-item">
+                                    <div className="form-item-title">
+                                        名
+                                </div>
+                                    <Input className="form-input" value={comment.last_name} onChange={e => commentChange('last_name', e.target.value)} />
+                                </div>
+                            </Col>
+                        </Row>
+                        <div className="form-item">
+                            <div className="form-item-title">
+                                邮箱
+                                </div>
+                            <Input className="form-input" value={comment.mail_box} onChange={e => commentChange('mail_box', e.target.value)} />
+                        </div>
+                        <div className="form-item">
+                            <div className="form-item-title">
+                                留言
+                                </div>
+                            <Input.TextArea autoSize={{ minRows: 4 }} className="form-input" value={comment.message} onChange={e => commentChange('message', e.target.value)} />
+                        </div>
+                        <div className="form-item">
+                            <Checkbox style={{ color: '#273460' }} onChange={e => commentChange('accept_notify', e.target.checked)}>勾选时将会接受新项目推送</Checkbox>
+                        </div>
+                        <div className="action-btn" onClick={() => { leaveComment() }}>
+                            <img src={LinkArrow} /> 留言
+                        </div>
+                    </Col>
+                </Row>
+
+            </div>
+
 
         </div>
         <Footer />

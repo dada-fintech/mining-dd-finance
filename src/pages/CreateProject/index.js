@@ -8,43 +8,13 @@ import Footer from '../../components/Footer'
 
 import './style.scss'
 
-
-
-const confirmAssetsRuleList = [
-    {
-        id: 1,
-        value: '100, 000 USDT(10%)',
-        time: 'Oct 05, 2020',
-        period: 'Oct 01,2020 - Oct 05,2020',
-        desc: '10% is scheduled to be released on Oct. 5 for approximately $100,000 to cover the deposit on the mine purchase.'
-    },
-    {
-        id: 2,
-        value: '100, 000 USDT(10%)',
-        time: 'Oct 05, 2020',
-        period: 'Oct 01,2020 - Oct 05,2020',
-        desc: '10% is scheduled to be released on Oct. 5 for approximately $100,000 to cover the deposit on the mine purchase.'
-    },
-    {
-        id: 3,
-        value: '100, 000 USDT(10%)',
-        time: 'Oct 05, 2020',
-        period: 'Oct 01,2020 - Oct 05,2020',
-        desc: '10% is scheduled to be released on Oct. 5 for approximately $100,000 to cover the deposit on the mine purchase.'
-    },
-    {
-        id: 4,
-        value: '100, 000 USDT(10%)',
-        time: 'Oct 05, 2020',
-        period: 'Oct 01,2020 - Oct 05,2020',
-        desc: '10% is scheduled to be released on Oct. 5 for approximately $100,000 to cover the deposit on the mine purchase.'
-    },
-]
-
-
 export default function CreateProject() {
     const [currentStep, setCurrentStep] = useState(0)
     const [councilMemberAddressList, setCouncilMemberAddressList] = useState([''])
+    const [projectInfo, setProjectInfo] = useState({})
+    const [fundraising, setFundraising] = useState({})
+    const [processList, setProcessList] = useState([{}])
+
     const { t, i18n } = useTranslation()
 
     const addCouncilMemberAddress = () => {
@@ -57,11 +27,49 @@ export default function CreateProject() {
             '创建项目', '项目信息', '添加地址', '筹款信息', '解锁规则', '上传文件', '确认信息'
         ]
 
-    const assetsRuleList = [
-        { id: 1 },
-        { id: 2 }
-    ]
+    const changeProjectInfo = (name, value) => {
+        setProjectInfo(prev => {
+            return {
+                ...prev,
+                [name]: value,
+            }
+        })
+    }
 
+    const changeFundraising = (name, value) => {
+        setFundraising(prev => {
+            return {
+                ...prev,
+                [name]: value,
+            }
+        })
+    }
+
+
+    const changeProcess = (number, name, value) => {
+        setProcessList(prev => {
+            let newObj = prev
+            newObj[number][name] = value
+            return newObj
+        })
+    }
+
+
+
+    const dateRangeChange = (type, value) => {
+        if (type === 'fundraising') {
+            setFundraising(prev => {
+                return {
+                    ...prev,
+                    startTime: value[0].valueOf(),
+                    endTime: value[1].valueOf()
+                }
+            })
+        }
+    }
+
+
+    console.log(processList, 'bzzzz')
     return (<div className="create-project-page">
         <Header />
 
@@ -74,11 +82,11 @@ export default function CreateProject() {
                         {currentStep === 1 && <div className="step-1">
                             <div className="form-item">
                                 <div className="label">{t('createProject.projectName')}</div>
-                                <Input style={{ width: '360px' }} />
+                                <Input value={projectInfo.project_name} onChange={(e) => { changeProjectInfo('project_name', e.target.value) }} style={{ width: '360px' }} />
                             </div>
                             <div className="form-item">
                                 <div className="label">{t('createProject.projectIntro')}</div>
-                                <Input.TextArea autoSize={{ minRows: 6 }} placeholder="200 words limit" />
+                                <Input.TextArea autoSize={{ minRows: 6 }} placeholder="200 words limit" value={projectInfo.description} onChange={(e) => { changeProjectInfo('description', e.target.value) }} />
                             </div>
                             <div className="form-item">
                                 <div className="label">{t('createProject.whitepaper')}</div>
@@ -91,11 +99,11 @@ export default function CreateProject() {
                         {currentStep === 2 && <div className="step-2">
                             <div className="form-item">
                                 <div className="label">{t('createProject.nameOfToken')}</div>
-                                <Input style={{ width: '360px' }} />
+                                <Input style={{ width: '360px' }} value={projectInfo.project_token_symbol} onChange={(e) => { changeProjectInfo('project_token_symbol', e.target.value) }} />
                             </div>
                             <div className="form-item">
                                 <div className="label">{t('createProject.addWallet')}</div>
-                                <Input style={{ width: '500px' }} />
+                                <Input style={{ width: '500px' }} value={projectInfo.receiver} onChange={(e) => { changeProjectInfo('receiver', e.target.value) }} />
                                 <div className="hint red">{t('createProject.addWalletHint')}</div>
                             </div>
                             <div className="form-item">
@@ -109,13 +117,13 @@ export default function CreateProject() {
 
                             <div className="form-item">
                                 <div className="label">{t('createProject.fundraisingPeriod')}</div>
-                                <DatePicker.RangePicker />
+                                <DatePicker.RangePicker onChange={value => dateRangeChange('fundraising', value)} />
                                 <div className="hint">{t('createProject.fundraisingPeriodHint')}</div>
                             </div>
 
                             <div className="form-item">
                                 <div className="label">{t('createProject.fundraisingGoal')}</div>
-                                <Input style={{ width: '300px' }} suffix="USDT" />
+                                <Input value={fundraising.softtop} onChange={e => changeFundraising('softtop', e.target.value)} style={{ width: '300px' }} suffix="USDT" />
                                 <div className="hint">
                                     {t('createProject.fundraisingGoalHint')}
                                 </div>
@@ -123,7 +131,7 @@ export default function CreateProject() {
 
                             <div className="form-item">
                                 <div className="label">{t('createProject.fundraisingLimit')}</div>
-                                <Input style={{ width: '300px' }} suffix="USDT" />
+                                <Input value={fundraising.hardtop} onChange={e => changeFundraising('hardtop', e.target.value)} style={{ width: '300px' }} suffix="USDT" />
                                 <div className="hint">
                                     {t('createProject.fundraisingLimitHint')}
                                 </div>
@@ -131,46 +139,46 @@ export default function CreateProject() {
 
                             <div className="form-item">
                                 <div className="label">{t('createProject.redemptionDate')}</div>
-                                <DatePicker />
+                                <DatePicker value={projectInfo.income_settlement_time} onChange={value => changeProjectInfo('income_settlement_time', value)} />
                             </div>
                             <div className="form-item">
                                 <div className="label">{t('common.apy')}</div>
-                                <Input style={{ width: '180px' }} suffix="%" />
+                                <Input value={projectInfo.expected_apy} onChange={e => changeProjectInfo('expected_apy', e.target.value)} style={{ width: '180px' }} suffix="%" />
                             </div>
                         </div>}
                         {currentStep === 4 && <div className="step-4">
                             <div className="assets-rule-title">{t('createProject.assetsRuleHint')}</div>
-                            {assetsRuleList.map(item => <>
-                                <div className="asset-id"># {item.id}</div>
+                            {processList.map((item, index) => <>
+                                <div className="asset-id"># {index + 1}</div>
                                 <div className="assets-rule-item">
                                     <Row gutter={24}>
                                         <Col md={6}>
                                             <div className="form-item">
                                                 <div className="label">{t('createProject.unlockDate')}</div>
-                                                <DatePicker />
+                                                <DatePicker value={item.unlock_time} onChange={value => changeProcess(index, 'unlock_time', value)} />
                                             </div>
                                         </Col>
                                         <Col md={6}>
                                             <div className="form-item">
                                                 <div className="label">{t('createProject.shares')}</div>
-                                                <Input suffix="%" />
+                                                <Input suffix="%" value={item.unlock_percentage} onChange={e => changeProcess[index, 'unlock_percentage', e.target.value]} />
                                             </div>
                                         </Col>
                                         <Col md={12}>
                                             <div className="form-item">
                                                 <div className="label">{t('createProject.votingDate')}</div>
-                                                <DatePicker.RangePicker />
+                                                <DatePicker.RangePicker onChange={value => { changeProcess(index, 'start_time', value[0]); changeProcess(index, 'end_time', value[1]) }} />
                                             </div>
                                         </Col>
                                     </Row>
                                     <div className="form-item">
                                         <div className="label">{t('common.description')}</div>
-                                        <Input.TextArea autoSize={{ minRows: 6 }} />
+                                        <Input.TextArea value={item.unlock_percentage} onChange={e => changeProcess[index, 'unlock_percentage', e.target.value]} autoSize={{ minRows: 6 }} />
                                     </div>
                                 </div>
 
                             </>)}
-                            <div className="add-item-box">
+                            <div className="add-item-box" onClick={() => { setProcessList(prev => prev.push({})) }}>
                                 <PlusCircleOutlined />
                             </div>
                             {/* <div className="form-item">
@@ -230,23 +238,23 @@ export default function CreateProject() {
                                 </div>
                             </div>
                             {/* <div className="title" style={{ marginTop: '56px' }}>ASSETS RULE</div> */}
-                            {confirmAssetsRuleList.map(item => <>
+                            {processList.map((item, index) => <>
                                 <div className="process-top">
-                                    <div>{t('project.progress')} #{item.id}</div>
-                                    <div>{item.time}</div>
+                                    <div>{t('project.progress')} #{index + 1}</div>
+                                    {/* <div>{item.time}</div> */}
                                 </div>
                                 <div className="confirm-box">
                                     <div className="line">
                                         <div className="name">{t('project.unlockingAmount')}</div>
-                                        <div className="value">{item.value}</div>
+                                        <div className="value">{item.percentage}%</div>
                                     </div>
                                     <div className="line">
                                         <div className="name">{t('project.unlockingTime')}</div>
-                                        <div className="value">{item.time}</div>
+                                        <div className="value">{item.unlock_time}</div>
                                     </div>
                                     <div className="line">
                                         <div className="name">{t('project.event')}</div>
-                                        <div className="value">{item.desc}</div>
+                                        <div className="value">{item.description}</div>
                                     </div>
                                 </div>
 
@@ -271,7 +279,7 @@ export default function CreateProject() {
                             {currentStep > 0 && <Button onClick={() => { setCurrentStep(prev => prev - 1) }} className="btn-grey">{t('common.back')}</Button>}
                         </div>
                         {currentStep < 6 && <div>
-                            <Button onClick={() => { setCurrentStep(prev => prev + 1) }} className="btn-green">{t('common.next')}</Button>
+                            <Button onClick={() => { console.log(processList); setCurrentStep(prev => prev + 1) }} className="btn-green">{t('common.next')}</Button>
                         </div>}
                         {currentStep == 6 && <div>
                             <span className="hint">{t('common.gasFeeHint')}</span>
