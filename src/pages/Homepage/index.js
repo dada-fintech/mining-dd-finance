@@ -50,41 +50,13 @@ export default function Homepage() {
         })
     }
 
-    // useEffect(() => {
-
-    //     //实现project-item的随滚轮渐入效果
-    //     const rows = document.querySelectorAll('.project-item');
-    //     const elem = document.documentElement;
-
-    //     document.addEventListener('scroll', (e) => {
-    //         let scrolled = elem.scrollTop / (elem.scrollHeight - elem.clientHeight);
-
-    //         let total = 0.8 / rows.length;
-
-    //         for (let [index, row] of rows.entries()) {
-    //             let start = total * index;
-    //             let end = total * (index + 1);
-
-    //             let progress = (scrolled - start) / (end - start);
-
-    //             if (progress >= 1) progress = 1;
-    //             if (progress <= 0) progress = 0;
-
-    //             row.style.setProperty('--progress', progress)
-    //         }
-    //     })
-    //     //
-    // }, [])
-
-
-
     // const wallet = useWallet()
     return (<div className="homepage">
         <div className="banner">
             <Header />
             <div className="container">
                 <Row type="flex" align="middle">
-                    <Col md={12}>
+                    <Col xs={24} md={12}>
                         <div className="banner-title">
                             矿业<span className="highlight">生态</span><br />
                             聚合器
@@ -98,7 +70,7 @@ export default function Homepage() {
                             <li>让矿圈出圈</li>
                         </ul>
                     </Col>
-                    <Col md={12} style={{ textAlign: 'right' }}>
+                    <Col xs={24} md={12} style={{ textAlign: 'right' }}>
                         <div className="banner-btn">
                             <div>
                                 <img src={LinkArrow} />即刻参与
@@ -112,8 +84,25 @@ export default function Homepage() {
         <div className="section-projects">
             <img src={ProjectListTriangle} className="triangle" />
             <div className="container">
-                <Row gutter={92}>
-                    <Col md={18} style={{ marginTop: '120px' }}>
+                <Row gutter={{md: 24, lg:64}}>
+                    <Col md={17} lg={18}>
+                        <div className="show-on-mobile">
+                        <div className="section-title">
+                            <span>
+                                可参与项目
+                                </span></div>
+                        <ul className="feature-list">
+                            <li>甄选品质项目</li>
+                            <li>充分尽职背调</li>
+                            <li>唯一身份验证</li>
+                            <li>声誉网络背书</li>
+                            <li>详尽项目策略</li>
+                            <li>收益更轻松</li>
+                        </ul>
+                        <div className="handle-btn">
+                            <img src={LinkArrow} /> 查看更多
+                    </div>
+                            </div>
                         <div className="project-list">
                             {projectList.map(item => (
                                 <div className="project-item">
@@ -136,7 +125,7 @@ export default function Homepage() {
                             ))}
                         </div>
                     </Col>
-                    <Col md={6}>
+                    <Col xs={0} md={7} lg={6}>
                         <div className="section-title">
                             <span>
                                 可参与项目
@@ -192,7 +181,7 @@ export default function Homepage() {
                     </div>
                 </div>
                 <Row align="middle">
-                    <Col md={12}>
+                    <Col xs={24} md={12}>
                         <div className="desc">
                             安全达（SAFD）是DADA推出的一项为保障投资人本金而设立的专项赔付体系，为此我们做了充足的准备，为每一位投资人提供最安心的投资保障。
                         </div>
@@ -207,7 +196,7 @@ export default function Homepage() {
                     </div>
 
                     </Col>
-                    <Col md={12} style={{ textAlign: 'center' }}>
+                    <Col xs={24} md={12}>
                         <img src={AboutImg} className="about-img" />
                     </Col>
                 </Row>
@@ -216,8 +205,8 @@ export default function Homepage() {
         </div>
         <div className="section-contact">
             <div className="container">
-                <Row>
-                    <Col md={12}>
+                <Row gutter={{md: 24}}>
+                    <Col xs={24} md={12}>
                         <div className="section-title">
                             <span>联系我们</span>
                         </div>
@@ -251,11 +240,11 @@ export default function Homepage() {
 
 
                     </Col>
-                    <Col md={12}>
+                    <Col xs={24} md={12}>
                         <div className="form-title">
                             非常感谢您对我们的支持！
                     </div>
-                        <Row gutter={32}>
+                        <Row gutter={{md: 32}}>
                             <Col md={10}>
                                 <div className="form-item">
                                     <div className="form-item-title">

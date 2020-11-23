@@ -1,8 +1,12 @@
 .homepage {
     color: #273460;
+    overflow: hidden;
     .line-btn {
         border-top: 1px solid #707070;
         border-bottom: 1px solid #707070;
+    }
+    .show-on-mobile{
+        display: none;
     }
     .section-title {
         font-size: 36px;
@@ -60,9 +64,9 @@
     }
 
     .banner {
-        background: #f9f9f9;
+        background: url('../../assets/paper-bg.jpg') repeat;
         & > .container {
-            padding: 132px 0;
+            padding: 132px 32px;
         }
         .banner-title {
             font-size: 80px;
@@ -113,8 +117,11 @@
             top: 300px;
             left: -64px;
         }
+        .project-list{
+            margin-top: 100px;
+        }
         & > .container {
-            padding: 132px 0;
+            padding: 132px 32px;
         }
         .section-title {
             margin-bottom: 44px;
@@ -125,7 +132,7 @@
     }
     .section-ongoing {
         position: relative;
-        background: #f9f9f9;
+        background: url('../../assets/paper-bg.jpg') repeat;
         .triangle{
             position: absolute;
             top: 300px;
@@ -143,15 +150,14 @@
     }
     .section-about {
         padding: 132px 0;
-        & > .container {
-            // text-align: center;
-        }
         .section-title {
             font-size: 52px;
             margin-bottom: 88px;
         }
         .about-img {
             width: 280px;
+            display: block;
+            margin: 0 auto;
         }
         .desc {
             font-size: 28px;
@@ -173,7 +179,8 @@
     }
 
     .section-contact {
-        background: #f9f9f9;
+        background: url('../../assets/paper-bg.jpg') repeat;
+
         padding: 132px 0;
         .action-btn {
             font-size: 28px;
@@ -325,7 +332,114 @@
             }
         }
     }
+    @media screen and (max-width: 992px){
+        .triangle{
+            display: none;
+        }
+        .section-title{
+            font-size: 24px;
+            line-height: 32px;
+        }
+        .handle-btn{
+            font-size: 20px;
+        }
+        .feature-list {
+            li {
+                font-size: 18px;
+                line-height: 32px;
+            }
+        }
+        .banner{
+            & > .container {
+                padding: 64px 24px;
+            }
+            .banner-title{
+                font-size: 46px;
+                line-height: 64px;
+                .highlight{
+                    font-size: 60px;
+                }
+            }
+            .banner-btn{
+                font-size: 24px;
+                width: 300px;
+                height: 120px;
+                margin: 32px auto;
+                float: unset;
+                div{
+                    padding-top: 24px;
+                }
+                &::after{
+                    content: "";
+                    display: block;
+                    width: 300px;
+                    height: 120px;
+                    border: 8px solid #48cccc;
+                    position: absolute;
+                    left: -24px;
+                    top: -24px;
+                }
+            }
+        }
+       
+        .section-projects{
+            &>.container{
+                padding: 64px 16px;
+            }
+            .projects-list{
+                margin-top: 32px;
+            }
+        }
+        .section-ongoing{
+            &>.container{
+                padding: 64px 16px;
+            }
+            .handle-btn{
+                margin-bottom: 32px;
+            }
+        }
+        .section-about{
+            padding: 64px 0;
+            .section-title{
+                font-size: 32px;
+                margin-bottom: 24px;
+            }
+            .desc{
+                font-size: 20px;
+                line-height: 32px;
+            }
+            .slogan{
+                font-size: 24px;
+                line-height: 36px;
+            }
+            .about-img{
+                width: 180px;
+
+            }
+            .handle-btn{
+                padding: 12px 24px;
+
+                margin-bottom: 32px;
+            }
+
+
+
+        }
+        .section-contact{
+            padding: 64px 0;
+            .desc{
+                font-size: 20px;
+                line-height: 32px;
+            }
+            .form-title{
+                margin-top: 64px;
+            }
+        }
+    }
     @media screen and (max-width: 768px) {
+        .show-on-mobile{
+            display: block;
+        }
         .project-item {
             margin: 32px auto;
             width: 100%;
