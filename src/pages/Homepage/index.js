@@ -73,7 +73,7 @@ export default function Homepage() {
                     <Col xs={24} md={12} style={{ textAlign: 'right' }}>
                         <div className="banner-btn">
                             <div>
-                                <img src={LinkArrow} />创建项目
+                                <img src={LinkArrow} />创建新项目
                             </div>
                         </div>
 
