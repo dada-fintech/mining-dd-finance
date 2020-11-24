@@ -5,12 +5,12 @@
         border-top: 1px solid #707070;
         border-bottom: 1px solid #707070;
     }
-    .show-on-mobile{
+    .show-on-mobile {
         display: none;
     }
     .section-title {
-        font-size: 36px;
-        line-height: 49px;
+        font-size: 32px;
+        line-height: 44px;
         font-weight: 800;
         display: inline-block;
         position: relative;
@@ -50,41 +50,49 @@
     .handle-btn {
         border-top: 1px solid #707070;
         border-bottom: 1px solid #707070;
-        font-size: 32px;
+        font-size: 22px;
         font-weight: 800;
-        padding: 16px 0;
+        padding: 12px 16px;
+        display: inline-block;
+        cursor: pointer;
+        img{
+            width: 52px;
+            vertical-align: baseline;
+        }
     }
-   
+
     .feature-list {
         li {
-            font-size: 26px;
-            line-height: 44px;
-            font-weight: 600;
+            font-size: 22px;
+            line-height: 40px;
+            // font-weight: 600;
         }
     }
 
     .banner {
-        background: url('../../assets/paper-bg.jpg') repeat;
+        background: url("../../assets/paper-bg.jpg") repeat;
         & > .container {
             padding: 132px 32px;
         }
         .banner-title {
-            font-size: 80px;
-            line-height: 106px;
+            font-size: 64px;
+            line-height: 96px;
             font-weight: 800;
-            margin-bottom: 64px;
+            margin-bottom: 56px;
+            letter-spacing: 2px;
             .highlight {
                 color: #f9f9f9;
-                vertical-align: text-top;
-                font-size: 130px;
+                vertical-align: bottom;
+                font-size: 90px;
+                margin-left: 4px;
                 text-shadow: 3px 3px #3dffbe, -3px -3px #3dffbe, 3px -3px #3dffbe, -3px 3px #3dffbe;
             }
         }
         .banner-btn {
             background: #fff;
-            font-size: 36px;
+            font-size: 32px;
             font-weight: 800;
-            width: 400px;
+            width: 360px;
             height: 210px;
             float: right;
             position: relative;
@@ -100,7 +108,7 @@
             &::after {
                 content: "";
                 display: block;
-                width: 400px;
+                width: 360px;
                 height: 210px;
 
                 border: 10px solid #48cccc;
@@ -112,12 +120,12 @@
     }
     .section-projects {
         position: relative;
-        .triangle{
+        .triangle {
             position: absolute;
             top: 300px;
-            left: -64px;
+            left: -92px;
         }
-        .project-list{
+        .project-list {
             margin-top: 100px;
         }
         & > .container {
@@ -132,8 +140,8 @@
     }
     .section-ongoing {
         position: relative;
-        background: url('../../assets/paper-bg.jpg') repeat;
-        .triangle{
+        background: url("../../assets/paper-bg.jpg") repeat;
+        .triangle {
             position: absolute;
             top: 300px;
             right: -134px;
@@ -151,84 +159,87 @@
     .section-about {
         padding: 132px 0;
         .section-title {
-            font-size: 52px;
+            font-size: 40px;
             margin-bottom: 88px;
         }
         .about-img {
-            width: 280px;
+            width: 220px;
             display: block;
             margin: 0 auto;
         }
         .desc {
-            font-size: 28px;
-            line-height: 50px;
-            margin-bottom: 32px;
-            text-align: left;
+            font-size: 20px;
+            line-height: 36px;
+            margin-bottom: 52px;
         }
         .slogan {
             font-weight: 800;
-            font-size: 36px;
-            line-height: 47px;
-            margin-bottom: 64px;
-            text-align: left;
+            font-size: 28px;
+            line-height: 40px;
+            margin-bottom: 72px;
         }
-        .handle-btn{
-            display: inline-block;
-            padding: 16px 32px;
-        }
+        // .handle-btn {
+        //     display: inline-block;
+        //     padding: 16px 32px;
+        // }
     }
 
     .section-contact {
-        background: url('../../assets/paper-bg.jpg') repeat;
+        background: url("../../assets/paper-bg.jpg") repeat;
 
         padding: 132px 0;
         .action-btn {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 800;
             padding: 16px 0;
-            text-align: right;
             cursor: pointer;
+            // display: inline-block;
+            float: right;
+            img{
+                width: 60px;
+            }
         }
-        .desc{
-            font-size: 28px;
-            line-height: 50px;
+        .desc {
+            font-size: 20px;
+            line-height: 40px;
             margin: 24px auto 64px;
         }
-        .social-icons{
+        .social-icons {
             margin-bottom: 32px;
-            .social-icon{
+            .social-icon {
                 width: 32px;
                 height: 32px;
                 margin-right: 12px;
             }
         }
-        .emails{
+        .emails {
             padding: 0;
-            li{
+            li {
                 list-style: none;
                 color: #707070;
-                font-size: 20px;
+                font-size: 18px;
                 margin-bottom: 8px;
                 line-height: 24px;
-                a{
+                a {
                     color: #707070;
                 }
             }
         }
-        .form-title{
-            font-size: 28px;
-            line-height: 50px;
-            margin-bottom: 8px;
+        .form-title {
+            font-size: 24px;
+            line-height: 44px;
+            margin-bottom: 12px;
             font-weight: 600;
         }
-        .form-item{
+        .form-item {
             margin-bottom: 18px;
-            .form-item-title{
+            .form-item-title {
                 font-weight: 800;
-                font-size: 18px;
-                line-height: 50px;
+                font-size: 16px;
+                line-height: 32px;
+                margin-bottom: 4px;
             }
-            .form-input{
+            .form-input {
                 border: none;
                 box-shadow: none;
             }
@@ -332,15 +343,15 @@
             }
         }
     }
-    @media screen and (max-width: 992px){
-        .triangle{
+    @media screen and (max-width: 992px) {
+        .triangle {
             display: none;
         }
-        .section-title{
+        .section-title {
             font-size: 24px;
             line-height: 32px;
         }
-        .handle-btn{
+        .handle-btn {
             font-size: 20px;
         }
         .feature-list {
@@ -349,27 +360,27 @@
                 line-height: 32px;
             }
         }
-        .banner{
+        .banner {
             & > .container {
                 padding: 64px 24px;
             }
-            .banner-title{
-                font-size: 46px;
-                line-height: 64px;
-                .highlight{
-                    font-size: 60px;
+            .banner-title {
+                font-size: 42px;
+                line-height: 56px;
+                .highlight {
+                    font-size: 46px;
                 }
             }
-            .banner-btn{
+            .banner-btn {
                 font-size: 24px;
                 width: 300px;
                 height: 120px;
                 margin: 32px auto;
                 float: unset;
-                div{
+                div {
                     padding-top: 24px;
                 }
-                &::after{
+                &::after {
                     content: "";
                     display: block;
                     width: 300px;
@@ -381,63 +392,59 @@
                 }
             }
         }
-       
-        .section-projects{
-            &>.container{
+
+        .section-projects {
+            & > .container {
                 padding: 64px 16px;
             }
-            .projects-list{
+            .projects-list {
                 margin-top: 32px;
             }
         }
-        .section-ongoing{
-            &>.container{
+        .section-ongoing {
+            & > .container {
                 padding: 64px 16px;
             }
-            .handle-btn{
+            .handle-btn {
                 margin-bottom: 32px;
             }
         }
-        .section-about{
+        .section-about {
             padding: 64px 0;
-            .section-title{
+            .section-title {
                 font-size: 32px;
                 margin-bottom: 24px;
             }
-            .desc{
+            .desc {
                 font-size: 20px;
                 line-height: 32px;
             }
-            .slogan{
+            .slogan {
                 font-size: 24px;
                 line-height: 36px;
             }
-            .about-img{
+            .about-img {
                 width: 180px;
-
             }
-            .handle-btn{
+            .handle-btn {
                 padding: 12px 24px;
 
                 margin-bottom: 32px;
             }
-
-
-
         }
-        .section-contact{
+        .section-contact {
             padding: 64px 0;
-            .desc{
+            .desc {
                 font-size: 20px;
                 line-height: 32px;
             }
-            .form-title{
+            .form-title {
                 margin-top: 64px;
             }
         }
     }
     @media screen and (max-width: 768px) {
-        .show-on-mobile{
+        .show-on-mobile {
             display: block;
         }
         .project-item {

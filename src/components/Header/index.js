@@ -33,9 +33,9 @@ export default function Header() {
                     <a className="line-btn">{window.ethereum.selectedAddress.slice(0, 4) + '...' + window.ethereum.selectedAddress.slice(-4)}</a>
                 </Tooltip>
                     : <a onClick={() => { wallet.connect() }}>Connect Wallet</a>}
-                <a onClick={() => { changeLanguage(i18n.language === 'en' ? 'zh' : 'en') }}>
+                {/* <a onClick={() => { changeLanguage(i18n.language === 'en' ? 'zh' : 'en') }}>
                     {i18n.language === 'en' ? 'English' : '简体中文'}
-                </a>
+                </a> */}
             </nav>
         </div>
     </header>)

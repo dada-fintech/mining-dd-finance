@@ -3,20 +3,20 @@
     background: url('../../assets/paper-bg.jpg') repeat;
     padding: 24px 0 0;
     .footer-logo{
-        width: 120px;
+        width: 130px;
         margin: 0 64px;
     }
     a{
         color: #000000;
-        font-size: 20px;
+        font-size: 18px;
         line-height: 27px;
         border-top: 1px solid #707070;
         border-bottom: 1px solid #707070;
-        padding: 4px 8px;
+        padding: 6px 12px;
     }
     .copyright{
         color: #707070;
-        font-size: 20px;
+        font-size: 16px;
         padding: 44px 0 12px;
     }
     @media screen and (max-width: 768px){
@@ -28,7 +28,6 @@
             font-size: 18px;
         }
         .copyright{
-            font-size: 16px;
             padding: 24px 0 8px;
         }
     }
