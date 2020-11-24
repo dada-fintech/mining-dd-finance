@@ -5,6 +5,7 @@ import { PlusCircleOutlined } from '@ant-design/icons'
 // import { useWallet } from 'use-wallet'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
+import axios from 'utils/axios'
 
 import './style.scss'
 
@@ -68,6 +69,62 @@ export default function CreateProject() {
         }
     }
 
+    const addProcessList = () => {
+        console.log('add it')
+        setProcessList(prev => {
+            return [
+                ...prev,
+                {}
+            ]
+        })
+    }
+
+    const whitePaperUpload = {
+        name: 'file',
+        action: 'https://mining-api.dd.finance/project/upload',
+        onChange(info) {
+            console.log(info)
+            if (info.file.status !== 'uploading') {
+                console.log(info.file, info.fileList);
+            }
+            if (info.file.status === 'done') {
+                message.success(`${info.file.name} file uploaded successfully`);
+                changeProjectInfo('white_paper', { file_name: info.file.name })
+            } else if (info.file.status === 'error') {
+                message.error(`${info.file.name} file upload failed.`);
+            }
+        },
+    };
+
+    const otherUpload = {
+        name: 'file',
+        action: 'https://mining-api.dd.finance/project/upload',
+        onChange(info) {
+            console.log(info)
+            if (info.file.status !== 'uploading') {
+                console.log(info.file, info.fileList);
+            }
+            if (info.file.status === 'done') {
+                message.success(`${info.file.name} file uploaded successfully`);
+                changeProjectInfo('other_file', [{ file_name: info.file.name }])
+            } else if (info.file.status === 'error') {
+                message.error(`${info.file.name} file upload failed.`);
+            }
+        },
+    };
+
+    const confirmInfo = () => {
+        let finalInfo = {
+            project_info: projectInfo,
+            fundraising: fundraising,
+            process: processList,
+        }
+        axios.post('/project/create-project', finalInfo).then(res => {
+            message.success('保存成功');
+            setCurrentStep(prev => prev + 1)
+        })
+    }
+
 
     console.log(processList, 'bzzzz')
     return (<div className="create-project-page">
@@ -90,7 +147,7 @@ export default function CreateProject() {
                             </div>
                             <div className="form-item">
                                 <div className="label">{t('createProject.whitepaper')}</div>
-                                <Upload>
+                                <Upload {...whitePaperUpload}>
                                     <Button className="btn-white" style={{ padding: '0 44px' }}>{t('common.upload')}</Button>
                                     <span style={{ marginLeft: '12px', color: '#707070' }}>*.pdf</span>
                                 </Upload>
@@ -155,40 +212,37 @@ export default function CreateProject() {
                                         <Col md={6}>
                                             <div className="form-item">
                                                 <div className="label">{t('createProject.unlockDate')}</div>
-                                                <DatePicker value={item.unlock_time} onChange={value => changeProcess(index, 'unlock_time', value)} />
+                                                <DatePicker onChange={value => changeProcess(index, 'unlock_time', value.valueOf())} />
                                             </div>
                                         </Col>
                                         <Col md={6}>
                                             <div className="form-item">
                                                 <div className="label">{t('createProject.shares')}</div>
-                                                <Input suffix="%" value={item.unlock_percentage} onChange={e => changeProcess[index, 'unlock_percentage', e.target.value]} />
+                                                <Input suffix="%" value={item.unlock_percentage} onChange={e => changeProcess(index, 'unlock_percentage', e.target.value)} />
                                             </div>
                                         </Col>
                                         <Col md={12}>
                                             <div className="form-item">
                                                 <div className="label">{t('createProject.votingDate')}</div>
-                                                <DatePicker.RangePicker onChange={value => { changeProcess(index, 'start_time', value[0]); changeProcess(index, 'end_time', value[1]) }} />
+                                                <DatePicker.RangePicker onChange={value => { changeProcess(index, 'start_time', value[0].valueOf()); changeProcess(index, 'end_time', value[1].valueOf()) }} />
                                             </div>
                                         </Col>
                                     </Row>
                                     <div className="form-item">
                                         <div className="label">{t('common.description')}</div>
-                                        <Input.TextArea value={item.unlock_percentage} onChange={e => changeProcess[index, 'unlock_percentage', e.target.value]} autoSize={{ minRows: 6 }} />
+                                        <Input.TextArea value={item.unlock_percentage} onChange={e => changeProcess(index, 'unlock_percentage', e.target.value)} autoSize={{ minRows: 6 }} />
                                     </div>
                                 </div>
 
                             </>)}
-                            <div className="add-item-box" onClick={() => { setProcessList(prev => prev.push({})) }}>
+                            <div className="add-item-box" onClick={() => { addProcessList() }}>
                                 <PlusCircleOutlined />
                             </div>
-                            {/* <div className="form-item">
-                                <div className="hint">New project locked 8% of Total fund to add in insure pool.</div>
-                            </div> */}
                         </div>}
                         {currentStep === 5 && <div className="step-5">
                             <div className="form-item">
                                 <div className="label">{t('createProject.additionalDoc')}</div>
-                                <Upload>
+                                <Upload {...otherUpload}>
                                     <Button className="btn-white" style={{ padding: '0 44px' }}>{t('common.upload')}</Button>
                                 </Upload>
                                 <div className="hint" style={{ marginTop: '160px' }}>
@@ -201,40 +255,46 @@ export default function CreateProject() {
                             <div className="confirm-box confirm-box-long">
                                 <div className="line">
                                     <div className="name">{t('createProject.projectName')}</div>
-                                    <div className="value">MINING FUND</div>
+                                    <div className="value">{projectInfo.project_name}</div>
                                 </div>
                                 <div className="line">
                                     <div className="name">{t('createProject.fundraisingPeriod')}</div>
-                                    <div className="value">Oct 01,2020 - Oct 05,2020</div>
+                                    <div className="value">{fundraising.start_time} {fundraising.end_time}</div>
                                 </div>
                                 <div className="line">
                                     <div className="name">{t('createProject.tokenName')}</div>
-                                    <div className="value">DADA-MF</div>
+                                    <div className="value">{projectInfo.project_token_symbol}</div>
                                 </div>
                                 <div className="line">
                                     <div className="name">{t('common.apy')}</div>
-                                    <div className="value">15%</div>
+                                    <div className="value">{projectInfo.expected_apy}%</div>
                                 </div>
                                 <div className="line">
                                     <div className="name">{t('createProject.fundraisingGoal')}</div>
-                                    <div className="value">800,000 USDT</div>
+                                    <div className="value">{fundraising.softtop} USDT</div>
                                 </div>
                                 <div className="line">
                                     <div className="name">{t('createProject.fundraisingLimit')}</div>
-                                    <div className="value">1,000,000 USDT</div>
+                                    <div className="value">{fundraising.hardtop} USDT</div>
                                 </div>
                                 <div className="line">
                                     <div className="name">{t('createProject.redemptionDate')}</div>
-                                    <div className="value">Oct 01,2021</div>
+                                    <div className="value">{projectInfo.income_settlement_time}</div>
                                 </div>
                                 <div className="line">
                                     <div className="name">{t('createProject.fundAddress')}</div>
-                                    <div className="value"><Tooltip title="0xaaAAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa">0xaa...aaa</Tooltip></div>
+                                    <div className="value"><Tooltip title={projectInfo.creater}>{projectInfo.creater}</Tooltip></div>
                                 </div>
                                 <div className="line">
                                     <div className="name">{t('createProject.councilAddress')}</div>
-                                    <div className="value"><Tooltip title="0xaaAAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa">0xaa...aaa</Tooltip><br />
-                                        <Tooltip title="0xaaAAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa">0xaa...aaa</Tooltip></div>
+
+                                    <div className="value">
+                                        {councilMemberAddressList.map(item => (
+                                            <>
+                                                <Tooltip title={item}>{item}</Tooltip><br />
+                                            </>
+                                        ))}
+                                    </div>
                                 </div>
                             </div>
                             {/* <div className="title" style={{ marginTop: '56px' }}>ASSETS RULE</div> */}
@@ -283,7 +343,7 @@ export default function CreateProject() {
                         </div>}
                         {currentStep == 6 && <div>
                             <span className="hint">{t('common.gasFeeHint')}</span>
-                            <Button onClick={() => { setCurrentStep(prev => prev + 1) }} className="btn-green">{t('common.confirmInfo')}</Button>
+                            <Button onClick={() => { confirmInfo() }} className="btn-green">{t('common.confirmInfo')}</Button>
                         </div>}
                         {currentStep == 7 && <div>
                             <Button onClick={() => { message.success('Success') }} className="btn-green">{t('common.pay')}</Button>
