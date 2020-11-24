@@ -72,7 +72,7 @@ export default function Homepage() {
                         <a className="line-top-bottom" href="https://doc.dd.finance">阅读文档</a>
                     </Col>
                     <Col xs={24} md={12} style={{ textAlign: 'right' }}>
-                        <div className="banner-btn">
+                        <div className="banner-btn" onClick={() => { message.info('Coming Soon') }}>
                             <div>
                                 <img src={LinkArrow} />创建新项目
                             </div>
@@ -100,7 +100,7 @@ export default function Homepage() {
                                 <li>详尽项目策略</li>
                                 <li>收益更轻松</li>
                             </ul>
-                            <div className="handle-btn">
+                            <div className="handle-btn" onClick={() => { message.info('Coming Soon') }}>
                                 <img src={LinkArrow} /> 查看更多
                     </div>
                         </div>
@@ -186,7 +186,7 @@ export default function Homepage() {
                             <li>资产托管安全</li>
                             <li>信息更透明</li>
                         </ul>
-                        <div className="handle-btn">
+                        <div className="handle-btn" onClick={() => { message.info('Coming Soon') }}>
                             <img src={LinkArrow} /> 参与治理
                     </div>
                     </Col>
@@ -216,7 +216,7 @@ export default function Homepage() {
                                 <div className="with-line"><span>提供最充足的保障</span></div>
                             </div>
                         </div>
-                        <div className="handle-btn">
+                        <div className="handle-btn" onClick={() => { message.info('Coming Soon') }}>
                             <img src={LinkArrow} /> 了解更多
                     </div>
 
