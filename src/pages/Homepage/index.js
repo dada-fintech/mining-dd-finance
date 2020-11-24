@@ -69,6 +69,7 @@ export default function Homepage() {
                             <li>全链路透明</li>
                             <li>让矿圈出圈</li>
                         </ul>
+                        <a className="line-top-bottom" href="https://doc.dd.finance">阅读文档</a>
                     </Col>
                     <Col xs={24} md={12} style={{ textAlign: 'right' }}>
                         <div className="banner-btn">
