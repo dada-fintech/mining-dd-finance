@@ -1,26 +1,22 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Row, Col, Input, Upload, message, DatePicker, Tooltip } from 'antd'
+import { Button, Row, Col, Input, Upload, message, DatePicker, Tooltip, InputNumber } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { PlusCircleOutlined } from '@ant-design/icons'
 // import { useWallet } from 'use-wallet'
 import Header from '../../components/Header'
-import Footer from '../../components/Footer'
+import moment from 'moment'
+// import Footer from '../../components/Footer'
 import axios from 'utils/axios'
 
 import './style.scss'
 
 export default function CreateProject() {
     const [currentStep, setCurrentStep] = useState(0)
-    const [councilMemberAddressList, setCouncilMemberAddressList] = useState([''])
-    const [projectInfo, setProjectInfo] = useState({})
+    const [projectInfo, setProjectInfo] = useState({ member_address: [''] })
     const [fundraising, setFundraising] = useState({})
     const [processList, setProcessList] = useState([{}])
 
     const { t, i18n } = useTranslation()
-
-    const addCouncilMemberAddress = () => {
-        message.info('Function under development')
-    }
 
     const sidebarList = i18n.language === 'en' ? [
         'Create the project', 'Project Info', 'Add Addresses', 'Fundraising Info', 'Rules for Unlock', 'Upload Files', 'Confirmation'
@@ -62,8 +58,8 @@ export default function CreateProject() {
             setFundraising(prev => {
                 return {
                     ...prev,
-                    startTime: value[0].valueOf(),
-                    endTime: value[1].valueOf()
+                    start_time: value[0].valueOf(),
+                    end_time: value[1].valueOf()
                 }
             })
         }
@@ -76,6 +72,32 @@ export default function CreateProject() {
                 ...prev,
                 {}
             ]
+        })
+    }
+
+    const addCouncilMember = () => {
+        if (projectInfo.member_address.length >= 3) {
+            message.error('最多3个理事会成员地址')
+            return false
+        }
+        setProjectInfo(prev => {
+            let newObj = prev
+            newObj.member_address.push('')
+            return {
+                ...newObj,
+            }
+        })
+    }
+
+    const changeMemberAddress = (number, value) => {
+        console.log(number, value)
+        setProjectInfo(prev => {
+            let newObj = prev
+            newObj.member_address[number] = value;
+
+            return {
+                ...newObj
+            }
         })
     }
 
@@ -119,6 +141,7 @@ export default function CreateProject() {
             fundraising: fundraising,
             process: processList,
         }
+        // finalInfo.project_info.expected_apy = Number(finalInfo.project_info.expected_apy)
         axios.post('/project/create-project', finalInfo).then(res => {
             message.success('保存成功');
             setCurrentStep(prev => prev + 1)
@@ -126,7 +149,6 @@ export default function CreateProject() {
     }
 
 
-    console.log(processList, 'bzzzz')
     return (<div className="create-project-page">
         <Header />
 
@@ -165,8 +187,8 @@ export default function CreateProject() {
                             </div>
                             <div className="form-item">
                                 <div className="label">{t('createProject.boardMembers')}</div>
-                                {councilMemberAddressList.map(item => <Input style={{ width: '500px' }} />)}
-                                <PlusCircleOutlined onClick={addCouncilMemberAddress} className="handle-icon" />
+                                {projectInfo.member_address.map((item, index) => <Input value={item} onChange={(e) => { changeMemberAddress(index, e.target.value) }} style={{ width: '500px', marginBottom: '12px' }} />)}
+                                <PlusCircleOutlined onClick={() => { addCouncilMember() }} className="handle-icon" />
                                 <div className="hint">{t('createProject.boardMembersHint')}</div>
                             </div>
                         </div>}
@@ -174,7 +196,7 @@ export default function CreateProject() {
 
                             <div className="form-item">
                                 <div className="label">{t('createProject.fundraisingPeriod')}</div>
-                                <DatePicker.RangePicker onChange={value => dateRangeChange('fundraising', value)} />
+                                <DatePicker.RangePicker value={fundraising.start_time && [moment(fundraising.start_time), moment(fundraising.end_time)]} onChange={value => dateRangeChange('fundraising', value)} />
                                 <div className="hint">{t('createProject.fundraisingPeriodHint')}</div>
                             </div>
 
@@ -196,11 +218,11 @@ export default function CreateProject() {
 
                             <div className="form-item">
                                 <div className="label">{t('createProject.redemptionDate')}</div>
-                                <DatePicker value={projectInfo.income_settlement_time} onChange={value => changeProjectInfo('income_settlement_time', value)} />
+                                <DatePicker value={projectInfo.income_settlement_time && moment(projectInfo.income_settlement_time)} onChange={value => { console.log(value.valueOf()); changeProjectInfo('income_settlement_time', value.valueOf()) }} />
                             </div>
                             <div className="form-item">
                                 <div className="label">{t('common.apy')}</div>
-                                <Input value={projectInfo.expected_apy} onChange={e => changeProjectInfo('expected_apy', e.target.value)} style={{ width: '180px' }} suffix="%" />
+                                <InputNumber formatter={value => `${value ? value : 0}%`} parser={value => parseInt(value)} value={projectInfo.expected_apy} onChange={e => changeProjectInfo('expected_apy', e)} style={{ width: '180px' }} />
                             </div>
                         </div>}
                         {currentStep === 4 && <div className="step-4">
@@ -212,25 +234,25 @@ export default function CreateProject() {
                                         <Col md={6}>
                                             <div className="form-item">
                                                 <div className="label">{t('createProject.unlockDate')}</div>
-                                                <DatePicker onChange={value => changeProcess(index, 'unlock_time', value.valueOf())} />
+                                                <DatePicker value={item.unlock_time && moment(item.unlock_time)} onChange={value => changeProcess(index, 'unlock_time', value.valueOf())} />
                                             </div>
                                         </Col>
                                         <Col md={6}>
                                             <div className="form-item">
                                                 <div className="label">{t('createProject.shares')}</div>
-                                                <Input suffix="%" value={item.unlock_percentage} onChange={e => changeProcess(index, 'unlock_percentage', e.target.value)} />
+                                                <InputNumber formatter={value => `${value ? value : 0}%`} parser={value => parseInt(value)} value={item.unlock_percentage} onChange={e => changeProcess(index, 'unlock_percentage', e)} style={{ width: '180px' }} />
                                             </div>
                                         </Col>
                                         <Col md={12}>
                                             <div className="form-item">
                                                 <div className="label">{t('createProject.votingDate')}</div>
-                                                <DatePicker.RangePicker onChange={value => { changeProcess(index, 'start_time', value[0].valueOf()); changeProcess(index, 'end_time', value[1].valueOf()) }} />
+                                                <DatePicker.RangePicker value={item.start_time && [moment(item.start_time), moment(item.end_time)]} onChange={value => { changeProcess(index, 'start_time', value[0].valueOf()); changeProcess(index, 'end_time', value[1].valueOf()) }} />
                                             </div>
                                         </Col>
                                     </Row>
                                     <div className="form-item">
                                         <div className="label">{t('common.description')}</div>
-                                        <Input.TextArea value={item.unlock_percentage} onChange={e => changeProcess(index, 'unlock_percentage', e.target.value)} autoSize={{ minRows: 6 }} />
+                                        <Input.TextArea value={item.description} onChange={e => changeProcess(index, 'description', e.target.value)} autoSize={{ minRows: 6 }} />
                                     </div>
                                 </div>
 
@@ -283,13 +305,13 @@ export default function CreateProject() {
                                 </div>
                                 <div className="line">
                                     <div className="name">{t('createProject.fundAddress')}</div>
-                                    <div className="value"><Tooltip title={projectInfo.creater}>{projectInfo.creater}</Tooltip></div>
+                                    <div className="value"><Tooltip title={projectInfo.receiver}>{projectInfo.receiver}</Tooltip></div>
                                 </div>
                                 <div className="line">
                                     <div className="name">{t('createProject.councilAddress')}</div>
 
                                     <div className="value">
-                                        {councilMemberAddressList.map(item => (
+                                        {projectInfo.member_address.map(item => (
                                             <>
                                                 <Tooltip title={item}>{item}</Tooltip><br />
                                             </>
@@ -306,7 +328,7 @@ export default function CreateProject() {
                                 <div className="confirm-box">
                                     <div className="line">
                                         <div className="name">{t('project.unlockingAmount')}</div>
-                                        <div className="value">{item.percentage}%</div>
+                                        <div className="value">{item.unlock_percentage}%</div>
                                     </div>
                                     <div className="line">
                                         <div className="name">{t('project.unlockingTime')}</div>
@@ -321,8 +343,7 @@ export default function CreateProject() {
                             </>)}
                             <div className="title" style={{ marginTop: '56px' }}>{t('createProject.additionalDoc')}</div>
                             <div className="confirm-box">
-                                WHITEPAPER.DOCX<br />
-                                LICENSE.JPG
+                                {projectInfo.white_paper && projectInfo.white_paper.file_name}<br />{projectInfo.other_file && projectInfo.other_file[0].file_name}
                             </div>
                         </div>}
                         {currentStep === 7 && <div className="step-pay">
@@ -339,7 +360,7 @@ export default function CreateProject() {
                             {currentStep > 0 && <Button onClick={() => { setCurrentStep(prev => prev - 1) }} className="btn-grey">{t('common.back')}</Button>}
                         </div>
                         {currentStep < 6 && <div>
-                            <Button onClick={() => { console.log(processList); setCurrentStep(prev => prev + 1) }} className="btn-green">{t('common.next')}</Button>
+                            <Button onClick={() => { console.log(projectInfo, fundraising, processList,); setCurrentStep(prev => prev + 1) }} className="btn-green">{t('common.next')}</Button>
                         </div>}
                         {currentStep == 6 && <div>
                             <span className="hint">{t('common.gasFeeHint')}</span>
@@ -360,6 +381,6 @@ export default function CreateProject() {
                 </Col>
             </Row>
         </div>
-        <Footer />
+        {/* <Footer /> */}
     </div>)
 }

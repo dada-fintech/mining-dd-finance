@@ -31,8 +31,6 @@ export default function CreateVote() {
     const [currentStep, setCurrentStep] = useState(0)
     const { t, i18n } = useTranslation()
 
-    console.log(i18n, 'bbbzz')
-
     const sidebarList = i18n.language === 'en' ? [
         'Create the Voting', 'Project Info', 'Confirmation'
     ] : [

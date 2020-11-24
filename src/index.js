@@ -8,11 +8,9 @@ import { UseWalletProvider } from 'use-wallet'
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-  <React.StrictMode>
     <UseWalletProvider>
       <App />
-    </UseWalletProvider>
-  </React.StrictMode>,
+    </UseWalletProvider>,
   document.getElementById('root')
 );
 
