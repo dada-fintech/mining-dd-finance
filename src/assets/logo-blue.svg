@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="187" height="81" viewBox="0 0 187 81">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.852" y1="0.924" x2="0.117" y2="0.125" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#065cc2"/>
+      <stop offset="1" stop-color="#022995"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-3" x1="0.922" y1="0.972" x2="0.234" y2="-0.087" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#0092e5"/>
+      <stop offset="1" stop-color="#0d1f99"/>
+    </linearGradient>
+  </defs>
+  <text id="DD.FINANCE" transform="translate(3 74)" fill="#0099db" font-size="30" font-family="Helvetica"><tspan x="0" y="0">DD.FINANCE</tspan></text>
+  <g id="组_92" data-name="组 92" transform="translate(-439 -4304.222)">
+    <path id="减去_5" data-name="减去 5" d="M42,42H0V21.117H.2L21,41.917,41.973,20.945,21.119.091V0H42V42Z" transform="translate(439 4304.222)" fill="url(#linear-gradient)"/>
+    <path id="减去_9" data-name="减去 9" d="M42,42H0V21.117H.2L21,41.917,41.973,20.945,21.119.091V0H42V42Z" transform="translate(526 4346.222) rotate(-90)" fill="url(#linear-gradient)"/>
+    <path id="减去_6" data-name="减去 6" d="M42,42,21,0H42V42ZM0,42H0V0H21Z" transform="translate(483 4304.222)" fill="url(#linear-gradient-3)"/>
+    <path id="减去_7" data-name="减去 7" d="M42,42,21,0H42V42ZM0,42H0V0H21Z" transform="translate(570 4304.222)" fill="url(#linear-gradient-3)"/>
+  </g>
+</svg>
