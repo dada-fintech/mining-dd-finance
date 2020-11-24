@@ -1,13 +1,13 @@
 import React from 'react'
 import { Row, Col } from 'antd'
-import SocialIcons from '../../assets/socials.png'
+// import SocialIcons from '../../assets/socials.png'
 import FaceBook from '../../assets/socials/facebook.svg'
 import Twiiter from '../../assets/socials/twiiter.svg'
 import WeChat from '../../assets/socials/wechat.svg'
 import WeiBo from '../../assets/socials/weibo.svg'
 
 import './style.scss'
-import Logo from "../../assets/logo.png";
+// import Logo from "../../assets/logo.png";
 
 export default function Footer() {
 
