@@ -73,7 +73,7 @@ export default function Homepage() {
                     <Col xs={24} md={12} style={{ textAlign: 'right' }}>
                         <div className="banner-btn">
                             <div>
-                                <img src={LinkArrow} />即刻参与
+                                <img src={LinkArrow} />创建项目
                             </div>
                         </div>
 
@@ -84,28 +84,28 @@ export default function Homepage() {
         <div className="section-projects">
             <img src={ProjectListTriangle} className="triangle" />
             <div className="container">
-                <Row gutter={{md: 24, lg:64}}>
+                <Row gutter={{ md: 24, lg: 64 }}>
                     <Col md={17} lg={18}>
                         <div className="show-on-mobile">
-                        <div className="section-title">
-                            <span>
-                                可参与项目
+                            <div className="section-title">
+                                <span>
+                                    可参与项目
                                 </span></div>
-                        <ul className="feature-list">
-                            <li>甄选品质项目</li>
-                            <li>充分尽职背调</li>
-                            <li>唯一身份验证</li>
-                            <li>声誉网络背书</li>
-                            <li>详尽项目策略</li>
-                            <li>收益更轻松</li>
-                        </ul>
-                        <div className="handle-btn">
-                            <img src={LinkArrow} /> 查看更多
+                            <ul className="feature-list">
+                                <li>甄选品质项目</li>
+                                <li>充分尽职背调</li>
+                                <li>唯一身份验证</li>
+                                <li>声誉网络背书</li>
+                                <li>详尽项目策略</li>
+                                <li>收益更轻松</li>
+                            </ul>
+                            <div className="handle-btn">
+                                <img src={LinkArrow} /> 查看更多
                     </div>
-                            </div>
+                        </div>
                         <div className="project-list">
                             {projectList.map(item => (
-                                <div className="project-item">
+                                <a className="project-item" href={'/project/' + item.project_uniq_id} key={item.project_uniq_id}>
                                     <div className="top">
                                         <div className="title">
                                             <div className="project-name">{item.project_name}</div>
@@ -121,7 +121,7 @@ export default function Homepage() {
                                     <div className="bottom">
                                         <Progress strokeColor="#3FAA4D" status="active" percent={((item.current_raised_money / item.hardtop) * 100).toFixed(0)} className="progress-bar" />
                                     </div>
-                                </div>
+                                </a>
                             ))}
                         </div>
                     </Col>
@@ -205,7 +205,7 @@ export default function Homepage() {
         </div>
         <div className="section-contact">
             <div className="container">
-                <Row gutter={{md: 24}}>
+                <Row gutter={{ md: 24 }}>
                     <Col xs={24} md={12}>
                         <div className="section-title">
                             <span>联系我们</span>
@@ -244,7 +244,7 @@ export default function Homepage() {
                         <div className="form-title">
                             非常感谢您对我们的支持！
                     </div>
-                        <Row gutter={{md: 32}}>
+                        <Row gutter={{ md: 32 }}>
                             <Col md={10}>
                                 <div className="form-item">
                                     <div className="form-item-title">
