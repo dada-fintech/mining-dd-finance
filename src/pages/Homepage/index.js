@@ -61,6 +61,7 @@ export default function Homepage() {
                             矿业<span className="highlight">生态</span><br />
                             聚合器
                         </div>
+                        <div className="subtitle">去中心化项目发布平台</div>
                         <ul className="feature-list">
                             <li>去中心化自治</li>
                             <li>锁定合约规则</li>
