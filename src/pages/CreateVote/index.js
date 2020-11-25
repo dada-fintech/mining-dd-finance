@@ -7,7 +7,6 @@ import { useParams } from 'react-router-dom'
 import moment from 'moment'
 // import { useWallet } from 'use-wallet'
 import Header from '../../components/Header'
-import Footer from '../../components/Footer'
 
 import './style.scss'
 
@@ -16,6 +15,8 @@ export default function CreateVote() {
     const [processList, setProcessList] = useState([])
     const [projectInfo, setProjectInfo] = useState({})
     const [fundraising, setFundraising] = useState({})
+    const [description, setDescription] = useState('')
+
     const { t, i18n } = useTranslation()
     const { id } = useParams()
 
@@ -93,7 +94,15 @@ export default function CreateVote() {
 
 
     const confirmInfo = () => {
-        axios.post('/project/change-process', processList)
+        axios.post('/project/change-process', {
+            sender: window.ethereum.selectedAddress,
+            project_uniq_id: id,
+            description: description,
+            other_file: projectInfo.other_file,
+            new_process: processList
+        }).then(res => {
+            message.success('提交成功!')
+        })
     }
 
     return (<div className="create-vote-page">
@@ -209,7 +218,7 @@ export default function CreateVote() {
                                 <div className="process-top">
                                     <div>{t('createVote.editDescription')}</div>
                                 </div>
-                                <Input.TextArea autoSize={{ minRows: 6 }} placeholder="200 words limit" value={projectInfo.description} onChange={(e) => { changeProjectInfo('description', e.target.value) }} />
+                                <Input.TextArea autoSize={{ minRows: 6 }} placeholder="200 words limit" value={description} onChange={(e) => {console.log(e); setDescription(e.target.value) }} />
                             </div>
 
                             <div className="form-item">
@@ -257,7 +266,7 @@ export default function CreateVote() {
                                     <div>{t('common.description')}</div>
                                 </div>
                                 <div>
-                                    {projectInfo.description}
+                                    {description}
                                 </div>
                             </div>
 
@@ -273,7 +282,7 @@ export default function CreateVote() {
                         </div>}
                         {currentStep == 2 && <div>
                             <span className="hint">{t('common.gasFeeHint')}</span>
-                            <Button onClick={() => { message.success('Confirmed!') }} className="btn-green">{t('common.confirmInfo')}</Button>
+                            <Button onClick={() => { confirmInfo() }} className="btn-green">{t('common.confirmInfo')}</Button>
                         </div>}
                     </div>
                 </Col>
@@ -287,6 +296,5 @@ export default function CreateVote() {
                 </Col>
             </Row>
         </div>
-        <Footer />
     </div>)
 }
