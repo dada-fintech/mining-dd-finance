@@ -101,7 +101,7 @@ export default function Project() {
                         </div>
                         <div className="project-content">
                             {currentTab === 'vote' && <VoteModule />}
-                            {currentTab === 'process' && <ProcessModule processList={project.process || []} />}
+                            {currentTab === 'process' && <ProcessModule id={id} processList={project.process || []} />}
                             {currentTab === 'detail' && <DetailModule fullDesc={project.fullDesc} />}
                             {currentTab === 'comments' && <CommentsModule />}
                         </div>

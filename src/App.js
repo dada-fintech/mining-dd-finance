@@ -38,7 +38,7 @@ function App() {
           <Route exact path="/" component={Homepage} />
           <Route exact path="/project/:id" component={Project} />
           <Route exact path="/create-project" component={CreateProject} />
-          <Route exact path="/create-vote" component={CreateVote} />
+          <Route exact path="/create-vote/:id" component={CreateVote} />
         </Switch>
       </Router>
     </div>

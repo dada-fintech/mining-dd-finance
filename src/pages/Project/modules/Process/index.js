@@ -22,6 +22,7 @@ export default function Process(props) {
     const [confirmVoteVisible, setConfirmVoteVisible] = useState(false)
     const [lockNum, setLockedNum] = useState('')
     const [contract, setContract] = useState('')
+    const { id } = props
     const { t } = useTranslation()
 
     let finalProcessList = processList.map(item => {
@@ -87,7 +88,7 @@ export default function Process(props) {
 
     return (<div className="process-module">
         {finalProcessList.map((process, index) => (
-            <div className="process-item">
+            <div className="process-item" key={index}>
                 <div className="top">
                     <div className="title">{t('project.progress')} #{index + 1}</div>
                     <div className="date">{new Date(process.vote_start_time * 1000).toLocaleDateString()} - {new Date(process.vote_end_time * 1000).toLocaleDateString()}</div>
@@ -109,6 +110,9 @@ export default function Process(props) {
 
             </div>
         ))}
+        <a href={`/create-vote/${id}`}>
+            <Button className="btn-green">变更计划</Button>
+        </a>
 
         { confirmVoteVisible && <ConfirmVote onCancel={() => { setConfirmVoteVisible(false) }} />}
     </div>)

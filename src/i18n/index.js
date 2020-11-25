@@ -90,8 +90,9 @@ export default {
                 Create a New Ballot for the Project<br/><br/>
                 Please make sure that you provide truthful information. The Mining Ecosystem Aggregator platform will create a corresponding smart contract with your data and update your project. 
                 `,
+                projectInfo: 'Project Info',
                 additionalDoc: 'Additional Documents',
-
+                editDescription: 'Edit Description',
             }
         }
     },
@@ -189,7 +190,8 @@ export default {
                 请认真填写以下表格并确保信息的准确性，平台将根据您填写的数据按照规则创建相应的智能合约并更新您的项目!
                 `,
                 projectInfo: '项目信息',
-
+                additionalDoc: '其他文件',
+                editDescription: '编辑描述',
             }
 
 

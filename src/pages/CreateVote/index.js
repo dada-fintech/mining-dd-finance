@@ -1,41 +1,42 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button, Row, Col, Input, Upload, message, DatePicker } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { PlusCircleOutlined } from '@ant-design/icons'
+import axios from 'utils/axios'
+import { useParams } from 'react-router-dom'
 // import { useWallet } from 'use-wallet'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 
 import './style.scss'
 
-
-const assetsRuleList = [
-    {
-        id: 1,
-        value: '100, 000 USDT(10%)',
-        time: 'Oct 05, 2020',
-        period: 'Oct 01,2020 - Oct 05,2020',
-        desc: '10% is scheduled to be released on Oct. 5 for approximately $100,000 to cover the deposit on the mine purchase.'
-    },
-    {
-        id: 2,
-        value: '100, 000 USDT(10%)',
-        time: 'Oct 05, 2020',
-        period: 'Oct 01,2020 - Oct 05,2020',
-        desc: '10% is scheduled to be released on Oct. 5 for approximately $100,000 to cover the deposit on the mine purchase.'
-    }
-]
-
-
 export default function CreateVote() {
     const [currentStep, setCurrentStep] = useState(0)
+    const [processList, setProcessList] = useState([])
+    const [projectInfo, setProjectInfo] = useState({})
+    const [fundraising, setFundraising] = useState({})
     const { t, i18n } = useTranslation()
+    const { id } = useParams()
 
     const sidebarList = i18n.language === 'en' ? [
         'Create the Voting', 'Project Info', 'Confirmation'
     ] : [
             '创建投票', '项目信息', '确认信息'
         ]
+
+    useEffect(() => {
+        axios.get('/project/detail/' + id).then(res => {
+            console.log(res.data, 'bbbb')
+            setProcessList(res.data.process)
+            setProjectInfo(res.data.project_info)
+            setFundraising(res.data.fundraising)
+        })
+    }, [])
+
+
+    const confirmInfo = () => {
+        axios.post('/project/change-process', processList)
+    }
 
     return (<div className="create-vote-page">
         <Header />
@@ -49,7 +50,65 @@ export default function CreateVote() {
 
                         {currentStep === 1 && <div className="step-1">
                             <div className="title">{t('createVote.projectInfo')}</div>
-                            {assetsRuleList.map(item => <>
+                            <div className="confirm-box">
+                                <div className="line">
+                                    <div className="name">
+                                        项目名称
+                                    </div>
+                                    <div className="value">
+                                        {projectInfo.project_name}
+                                    </div>
+                                </div>
+                                <div className="line">
+                                    <div className="name">
+                                        筹款期
+                                    </div>
+                                    <div className="value">
+                                        {new Date(fundraising.start_time).toLocaleDateString()} - {new Date(fundraising.end_time).toLocaleDateString()}
+                                    </div>
+                                </div>
+                                <div className="line">
+                                    <div className="name">
+                                        项目币名称
+                                    </div>
+                                    <div className="value">
+                                        {projectInfo.project_token_symbol}
+                                    </div>
+                                </div>
+                                <div className="line">
+                                    <div className="name">
+                                        预期APY
+                                    </div>
+                                    <div className="value">
+                                        {projectInfo.expected_apy}
+                                    </div>
+                                </div>
+                                <div className="line">
+                                    <div className="name">
+                                        筹款目标
+                                    </div>
+                                    <div className="value">
+                                        {fundraising.softtop}
+                                    </div>
+                                </div>
+                                <div className="line">
+                                    <div className="name">
+                                        筹款限制
+                                    </div>
+                                    <div className="value">
+                                        {fundraising.hardtop}
+                                    </div>
+                                </div>
+                                <div className="line">
+                                    <div className="name">
+                                        回款日期
+                                    </div>
+                                    <div className="value">
+                                        {new Date(projectInfo.income_settlement_time).toLocaleDateString()}
+                                    </div>
+                                </div>
+                            </div>
+                            {processList.map(item => <>
                                 <div className="process-top">
                                     <div>{t('project.progress')} #{item.id}</div>
                                 </div>
@@ -92,7 +151,7 @@ export default function CreateVote() {
 
                         {currentStep === 2 && <div className="step-1">
                             <div className="title" style={{ marginTop: '56px' }}>{t('createVote.projectInfo')}</div>
-                            {assetsRuleList.map(item => <>
+                            {processList.map(item => <>
                                 <div className="process-top">
                                     <div>{t('project.progress')} #{item.id}</div>
                                 </div>

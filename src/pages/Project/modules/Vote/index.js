@@ -40,7 +40,7 @@ export default function Vote() {
 
     return (<div className="vote-module">
         {voteList.map(item => (
-            <div className="vote-item">
+            <div className="vote-item" key={item.title}>
                 <div className="top">
                     <div className="title">{item.title}</div>
                     <div>
@@ -61,5 +61,6 @@ export default function Vote() {
 
             </div>
         ))}
+      
     </div>)
 }
