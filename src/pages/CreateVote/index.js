@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Row, Col, Input, Upload, message, DatePicker } from 'antd'
+import { Button, Row, Col, Input, Upload, message, DatePicker, InputNumber } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { PlusCircleOutlined } from '@ant-design/icons'
 import axios from 'utils/axios'
 import { useParams } from 'react-router-dom'
+import moment from 'moment'
 // import { useWallet } from 'use-wallet'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
@@ -32,6 +33,63 @@ export default function CreateVote() {
             setFundraising(res.data.fundraising)
         })
     }, [])
+
+    const changeProjectInfo = (name, value) => {
+        setProjectInfo(prev => {
+            return {
+                ...prev,
+                [name]: value,
+            }
+        })
+    }
+
+    const changeFundraising = (name, value) => {
+        setFundraising(prev => {
+            return {
+                ...prev,
+                [name]: value,
+            }
+        })
+    }
+
+
+    const changeProcess = (number, name, value) => {
+        console.log(number, name, value)
+        setProcessList(prev => {
+            let newArr = prev
+            newArr[number][name] = value
+            return [
+                ...newArr
+            ]
+        })
+    }
+
+    const addProcessList = () => {
+        setProcessList(prev => {
+            return [
+                ...prev,
+                {}
+            ]
+        })
+    }
+
+
+    const otherUpload = {
+        name: 'file',
+        action: 'https://mining-api.dd.finance/project/upload',
+        onChange(info) {
+            console.log(info)
+            if (info.file.status !== 'uploading') {
+                console.log(info.file, info.fileList);
+            }
+            if (info.file.status === 'done') {
+                message.success(`${info.file.name} file uploaded successfully`);
+                changeProjectInfo('other_file', [{ file_name: info.file.name }])
+            } else if (info.file.status === 'error') {
+                message.error(`${info.file.name} file upload failed.`);
+            }
+        },
+    };
 
 
     const confirmInfo = () => {
@@ -108,42 +166,58 @@ export default function CreateVote() {
                                     </div>
                                 </div>
                             </div>
-                            {processList.map(item => <>
+                            {processList.map((item, index) => <>
                                 <div className="process-top">
-                                    <div>{t('project.progress')} #{item.id}</div>
+                                    <div>{t('project.progress')} #{index + 1}</div>
                                 </div>
                                 <div className="confirm-box">
-                                    <div className="status finish">
-                                        FINISH
+                                    <div className={'status ' + (item.status === 'Active' ? 'finish' : '')}>
+                                        {item.status}
                                     </div>
                                     <div className="line">
                                         <div className="name">{t('project.unlockingAmount')}</div>
-                                        <div className="value">{item.value}</div>
+                                        <div className="value">
+                                            {item.status == 'Finished' ? (item.unlock_percentage + '%') : <InputNumber formatter={value => `${value ? value : 0}%`} parser={value => parseInt(value)} value={item.unlock_percentage} onChange={e => changeProcess(index, 'unlock_percentage', e)} style={{ width: '180px' }} />}
+                                        </div>
                                     </div>
                                     <div className="line">
                                         <div className="name">{t('project.unlockingTime')}</div>
-                                        <div className="value">{item.time}</div>
+                                        <div className="value">
+                                            {item.status == 'Finished' ? new Date(item.unlock_time).toLocaleDateString() : <DatePicker value={item.unlock_time && moment(item.unlock_time)} onChange={value => changeProcess(index, 'unlock_time', value.valueOf())} />}
+                                        </div>
+                                    </div>
+                                    <div className="line">
+                                        <div className="name">{t('createProject.votingDate')}</div>
+                                        <div className="value">
+                                            {item.status === 'Finished' ? `${new Date(item.vote_start_time).toLocaleDateString()}-${new Date(item.vote_end_time).toLocaleDateString()}` :
+                                                <DatePicker.RangePicker value={item.vote_start_time && [moment(item.vote_start_time), moment(item.vote_end_time)]} onChange={value => { changeProcess(index, 'vote_start_time', value[0].valueOf()); changeProcess(index, 'vote_end_time', value[1].valueOf()) }} />
+                                            }
+                                        </div>
                                     </div>
                                     <div className="line">
                                         <div className="name">{t('project.event')}</div>
-                                        <div className="value">{item.desc}</div>
+                                        <div className="value">
+                                            {item.status == 'Finished' ? item.description : <Input.TextArea value={item.description} onChange={e => changeProcess(index, 'description', e.target.value)} autoSize={{ minRows: 6 }} />}
+                                        </div>
                                     </div>
                                 </div>
-
                             </>)}
-                            <div className="add-item-box">
+                            <div className="add-item-box" onClick={() => { addProcessList() }}>
                                 <PlusCircleOutlined />
                             </div>
                             <div className="description-block">
                                 <div className="process-top">
                                     <div>{t('createVote.editDescription')}</div>
                                 </div>
-                                <Input.TextArea autoSize={{ minRows: 5 }} />
+                                <Input.TextArea autoSize={{ minRows: 6 }} placeholder="200 words limit" value={projectInfo.description} onChange={(e) => { changeProjectInfo('description', e.target.value) }} />
                             </div>
 
                             <div className="form-item">
                                 <div className="label">{t('createVote.additionalDoc')}</div>
-                                <Upload>
+                                <Upload showUploadList={false}  {...otherUpload}>
+                                    <div style={{ marginBottom: '4px' }}>
+                                        {projectInfo.other_file.length > 0 ? `已上传：${projectInfo.other_file[0].file_name}` : ''}
+                                    </div>
                                     <Button className="btn-white" style={{ padding: '0 44px' }}>{t('common.upload')}</Button>
                                 </Upload>
                             </div>
@@ -151,36 +225,39 @@ export default function CreateVote() {
 
                         {currentStep === 2 && <div className="step-1">
                             <div className="title" style={{ marginTop: '56px' }}>{t('createVote.projectInfo')}</div>
-                            {processList.map(item => <>
+                            {processList.map((item, index) => <>
                                 <div className="process-top">
-                                    <div>{t('project.progress')} #{item.id}</div>
+                                    <div>{t('project.progress')} #{index}</div>
                                 </div>
                                 <div className="confirm-box">
                                     <div className="line">
                                         <div className="name">{t('project.unlockingAmount')}</div>
-                                        <div className="value">{item.value}</div>
+                                        <div className="value">{item.unlock_percentage}%</div>
                                     </div>
                                     <div className="line">
                                         <div className="name">{t('project.unlockingTime')}</div>
-                                        <div className="value">{item.time}</div>
+                                        <div className="value">{new Date(item.unlock_time).toLocaleDateString()}</div>
+                                    </div>
+                                    <div className="line">
+                                        <div className="name">{t('createProject.votingDate')}</div>
+                                        <div className="value">{new Date(item.vote_start_time).toLocaleDateString()}-{new Date(item.vote_end_time).toLocaleDateString()}</div>
                                     </div>
                                     <div className="line">
                                         <div className="name">{t('project.event')}</div>
-                                        <div className="value">{item.desc}</div>
+                                        <div className="value">{item.description}</div>
                                     </div>
                                 </div>
                             </>)}
                             <div className="title" style={{ marginTop: '56px' }}>{t('createVote.additionalDoc')}</div>
                             <div className="confirm-box">
-                                WHITEPAPER.DOCX<br />
-                                LICENSE.JPG
+                                {projectInfo.other_file[0].file_name}
                             </div>
                             <div className="description-block">
                                 <div className="process-top">
                                     <div>{t('common.description')}</div>
                                 </div>
                                 <div>
-                                    Since the project has entered the site and the project is progressing rapidly, 10% of the fund originally scheduled to be released on October 10 is about 100000 US dollars, and the deposit needs to be unlocked in advance. Therefore, the proposal is applied. After the proposal takes effect, the unlocking plan of October 10 will be cancelled and the follow-up plan will be advanced.
+                                    {projectInfo.description}
                                 </div>
                             </div>
 

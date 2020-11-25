@@ -246,7 +246,7 @@ export default function CreateProject() {
                                         <Col md={12}>
                                             <div className="form-item">
                                                 <div className="label">{t('createProject.votingDate')}</div>
-                                                <DatePicker.RangePicker value={item.start_time && [moment(item.start_time), moment(item.end_time)]} onChange={value => { changeProcess(index, 'start_time', value[0].valueOf()); changeProcess(index, 'end_time', value[1].valueOf()) }} />
+                                                <DatePicker.RangePicker value={item.vote_start_time && [moment(item.vote_start_time), moment(item.end_time)]} onChange={value => { changeProcess(index, 'vote_start_time', value[0].valueOf()); changeProcess(index, 'end_time', value[1].valueOf()) }} />
                                             </div>
                                         </Col>
                                     </Row>
