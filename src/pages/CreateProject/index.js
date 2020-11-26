@@ -45,9 +45,11 @@ export default function CreateProject() {
 
     const changeProcess = (number, name, value) => {
         setProcessList(prev => {
-            let newObj = prev
-            newObj[number][name] = value
-            return newObj
+            let newArr = prev
+            newArr[number][name] = value
+            return [
+                ...newArr
+            ]
         })
     }
 
@@ -99,6 +101,67 @@ export default function CreateProject() {
                 ...newObj
             }
         })
+    }
+
+    const goNextStep = () => {
+        // 进行步骤跳转以及字段校验
+        if (currentStep === 1) {
+            if (!projectInfo.project_name) {
+                message.error('请填写项目名称')
+                return false
+            }
+            if (!projectInfo.white_paper) {
+                message.error('请上传白皮书')
+                return false
+            }
+        }
+
+        if (currentStep === 2) {
+            if (!projectInfo.project_token_symbol) {
+                message.error('请填写项目币名称')
+                return false
+            }
+            if (!projectInfo.receiver) {
+                message.error('请填写基金持有地址')
+                return false
+            }
+        }
+
+        if (currentStep === 3) {
+            if (!fundraising.start_time || !fundraising.end_time) {
+                message.error('请选择筹款期')
+                return false
+            }
+            if (!fundraising.softtop) {
+                message.error('请填写最低启动金额')
+                return false
+            }
+            if (!projectInfo.income_settlement_time) {
+                message.error('请选择回款日期')
+                return false
+            }
+            if (!projectInfo.expected_apy) {
+                message.error('请填写预期APY')
+                return false
+            }
+        }
+
+        if (currentStep === 4) {
+            let pass = true
+            processList.forEach(item => {
+                if (!item.unlock_time || !item.unlock_percentage || !item.vote_start_time || !item.vote_end_time) {
+                    console.log(item.unlock_time, item.unlock_percentage, item.vote_start_time, item.vote_end_time)
+                    pass = false
+                }
+            })
+            if (!pass) {
+                message.error('请检查所有必填字段')
+                return false
+            }
+        }
+
+        //when all required fields are filled
+        setCurrentStep(prev => prev + 1)
     }
 
     const whitePaperUpload = {
@@ -160,7 +223,7 @@ export default function CreateProject() {
                         </div>}
                         {currentStep === 1 && <div className="step-1">
                             <div className="form-item">
-                                <div className="label">{t('createProject.projectName')}</div>
+                                <div className="label required">{t('createProject.projectName')}</div>
                                 <Input value={projectInfo.project_name} onChange={(e) => { changeProjectInfo('project_name', e.target.value) }} style={{ width: '360px' }} />
                             </div>
                             <div className="form-item">
@@ -168,7 +231,7 @@ export default function CreateProject() {
                                 <Input.TextArea autoSize={{ minRows: 6 }} placeholder="200 words limit" value={projectInfo.description} onChange={(e) => { changeProjectInfo('description', e.target.value) }} />
                             </div>
                             <div className="form-item">
-                                <div className="label">{t('createProject.whitepaper')}</div>
+                                <div className="label required">{t('createProject.whitepaper')}</div>
                                 <Upload {...whitePaperUpload}>
                                     <Button className="btn-white" style={{ padding: '0 44px' }}>{t('common.upload')}</Button>
                                     <span style={{ marginLeft: '12px', color: '#707070' }}>*.pdf</span>
@@ -177,11 +240,11 @@ export default function CreateProject() {
                         </div>}
                         {currentStep === 2 && <div className="step-2">
                             <div className="form-item">
-                                <div className="label">{t('createProject.nameOfToken')}</div>
+                                <div className="label required">{t('createProject.nameOfToken')}</div>
                                 <Input style={{ width: '360px' }} value={projectInfo.project_token_symbol} onChange={(e) => { changeProjectInfo('project_token_symbol', e.target.value) }} />
                             </div>
                             <div className="form-item">
-                                <div className="label">{t('createProject.addWallet')}</div>
+                                <div className="label required">{t('createProject.addWallet')}</div>
                                 <Input style={{ width: '500px' }} value={projectInfo.receiver} onChange={(e) => { changeProjectInfo('receiver', e.target.value) }} />
                                 <div className="hint red">{t('createProject.addWalletHint')}</div>
                             </div>
@@ -195,13 +258,13 @@ export default function CreateProject() {
                         {currentStep === 3 && <div className="step-3">
 
                             <div className="form-item">
-                                <div className="label">{t('createProject.fundraisingPeriod')}</div>
+                                <div className="label required">{t('createProject.fundraisingPeriod')}</div>
                                 <DatePicker.RangePicker value={fundraising.start_time && [moment(fundraising.start_time), moment(fundraising.end_time)]} onChange={value => dateRangeChange('fundraising', value)} />
                                 <div className="hint">{t('createProject.fundraisingPeriodHint')}</div>
                             </div>
 
                             <div className="form-item">
-                                <div className="label">{t('createProject.fundraisingGoal')}</div>
+                                <div className="label required">{t('createProject.fundraisingGoal')}</div>
                                 <Input value={fundraising.softtop} onChange={e => changeFundraising('softtop', e.target.value)} style={{ width: '300px' }} suffix="USDT" />
                                 <div className="hint">
                                     {t('createProject.fundraisingGoalHint')}
@@ -217,11 +280,11 @@ export default function CreateProject() {
                             </div>
 
                             <div className="form-item">
-                                <div className="label">{t('createProject.redemptionDate')}</div>
+                                <div className="label required">{t('createProject.redemptionDate')}</div>
                                 <DatePicker value={projectInfo.income_settlement_time && moment(projectInfo.income_settlement_time)} onChange={value => { console.log(value.valueOf()); changeProjectInfo('income_settlement_time', value.valueOf()) }} />
                             </div>
                             <div className="form-item">
-                                <div className="label">{t('common.apy')}</div>
+                                <div className="label required">{t('common.apy')}</div>
                                 <InputNumber formatter={value => `${value ? value : 0}%`} parser={value => parseInt(value)} value={projectInfo.expected_apy} onChange={e => changeProjectInfo('expected_apy', e)} style={{ width: '180px' }} />
                             </div>
                         </div>}
@@ -233,20 +296,20 @@ export default function CreateProject() {
                                     <Row gutter={24}>
                                         <Col md={6}>
                                             <div className="form-item">
-                                                <div className="label">{t('createProject.unlockDate')}</div>
+                                                <div className="label required">{t('createProject.unlockDate')}</div>
                                                 <DatePicker value={item.unlock_time && moment(item.unlock_time)} onChange={value => changeProcess(index, 'unlock_time', value.valueOf())} />
                                             </div>
                                         </Col>
                                         <Col md={6}>
                                             <div className="form-item">
-                                                <div className="label">{t('createProject.shares')}</div>
+                                                <div className="label required">{t('createProject.shares')}</div>
                                                 <InputNumber formatter={value => `${value ? value : 0}%`} parser={value => parseInt(value)} value={item.unlock_percentage} onChange={e => changeProcess(index, 'unlock_percentage', e)} style={{ width: '180px' }} />
                                             </div>
                                         </Col>
                                         <Col md={12}>
                                             <div className="form-item">
-                                                <div className="label">{t('createProject.votingDate')}</div>
-                                                <DatePicker.RangePicker value={item.vote_start_time && [moment(item.vote_start_time), moment(item.end_time)]} onChange={value => { changeProcess(index, 'vote_start_time', value[0].valueOf()); changeProcess(index, 'end_time', value[1].valueOf()) }} />
+                                                <div className="label required">{t('createProject.votingDate')}</div>
+                                                <DatePicker.RangePicker value={item.vote_start_time && [moment(item.vote_start_time), moment(item.vote_end_time)]} onChange={value => { changeProcess(index, 'vote_start_time', value[0].valueOf()); changeProcess(index, 'vote_end_time', value[1].valueOf()) }} />
                                             </div>
                                         </Col>
                                     </Row>
@@ -341,10 +404,13 @@ export default function CreateProject() {
                                 </div>
 
                             </>)}
-                            <div className="title" style={{ marginTop: '56px' }}>{t('createProject.additionalDoc')}</div>
-                            <div className="confirm-box">
-                                {projectInfo.white_paper && projectInfo.white_paper.file_name}<br />{projectInfo.other_file && projectInfo.other_file[0].file_name}
+                            <div>
+                                <div className="title" style={{ marginTop: '56px' }}>{t('createProject.additionalDoc')}</div>
+                                <div className="confirm-box">
+                                    {projectInfo.white_paper && projectInfo.white_paper.file_name}<br />{projectInfo.other_file && projectInfo.other_file[0].file_name}
+                                </div>
                             </div>
+
                         </div>}
                         {currentStep === 7 && <div className="step-pay">
                             <div class="dada-circle">
@@ -360,7 +426,7 @@ export default function CreateProject() {
                             {currentStep > 0 && <Button onClick={() => { setCurrentStep(prev => prev - 1) }} className="btn-grey">{t('common.back')}</Button>}
                         </div>
                         {currentStep < 6 && <div>
-                            <Button onClick={() => { console.log(projectInfo, fundraising, processList,); setCurrentStep(prev => prev + 1) }} className="btn-green">{t('common.next')}</Button>
+                            <Button onClick={() => { goNextStep() }} className="btn-green">{t('common.next')}</Button>
                         </div>}
                         {currentStep == 6 && <div>
                             <span className="hint">{t('common.gasFeeHint')}</span>

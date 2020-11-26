@@ -55,7 +55,7 @@ export default function CreateVote() {
 
 
     const changeProcess = (number, name, value) => {
-        console.log(number, name, value)
+    
         setProcessList(prev => {
             let newArr = prev
             newArr[number][name] = value

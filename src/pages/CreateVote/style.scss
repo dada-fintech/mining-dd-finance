@@ -18,6 +18,13 @@
             font-size: 18px;
             line-height: 27px;
             margin-bottom: 8px;
+            &.required {
+                &::after {
+                    color: red;
+                    content: "*";
+                    display: "inline-block";
+                }
+            }
         }
         .hint {
             margin-top: 5px;
