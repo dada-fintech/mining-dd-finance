@@ -111,7 +111,7 @@ export default function Process(props) {
             </div>
         ))}
         <a href={`/create-vote/${id}`}>
-            <Button className="btn-green">变更计划</Button>
+            {finalProcessList.filter(item => item.status === 'Active').length != 0 && <Button className="btn-green">变更计划</Button>}
         </a>
 
         { confirmVoteVisible && <ConfirmVote onCancel={() => { setConfirmVoteVisible(false) }} />}

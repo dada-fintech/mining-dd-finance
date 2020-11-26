@@ -55,7 +55,7 @@ export default function CreateVote() {
 
 
     const changeProcess = (number, name, value) => {
-    
+
         setProcessList(prev => {
             let newArr = prev
             newArr[number][name] = value
@@ -72,6 +72,31 @@ export default function CreateVote() {
                 {}
             ]
         })
+    }
+
+    const goNextStep = () => {
+        // 进行步骤跳转以及字段校验
+        if (currentStep === 1) {
+            let pass = true
+            processList.forEach(item => {
+                if (!item.unlock_time || !item.unlock_percentage || !item.vote_start_time || !item.vote_end_time) {
+                    console.log(item.unlock_time, item.unlock_percentage, item.vote_start_time, item.vote_end_time)
+                    pass = false
+                }
+            })
+            if (!pass) {
+                message.error('请检查所有必填字段')
+                return false
+            }
+
+            if (description) {
+                message.error('请填写描述')
+                return false
+            }
+        }
+
+        //when all required fields are filled
+        setCurrentStep(prev => prev + 1)
     }
 
 
@@ -184,21 +209,21 @@ export default function CreateVote() {
                                         {item.status}
                                     </div>
                                     <div className="line">
-                                        <div className="name">{t('project.unlockingAmount')}</div>
+                                        <div className="name required">{t('project.unlockingAmount')}</div>
                                         <div className="value">
-                                            {item.status == 'Finished' ? (item.unlock_percentage + '%') : <InputNumber formatter={value => `${value ? value : 0}%`} parser={value => parseInt(value)} value={item.unlock_percentage} onChange={e => changeProcess(index, 'unlock_percentage', e)} style={{ width: '180px' }} />}
+                                            {item.status !== 'Future' ? (item.unlock_percentage + '%') : <InputNumber formatter={value => `${value ? value : 0}%`} parser={value => parseInt(value)} value={item.unlock_percentage} onChange={e => changeProcess(index, 'unlock_percentage', e)} style={{ width: '180px' }} />}
                                         </div>
                                     </div>
                                     <div className="line">
-                                        <div className="name">{t('project.unlockingTime')}</div>
+                                        <div className="name required">{t('project.unlockingTime')}</div>
                                         <div className="value">
-                                            {item.status == 'Finished' ? new Date(item.unlock_time).toLocaleDateString() : <DatePicker value={item.unlock_time && moment(item.unlock_time)} onChange={value => changeProcess(index, 'unlock_time', value.valueOf())} />}
+                                            {item.status !== 'Future' ? new Date(item.unlock_time).toLocaleDateString() : <DatePicker value={item.unlock_time && moment(item.unlock_time)} onChange={value => changeProcess(index, 'unlock_time', value.valueOf())} />}
                                         </div>
                                     </div>
                                     <div className="line">
-                                        <div className="name">{t('createProject.votingDate')}</div>
+                                        <div className="name required">{t('createProject.votingDate')}</div>
                                         <div className="value">
-                                            {item.status === 'Finished' ? `${new Date(item.vote_start_time).toLocaleDateString()}-${new Date(item.vote_end_time).toLocaleDateString()}` :
+                                            {item.status !== 'Future' ? `${new Date(item.vote_start_time).toLocaleDateString()}-${new Date(item.vote_end_time).toLocaleDateString()}` :
                                                 <DatePicker.RangePicker value={item.vote_start_time && [moment(item.vote_start_time), moment(item.vote_end_time)]} onChange={value => { changeProcess(index, 'vote_start_time', value[0].valueOf()); changeProcess(index, 'vote_end_time', value[1].valueOf()) }} />
                                             }
                                         </div>
@@ -206,7 +231,7 @@ export default function CreateVote() {
                                     <div className="line">
                                         <div className="name">{t('project.event')}</div>
                                         <div className="value">
-                                            {item.status == 'Finished' ? item.description : <Input.TextArea value={item.description} onChange={e => changeProcess(index, 'description', e.target.value)} autoSize={{ minRows: 6 }} />}
+                                            {item.status !== 'Future' ? item.description : <Input.TextArea value={item.description} onChange={e => changeProcess(index, 'description', e.target.value)} autoSize={{ minRows: 6 }} />}
                                         </div>
                                     </div>
                                 </div>
@@ -216,9 +241,9 @@ export default function CreateVote() {
                             </div>
                             <div className="description-block">
                                 <div className="process-top">
-                                    <div>{t('createVote.editDescription')}</div>
+                                    <div className="required">{t('createVote.editDescription')}</div>
                                 </div>
-                                <Input.TextArea autoSize={{ minRows: 6 }} placeholder="200 words limit" value={description} onChange={(e) => {console.log(e); setDescription(e.target.value) }} />
+                                <Input.TextArea autoSize={{ minRows: 6 }} placeholder="200 words limit" value={description} onChange={(e) => { console.log(e); setDescription(e.target.value) }} />
                             </div>
 
                             <div className="form-item">
@@ -278,7 +303,7 @@ export default function CreateVote() {
                             {currentStep > 0 && <Button onClick={() => { setCurrentStep(prev => prev - 1) }} className="btn-grey">{t('common.back')}</Button>}
                         </div>
                         {currentStep < 2 && <div>
-                            <Button onClick={() => { setCurrentStep(prev => prev + 1) }} className="btn-green">{t('common.next')}</Button>
+                            <Button onClick={() => { goNextStep() }} className="btn-green">{t('common.next')}</Button>
                         </div>}
                         {currentStep == 2 && <div>
                             <span className="hint">{t('common.gasFeeHint')}</span>

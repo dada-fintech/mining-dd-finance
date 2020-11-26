@@ -111,7 +111,7 @@ export default function Homepage() {
                                     <div className="top">
                                         <div className="title">
                                             <div className="project-name">{item.project_name}</div>
-                                            <div className="date">&nbsp; - {new Date(item.start_time * 1000).toLocaleDateString()}</div>
+                                            <div className="date">&nbsp; - {new Date(item.start_time).toLocaleDateString()}</div>
                                         </div>
                                         <div className="info">
                                             <div className="apy">{t('common.apy')} {item.expected_apy}%</div>
