@@ -229,19 +229,19 @@ export default function CreateVote() {
                                     <div className="line">
                                         <div className="name required">{t('project.unlockingAmount')}</div>
                                         <div className="value">
-                                            {item.status !== 'Future' ? (item.unlock_percentage + '%') : <InputNumber formatter={value => `${value ? value : 0} %`} parser={value => parseInt(value)} value={item.unlock_percentage} onChange={e => changeProcess(index, 'unlock_percentage', e)} style={{ width: '180px' }} />}
+                                            {(item.status && item.status !== 'Future') ? (item.unlock_percentage + '%') : <InputNumber formatter={value => `${value ? value : 0} %`} parser={value => parseInt(value)} value={item.unlock_percentage} onChange={e => changeProcess(index, 'unlock_percentage', e)} style={{ width: '180px' }} />}
                                         </div>
                                     </div>
                                     <div className="line">
                                         <div className="name required">{t('project.unlockingTime')}</div>
                                         <div className="value">
-                                            {item.status !== 'Future' ? new Date(item.unlock_time).toLocaleDateString() : <DatePicker value={item.unlock_time && moment(item.unlock_time)} onChange={value => changeProcess(index, 'unlock_time', value.valueOf())} />}
+                                            {(item.status && item.status !== 'Future') ? new Date(item.unlock_time).toLocaleDateString() : <DatePicker value={item.unlock_time && moment(item.unlock_time)} onChange={value => changeProcess(index, 'unlock_time', value.valueOf())} />}
                                         </div>
                                     </div>
                                     <div className="line">
                                         <div className="name required">{t('createProject.votingDate')}</div>
                                         <div className="value">
-                                            {item.status !== 'Future' ? `${new Date(item.vote_start_time).toLocaleDateString()}-${new Date(item.vote_end_time).toLocaleDateString()}` :
+                                            {(item.status && item.status !== 'Future') ? `${new Date(item.vote_start_time).toLocaleDateString()}-${new Date(item.vote_end_time).toLocaleDateString()}` :
                                                 <DatePicker.RangePicker value={item.vote_start_time && [moment(item.vote_start_time), moment(item.vote_end_time)]} onChange={value => { changeProcess(index, 'vote_start_time', value[0].valueOf()); changeProcess(index, 'vote_end_time', value[1].valueOf()) }} />
                                             }
                                         </div>
@@ -249,7 +249,7 @@ export default function CreateVote() {
                                     <div className="line">
                                         <div className="name">{t('project.event')}</div>
                                         <div className="value">
-                                            {item.status !== 'Future' ? item.description : <Input.TextArea value={item.description} onChange={e => changeProcess(index, 'description', e.target.value)} autoSize={{ minRows: 6 }} />}
+                                            {(item.status && item.status !== 'Future') ? item.description : <Input.TextArea value={item.description} onChange={e => changeProcess(index, 'description', e.target.value)} autoSize={{ minRows: 6 }} />}
                                         </div>
                                     </div>
                                 </div>
