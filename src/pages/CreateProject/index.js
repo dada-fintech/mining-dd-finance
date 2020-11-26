@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Row, Col, Input, Upload, message, DatePicker, Tooltip, InputNumber } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { PlusCircleOutlined } from '@ant-design/icons'
+import { PlusCircleOutlined,MinusCircleOutlined } from '@ant-design/icons'
 // import { useWallet } from 'use-wallet'
 import Header from '../../components/Header'
 import moment from 'moment'
@@ -87,6 +87,16 @@ export default function CreateProject() {
             newObj.member_address.push('')
             return {
                 ...newObj,
+            }
+        })
+    }
+
+    const remomveCouncilMember = (number) => {
+        setProjectInfo(prev => {
+            let newObj = prev
+            newObj.member_address.splice(number, 1)
+            return {
+                ...newObj
             }
         })
     }
@@ -250,8 +260,12 @@ export default function CreateProject() {
                             </div>
                             <div className="form-item">
                                 <div className="label">{t('createProject.boardMembers')}</div>
-                                {projectInfo.member_address.map((item, index) => <Input value={item} onChange={(e) => { changeMemberAddress(index, e.target.value) }} style={{ width: '500px', marginBottom: '12px' }} />)}
-                                <PlusCircleOutlined onClick={() => { addCouncilMember() }} className="handle-icon" />
+                                {projectInfo.member_address.map((item, index) => <div>
+                                    <Input value={item} onChange={(e) => { changeMemberAddress(index, e.target.value) }} style={{ width: '500px', marginBottom: '12px' }} />
+                                    {index != projectInfo.member_address.length -1 && <MinusCircleOutlined onClick={() => { remomveCouncilMember(index) }} className="handle-icon" />}
+                                    {index == projectInfo.member_address.length -1 && <PlusCircleOutlined onClick={() => { addCouncilMember() }} className="handle-icon" />}
+                                </div>)}
+                                
                                 <div className="hint">{t('createProject.boardMembersHint')}</div>
                             </div>
                         </div>}
