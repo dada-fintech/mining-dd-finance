@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Row, Col, Input, Upload, message, DatePicker, Tooltip, InputNumber } from 'antd'
+import { Button, Row, Col, Input, Upload, message, DatePicker, Tooltip, InputNumber, Popconfirm } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { PlusCircleOutlined,MinusCircleOutlined } from '@ant-design/icons'
+import { PlusCircleOutlined, MinusCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
 // import { useWallet } from 'use-wallet'
 import Header from '../../components/Header'
 import moment from 'moment'
@@ -68,7 +68,6 @@ export default function CreateProject() {
     }
 
     const addProcessList = () => {
-        console.log('add it')
         setProcessList(prev => {
             return [
                 ...prev,
@@ -76,6 +75,19 @@ export default function CreateProject() {
             ]
         })
     }
+
+
+    const removeProcess = (number) => {
+        setProcessList(prev => {
+            let newArr = prev
+            newArr.splice(number, 1)
+            return [
+                ...prev
+            ]
+
+        })
+    }
+
 
     const addCouncilMember = () => {
         if (projectInfo.member_address.length >= 3) {
@@ -91,7 +103,7 @@ export default function CreateProject() {
         })
     }
 
-    const remomveCouncilMember = (number) => {
+    const removeCouncilMember = (number) => {
         setProjectInfo(prev => {
             let newObj = prev
             newObj.member_address.splice(number, 1)
@@ -157,6 +169,10 @@ export default function CreateProject() {
         }
 
         if (currentStep === 4) {
+            if(processList.length == 0){
+                message.error('至少要有一个进程')
+                return false
+            }
             let pass = true
             processList.forEach(item => {
                 if (!item.unlock_time || !item.unlock_percentage || !item.vote_start_time || !item.vote_end_time) {
@@ -262,10 +278,10 @@ export default function CreateProject() {
                                 <div className="label">{t('createProject.boardMembers')}</div>
                                 {projectInfo.member_address.map((item, index) => <div>
                                     <Input value={item} onChange={(e) => { changeMemberAddress(index, e.target.value) }} style={{ width: '500px', marginBottom: '12px' }} />
-                                    {index != projectInfo.member_address.length -1 && <MinusCircleOutlined onClick={() => { remomveCouncilMember(index) }} className="handle-icon" />}
-                                    {index == projectInfo.member_address.length -1 && <PlusCircleOutlined onClick={() => { addCouncilMember() }} className="handle-icon" />}
+                                    {index != projectInfo.member_address.length - 1 && <Popconfirm title="确定删除该地址吗？" onConfirm={() => { removeCouncilMember(index) }}><MinusCircleOutlined className="handle-icon" /></Popconfirm>}
+                                    {index == projectInfo.member_address.length - 1 && <PlusCircleOutlined onClick={() => { addCouncilMember() }} className="handle-icon" />}
                                 </div>)}
-                                
+
                                 <div className="hint">{t('createProject.boardMembersHint')}</div>
                             </div>
                         </div>}
@@ -299,7 +315,7 @@ export default function CreateProject() {
                             </div>
                             <div className="form-item">
                                 <div className="label required">{t('common.apy')}</div>
-                                <InputNumber formatter={value => `${value ? value : 0}%`} parser={value => parseInt(value)} value={projectInfo.expected_apy} onChange={e => changeProjectInfo('expected_apy', e)} style={{ width: '180px' }} />
+                                <InputNumber formatter={value => `${value ? value : 0} %`} parser={value => parseInt(value)} value={projectInfo.expected_apy} onChange={e => changeProjectInfo('expected_apy', e)} style={{ width: '180px' }} />
                             </div>
                         </div>}
                         {currentStep === 4 && <div className="step-4">
@@ -307,6 +323,7 @@ export default function CreateProject() {
                             {processList.map((item, index) => <>
                                 <div className="asset-id"># {index + 1}</div>
                                 <div className="assets-rule-item">
+                                    {processList.length > 1 && <Popconfirm title="确定删除该进程吗？" onConfirm={() => { removeProcess(index) }}><CloseCircleOutlined className="remove-btn" /></Popconfirm>}
                                     <Row gutter={24}>
                                         <Col md={6}>
                                             <div className="form-item">
@@ -317,7 +334,7 @@ export default function CreateProject() {
                                         <Col md={6}>
                                             <div className="form-item">
                                                 <div className="label required">{t('createProject.shares')}</div>
-                                                <InputNumber formatter={value => `${value ? value : 0}%`} parser={value => parseInt(value)} value={item.unlock_percentage} onChange={e => changeProcess(index, 'unlock_percentage', e)} style={{ width: '180px' }} />
+                                                <InputNumber formatter={value => `${value ? value : 0} %`} parser={value => parseInt(value)} value={item.unlock_percentage} onChange={e => changeProcess(index, 'unlock_percentage', e)} style={{ width: '180px' }} />
                                             </div>
                                         </Col>
                                         <Col md={12}>

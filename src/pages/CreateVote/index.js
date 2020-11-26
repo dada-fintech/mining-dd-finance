@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Row, Col, Input, Upload, message, DatePicker, InputNumber } from 'antd'
+import { Button, Row, Col, Input, Upload, message, DatePicker, InputNumber, Popconfirm } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { PlusCircleOutlined } from '@ant-design/icons'
+import { PlusCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
+
 import axios from 'utils/axios'
 import { useParams } from 'react-router-dom'
 import moment from 'moment'
@@ -53,6 +54,17 @@ export default function CreateVote() {
         })
     }
 
+    const removeProcess = (number) => {
+        setProcessList(prev => {
+            let newArr = prev
+            newArr.splice(number, 1)
+            return [
+                ...prev
+            ]
+        })
+    }
+
+
 
     const changeProcess = (number, name, value) => {
 
@@ -77,6 +89,11 @@ export default function CreateVote() {
     const goNextStep = () => {
         // 进行步骤跳转以及字段校验
         if (currentStep === 1) {
+            if (processList.length == 0) {
+                message.error('至少要有一个进程')
+                return false
+            }
+
             let pass = true
             processList.forEach(item => {
                 if (!item.unlock_time || !item.unlock_percentage || !item.vote_start_time || !item.vote_end_time) {
@@ -205,13 +222,14 @@ export default function CreateVote() {
                                     <div>{t('project.progress')} #{index + 1}</div>
                                 </div>
                                 <div className="confirm-box">
+                                    {item.status === 'Future' && <Popconfirm title="确定删除该进程吗？" onConfirm={() => { removeProcess(index) }}><CloseCircleOutlined className="remove-btn" /></Popconfirm>}
                                     <div className={'status ' + (item.status === 'Active' ? 'finish' : '')}>
                                         {item.status}
                                     </div>
                                     <div className="line">
                                         <div className="name required">{t('project.unlockingAmount')}</div>
                                         <div className="value">
-                                            {item.status !== 'Future' ? (item.unlock_percentage + '%') : <InputNumber formatter={value => `${value ? value : 0}%`} parser={value => parseInt(value)} value={item.unlock_percentage} onChange={e => changeProcess(index, 'unlock_percentage', e)} style={{ width: '180px' }} />}
+                                            {item.status !== 'Future' ? (item.unlock_percentage + '%') : <InputNumber formatter={value => `${value ? value : 0} %`} parser={value => parseInt(value)} value={item.unlock_percentage} onChange={e => changeProcess(index, 'unlock_percentage', e)} style={{ width: '180px' }} />}
                                         </div>
                                     </div>
                                     <div className="line">
