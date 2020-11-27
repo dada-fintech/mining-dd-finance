@@ -89,8 +89,8 @@ export default function CreateVote() {
     const goNextStep = () => {
         // 进行步骤跳转以及字段校验
         if (currentStep === 1) {
-            if (processList.length == 0) {
-                message.error('至少要有一个进程')
+            if (processList.length < 2) {
+                message.error('至少要有两个进程')
                 return false
             }
 
@@ -235,7 +235,7 @@ export default function CreateVote() {
                                     <div className="line">
                                         <div className="name required">{t('project.unlockingAmount')}</div>
                                         <div className="value">
-                                            {(item.status && item.status !== 'Future') ? (item.unlock_percentage + '%') : <InputNumber formatter={value => `${value ? value : 0} %`} parser={value => parseInt(value)} value={item.unlock_percentage} onChange={e => changeProcess(index, 'unlock_percentage', e)} style={{ width: '180px' }} />}
+                                            {(item.status && item.status !== 'Future') ? (item.unlock_percentage + '%') : <InputNumber max={index === 0 ? 80 : 100} min={0} formatter={value => `${value ? value : 0} %`} parser={value => parseInt(value)} value={item.unlock_percentage} onChange={e => changeProcess(index, 'unlock_percentage', e)} style={{ width: '180px' }} />}
                                         </div>
                                     </div>
                                     <div className="line">

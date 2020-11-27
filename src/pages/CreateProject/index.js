@@ -147,6 +147,15 @@ export default function CreateProject() {
                 message.error('请填写基金持有地址')
                 return false
             }
+            //检测重复地址
+            if (projectInfo.member_address.length > 1) {
+                let findDuplicates = arr => arr.filter((item, index) => arr.indexOf(item) != index)
+                const duplicateArr = findDuplicates(projectInfo.member_address)
+                if (duplicateArr.length > 0) {
+                    message.error('理事会成员地址有重复')
+                    return false
+                }
+            }
         }
 
         if (currentStep === 3) {
@@ -169,8 +178,8 @@ export default function CreateProject() {
         }
 
         if (currentStep === 4) {
-            if(processList.length == 0){
-                message.error('至少要有一个进程')
+            if (processList.length < 2) {
+                message.error('至少要有两个进程')
                 return false
             }
             let pass = true
@@ -337,7 +346,7 @@ export default function CreateProject() {
                                         <Col md={6}>
                                             <div className="form-item">
                                                 <div className="label required">{t('createProject.shares')}</div>
-                                                <InputNumber formatter={value => `${value ? value : 0} %`} parser={value => parseInt(value)} value={item.unlock_percentage} onChange={e => changeProcess(index, 'unlock_percentage', e)} style={{ width: '180px' }} />
+                                                <InputNumber max={index === 0 ? 80 : 100} min={0} formatter={value => `${value ? value : 0} %`} parser={value => parseInt(value)} value={item.unlock_percentage} onChange={e => changeProcess(index, 'unlock_percentage', e)} style={{ width: '180px' }} />
                                             </div>
                                         </Col>
                                         <Col md={12}>
@@ -378,7 +387,7 @@ export default function CreateProject() {
                                 </div>
                                 <div className="line">
                                     <div className="name">{t('createProject.fundraisingPeriod')}</div>
-                                    <div className="value">{fundraising.start_time} {fundraising.end_time}</div>
+                                    <div className="value">{new Date(fundraising.start_time).toLocaleDateString()} {new Date(fundraising.end_time).toLocaleDateString()}</div>
                                 </div>
                                 <div className="line">
                                     <div className="name">{t('createProject.tokenName')}</div>
@@ -398,15 +407,14 @@ export default function CreateProject() {
                                 </div>
                                 <div className="line">
                                     <div className="name">{t('createProject.redemptionDate')}</div>
-                                    <div className="value">{projectInfo.income_settlement_time}</div>
+                                    <div className="value">{new Date(projectInfo.income_settlement_time).toLocaleDateString()}</div>
                                 </div>
                                 <div className="line">
                                     <div className="name">{t('createProject.fundAddress')}</div>
                                     <div className="value"><Tooltip title={projectInfo.receiver}>{projectInfo.receiver}</Tooltip></div>
                                 </div>
-                                <div className="line">
+                                {projectInfo.member_address.filter(item => item).length > 0 && <div className="line">
                                     <div className="name">{t('createProject.councilAddress')}</div>
-
                                     <div className="value">
                                         {projectInfo.member_address.map(item => (
                                             <>
@@ -414,7 +422,8 @@ export default function CreateProject() {
                                             </>
                                         ))}
                                     </div>
-                                </div>
+                                </div>}
+
                             </div>
                             {/* <div className="title" style={{ marginTop: '56px' }}>ASSETS RULE</div> */}
                             {processList.map((item, index) => <>
@@ -429,7 +438,7 @@ export default function CreateProject() {
                                     </div>
                                     <div className="line">
                                         <div className="name">{t('project.unlockingTime')}</div>
-                                        <div className="value">{item.unlock_time}</div>
+                                        <div className="value">{new Date(item.unlock_time).toLocaleDateString()}</div>
                                     </div>
                                     <div className="line">
                                         <div className="name">{t('project.event')}</div>
