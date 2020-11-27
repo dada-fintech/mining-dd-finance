@@ -135,13 +135,19 @@ export default function CreateVote() {
     };
 
 
+
     const confirmInfo = () => {
+        let finalProcessList = processList
+        finalProcessList.process.forEach(item => {
+            item.unlock_percentage = String(item.unlock_percentage)
+        })
+
         axios.post('/project/change-process', {
             sender: window.ethereum.selectedAddress,
             project_uniq_id: id,
             description: description,
             other_file: projectInfo.other_file,
-            new_process: processList
+            new_process: finalProcessList
         }).then(res => {
             message.success('提交成功!')
         })

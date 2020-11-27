@@ -73,12 +73,11 @@ export default function Homepage() {
                         <a className="line-top-bottom" href="https://doc.dd.finance">阅读文档</a>
                     </Col>
                     <Col xs={24} md={12} style={{ textAlign: 'right' }}>
-                        <div className="banner-btn">
+                        <a href="/create-project" className="banner-btn">
                             <div>
                                 <img src={LinkArrow} />创建新项目
                             </div>
-                        </div>
-
+                        </a>
                     </Col>
                 </Row>
             </div>

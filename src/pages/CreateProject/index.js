@@ -230,7 +230,10 @@ export default function CreateProject() {
             fundraising: fundraising,
             process: processList,
         }
-        // finalInfo.project_info.expected_apy = Number(finalInfo.project_info.expected_apy)
+        finalInfo.project_info.expected_apy = String(finalInfo.project_info.expected_apy)
+        finalInfo.process.forEach(item => {
+            item.unlock_percentage = String(item.unlock_percentage)
+        })
         axios.post('/project/create-project', finalInfo).then(res => {
             message.success('保存成功');
             setCurrentStep(prev => prev + 1)
