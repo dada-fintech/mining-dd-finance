@@ -130,7 +130,7 @@ export default function Homepage() {
                             <div className="project-item">
                                 <div className="top">
                                     <div className="title">
-                                        <div className="project-name">BTC矿机托管项目</div>
+                                        <div className="project-name">ETH矿机托管项目</div>
                                         <div className="date">&nbsp; - 2020年11月28日</div>
                                     </div>
                                     <div className="status green">尚未开放</div>
@@ -140,7 +140,7 @@ export default function Homepage() {
                                     </div>
                                 </div>
                                 <div className="desc">
-                                    新疆矿场50台蚂蚁T19矿机托管项目<br />该项目将会采购50台蚂蚁T19矿机并托管在位于新疆阿克苏的矿场，限量20w美金。
+                                    新疆矿场50台显卡矿机托管项目<br />该项目将会采购50台显卡矿机并托管在位于新疆阿克苏的矿场，限量20w美金。
                 </div>
                                 <div className="bottom">
                                     <a href="/project/2">

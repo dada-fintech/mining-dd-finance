@@ -67,7 +67,7 @@ export default function Project() {
             
             `,
             process: {
-            done: true,
+                done: true,
 
                 title: '募集完成',
                 amount: '100,000 USDT',
@@ -79,9 +79,9 @@ export default function Project() {
         }
     } else if (id == 2) {
         project = {
-            title: 'BTC矿机托管项目 - 2020年11月28日',
+            title: 'ETH矿机托管项目 - 2020年11月28日',
             apy: '15%',
-            desc: '新疆矿场50台蚂蚁T19矿机托管项目<br/>该项目将会采购50台蚂蚁T19矿机并托管在位于新疆阿克苏的矿场，限量20w美金。',
+            desc: '新疆矿场50台显卡矿机托管项目<br/>该项目将会采购50台显卡矿机并托管在位于新疆阿克苏的矿场，限量20w美金。',
             fullDesc: `
             <div class="text-line">
             <div class="title">基金发起人</div>
@@ -101,24 +101,23 @@ export default function Project() {
             <div class="title">
             项目策略
             </div>
-            <p>当前蚂蚁矿机报价约为15000-17000元/台，故本项目拟筹资200000美金作为项目启动费用，其中100000美金作为矿机采购费用，另外100000美金作为套保币价使用。收益周期为12个月，年化收益率为15%，届时将会公示采购及收益记录。</p>
+            <p>当前显卡矿机报价约为11000-15000元/台，故本项目拟筹资200000美金作为项目启动费用，其中100000美金作为矿机采购费用，另外100000美金作为套保币价使用。收益周期为12个月，年化收益率为15%，届时将会公示采购及收益记录。</p>
             
             </div>
             <div class="detail-line">
             <img class="mining-full" src="/img/mining-3.jpeg"/>
             </div>
             
-            <p>本项目拟采购50台蚂蚁T19作为投资标的矿机，蚂蚁矿机作为比特大陆的明星产品，多年来占有大量市场份额，19系列更是当前最高性价比的大算力机型之一。</p>
+            <p>本项目拟采购50台显卡矿机作为投资标的矿机，当前ETH币价高企，显卡矿机目前仍然拥有较高的收益。</p>
             <p>本项目所采购的型号参数如下：</p>
             <div class="detail-line">
                 <div>
-            蚂蚁T19-84T 官方参数(标准模式）<br/>
-            
-                　　算力：84T ±3%<br/>
-                
-                　　功耗：3150W ± 5%<br/>
-                
-                　　功耗比：37.5W/T<br/>
+                蓝宝石599 8G 官方参数(标准模式）<br/>
+                算力：240MH/S ±3%<br/>
+                功耗：1150W ± 5%<br/>
+                额定电压：220V<br/>
+                显卡数量：AMD RX 590*8张<br/>
+                显存：8G
                 </div>
                 <img src="/img/mining-rig-2.png"/><br/>
             </div>
@@ -126,8 +125,8 @@ export default function Project() {
             <img src="/img/return-table-2.png"/><br/>
             `,
             process: {
-            done: false,
-            title: '募资进行中',
+                done: false,
+                title: '募资进行中',
                 amount: '200,000 USDT',
                 apy: '15%',
                 date: '2021年11月12日',
