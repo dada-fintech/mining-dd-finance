@@ -105,7 +105,7 @@ export default function Homepage() {
                     </div>
                         </div>
                         <div className="project-list">
-                            {projectList.map(item => (
+                            {projectList && projectList.map(item => (
                                 <a className="project-item" href={'/project/' + item.project_uniq_id} key={item.project_uniq_id}>
                                     <div className="top">
                                         <div className="title">
