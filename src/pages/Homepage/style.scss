@@ -110,6 +110,7 @@
             font-size: 22px;
             line-height: 40px;
             margin-bottom: 64px;
+
         }
         .banner-btn {
             background: #ffffff;
@@ -117,6 +118,7 @@
             font-weight: 600;
             width: 360px;
             height: 210px;
+            cursor: pointer;
             float: right;
             position: relative;
             div {
@@ -522,6 +524,33 @@
                     padding: 8px 8px;
                     line-height: 18px;
                 }
+            }
+        }
+    }
+}
+
+.en{
+    .homepage{
+        .banner{
+            .banner-btn{
+                font-size: 20px;
+            }
+        }
+        .feature-list{
+            li{
+                font-size: 20px;
+                line-height: 32px;
+            }
+        }
+        .handle-btn{
+            font-size: 18px;
+            img{
+                width: 28px;
+            }
+        }
+        .section-about{
+            .slogan{
+                font-size: 22px;
             }
         }
     }

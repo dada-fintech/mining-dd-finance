@@ -1,31 +1,43 @@
 import React, { useEffect } from 'react'
 import Logo from '../../assets/logo.png'
-import { Button, Tooltip } from 'antd'
+import { Tooltip} from 'antd'
 import { useWallet } from 'use-wallet'
-
+import { useTranslation } from 'react-i18next'
+import i18n from 'i18next'
 
 import './style.scss'
 
 export default function Header() {
     const wallet = useWallet()
+    const { t } = useTranslation()
     useEffect(() => {
         wallet.connect()
 
     }, [])
+
+    const changeLanguage = language => {
+        localStorage.setItem('language', language)
+        i18n.changeLanguage(language)
+    }
+
+
     return (<header className="header">
         <div className="container">
             <a href="/">
                 <img src={Logo} className="logo" />
             </a>
             <nav>
-                {/* <a style={{ marginRight: '16px' }}>Project</a> */}
                 <span className="hint">
-                Project in working progress
+                    Project in working progress
                 </span>
+                <a>{t('common.projectList')}</a>
                 {wallet.status === 'connected' ? <Tooltip title={window.ethereum.selectedAddress}>
-                    <Button className="btn-green">{window.ethereum.selectedAddress.slice(0, 4) + '...' + window.ethereum.selectedAddress.slice(-4)}</Button>
+                    <a className="line-btn">{window.ethereum.selectedAddress.slice(0, 4) + '...' + window.ethereum.selectedAddress.slice(-4)}</a>
                 </Tooltip>
-                    : <Button className="btn-green" onClick={() => { wallet.connect() }}>Connect Wallet</Button>}
+                    : <a onClick={() => { wallet.connect() }}>Connect Wallet</a>}
+                <a onClick={() => { changeLanguage(i18n.language === 'en' ? 'zh' : 'en') }}>
+                    {i18n.language === 'en' ? 'English' : '简体中文'}
+                </a>
             </nav>
         </div>
     </header>)

@@ -11,17 +11,34 @@
         width: 80px;
     }
     nav {
-        font-size: 20px;
         a {
-            color: #707070;
+            font-size: 18px;
+            color: #000;
+            font-weight: 800;
             vertical-align: middle;
+            margin-left: 24px;
+            padding: 8px 4px;
         }
-        .hint{
-            margin-right: 12px;
-            font-size: 12px;
+    }
+    @media screen and (max-width: 768px) {
+        .container {
+            width: 98%;
         }
-        .ant-btn{
-            vertical-align: middle;
+        .logo {
+            width: 52px;
+        }
+        nav {
+            text-align: right;
+            a {
+                font-size: 14px;
+                margin-left: 8px;
+            }
+            .hint {
+                display: none;
+            }
+            .mobile-hint {
+                display: block;
+            }
         }
     }
 }

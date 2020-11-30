@@ -25,18 +25,18 @@ export default function Homepage() {
     const wallet = useWallet()
     const [projectList, setProjectList] = useState([])
     const [comment, setComment] = useState({})
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
 
-    useEffect(() => {
-        axios.get('/project/active-items').then(res => {
-            setProjectList(res.data.ActiveProjectOut)
-        })
+    // useEffect(() => {
+    //     axios.get('/project/active-items').then(res => {
+    //         setProjectList(res.data.ActiveProjectOut)
+    //     })
 
-    }, [])
+    // }, [])
 
     const leaveComment = () => {
         axios.post('/comment/main-page', comment).then(res => {
-            message.success('留言成功！')
+            message.success(t('common.submitted'))
             setComment({})
         })
     }
@@ -57,28 +57,31 @@ export default function Homepage() {
             <div className="container">
                 <Row type="flex" align="middle">
                     <Col xs={24} md={12}>
-                        <div className="banner-title">
+                        {i18n.language === 'zh' ? <div className="banner-title">
                             矿业<span className="highlight">生态</span><br />
                             聚合器
-                        </div>
-                        <div className="subtitle">去中心化项目发布平台</div>
+                        </div> : <div className="banner-title">
+                                Crypto<span className="highlight">Mining</span><br />
+                            Aggregator
+                        </div>}
+
+                        <div className="subtitle">{t('homepage.subtitle')}</div>
                         <ul className="feature-list">
-                            <li>去中心化自治</li>
-                            <li>锁定合约规则</li>
-                            <li>整合链下资源</li>
-                            <li>构建声誉网络</li>
-                            <li>全链路透明</li>
-                            <li>让矿圈出圈</li>
+                            <li>{t('homepage.banner.feature.1')}</li>
+                            <li>{t('homepage.banner.feature.2')}</li>
+                            <li>{t('homepage.banner.feature.3')}</li>
+                            <li>{t('homepage.banner.feature.4')}</li>
+                            <li>{t('homepage.banner.feature.5')}</li>
+                            <li>{t('homepage.banner.feature.6')}</li>
                         </ul>
-                        <a className="line-top-bottom" href="https://doc.dd.finance">阅读文档</a>
+                        <a className="line-top-bottom" href="https://doc.dd.finance">{t('common.readTheDoc')}</a>
                     </Col>
                     <Col xs={24} md={12} style={{ textAlign: 'right' }}>
-                        <div className="banner-btn" onClick={() => { message.info('Coming Soon') }}>
+                        <a href="/create-project" className="banner-btn">
                             <div>
-                                <img src={LinkArrow} />创建新项目
+                                <img src={LinkArrow} />{t('common.createNewProject')}
                             </div>
-                        </div>
-
+                        </a>
                     </Col>
                 </Row>
             </div>
@@ -91,38 +94,41 @@ export default function Homepage() {
                         <div className="show-on-mobile">
                             <div className="section-title">
                                 <span>
-                                    可参与项目
+                                    {t('homepage.inFundraisingTitle')}
                                 </span></div>
                             <ul className="feature-list">
-                                <li>甄选品质项目</li>
-                                <li>充分尽职背调</li>
-                                <li>唯一身份验证</li>
-                                <li>声誉网络背书</li>
-                                <li>详尽项目策略</li>
-                                <li>收益更轻松</li>
+                                <li>{t('homepage.inFundraising.1')}</li>
+                                <li>{t('homepage.inFundraising.2')}</li>
+                                <li>{t('homepage.inFundraising.3')}</li>
+                                <li>{t('homepage.inFundraising.4')}</li>
+                                <li>{t('homepage.inFundraising.5')}</li>
+                                <li>{t('homepage.inFundraising.6')}</li>
                             </ul>
-                            <div className="handle-btn" onClick={() => { message.info('Coming Soon') }}>
-                                <img src={LinkArrow} /> 查看更多
-                    </div>
+                            <div className="handle-btn">
+                                <img src={LinkArrow} /> {t('common.toReadMore')}
+                            </div>
                         </div>
+
+
                         <div className="project-list">
                             <div className="project-item">
                                 <div className="top">
                                     <div className="title">
-                                        <div className="project-name">BTC矿机托管项目</div>
-                                        <div className="date">&nbsp; - 2020年11月13日</div>
+                                        <div className="project-name">{t('projectList.1.title')}</div>
+                                        <div className="date">&nbsp; - 2020-11-13</div>
                                     </div>
-                                    <div className="status red">已满额</div>
+                                    <div className="status red">{t('common.achived')}</div>
                                     <div className="info">
-                                        <div className="apy">年化收益率 10%</div>
+                                        <div className="apy">{t('common.apy')} 10%</div>
                                     </div>
                                 </div>
                                 <div className="desc">
-                                    新疆矿场50台神马M20s矿机托管项目<br />该项目将会采购50台神马M20s矿机并托管在位于新疆准东的矿场，限量10w美金。
+                                {t('projectList.1.desc')}
+
                 </div>
                                 <div className="bottom">
                                     <a href="/project/1">
-                                        <Button className="btn-trans">项目详情</Button>
+                                        <Button className="btn-trans">{t('common.productDetail')}</Button>
                                     </a>
                                     {/* <Progress strokeColor="#3FAA4D" status="active" percent={42} className="progress-bar" /> */}
                                 </div>
@@ -130,43 +136,44 @@ export default function Homepage() {
                             <div className="project-item">
                                 <div className="top">
                                     <div className="title">
-                                        <div className="project-name">ETH矿机托管项目</div>
-                                        <div className="date">&nbsp; - 2020年12月15日</div>
+                                        <div className="project-name">{t('projectList.2.title')}</div>
+                                        <div className="date">&nbsp; - 2020-12-15</div>
                                     </div>
-                                    <div className="status green">尚未开放</div>
+                                    <div className="status green">{t('common.comingSoon')}</div>
 
                                     <div className="info">
-                                        <div className="apy">年化收益率 15%</div>
+                                        <div className="apy">{t('common.apy')} 15%</div>
                                     </div>
                                 </div>
                                 <div className="desc">
-                                    新疆矿场50台显卡矿机托管项目<br />该项目将会采购50台显卡矿机并托管在位于新疆阿克苏的矿场，限量20w美金。
+                                {t('projectList.2.desc')}
                 </div>
                                 <div className="bottom">
                                     <a href="/project/2">
-                                        <Button className="btn-trans">项目详情</Button>
+                                        <Button className="btn-trans">{t('common.productDetail')}</Button>
                                     </a>
                                     {/* <Progress strokeColor="#3FAA4D" status="active" percent={56} className="progress-bar" /> */}
                                 </div>
                             </div>
                         </div>
+
                     </Col>
                     <Col xs={0} md={7} lg={6}>
                         <div className="section-title">
                             <span>
-                                可参与项目
-                                </span></div>
+                                {t('homepage.inFundraisingTitle')}
+                            </span></div>
                         <ul className="feature-list">
-                            <li>甄选品质项目</li>
-                            <li>充分尽职背调</li>
-                            <li>唯一身份验证</li>
-                            <li>声誉网络背书</li>
-                            <li>详尽项目策略</li>
-                            <li>收益更轻松</li>
+                            <li>{t('homepage.inFundraising.1')}</li>
+                            <li>{t('homepage.inFundraising.2')}</li>
+                            <li>{t('homepage.inFundraising.3')}</li>
+                            <li>{t('homepage.inFundraising.4')}</li>
+                            <li>{t('homepage.inFundraising.5')}</li>
+                            <li>{t('homepage.inFundraising.6')}</li>
                         </ul>
                         <div className="handle-btn">
-                            <img src={LinkArrow} /> 查看更多
-                    </div>
+                            <img src={LinkArrow} /> {t('common.toReadMore')}
+                        </div>
                     </Col>
                 </Row>
             </div>
@@ -178,18 +185,17 @@ export default function Homepage() {
             <div className="container">
                 <Row gutter={44}>
                     <Col md={6}>
-                        <div className="section-title"><span>进行中项目</span></div>
+                        <div className="section-title"><span>{t('homepage.onGoingTitle')}</span></div>
                         <ul className="feature-list">
-                            <li>全程投票自治</li>
-                            <li>参与项目决策</li>
-                            <li>推进项目发展</li>
-                            <li>权益转让自由</li>
-                            <li>资产托管安全</li>
-                            <li>信息更透明</li>
+                            <li>{t('homepage.onGoing.1')}</li>
+                            <li>{t('homepage.onGoing.2')}</li>
+                            <li>{t('homepage.onGoing.3')}</li>
+                            <li>{t('homepage.onGoing.4')}</li>
+                            <li>{t('homepage.onGoing.5')}</li>
                         </ul>
-                        <div className="handle-btn" onClick={() => { message.info('Coming Soon') }}>
-                            <img src={LinkArrow} /> 参与治理
-                    </div>
+                        <div className="handle-btn">
+                            <img src={LinkArrow} /> {t('common.participateGov')}
+                        </div>
                     </Col>
                     <Col md={18}>
                         <img src={OngoingImg} />
@@ -202,24 +208,25 @@ export default function Homepage() {
                 <div style={{ textAlign: 'center' }}>
                     <div className="section-title">
                         <span>
-                            关于安全达（SAFD）
-                    </span>
+                            {t('homepage.safd.title')}
+                        </span>
                     </div>
                 </div>
                 <Row align="middle">
                     <Col xs={24} md={12}>
                         <div className="desc">
-                            安全达（SAFD）是DADA推出的一项为保障投资人本金而设立的专项赔付体系，为此我们做了充足的准备，为每一位投资人提供最安心的投资保障。
+                            {t('homepage.safd.subtitle')}
                         </div>
                         <div className="slogan">
-                            为共同构建最优质的信誉体系<br />
+                            {t('homepage.safd.slogan.1')}
+                            <br />
                             <div style={{ textAlign: 'right', marginTop: '8px' }}>
-                                <div className="with-line"><span>提供最充足的保障</span></div>
+                                <div className="with-line"><span>{t('homepage.safd.slogan.2')}</span></div>
                             </div>
                         </div>
-                        <div className="handle-btn" onClick={() => { message.info('Coming Soon') }}>
-                            <img src={LinkArrow} /> 了解更多
-                    </div>
+                        <div className="handle-btn">
+                            <img src={LinkArrow} /> {t('common.toLearnMore')}
+                        </div>
 
                     </Col>
                     <Col xs={24} md={12}>
@@ -234,14 +241,10 @@ export default function Homepage() {
                 <Row gutter={{ md: 24 }}>
                     <Col xs={24} md={12}>
                         <div className="section-title">
-                            <span>联系我们</span>
+                            <span>{t('homepage.contact.title')}</span>
                         </div>
-                        <div className="desc">
-                            如果您对我们感兴趣<br />
-                        如果您对我们有建议<br />
-                        如果您对我们有帮助<br /><br />
-                        欢迎联系我们！
-                    </div>
+                        <div className="desc" dangerouslySetInnerHTML={{ __html: t('homepage.contact.desc') }}>
+                        </div>
 
                         <div className="social-icons">
                             <a target="_blank" href="https://twitter.com/FinanceDada">
@@ -262,49 +265,50 @@ export default function Homepage() {
                             <li><a href="mailto:contact@dd.finance">contact@dd.finance</a></li>
                             <li><a href="mailto:media@dd.finance">media@dd.finance</a></li>
                         </ul>
-
-
-
                     </Col>
                     <Col xs={24} md={12}>
                         <div className="form-title">
-                            非常感谢您对我们的支持！
-                    </div>
+                            {t('homepage.contact.thanks')}
+                        </div>
                         <Row gutter={{ md: 32 }}>
                             <Col md={10}>
                                 <div className="form-item">
                                     <div className="form-item-title">
-                                        姓
-                                </div>
+                                        {t('homepage.contact.form.lastName')}
+                                    </div>
                                     <Input className="form-input" value={comment.first_name} onChange={e => commentChange('first_name', e.target.value)} />
                                 </div>
                             </Col>
                             <Col md={14}>
                                 <div className="form-item">
                                     <div className="form-item-title">
-                                        名
-                                </div>
+                                        {t('homepage.contact.form.firstName')}
+                                    </div>
                                     <Input className="form-input" value={comment.last_name} onChange={e => commentChange('last_name', e.target.value)} />
                                 </div>
                             </Col>
                         </Row>
                         <div className="form-item">
                             <div className="form-item-title">
-                                邮箱
-                                </div>
+                                {t('homepage.contact.form.email')}
+
+                            </div>
                             <Input className="form-input" value={comment.mail_box} onChange={e => commentChange('mail_box', e.target.value)} />
                         </div>
                         <div className="form-item">
                             <div className="form-item-title">
-                                留言
-                                </div>
+                                {t('homepage.contact.form.message')}
+
+                            </div>
                             <Input.TextArea autoSize={{ minRows: 4 }} className="form-input" value={comment.message} onChange={e => commentChange('message', e.target.value)} />
                         </div>
                         <div className="form-item">
-                            <Checkbox style={{ color: '#273460' }} onChange={e => commentChange('accept_notify', e.target.checked)}>勾选时将会接受新项目推送</Checkbox>
+                            <Checkbox style={{ color: '#273460' }} onChange={e => commentChange('accept_notify', e.target.checked)}>
+                                {t('homepage.contact.form.checkHint')}
+                            </Checkbox>
                         </div>
                         <div className="action-btn" onClick={() => { leaveComment() }}>
-                            <img src={LinkArrow} /> 留言
+                            <img src={LinkArrow} /> {t('homepage.contact.form.message')}
                         </div>
                     </Col>
                 </Row>
@@ -316,3 +320,6 @@ export default function Homepage() {
         <Footer />
     </div >)
 }
+
+
+
