@@ -16,7 +16,67 @@ export default {
                 confirmInfo: 'Confirm Info',
                 gasFeeHint: 'It will cost a certain amount of gas fee to create.',
                 upload: 'Upload',
-
+                projectList: 'Project List',
+                readTheDoc: 'Read the Documentation',
+                createNewProject: 'Create a New Project',
+                toReadMore: 'To Read More',
+                toLearnMore: 'To Learn More',
+                participateGov: 'Participate in Governance',
+                submitted: 'Submitted',
+            },
+            homepage: {
+                subtitle: 'Decentralized Platform for Mining Ecosystem',
+                banner: {
+                    feature: {
+                        1: 'Decentralized Autonomous Organization ',
+                        2: 'Funds locked in Smart Contract',
+                        3: 'Integrate Off-chain Resources ',
+                        4: 'Establish a DID Reputation Network',
+                        5: 'Transparency in Logistics',
+                        6: 'Bridging Crypto Mining with the Traditional World'
+                    }
+                },
+                inFundraisingTitle: 'Projects in Fundraising',
+                inFundraising: {
+                    1: 'Select High-Quality Projects',
+                    2: 'Conduct Thorough Due Diligence',
+                    3: 'Verification based on unique IDs',
+                    4: 'Endorsement from the DID Reputation Network',
+                    5: 'Comprehensive Project Business Strategy',
+                    6: 'High ROI with Easy Onboarding'
+                },
+                onGoingTitle: 'Ongoing Projects',
+                onGoing: {
+                    1: 'Autonomous Governance via Voting throughout the Processes ',
+                    2: 'Decentralized Participation in the Project Decision-Making',
+                    3: 'Easy Transfer of Project’s Participation Right',
+                    4: 'Safe Asset Custody via Multisig wallets',
+                    5: 'Project Transparency',
+                },
+                safd: {
+                    title: 'About SAFD',
+                    subtitle: 'SAFD is DADA’s settlement system designed to ensure investors’ principals.  We set up a treasury reserve to protect your investment. ',
+                    slogan: {
+                        1: 'We Safeguard and Facilitate the',
+                        2: 'Community-driven DID Reputation Network.  ',
+                    }
+                },
+                contact: {
+                    title: 'Contact Us',
+                    desc: `Interested in learning more about what we do or working together? Please feel free to contact us or fill out the form. Our team is ready to help you every step of the way.`,
+                    thanks: 'Thank you for your support!',
+                    form: {
+                        lastName: 'Last Name',
+                        firstName: 'First Name',
+                        email: 'Email',
+                        message: 'Message',
+                        checkHint: 'Check to receive project updates '
+                    }
+                },
+                footer:{
+                    documentation: 'Documentation',
+                    explore: 'Explore',
+                }
             },
             sidebar: {
                 yourShares: 'Your Shares',
@@ -113,6 +173,73 @@ export default {
                 confirmInfo: '确认信息',
                 gasFeeHint: '创建项目将会耗费一些 Gas fee',
                 upload: '上传',
+                projectList: '项目列表',
+                readTheDoc: '阅读文档',
+                createNewProject: '创建新项目',
+                toReadMore: '查看更多',
+                toLearnMore: '了解更多',
+                participateGov: '参与治理',
+                submitted: '已提交',
+
+
+
+            },
+            homepage: {
+                subtitle: '去中心化项目发布平台',
+                banner: {
+                    feature: {
+                        1: '去中心化自治',
+                        2: '锁定合约规则',
+                        3: '整合链下资源',
+                        4: '构建声誉网络',
+                        5: '全链路透明',
+                        6: '让矿圈出圈'
+                    }
+                },
+                inFundraisingTitle: '可参与项目',
+                inFundraising: {
+                    1: '甄选品质项目',
+                    2: '充分尽职背调',
+                    3: '唯一身份验证',
+                    4: '声誉网络背书',
+                    5: '详尽项目策略',
+                    6: '收益更轻松'
+                },
+                onGoingTitle: '进行中项目',
+                onGoing: {
+                    1: '全程投票自治',
+                    2: '参与项目决策',
+                    3: '权益转让自由',
+                    4: '资产托管安全',
+                    5: '信息更透明',
+                },
+                safd: {
+                    title: '关于安全达（SAFD）',
+                    subtitle: '安全达（SAFD）是DADA推出的一项为保障投资人本金而设立的专项赔付体系，为此我们做了充足的准备，为每一位投资人提供最安心的投资保障。',
+                    slogan: {
+                        1: '为共同构建最优质的信誉体系',
+                        2: '提供最充足的保障',
+                    }
+                },
+                contact: {
+                    title: '联系我们',
+                    desc: `如果您对我们感兴趣<br />
+                    如果您对我们有建议<br />
+                    如果您对我们有帮助<br /><br />
+                    欢迎联系我们！`,
+                    thanks: '非常感谢您对我们的支持！',
+                    form: {
+                        lastName: '姓',
+                        firstName: '名',
+                        email: '邮箱',
+                        message: '留言',
+                        checkHint: '勾选时将会接受新项目推送'
+                    }
+                },
+                footer:{
+                    documentation: '阅读文档',
+                    explore: '发现更多',
+                }
             },
             sidebar: {
                 yourShares: '你的份额',

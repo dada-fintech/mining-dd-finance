@@ -11,6 +11,7 @@ import './style.scss'
 
 export default function Header() {
     const wallet = useWallet()
+    const { t } = useTranslation()
     useEffect(() => {
         wallet.connect()
 
@@ -28,14 +29,14 @@ export default function Header() {
                 <img src={Logo} className="logo" />
             </a>
             <nav>
-                <a>项目列表</a>
+                <a>{t('common.projectList')}</a>
                 {wallet.status === 'connected' ? <Tooltip title={window.ethereum.selectedAddress}>
                     <a className="line-btn">{window.ethereum.selectedAddress.slice(0, 4) + '...' + window.ethereum.selectedAddress.slice(-4)}</a>
                 </Tooltip>
                     : <a onClick={() => { wallet.connect() }}>Connect Wallet</a>}
-                {/* <a onClick={() => { changeLanguage(i18n.language === 'en' ? 'zh' : 'en') }}>
+                <a onClick={() => { changeLanguage(i18n.language === 'en' ? 'zh' : 'en') }}>
                     {i18n.language === 'en' ? 'English' : '简体中文'}
-                </a> */}
+                </a>
             </nav>
         </div>
     </header>)

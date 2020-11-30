@@ -6,7 +6,7 @@ import {
 import './App.scss';
 
 import i18n from "i18next";
-import { initReactI18next } from 'react-i18next'
+import { initReactI18next,useTranslation } from 'react-i18next'
 import message from './i18n'
 
 import Homepage from './pages/Homepage'
@@ -28,8 +28,10 @@ i18n
   });
 
 function App() {
+  const { i18n } = useTranslation()
+
   return (
-    <div className="App">
+    <div className={`App ${i18n.language}`}>
       <Router>
         <Switch>
           {/* <Route exact path="/">

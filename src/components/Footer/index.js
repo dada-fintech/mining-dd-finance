@@ -1,17 +1,18 @@
 import React from 'react'
-import { Row, Col } from 'antd'
+import { useTranslation } from 'react-i18next'
 
 import './style.scss'
 import LogoBlue from "../../assets/logo-blue.svg";
 
 export default function Footer() {
+    const { t } = useTranslation()
 
     return (<div className="footer">
         <footer className="container">
             <div>
-                <a href="https://doc.dd.finance">阅读文档</a>
+                <a href="https://doc.dd.finance">{t('homepage.footer.documentation')}</a>
                 <img src={LogoBlue} className="footer-logo" />
-                <a>发现更多</a>
+                <a>{t('homepage.footer.explore')}</a>
             </div>
             <div className="copyright">
                 © DD.FINANCE.All rights reserved.
