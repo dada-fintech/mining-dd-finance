@@ -35,7 +35,7 @@ export default function Header() {
                 </Tooltip>
                     : <a onClick={() => { wallet.connect() }}>Connect Wallet</a>}
                 <a onClick={() => { changeLanguage(i18n.language === 'en' ? 'zh' : 'en') }}>
-                    {i18n.language === 'en' ? 'English' : '简体中文'}
+                    {i18n.language === 'en' ? '简体中文' : 'English'}
                 </a>
             </nav>
         </div>
