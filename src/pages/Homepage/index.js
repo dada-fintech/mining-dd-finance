@@ -6,6 +6,7 @@ import { useWallet } from 'use-wallet'
 import Header from '../../components/Header'
 import LinkArrow from 'assets/link-arrow.svg'
 import OngoingImg from 'assets/ongoing-img.svg'
+import OngoingImgEn from 'assets/ongoing-img-en.svg'
 import AboutImg from 'assets/about-img.svg'
 import Twiiter from '../../assets/socials/twitter.svg'
 import Discord from '../../assets/socials/discord.svg'
@@ -198,7 +199,8 @@ export default function Homepage() {
                         </div>
                     </Col>
                     <Col md={18}>
-                        <img src={OngoingImg} />
+                        {i18n.language === 'zh' ? <img src={OngoingImg} /> : <img src={OngoingImgEn} />}
+                        
                     </Col>
                 </Row>
             </div>
