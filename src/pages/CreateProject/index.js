@@ -202,10 +202,17 @@ export default function CreateProject() {
     const whitePaperUpload = {
         name: 'file',
         action: 'https://mining-api.dd.finance/project/upload',
+        showUploadList: false,
+        beforeUpload(file) {
+            if (file.type !== 'application/pdf') {
+                message.error('请上传PDF格式文件')
+                return false
+            }
+        },
         onChange(info) {
             console.log(info)
             if (info.file.status !== 'uploading') {
-                console.log(info.file, info.fileList);
+                // console.log(info.file, info.fileList);
             }
             if (info.file.status === 'done') {
                 message.success(`${info.file.name} file uploaded successfully`);
@@ -216,9 +223,14 @@ export default function CreateProject() {
         },
     };
 
+    const removeWhitePaper = () => {
+        changeProjectInfo('white_paper', { file_name: '' })
+    }
+
     const otherUpload = {
         name: 'file',
         action: 'https://mining-api.dd.finance/project/upload',
+        showUploadList: false,
         onChange(info) {
             console.log(info)
             if (info.file.status !== 'uploading') {
@@ -226,12 +238,26 @@ export default function CreateProject() {
             }
             if (info.file.status === 'done') {
                 message.success(`${info.file.name} file uploaded successfully`);
-                changeProjectInfo('other_file', [{ file_name: info.file.name }])
+                let previousArr = projectInfo.other_file || []
+                previousArr.push({
+                    file_name: info.file.name
+                })
+                changeProjectInfo('other_file', previousArr)
             } else if (info.file.status === 'error') {
                 message.error(`${info.file.name} file upload failed.`);
             }
         },
     };
+
+    const removeOtherFile = (index) => {
+        let previousArr = projectInfo.other_file || []
+        previousArr.splice(index, 1)
+        changeProjectInfo('other_file', previousArr)
+    }
+
+    const disable5Days = current => {
+        return current && current < moment().add(5, 'days').endOf('day');
+    }
 
     const confirmInfo = () => {
         let finalInfo = {
@@ -274,6 +300,9 @@ export default function CreateProject() {
                                     <Button className="btn-white" style={{ padding: '0 44px' }}>{t('common.upload')}</Button>
                                     <span style={{ marginLeft: '12px', color: '#707070' }}>*.pdf</span>
                                 </Upload>
+                                {projectInfo.white_paper && projectInfo.white_paper.file_name && <div className="uploaded-box">
+                                    {projectInfo.white_paper.file_name} <CloseCircleOutlined onClick={() => { removeWhitePaper() }} />
+                                </div>}
                             </div>
                         </div>}
                         {currentStep === 2 && <div className="step-2">
@@ -285,6 +314,11 @@ export default function CreateProject() {
                                 <div className="label required">{t('createProject.addWallet')}</div>
                                 <Input style={{ width: '500px' }} value={projectInfo.receiver} onChange={(e) => { changeProjectInfo('receiver', e.target.value) }} />
                                 <div className="hint red">{t('createProject.addWalletHint')}</div>
+                            </div>
+                            <div className="form-item">
+                                <div className="label required">{t('createProject.profitAddr')}</div>
+                                <Input style={{ width: '500px' }} value={projectInfo.profit} onChange={(e) => { changeProjectInfo('profit', e.target.value) }} />
+                                <div className="hint red">{t('createProject.profitAddrHint')}</div>
                             </div>
                             <div className="form-item">
                                 <div className="label">{t('createProject.boardMembers')}</div>
@@ -301,7 +335,7 @@ export default function CreateProject() {
 
                             <div className="form-item">
                                 <div className="label required">{t('createProject.fundraisingPeriod')}</div>
-                                <DatePicker.RangePicker value={fundraising.start_time && [moment(fundraising.start_time), moment(fundraising.end_time)]} onChange={value => dateRangeChange('fundraising', value)} />
+                                <DatePicker.RangePicker disabledDate={disable5Days} value={fundraising.start_time && [moment(fundraising.start_time), moment(fundraising.end_time)]} onChange={value => dateRangeChange('fundraising', value)} />
                                 <div className="hint">{t('createProject.fundraisingPeriodHint')}</div>
                             </div>
 
@@ -337,22 +371,22 @@ export default function CreateProject() {
                                 <div className="assets-rule-item">
                                     {processList.length > 1 && <Popconfirm title="确定删除该进程吗？" onConfirm={() => { removeProcess(index) }}><CloseCircleOutlined className="remove-btn" /></Popconfirm>}
                                     <Row gutter={24}>
+                                        <Col md={12}>
+                                            <div className="form-item">
+                                                <div className="label required">{t('createProject.votingDate')}</div>
+                                                <DatePicker.RangePicker disabledDate={current => current && current < moment(fundraising.end_time)} value={item.vote_start_time && [moment(item.vote_start_time), moment(item.vote_end_time)]} onChange={value => { changeProcess(index, 'vote_start_time', value[0].valueOf()); changeProcess(index, 'vote_end_time', value[1].valueOf()) }} />
+                                            </div>
+                                        </Col>
                                         <Col md={6}>
                                             <div className="form-item">
                                                 <div className="label required">{t('createProject.unlockDate')}</div>
-                                                <DatePicker value={item.unlock_time && moment(item.unlock_time)} onChange={value => changeProcess(index, 'unlock_time', value.valueOf())} />
+                                                <DatePicker disabledDate={current => current && current < moment(item.vote_end_time)} value={item.unlock_time && moment(item.unlock_time)} onChange={value => changeProcess(index, 'unlock_time', value.valueOf())} />
                                             </div>
                                         </Col>
                                         <Col md={6}>
                                             <div className="form-item">
                                                 <div className="label required">{t('createProject.shares')}</div>
                                                 <InputNumber max={index === 0 ? 80 : 100} min={0} formatter={value => `${value ? value : 0} %`} parser={value => parseInt(value)} value={item.unlock_percentage} onChange={e => changeProcess(index, 'unlock_percentage', e)} style={{ width: '180px' }} />
-                                            </div>
-                                        </Col>
-                                        <Col md={12}>
-                                            <div className="form-item">
-                                                <div className="label required">{t('createProject.votingDate')}</div>
-                                                <DatePicker.RangePicker value={item.vote_start_time && [moment(item.vote_start_time), moment(item.vote_end_time)]} onChange={value => { changeProcess(index, 'vote_start_time', value[0].valueOf()); changeProcess(index, 'vote_end_time', value[1].valueOf()) }} />
                                             </div>
                                         </Col>
                                     </Row>
@@ -373,6 +407,16 @@ export default function CreateProject() {
                                 <Upload {...otherUpload}>
                                     <Button className="btn-white" style={{ padding: '0 44px' }}>{t('common.upload')}</Button>
                                 </Upload>
+                                {
+                                    projectInfo.other_file && projectInfo.other_file.length > 0 && <div className="uploaded-box">
+                                        {projectInfo.other_file.map((item, index) => (
+                                            <div>
+                                                {item.file_name} <CloseCircleOutlined onClick={() => { removeOtherFile(index) }} />
+                                            </div>
+                                        ))}
+                                    </div>
+                                }
+
                                 <div className="hint" style={{ marginTop: '160px' }}>
                                     {t('createProject.additionalDocHint')}
                                 </div>
@@ -435,6 +479,10 @@ export default function CreateProject() {
                                     <div className="line">
                                         <div className="name">{t('project.unlockingAmount')}</div>
                                         <div className="value">{item.unlock_percentage}%</div>
+                                    </div>
+                                    <div className="line">
+                                        <div className="name">{t('project.voteTime')}</div>
+                                        <div className="value">{new Date(item.vote_start_time).toLocaleDateString()} - {new Date(item.vote_end_time).toLocaleDateString()}</div>
                                     </div>
                                     <div className="line">
                                         <div className="name">{t('project.unlockingTime')}</div>

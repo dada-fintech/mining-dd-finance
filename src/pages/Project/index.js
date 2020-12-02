@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Row, Col, Progress } from 'antd'
+import { Row, Col } from 'antd'
 import { useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import axios from 'utils/axios'
