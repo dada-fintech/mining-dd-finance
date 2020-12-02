@@ -23,6 +23,7 @@ export default {
                 toLearnMore: 'To Learn More',
                 participateGov: 'Participate in Governance',
                 submitted: 'Submitted',
+                approve: 'Approve',
             },
             homepage: {
                 subtitle: 'Decentralized Platform for Mining Ecosystem',
@@ -183,6 +184,7 @@ export default {
                 toLearnMore: '了解更多',
                 participateGov: '参与治理',
                 submitted: '已提交',
+                approve: '授权',
 
 
 

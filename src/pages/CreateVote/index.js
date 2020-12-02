@@ -120,6 +120,7 @@ export default function CreateVote() {
     const otherUpload = {
         name: 'file',
         action: 'https://mining-api.dd.finance/project/upload',
+        showUploadList: false,
         onChange(info) {
             console.log(info)
             if (info.file.status !== 'uploading') {
@@ -127,14 +128,22 @@ export default function CreateVote() {
             }
             if (info.file.status === 'done') {
                 message.success(`${info.file.name} file uploaded successfully`);
-                changeProjectInfo('other_file', [{ file_name: info.file.name }])
+                let previousArr = projectInfo.other_file || []
+                previousArr.push({
+                    file_name: info.file.name
+                })
+                changeProjectInfo('other_file', previousArr)
             } else if (info.file.status === 'error') {
                 message.error(`${info.file.name} file upload failed.`);
             }
         },
     };
 
-
+    const removeOtherFile = (index) => {
+        let previousArr = projectInfo.other_file || []
+        previousArr.splice(index, 1)
+        changeProjectInfo('other_file', previousArr)
+    }
 
     const confirmInfo = () => {
         let finalProcessList = processList
@@ -272,12 +281,18 @@ export default function CreateVote() {
 
                             <div className="form-item">
                                 <div className="label">{t('createVote.additionalDoc')}</div>
-                                <Upload showUploadList={false}  {...otherUpload}>
-                                    <div style={{ marginBottom: '4px' }}>
-                                        {projectInfo.other_file.length > 0 ? `已上传：${projectInfo.other_file[0].file_name}` : ''}
-                                    </div>
+                                <Upload {...otherUpload}>
                                     <Button className="btn-white" style={{ padding: '0 44px' }}>{t('common.upload')}</Button>
                                 </Upload>
+                                {
+                                    projectInfo.other_file && projectInfo.other_file.length > 0 && <div className="uploaded-box">
+                                        {projectInfo.other_file.map((item, index) => (
+                                            <div>
+                                                {item.file_name} <CloseCircleOutlined onClick={() => { removeOtherFile(index) }} />
+                                            </div>
+                                        ))}
+                                    </div>
+                                }
                             </div>
                         </div>}
 

@@ -14,7 +14,10 @@ export default function CreateProject() {
     const [currentStep, setCurrentStep] = useState(0)
     const [projectInfo, setProjectInfo] = useState({ member_address: [''] })
     const [fundraising, setFundraising] = useState({})
-    const [processList, setProcessList] = useState([{}])
+    const [processList, setProcessList] = useState([{}, {}])
+    const [approveBalance, setApproveBalance] = useState(0)
+    const [dadaApproved, setDadaApproved] = useState(false)
+
 
     const { t, i18n } = useTranslation()
 
@@ -270,8 +273,11 @@ export default function CreateProject() {
             item.unlock_percentage = String(item.unlock_percentage)
         })
         axios.post('/project/create-project', finalInfo).then(res => {
-            message.success('保存成功');
+            setDadaApproved(res.data.is_satisfied)
+            setApproveBalance(res.data.approve_balance)
             setCurrentStep(prev => prev + 1)
+        }).catch(error => {
+            message.error(error.response.data.error)
         })
     }
 
@@ -380,7 +386,7 @@ export default function CreateProject() {
                                         <Col md={6}>
                                             <div className="form-item">
                                                 <div className="label required">{t('createProject.unlockDate')}</div>
-                                                <DatePicker disabledDate={current => current && current < moment(item.vote_end_time)} value={item.unlock_time && moment(item.unlock_time)} onChange={value => changeProcess(index, 'unlock_time', value.valueOf())} />
+                                                <DatePicker disabledDate={current => current && current < moment(item.vote_end_time)} value={item.unlock_time && moment(item.unlock_time)} onChange={value =>  value && changeProcess(index, 'unlock_time', value.valueOf())} />
                                             </div>
                                         </Col>
                                         <Col md={6}>
@@ -505,7 +511,7 @@ export default function CreateProject() {
                         </div>}
                         {currentStep === 7 && <div className="step-pay">
                             <div class="dada-circle">
-                                10000 DADA
+                                {approveBalance} DADA
                             </div>
                             <div className="pay-hint">
                                 {t('createProject.payHint')}
@@ -524,7 +530,9 @@ export default function CreateProject() {
                             <Button onClick={() => { confirmInfo() }} className="btn-green">{t('common.confirmInfo')}</Button>
                         </div>}
                         {currentStep == 7 && <div>
-                            <Button onClick={() => { message.success('Success') }} className="btn-green">{t('common.pay')}</Button>
+                            {dadaApproved ? <Button onClick={() => { message.success('Success') }} className="btn-green">{t('common.pay')}</Button>
+                                : <Button onClick={() => { message.success('Success') }} className="btn-green">{t('common.approve')}</Button>}
+
                         </div>}
                     </div>
                 </Col>
