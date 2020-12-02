@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Input, Select, Button } from 'antd'
-import Web3 from 'web3'
+import web3 from 'components/web3'
 import BN from 'bignumber.js'
 import { useTranslation } from 'react-i18next'
 import detectEthereumProvider from '@metamask/detect-provider'
@@ -36,12 +36,6 @@ export default function Process(props) {
     })
 
     useEffect(async () => {
-        const provider = await detectEthereumProvider(
-            'wss://mainnet.infura.io/ws/v3/89db527f19e14a00902a439ae587a25b',
-        )
-
-        const web3 = new Web3(provider)
-
         let ABI = [
             // transfer
             {

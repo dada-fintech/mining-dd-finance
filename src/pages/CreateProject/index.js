@@ -7,6 +7,7 @@ import Header from '../../components/Header'
 import moment from 'moment'
 // import Footer from '../../components/Footer'
 import axios from 'utils/axios'
+import mm from 'components/mm'
 
 import './style.scss'
 
@@ -17,6 +18,7 @@ export default function CreateProject() {
     const [processList, setProcessList] = useState([{}, {}])
     const [approveBalance, setApproveBalance] = useState(0)
     const [dadaApproved, setDadaApproved] = useState(false)
+    const [callData, setCallData] = useState(false)
 
 
     const { t, i18n } = useTranslation()
@@ -268,17 +270,51 @@ export default function CreateProject() {
             fundraising: fundraising,
             process: processList,
         }
+        
         finalInfo.project_info.expected_apy = String(finalInfo.project_info.expected_apy)
+        finalInfo.project_info.creater = window.ethereum.selectedAddress
+
         finalInfo.process.forEach(item => {
             item.unlock_percentage = String(item.unlock_percentage)
         })
         axios.post('/project/create-project', finalInfo).then(res => {
             setDadaApproved(res.data.is_satisfied)
             setApproveBalance(res.data.approve_balance)
+            setCallData(res.data.call_contract)
             setCurrentStep(prev => prev + 1)
         }).catch(error => {
             message.error(error.response.data.error)
         })
+    }
+
+    const doApprove = async () => {
+        const txnParams = {
+            from: window.ethereum.selectedAddress,
+            to: callData[0].contract_addr,
+            data: callData[0].call_data
+        }
+        await mm.sendTransaction(
+            txnParams,
+            '授权中',
+            {
+                from: window.ethereum.selectedAddress,
+                to: callData[1].contract_addr,
+                data: callData[1].call_data
+            }
+        )
+    }
+
+    const doPay = async () => {
+        const txnParams = {
+            from: window.ethereum.selectedAddress,
+            to: callData[1].contract_addr,
+            data: callData[1].call_data
+        }
+        await mm.sendTransaction(
+            txnParams,
+            '支付中'
+        )
+
     }
 
 
@@ -386,7 +422,7 @@ export default function CreateProject() {
                                         <Col md={6}>
                                             <div className="form-item">
                                                 <div className="label required">{t('createProject.unlockDate')}</div>
-                                                <DatePicker disabledDate={current => current && current < moment(item.vote_end_time)} value={item.unlock_time && moment(item.unlock_time)} onChange={value =>  value && changeProcess(index, 'unlock_time', value.valueOf())} />
+                                                <DatePicker disabledDate={current => current && current < moment(item.vote_end_time)} value={item.unlock_time && moment(item.unlock_time)} onChange={value => value && changeProcess(index, 'unlock_time', value.valueOf())} />
                                             </div>
                                         </Col>
                                         <Col md={6}>
@@ -510,7 +546,7 @@ export default function CreateProject() {
 
                         </div>}
                         {currentStep === 7 && <div className="step-pay">
-                            <div class="dada-circle">
+                            <div className="dada-circle">
                                 {approveBalance} DADA
                             </div>
                             <div className="pay-hint">
@@ -530,8 +566,8 @@ export default function CreateProject() {
                             <Button onClick={() => { confirmInfo() }} className="btn-green">{t('common.confirmInfo')}</Button>
                         </div>}
                         {currentStep == 7 && <div>
-                            {dadaApproved ? <Button onClick={() => { message.success('Success') }} className="btn-green">{t('common.pay')}</Button>
-                                : <Button onClick={() => { message.success('Success') }} className="btn-green">{t('common.approve')}</Button>}
+                            {dadaApproved ? <Button onClick={() => { doPay() }} className="btn-green">{t('common.pay')}</Button>
+                                : <Button onClick={() => { doApprove() }} className="btn-green">{t('common.approve')}</Button>}
 
                         </div>}
                     </div>
