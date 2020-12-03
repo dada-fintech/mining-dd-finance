@@ -1,8 +1,7 @@
 import { notification } from 'antd'
 import { web3 } from 'components/web3'
 import mm from "components/mm";
-import { CheckOutlined, LoadingOutlined } from '@ant-design/icons';
-
+import { CheckOutlined, LoadingOutlined, CloseCircleOutlined } from '@ant-design/icons';
 
 const getTokenBalance = (balanceList, target) => {
     let result = 0
@@ -102,9 +101,7 @@ const watchTransaction = async (txHash) => {
                 notification.error({
                     message: 'Failed',
                     description: currentAction.desc,
-                    icon: h => {
-                        return h('a-icon', { props: { type: 'close', style: { 'color': 'red' } } })
-                    }
+                    icon: <CloseCircleOutlined style={{color: 'red'}} />
                 })
             }
             // remove obj from localstorage

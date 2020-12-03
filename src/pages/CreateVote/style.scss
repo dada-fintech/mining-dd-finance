@@ -139,12 +139,17 @@
             margin-right: 12px;
         }
 
-        .ant-btn {
-            border-radius: 10px;
-            height: 36px;
-            padding: 0 36px;
-            font-size: 18px;
-            box-shadow: none;
+        .line-btn{
+            cursor: pointer;
+            padding: 8px 16px;
+            font-weight: 800;
+            font-size: 25px;
+            line-height: 33px;
+            color: #273460;
+            img{
+                width: 44px;
+                vertical-align: baseline;
+            }
         }
     }
     .step-sidebar {

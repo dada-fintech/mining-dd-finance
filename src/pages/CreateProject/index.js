@@ -541,7 +541,7 @@ export default function CreateProject() {
                                         <Col md={12}>
                                             <div className="form-item">
                                                 <div className="label ">{t('createProject.votingDate')} <Tooltip title="该时期为本阶段治理投票的时间区间">?</Tooltip></div>
-                                                <DatePicker.RangePicker disabledDate={current => current && current < moment(fundraising.end_time)} value={item.vote_start_time && [moment(item.vote_start_time), moment(item.vote_end_time)]} onChange={value => { changeProcess(index, 'vote_start_time', value[0].valueOf()); changeProcess(index, 'vote_end_time', value[1].valueOf()) }} />
+                                                <DatePicker.RangePicker disabledDate={current => current && current < moment(fundraising.end_time).add(3, 'days').endOf('day')} value={item.vote_start_time && [moment(item.vote_start_time), moment(item.vote_end_time)]} onChange={value => { changeProcess(index, 'vote_start_time', value[0].valueOf()); changeProcess(index, 'vote_end_time', value[1].valueOf()) }} />
                                             </div>
                                         </Col>
                                         <Col md={6}>
@@ -556,8 +556,6 @@ export default function CreateProject() {
                                         <Input.TextArea value={item.description} onChange={e => changeProcess(index, 'description', e.target.value)} autoSize={{ minRows: 6 }} />
                                     </div>
                                 </div>
-
-
                             </>)}
                             <div className="add-item-box" onClick={() => { addProcessList() }}>
                                 <PlusCircleOutlined />

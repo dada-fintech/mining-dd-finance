@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Row, Col, Input, Upload, message, DatePicker, InputNumber, Popconfirm } from 'antd'
+import LinkArrow from 'assets/link-arrow.svg'
+import LinkArrowBack from 'assets/link-arrow-back.svg'
 import { useTranslation } from 'react-i18next'
 import { PlusCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
 
@@ -101,7 +103,7 @@ export default function CreateVote() {
                     pass = false
                 }
 
-                totalPercent += item.unlock_percentage
+                totalPercent += Number(item.unlock_percentage)
 
             })
             if (!pass) {
@@ -181,6 +183,10 @@ export default function CreateVote() {
                         </div>}
 
                         {currentStep === 1 && <div className="step-1">
+                            <div className="hint-block small">
+                                这些设置是用来配置项目的阶段性进展与解锁规则，请根据原定项目计划修改解锁计划。<br/>
+                                *已完成计划不可变更
+                            </div>
                             <div className="title">{t('createVote.projectInfo')}</div>
                             <div className="confirm-box">
                                 <div className="line">
@@ -331,7 +337,15 @@ export default function CreateVote() {
                             </>)}
                             <div className="title" style={{ marginTop: '56px' }}>{t('createVote.additionalDoc')}</div>
                             <div className="confirm-box">
-                                {projectInfo.other_file[0].file_name}
+                                {
+                                    projectInfo.other_file && projectInfo.other_file.length > 0 && <div className="uploaded-box">
+                                        {projectInfo.other_file.map((item, index) => (
+                                            <div>
+                                                {item.file_name.slice(10)}
+                                            </div>
+                                        ))}
+                                    </div>
+                                }
                             </div>
                             <div className="description-block">
                                 <div className="process-top">
@@ -347,14 +361,14 @@ export default function CreateVote() {
                     </div>
                     <div className="step-control">
                         <div>
-                            {currentStep > 0 && <Button onClick={() => { setCurrentStep(prev => prev - 1) }} className="btn-grey">{t('common.back')}</Button>}
+                            {currentStep > 0 && <div onClick={() => { setCurrentStep(prev => prev - 1) }} className="line-btn">{t('common.back')}</div>}
                         </div>
                         {currentStep < 2 && <div>
-                            <Button onClick={() => { goNextStep() }} className="btn-green">{t('common.next')}</Button>
+                            <div onClick={() => { goNextStep() }} className="line-btn">{t('common.next')}</div>
                         </div>}
                         {currentStep == 2 && <div>
                             <span className="hint">{t('common.gasFeeHint')}</span>
-                            <Button onClick={() => { confirmInfo() }} className="btn-green">{t('common.confirmInfo')}</Button>
+                            <div onClick={() => { confirmInfo() }} className="line-btn">{t('common.confirmInfo')}</div>
                         </div>}
                     </div>
                 </Col>

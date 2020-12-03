@@ -155,9 +155,13 @@ export default {
                 payHint: 'Buy DADA amounts to 0.5% of your total funds needed for the fundraising, and submit the proposal to the DADA DAO Committee for approval and verification. '
             },
             createVote: {
-                hint: `
-                Create a New Ballot for the Project<br/><br/>
-                Please make sure that you provide truthful information. The Mining Ecosystem Aggregator platform will create a corresponding smart contract with your data and update your project. 
+                hint: `<div class="with-line"><span>现在开始创建一个变更投票</div></span><br /><br />
+                接下来，您将根据引导修改项目的治理规则，我们将会根据您所填写的信息创建一个新的治理投票。<br/><br/>
+                请务必保证数据真实准确，您所填写信息一经提交无法更改<br/><br/><br/>
+                <div class="hint-block">
+                    注意：变更投票时请充分说明理由，有且仅有在获得超过2/3的支持票数，您所做出的变更才可以生效（<strong>变更投票中，未投票数均计入反对票</strong>)<br/><br/>
+                    注意：您所提交的变更投票将会有一天的公示期，请务必保证投票期限位于下一进程开始前，否则可能会导致合约发布失败。
+                </div>
                 `,
                 projectInfo: 'Project Info',
                 additionalDoc: 'Additional Documents',
@@ -330,9 +334,13 @@ export default {
 
             },
             createVote: {
-                hint: `
-                为项目创建一个新的投票<br/><br/>
-                请认真填写以下表格并确保信息的准确性，平台将根据您填写的数据按照规则创建相应的智能合约并更新您的项目!
+                hint: `<div class="with-line"><span>现在开始创建一个变更投票</div></span><br /><br />
+                接下来，您将根据引导修改项目的治理规则，我们将会根据您所填写的信息创建一个新的治理投票。<br/><br/>
+                请务必保证数据真实准确，您所填写信息一经提交无法更改<br/><br/><br/>
+                <div class="hint-block">
+                    注意：变更投票时请充分说明理由，有且仅有在获得超过2/3的支持票数，您所做出的变更才可以生效（<strong>变更投票中，未投票数均计入反对票</strong>)<br/><br/>
+                    注意：您所提交的变更投票将会有一天的公示期，请务必保证投票期限位于下一进程开始前，否则可能会导致合约发布失败。
+                </div>
                 `,
                 projectInfo: '项目信息',
                 additionalDoc: '其他文件',
