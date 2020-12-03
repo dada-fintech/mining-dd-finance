@@ -359,7 +359,7 @@ export default function CreateProject() {
         }
         await mm.sendTransaction(
             txnParams,
-            '授权中',
+            '授权',
             {
                 from: window.ethereum.selectedAddress,
                 to: callData[1].contract_addr,

@@ -1,38 +1,22 @@
 .project-page {
-    background: linear-gradient(12deg, #e3e3e3, #f8f8f8, #f8f8f8);
-    .project-main {
-        width: 90%;
-        margin: 0 auto;
+    .top-area {
+        background: #f7f7f7;
+        padding-bottom: 32px;
     }
-
-    .project-intro {
-        margin-top: 120px;
-        margin-bottom: 20px;
-        padding: 16px 24px;
-        background: #fff;
-        border: 1px solid #b9b9b9;
-        .top {
+    .middle-area {
+        margin-bottom: 32px;
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+        .container {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 8px;
-            .title {
-                font-size: 20px;
-                color: #010101;
-                font-weight: 800;
-                line-height: 27px;
-            }
-            .apy {
-                color: #3faa4d;
-                font-size: 18px;
-            }
+            justify-content: space-between;
+            padding-top: 12px;
+            padding-bottom: 12px;
+
         }
-        .desc {
-            font-size: 18px;
-            line-height: 28px;
-            color: #707070;
-            margin-top: 18px;
-            margin-bottom: 16px;
+        .apy {
+            color: #3faa4d;
+            font-size: 20px;
         }
         .tabs {
             padding: 0;
@@ -41,23 +25,83 @@
                 display: inline-block;
                 font-size: 20px;
                 line-height: 27px;
-                color: #b5b5b5;
+                color: #9a9a9a;
                 cursor: pointer;
                 margin-right: 64px;
+                padding: 4px 18px;
                 &.active {
-                    color: #010101;
+                    color: #000;
+                    border-top: 1px solid #707070;
+                    border-bottom: 1px solid #707070;
                 }
             }
         }
     }
-    .project-content {
-        // margin-bottom: 10vh;
-        // min-height: 150vh;
-        border: 1px solid #b9b9b9;
-        padding: 36px 24px;
-        margin-bottom: 160px;
-        background: #fff;
+    .project-intro {
+        margin-top: 32px;
+        padding: 16px 24px;
+        color: #273460;
+        // background: #fff;
+        // border: 1px solid #b9b9b9;
+        .top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            .title {
+                font-size: 24px;
+                font-weight: 800;
+                line-height: 32px;
+                margin-bottom: 24px;
+            }
+        }
+        .date-range {
+            font-size: 18px;
+            line-height: 24px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        .handle-area{
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            .btn-action{
+                height: unset;
+                padding: 4px 16px;
+                font-weight: 800;
+                font-size: 18px;
+                margin-left: 12px;
+
+            }
+        }
+        .top-box {
+            background: #fff;
+            font-size: 18px;
+            line-height: 24px;
+            padding: 24px 36px;
+            .item {
+                margin-bottom: 16px;
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+        .desc {
+            font-size: 18px;
+            line-height: 50px;
+            margin-top: 18px;
+            margin-bottom: 16px;
+        }
     }
+
+    // .project-content {
+    //     // margin-bottom: 10vh;
+    //     // min-height: 150vh;
+    //     border: 1px solid #b9b9b9;
+    //     padding: 36px 24px;
+    //     margin-bottom: 160px;
+    //     background: #fff;
+    // }
     .votes-bar {
         border-radius: 5px;
         height: 10px;
@@ -77,7 +121,6 @@
     .process-tag {
         font-size: 14px;
         color: #707070;
-        margin-bottom: 24px;
     }
     @media screen and (max-width: 992px) {
         .project-main {

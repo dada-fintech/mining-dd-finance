@@ -1,32 +1,38 @@
 .process-module {
+    color: #273460;
     .process-item {
-        padding: 12px 20px;
-        border: 1px solid #707070;
-        color: #707070;
+        padding: 24px 5px;
+        border-top: 0.5px solid #000;
+        border-bottom: 0.5px solid #000;
         margin-bottom: 32px;
-        &:last-child{
-            margin-bottom:  0;
+        &:last-child {
+            margin-bottom: 0;
         }
-        .vs-bar{
+        .vs-bar {
             display: flex;
             color: #fff;
-            height: 24px;
+            height: 8px;
             overflow: hidden;
-            border-radius: 12px;
+            border-radius: 5px;
             margin: 8px auto 0;
-            .yes{
-                background: green;
+            .yes {
+                background: #28BC81;
                 text-align: right;
                 padding: 0 12px;
             }
-            .no{
-                background: red;
+            .no {
+                background: #BE2828;
                 text-align: left;
                 padding: 0 12px;
             }
         }
-       
-        .text-area{
+        .vote-action{
+            text-align: center;
+            .ant-btn{
+                margin: 0 8px;
+            }
+        }
+        .text-area {
             font-size: 18px;
             line-height: 36px;
         }
@@ -41,6 +47,7 @@
                 line-height: 27px;
             }
             .date {
+                color: #ACB1C2;
                 font-size: 18px;
                 line-height: 24px;
             }
@@ -48,14 +55,16 @@
                 font-size: 18px;
                 line-height: 24px;
                 text-align: right;
-                &.finish {
+                padding-left: 6px;
+                
+                &.Finished {
                     color: #28bc81;
                 }
-                &.close {
+                &.Closed {
                     color: #be2828;
                 }
-                &.planning{
-                    color: #0000F8;
+                &.Active {
+                    color: #0000f8;
                 }
             }
         }
@@ -74,28 +83,32 @@
             line-height: 24px;
             margin-bottom: 12px;
         }
-      
-        .handle-area{
+        .vote-result{
+            color: #ACB1C2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .handle-area {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin: 24px 0 32px;
-            
-            .btn-green{
+
+            .btn-green {
                 min-width: 120px;
                 margin-left: 44px;
             }
         }
-      
     }
-    @media screen and (max-width: 992px){
-        .process-item{
-            .text-area{
+    @media screen and (max-width: 992px) {
+        .process-item {
+            .text-area {
                 font-size: 16px;
             }
-            .handle-area{
+            .handle-area {
                 margin: 24px 0;
-                
             }
         }
     }

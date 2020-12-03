@@ -43,6 +43,18 @@
     }
 }
 
+.btn-action {
+    color: #273460;
+    background: transparent;
+    border: 5px solid #48cccc;
+    &:hover,
+    &:focus {
+        color: #273460;
+        background: transparent;
+        border: 5px solid #48cccc;
+    }
+}
+
 .btn-white {
     color: #707070;
     background: #fff;

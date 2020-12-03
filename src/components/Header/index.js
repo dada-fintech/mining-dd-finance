@@ -2,8 +2,9 @@ import React, { useEffect } from 'react'
 import Logo from '../../assets/logo.png'
 import { Button, Tooltip, Dropdown, Menu } from 'antd'
 import { useWallet } from 'use-wallet'
-import { DownOutlined } from '@ant-design/icons'
+import axios from 'utils/axios'
 import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
 import i18n from 'i18next'
 
 
@@ -12,9 +13,10 @@ import './style.scss'
 export default function Header() {
     const wallet = useWallet()
     const { t } = useTranslation()
+    const role = useSelector(state => state.setting.role)
+    const dispatch = useDispatch()
     useEffect(() => {
         wallet.connect()
-
     }, [])
 
     const changeLanguage = language => {
@@ -22,6 +24,26 @@ export default function Header() {
         i18n.changeLanguage(language)
     }
 
+    // const changeRole = role => {
+    //     dispatch({
+    //         type: 'SWITCH_ROLE',
+    //         payload:{
+    //             role: role
+    //         }
+    //     })
+    // }
+
+    // const roleMenu = <Menu>
+    //     <Menu.Item onClick={changeRole('1')}>
+    //         项目贡献者
+    //     </Menu.Item>
+    //     <Menu.Item onClick={changeRole('2')}>
+    //         项目管理人
+    //     </Menu.Item>
+    //     <Menu.Item onClick={changeRole('3')}>
+    //         委员会委员
+    //     </Menu.Item>
+    // </Menu>
 
     return (<header className="header">
         <div className="container">

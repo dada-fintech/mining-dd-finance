@@ -65,7 +65,7 @@ export default function Sidebar() {
 
     return (<div className="sidebar">
         <div className="block">
-            <div className="title">{t('sidebar.yourShares')}</div>
+            <div className="title">我的份额</div>
             <div className="box supporter-box">
                 {supporterOwner.map(item => (
                     <div className="box-item" key={item.address}>
@@ -78,9 +78,8 @@ export default function Sidebar() {
                     </div>
                 ))}
             </div>
-            <div className="title">{t('sidebar.investors')}</div>
+            <div className="title">所有份额</div>
             <div className="box supporter-box">
-
                 {supporterList.map(item => (
                     <div className="box-item">
                         <div className="progress" style={{width: (item.amount / totalAmount) * 100 + '%'}}></div>

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Input, Select, Button } from 'antd'
-import web3 from 'components/web3'
-import BN from 'bignumber.js'
 import { useTranslation } from 'react-i18next'
-import detectEthereumProvider from '@metamask/detect-provider'
+import axios from 'utils/axios'
+import mm from 'components/mm'
 import ConfirmVote from '../../modals/ConfirmVote'
 import './style.scss'
 
@@ -20,11 +19,8 @@ import './style.scss'
 export default function Process(props) {
     const { processList } = props
     const [confirmVoteVisible, setConfirmVoteVisible] = useState(false)
-    const [lockNum, setLockedNum] = useState('')
-    const [contract, setContract] = useState('')
     const { id } = props
     const { t } = useTranslation()
-
     let finalProcessList = processList.map(item => {
         return {
             ...item,
@@ -32,76 +28,61 @@ export default function Process(props) {
             yesPercent: (item.affirmative_vote / (Number(item.affirmative_vote) + Number(item.dissenting_vote))) * 100,
             noPercent: (item.dissenting_vote / (Number(item.affirmative_vote) + Number(item.dissenting_vote))) * 100,
         }
-
     })
 
-    useEffect(async () => {
-        let ABI = [
-            // transfer
-            {
-                "constant": false,
-                "inputs": [
-                    {
-                        "name": "_to",
-                        "type": "address"
-                    },
-                    {
-                        "name": "_value",
-                        "type": "uint256"
-                    }
-                ],
-                "name": "transfer",
-                "outputs": [
-                    {
-                        "name": "",
-                        "type": "bool"
-                    }
-                ],
-                "type": "function"
-            }
-        ];
+    const sayYes = () => {
+        axios.post('/project/vote-for-phase', {
+            project_uniq_id: id,
+            user_addr: window.ethereum.selectedAddress,
+            phase_id: '',
+            comment: '',
+        }).then(res => {
 
-        let CONTRACT_ADDRESS = '0xdac17f958d2ee523a2206206994597c13d831ec7'
-
-        const contractRaw = new web3.eth.Contract(ABI, CONTRACT_ADDRESS)
-
-        setContract(contractRaw)
-
-
-    }, [])
-
-    const doLock = () => {
-        const toAddress = '0xfc965F41F1BC0160db5920087C1BF9E578D07Bb4'
-        const amount = String(new BN(lockNum).shiftedBy(6))
-        contract.methods.transfer(toAddress, amount).send({
-            from: window.ethereum.selectedAddress
-        }).on('transactionHash', hash => {
-            console.log(hash)
         })
+
     }
+
+    const sayNo = () => {
+
+    }
+
 
     return (<div className="process-module">
         {finalProcessList.map((process, index) => (
             <div className="process-item" key={index}>
                 <div className="top">
                     <div className="title">{t('project.progress')} #{index + 1}</div>
-                    <div className="date">{new Date(process.vote_start_time * 1000).toLocaleDateString()} - {new Date(process.vote_end_time * 1000).toLocaleDateString()}</div>
+                    <div>
+                        <span className="date">{new Date(process.vote_start_time).toLocaleDateString()} - {new Date(process.vote_end_time).toLocaleDateString()}</span>
+                        <span className={`status ${process.status}`}>{process.status}</span>
+                    </div>
                 </div>
                 <div className="text-area">
-                    <strong>{t('project.unlockingAmount')}</strong>: {process.unlock_value}USDT({process.unlock_percentage}%)<br />
-                    <strong>{t('project.unlockingTime')}</strong>: {new Date(process.unlock_time * 1000).toLocaleDateString()}<br />
-                    <strong>{t('project.event')}</strong>: {process.description}<br />
-                    <strong>{t('project.voteResult')}</strong>: {process.affirmative_vote} {t('project.approve')} / {process.dissenting_vote} {t('project.object')}
+                    <div>
+                        释放额度: <strong>{process.unlock_percentage}%</strong>
+                    </div>
+                    <div>
+                        {t('project.event')}: <strong>{process.description}</strong><br />
+                    </div>
                 </div>
-                <div className="vs-bar">
-                    <div className="yes" style={{ width: process.yesPercent + '%' }}>{process.yesPercent >= 10 && (process.yesPercent + '%')} {t('project.approve')}</div>
-                    <div className="no" style={{ width: process.noPercent + '%' }}>{process.noPercent >= 10 && (process.noPercent + '%')} {t('project.object')}</div>
-                </div>
-                <div className="handle-area">
-                    <Input value={lockNum} onChange={(event) => { setLockedNum(event.target.value) }} suffix="USDT" />
-                    <Button disabled={process.done} className="btn-green" onClick={() => { doLock() }}>{t('common.invest')}</Button>
-                </div>
-
+                {process.status === 'Active' && <>
+                    <div className="vs-bar">
+                        <div className="yes" style={{ width: process.yesPercent + '%' }}></div>
+                        <div className="no" style={{ width: process.noPercent + '%' }}></div>
+                    </div>
+                    <div className="vote-result">
+                        <div>
+                            {process.affirmative_vote} {t('project.approve')}
+                        </div>
+                        <div>
+                            {process.dissenting_vote} {t('project.object')}
+                        </div>
+                    </div>
+                    <div className="vote-action">
+                        <Button onClick={sayYes(process.id)}>同意</Button>
+                        <Button onClick={sayNo(process.id)}>反对</Button>
+                    </div>
+                </>}
             </div>
         ))}
         <a href={`/create-vote/${id}`}>
