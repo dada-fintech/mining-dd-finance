@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Input, Select, Button } from 'antd'
 import { useTranslation } from 'react-i18next'
-import axios from 'utils/axios'
-import mm from 'components/mm'
 import ConfirmVote from '../../modals/ConfirmVote'
 import './style.scss'
 
@@ -19,6 +17,8 @@ import './style.scss'
 export default function Process(props) {
     const { processList } = props
     const [confirmVoteVisible, setConfirmVoteVisible] = useState(false)
+    const [currentParams, setCurrentParams] = useState({})
+
     const { id } = props
     const { t } = useTranslation()
     let finalProcessList = processList.map(item => {
@@ -30,19 +30,24 @@ export default function Process(props) {
         }
     })
 
-    const sayYes = () => {
-        axios.post('/project/vote-for-phase', {
+    const sayYes = (phase_id) => {
+        setCurrentParams({
             project_uniq_id: id,
+            phase_id: phase_id,
             user_addr: window.ethereum.selectedAddress,
-            phase_id: '',
-            comment: '',
-        }).then(res => {
-
+            vote: 'yes'
         })
-
+        setConfirmVoteVisible(true)
     }
 
-    const sayNo = () => {
+    const sayNo = (phase_id) => {
+        setCurrentParams({
+            project_uniq_id: id,
+            phase_id: phase_id,
+            user_addr: window.ethereum.selectedAddress,
+            vote: 'no'
+        })
+        setConfirmVoteVisible(true)
 
     }
 
@@ -79,8 +84,8 @@ export default function Process(props) {
                         </div>
                     </div>
                     <div className="vote-action">
-                        <Button onClick={sayYes(process.id)}>同意</Button>
-                        <Button onClick={sayNo(process.id)}>反对</Button>
+                        <Button onClick={()=>{sayYes(process.index)}}>同意</Button>
+                        <Button onClick={()=>{sayNo(process.index)}}>反对</Button>
                     </div>
                 </>}
             </div>
@@ -89,6 +94,6 @@ export default function Process(props) {
             {finalProcessList.filter(item => item.status === 'Active').length != 0 && <Button className="btn-green">变更计划</Button>}
         </a>
 
-        { confirmVoteVisible && <ConfirmVote onCancel={() => { setConfirmVoteVisible(false) }} />}
+        { confirmVoteVisible && <ConfirmVote params={currentParams} onCancel={() => { setConfirmVoteVisible(false) }} />}
     </div>)
 }

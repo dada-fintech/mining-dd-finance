@@ -1,4 +1,10 @@
 .detail-module {
+    #my-pdf {
+        width: 100% !important;
+        canvas {
+            width: 100% !important;
+        }
+    }
     // .article{
     //     color: #000;
     //     font-size: 18px;
