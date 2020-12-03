@@ -68,7 +68,7 @@ export default function Sidebar() {
             <div className="title">{t('sidebar.yourShares')}</div>
             <div className="box supporter-box">
                 {supporterOwner.map(item => (
-                    <div className="box-item">
+                    <div className="box-item" key={item.address}>
                         <div className="progress" style={{width: (item.amount / totalAmount) * 100 + '%'}}></div>
                         <div className="texts">
                             <div>{((item.amount / totalAmount) * 100).toFixed(2)}% ({item.amount} USDT)</div>

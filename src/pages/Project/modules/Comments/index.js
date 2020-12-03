@@ -31,7 +31,7 @@ export default function Comments() {
 
     return (<div className="comments-module">
         {commentsList.map(item => (
-            <div className="comment-item">
+            <div className="comment-item" key={item.id}>
                 <div className="top">
                     <div className="id">
                         #{item.id}
