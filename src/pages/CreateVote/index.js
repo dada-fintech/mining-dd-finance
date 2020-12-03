@@ -95,18 +95,26 @@ export default function CreateVote() {
             }
 
             let pass = true
+            let totalPercent = 0
             processList.forEach(item => {
-                if (!item.unlock_time || !item.unlock_percentage || !item.vote_start_time || !item.vote_end_time) {
-                    console.log(item.unlock_time, item.unlock_percentage, item.vote_start_time, item.vote_end_time)
+                if (!item.unlock_percentage || !item.vote_start_time || !item.vote_end_time) {
                     pass = false
                 }
+
+                totalPercent += item.unlock_percentage
+
             })
             if (!pass) {
                 message.error('请检查所有必填字段')
                 return false
             }
 
-            if (description) {
+            if (totalPercent !== 100) {
+                message.error('份额相加需等于100%')
+                return false
+            }
+
+            if (!description) {
                 message.error('请填写描述')
                 return false
             }
@@ -204,7 +212,7 @@ export default function CreateVote() {
                                         预期APY
                                     </div>
                                     <div className="value">
-                                        {projectInfo.expected_apy}
+                                        {fundraising.expected_apy}
                                     </div>
                                 </div>
                                 <div className="line">
@@ -212,7 +220,7 @@ export default function CreateVote() {
                                         筹款目标
                                     </div>
                                     <div className="value">
-                                        {fundraising.softtop}
+                                        {fundraising.min_amount}
                                     </div>
                                 </div>
                                 <div className="line">
@@ -220,7 +228,7 @@ export default function CreateVote() {
                                         筹款限制
                                     </div>
                                     <div className="value">
-                                        {fundraising.hardtop}
+                                        {fundraising.max_amount}
                                     </div>
                                 </div>
                                 <div className="line">
@@ -242,17 +250,17 @@ export default function CreateVote() {
                                         {item.status}
                                     </div>
                                     <div className="line">
-                                        <div className="name required">{t('project.unlockingAmount')}</div>
+                                        <div className="name required">解锁额度</div>
                                         <div className="value">
                                             {(item.status && item.status !== 'Future') ? (item.unlock_percentage + '%') : <InputNumber max={index === 0 ? 80 : 100} min={0} formatter={value => `${value ? value : 0} %`} parser={value => parseInt(value)} value={item.unlock_percentage} onChange={e => changeProcess(index, 'unlock_percentage', e)} style={{ width: '180px' }} />}
                                         </div>
                                     </div>
-                                    <div className="line">
+                                    {/* <div className="line">
                                         <div className="name required">{t('project.unlockingTime')}</div>
                                         <div className="value">
                                             {(item.status && item.status !== 'Future') ? new Date(item.unlock_time).toLocaleDateString() : <DatePicker value={item.unlock_time && moment(item.unlock_time)} onChange={value => changeProcess(index, 'unlock_time', value.valueOf())} />}
                                         </div>
-                                    </div>
+                                    </div> */}
                                     <div className="line">
                                         <div className="name required">{t('createProject.votingDate')}</div>
                                         <div className="value">
@@ -304,13 +312,13 @@ export default function CreateVote() {
                                 </div>
                                 <div className="confirm-box">
                                     <div className="line">
-                                        <div className="name">{t('project.unlockingAmount')}</div>
+                                        <div className="name">解锁额度</div>
                                         <div className="value">{item.unlock_percentage}%</div>
                                     </div>
-                                    <div className="line">
+                                    {/* <div className="line">
                                         <div className="name">{t('project.unlockingTime')}</div>
                                         <div className="value">{new Date(item.unlock_time).toLocaleDateString()}</div>
-                                    </div>
+                                    </div> */}
                                     <div className="line">
                                         <div className="name">{t('createProject.votingDate')}</div>
                                         <div className="value">{new Date(item.vote_start_time).toLocaleDateString()}-{new Date(item.vote_end_time).toLocaleDateString()}</div>

@@ -25,7 +25,7 @@ export default function Project() {
         axios.get('/project/detail/' + id).then(res => {
             setProject({
                 ...res.data,
-                percent: parseInt((res.data.fundraising.current_raised_money / res.data.fundraising.hardtop) * 100),
+                percent: parseInt((res.data.fundraising.current_raised_money / res.data.fundraising.max_amount) * 100),
                 fullDesc: `https://mining-api.dd.finance/project/download/${res.data.project_info.project_uniq_id}/${res.data.project_info.white_paper.file_name}`
             }
             )

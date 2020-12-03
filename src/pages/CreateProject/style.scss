@@ -5,17 +5,14 @@
         padding: 64px 0;
         min-height: 73vh;
     }
-    .add-item-box {
-        border: 1px solid #707070;
-        background: #f9f9f9;
-        padding: 40px 0;
-        text-align: center;
-        font-size: 26px;
-        cursor: pointer;
-    }
-    .uploaded-box{
+
+    .uploaded-box {
         color: #111;
         margin-top: 8px;
+    }
+    .softtop-value{
+        font-weight: 600;
+        color: #000;
     }
     .form-item {
         margin-bottom: 20px;
@@ -24,16 +21,16 @@
             font-size: 18px;
             line-height: 27px;
             margin-bottom: 8px;
-            &.required {
-                &::after {
-                    color: red;
-                    content: "*";
-                    display: "inline-block";
-                }
-            }
+            // &.required {
+            //     &::after {
+            //         color: red;
+            //         content: "*";
+            //         display: "inline-block";
+            //     }
+            // }
         }
         .hint {
-            margin-top: 5px;
+            margin-top: 3px;
             font-size: 14px;
             line-height: 25px;
             color: #010101;
@@ -58,28 +55,15 @@
         line-height: 27px;
         margin-bottom: 10px;
     }
-    .assets-rule-item {
-        border: 1px solid #707070;
-        background: #f9f9f9;
-        padding: 14px 24px;
-        margin-bottom: 16px;
-        position: relative;
-        .ant-picker {
-            width: 100%;
-        }
-        .remove-btn{
-            position: absolute;
-            top: 12px;
-            z-index: 10;
-            cursor: pointer;
-            font-size: 24px;
-            right: 12px;
-        }
-    }
+
 
     .step-0 {
-        font-size: 16px;
+        color: #273460;
+        font-size: 20px;
         line-height: 27px;
+    }
+    .step-1{
+       
     }
     .step-6 {
         font-size: 16px;
@@ -88,24 +72,7 @@
             margin-bottom: 15px;
         }
 
-        .confirm-box {
-            border: 1px solid #707070;
-            background: #f9f9f9;
-            padding: 18px 22px;
-            margin-bottom: 16px;
-            .line {
-                display: flex;
-                margin: 8px auto;
-                .name {
-                    flex: 1;
-                    color: #b7b7b7;
-                }
-                .value {
-                    flex: 2;
-                    color: #3a3a3a;
-                }
-            }
-        }
+   
         .process-top {
             display: flex;
             justify-content: space-between;
@@ -137,21 +104,27 @@
     }
     .step-control {
         width: 100%;
-        margin: 64px auto;
+        margin: 120px auto;
         display: flex;
         align-items: center;
         justify-content: space-between;
         .hint {
+            
             color: #010101;
             margin-right: 12px;
         }
 
-        .ant-btn {
-            border-radius: 10px;
-            height: 36px;
-            padding: 0 36px;
-            font-size: 18px;
-            box-shadow: none;
+        .line-btn{
+            cursor: pointer;
+            padding: 8px 16px;
+            font-weight: 800;
+            font-size: 25px;
+            line-height: 33px;
+            color: #273460;
+            img{
+                width: 44px;
+                vertical-align: baseline;
+            }
         }
     }
     .step-sidebar {
@@ -252,7 +225,6 @@
                 font-size: 16px;
                 line-height: 24px;
                 margin-top: 16px;
-            
             }
             input {
                 max-width: 100% !important;

@@ -74,7 +74,7 @@ export default {
                         checkHint: 'Check to receive project updates '
                     }
                 },
-                footer:{
+                footer: {
                     documentation: 'Documentation',
                     explore: 'Explore',
                 }
@@ -117,9 +117,14 @@ export default {
                 object: 'Object',
             },
             createProject: {
-                hint: `Create a new DAO for your Project<br /><br />
-                Please fill out the following form carefully and ensure the accuracy of the information, the platform will be based on the data you fill in according to the rules to create the corresponding smart contract and upload the data to the blockchain! <br /><br />
-                You needs to buy/raise 0.5% of the desired raising amount worth of DADA to submit the proposal to the governance council for approval/verification. You can click here to swap some DADA.`,
+                hint: `<div class="with-line"><span>现在开始创建一个项目</div></span><br /><br />
+                接下来，您将根据引导填写完整的项目信息与治理规则，我们将会根据您所填写的信息创建一个新的智能合约。<br/><br/>
+                请务必保证数据真实准确，您所填写信息一经提交无法更改<br /><br /><br/>
+                <div class="hint-block">
+                    注意：您提交项目时需要准备好所募集金额0.5%的等值DADA用于支付给社区，用于提交项目的审计/验证。<br/><br/>
+                    筹集目标达成后，您将需要准备好最大募集金额10%的等值DADA用于项目启动保证金，该资金将会于项目完成后返还部分。
+                </div>
+                `,
                 projectName: 'Project Name',
                 projectIntro: 'Project Introduction',
                 whitepaper: 'Whitepaper',
@@ -241,7 +246,7 @@ export default {
                         checkHint: '勾选时将会接受新项目推送'
                     }
                 },
-                footer:{
+                footer: {
                     documentation: '阅读文档',
                     explore: '发现更多',
                 }
@@ -285,26 +290,31 @@ export default {
                 object: '反对',
             },
             createProject: {
-                hint: `创建一个新的项目<br /><br />
-                请仔细填写以下表格并确保信息的准确性，平台将根据您填写的数据按照规则创建相应的智能合约并将数据上传到区块链!<br /><br />
-                您提交项目时，需要购买或募集所需募集金额0.5%的DADA，将提案提交给治理委员会进行批准/验证。`,
+                hint: `<div class="with-line"><span>现在开始创建一个项目</div></span><br /><br />
+                接下来，您将根据引导填写完整的项目信息与治理规则，我们将会根据您所填写的信息创建一个新的智能合约。<br/><br/>
+                请务必保证数据真实准确，您所填写信息一经提交无法更改<br /><br /><br/>
+                <div class="hint-block">
+                    注意：您提交项目时需要准备好所募集金额0.5%的等值DADA用于支付给社区，用于提交项目的审计/验证。<br/><br/>
+                    筹集目标达成后，您将需要准备好最大募集金额10%的等值DADA用于项目启动保证金，该资金将会于项目完成后返还部分。
+                </div>
+                `,
                 projectName: '项目名称',
                 projectIntro: '项目简介',
                 whitepaper: '白皮书文件',
-                nameOfToken: '项目币名称',
+                nameOfToken: '项目代币名称',
                 addWallet: '添加基金持有地址',
                 addWalletHint: '此地址将是持有本基金的唯一地址。',
                 profitAddr: '项目收益地址',
                 profitAddrHint: '该地址为项目盈利的收款钱包地址，务必选择可验证的多方共管钱包地址，无法变更',
                 boardMembers: '添加理事会成员地址',
                 boardMembersHint: '创建最多3个理事会成员地址，只有创建投票的权限。',
-                fundraisingPeriod: '筹款期',
+                fundraisingPeriod: '筹款期限',
                 fundraisingPeriodHint: '确认筹款开始及结束的日期。',
                 fundraisingGoal: '筹款目标',
                 fundraisingGoalHint: '这是该项目的最低筹资限额。',
-                fundraisingLimit: '筹款限制',
-                fundraisingLimitHint: '这是这个项目的硬顶筹款。',
-                redemptionDate: '回款日期',
+                fundraisingLimit: '最高募集金额',
+                fundraisingLimitHint: '作为该项目的最大募集总额',
+                redemptionDate: '开放赎回日期',
                 assetsRuleHint: '请根据您的募资计划配置基金解锁规则。',
                 unlockDate: '解锁时间',
                 shares: '份额',

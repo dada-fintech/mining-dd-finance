@@ -12,30 +12,22 @@
             display: "inline-block";
         }
     }
-    .add-item-box {
-        border: 1px solid #707070;
-        background: #f9f9f9;
-        padding: 40px 0;
-        font-size: 26px;
-        text-align: center;
-        cursor: pointer;
-    }
     .form-item {
         margin-bottom: 20px;
         .label {
             font-size: 18px;
             line-height: 27px;
             margin-bottom: 8px;
-            &.required {
-                &::after {
-                    color: red;
-                    content: "*";
-                    display: "inline-block";
-                }
-            }
+            // &.required {
+            //     &::after {
+            //         color: red;
+            //         content: "*";
+            //         display: "inline-block";
+            //     }
+            // }
         }
         .hint {
-            margin-top: 5px;
+            margin-top: 3px;
             font-size: 14px;
             line-height: 25px;
             color: #010101;
@@ -60,23 +52,6 @@
         line-height: 27px;
         margin-bottom: 10px;
     }
-    .assets-rule-item {
-        border: 1px solid #707070;
-        background: #f9f9f9;
-        padding: 14px 24px;
-        margin-bottom: 16px;
-        .ant-picker {
-            width: 100%;
-        }
-        .remove-btn {
-            position: absolute;
-            top: 12px;
-            z-index: 10;
-            cursor: pointer;
-            font-size: 24px;
-            right: 12px;
-        }
-    }
 
     .step-0 {
         font-size: 18px;
@@ -92,38 +67,38 @@
             margin: 32px auto;
         }
 
-        .confirm-box {
-            border: 1px solid #707070;
-            background: #f9f9f9;
-            padding: 8px 18px;
-            margin-bottom: 16px;
-            position: relative;
-            .status {
-                position: absolute;
-                top: 8px;
-                font-size: 16px;
-                font-weight: 800;
-                right: 8px;
-                &.finish {
-                    color: #28bc81;
-                }
-                &.edit {
-                    color: #285ae4;
-                }
-            }
-            .line {
-                display: flex;
-                margin: 8px auto;
-                .name {
-                    flex: 1;
-                    color: #888;
-                }
-                .value {
-                    flex: 2;
-                    color: #111;
-                }
-            }
-        }
+        // .confirm-box {
+        //     border: 1px solid #707070;
+        //     background: #f9f9f9;
+        //     padding: 8px 18px;
+        //     margin-bottom: 16px;
+        //     position: relative;
+        //     .status {
+        //         position: absolute;
+        //         top: 8px;
+        //         font-size: 16px;
+        //         font-weight: 800;
+        //         right: 8px;
+        //         &.finish {
+        //             color: #28bc81;
+        //         }
+        //         &.edit {
+        //             color: #285ae4;
+        //         }
+        //     }
+        //     .line {
+        //         display: flex;
+        //         margin: 8px auto;
+        //         .name {
+        //             flex: 1;
+        //             color: #888;
+        //         }
+        //         .value {
+        //             flex: 2;
+        //             color: #111;
+        //         }
+        //     }
+        // }
         .process-top {
             display: flex;
             justify-content: space-between;
@@ -155,7 +130,7 @@
     }
     .step-control {
         width: 100%;
-        margin: 64px auto;
+        margin: 120px auto;
         display: flex;
         align-items: center;
         justify-content: space-between;
