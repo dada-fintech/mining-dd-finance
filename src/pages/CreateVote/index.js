@@ -130,7 +130,7 @@ export default function CreateVote() {
                 message.success(`${info.file.name} file uploaded successfully`);
                 let previousArr = projectInfo.other_file || []
                 previousArr.push({
-                    file_name: info.file.name
+                    file_name: info.file.response.file_name
                 })
                 changeProjectInfo('other_file', previousArr)
             } else if (info.file.status === 'error') {
@@ -288,7 +288,7 @@ export default function CreateVote() {
                                     projectInfo.other_file && projectInfo.other_file.length > 0 && <div className="uploaded-box">
                                         {projectInfo.other_file.map((item, index) => (
                                             <div>
-                                                {item.file_name} <CloseCircleOutlined onClick={() => { removeOtherFile(index) }} />
+                                                {item.file_name.slice(10)} <CloseCircleOutlined onClick={() => { removeOtherFile(index) }} />
                                             </div>
                                         ))}
                                     </div>

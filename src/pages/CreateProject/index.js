@@ -221,7 +221,8 @@ export default function CreateProject() {
             }
             if (info.file.status === 'done') {
                 message.success(`${info.file.name} file uploaded successfully`);
-                changeProjectInfo('white_paper', { file_name: info.file.name })
+                
+                changeProjectInfo('white_paper', { file_name: info.file.response.file_name })
             } else if (info.file.status === 'error') {
                 message.error(`${info.file.name} file upload failed.`);
             }
@@ -245,7 +246,7 @@ export default function CreateProject() {
                 message.success(`${info.file.name} file uploaded successfully`);
                 let previousArr = projectInfo.other_file || []
                 previousArr.push({
-                    file_name: info.file.name
+                    file_name: info.file.response.file_name
                 })
                 changeProjectInfo('other_file', previousArr)
             } else if (info.file.status === 'error') {
@@ -343,7 +344,7 @@ export default function CreateProject() {
                                     <span style={{ marginLeft: '12px', color: '#707070' }}>*.pdf</span>
                                 </Upload>
                                 {projectInfo.white_paper && projectInfo.white_paper.file_name && <div className="uploaded-box">
-                                    {projectInfo.white_paper.file_name} <CloseCircleOutlined onClick={() => { removeWhitePaper() }} />
+                                    {projectInfo.white_paper.file_name.slice(10)} <CloseCircleOutlined onClick={() => { removeWhitePaper() }} />
                                 </div>}
                             </div>
                         </div>}
@@ -453,7 +454,7 @@ export default function CreateProject() {
                                     projectInfo.other_file && projectInfo.other_file.length > 0 && <div className="uploaded-box">
                                         {projectInfo.other_file.map((item, index) => (
                                             <div>
-                                                {item.file_name} <CloseCircleOutlined onClick={() => { removeOtherFile(index) }} />
+                                                {item.file_name.slice(10)} <CloseCircleOutlined onClick={() => { removeOtherFile(index) }} />
                                             </div>
                                         ))}
                                     </div>
@@ -540,7 +541,7 @@ export default function CreateProject() {
                             <div>
                                 <div className="title" style={{ marginTop: '56px' }}>{t('createProject.additionalDoc')}</div>
                                 <div className="confirm-box">
-                                    {projectInfo.white_paper && projectInfo.white_paper.file_name}<br />{projectInfo.other_file && projectInfo.other_file[0].file_name}
+                                    {projectInfo.white_paper && projectInfo.white_paper.file_name.slice(10)}<br />{projectInfo.other_file && projectInfo.other_file[0].file_name.slice(10)}
                                 </div>
                             </div>
 

@@ -26,48 +26,7 @@ export default function Project() {
             setProject({
                 ...res.data,
                 percent: parseInt((res.data.fundraising.current_raised_money / res.data.fundraising.hardtop) * 100),
-                fullDesc: `
-                        <div>(此处为示范，后期会改成PDF形式)<br/><br/></div>
-                        <div class="text-line">
-                        <div class="title">基金发起人</div>
-                        <p>
-                            范喜明<br/>2017年进入数字货币挖矿行业，目前管理算力超过300P。
-                        </p>
-                        
-                        </div>
-                        <div class="text-line">
-                        <div class="title">项目描述</div>
-                        <p>本项目以整机矿机为服务单元，提供矿机的限时使用权转让服务。用户不会获得任何矿机本体，所有矿机将部署在新疆准东矿场，投资者将获得相应矿机的使用权，并在投资期限内获得本基金承诺收益。</p>
-                        
-                        </div>
-            
-                        <div class="text-line">
-                        <div class="title">项目策略</div>
-                        <p>当前神马矿机报价约为6000-8000元/台，故本项目拟筹资100000美金作为项目启动费用，其中50000美金作为矿机采购费用，另外50000美金作为套保币价使用。收益周期为12个月，年化收益率为10%，届时将会公示采购及收益记录。</p>
-                        
-                        </div>
-                        <div class="detail-line">
-                        <img class="mining-img" src="/img/mining-1.jpeg"/>
-                        <img class="mining-img" src="/img/mining-2.jpeg"/>
-                        </div>
-            
-                        <p>本项目拟采购50台神马M20s作为投资标的矿机，神马矿机一直属于BTC挖矿行业的翘楚品牌，高算力，高性价比的特性已经得到了市场的认可。</p>
-                        <p>本项目所采购的型号参数如下：</p>
-                        <div class="detail-line">
-                            <div>
-                            　　神马M20S-68T 官方参数(标准模式）<br/>
-                            
-                            　　算力：68T ±5%<br/>
-                            
-                            　　功耗：3260W ±10%<br/>
-                            
-                            　　功耗比：48W/T<br/>
-                            </div>
-                            <img class="mining-rig" src="/img/mining-rig-1.png"/><br/>
-                        </div>
-                        　　
-                        <img src="/img/return-table-1.png"/><br/>
-                        `
+                fullDesc: `https://mining-api.dd.finance/project/download/${res.data.project_info.project_uniq_id}/${res.data.project_info.white_paper.file_name}`
             }
             )
         })
