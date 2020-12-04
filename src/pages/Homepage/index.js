@@ -53,11 +53,26 @@ export default function Homepage() {
 
     // const wallet = useWallet()
     return (<div className="homepage">
+        <div className="social-icons left-icons">
+            <a target="_blank" href="https://twitter.com/FinanceDada">
+                <img src={Twiiter} className="social-icon" />
+            </a>
+            <a target="_blank">
+                <img src={Discord} className="social-icon" />
+            </a>
+            <a target="_blank">
+                <img src={Medium} className="social-icon" />
+            </a>
+            <a target="_blank">
+                <img src={Telegram} className="social-icon" />
+            </a>
+        </div>
         <div className="banner">
             <Header />
+
             <div className="container">
-                <Row type="flex" align="middle">
-                    <Col xs={24} md={12}>
+                <Row type="flex" align="middle" justify="center">
+                    <Col xs={24} md={10}>
                         {i18n.language === 'zh' ? <div className="banner-title">
                             矿业<span className="highlight">生态</span><br />
                             聚合器
@@ -73,14 +88,14 @@ export default function Homepage() {
                             <li>{t('homepage.banner.feature.3')}</li>
                             <li>{t('homepage.banner.feature.4')}</li>
                             <li>{t('homepage.banner.feature.5')}</li>
-                            <li>{t('homepage.banner.feature.6')}</li>
+                            <li className="li-line">{t('homepage.banner.feature.6')}</li>
                         </ul>
                         <a className="line-top-bottom" href="https://doc.dd.finance">{t('common.readTheDoc')}</a>
                     </Col>
-                    <Col xs={24} md={12} style={{ textAlign: 'right' }}>
+                    <Col xs={24} md={10} style={{ textAlign: 'right' }}>
                         <a href="/create-project" className="banner-btn">
-                            <div>
-                                <img src={LinkArrow} />{t('common.createNewProject')}
+                            <div className="btn-before">
+                                <span>{t('common.createNewProject')}</span>
                             </div>
                         </a>
                     </Col>
@@ -90,8 +105,9 @@ export default function Homepage() {
         <div className="section-projects">
             <img src={ProjectListTriangle} className="triangle" />
             <div className="container">
-                <Row gutter={{ md: 24, lg: 64 }}>
-                    <Col md={17} lg={18}>
+                <Row gutter={{ md: 24, lg: 96 }} justify="end">
+
+                    <Col md={17} lg={15}>
                         <div className="show-on-mobile">
                             <div className="section-title">
                                 <span>
@@ -131,7 +147,7 @@ export default function Homepage() {
                             ))}
                         </div>
                     </Col>
-                    <Col xs={0} md={7} lg={6}>
+                    <Col xs={0} md={7} lg={7}>
                         <div className="section-title">
                             <span>
                                 {t('homepage.inFundraisingTitle')}

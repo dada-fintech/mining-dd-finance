@@ -37,7 +37,7 @@ export default {
                         6: 'Bridging Crypto Mining with the Traditional World'
                     }
                 },
-                inFundraisingTitle: 'Projects in Fundraising',
+                inFundraisingTitle: 'Ongoing Projects',
                 inFundraising: {
                     1: 'Select High-Quality Projects',
                     2: 'Conduct Thorough Due Diligence',
@@ -46,7 +46,7 @@ export default {
                     5: 'Comprehensive Project Business Strategy',
                     6: 'High ROI with Easy Onboarding'
                 },
-                onGoingTitle: 'Ongoing Projects',
+                onGoingTitle: 'Fund Release',
                 onGoing: {
                     1: 'Autonomous Governance via Voting throughout the Processes ',
                     2: 'Decentralized Participation in the Project Decision-Making',
