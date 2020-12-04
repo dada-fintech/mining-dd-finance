@@ -4,9 +4,10 @@ import { Row, Col, Input, Button, message } from 'antd'
 import { useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import axios from 'utils/axios'
+import AuditModal from './modals/AuditModal'
 import web3 from 'components/web3'
 // import BN from 'bignumber.js'
-import detectEthereumProvider from '@metamask/detect-provider'
+// import detectEthereumProvider from '@metamask/detect-provider'
 // import { useWallet } from 'use-wallet'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
@@ -24,7 +25,9 @@ export default function Project() {
     const [project, setProject] = useState({ fundraising: {}, project_info: {} })
     const [lockNum, setLockedNum] = useState('')
     const [contract, setContract] = useState('')
-    const [role, setRole] = useState('committee')
+    const [auditModalVisible, setAuditModalVisible] = useState(false)
+    const [currentParams, setCurrentParams] = useState({})
+    const [role, setRole] = useState('invester')
     const { id } = useParams()
     const { t } = useTranslation()
     useEffect(() => {
@@ -36,6 +39,10 @@ export default function Project() {
             }
             )
         })
+
+        // committee： 委员会成员，审核项目
+        // manager： 理事会，有权限去更改计划
+        // invester： 普通投资者
 
         axios.post('/project/user-role', {
             project_uniq_id: id,
@@ -109,7 +116,33 @@ export default function Project() {
     }
 
 
+    const doAudit = () => {
+        setCurrentParams({
+            project_uniq_id: id,
+            user_addr: window.ethereum.selectedAddress,
+        })
+        setAuditModalVisible(true)
+    }
 
+    const statusMapping = {
+        'Auditing': '委员会审核中',
+        'Future': '项目即将到来',
+        'Raising': '正在筹款',
+        'PayingInsurance': '正在支付安全达',
+        'Active': '项目正在进行中',
+        'Rolling': '正在投票',
+        'AllPhasesDone': '项目计划完成，等待获取报酬',
+        'Repaying': '用户正在获取回报',
+        'Finished': '项目已完成',
+        'Refunding': '退款中',
+        'PhaseFailed': '进程失败',
+        'ReplanNoticing': '更改计划公示',
+        'ReplanVoting': '更改计划投票',
+        'ReplanFailed': '更改计划失败',
+        'Liquidating': '清算中',
+        'Failed': '项目失败',
+        'PreDefined': '进行中',
+    }
 
     return (<div className="project-page">
         <div className="top-area">
@@ -122,7 +155,16 @@ export default function Project() {
                                 <div className="title with-line"><span>{project.project_info && project.project_info.project_name}</span></div>
                             </div>
                             <div className="desc" dangerouslySetInnerHTML={{ __html: project.project_info && project.project_info.project_description }}></div>
-                            <Row>
+
+                            {/* 一开始审核评议 */}
+                            {project.status === 'Auditing' && role === 'committe' && <Row>
+                                <div className="handle-area">
+                                    <Button className="btn-action" onClick={() => { doAudit() }}>审核评议</Button>
+                                </div>
+                            </Row>}
+
+                            {/* manager 不需投资 */}
+                            {project.status === 'Raising' && role !== 'manager' && <Row>
                                 <Col md={12}>
                                     <div className="votes-bar">
                                         <div className="done" style={{ width: project.percent + '%' }}></div>
@@ -136,7 +178,17 @@ export default function Project() {
                                         <Button className="btn-action" onClick={() => { doLock() }}>立即锁定</Button>
                                     </div>
                                 </Col>
-                            </Row>
+                            </Row>}
+
+                            {/* manager 可以变更计划 */}
+                            {(project.status === 'Active' || project.status === 'PhaseFailed' || project.status === 'ReplanFailed') && role === 'manager' && <Row>
+                                <div className="handle-area">
+                                    <a href={`/create-vote/${id}`}>
+                                        <Button className="btn-action">发起变更投票</Button>
+                                    </a>
+                                </div>
+                            </Row>}
+
 
                         </Col>
                         <Col md={8}>
@@ -144,7 +196,7 @@ export default function Project() {
                             <div className="top-box">
                                 <div className="item">已完成：{project.fundraising.current_raised_money} USDT</div>
                                 <div className="item">上限：{project.fundraising.max_amount} USDT</div>
-                                <div className="item">状态：{project.project_info.status}</div>
+                                <div className="item">状态：{statusMapping[project.project_info.status]}</div>
                                 <div className="item">角色：{role === 'manager' ? '项目管理人' : (role === 'committee' ? '委员会成员' : '项目贡献者')}</div>
                             </div>
                         </Col>
@@ -181,5 +233,8 @@ export default function Project() {
 
         </div>
         <Footer />
+
+        { auditModalVisible && <AuditModal params={currentParams} onCancel={() => { setAuditModalVisible(false) }} />}
+
     </div>)
 }
