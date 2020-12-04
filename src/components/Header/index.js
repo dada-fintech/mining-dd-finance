@@ -50,7 +50,7 @@ export default function Header() {
                 <img src={Logo} className="logo" />
             </a>
             <nav>
-                <a>{t('common.projectList')}</a>
+                <a href="/projects">{t('common.projectList')}</a>
                 {wallet.status === 'connected' ? <Tooltip title={window.ethereum.selectedAddress}>
                     <a className="line-btn">{window.ethereum.selectedAddress.slice(0, 4) + '...' + window.ethereum.selectedAddress.slice(-4)}</a>
                 </Tooltip>

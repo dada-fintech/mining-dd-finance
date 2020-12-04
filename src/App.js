@@ -11,6 +11,7 @@ import message from './i18n'
 
 import Homepage from './pages/Homepage'
 import Project from './pages/Project'
+import Projects from './pages/Projects'
 import CreateProject from './pages/CreateProject'
 import CreateVote from './pages/CreateVote'
 
@@ -38,6 +39,7 @@ function App() {
             <Redirect to="/home" />
           </Route> */}
           <Route exact path="/" component={Homepage} />
+          <Route exact path="/projects" component={Projects} />
           <Route exact path="/project/:id" component={Project} />
           <Route exact path="/create-project" component={CreateProject} />
           <Route exact path="/create-vote/:id" component={CreateVote} />
