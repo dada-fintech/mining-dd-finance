@@ -5,6 +5,7 @@ import LinkArrowBack from 'assets/link-arrow-back.svg'
 import { useTranslation } from 'react-i18next'
 import { PlusCircleOutlined, MinusCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
 // import { useWallet } from 'use-wallet'
+import QuestionIcon from 'assets/question.svg'
 import Header from '../../components/Header'
 import moment from 'moment'
 // import Footer from '../../components/Footer'
@@ -511,7 +512,7 @@ export default function CreateProject() {
                                 </div>
                             </div>
                             {fundraising.max_amount && <div className="form-item">
-                                <div className="label ">最低启动金额 <Tooltip title="作为该项目的最低筹资限额">?</Tooltip></div>
+                                <div className="label ">最低启动金额 <Tooltip title="作为该项目的最低筹资限额"><img src={QuestionIcon} /></Tooltip></div>
                                 <Slider tipFormatter={(val) => (<span>{val}%</span>)} style={{ width: '360px', }} value={fundraising.softtopPercent} tooltipVisible={true} onChange={value => { fundraisingSofttopChange(value) }} />
                                 <div className="softtop-value">{fundraising.min_amount} USDT</div>
                                 <div className="hint">
@@ -540,13 +541,13 @@ export default function CreateProject() {
                                     <Row gutter={24}>
                                         <Col md={12}>
                                             <div className="form-item">
-                                                <div className="label ">{t('createProject.votingDate')} <Tooltip title="该时期为本阶段治理投票的时间区间">?</Tooltip></div>
+                                                <div className="label ">{t('createProject.votingDate')} <Tooltip title="该时期为本阶段治理投票的时间区间"><img src={QuestionIcon} /></Tooltip></div>
                                                 <DatePicker.RangePicker disabledDate={current => current && current < moment(fundraising.end_time).add(3, 'days').endOf('day')} value={item.vote_start_time && [moment(item.vote_start_time), moment(item.vote_end_time)]} onChange={value => { changeProcess(index, 'vote_start_time', value[0].valueOf()); changeProcess(index, 'vote_end_time', value[1].valueOf()) }} />
                                             </div>
                                         </Col>
                                         <Col md={6}>
                                             <div className="form-item">
-                                                <div className="label ">{t('createProject.shares')} <Tooltip title="本阶段放款金额">?</Tooltip></div>
+                                                <div className="label ">{t('createProject.shares')} <Tooltip title="本阶段放款金额"><img src={QuestionIcon} /></Tooltip></div>
                                                 <InputNumber max={index === 0 ? 80 : 100} min={0} formatter={value => `${value ? value : 0} %`} parser={value => parseInt(value)} value={item.unlock_percentage} onChange={e => changeProcess(index, 'unlock_percentage', e)} style={{ width: '180px' }} />
                                             </div>
                                         </Col>

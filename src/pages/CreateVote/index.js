@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Row, Col, Input, Upload, message, DatePicker, InputNumber, Popconfirm } from 'antd'
+import { Button, Row, Col, Input, Upload, message, DatePicker, InputNumber, Popconfirm, Tooltip } from 'antd'
 import LinkArrow from 'assets/link-arrow.svg'
 import LinkArrowBack from 'assets/link-arrow-back.svg'
+import QuestionIcon from 'assets/question.svg'
+import moment from 'moment'
 import { useTranslation } from 'react-i18next'
 import { PlusCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
 
 import axios from 'utils/axios'
 import { useParams } from 'react-router-dom'
-import moment from 'moment'
 // import { useWallet } from 'use-wallet'
 import Header from '../../components/Header'
 
@@ -83,7 +84,9 @@ export default function CreateVote() {
         setProcessList(prev => {
             return [
                 ...prev,
-                {}
+                {
+                    status: 'Future'
+                }
             ]
         })
     }
@@ -156,8 +159,12 @@ export default function CreateVote() {
     }
 
     const confirmInfo = () => {
-        let finalProcessList = processList
-        finalProcessList.process.forEach(item => {
+        //🈯只传过去Future
+        let finalProcessList = processList.filter(item => item.status === 'Future')
+
+        console.log(finalProcessList, 'bbfuture')
+
+        finalProcessList.forEach(item => {
             item.unlock_percentage = String(item.unlock_percentage)
         })
 
@@ -184,67 +191,37 @@ export default function CreateVote() {
 
                         {currentStep === 1 && <div className="step-1">
                             <div className="hint-block small">
-                                这些设置是用来配置项目的阶段性进展与解锁规则，请根据原定项目计划修改解锁计划。<br/>
-                                *已完成计划不可变更
+                                这些设置是用来配置项目的阶段性进展与解锁规则，请根据原定项目计划修改解锁计划。<br />
+                                *计划变更投票期限为4天（1天为公示期，3天为投票期），已完成计划不可变更
                             </div>
-                            <div className="title">{t('createVote.projectInfo')}</div>
+                            <div className="title">变更投票信息</div>
                             <div className="confirm-box">
-                                <div className="line">
-                                    <div className="name">
-                                        项目名称
-                                    </div>
-                                    <div className="value">
-                                        {projectInfo.project_name}
+                                <div className="form-item">
+                                    <div className="label">投票期限 <Tooltip title="投票期限无法更改，合约创建时开始生效。公示期：24小时，投票期：24小时-96小时。"><img src={QuestionIcon} /></Tooltip></div>
+                                    <div>
+                                        {moment().add(1, 'days').format('MMMM Do YYYY')} - {moment().add(4, 'days').format('MMMM Do YYYY')}
                                     </div>
                                 </div>
-                                <div className="line">
-                                    <div className="name">
-                                        筹款期
-                                    </div>
-                                    <div className="value">
-                                        {new Date(fundraising.start_time).toLocaleDateString()} - {new Date(fundraising.end_time).toLocaleDateString()}
-                                    </div>
+                                <div className="form-item">
+                                    <div className="label">变更说明</div>
+                                    <Input.TextArea autoSize={{ minRows: 6 }} placeholder="200 words limit" value={description} onChange={(e) => { console.log(e); setDescription(e.target.value) }} />
                                 </div>
-                                <div className="line">
-                                    <div className="name">
-                                        项目币名称
+                            </div>
+
+                            <div className="form-item">
+                                <div className="label">请上传其它相关文件</div>
+                                <Upload {...otherUpload}>
+                                    <Button className="btn-white" style={{ padding: '0 44px' }}>{t('common.upload')}</Button>
+                                </Upload>
+                                {
+                                    projectInfo.other_file && projectInfo.other_file.length > 0 && <div className="uploaded-box">
+                                        {projectInfo.other_file.map((item, index) => (
+                                            <div>
+                                                {item.file_name.slice(10)} <CloseCircleOutlined onClick={() => { removeOtherFile(index) }} />
+                                            </div>
+                                        ))}
                                     </div>
-                                    <div className="value">
-                                        {projectInfo.project_token_symbol}
-                                    </div>
-                                </div>
-                                <div className="line">
-                                    <div className="name">
-                                        预期APY
-                                    </div>
-                                    <div className="value">
-                                        {fundraising.expected_apy}
-                                    </div>
-                                </div>
-                                <div className="line">
-                                    <div className="name">
-                                        筹款目标
-                                    </div>
-                                    <div className="value">
-                                        {fundraising.min_amount}
-                                    </div>
-                                </div>
-                                <div className="line">
-                                    <div className="name">
-                                        筹款限制
-                                    </div>
-                                    <div className="value">
-                                        {fundraising.max_amount}
-                                    </div>
-                                </div>
-                                <div className="line">
-                                    <div className="name">
-                                        回款日期
-                                    </div>
-                                    <div className="value">
-                                        {new Date(projectInfo.income_settlement_time).toLocaleDateString()}
-                                    </div>
-                                </div>
+                                }
                             </div>
                             {processList.map((item, index) => <>
                                 <div className="process-top">
@@ -286,32 +263,39 @@ export default function CreateVote() {
                             <div className="add-item-box" onClick={() => { addProcessList() }}>
                                 <PlusCircleOutlined />
                             </div>
-                            <div className="description-block">
-                                <div className="process-top">
-                                    <div className="required">{t('createVote.editDescription')}</div>
-                                </div>
-                                <Input.TextArea autoSize={{ minRows: 6 }} placeholder="200 words limit" value={description} onChange={(e) => { console.log(e); setDescription(e.target.value) }} />
-                            </div>
 
-                            <div className="form-item">
-                                <div className="label">{t('createVote.additionalDoc')}</div>
-                                <Upload {...otherUpload}>
-                                    <Button className="btn-white" style={{ padding: '0 44px' }}>{t('common.upload')}</Button>
-                                </Upload>
-                                {
-                                    projectInfo.other_file && projectInfo.other_file.length > 0 && <div className="uploaded-box">
-                                        {projectInfo.other_file.map((item, index) => (
-                                            <div>
-                                                {item.file_name.slice(10)} <CloseCircleOutlined onClick={() => { removeOtherFile(index) }} />
-                                            </div>
-                                        ))}
-                                    </div>
-                                }
-                            </div>
                         </div>}
 
                         {currentStep === 2 && <div className="step-1">
-                            <div className="title" style={{ marginTop: '56px' }}>{t('createVote.projectInfo')}</div>
+                            <div className="title">变更投票信息</div>
+                            <div className="confirm-box">
+                                <div className="form-item">
+                                    <div className="label">投票期限 <Tooltip title="投票期限无法更改，合约创建时开始生效。公示期：24小时，投票期：24小时-96小时。"><img src={QuestionIcon} /></Tooltip></div>
+                                    <div>{moment().add(1, 'days').format('MMMM Do YYYY')} - {moment().add(4, 'days').format('MMMM Do YYYY')}</div>
+                                </div>
+                                <div className="form-item">
+                                    <div className="label">变更说明</div>
+                                    <div>{description}</div>
+                                </div>
+                            </div>
+                            {
+                                projectInfo.other_file && projectInfo.other_file.length > 0 && <>
+                                    <div className="title" style={{ marginTop: '56px' }}>{t('createVote.additionalDoc')}</div>
+                                    <div className="confirm-box">
+                                        {
+                                            <div className="uploaded-box">
+                                                {projectInfo.other_file.map((item, index) => (
+                                                    <div>
+                                                        {item.file_name.slice(10)}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        }
+                                    </div>
+                                </>
+                            }
+
+
                             {processList.map((item, index) => <>
                                 <div className="process-top">
                                     <div>{t('project.progress')} #{index}</div>
@@ -335,40 +319,19 @@ export default function CreateVote() {
                                     </div>
                                 </div>
                             </>)}
-                            <div className="title" style={{ marginTop: '56px' }}>{t('createVote.additionalDoc')}</div>
-                            <div className="confirm-box">
-                                {
-                                    projectInfo.other_file && projectInfo.other_file.length > 0 && <div className="uploaded-box">
-                                        {projectInfo.other_file.map((item, index) => (
-                                            <div>
-                                                {item.file_name.slice(10)}
-                                            </div>
-                                        ))}
-                                    </div>
-                                }
-                            </div>
-                            <div className="description-block">
-                                <div className="process-top">
-                                    <div>{t('common.description')}</div>
-                                </div>
-                                <div>
-                                    {description}
-                                </div>
-                            </div>
-
 
                         </div>}
                     </div>
                     <div className="step-control">
                         <div>
-                            {currentStep > 0 && <div onClick={() => { setCurrentStep(prev => prev - 1) }} className="line-btn">{t('common.back')}</div>}
+                            {currentStep > 0 && <div onClick={() => { setCurrentStep(prev => prev - 1) }} className="line-btn">{t('common.back')} <img src={LinkArrowBack} /></div>}
                         </div>
                         {currentStep < 2 && <div>
-                            <div onClick={() => { goNextStep() }} className="line-btn">{t('common.next')}</div>
+                            <div onClick={() => { goNextStep() }} className="line-btn"><img src={LinkArrow} /> {t('common.next')}</div>
                         </div>}
                         {currentStep == 2 && <div>
                             <span className="hint">{t('common.gasFeeHint')}</span>
-                            <div onClick={() => { confirmInfo() }} className="line-btn">{t('common.confirmInfo')}</div>
+                            <div onClick={() => { confirmInfo() }} className="line-btn"><img src={LinkArrow} /> {t('common.confirmInfo')}</div>
                         </div>}
                     </div>
                 </Col>

@@ -5,6 +5,9 @@
         padding: 64px 0;
         min-height: 73vh;
     }
+    .hint-block{
+        margin-bottom: 32px;
+    }
     .required {
         &::after {
             color: red;
@@ -99,13 +102,13 @@
         //         }
         //     }
         // }
-        .process-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 800;
-            margin-bottom: 8px;
-        }
+        // .process-top {
+        //     display: flex;
+        //     justify-content: space-between;
+        //     align-items: center;
+        //     font-weight: 800;
+        //     margin-bottom: 8px;
+        // }
     }
     .step-pay {
         text-align: center;

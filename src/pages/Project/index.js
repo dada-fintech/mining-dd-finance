@@ -227,7 +227,7 @@ export default function Project() {
                     {/* </div> */}
                 </Col>
                 <Col xs={24} md={8} lg={6}>
-                    <Sidebar />
+                    <Sidebar projectId={id} role={role}/>
                 </Col>
             </Row>
 

@@ -1,8 +1,5 @@
 .vote-confirm-modal {
-    text-align: center;
-    .ant-modal {
-        width: 60% !important;
-    }
+    // text-align: center;
     .hint {
         color: #a5a5a5;
         font-size: 20px;
@@ -28,18 +25,15 @@
             padding: 8px 16px;
             border: 1px solid #515151;
         }
-        .yes{
+        .yes {
             color: #28bc81;
         }
-        .no{
-            color: #BE2828;
+        .no {
+            color: #be2828;
         }
     }
     .texts {
-        margin-top: 30px;
-    }
-    .safe-zone {
-        width: 80%;
-        margin: 32px auto;
+        margin: 16px auto 16px;
+        
     }
 }
