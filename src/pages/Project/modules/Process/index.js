@@ -21,6 +21,21 @@ export default function Process(props) {
 
     const { id } = props
     const { t } = useTranslation()
+
+    const statusMapping = {
+        'Active': '正在投票',
+        'Finished': '已完成',
+        'Failed': '已失败',
+        'Future': '还没到投票期',
+        'ChangeFrom': '正在变更计划',
+        'Archived': '已经变更计划',
+        'ChangeTo': '正在变更计划',
+        'VoteNotice': '公示中',
+        'VoteReplaning': '正在投票表决是否变更计划',
+        'VoteReplanFailed': '投票变更计划失败',
+        'VoteReplanPassed': '投票变更计划成功 ',
+    }
+
     let finalProcessList = processList.map(item => {
         return {
             ...item,
@@ -30,25 +45,26 @@ export default function Process(props) {
         }
     })
 
-    const sayYes = (phase_id) => {
+    const sayYes = (phase_id, status) => {
         setCurrentParams({
             project_uniq_id: id,
             phase_id: phase_id,
             user_addr: window.ethereum.selectedAddress,
-            vote: 'yes'
+            vote: 'yes',
+            status: status,
         })
         setConfirmVoteVisible(true)
     }
 
-    const sayNo = (phase_id) => {
+    const sayNo = (phase_id, status) => {
         setCurrentParams({
             project_uniq_id: id,
             phase_id: phase_id,
             user_addr: window.ethereum.selectedAddress,
-            vote: 'no'
+            vote: 'no',
+            status: status,
         })
         setConfirmVoteVisible(true)
-
     }
 
 
@@ -59,7 +75,7 @@ export default function Process(props) {
                     <div className="title">{t('project.progress')} #{index + 1}</div>
                     <div>
                         <span className="date">{new Date(process.vote_start_time).toLocaleDateString()} - {new Date(process.vote_end_time).toLocaleDateString()}</span>
-                        <span className={`status ${process.status}`}>{process.status}</span>
+                        <span className={`status ${process.status}`}>{statusMapping[process.status]}</span>
                     </div>
                 </div>
                 <div className="text-area">
@@ -70,7 +86,7 @@ export default function Process(props) {
                         {t('project.event')}: <strong>{process.description}</strong><br />
                     </div>
                 </div>
-                {process.status === 'Active' && <>
+                {(process.status === 'Active' || process.status === 'VoteReplaning') && <>
                     <div className="vs-bar">
                         <div className="yes" style={{ width: process.yesPercent + '%' }}></div>
                         <div className="no" style={{ width: process.noPercent + '%' }}></div>
@@ -84,8 +100,8 @@ export default function Process(props) {
                         </div>
                     </div>
                     <div className="vote-action">
-                        <Button onClick={()=>{sayYes(process.index)}}>同意</Button>
-                        <Button onClick={()=>{sayNo(process.index)}}>反对</Button>
+                        <Button onClick={() => { sayYes(process.index, process.status) }}>同意</Button>
+                        <Button onClick={() => { sayNo(process.index, process.status) }}>反对</Button>
                     </div>
                 </>}
             </div>

@@ -9,7 +9,22 @@ export default function ConfirmVote(props) {
     const params = props.params
     const [comment, setComment] = useState('')
     const doAction = () => {
-        axios.post(params.vote === 'yes' ? '/project/vote-for-phase' : 'vote-against-phase', {
+        let target = ''
+        if (params.status === 'Future') {
+            if (params.vote === 'yes') {
+                target = '/project/vote-for-phase'
+            } else {
+                target = '/project/vote-against-phase'
+            }
+        } else {
+            if (params.vote === 'yes') {
+                target = '/project/vote-for-replan'
+            } else {
+                target = '/project/vote-against-replan'
+            }
+        }
+
+        axios.post(target, {
             ...params,
             comment: comment,
         }).then(res => {
@@ -19,7 +34,7 @@ export default function ConfirmVote(props) {
                     to: res.data.call_data.contract_addr,
                     data: res.data.call_data.call_data
                 }
-                mm.sendTransaction(txnParams, '投票')
+                mm.sendTransaction(txnParams, params.status === 'Future' ? '确认投票' : '确认变更投票')
             } else {
                 message.success('操作成功')
             }
@@ -27,7 +42,7 @@ export default function ConfirmVote(props) {
     }
 
     return (
-        <Modal wrapClassName="vote-confirm-modal" footer={null} title="确认投票" visible={true} onCancel={() => { props.onCancel() }}>
+        <Modal wrapClassName="vote-confirm-modal" footer={null} title={params.status === 'Future' ? '确认投票' : '确认变更投票'} visible={true} onCancel={() => { props.onCancel() }}>
             {/* <div className="hint">You are voting for the following proposal:</div>
             <div className="description">
                 Vote #3 PIP-3 : Unlock 10% in advance for deposit

@@ -84,9 +84,7 @@ export default function CreateVote() {
         setProcessList(prev => {
             return [
                 ...prev,
-                {
-                    status: 'Future'
-                }
+                {}
             ]
         })
     }
@@ -160,7 +158,7 @@ export default function CreateVote() {
 
     const confirmInfo = () => {
         //🈯只传过去Future
-        let finalProcessList = processList.filter(item => item.status === 'Future')
+        let finalProcessList = processList.filter(item => (item.status === 'Future' || !item.status))
 
         console.log(finalProcessList, 'bbfuture')
 
@@ -228,7 +226,7 @@ export default function CreateVote() {
                                     <div>{t('project.progress')} #{index + 1}</div>
                                 </div>
                                 <div className="confirm-box">
-                                    {item.status === 'Future' && <Popconfirm title="确定删除该进程吗？" onConfirm={() => { removeProcess(index) }}><CloseCircleOutlined className="remove-btn" /></Popconfirm>}
+                                    {(item.status === 'Future' || !item.status) && <Popconfirm title="确定删除该进程吗？" onConfirm={() => { removeProcess(index) }}><CloseCircleOutlined className="remove-btn" /></Popconfirm>}
                                     <div className={'status ' + (item.status === 'Active' ? 'finish' : '')}>
                                         {item.status}
                                     </div>
