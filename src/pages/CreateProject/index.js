@@ -393,8 +393,8 @@ export default function CreateProject() {
         <Header />
 
         <div className="container create-project-main">
-            <Row gutter={{ md: 32 }}>
-                <Col xs={24} md={18}>
+            <Row gutter={{ md: 160 }} align="center">
+                <Col xs={24} md={14}>
                     <div className="main-content">
                         {currentStep === 0 && <div className="step-0" dangerouslySetInnerHTML={{ __html: t('createProject.hint') }}>
                         </div>}
@@ -512,7 +512,7 @@ export default function CreateProject() {
                                 </div>
                             </div>
                             {fundraising.max_amount && <div className="form-item">
-                                <div className="label ">最低启动金额 <Tooltip title="作为该项目的最低筹资限额"><img src={QuestionIcon} /></Tooltip></div>
+                                <div className="label ">最低启动金额 <Tooltip title="筹款额达到该目标后视为筹集成功"><img src={QuestionIcon} /></Tooltip></div>
                                 <Slider tipFormatter={(val) => (<span>{val}%</span>)} style={{ width: '360px', }} value={fundraising.softtopPercent} tooltipVisible={true} onChange={value => { fundraisingSofttopChange(value) }} />
                                 <div className="softtop-value">{fundraising.min_amount} USDT</div>
                                 <div className="hint">
@@ -527,10 +527,10 @@ export default function CreateProject() {
                                 该环节为项目治理的重要环节，请务必认真填写。<br />
                             </div>
                             <div className="form-item">
-                                <div className="label ">{t('createProject.redemptionDate')}</div>
+                                <div className="label ">{t('createProject.redemptionDate')}<Tooltip title="计息周期=赎回日期-募集截至日期"><img src={QuestionIcon} /></Tooltip></div>
                                 <DatePicker value={projectInfo.income_settlement_time && moment(projectInfo.income_settlement_time)} onChange={value => { console.log(value.valueOf()); changeProjectInfo('income_settlement_time', value.valueOf()) }} />
                                 <div className="hint red">
-                                    *项目专业委员会审核期为5天，筹款开始时间需为5个自然日后
+                                    *赎回日期为开放用户提取收益的时间，请务必于该日期前完成收益回款
                                 </div>
                             </div>
                             <div className="assets-rule-title">{t('createProject.assetsRuleHint')}</div>
@@ -714,15 +714,18 @@ export default function CreateProject() {
                     </div>
                     <div className="step-control">
                         <div>
-                            {currentStep > 0 && <div onClick={() => { setCurrentStep(prev => prev - 1) }} className="line-btn">{t('common.back')} <img src={LinkArrowBack} /></div>}
+                            {currentStep > 0 && <div onClick={() => { setCurrentStep(prev => prev - 1) }} className="line-btn line-btn-back">{t('common.back')} <img src={LinkArrowBack} /></div>}
                         </div>
                         {currentStep < 7 && <div>
-                            <div onClick={() => { goNextStep() }} className="line-btn"><img src={LinkArrow} /> {t('common.next')}</div>
+                            <div onClick={() => { goNextStep() }} className="line-btn line-btn-next"><img src={LinkArrow} /> {t('common.next')}</div>
                         </div>}
                         {currentStep == 7 && <div>
-                            <span className="hint">{t('common.gasFeeHint')}</span>
-                            <div onClick={() => { confirmInfo() }} className="line-btn"><img src={LinkArrow} /> {t('common.confirmInfo')}</div>
-                        </div>}
+                            
+                            <div onClick={() => { confirmInfo() }} className="btn-confirm"> <span>{t('common.confirmInfo')}</span></div>
+                            <span className="hint hint-gasfee">{t('common.gasFeeHint')}</span>
+                        </div>
+                        
+                        }
                         {currentStep == 8 && <div>
                             {dadaApproved ? <div onClick={() => { doPay() }} className="line-btn"><img src={LinkArrow} /> {t('common.pay')}</div>
                                 : <div onClick={() => { doApprove() }} className="line-btn"><img src={LinkArrow} /> {t('common.approve')}</div>}
@@ -734,7 +737,7 @@ export default function CreateProject() {
                     <ul className="step-sidebar">
                         {sidebarList.map((item, index) => <li>
                             <div className={'circle ' + (currentStep === (index + 1) ? 'active ' : '') + (currentStep > (index + 1) ? 'done' : '')}></div>
-                            <span>{item}</span>
+                            <span className={'stepinfo ' + (currentStep >= (index + 1) ? 'done' : '')}>{item}</span>
                         </li>)}
                     </ul>
                 </Col>

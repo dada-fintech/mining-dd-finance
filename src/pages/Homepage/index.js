@@ -66,23 +66,41 @@ export default function Homepage() {
             <a target="_blank">
                 <img src={Telegram} className="social-icon" />
             </a>
+            <a className="line-top-bottom" href="https://doc.dd.finance">{t('common.readTheDoc')}</a>
         </div>
         <div className="banner">
             <Header />
 
             <div className="container">
                 <Row type="flex" align="middle" justify="center">
-                    <Col xs={24} md={10}>
+                    <Col xs={24} md={24} align="center">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="353" height="98.572" viewBox="0 0 353 98.572">
+                        <defs>
+                            <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+                            <stop offset="0" stop-color="#48cccc"/>
+                            <stop offset="1" stop-color="#273460"/>
+                            </linearGradient>
+                        </defs>
+                        <g id="组_166" data-name="组 166" transform="translate(-760 -183)">
+                            <path id="路径_990" data-name="路径 990" d="M3533.834,5465.443H3478V5367h55.833a7.346,7.346,0,0,1,7.346,7.347v83.75a7.347,7.347,0,0,1-7.346,7.347Zm-51.426-94.036v89.627h49.221a5.516,5.516,0,0,0,5.51-5.51v-78.608a5.516,5.516,0,0,0-5.51-5.509Z" transform="translate(-2718 -5184)" fill="url(#linear-gradient)"/>
+                            <path id="路径_992" data-name="路径 992" d="M3533.834,5465.443H3478V5367h55.833a7.346,7.346,0,0,1,7.346,7.347v83.75a7.347,7.347,0,0,1-7.346,7.347Zm-51.426-94.036v89.627h49.221a5.516,5.516,0,0,0,5.51-5.51v-78.608a5.516,5.516,0,0,0-5.51-5.509Z" transform="translate(-2525.889 -5184)" fill="url(#linear-gradient)"/>
+                            <path id="路径_989" data-name="路径 989" d="M3482.409,5465.572h0a7.35,7.35,0,0,1-4.407-6.735v-84.491a7.346,7.346,0,0,1,7.346-7.347h51.793a7.346,7.346,0,0,1,7.347,7.347v84.491a7.346,7.346,0,0,1-4.041,6.562v-47.7h-58.037Zm5.51-94.131a5.516,5.516,0,0,0-5.51,5.51v36.681h58.037v-36.681a5.516,5.516,0,0,0-5.51-5.51Z" transform="translate(-2623.598 -5184)" fill="url(#linear-gradient)"/>
+                            <path id="路径_991" data-name="路径 991" d="M3482.409,5465.572h0a7.35,7.35,0,0,1-4.407-6.735v-84.491a7.346,7.346,0,0,1,7.346-7.347h51.793a7.346,7.346,0,0,1,7.347,7.347v84.491a7.346,7.346,0,0,1-4.041,6.562v-47.7h-58.037Zm5.51-94.131a5.516,5.516,0,0,0-5.51,5.51v36.681h58.037v-36.681a5.516,5.516,0,0,0-5.51-5.51Z" transform="translate(-2431.486 -5184)" fill="url(#linear-gradient)"/>
+                        </g>
+                    </svg>
                         {i18n.language === 'zh' ? <div className="banner-title">
-                            矿业<span className="highlight">生态</span><br />
-                            聚合器
+                            矿业生态聚合器
                         </div> : <div className="banner-title">
-                                Crypto<span className="highlight">Mining</span><br />
-                            Aggregator
+                                Crypto Mining Aggregator
                         </div>}
 
                         <div className="subtitle">{t('homepage.subtitle')}</div>
-                        <ul className="feature-list">
+                        <a href="/create-project" className="banner-btn">
+                            <div className="btn-before">
+                                <span>{t('common.createNewProject')}</span>
+                            </div>
+                        </a>
+                        {/* <ul className="feature-list">
                             <li>{t('homepage.banner.feature.1')}</li>
                             <li>{t('homepage.banner.feature.2')}</li>
                             <li>{t('homepage.banner.feature.3')}</li>
@@ -90,15 +108,15 @@ export default function Homepage() {
                             <li>{t('homepage.banner.feature.5')}</li>
                             <li className="li-line">{t('homepage.banner.feature.6')}</li>
                         </ul>
-                        <a className="line-top-bottom" href="https://doc.dd.finance">{t('common.readTheDoc')}</a>
+                        <a className="line-top-bottom" href="https://doc.dd.finance">{t('common.readTheDoc')}</a> */}
                     </Col>
-                    <Col xs={24} md={10} style={{ textAlign: 'right' }}>
+                    {/* <Col xs={24} md={10} style={{ textAlign: 'right' }}>
                         <a href="/create-project" className="banner-btn">
                             <div className="btn-before">
                                 <span>{t('common.createNewProject')}</span>
                             </div>
                         </a>
-                    </Col>
+                    </Col> */}
                 </Row>
             </div>
         </div>
@@ -141,7 +159,7 @@ export default function Homepage() {
                                         {item.description}
                                     </div>
                                     <div className="bottom">
-                                        <Progress strokeColor="#3FAA4D" status="active" percent={((item.current_raised_money / item.max_amount) * 100).toFixed(0)} className="progress-bar" />
+                                        <Progress strokeColor="#3FAA4D" status="active" percent={((item.current_raised_money / item.hardtop) * 100).toFixed(0)} className="progress-bar" />
                                     </div>
                                 </a>
                             ))}

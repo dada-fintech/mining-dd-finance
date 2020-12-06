@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-12-05 22:48:57
+ * @LastEditTime: 2020-12-06 00:43:27
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \mining-dd-finance\src\components\Header\index.js
+ */
 import React, { useEffect } from 'react'
 import Logo from '../../assets/logo.png'
 import { Tooltip } from 'antd'
@@ -51,13 +59,13 @@ export default function Header() {
             </a>
             <nav>
                 <a href="/projects">{t('common.projectList')}</a>
-                {wallet.status === 'connected' ? <Tooltip title={window.ethereum.selectedAddress}>
-                    <a className="line-btn">{window.ethereum.selectedAddress.slice(0, 4) + '...' + window.ethereum.selectedAddress.slice(-4)}</a>
-                </Tooltip>
-                    : <a onClick={() => { wallet.connect() }}>Connect Wallet</a>}
                 <a onClick={() => { changeLanguage(i18n.language === 'en' ? 'zh' : 'en') }}>
                     {i18n.language === 'en' ? '简体中文' : 'English'}
                 </a>
+                {wallet.status === 'connected' ? <Tooltip title={window.ethereum.selectedAddress}>
+                    <a className="line-btn">{window.ethereum.selectedAddress.slice(0, 4) + '...' + window.ethereum.selectedAddress.slice(-4)}</a>
+                </Tooltip>
+                    : <a className="border-top-btm" onClick={() => { wallet.connect() }}>Connect Wallet</a>}
             </nav>
         </div>
     </header>)

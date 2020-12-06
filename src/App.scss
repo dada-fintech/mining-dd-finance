@@ -3,8 +3,8 @@
 }
 
 .line-btn {
-    border-top: 1px solid #707070;
-    border-bottom: 1px solid #707070;
+    //border-top: 1px solid #707070;
+    //border-bottom: 1px solid #707070;
 }
 
 .container {
@@ -73,12 +73,13 @@
     color: #707070;
     background: #fff;
     border-radius: 10px;
-    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+    box-shadow: 0pxw 3px 6px rgba(0, 0, 0, 0.16);
     border: none;
     &:hover,
     &:focus {
-        color: #707070;
-        background: #f2f2f2;
+        color: #000000;
+        background: #f7f7f7;
+        font-size: 16px;
     }
 }
 .btn-grey {
@@ -180,7 +181,7 @@ img {
 
 .hint-block {
     color: #273460;
-    font-size: 20px;
+    font-size: 14px;
     line-height: 27px;
     background: rgba(72, 204, 204, 0.18);
     padding: 20px 64px 20px 8px;
@@ -211,6 +212,10 @@ img {
     padding: 14px 24px;
     margin-bottom: 16px;
     position: relative;
+    transition: all 0.5s;
+    &:hover{
+        box-shadow: 3px 6px 9px rgba(0, 0, 0, 0.25);;
+    }
     .ant-picker {
         width: 100%;
     }
@@ -233,16 +238,20 @@ img {
     background: #f9f9f9;
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
     border-radius: 15px;
-    padding: 40px 0;
+    padding: 20px 0;
     text-align: center;
     font-size: 26px;
     cursor: pointer;
+    transition: all 0.5s;
+    &:hover{
+        box-shadow: 3px 6px 9px rgba(0, 0, 0, 0.25);
+    }
 }
 
 .confirm-box {
     background: #fefefe;
-    border: 1px solid #bbbbbb;
-    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+    //border: 1px solid #bbbbbb;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.06);
     padding: 18px 22px;
     margin-bottom: 16px;
     border-radius: 15px;
