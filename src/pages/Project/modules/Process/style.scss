@@ -1,10 +1,10 @@
 .process-module {
     color: #273460;
     .process-item {
-        padding: 24px 5px;
+        padding: 32px 5px 56px;
         border-top: 0.5px solid #000;
         border-bottom: 0.5px solid #000;
-        margin-bottom: 32px;
+        //margin-bottom: 32px;
         &:last-child {
             margin-bottom: 0;
         }
@@ -33,8 +33,13 @@
             }
         }
         .text-area {
-            font-size: 18px;
-            line-height: 36px;
+            font-size: 16px;
+            line-height: 48px;
+            font-weight: 200px;
+            div strong{
+                font-weight: 300px;
+                font-size: 18px;
+            }
         }
         .top {
             display: flex;

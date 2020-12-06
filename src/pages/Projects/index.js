@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-12-05 22:48:58
+ * @LastEditTime: 2020-12-06 19:07:57
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \mining-dd-finance\src\pages\Projects\index.js
+ */
 import React, { useEffect, useState } from 'react'
 import { Row, Col, Input, Button, message } from 'antd'
 
@@ -32,14 +40,14 @@ export default function Projects() {
                     <div className="top">
                         <div className="title with-line"><span>项目列表</span></div>
                     </div>
-                    <Row type="flex" justify="space-between">
-                        <Col md={12}>
+                    <Row type="flex" justify="space-around">
+                        <Col md={8}>
                             <div className="desc">
                                 臻选好项目<br />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;收益更轻松
                             </div>
                         </Col>
-                        <Col md={12}>
+                        <Col md={8}>
                             <img src={ProjectsTop} className="top-img"/>
                         </Col>
 
@@ -52,7 +60,7 @@ export default function Projects() {
             <div className="container">
                 <ul className="tabs">
                     {projects.active_project && <li className={currentTab === 'active_project' && 'active'} onClick={() => { setCurrentTab('active_project') }}>可参与</li>}
-                    {projects.future_project && <li className={currentTab === 'future_project' && 'active'} onClick={() => { setCurrentTab('future_project') }}>即将到来</li>}
+                    {projects.future_project && <li className={currentTab === 'future_project' && 'active'} onClick={() => { setCurrentTab('future_project') }}>运行中</li>}
                     {projects.finished_project && <li className={currentTab === 'finished_project' && 'active'} onClick={() => { setCurrentTab('finished_project') }}>已完成</li>}
                 </ul>
                 <div>
@@ -79,7 +87,7 @@ export default function Projects() {
                             {item.description}
                         </div>
                         <div className="go-detail">
-                            <img src={LinkArrow} /> 项目详情
+                            <img src={LinkArrow} /> 
                         </div>
                     </a>
                 ))}

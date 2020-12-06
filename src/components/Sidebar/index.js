@@ -95,8 +95,14 @@ export default function Sidebar(props) {
                             <div>{((myShare.user_balance / myShare.actual_raised) * 100).toFixed(2)}% ({myShare.user_balance} USDT)</div>
                         </div>
                     </div>}
+                    {myShare.actual_raised <= 0 && <div className="box-item">
+                        <div className="progress" style={{ width: '0%' }}></div>
+                        <div className="texts">
+                            <div>0% ({myShare.user_balance} USDT)</div>
+                        </div>
+                    </div>}
                 </div>
-                <div className="my-share-box">
+                {myShare.actual_raised > 0 &&<div className="my-share-box">
                     <div className="line">
                         <div>投资份额</div>
                         <div>{myShare.user_balance} USDT</div>
@@ -119,7 +125,7 @@ export default function Sidebar(props) {
                             {statusMapping[myShare.status]}
                         </Button>
                     </div>}
-                </div>
+                </div>}
             </>}
 
             <div className="title">所有份额</div>

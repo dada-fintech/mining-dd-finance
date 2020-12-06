@@ -149,8 +149,8 @@ export default function Project() {
             <Header />
             <div className="container">
                 <div className="project-intro">
-                    <Row gutter={44} type="flex" align="middle">
-                        <Col md={16}>
+                    <Row gutter={44} type="flex" align="center">
+                        <Col md={12}>
                             <div className="top">
                                 <div className="title with-line"><span>{project.project_info && project.project_info.project_name}</span></div>
                             </div>
@@ -217,8 +217,8 @@ export default function Project() {
         </div>
         <div className="container">
 
-            <Row gutter={{ md: 24, lg: 24 }}>
-                <Col xs={24} md={16} lg={18}>
+            <Row gutter={{ md: 24, lg: 24 }} align="center"> 
+                <Col xs={24} md={12} lg={14}>
                     {/* <div className="project-content"> */}
                     {/* {currentTab === 'vote' && <VoteModule />} */}
                     {currentTab === 'process' && <ProcessModule id={id} processList={project.process || []} />}
