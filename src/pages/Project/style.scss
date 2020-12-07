@@ -1,6 +1,6 @@
 .project-page {
     .top-area {
-        background: #f7f7f7;
+        background: url("../../assets/paper-bg.jpg") repeat;
         padding-bottom: 32px;
     }
     .middle-area {
@@ -24,16 +24,20 @@
             margin: 0;
             li {
                 display: inline-block;
-                font-size: 20px;
+                font-size: 18px;
                 line-height: 27px;
                 color: #9a9a9a;
                 cursor: pointer;
                 margin-right: 64px;
                 padding: 4px 18px;
+                border-top: 1px solid transparent;
+                border-bottom: 1px solid transparent;
+                transition: all 0.5s;
                 &.active {
                     color: #000;
                     border-top: 1px solid #707070;
                     border-bottom: 1px solid #707070;
+                    font-size: 20px;
                 }
             }
         }

@@ -727,8 +727,8 @@ export default function CreateProject() {
                         
                         }
                         {currentStep == 8 && <div>
-                            {dadaApproved ? <div onClick={() => { doPay() }} className="line-btn"><img src={LinkArrow} /> {t('common.pay')}</div>
-                                : <div onClick={() => { doApprove() }} className="line-btn"><img src={LinkArrow} /> {t('common.approve')}</div>}
+                            {dadaApproved ? <div onClick={() => { doPay() }} className="btn-confirm"> <span>{t('common.pay')}</span></div>
+                                : <div onClick={() => { doApprove() }} className="btn-confirm"> <span>{t('common.approve')}</span></div>}
 
                         </div>}
                     </div>
