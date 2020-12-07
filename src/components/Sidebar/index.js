@@ -58,8 +58,9 @@ supporterList.map(item => {
 })
 
 export default function Sidebar(props) {
-    const { projectId, role } = props
+    const { projectId, role, otherFiles } = props
     const [myShare, setMyShare] = useState({})
+    const [topInvestList, setTopInvestList] = useState([])
     const { t } = useTranslation()
     const statusMapping = {
         "Refunding": "可退款",
@@ -67,16 +68,21 @@ export default function Sidebar(props) {
         "Liquiditing": "可清算",
     }
     useEffect(() => {
+        //获取当前user的投资
         axios.post('/project/user-invest', {
             project_uniq_id: projectId,
             user_addr: window.ethereum.selectedAddress,
         }).then(res => {
             setMyShare(res.data)
         })
+        //获取投资top用户
+        axios.get(`/project/top-invest/${projectId}`).then(res => {
+            setTopInvestList(res.data)
+        })
     }, [])
 
-    const doAction = () =>{
-        const params= {
+    const doAction = () => {
+        const params = {
             from: window.ethereum.selectedAddress,
             to: myShare.profit_call_data.contract_addr,
             data: myShare.profit_call_data.call_data
@@ -86,7 +92,8 @@ export default function Sidebar(props) {
 
     return (<div className="sidebar">
         <div className="block">
-            {role !== 'manager' && <>
+            {/* user_balance > 0 的时候才显示我的份额 */}
+            {role !== 'manager' && myShare && myShare.user_balance > 0 && <>
                 <div className="title">我的份额</div>
                 <div className="box supporter-box">
                     {myShare.actual_raised > 0 && <div className="box-item">
@@ -122,46 +129,34 @@ export default function Sidebar(props) {
                 </div>
             </>}
 
-            <div className="title">所有份额</div>
-            <div className="box supporter-box">
-                {supporterList.map(item => (
-                    <div className="box-item">
-                        <div className="progress" style={{ width: (item.amount / totalAmount) * 100 + '%' }}></div>
-                        <div className="texts">
-                            <div>{((item.amount / totalAmount) * 100).toFixed(2)}% ({item.amount} USDT)</div>
-                            <div>{item.address}</div>
+            {myShare.actual_raised && topInvestList && <>
+                <div className="title">所有份额</div>
+                <div className="box supporter-box">
+                    {topInvestList.map(item => (
+                        <div className="box-item">
+                            <div className="progress" style={{ width: (item.amount / myShare.actual_raised) * 100 + '%' }}></div>
+                            <div className="texts">
+                                <div>{((item.amount / myShare.actual_raised) * 100).toFixed(2)}% ({item.amount} USDT)</div>
+                                <div>{item.user_addr.slice(0, 4)}...{item.user_addr.slice(-4)}</div>
+                            </div>
                         </div>
-
+                    ))}
+                </div>
+            </>}
+        </div>
+        {otherFiles && <div className="block">
+            <div className="title">{t('sidebar.documents')}</div>
+            <div className="box">
+                {otherFiles.map(item => (
+                    <div className="box-item-doc">
+                        <a target="_blank" href={`https://mining-assets.dd.finance/${projectId}/${item.file_name}`}>
+                            {item.file_name.slice(10)}
+                        </a>
                     </div>
                 ))}
             </div>
-        </div>
-        <div className="block">
-            <div className="title">{t('sidebar.documents')}</div>
-            <div className="box">
-                <div className="box-item-doc">
-                    <div>
-                        WhitePaper.docx
-                    </div>
-                    {/*<div className="status-pass">*/}
-                    {/*    PASS*/}
-                    {/*</div>*/}
-                </div>
-                <div className="box-item-doc">
-                    <div>
-                        LICENSE.JPG
-                    </div>
-                    {/*<div className="status-fail">*/}
-                    {/*    FAIL*/}
-                    {/*</div>*/}
-                </div>
-                <div className="box-item-doc">
-                    <div>
-                        PURCHASE CONTRACT.JPG
-                    </div>
-                </div>
-            </div>
-        </div>
+        </div>}
+
         {/*<div className="block">*/}
         {/*    <div className="title">History</div>*/}
         {/*    <div className="box">*/}

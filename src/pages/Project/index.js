@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import axios from 'utils/axios'
 import AuditModal from './modals/AuditModal'
+import InsuranceModal from './modals/InsuranceModal'
 import web3 from 'components/web3'
 // import BN from 'bignumber.js'
 // import detectEthereumProvider from '@metamask/detect-provider'
@@ -26,6 +27,7 @@ export default function Project() {
     const [lockNum, setLockedNum] = useState('')
     const [contract, setContract] = useState('')
     const [auditModalVisible, setAuditModalVisible] = useState(false)
+    const [insuranceModalVisible, setInsuranceModalVisible] = useState(false)
     const [currentParams, setCurrentParams] = useState({})
     const [role, setRole] = useState('invester')
     const { id } = useParams()
@@ -124,6 +126,14 @@ export default function Project() {
         setAuditModalVisible(true)
     }
 
+    const doInsurance = () => {
+        setCurrentParams({
+            project_uniq_id: id,
+            user_addr: window.ethereum.selectedAddress,
+        })
+        setInsuranceModalVisible(true)
+    }
+
     const statusMapping = {
         'Auditing': '委员会审核中',
         'Future': '项目即将到来',
@@ -160,6 +170,12 @@ export default function Project() {
                             {project.status === 'Auditing' && role === 'committe' && <Row>
                                 <div className="handle-area">
                                     <Button className="btn-action" onClick={() => { doAudit() }}>审核评议</Button>
+                                </div>
+                            </Row>}
+
+                            {project.status === 'PayingInsurance' && role === 'manager' && <Row>
+                                <div className="handle-area">
+                                    <Button className="btn-action" onClick={() => { doInsurance() }}>支付项目保证金</Button>
                                 </div>
                             </Row>}
 
@@ -227,14 +243,14 @@ export default function Project() {
                     {/* </div> */}
                 </Col>
                 <Col xs={24} md={8} lg={6}>
-                    <Sidebar projectId={id} role={role}/>
+                    <Sidebar projectId={id} role={role} otherFiles={project.project_info.other_file} />
                 </Col>
             </Row>
-
         </div>
         <Footer />
 
         { auditModalVisible && <AuditModal params={currentParams} onCancel={() => { setAuditModalVisible(false) }} />}
+        { insuranceModalVisible && <InsuranceModal params={currentParams} onCancel={() => { setInsuranceModalVisible(false) }} />}
 
     </div>)
 }

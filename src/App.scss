@@ -1,5 +1,6 @@
 @import "~antd/dist/antd.css";
 .App {
+    word-break: break-all;
 }
 
 .line-btn {
@@ -281,4 +282,17 @@ img {
             color: #3a3a3a;
         }
     }
+}
+
+
+.dada-circle {
+    width: 200px;
+    height: 200px;
+    border: 6px solid #48cccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 32px;
+    border-radius: 100%;
+    font-size: 20px;
 }
