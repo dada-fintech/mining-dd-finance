@@ -19,7 +19,7 @@ export default {
                 projectList: 'Project List',
                 readTheDoc: 'Read the Docs',
                 createNewProject: 'Create a New Project',
-                toReadMore: 'To Read More',
+                toReadMore: 'View Projects',
                 toLearnMore: 'To Learn More',
                 participateGov: 'Participate in Governance',
                 submitted: 'Submitted',

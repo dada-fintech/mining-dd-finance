@@ -173,18 +173,17 @@ export default function Project() {
                             {/* 一开始审核评议 */}
                             {project.project_info.status === 'Auditing' && role === 'committee' && <Row>
                                 <div className="handle-area">
-                                    <Button className="btn-action" onClick={() => { doAudit() }}>审核评议</Button>
+                                    <div className="btn-action" onClick={() => { doAudit() }}><span>审核评议</span></div>
                                 </div>
                             </Row>}
 
                             {project.project_info.status === 'PayingInsurance' && role === 'manager' && <Row>
                                 <div className="handle-area">
-                                    <Button className="btn-action" onClick={() => { doInsurance() }}>支付项目保证金</Button>
+                                    <div className="btn-action" onClick={() => { doInsurance() }}><span>支付保证金</span></div>
                                 </div>
                             </Row>}
-
                             {/* manager 不需投资 */}
-                            {project.project_info.status === 'Raising' && role !== 'manager' && <Row>
+                            {project.project_info.status === 'Raising' && role !== 'manager' && <Row gutter={32}>
                                 <Col md={12}>
                                     <div className="votes-bar">
                                         <div className="done" style={{ width: project.percent + '%' }}></div>
@@ -195,7 +194,7 @@ export default function Project() {
                                 <Col md={12}>
                                     <div className="handle-area">
                                         <Input style={{ width: '140px', height: '44px' }} value={lockNum} onChange={(event) => { setLockedNum(event.target.value) }} suffix="USDT" />
-                                        <Button className="btn-action" onClick={() => { doLock() }}>立即锁定</Button>
+                                        <div className="btn-action" onClick={() => { doLock() }}><span>立即锁定</span></div>
                                     </div>
                                 </Col>
                             </Row>}
