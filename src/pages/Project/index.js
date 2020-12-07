@@ -171,20 +171,20 @@ export default function Project() {
                             <div className="desc" dangerouslySetInnerHTML={{ __html: project.project_info && project.project_info.project_description }}></div>
 
                             {/* 一开始审核评议 */}
-                            {project.status === 'Auditing' && role === 'committe' && <Row>
+                            {project.project_info.status === 'Auditing' && role === 'committee' && <Row>
                                 <div className="handle-area">
                                     <Button className="btn-action" onClick={() => { doAudit() }}>审核评议</Button>
                                 </div>
                             </Row>}
 
-                            {project.status === 'PayingInsurance' && role === 'manager' && <Row>
+                            {project.project_info.status === 'PayingInsurance' && role === 'manager' && <Row>
                                 <div className="handle-area">
                                     <Button className="btn-action" onClick={() => { doInsurance() }}>支付项目保证金</Button>
                                 </div>
                             </Row>}
 
                             {/* manager 不需投资 */}
-                            {project.status === 'Raising' && role !== 'manager' && <Row>
+                            {project.project_info.status === 'Raising' && role !== 'manager' && <Row>
                                 <Col md={12}>
                                     <div className="votes-bar">
                                         <div className="done" style={{ width: project.percent + '%' }}></div>
@@ -201,7 +201,7 @@ export default function Project() {
                             </Row>}
 
                             {/* manager 可以变更计划 */}
-                            {(project.status === 'Active' || project.status === 'PhaseFailed' || project.status === 'ReplanFailed') && role === 'manager' && <Row>
+                            {(project.project_info.status === 'Active' || project.project_info.status === 'PhaseFailed' || project.project_info.status === 'ReplanFailed') && role === 'manager' && <Row>
                                 <div className="handle-area">
                                     <a href={`/create-vote/${id}`}>
                                         <Button className="btn-action">发起变更投票</Button>
