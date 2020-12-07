@@ -288,7 +288,7 @@ export default {
                 unlockingAmount: '解锁数额',
                 unlockingTime: '解锁时间',
                 voteTime: '投票时段',
-                event: '描述',
+                event: '进程说明',
                 voteResult: '投票结果',
                 approve: '支持',
                 object: '反对',
