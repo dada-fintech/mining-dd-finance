@@ -25,6 +25,7 @@ export default function Project() {
     const [currentTab, setCurrentTab] = useState('process')
     const [project, setProject] = useState({ fundraising: {}, project_info: {} })
     const [lockNum, setLockedNum] = useState('')
+    const [userAddress, setUserAddress] = useState('')
     const [contract, setContract] = useState('')
     const [auditModalVisible, setAuditModalVisible] = useState(false)
     const [insuranceModalVisible, setInsuranceModalVisible] = useState(false)
@@ -33,6 +34,9 @@ export default function Project() {
     const { id } = useParams()
     const { t } = useTranslation()
     useEffect(() => {
+        const myAddress = window.ethereum && window.ethereum.selectedAddress
+        setUserAddress(myAddress)
+
         axios.get('/project/detail/' + id).then(res => {
             setProject({
                 ...res.data,
@@ -48,7 +52,7 @@ export default function Project() {
 
         axios.post('/project/user-role', {
             project_uniq_id: id,
-            user_addr: window.ethereum.selectedAddress
+            user_addr: myAddress
         }).then(res => {
             const role = res.data.role
             setRole(role)
@@ -92,18 +96,18 @@ export default function Project() {
     const doLock = () => {
         axios.post('project/invest', {
             project_uniq_id: id,
-            user_addr: window.ethereum.selectedAddress,
+            user_addr: userAddress,
             amount: lockNum
         }).then(res => {
             const callData = res.data.call_contract
             const approveParams = {
-                from: window.ethereum.selectedAddress,
+                from: userAddress,
                 to: callData[0].contract_addr,
                 data: callData[0].call_data
             }
 
             const lockParams = {
-                from: window.ethereum.selectedAddress,
+                from: userAddress,
                 to: callData[1].contract_addr,
                 data: callData[1].call_data
             }
@@ -112,7 +116,7 @@ export default function Project() {
                 mm.sendTransaction(lockParams, '锁定balance')
             } else {
                 message.info('请在锁定前先授权')
-                mm.sendTransaction(lockParams, '授权锁定balance', lockParams)
+                mm.sendTransaction(approveParams, '授权锁定balance', lockParams)
             }
         })
     }
@@ -121,7 +125,7 @@ export default function Project() {
     const doAudit = () => {
         setCurrentParams({
             project_uniq_id: id,
-            user_addr: window.ethereum.selectedAddress,
+            user_addr: userAddress,
         })
         setAuditModalVisible(true)
     }
@@ -129,7 +133,7 @@ export default function Project() {
     const doInsurance = () => {
         setCurrentParams({
             project_uniq_id: id,
-            user_addr: window.ethereum.selectedAddress,
+            user_addr: userAddress,
         })
         setInsuranceModalVisible(true)
     }
@@ -233,7 +237,7 @@ export default function Project() {
         </div>
         <div className="container">
 
-            <Row gutter={{ md: 24, lg: 24 }} align="center"> 
+            <Row gutter={{ md: 24, lg: 24 }} align="center">
                 <Col xs={24} md={12} lg={14}>
                     {/* <div className="project-content"> */}
                     {/* {currentTab === 'vote' && <VoteModule />} */}
