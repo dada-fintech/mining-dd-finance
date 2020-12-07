@@ -60,7 +60,7 @@ export default function Projects() {
             <div className="container">
                 <ul className="tabs">
                     {projects.active_project && <li className={currentTab === 'active_project' && 'active'} onClick={() => { setCurrentTab('active_project') }}>可参与</li>}
-                    {projects.can_invest_project && <li className={currentTab === 'can_invest_project' && 'active'} onClick={() => { setCurrentTab('can_invest_project') }}>运行中</li>}
+                    {projects.future_project && <li className={currentTab === 'future_project' && 'active'} onClick={() => { setCurrentTab('future_project') }}>运行中</li>}
                     {projects.finished_project && <li className={currentTab === 'finished_project' && 'active'} onClick={() => { setCurrentTab('finished_project') }}>已完成</li>}
                 </ul>
                 <div>

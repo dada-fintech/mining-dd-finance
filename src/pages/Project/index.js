@@ -94,10 +94,6 @@ export default function Project() {
     }, [])
 
     const doLock = () => {
-        if(!lockNum){
-            message.error('请输入锁定金额')
-            return false
-        }
         axios.post('project/invest', {
             project_uniq_id: id,
             user_addr: userAddress,
@@ -117,10 +113,10 @@ export default function Project() {
             }
 
             if (res.data.is_satisfied) {
-                mm.sendTransaction(lockParams, '锁定USDT')
+                mm.sendTransaction(lockParams, '锁定balance')
             } else {
-                message.error('请在锁定前先授权')
-                mm.sendTransaction(approveParams, '授权消耗USDT', lockParams)
+                message.info('请在锁定前先授权')
+                mm.sendTransaction(approveParams, '授权锁定balance', lockParams)
             }
         })
     }

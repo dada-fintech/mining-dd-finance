@@ -99,15 +99,9 @@ export default function CreateVote() {
 
             let pass = true
             let totalPercent = 0
-            processList.forEach((item, index) => {
-                if (index === 0) {
-                    if (!item.unlock_percentage || !item.unlock_time) {
-                        pass = false
-                    }
-                } else {
-                    if (!item.unlock_percentage || !item.vote_start_time || !item.vote_end_time) {
-                        pass = false
-                    }
+            processList.forEach(item => {
+                if (!item.unlock_percentage || !item.vote_start_time || !item.vote_end_time) {
+                    pass = false
                 }
 
                 totalPercent += Number(item.unlock_percentage)
@@ -248,22 +242,14 @@ export default function CreateVote() {
                                             {(item.status && item.status !== 'Future') ? new Date(item.unlock_time).toLocaleDateString() : <DatePicker value={item.unlock_time && moment(item.unlock_time)} onChange={value => changeProcess(index, 'unlock_time', value.valueOf())} />}
                                         </div>
                                     </div> */}
-                                    {index === 0 ? <div className="line">
-                                        <div className="name required">{t('createProject.unlockDate')}</div>
+                                    <div className="line">
+                                        <div className="name required">{t('createProject.votingDate')}</div>
                                         <div className="value">
-                                            {(item.status && item.status !== 'Future') ? `${new Date(item.unlock_time).toLocaleDateString()}` :
-                                                <DatePicker value={item.unlock_time && moment(item.unlock_time)} onChange={value => { changeProcess(index, 'unlock_time', value.valueOf()); }} />
+                                            {(item.status && item.status !== 'Future') ? `${new Date(item.vote_start_time).toLocaleDateString()}-${new Date(item.vote_end_time).toLocaleDateString()}` :
+                                                <DatePicker.RangePicker value={item.vote_start_time && [moment(item.vote_start_time), moment(item.vote_end_time)]} onChange={value => { changeProcess(index, 'vote_start_time', value[0].valueOf()); changeProcess(index, 'vote_end_time', value[1].valueOf()) }} />
                                             }
                                         </div>
-                                    </div> : <div className="line">
-                                            <div className="name required">{t('createProject.votingDate')}</div>
-                                            <div className="value">
-                                                {(item.status && item.status !== 'Future') ? `${new Date(item.vote_start_time).toLocaleDateString()}-${new Date(item.vote_end_time).toLocaleDateString()}` :
-                                                    <DatePicker.RangePicker value={item.vote_start_time && [moment(item.vote_start_time), moment(item.vote_end_time)]} onChange={value => { changeProcess(index, 'vote_start_time', value[0].valueOf()); changeProcess(index, 'vote_end_time', value[1].valueOf()) }} />
-                                                }
-                                            </div>
-                                        </div>}
-
+                                    </div>
                                     <div className="line">
                                         <div className="name">{t('project.event')}</div>
                                         <div className="value">
@@ -317,14 +303,14 @@ export default function CreateVote() {
                                         <div className="name">解锁额度</div>
                                         <div className="value">{item.unlock_percentage}%</div>
                                     </div>
-                                    {index === 0 ? <div className="line">
-                                        <div className="name">{t('createProject.unlockDate')}</div>
+                                    {/* <div className="line">
+                                        <div className="name">{t('project.unlockingTime')}</div>
                                         <div className="value">{new Date(item.unlock_time).toLocaleDateString()}</div>
-                                    </div> : <div className="line">
-                                            <div className="name">{t('project.voteTime')}</div>
-                                            <div className="value">{new Date(item.vote_start_time).toLocaleDateString()} - {new Date(item.vote_end_time).toLocaleDateString()}</div>
-                                        </div>}
-
+                                    </div> */}
+                                    <div className="line">
+                                        <div className="name">{t('createProject.votingDate')}</div>
+                                        <div className="value">{new Date(item.vote_start_time).toLocaleDateString()}-{new Date(item.vote_end_time).toLocaleDateString()}</div>
+                                    </div>
                                     <div className="line">
                                         <div className="name">{t('project.event')}</div>
                                         <div className="value">{item.description}</div>
@@ -357,5 +343,5 @@ export default function CreateVote() {
                 </Col>
             </Row>
         </div>
-    </div >)
+    </div>)
 }

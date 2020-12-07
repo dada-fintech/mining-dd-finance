@@ -243,20 +243,14 @@ export default function CreateProject() {
             let pass = true
             let totalPercent = 0
 
-            processList.forEach((item, index) => {
-                if (index === 0) {
-                    if (!item.unlock_percentage || !item.unlock_time) {
-                        pass = false
-                    }
-                } else {
-                    if (!item.unlock_percentage || !item.vote_start_time || !item.vote_end_time) {
-                        pass = false
-                    }
+            processList.forEach(item => {
+                if (!item.unlock_percentage || !item.vote_start_time || !item.vote_end_time) {
+                    pass = false
                 }
-
                 totalPercent += Number(item.unlock_percentage)
             })
 
+            console.log(totalPercent, 'total per')
             if (!pass) {
                 message.error('请检查所有必填字段')
                 return false
@@ -545,19 +539,12 @@ export default function CreateProject() {
                                 <div className="assets-rule-item">
                                     {processList.length > 1 && <Popconfirm title="确定删除该进程吗？" onConfirm={() => { removeProcess(index) }}><CloseCircleOutlined className="remove-btn" /></Popconfirm>}
                                     <Row gutter={24}>
-                                        {index === 0 ? <Col md={12}>
+                                        <Col md={12}>
                                             <div className="form-item">
-                                                <div className="label ">{t('createProject.unlockDate')} <Tooltip title="该时期为本阶段合约放款日期，需在治理投票结束后"><img src={QuestionIcon} /></Tooltip></div>
-                                                <DatePicker disabledDate={current => current && current < moment(fundraising.end_time).add(4, 'days').endOf('day')} value={item.unlock_time && moment(item.unlock_time)} onChange={value => { changeProcess(index, 'unlock_time', value.valueOf()); }} />
+                                                <div className="label ">{t('createProject.votingDate')} <Tooltip title="该时期为本阶段治理投票的时间区间"><img src={QuestionIcon} /></Tooltip></div>
+                                                <DatePicker.RangePicker disabledDate={current => current && current < moment(fundraising.end_time).add(3, 'days').endOf('day')} value={item.vote_start_time && [moment(item.vote_start_time), moment(item.vote_end_time)]} onChange={value => { changeProcess(index, 'vote_start_time', value[0].valueOf()); changeProcess(index, 'vote_end_time', value[1].valueOf()) }} />
                                             </div>
-                                        </Col> : <Col md={12}>
-                                                <div className="form-item">
-                                                    <div className="label ">{t('createProject.votingDate')} <Tooltip title="该时期为本阶段治理投票的时间区间"><img src={QuestionIcon} /></Tooltip></div>
-                                                    <DatePicker.RangePicker disabledDate={current => current && current < moment(fundraising.end_time).add(3, 'days').endOf('day')} value={item.vote_start_time && [moment(item.vote_start_time), moment(item.vote_end_time)]} onChange={value => { changeProcess(index, 'vote_start_time', value[0].valueOf()); changeProcess(index, 'vote_end_time', value[1].valueOf()) }} />
-                                                </div>
-
-                                            </Col>}
-
+                                        </Col>
                                         <Col md={6}>
                                             <div className="form-item">
                                                 <div className="label ">{t('createProject.shares')} <Tooltip title="本阶段放款金额"><img src={QuestionIcon} /></Tooltip></div>
@@ -601,7 +588,7 @@ export default function CreateProject() {
                         </div>}
                         {currentStep === 7 && <div className="step-6">
                             <div className="title">项目基础信息</div>
-                            <div className="confirm-box confirm-box-long" style={{ marginBottom: '72px' }}>
+                            <div className="confirm-box confirm-box-long" style={{marginBottom: '72px'}}>
                                 <div className="line">
                                     <div className="name">{t('createProject.projectName')}</div>
                                     <div className="value">{projectInfo.project_name}</div>
@@ -632,7 +619,7 @@ export default function CreateProject() {
                                 </div>
                             </div>
                             <div className="title">项目治理信息</div>
-                            <div className="confirm-box confirm-box-long" style={{ marginBottom: '72px' }}>
+                            <div className="confirm-box confirm-box-long" style={{marginBottom: '72px'}}>
                                 <div className="line">
                                     <div className="name">{t('createProject.tokenName')}</div>
                                     <div className="value">{projectInfo.project_token_symbol}</div>
@@ -693,14 +680,14 @@ export default function CreateProject() {
                                         <div className="name">{t('project.unlockingAmount')}</div>
                                         <div className="value">{item.unlock_percentage}%</div>
                                     </div>
-                                    {index === 0 ? <div className="line">
-                                        <div className="name">{t('createProject.unlockDate')}</div>
+                                    <div className="line">
+                                        <div className="name">{t('project.voteTime')}</div>
+                                        <div className="value">{new Date(item.vote_start_time).toLocaleDateString()} - {new Date(item.vote_end_time).toLocaleDateString()}</div>
+                                    </div>
+                                    {/* <div className="line">
+                                        <div className="name">{t('project.unlockingTime')}</div>
                                         <div className="value">{new Date(item.unlock_time).toLocaleDateString()}</div>
-                                    </div> : <div className="line">
-                                            <div className="name">{t('project.voteTime')}</div>
-                                            <div className="value">{new Date(item.vote_start_time).toLocaleDateString()} - {new Date(item.vote_end_time).toLocaleDateString()}</div>
-                                        </div>}
-
+                                    </div> */}
                                     <div className="line">
                                         <div className="name">{t('project.event')}</div>
                                         <div className="value">{item.description}</div>
@@ -733,11 +720,11 @@ export default function CreateProject() {
                             <div onClick={() => { goNextStep() }} className="line-btn line-btn-next"><img src={LinkArrow} /> {t('common.next')}</div>
                         </div>}
                         {currentStep == 7 && <div>
-
+                            
                             <div onClick={() => { confirmInfo() }} className="btn-confirm"> <span>{t('common.confirmInfo')}</span></div>
                             <span className="hint hint-gasfee">{t('common.gasFeeHint')}</span>
                         </div>
-
+                        
                         }
                         {currentStep == 8 && <div>
                             {dadaApproved ? <div onClick={() => { doPay() }} className="btn-confirm"> <span>{t('common.pay')}</span></div>
