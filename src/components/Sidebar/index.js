@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useWallet } from 'use-wallet'
 import mm from 'components/mm'
 import { Button } from 'antd'
 import axios from 'utils/axios'
@@ -62,6 +63,7 @@ export default function Sidebar(props) {
     const [myShare, setMyShare] = useState({})
     const [topInvestList, setTopInvestList] = useState([])
     const { t } = useTranslation()
+    const wallet = useWallet()
     const statusMapping = {
         "Refunding": "可退款",
         "Repaying": "可赎回",
@@ -69,21 +71,24 @@ export default function Sidebar(props) {
     }
     useEffect(() => {
         //获取当前user的投资
-        axios.post('/project/user-invest', {
-            project_uniq_id: projectId,
-            user_addr: window.ethereum.selectedAddress,
-        }).then(res => {
-            setMyShare(res.data)
-        })
+        if (wallet.account) {
+            axios.post('/project/user-invest', {
+                project_uniq_id: projectId,
+                user_addr: wallet.account,
+            }).then(res => {
+                setMyShare(res.data)
+            })
+        }
+
         //获取投资top用户
         axios.get(`/project/top-invest/${projectId}`).then(res => {
             setTopInvestList(res.data)
         })
-    }, [])
+    }, [wallet.account])
 
     const doAction = () => {
         const params = {
-            from: window.ethereum.selectedAddress,
+            from: wallet.account,
             to: myShare.profit_call_data.contract_addr,
             data: myShare.profit_call_data.call_data
         }
@@ -109,7 +114,7 @@ export default function Sidebar(props) {
                         </div>
                     </div>}
                 </div>
-                {myShare.actual_raised > 0 &&<div className="my-share-box">
+                {myShare.actual_raised > 0 && <div className="my-share-box">
                     <div className="line">
                         <div>投资份额</div>
                         <div>{myShare.user_balance} USDT</div>
@@ -126,10 +131,10 @@ export default function Sidebar(props) {
                         <div>项目周期</div>
                         <div>{myShare.project_duration}个月</div>
                     </div>
-                    {myShare.status && <div className="line">
+                    {myShare.profit_status && <div className="line">
                         <div>收益状态</div>
                         <Button className="btn-green" onClick={() => { doAction() }}>
-                            {statusMapping[myShare.status]}
+                            {statusMapping[myShare.profit_status]}
                         </Button>
                     </div>}
                 </div>}

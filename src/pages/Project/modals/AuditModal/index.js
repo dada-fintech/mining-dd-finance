@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import { Modal, Input, Button, message } from 'antd'
 // import VoteStatus from '../../../../components/VoteStatus'
+import { useWallet } from 'use-wallet'
 import axios from 'utils/axios'
 import mm from 'components/mm'
 import './style.scss'
 
 export default function ConfirmVote(props) {
     const params = props.params
+    const wallet = useWallet()
     const [comment, setComment] = useState('')
     const doAudit = (support) => {
         if (!comment) {
@@ -19,7 +21,7 @@ export default function ConfirmVote(props) {
             support: support
         }).then(res => {
             const auditParams = {
-                from: window.ethereum.selectedAddress,
+                from: wallet.account,
                 to: res.data.contract_addr,
                 data: res.data.call_data
             }

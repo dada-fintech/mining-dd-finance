@@ -2,15 +2,18 @@ import React, { useState } from 'react'
 import { Modal, Input, Button, message } from 'antd'
 // import VoteStatus from '../../../../components/VoteStatus'
 import axios from 'utils/axios'
+import { useWallet } from 'use-wallet'
 import mm from 'components/mm'
 import './style.scss'
 
 export default function ConfirmVote(props) {
     const params = props.params
+    const wallet = useWallet()
+
     const [comment, setComment] = useState('')
     const doAction = () => {
         let target = ''
-        if (params.status === 'Future') {
+        if (params.status === 'Active') {
             if (params.vote === 'yes') {
                 target = '/project/vote-for-phase'
             } else {
@@ -30,11 +33,11 @@ export default function ConfirmVote(props) {
         }).then(res => {
             if (res.data.need_call) {
                 const txnParams = {
-                    from: window.ethereum.selectedAddress,
+                    from: wallet.account,
                     to: res.data.call_data.contract_addr,
                     data: res.data.call_data.call_data
                 }
-                mm.sendTransaction(txnParams, params.status === 'Future' ? '确认投票' : '确认变更投票')
+                mm.sendTransaction(txnParams, params.status === 'Active' ? '确认投票' : '确认变更投票')
             } else {
                 message.success('操作成功')
             }
@@ -42,7 +45,7 @@ export default function ConfirmVote(props) {
     }
 
     return (
-        <Modal wrapClassName="vote-confirm-modal" footer={null} title={params.status === 'Future' ? '确认投票' : '确认变更投票'} visible={true} onCancel={() => { props.onCancel() }}>
+        <Modal wrapClassName="vote-confirm-modal" footer={null} title={params.status === 'Active' ? '确认投票' : '确认变更投票'} visible={true} onCancel={() => { props.onCancel() }}>
             {/* <div className="hint">You are voting for the following proposal:</div>
             <div className="description">
                 Vote #3 PIP-3 : Unlock 10% in advance for deposit

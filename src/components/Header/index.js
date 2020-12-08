@@ -62,8 +62,8 @@ export default function Header() {
                 <a onClick={() => { changeLanguage(i18n.language === 'en' ? 'zh' : 'en') }}>
                     {i18n.language === 'en' ? '简体中文' : 'English'}
                 </a>
-                {wallet.status === 'connected' ? <Tooltip title={window.ethereum.selectedAddress}>
-                    <a className="line-btn">{window.ethereum.selectedAddress.slice(0, 4) + '...' + window.ethereum.selectedAddress.slice(-4)}</a>
+                {wallet.status === 'connected' ? <Tooltip title={wallet.account}>
+                    <a className="line-btn">{wallet.account.slice(0, 4) + '...' + wallet.account.slice(-4)}</a>
                 </Tooltip>
                     : <a className="border-top-btm" onClick={() => { wallet.connect() }}>Connect Wallet</a>}
             </nav>

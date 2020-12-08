@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { PlusCircleOutlined, MinusCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
 // import { useWallet } from 'use-wallet'
 import QuestionIcon from 'assets/question.svg'
+import { useWallet } from 'use-wallet'
 import Header from '../../components/Header'
 import moment from 'moment'
 // import Footer from '../../components/Footer'
@@ -22,6 +23,7 @@ export default function CreateProject() {
     const [approveBalance, setApproveBalance] = useState(0)
     const [dadaApproved, setDadaApproved] = useState(false)
     const [callData, setCallData] = useState(false)
+    const wallet = useWallet()
 
 
     const { t, i18n } = useTranslation()
@@ -245,7 +247,7 @@ export default function CreateProject() {
 
             processList.forEach((item, index) => {
                 if (index === 0) {
-                    if (!item.unlock_percentage || !item.unlock_time) {
+                    if (!item.unlock_percentage || !item.vote_start_time) {
                         pass = false
                     }
                 } else {
@@ -343,7 +345,7 @@ export default function CreateProject() {
         finalInfo.fundraising.min_amount = String(finalInfo.fundraising.min_amount)
         finalInfo.fundraising.max_amount = String(finalInfo.fundraising.max_amount)
 
-        finalInfo.project_info.creater_addr = window.ethereum.selectedAddress
+        finalInfo.project_info.creater_addr = wallet.account
 
         finalInfo.process.forEach(item => {
             item.unlock_percentage = String(item.unlock_percentage)
@@ -360,7 +362,7 @@ export default function CreateProject() {
 
     const doApprove = async () => {
         const txnParams = {
-            from: window.ethereum.selectedAddress,
+            from: wallet.account,
             to: callData[0].contract_addr,
             data: callData[0].call_data
         }
@@ -368,7 +370,7 @@ export default function CreateProject() {
             txnParams,
             '授权',
             {
-                from: window.ethereum.selectedAddress,
+                from: wallet.account,
                 to: callData[1].contract_addr,
                 data: callData[1].call_data
             }
@@ -377,7 +379,7 @@ export default function CreateProject() {
 
     const doPay = async () => {
         const txnParams = {
-            from: window.ethereum.selectedAddress,
+            from: wallet.account,
             to: callData[1].contract_addr,
             data: callData[1].call_data
         }
@@ -548,7 +550,7 @@ export default function CreateProject() {
                                         {index === 0 ? <Col md={12}>
                                             <div className="form-item">
                                                 <div className="label ">{t('createProject.unlockDate')} <Tooltip title="该时期为本阶段合约放款日期，需在治理投票结束后"><img src={QuestionIcon} /></Tooltip></div>
-                                                <DatePicker disabledDate={current => current && current < moment(fundraising.end_time).add(4, 'days').endOf('day')} value={item.unlock_time && moment(item.unlock_time)} onChange={value => { changeProcess(index, 'unlock_time', value.valueOf()); }} />
+                                                <DatePicker disabledDate={current => current && current < moment(fundraising.end_time).add(4, 'days').endOf('day')} value={item.vote_start_time && moment(item.vote_start_time)} onChange={value => { changeProcess(index, 'vote_start_time', value.valueOf()); }} />
                                             </div>
                                         </Col> : <Col md={12}>
                                                 <div className="form-item">
@@ -695,7 +697,7 @@ export default function CreateProject() {
                                     </div>
                                     {index === 0 ? <div className="line">
                                         <div className="name">{t('createProject.unlockDate')}</div>
-                                        <div className="value">{new Date(item.unlock_time).toLocaleDateString()}</div>
+                                        <div className="value">{new Date(item.vote_start_time).toLocaleDateString()}</div>
                                     </div> : <div className="line">
                                             <div className="name">{t('project.voteTime')}</div>
                                             <div className="value">{new Date(item.vote_start_time).toLocaleDateString()} - {new Date(item.vote_end_time).toLocaleDateString()}</div>

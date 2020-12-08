@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Input, Select, Button } from 'antd'
+import { useWallet } from 'use-wallet'
 import { useTranslation } from 'react-i18next'
 import ConfirmVote from '../../modals/ConfirmVote'
 import './style.scss'
@@ -18,6 +19,7 @@ export default function Process(props) {
     const { processList } = props
     const [confirmVoteVisible, setConfirmVoteVisible] = useState(false)
     const [currentParams, setCurrentParams] = useState({})
+    const wallet = useWallet()
 
     const { id } = props
     const { t } = useTranslation()
@@ -49,7 +51,7 @@ export default function Process(props) {
         setCurrentParams({
             project_uniq_id: id,
             phase_id: phase_id,
-            user_addr: window.ethereum.selectedAddress,
+            user_addr: wallet.account,
             vote: 'yes',
             status: status,
         })
@@ -60,7 +62,7 @@ export default function Process(props) {
         setCurrentParams({
             project_uniq_id: id,
             phase_id: phase_id,
-            user_addr: window.ethereum.selectedAddress,
+            user_addr: wallet.account,
             vote: 'no',
             status: status,
         })

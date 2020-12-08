@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { Modal, Input, Button, message } from 'antd'
 // import VoteStatus from '../../../../components/VoteStatus'
 import axios from 'utils/axios'
+import { useWallet } from 'use-wallet'
 import mm from 'components/mm'
 import './style.scss'
 
 export default function ConfirmVote(props) {
     const params = props.params
+    const wallet = useWallet()
     const [info, setInfo] = useState({})
     useEffect(() => {
         axios.post('/project/pay-insurance', {
@@ -18,13 +20,13 @@ export default function ConfirmVote(props) {
 
     const doAction = () => {
         const approveParams = {
-            from: window.ethereum.selectedAddress,
+            from: wallet.account,
             to: info.call_contract[0].contract_addr,
             data: info.call_contract[0].call_data
         }
 
         const txnParams = {
-            from: window.ethereum.selectedAddress,
+            from: wallet.account,
             to: info.call_contract[1].contract_addr,
             data: info.call_contract[1].call_data
         }

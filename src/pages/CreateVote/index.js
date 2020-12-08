@@ -3,6 +3,8 @@ import { Button, Row, Col, Input, Upload, message, DatePicker, InputNumber, Popc
 import LinkArrow from 'assets/link-arrow.svg'
 import LinkArrowBack from 'assets/link-arrow-back.svg'
 import QuestionIcon from 'assets/question.svg'
+import { useWallet } from 'use-wallet'
+import mm from 'components/mm'
 import moment from 'moment'
 import { useTranslation } from 'react-i18next'
 import { PlusCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
@@ -20,6 +22,7 @@ export default function CreateVote() {
     const [projectInfo, setProjectInfo] = useState({})
     const [fundraising, setFundraising] = useState({})
     const [description, setDescription] = useState('')
+    const wallet = useWallet()
 
     const { t, i18n } = useTranslation()
     const { id } = useParams()
@@ -101,7 +104,7 @@ export default function CreateVote() {
             let totalPercent = 0
             processList.forEach((item, index) => {
                 if (index === 0) {
-                    if (!item.unlock_percentage || !item.unlock_time) {
+                    if (!item.unlock_percentage || !item.vote_start_time) {
                         pass = false
                     }
                 } else {
@@ -166,20 +169,22 @@ export default function CreateVote() {
         //🈯只传过去Future
         let finalProcessList = processList.filter(item => (item.status === 'Future' || !item.status))
 
-        console.log(finalProcessList, 'bbfuture')
-
         finalProcessList.forEach(item => {
             item.unlock_percentage = String(item.unlock_percentage)
         })
 
         axios.post('/project/change-process', {
-            sender: window.ethereum.selectedAddress,
+            sender: wallet.account,
             project_uniq_id: id,
             description: description,
             other_file: projectInfo.other_file,
             new_process: finalProcessList
         }).then(res => {
-            message.success('提交成功!')
+            mm.sendTransaction({
+                from: wallet.account,
+                to: res.data.contract_addr,
+                data: res.data.call_data
+            }, '更改计划')
         })
     }
 
@@ -251,8 +256,8 @@ export default function CreateVote() {
                                     {index === 0 ? <div className="line">
                                         <div className="name required">{t('createProject.unlockDate')}</div>
                                         <div className="value">
-                                            {(item.status && item.status !== 'Future') ? `${new Date(item.unlock_time).toLocaleDateString()}` :
-                                                <DatePicker value={item.unlock_time && moment(item.unlock_time)} onChange={value => { changeProcess(index, 'unlock_time', value.valueOf()); }} />
+                                            {(item.status && item.status !== 'Future') ? `${new Date(item.vote_start_time).toLocaleDateString()}` :
+                                                <DatePicker value={item.vote_start_time && moment(item.vote_start_time)} onChange={value => { changeProcess(index, 'vote_start_time', value.valueOf()); }} />
                                             }
                                         </div>
                                     </div> : <div className="line">

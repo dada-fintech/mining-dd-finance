@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import axios from 'utils/axios'
 import AuditModal from './modals/AuditModal'
+import { useWallet } from 'use-wallet'
 import InsuranceModal from './modals/InsuranceModal'
 import web3 from 'components/web3'
 // import BN from 'bignumber.js'
@@ -20,23 +21,21 @@ import CommentsModule from './modules/Comments'
 
 
 import './style.scss'
+import { getRoles } from '@testing-library/react'
 
 export default function Project() {
     const [currentTab, setCurrentTab] = useState('process')
     const [project, setProject] = useState({ fundraising: {}, project_info: {} })
     const [lockNum, setLockedNum] = useState('')
-    const [userAddress, setUserAddress] = useState('')
     const [contract, setContract] = useState('')
     const [auditModalVisible, setAuditModalVisible] = useState(false)
     const [insuranceModalVisible, setInsuranceModalVisible] = useState(false)
     const [currentParams, setCurrentParams] = useState({})
     const [role, setRole] = useState('invester')
+    const wallet = useWallet()
     const { id } = useParams()
     const { t } = useTranslation()
-    useEffect(() => {
-        const myAddress = window.ethereum && window.ethereum.selectedAddress
-        setUserAddress(myAddress)
-
+    useEffect(async () => {
         axios.get('/project/detail/' + id).then(res => {
             setProject({
                 ...res.data,
@@ -49,15 +48,17 @@ export default function Project() {
         // committee： 委员会成员，审核项目
         // manager： 理事会，有权限去更改计划
         // invester： 普通投资者
+        if (wallet.account) {
+            axios.post('/project/user-role', {
+                project_uniq_id: id,
+                user_addr: wallet.account
+            }).then(res => {
+                const role = res.data.role
+                setRole(role)
+            })
+        }
 
-        axios.post('/project/user-role', {
-            project_uniq_id: id,
-            user_addr: myAddress
-        }).then(res => {
-            const role = res.data.role
-            setRole(role)
-        })
-    }, [])
+    }, [wallet.account])
 
     useEffect(async () => {
         let ABI = [
@@ -94,24 +95,24 @@ export default function Project() {
     }, [])
 
     const doLock = () => {
-        if(!lockNum){
+        if (!lockNum) {
             message.error('请输入锁定金额')
             return false
         }
         axios.post('project/invest', {
             project_uniq_id: id,
-            user_addr: userAddress,
+            user_addr: wallet.account,
             amount: lockNum
         }).then(res => {
             const callData = res.data.call_contract
             const approveParams = {
-                from: userAddress,
+                from: wallet.account,
                 to: callData[0].contract_addr,
                 data: callData[0].call_data
             }
 
             const lockParams = {
-                from: userAddress,
+                from: wallet.account,
                 to: callData[1].contract_addr,
                 data: callData[1].call_data
             }
@@ -129,7 +130,7 @@ export default function Project() {
     const doAudit = () => {
         setCurrentParams({
             project_uniq_id: id,
-            user_addr: userAddress,
+            user_addr: wallet.account,
         })
         setAuditModalVisible(true)
     }
@@ -137,7 +138,7 @@ export default function Project() {
     const doInsurance = () => {
         setCurrentParams({
             project_uniq_id: id,
-            user_addr: userAddress,
+            user_addr: wallet.account,
         })
         setInsuranceModalVisible(true)
     }

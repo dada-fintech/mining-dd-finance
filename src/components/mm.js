@@ -8,7 +8,7 @@ async function sendTransaction(transactionParameters, desc, approvedActionParam)
         await window.ethereum
             .request({
                 method: "eth_sendTransaction",
-                params: [{ ...transactionParameters, chainId: 1 }],
+                params: [{ ...transactionParameters, chainId: 42 }],
             })
             .then(async (txHash) => {
                 let previousActionObj = JSON.parse(localStorage.getItem('actionObj')) || {}

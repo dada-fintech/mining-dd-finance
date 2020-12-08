@@ -11,7 +11,7 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <Provider store={store}>
-    <UseWalletProvider>
+    <UseWalletProvider chainId={42}>
       <App />
     </UseWalletProvider>
   </Provider>,
