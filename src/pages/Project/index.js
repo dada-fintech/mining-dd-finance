@@ -168,7 +168,7 @@ export default function Project() {
             <div className="container">
                 <div className="project-intro">
                     <Row gutter={44} type="flex" align="center">
-                        <Col md={12}>
+                        <Col md={13}>
                             <div className="top">
                                 <div className="title with-line"><span>{project.project_info && project.project_info.project_name}</span></div>
                             </div>
@@ -207,14 +207,14 @@ export default function Project() {
                             {(project.project_info.status === 'Active' || project.project_info.status === 'PhaseFailed' || project.project_info.status === 'ReplanFailed') && role === 'manager' && <Row>
                                 <div className="handle-area">
                                     <a href={`/create-vote/${id}`}>
-                                        <Button className="btn-action">发起变更投票</Button>
+                                        <div className="btn-action"><span>发起变更投票</span></div>
                                     </a>
                                 </div>
                             </Row>}
 
 
                         </Col>
-                        <Col md={8}>
+                        <Col md={7}>
                             <div className="date-range">{new Date(project.fundraising.start_time).toLocaleDateString()} - {new Date(project.fundraising.end_time).toLocaleDateString()}</div>
                             <div className="top-box">
                                 <div className="item">已完成：{project.fundraising.current_raised_money} USDT</div>
