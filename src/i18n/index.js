@@ -33,8 +33,8 @@ export default {
                     desc: 'Miners hosting Project: purchasing 50 WhatsMiner M20S and having them managed at Xinjiang ZhunDong mining farm. The hard cap for investment is at $100,000. '
                 },
                 2:{
-                    title: 'ETH Mining Project',
-                    desc: 'Managed Mining Project: Purchasing 50 Antminer T19 and having them managed at Xinjiang Asku City    mining farm. The hard cap is at $200,000.  '
+                    title: 'ETH Mining Machine Custody Service Project',
+                    desc: '50 GPU mining machine managed at Xinjiang farm -- purchase 50 GPU mining machines and having them managed at farms in Xinjiang Aksu City. The hard cap is at $200,000.'
                 }
             },
             homepage: {
