@@ -1,6 +1,7 @@
 import { notification } from 'antd'
 import { web3 } from 'components/web3'
 import mm from "components/mm";
+import { emit } from '@nextcloud/event-bus'
 import { CheckOutlined, LoadingOutlined, CloseCircleOutlined } from '@ant-design/icons';
 
 const getTokenBalance = (balanceList, target) => {
@@ -85,12 +86,13 @@ const watchTransaction = async (txHash) => {
 
         if (receipt) {
             if (receipt.status) {
+                emit(txHash, true)
+
                 notification.success({
                     message: 'Success',
                     description: currentAction.desc,
                     icon: <CheckOutlined style={{ color: 'green' }} />,
                 })
-
                 //TODO，成功之后要重新刷各种list
 
                 // trigger approved action
@@ -98,6 +100,7 @@ const watchTransaction = async (txHash) => {
                     mm.sendTransaction(currentAction.action)
                 }
             } else {
+                emit(txHash, false)
                 notification.error({
                     message: 'Failed',
                     description: currentAction.desc,

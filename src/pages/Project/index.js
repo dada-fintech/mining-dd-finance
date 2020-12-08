@@ -7,6 +7,7 @@ import axios from 'utils/axios'
 import AuditModal from './modals/AuditModal'
 import { useWallet } from 'use-wallet'
 import InsuranceModal from './modals/InsuranceModal'
+import { subscribe } from '@nextcloud/event-bus'
 import web3 from 'components/web3'
 // import BN from 'bignumber.js'
 // import detectEthereumProvider from '@metamask/detect-provider'
@@ -19,9 +20,7 @@ import mm from 'components/mm'
 import DetailModule from './modules/Detail'
 import CommentsModule from './modules/Comments'
 
-
 import './style.scss'
-import { getRoles } from '@testing-library/react'
 
 export default function Project() {
     const [currentTab, setCurrentTab] = useState('process')
@@ -118,10 +117,27 @@ export default function Project() {
             }
 
             if (res.data.is_satisfied) {
-                mm.sendTransaction(lockParams, '锁定USDT')
+                mm.sendTransaction(lockParams, '锁定USDT').then(res =>{
+                    console.log(res)
+
+                    if(res){
+
+                    }else{
+
+                    }
+                })
+                // subscribe(txHash, ()=>{
+                //     console.log('done 111')
+                // })
+
             } else {
                 message.error('请在锁定前先授权')
-                mm.sendTransaction(approveParams, '授权消耗USDT', lockParams)
+                const txHash = mm.sendTransaction(approveParams, '授权消耗USDT', lockParams)
+                console.log('222', txHash)
+                subscribe(txHash, ()=>{
+                    console.log('done 222')
+                })
+
             }
         })
     }
@@ -188,7 +204,7 @@ export default function Project() {
                                 </div>
                             </Row>}
                             {/* manager 不需投资 */}
-                            {project.project_info.status === 'Raising' && role !== 'manager' && <Row gutter={32}>
+                            {(true || project.project_info.status === 'Raising' && role !== 'manager') && <Row gutter={32}>
                                 <Col md={12}>
                                     <div className="votes-bar">
                                         <div className="done" style={{ width: project.percent + '%' }}></div>

@@ -1536,6 +1536,15 @@
   resolved "https://registry.npm.taobao.org/@metamask/detect-provider/download/@metamask/detect-provider-1.2.0.tgz#3667a7531f2a682e3c3a43eaf3a1958bdb42a696"
   integrity sha1-NmenUx8qaC48OkPq86GVi9tCppY=
 
+"@nextcloud/event-bus@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.npm.taobao.org/@nextcloud/event-bus/download/@nextcloud/event-bus-1.2.0.tgz#6889ddaec21e4a0c0dadbc5f5d782e48e8821fdc"
+  integrity sha1-aIndrsIeSgwNrbxfXXguSOiCH9w=
+  dependencies:
+    "@types/semver" "^7.1.0"
+    core-js "^3.6.2"
+    semver "^7.3.2"
+
 "@nodelib/fs.scandir@2.1.3":
   version "2.1.3"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.scandir/-/fs.scandir-2.1.3.tgz#3a582bdb53804c6ba6d146579c46e52130cf4a3b"
@@ -2067,6 +2076,11 @@
   integrity sha1-+zqmGhhIrZfXQl/53Lp4RUn8paQ=
   dependencies:
     "@types/node" "*"
+
+"@types/semver@^7.1.0":
+  version "7.3.4"
+  resolved "https://registry.npm.taobao.org/@types/semver/download/@types/semver-7.3.4.tgz?cache=0&sync_timestamp=1605057260070&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fsemver%2Fdownload%2F%40types%2Fsemver-7.3.4.tgz#43d7168fec6fa0988bb1a513a697b29296721afb"
+  integrity sha1-Q9cWj+xvoJiLsaUTppeykpZyGvs=
 
 "@types/source-list-map@*":
   version "0.1.2"
@@ -5054,6 +5068,11 @@ core-js@^2.4.0, core-js@^2.5.0:
   version "2.6.11"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.11.tgz#38831469f9922bded8ee21c9dc46985e0399308c"
   integrity sha512-5wjnpaT/3dV+XB4borEsnAYQchn00XSgTAWKDkEqv+K8KevjbzmofK6hfJ9TZIlpj2N0xQpazy7PiRQiWHqzWg==
+
+core-js@^3.6.2:
+  version "3.8.1"
+  resolved "https://registry.npm.taobao.org/core-js/download/core-js-3.8.1.tgz?cache=0&sync_timestamp=1607216048810&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fcore-js%2Fdownload%2Fcore-js-3.8.1.tgz#f51523668ac8a294d1285c3b9db44025fda66d47"
+  integrity sha1-9RUjZorIopTRKFw7nbRAJf2mbUc=
 
 core-js@^3.6.5:
   version "3.6.5"
