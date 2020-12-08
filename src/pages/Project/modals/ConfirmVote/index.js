@@ -31,6 +31,7 @@ export default function ConfirmVote(props) {
             ...params,
             comment: comment,
         }).then(res => {
+            console.log(res.data, 'bb')
             if (res.data.need_call) {
                 const txnParams = {
                     from: wallet.account,

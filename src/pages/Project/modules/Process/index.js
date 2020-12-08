@@ -89,18 +89,21 @@ export default function Process(props) {
                     </div>
                 </div>
                 {(process.status === 'Active' || process.status === 'VoteReplaning') && <>
-                    <div className="vs-bar">
-                        <div className="yes" style={{ width: process.yesPercent + '%' }}></div>
-                        <div className="no" style={{ width: process.noPercent + '%' }}></div>
-                    </div>
-                    <div className="vote-result">
-                        <div>
-                            {process.affirmative_vote} {t('project.approve')}
+                    {process.affirmative_vote && process.dissenting_vote && <>
+                        <div className="vs-bar">
+                            <div className="yes" style={{ width: process.yesPercent + '%' }}></div>
+                            <div className="no" style={{ width: process.noPercent + '%' }}></div>
                         </div>
-                        <div>
-                            {process.dissenting_vote} {t('project.object')}
+                        <div className="vote-result">
+                            <div>
+                                {process.affirmative_vote} {t('project.approve')}
+                            </div>
+                            <div>
+                                {process.dissenting_vote} {t('project.object')}
+                            </div>
                         </div>
-                    </div>
+                    </>}
+
                     <div className="vote-action">
                         <Button onClick={() => { sayYes(process.index, process.status) }}>同意</Button>
                         <Button onClick={() => { sayNo(process.index, process.status) }}>反对</Button>

@@ -159,7 +159,7 @@ export default function Homepage() {
                                         {item.description}
                                     </div>
                                     <div className="bottom">
-                                        <Progress strokeColor="#3FAA4D" status="active" percent={((item.current_raised_money / item.hardtop) * 100).toFixed(0)} className="progress-bar" />
+                                        <Progress strokeColor="#3FAA4D" status="active" percent={((item.current_raised_money / item.max_amount) * 100).toFixed(0)} className="progress-bar" />
                                     </div>
                                 </a>
                             ))}
