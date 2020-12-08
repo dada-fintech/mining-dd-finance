@@ -17,7 +17,7 @@ import './style.scss'
 
 export default function CreateProject() {
     const [currentStep, setCurrentStep] = useState(0)
-    const [projectInfo, setProjectInfo] = useState({ member_address: [''], profit_token: 'USDT' })
+    const [projectInfo, setProjectInfo] = useState({ member_address: [''], profit_token: 'USDT', other_file: [] })
     const [fundraising, setFundraising] = useState({})
     const [processList, setProcessList] = useState([{}, {}])
     const [approveBalance, setApproveBalance] = useState(0)
@@ -306,18 +306,20 @@ export default function CreateProject() {
         name: 'file',
         action: 'https://mining-api.dd.finance/project/upload',
         showUploadList: false,
+        multiple: true,
         onChange(info) {
-            console.log(info)
             if (info.file.status !== 'uploading') {
                 console.log(info.file, info.fileList);
             }
             if (info.file.status === 'done') {
                 message.success(`${info.file.name} file uploaded successfully`);
-                let previousArr = projectInfo.other_file || []
+
+                let previousArr = projectInfo.other_file
                 previousArr.push({
                     file_name: info.file.response.file_name
                 })
                 changeProjectInfo('other_file', previousArr)
+
             } else if (info.file.status === 'error') {
                 message.error(`${info.file.name} file upload failed.`);
             }

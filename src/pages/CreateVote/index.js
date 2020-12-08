@@ -35,7 +35,9 @@ export default function CreateVote() {
 
     useEffect(() => {
         axios.get('/project/detail/' + id).then(res => {
-            console.log(res.data, 'bbbb')
+            if(!res.data.project_info.other_file){
+                res.data.project_info.other_file = []
+            }
             setProcessList(res.data.process)
             setProjectInfo(res.data.project_info)
             setFundraising(res.data.fundraising)
@@ -141,14 +143,14 @@ export default function CreateVote() {
         name: 'file',
         action: 'https://mining-api.dd.finance/project/upload',
         showUploadList: false,
+        multiple: true,
         onChange(info) {
-            console.log(info)
             if (info.file.status !== 'uploading') {
                 console.log(info.file, info.fileList);
             }
             if (info.file.status === 'done') {
                 message.success(`${info.file.name} file uploaded successfully`);
-                let previousArr = projectInfo.other_file || []
+                let previousArr = projectInfo.other_file
                 previousArr.push({
                     file_name: info.file.response.file_name
                 })
