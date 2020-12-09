@@ -111,7 +111,6 @@
         align-items: center;
         justify-content: space-between;
         .hint {
-
             color: #010101;
             margin-right: 12px;
         }
@@ -137,17 +136,17 @@
         .line-btn-back{
             &:hover {
                 img{
-                    transform: translateX(-140px);
+                    transform: translateX(-120px);
                 }
-                transform: translatex(60px);
+                transform: translatex(40px);
             }
         }
         .line-btn-next{
             &:hover {
                 img{
-                    transform: translateX(140px);
+                    transform: translateX(120px);
                 }
-                transform: translatex(-60px);
+                transform: translatex(-40px);
             }
         }
         .btn-confirm{

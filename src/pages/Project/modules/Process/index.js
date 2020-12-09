@@ -30,7 +30,7 @@ export default function Process(props) {
         'Failed': '已失败',
         'Future': '还没到投票期',
         'ChangeFrom': '正在变更计划',
-        'Archived': '已经变更计划',
+        'Archived': '已失效',
         'ChangeTo': '正在变更计划',
         'VoteNotice': '公示中',
         'VoteReplaning': '正在投票表决是否变更计划',
