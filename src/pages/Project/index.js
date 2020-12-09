@@ -204,7 +204,7 @@ export default function Project() {
                                 </div>
                             </Row>}
                             {/* manager 不需投资 */}
-                            {(true || project.project_info.status === 'Raising' && role !== 'manager') && <Row gutter={32}>
+                            {project.project_info.status === 'Raising' && role !== 'manager' && <Row gutter={32}>
                                 <Col md={12}>
                                     <div className="votes-bar">
                                         <div className="done" style={{ width: project.percent + '%' }}></div>

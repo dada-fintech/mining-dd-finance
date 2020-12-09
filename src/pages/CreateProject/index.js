@@ -142,6 +142,7 @@ export default function CreateProject() {
     }
 
     const goNextStep = () => {
+        console.log(projectInfo)
         // 进行步骤跳转以及字段校验
         if (currentStep === 1) {
             if (!projectInfo.project_name) {
@@ -284,7 +285,6 @@ export default function CreateProject() {
             }
         },
         onChange(info) {
-            console.log(info)
             if (info.file.status !== 'uploading') {
                 // console.log(info.file, info.fileList);
             }
@@ -552,7 +552,7 @@ export default function CreateProject() {
                                         {index === 0 ? <Col md={12}>
                                             <div className="form-item">
                                                 <div className="label ">{t('createProject.unlockDate')} <Tooltip title="该时期为本阶段合约放款日期，需在治理投票结束后"><img src={QuestionIcon} /></Tooltip></div>
-                                                <DatePicker disabledDate={current => current && current < moment(fundraising.end_time).add(4, 'days').endOf('day')} value={item.vote_start_time && moment(item.vote_start_time)} onChange={value => { changeProcess(index, 'vote_start_time', value.valueOf()); }} />
+                                                <DatePicker disabledDate={current => current && current < moment(fundraising.end_time).add(5, 'days').endOf('day')} value={item.vote_start_time && moment(item.vote_start_time)} onChange={value => { changeProcess(index, 'vote_start_time', value.valueOf()); }} />
                                             </div>
                                         </Col> : <Col md={12}>
                                                 <div className="form-item">
@@ -715,7 +715,10 @@ export default function CreateProject() {
                             <div>
                                 <div className="title" style={{ marginTop: '56px' }}>{t('createProject.additionalDoc')}</div>
                                 <div className="confirm-box">
-                                    {projectInfo.white_paper && projectInfo.white_paper.file_name.slice(10)}<br />{projectInfo.other_file && projectInfo.other_file[0].file_name.slice(10)}
+                                    {projectInfo.white_paper && projectInfo.white_paper.file_name.slice(10)}<br />
+                                    {projectInfo.other_file.map(item => <div>
+                                        {item && item.file_name.slice(10)}
+                                    </div>)}
                                 </div>
                             </div>
 

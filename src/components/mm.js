@@ -9,42 +9,39 @@ async function sendTransaction(transactionParameters, desc, approvedActionParam)
 
 
 
-    if (window.ethereum && window.ethereum.selectedAddress) {
-        return new Promise(async (resolve, reject) => {
-            await window.ethereum
-                .request({
-                    method: "eth_sendTransaction",
-                    params: [{ ...transactionParameters, chainId: 42 }],
+    return new Promise(async (resolve, reject) => {
+        await window.ethereum
+            .request({
+                method: "eth_sendTransaction",
+                params: [{ ...transactionParameters, chainId: 42 }],
+            })
+            .then(async (txHash) => {
+                let previousActionObj = JSON.parse(localStorage.getItem('actionObj')) || {}
+                previousActionObj[txHash] = {
+                    desc: desc,
+                    action: approvedActionParam ? approvedActionParam : ''
+                }
+                localStorage.setItem('actionObj', JSON.stringify(previousActionObj))
+
+                subscribe(txHash, (val) => {
+                    resolve(val)
                 })
-                .then(async (txHash) => {
-                    let previousActionObj = JSON.parse(localStorage.getItem('actionObj')) || {}
-                    previousActionObj[txHash] = {
-                        desc: desc,
-                        action: approvedActionParam ? approvedActionParam : ''
-                    }
-                    localStorage.setItem('actionObj', JSON.stringify(previousActionObj))
 
-                    subscribe(txHash, (val) => {
-                        resolve(val)
-                    })
+                watchTransaction(txHash)
+            })
+            .catch((error) => {
+                // me.$message.error(me.$t("hint.rejected"));
+            })
+    })
 
-                    watchTransaction(txHash)
-                })
-                .catch((error) => {
-                    // me.$message.error(me.$t("hint.rejected"));
-                })
-        })
-
-
-    } else {
-        notification.error({
-            message: 'Failed',
-            description: 'Address not detected',
-            icon: h => {
-                return h('a-icon', { props: { type: 'close', style: { 'color': 'red' } } })
-            }
-        })
-    }
+    // 这里就不需要检查地址了
+    // notification.error({
+    //     message: 'Failed',
+    //     description: 'Address not detected',
+    //     icon: h => {
+    //         return h('a-icon', { props: { type: 'close', style: { 'color': 'red' } } })
+    //     }
+    // })
 }
 
 

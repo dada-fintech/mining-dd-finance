@@ -20,7 +20,7 @@ import Footer from '../../components/Footer'
 import './style.scss'
 
 export default function Projects() {
-    const [currentTab, setCurrentTab] = useState('active_project')
+    const [currentTab, setCurrentTab] = useState('can_invest_project')
     const [projects, setProjects] = useState({})
     const { t } = useTranslation()
     useEffect(() => {

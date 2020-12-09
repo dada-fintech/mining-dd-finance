@@ -80,14 +80,15 @@ export default function Process(props) {
                         <span className={`status ${process.status}`}>{statusMapping[process.status]}</span>
                     </div>
                 </div>
-                <div className="text-area">
+                {process.status !== 'VoteReplaning' && <div className="text-area">
                     <div>
                         释放额度: <strong>{process.unlock_percentage}%</strong>
                     </div>
                     <div>
                         {t('project.event')}: <strong>{process.description}</strong><br />
                     </div>
-                </div>
+                </div>}
+
                 {(process.status === 'Active' || process.status === 'VoteReplaning') && <>
                     {process.affirmative_vote && process.dissenting_vote && <>
                         <div className="vs-bar">
