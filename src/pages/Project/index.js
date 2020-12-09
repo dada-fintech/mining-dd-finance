@@ -26,7 +26,7 @@ export default function Project() {
     const [currentTab, setCurrentTab] = useState('process')
     const [project, setProject] = useState({ fundraising: {}, project_info: {} })
     const [lockNum, setLockedNum] = useState('')
-    const [contract, setContract] = useState('')
+    // const [contract, setContract] = useState('')
     const [auditModalVisible, setAuditModalVisible] = useState(false)
     const [insuranceModalVisible, setInsuranceModalVisible] = useState(false)
     const [currentParams, setCurrentParams] = useState({})
@@ -59,39 +59,39 @@ export default function Project() {
 
     }, [wallet.account])
 
-    useEffect(async () => {
-        let ABI = [
-            // transfer
-            {
-                "constant": false,
-                "inputs": [
-                    {
-                        "name": "_to",
-                        "type": "address"
-                    },
-                    {
-                        "name": "_value",
-                        "type": "uint256"
-                    }
-                ],
-                "name": "transfer",
-                "outputs": [
-                    {
-                        "name": "",
-                        "type": "bool"
-                    }
-                ],
-                "type": "function"
-            }
-        ];
+    // useEffect(async () => {
+    //     let ABI = [
+    //         // transfer
+    //         {
+    //             "constant": false,
+    //             "inputs": [
+    //                 {
+    //                     "name": "_to",
+    //                     "type": "address"
+    //                 },
+    //                 {
+    //                     "name": "_value",
+    //                     "type": "uint256"
+    //                 }
+    //             ],
+    //             "name": "transfer",
+    //             "outputs": [
+    //                 {
+    //                     "name": "",
+    //                     "type": "bool"
+    //                 }
+    //             ],
+    //             "type": "function"
+    //         }
+    //     ];
 
-        let CONTRACT_ADDRESS = '0xdac17f958d2ee523a2206206994597c13d831ec7'
+    //     let CONTRACT_ADDRESS = '0xdac17f958d2ee523a2206206994597c13d831ec7'
 
-        const contractRaw = new web3.eth.Contract(ABI, CONTRACT_ADDRESS)
+    //     const contractRaw = new web3.eth.Contract(ABI, CONTRACT_ADDRESS)
 
-        setContract(contractRaw)
+    //     setContract(contractRaw)
 
-    }, [])
+    // }, [])
 
     const doLock = () => {
         if (!lockNum) {
@@ -117,12 +117,12 @@ export default function Project() {
             }
 
             if (res.data.is_satisfied) {
-                mm.sendTransaction(lockParams, '锁定USDT').then(res =>{
+                mm.sendTransaction(lockParams, '锁定USDT').then(res => {
                     console.log(res)
 
-                    if(res){
+                    if (res) {
 
-                    }else{
+                    } else {
 
                     }
                 })
@@ -134,7 +134,7 @@ export default function Project() {
                 message.error('请在锁定前先授权')
                 const txHash = mm.sendTransaction(approveParams, '授权消耗USDT', lockParams)
                 console.log('222', txHash)
-                subscribe(txHash, ()=>{
+                subscribe(txHash, () => {
                     console.log('done 222')
                 })
 

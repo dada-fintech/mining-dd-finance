@@ -6,6 +6,11 @@
     // width: 16vw;
     padding: 2px;
     //background: rgba(0,0,0,0.01);
+    .btn-action{
+        line-height: unset;
+        height: 44px;
+        width:100%;
+    }
     .block {
         .title {
             color: #010101;

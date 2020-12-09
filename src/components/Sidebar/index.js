@@ -2,65 +2,16 @@ import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useWallet } from 'use-wallet'
 import mm from 'components/mm'
-import { Button } from 'antd'
+import { Button, Input, Modal, message } from 'antd'
 import axios from 'utils/axios'
 import './style.scss'
-
-const supporterList = [
-    {
-        address: '0x98...5643',
-        amount: 393
-    },
-    {
-        address: '0x98...5643',
-        amount: 263
-    },
-    {
-        address: '0x98...5643',
-        amount: 212
-    },
-    {
-        address: '0x98...5643',
-        amount: 198
-    },
-    {
-        address: '0x98...5643',
-        amount: 65
-    },
-    {
-        address: '0x98...5643',
-        amount: 21
-    },
-    {
-        address: '0x98...5643',
-        amount: 21
-    },
-    {
-        address: '0x98...5643',
-        amount: 21
-    },
-    {
-        address: '0x98...5643',
-        amount: 21
-    },
-    {
-        address: '0x98...5643',
-        amount: 21
-    },
-    {
-        address: '0x98...5643',
-        amount: 21
-    },
-]
-
-let totalAmount = 0
-supporterList.map(item => {
-    totalAmount += item.amount
-})
 
 export default function Sidebar(props) {
     const { projectId, role, otherFiles } = props
     const [myShare, setMyShare] = useState({})
+    const [subscribeVisible, setSubscribeVisible] = useState(false)
+    const [email, setEmail] = useState('')
+
     const [topInvestList, setTopInvestList] = useState([])
     const { t } = useTranslation()
     const wallet = useWallet()
@@ -93,6 +44,21 @@ export default function Sidebar(props) {
             data: myShare.profit_call_data.call_data
         }
         mm.sendTransaction(params, statusMapping[myShare.status])
+    }
+
+    const doSubscribe = () => {
+        if (!email) {
+            message.error('请输入邮箱')
+            return false
+        }
+        axios.post('/email/subscribe', {
+            project_uniq_id: projectId,
+            user_email: email
+        }).then(res => {
+            console.log(res)
+            message.success('订阅成功!')
+            setSubscribeVisible(false)
+        })
     }
 
     return (<div className="sidebar">
@@ -155,7 +121,7 @@ export default function Sidebar(props) {
                 </div>
             </>}
         </div>
-        {otherFiles && <div className="block">
+        {otherFiles && otherFiles.length > 0 && <div className="block">
             <div className="title">{t('sidebar.documents')}</div>
             <div className="box">
                 {otherFiles.map(item => (
@@ -168,47 +134,17 @@ export default function Sidebar(props) {
             </div>
         </div>}
 
-        {/*<div className="block">*/}
-        {/*    <div className="title">History</div>*/}
-        {/*    <div className="box">*/}
-        {/*        <div className="box-item">*/}
-        {/*            <div>*/}
-        {/*                PIP-7*/}
-        {/*            </div>*/}
-        {/*            <div className="status-pass">*/}
-        {/*                PASS*/}
-        {/*            </div>*/}
-        {/*        </div>*/}
-        {/*        <div className="box-item">*/}
-        {/*            <div>*/}
-        {/*                PIP-1*/}
-        {/*            </div>*/}
-        {/*            <div className="status-fail">*/}
-        {/*                FAIL*/}
-        {/*            </div>*/}
-        {/*        </div>*/}
-        {/*    </div>*/}
-        {/*</div>*/}
-        {/*<div className="block">*/}
-        {/*    <div className="title">Stats</div>*/}
-        {/*    <div className="box">*/}
-        {/*        <div className="box-item">*/}
-        {/*            <div>*/}
-        {/*                Total asset*/}
-        {/*            </div>*/}
-        {/*            <div>*/}
-        {/*                1,000,000 USD*/}
-        {/*            </div>*/}
-        {/*        </div>*/}
-        {/*        <div className="box-item">*/}
-        {/*            <div>*/}
-        {/*                Total Vote*/}
-        {/*            </div>*/}
-        {/*            <div>*/}
-        {/*                1,000,000 DUSD*/}
-        {/*            </div>*/}
-        {/*        </div>*/}
-        {/*    </div>*/}
-        {/*</div>*/}
+        <div>
+            <Button className="btn-action" onClick={() => { setEmail(''); setSubscribeVisible(true) }}>订阅该项目获得最新动态</Button>
+        </div>
+
+        {subscribeVisible && <Modal title="订阅项目" visible={true} onOk={() => { doSubscribe() }} onCancel={() => { setSubscribeVisible(false) }}>
+            <div style={{ marginBottom: '4px' }}>
+                请输入邮箱
+            </div>
+            <Input value={email} onChange={(e) => { setEmail(e.target.value) }} />
+
+        </Modal>}
+
     </div>)
 }

@@ -6,14 +6,22 @@ import axios from 'utils/axios'
 import mm from 'components/mm'
 import './style.scss'
 
-export default function ConfirmVote(props) {
+export default function AuditModal(props) {
     const params = props.params
     const wallet = useWallet()
     const [comment, setComment] = useState('')
+    const [approveLoading, setApproveLoading] = useState(false)
+    const [rejectLoading, setRejectLoading] = useState(false)
+
     const doAudit = (support) => {
         if (!comment) {
             message.error('请填写专业意见')
             return false
+        }
+        if (support) {
+            setApproveLoading(true)
+        } else {
+            setRejectLoading(true)
         }
         axios.post('/project/audit-project', {
             ...params,
@@ -25,7 +33,11 @@ export default function ConfirmVote(props) {
                 to: res.data.contract_addr,
                 data: res.data.call_data
             }
-            mm.sendTransaction(auditParams, '审计项目')
+            mm.sendTransaction(auditParams, '审计项目').then(res => {
+                setApproveLoading(false)
+                setRejectLoading(false)
+                props.onCancel()
+            })
         })
     }
 
@@ -40,8 +52,8 @@ export default function ConfirmVote(props) {
             未通过审核的项目将会撤销项目
             </div>
             <div className="handle-area">
-                <Button className="btn-red" onClick={() => { doAudit(false) }}>拒绝</Button>
-                <Button className="btn-green" onClick={() => { doAudit(true) }}>通过</Button>
+                <Button loading={rejectLoading} className="btn-red" onClick={() => { doAudit(false) }}>拒绝</Button>
+                <Button loading={approveLoading} className="btn-green" onClick={() => { doAudit(true) }}>通过</Button>
             </div>
         </Modal>
     )

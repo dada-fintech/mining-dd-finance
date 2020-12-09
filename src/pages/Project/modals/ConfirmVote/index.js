@@ -9,7 +9,7 @@ import './style.scss'
 export default function ConfirmVote(props) {
     const params = props.params
     const wallet = useWallet()
-
+    const [loading, setLoading] = useState(false)
     const [comment, setComment] = useState('')
     const doAction = () => {
         let target = ''
@@ -26,21 +26,27 @@ export default function ConfirmVote(props) {
                 target = '/project/vote-against-replan'
             }
         }
-
+        setLoading(true)
         axios.post(target, {
             ...params,
             comment: comment,
         }).then(res => {
             console.log(res.data, 'bb')
+            
             if (res.data.need_call) {
                 const txnParams = {
                     from: wallet.account,
                     to: res.data.call_data.contract_addr,
                     data: res.data.call_data.call_data
                 }
-                mm.sendTransaction(txnParams, params.status === 'Active' ? '确认投票' : '确认变更投票')
+                mm.sendTransaction(txnParams, params.status === 'Active' ? '确认投票' : '确认变更投票').then(res => {
+                    setLoading(false)
+                    props.onCancel()
+                })
             } else {
                 message.success('操作成功')
+                setLoading(false)
+                props.onCancel()
             }
         })
     }
@@ -66,10 +72,9 @@ export default function ConfirmVote(props) {
             </div> */}
             <div className="safe-zone">
                 确定要投{params.vote === 'yes' ? '同意' : '拒绝'}票吗？
-                {/* <VoteStatus approve={12321} object={3313} /> */}
                 <Input.TextArea value={comment} onChange={(e) => { setComment(e.target.value) }} placeholder="请输入评论" className="texts" />
             </div>
-            <Button className="btn-green" onClick={() => { doAction() }}>确定</Button>
+            <Button loading={loading} className="btn-green" onClick={() => { doAction() }}>确定</Button>
         </Modal>
     )
 

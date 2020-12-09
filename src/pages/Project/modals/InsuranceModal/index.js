@@ -10,6 +10,8 @@ export default function ConfirmVote(props) {
     const params = props.params
     const wallet = useWallet()
     const [info, setInfo] = useState({})
+    const [loading, setLoading] = useState({})
+
     useEffect(() => {
         axios.post('/project/pay-insurance', {
             ...params,
@@ -32,7 +34,10 @@ export default function ConfirmVote(props) {
         }
 
         if (info.is_satisfied) {
-            mm.sendTransaction(txnParams, '支付保证金')
+            mm.sendTransaction(txnParams, '支付保证金').then(res => {
+                setLoading(false)
+                props.cancel()
+            })
         } else {
             mm.sendTransaction(approveParams, '授权支付保证金', txnParams)
         }
@@ -48,7 +53,7 @@ export default function ConfirmVote(props) {
                 您的项目即将启动，您需要支付募集额度10%的DADA作为项目抵押金。<br />项目完成后，将会收取其中25%的费用作为保险费用，返回剩余75%的押金。
             </div>
             <div className="handle-area">
-                <Button className="btn-green" onClick={() => { doAction() }}>{info.is_satisfied ? '支付' : '授权'}</Button>
+                <Button loading={loading} className="btn-green" onClick={() => { doAction() }}>{info.is_satisfied ? '支付' : '授权'}</Button>
             </div>
         </Modal>
     )

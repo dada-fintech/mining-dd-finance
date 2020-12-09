@@ -65,7 +65,7 @@ export default function Header() {
                 {wallet.status === 'connected' ? <Tooltip title={wallet.account}>
                     {wallet.account && <a className="line-btn">{wallet.account.slice(0, 4) + '...' + wallet.account.slice(-4)}</a>}
                 </Tooltip>
-                    : <a className="border-top-btm" onClick={() => { wallet.connect() }}>Connect Wallet</a>}
+                    : <a className="border-top-btm" onClick={() => {console.log(11); wallet.connect() }}>Connect Wallet</a>}
             </nav>
         </div>
     </header>)
