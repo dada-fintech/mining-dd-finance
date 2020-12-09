@@ -194,8 +194,8 @@ export default function CreateVote() {
         <Header />
 
         <div className="container create-vote-main">
-            <Row gutter={{ md: 32 }}>
-                <Col xs={24} md={18}>
+            <Row gutter={{ md: 160 }} align="center">
+                <Col xs={24} md={14}>
                     <div className="main-content">
                         {currentStep === 0 && <div className="step-0" dangerouslySetInnerHTML={{ __html: t('createVote.hint') }}>
                         </div>}
@@ -343,14 +343,14 @@ export default function CreateVote() {
                     </div>
                     <div className="step-control">
                         <div>
-                            {currentStep > 0 && <div onClick={() => { setCurrentStep(prev => prev - 1) }} className="line-btn">{t('common.back')} <img src={LinkArrowBack} /></div>}
+                            {currentStep > 0 && <div onClick={() => { setCurrentStep(prev => prev - 1) }} className="line-btn line-btn-back">{t('common.back')} <img src={LinkArrowBack} /></div>}
                         </div>
                         {currentStep < 2 && <div>
-                            <div onClick={() => { goNextStep() }} className="line-btn"><img src={LinkArrow} /> {t('common.next')}</div>
+                            <div onClick={() => { goNextStep() }} className="line-btn line-btn-next"><img src={LinkArrow} /> {t('common.next')}</div>
                         </div>}
                         {currentStep == 2 && <div>
-                            <span className="hint">{t('common.gasFeeHint')}</span>
-                            <div onClick={() => { confirmInfo() }} className="line-btn"><img src={LinkArrow} /> {t('common.confirmInfo')}</div>
+                            <div onClick={() => { confirmInfo() }} className="btn-confirm"><span>{t('common.confirmInfo')}</span> </div>
+                            <span className="hint hint-gasfee">{t('common.gasFeeHint')}</span>
                         </div>}
                     </div>
                 </Col>
