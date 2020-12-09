@@ -295,4 +295,12 @@ img {
     margin: 0 auto 32px;
     border-radius: 100%;
     font-size: 20px;
+    &.success{
+        background: #48cccc;
+        color: #fff;
+    }
+    &.error{
+        background: red;
+        color: #fff;
+    }
 }

@@ -19,6 +19,8 @@ export default function CreateProject() {
     const [currentStep, setCurrentStep] = useState(0)
     const [projectInfo, setProjectInfo] = useState({ member_address: [''], profit_token: 'USDT', other_file: [] })
     const [fundraising, setFundraising] = useState({})
+    const [payStatus, setPayStatus] = useState('')
+
     const [processList, setProcessList] = useState([{}, {}])
     const [approveBalance, setApproveBalance] = useState(0)
     const [dadaApproved, setDadaApproved] = useState(false)
@@ -391,7 +393,15 @@ export default function CreateProject() {
         await mm.sendTransaction(
             txnParams,
             '支付中'
-        )
+        ).then(res => {
+            if (res) {
+                setPayStatus('success')
+                setCurrentStep(prev => prev + 1)
+            } else {
+                setPayStatus('error')
+                setCurrentStep(prev => prev + 1)
+            }
+        })
 
     }
 
@@ -734,24 +744,51 @@ export default function CreateProject() {
                                 {t('createProject.payHint')}
                             </div>
                         </div>}
+                        {currentStep === 9 && <div className="step-pay">
+                            {payStatus === 'success' ? <>
+                                <div className="dada-circle success">
+                                    支付成功
+                            </div>
+                                <div className="pay-hint">
+                                    您的项目已经上传至以太坊网络中，合约创建时间预计需要1~10分钟<br /><br />
+                            创建成功后将会给推送邮件至您的邮箱中
+                            </div>
+                            </> : <>
+                                    <div className="dada-circle error">
+                                        支付失败
+                            </div>
+                                    <div className="pay-hint">
+                                        请查询链操作记录查看原因
+                            </div>
+                                </>}
+
+                        </div>}
                     </div>
                     <div className="step-control">
                         <div>
-                            {currentStep > 0 && <div onClick={() => { setCurrentStep(prev => prev - 1) }} className="line-btn line-btn-back">{t('common.back')} <img src={LinkArrowBack} /></div>}
+                            {currentStep > 0 && currentStep < 9 && <div onClick={() => { setCurrentStep(prev => prev - 1) }} className="line-btn line-btn-back">{t('common.back')} <img src={LinkArrowBack} /></div>}
                         </div>
                         {currentStep < 7 && <div>
                             <div onClick={() => { goNextStep() }} className="line-btn line-btn-next"><img src={LinkArrow} /> {t('common.next')}</div>
                         </div>}
                         {currentStep == 7 && <div>
-
                             <div onClick={() => { confirmInfo() }} className="btn-confirm"> <span>{t('common.confirmInfo')}</span></div>
                             <span className="hint hint-gasfee">{t('common.gasFeeHint')}</span>
                         </div>
-
                         }
                         {currentStep == 8 && <div>
                             {dadaApproved ? <div onClick={() => { doPay() }} className="btn-confirm"> <span>{t('common.pay')}</span></div>
                                 : <div onClick={() => { doApprove() }} className="btn-confirm"> <span>{t('common.approve')}</span></div>}
+                        </div>}
+                        {currentStep == 9 && <div>
+                            <a href="/">
+                                <div className="btn-confirm">
+                                    <span>
+                                        返回首页
+
+                                </span>
+                                </div>
+                            </a>
 
                         </div>}
                     </div>
