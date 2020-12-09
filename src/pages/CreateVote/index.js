@@ -35,7 +35,7 @@ export default function CreateVote() {
 
     useEffect(() => {
         axios.get('/project/detail/' + id).then(res => {
-            if(!res.data.project_info.other_file){
+            if (!res.data.project_info.other_file) {
                 res.data.project_info.other_file = []
             }
             setProcessList(res.data.process)
@@ -259,14 +259,14 @@ export default function CreateVote() {
                                         <div className="name required">{t('createProject.unlockDate')}</div>
                                         <div className="value">
                                             {(item.status && item.status !== 'Future') ? `${new Date(item.vote_start_time).toLocaleDateString()}` :
-                                                <DatePicker value={item.vote_start_time && moment(item.vote_start_time)} onChange={value => { changeProcess(index, 'vote_start_time', value.valueOf()); }} />
+                                                <DatePicker value={item.vote_start_time && moment(item.vote_start_time)} onChange={value => { value && changeProcess(index, 'vote_start_time', value.valueOf()); }} />
                                             }
                                         </div>
                                     </div> : <div className="line">
                                             <div className="name required">{t('createProject.votingDate')}</div>
                                             <div className="value">
                                                 {(item.status && item.status !== 'Future') ? `${new Date(item.vote_start_time).toLocaleDateString()}-${new Date(item.vote_end_time).toLocaleDateString()}` :
-                                                    <DatePicker.RangePicker value={item.vote_start_time && [moment(item.vote_start_time), moment(item.vote_end_time)]} onChange={value => { changeProcess(index, 'vote_start_time', value[0].valueOf()); changeProcess(index, 'vote_end_time', value[1].valueOf()) }} />
+                                                    <DatePicker.RangePicker value={item.vote_start_time && [moment(item.vote_start_time), moment(item.vote_end_time)]} onChange={value => { value && changeProcess(index, 'vote_start_time', value[0].valueOf()); value && changeProcess(index, 'vote_end_time', value[1].valueOf()) }} />
                                                 }
                                             </div>
                                         </div>}

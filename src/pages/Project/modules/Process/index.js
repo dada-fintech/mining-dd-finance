@@ -74,20 +74,23 @@ export default function Process(props) {
         {finalProcessList.map((process, index) => (
             <div className="process-item" key={index}>
                 <div className="top">
-                    <div className="title">{t('project.progress')} #{index + 1}</div>
+                    {(process.status === 'VoteNotice' || process.status === 'VoteReplanFailed' || process.status === 'VoteReplanPassed' || process.status === 'VoteReplaning') ? <div className="title">变更计划</div> : <div className="title">{t('project.progress')} #{index + 1}</div>}
                     <div>
                         <span className="date">{new Date(process.vote_start_time).toLocaleDateString()} - {new Date(process.vote_end_time).toLocaleDateString()}</span>
                         <span className={`status ${process.status}`}>{statusMapping[process.status]}</span>
                     </div>
                 </div>
-                {process.status !== 'VoteReplaning' && <div className="text-area">
-                    <div>
-                        释放额度: <strong>{process.unlock_percentage}%</strong>
-                    </div>
-                    <div>
-                        {t('project.event')}: <strong>{process.description}</strong><br />
-                    </div>
-                </div>}
+                {(process.status === 'VoteNotice' || process.status === 'VoteReplanFailed' || process.status === 'VoteReplanPassed' || process.status === 'VoteReplaning') ? <div>
+                    发起时间：<strong>{new Date(process.replan_time).toLocaleDateString()}</strong>
+                </div> : <div className="text-area">
+                        <div>
+                            释放额度: <strong>{process.unlock_percentage}%</strong>
+                        </div>
+
+                    </div>}
+                <div>
+                    {t('project.event')}: <strong>{process.description}</strong><br />
+                </div>
 
                 {(process.status === 'Active' || process.status === 'VoteReplaning') && <>
                     {process.affirmative_vote && process.dissenting_vote && <>

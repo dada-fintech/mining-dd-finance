@@ -13,6 +13,7 @@ import LinkArrow from 'assets/link-arrow.svg'
 import ProjectsTop from 'assets/projects-top.svg'
 
 import { useTranslation } from 'react-i18next'
+import { useLocation } from 'react-router-dom'
 import axios from 'utils/axios'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
@@ -22,6 +23,8 @@ import './style.scss'
 export default function Projects() {
     const [currentTab, setCurrentTab] = useState('can_invest_project')
     const [projects, setProjects] = useState({})
+    const locate = useLocation()
+
     const { t } = useTranslation()
     useEffect(() => {
         axios.get('/project/list').then(res => {
@@ -30,6 +33,10 @@ export default function Projects() {
             }
             )
         })
+
+        if(locate.search){
+            setCurrentTab(locate.search.split('=')[1])
+        }
     }, [])
 
     return (<div className="projects-page">
