@@ -42,6 +42,9 @@
             }
         }
     }
+    .bottom-area{
+        margin: 16px auto 64px;
+    }
     .project-intro {
         margin-top: 32px;
         padding: 16px 24px;
@@ -66,12 +69,12 @@
             margin-bottom: 12px;
             font-weight: 600;
         }
-        .handle-area{
+        .handle-area {
             display: flex;
             align-items: center;
             justify-content: flex-end;
             width: 100%;
-            .btn-action{
+            .btn-action {
                 margin-left: 12px;
                 position: relative;
                 font-weight: 600;
@@ -86,7 +89,7 @@
                 // font-weight: 800;
                 // font-size: 18px;
                 // margin-left: 12px;
-                .text{
+                .text {
                     position: absolute;
                     line-height: 30px;
                     left: 50%;
@@ -94,11 +97,11 @@
                     z-index: 2;
                     white-space: nowrap;
                 }
-                .anticon{
-font-size: 14px;
+                .anticon {
+                    font-size: 14px;
                 }
-                &::before{
-                    content: '';
+                &::before {
+                    content: "";
                     position: absolute;
                     width: 0;
                     height: 100%;
@@ -106,10 +109,10 @@ font-size: 14px;
                     z-index: 1;
                     transition: all 0.7s;
                 }
-                &:hover::before{
+                &:hover::before {
                     width: 100%;
                 }
-                &:hover{
+                &:hover {
                     color: white;
                     box-shadow: 2px 2px 3px #9a9a9a;
                 }
@@ -144,7 +147,7 @@ font-size: 14px;
     //     background: #fff;
     // }
     .votes-bar {
-        margin:5% auto;
+        margin: 5% auto;
         border-radius: 5px;
         height: 10px;
         margin-bottom: 10px;

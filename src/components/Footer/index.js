@@ -10,9 +10,9 @@ export default function Footer() {
     return (<div className="footer">
         <footer className="container">
             <div>
-                <a href="https://doc.dd.finance">{t('homepage.footer.documentation')}</a>
+                <a href="https://doc.dd.finance" target="_blank">{t('homepage.footer.documentation')}</a>
                 <img src={LogoBlue} className="footer-logo" />
-                <a>{t('homepage.footer.explore')}</a>
+                <a href="/projects?tab=can_invest_project">{t('homepage.footer.explore')}</a>
             </div>
             <div className="copyright">
                 © DD.FINANCE.All rights reserved.

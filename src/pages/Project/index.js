@@ -15,7 +15,7 @@ import InsuranceModal from './modals/InsuranceModal'
 // import detectEthereumProvider from '@metamask/detect-provider'
 // import { useWallet } from 'use-wallet'
 import Header from '../../components/Header'
-import Footer from '../../components/Footer'
+import ProjectFooter from '../../components/ProjectFooter'
 import Sidebar from '../../components/Sidebar'
 import ProcessModule from './modules/Process'
 import mm from 'components/mm'
@@ -264,23 +264,25 @@ export default function Project() {
                 <div className="apy">{t('common.apy')} {project.fundraising.expected_apy}%</div>
             </div>
         </div>
-        <div className="container">
-
-            <Row gutter={{ md: 24, lg: 24 }} align="center">
-                <Col xs={24} md={12} lg={14}>
-                    {/* <div className="project-content"> */}
-                    {/* {currentTab === 'vote' && <VoteModule />} */}
-                    {currentTab === 'process' && <ProcessModule id={id} processList={project.process || []} />}
-                    {currentTab === 'detail' && <DetailModule fullDesc={project.fullDesc} projectInfo={project.project_info} />}
-                    {currentTab === 'comments' && <CommentsModule />}
-                    {/* </div> */}
-                </Col>
-                <Col xs={24} md={8} lg={6}>
-                    <Sidebar projectId={id} role={role} otherFiles={project.project_info.other_file} />
-                </Col>
-            </Row>
+        <div className="bottom-area">
+            <div className="container">
+                <Row gutter={{ md: 24, lg: 24 }} align="center">
+                    <Col xs={24} md={12} lg={14}>
+                        {/* <div className="project-content"> */}
+                        {/* {currentTab === 'vote' && <VoteModule />} */}
+                        {currentTab === 'process' && <ProcessModule id={id} processList={project.process || []} />}
+                        {currentTab === 'detail' && <DetailModule fullDesc={project.fullDesc} projectInfo={project.project_info} />}
+                        {currentTab === 'comments' && <CommentsModule />}
+                        {/* </div> */}
+                    </Col>
+                    <Col xs={24} md={8} lg={6}>
+                        <Sidebar projectId={id} role={role} otherFiles={project.project_info.other_file} />
+                    </Col>
+                </Row>
+            </div>
         </div>
-        <Footer />
+
+        <ProjectFooter />
 
         { repayModalVisible && <RepayModal params={currentParams} onCancel={() => { setRepayModalVisible(false) }} />}
         { auditModalVisible && <AuditModal params={currentParams} onCancel={() => { setAuditModalVisible(false) }} />}
