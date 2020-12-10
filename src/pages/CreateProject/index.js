@@ -3,7 +3,7 @@ import { Button, Row, Col, Input, Upload, message, DatePicker, Tooltip, InputNum
 import LinkArrow from 'assets/link-arrow.svg'
 import LinkArrowBack from 'assets/link-arrow-back.svg'
 import { useTranslation } from 'react-i18next'
-import { PlusCircleOutlined, MinusCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
+import { PlusCircleOutlined, MinusCircleOutlined, CloseCircleOutlined, LoadingOutlined } from '@ant-design/icons'
 // import { useWallet } from 'use-wallet'
 import QuestionIcon from 'assets/question.svg'
 import { useWallet } from 'use-wallet'
@@ -20,6 +20,7 @@ export default function CreateProject() {
     const [projectInfo, setProjectInfo] = useState({ member_address: [''], profit_token: 'USDT', other_file: [] })
     const [fundraising, setFundraising] = useState({})
     const [payStatus, setPayStatus] = useState('')
+    const [createLoading, setCreateLoading] = useState(false)
 
     const [processList, setProcessList] = useState([{}, {}])
     const [approveBalance, setApproveBalance] = useState(0)
@@ -373,15 +374,16 @@ export default function CreateProject() {
             to: callData[0].contract_addr,
             data: callData[0].call_data
         }
-        await mm.sendTransaction(
+        setCreateLoading(true)
+        mm.sendTransaction(
             txnParams,
             '授权',
-            {
-                from: wallet.account,
-                to: callData[1].contract_addr,
-                data: callData[1].call_data
+        ).then(res => {
+            setCreateLoading(false)
+            if (res) {
+                doPay()
             }
-        )
+        })
     }
 
     const doPay = async () => {
@@ -390,10 +392,14 @@ export default function CreateProject() {
             to: callData[1].contract_addr,
             data: callData[1].call_data
         }
-        await mm.sendTransaction(
+        setCreateLoading(true)
+
+        mm.sendTransaction(
             txnParams,
             '支付中'
         ).then(res => {
+            setCreateLoading(false)
+
             if (res) {
                 setPayStatus('success')
                 setCurrentStep(prev => prev + 1)
@@ -777,8 +783,8 @@ export default function CreateProject() {
                         </div>
                         }
                         {currentStep == 8 && <div>
-                            {dadaApproved ? <div onClick={() => { doPay() }} className="btn-confirm"> <span>{t('common.pay')}</span></div>
-                                : <div onClick={() => { doApprove() }} className="btn-confirm"> <span>{t('common.approve')}</span></div>}
+                            {dadaApproved ? <div onClick={() => { !createLoading && doPay() }} className="btn-confirm"> <span>{t('common.pay')}</span></div>
+                                : <div onClick={() => { !createLoading && doApprove() }} className="btn-confirm"> <span className="text">{t('common.approve')} {createLoading && <LoadingOutlined />}</span></div>}
                         </div>}
                         {currentStep == 9 && <div>
                             <a href="/">

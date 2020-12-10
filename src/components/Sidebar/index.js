@@ -11,6 +11,7 @@ export default function Sidebar(props) {
     const [myShare, setMyShare] = useState({})
     const [subscribeVisible, setSubscribeVisible] = useState(false)
     const [email, setEmail] = useState('')
+    const [actionLoading, setActionLoading] = useState(false)
 
     const [topInvestList, setTopInvestList] = useState([])
     const { t } = useTranslation()
@@ -43,7 +44,10 @@ export default function Sidebar(props) {
             to: myShare.profit_call_data.contract_addr,
             data: myShare.profit_call_data.call_data
         }
-        mm.sendTransaction(params, statusMapping[myShare.status])
+        setActionLoading(true)
+        mm.sendTransaction(params, statusMapping[myShare.status]).then(res => {
+            setActionLoading(false)
+        })
     }
 
     const doSubscribe = () => {
@@ -99,7 +103,7 @@ export default function Sidebar(props) {
                     </div>
                     {myShare.profit_status && <div className="line">
                         <div>收益状态</div>
-                        <Button className="btn-green" onClick={() => { doAction() }}>
+                        <Button className="btn-green" loading={actionLoading} onClick={() => { doAction() }}>
                             {statusMapping[myShare.profit_status]}
                         </Button>
                     </div>}

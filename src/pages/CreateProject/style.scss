@@ -163,13 +163,16 @@
             border-radius: 10px;
             cursor: pointer;
             transition: all 1s;
-            span{
+            .text{
                 position: absolute;
                 line-height: 40px;
                 left: 50%;
                 transform: translateX(-50%);
                 z-index: 2;
                 white-space: nowrap;
+                .anticon{
+                    font-size: 14px;
+                }
             }
             &::before{
                 content: '';

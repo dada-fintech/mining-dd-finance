@@ -1,0 +1,31 @@
+.repay-modal {
+    .hint {
+        color: #414141;
+        font-size: 16px;
+        line-height: 27px;
+        margin-bottom: 8px;
+    }
+    .description {
+        background: #f6f6f6;
+        color: #000;
+        font-size: 20px;
+        line-height: 27px;
+        padding: 6px 32px;
+        text-align: left;
+    }
+    .your-vote {
+        margin-top: 12px;
+        font-size: 20px;
+        line-height: 27px;
+    }
+    .texts {
+        margin-bottom: 24px;
+    }
+    .handle-area{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 20px auto 4px;
+    }
+
+}

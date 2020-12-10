@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { Row, Col, Input, Button, message } from 'antd'
-
+import {
+    LoadingOutlined,
+} from '@ant-design/icons';
 import { useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import axios from 'utils/axios'
 import AuditModal from './modals/AuditModal'
+import RepayModal from './modals/RepayModal'
 import { useWallet } from 'use-wallet'
 import InsuranceModal from './modals/InsuranceModal'
-import { subscribe } from '@nextcloud/event-bus'
-import web3 from 'components/web3'
+// import web3 from 'components/web3'
 // import BN from 'bignumber.js'
 // import detectEthereumProvider from '@metamask/detect-provider'
 // import { useWallet } from 'use-wallet'
@@ -28,8 +30,10 @@ export default function Project() {
     const [lockNum, setLockedNum] = useState('')
     // const [contract, setContract] = useState('')
     const [auditModalVisible, setAuditModalVisible] = useState(false)
+    const [repayModalVisible, setRepayModalVisible] = useState(false)
     const [insuranceModalVisible, setInsuranceModalVisible] = useState(false)
     const [currentParams, setCurrentParams] = useState({})
+    const [lockLoading, setLocklLoading] = useState(false)
     const [role, setRole] = useState('invester')
     const wallet = useWallet()
     const { id } = useParams()
@@ -98,6 +102,7 @@ export default function Project() {
             message.error('请输入锁定金额')
             return false
         }
+        setLocklLoading(true)
         axios.post('project/invest', {
             project_uniq_id: id,
             user_addr: wallet.account,
@@ -118,32 +123,26 @@ export default function Project() {
 
             if (res.data.is_satisfied) {
                 mm.sendTransaction(lockParams, '锁定USDT').then(res => {
-                    console.log(res)
-
-                    if (res) {
-
-                    } else {
-
-                    }
+                    setLocklLoading(false)
                 })
-                // subscribe(txHash, ()=>{
-                //     console.log('done 111')
-                // })
-
             } else {
                 message.error('请在锁定前先授权')
-                const txHash = mm.sendTransaction(approveParams, '授权消耗USDT', lockParams)
-                console.log('222', txHash)
-                subscribe(txHash, () => {
-                    console.log('done 222')
+                mm.sendTransaction(approveParams, '授权消耗USDT').then(res => {
+                    if (res) {
+                        mm.sendTransaction(lockParams, '锁定USDT').then(res => {
+                            setLocklLoading(false)
+                        })
+                    }
                 })
-
             }
         })
     }
 
     const doTakeMoney = () => {
-
+        setCurrentParams({
+            project_uniq_id: id,
+        })
+        setRepayModalVisible(true)
     }
 
     const doAudit = () => {
@@ -225,7 +224,7 @@ export default function Project() {
                                 <Col md={12}>
                                     <div className="handle-area">
                                         <Input style={{ width: '140px', height: '44px' }} value={lockNum} onChange={(event) => { setLockedNum(event.target.value) }} suffix="USDT" />
-                                        <div className="btn-action" onClick={() => { doLock() }}><span>立即锁定</span></div>
+                                        <div className="btn-action" onClick={() => { !lockLoading && doLock() }}><span className="text">立即锁定 {lockLoading && <LoadingOutlined />}</span></div>
                                     </div>
                                 </Col>
                             </Row>}
@@ -272,7 +271,7 @@ export default function Project() {
                     {/* <div className="project-content"> */}
                     {/* {currentTab === 'vote' && <VoteModule />} */}
                     {currentTab === 'process' && <ProcessModule id={id} processList={project.process || []} />}
-                    {currentTab === 'detail' && <DetailModule fullDesc={project.fullDesc} projectInfo={project.project_info}/>}
+                    {currentTab === 'detail' && <DetailModule fullDesc={project.fullDesc} projectInfo={project.project_info} />}
                     {currentTab === 'comments' && <CommentsModule />}
                     {/* </div> */}
                 </Col>
@@ -283,6 +282,7 @@ export default function Project() {
         </div>
         <Footer />
 
+        { repayModalVisible && <RepayModal params={currentParams} onCancel={() => { setRepayModalVisible(false) }} />}
         { auditModalVisible && <AuditModal params={currentParams} onCancel={() => { setAuditModalVisible(false) }} />}
         { insuranceModalVisible && <InsuranceModal params={currentParams} onCancel={() => { setInsuranceModalVisible(false) }} />}
 

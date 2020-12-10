@@ -7,7 +7,7 @@ import { useWallet } from 'use-wallet'
 import mm from 'components/mm'
 import moment from 'moment'
 import { useTranslation } from 'react-i18next'
-import { PlusCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
+import { PlusCircleOutlined, CloseCircleOutlined, LoadingOutlined } from '@ant-design/icons'
 
 import axios from 'utils/axios'
 import { useParams } from 'react-router-dom'
@@ -22,6 +22,7 @@ export default function CreateVote() {
     const [projectInfo, setProjectInfo] = useState({})
     const [fundraising, setFundraising] = useState({})
     const [description, setDescription] = useState('')
+    const [changeLoading, setChangeLoading] = useState(false)
     const wallet = useWallet()
 
     const { t, i18n } = useTranslation()
@@ -169,12 +170,14 @@ export default function CreateVote() {
     }
 
     const confirmInfo = () => {
-        //🈯只传过去Future
+        //只传过去Future
         let finalProcessList = processList.filter(item => (item.status === 'Future' || !item.status))
 
         finalProcessList.forEach(item => {
             item.unlock_percentage = String(item.unlock_percentage)
         })
+
+        setChangeLoading(true)
 
         axios.post('/project/change-process', {
             sender: wallet.account,
@@ -187,7 +190,9 @@ export default function CreateVote() {
                 from: wallet.account,
                 to: res.data.contract_addr,
                 data: res.data.call_data
-            }, '更改计划')
+            }, '更改计划').then(res => {
+                setChangeLoading(false)
+            })
         })
     }
 
@@ -350,7 +355,7 @@ export default function CreateVote() {
                             <div onClick={() => { goNextStep() }} className="line-btn line-btn-next"><img src={LinkArrow} /> {t('common.next')}</div>
                         </div>}
                         {currentStep == 2 && <div>
-                            <div onClick={() => { confirmInfo() }} className="btn-confirm"><span>{t('common.confirmInfo')}</span> </div>
+                            <div onClick={() => { !changeLoading && confirmInfo() }} className="btn-confirm"><span className="text">{t('common.confirmInfo')} {changeLoading && <LoadingOutlined />}</span> </div>
                             <span className="hint hint-gasfee">{t('common.gasFeeHint')}</span>
                         </div>}
                     </div>

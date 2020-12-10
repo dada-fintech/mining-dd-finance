@@ -86,13 +86,16 @@
                 // font-weight: 800;
                 // font-size: 18px;
                 // margin-left: 12px;
-                span{
+                .text{
                     position: absolute;
                     line-height: 30px;
                     left: 50%;
                     transform: translateX(-50%);
                     z-index: 2;
                     white-space: nowrap;
+                }
+                .anticon{
+font-size: 14px;
                 }
                 &::before{
                     content: '';
@@ -160,7 +163,7 @@
     .process-tag {
         font-size: 14px;
         color: #707070;
-        white-space: now;
+        white-space: nowrap;
     }
     @media screen and (max-width: 992px) {
         .project-main {
