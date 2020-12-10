@@ -115,8 +115,9 @@ export default function CreateVote() {
                     }
                 }
 
-                totalPercent += Number(item.unlock_percentage)
-
+                if (item.status === 'Finished' || !item.status) {
+                    totalPercent += Number(item.unlock_percentage)
+                }
             })
             if (!pass) {
                 message.error('请检查所有必填字段')

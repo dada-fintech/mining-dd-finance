@@ -142,6 +142,9 @@ export default function Project() {
         })
     }
 
+    const doTakeMoney = () => {
+
+    }
 
     const doAudit = () => {
         setCurrentParams({
@@ -203,6 +206,13 @@ export default function Project() {
                                     <div className="btn-action" onClick={() => { doInsurance() }}><span>支付保证金</span></div>
                                 </div>
                             </Row>}
+
+                            {project.project_info.status === 'AllPhasesDone' && role === 'manager' && (new Date().valueOf() < project.project_info.income_settlement_time) && <Row>
+                                <div className="handle-area">
+                                    <div className="btn-action" onClick={() => { doTakeMoney() }}><span>项目回款</span></div>
+                                </div>
+                            </Row>}
+
                             {/* manager 不需投资 */}
                             {project.project_info.status === 'Raising' && role !== 'manager' && <Row gutter={32}>
                                 <Col md={12}>
@@ -262,7 +272,7 @@ export default function Project() {
                     {/* <div className="project-content"> */}
                     {/* {currentTab === 'vote' && <VoteModule />} */}
                     {currentTab === 'process' && <ProcessModule id={id} processList={project.process || []} />}
-                    {currentTab === 'detail' && <DetailModule fullDesc={project.fullDesc} />}
+                    {currentTab === 'detail' && <DetailModule fullDesc={project.fullDesc} projectInfo={project.project_info}/>}
                     {currentTab === 'comments' && <CommentsModule />}
                     {/* </div> */}
                 </Col>

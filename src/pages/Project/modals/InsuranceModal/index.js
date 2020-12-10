@@ -10,7 +10,7 @@ export default function ConfirmVote(props) {
     const params = props.params
     const wallet = useWallet()
     const [info, setInfo] = useState({})
-    const [loading, setLoading] = useState({})
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         axios.post('/project/pay-insurance', {
@@ -33,13 +33,22 @@ export default function ConfirmVote(props) {
             data: info.call_contract[1].call_data
         }
 
+        setLoading(true)
+
         if (info.is_satisfied) {
             mm.sendTransaction(txnParams, '支付保证金').then(res => {
                 setLoading(false)
                 props.cancel()
             })
         } else {
-            mm.sendTransaction(approveParams, '授权支付保证金', txnParams)
+            mm.sendTransaction(approveParams, '授权支付保证金').then(res => {
+                if (res) {
+                    mm.sendTransaction(txnParams, '支付保证金').then(res => {
+                        setLoading(false)
+                        props.cancel()
+                    })
+                }
+            })
         }
 
     }
