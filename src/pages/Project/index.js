@@ -33,6 +33,8 @@ export default function Project() {
     const [repayModalVisible, setRepayModalVisible] = useState(false)
     const [insuranceModalVisible, setInsuranceModalVisible] = useState(false)
     const [currentParams, setCurrentParams] = useState({})
+    // 下一个进程是否在4天内
+    const [nextInFour, setNextInFour] = useState(false)
     const [lockLoading, setLocklLoading] = useState(false)
     const [role, setRole] = useState('invester')
     const wallet = useWallet()
@@ -44,8 +46,18 @@ export default function Project() {
                 ...res.data,
                 percent: parseInt((res.data.fundraising.current_raised_money / res.data.fundraising.max_amount) * 100),
                 fullDesc: `https://mining-api.dd.finance/project/download/${res.data.project_info.project_uniq_id}/${res.data.project_info.white_paper.file_name}`
+            })
+            //判断下一个进程是否在4天内
+            const allFutureProcess = res.data.process.filter(item => item.status === 'Future')
+            if (allFutureProcess.length > 0) {
+                const firstItem = allFutureProcess[0]
+                if (firstItem.vote_start_time - new Date().valueOf() < 4 * 24 * 60 * 60 * 1000) {
+                    setNextInFour(true)
+                }
+            } else {
+                // 借用一下这个标识位。如果没有Future，可以直接禁用调更改计划
+                setNextInFour(true)
             }
-            )
         })
 
         // committee： 委员会成员，审核项目
@@ -60,6 +72,7 @@ export default function Project() {
                 setRole(role)
             })
         }
+
 
     }, [wallet.account])
 
@@ -229,8 +242,8 @@ export default function Project() {
                                 </Col>
                             </Row>}
 
-                            {/* manager 可以变更计划 */}
-                            {(project.project_info.status === 'Active' || project.project_info.status === 'PhaseFailed' || project.project_info.status === 'ReplanFailed') && role === 'manager' && <Row>
+                            {/* manager 可以变更计划. */}
+                            {(project.project_info.status === 'Active' || project.project_info.status === 'PhaseFailed' || project.project_info.status === 'ReplanFailed') && role === 'manager' && !nextInFour && <Row>
                                 <div className="handle-area">
                                     <a href={`/create-vote/${id}`}>
                                         <div className="btn-action"><span>发起变更投票</span></div>
