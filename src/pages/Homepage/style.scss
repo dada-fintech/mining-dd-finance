@@ -102,6 +102,7 @@
     }
 
     .feature-list {
+        word-break: keep-all;
         li {
             list-style-type: circle;
             font-size: 22px;
@@ -642,6 +643,10 @@
         .banner{
             .banner-btn{
                 font-size: 20px;
+            }
+            .banner-title {
+                font-size: 50px;
+                line-height: 70px;
             }
         }
         .feature-list{
