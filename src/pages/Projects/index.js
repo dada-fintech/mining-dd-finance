@@ -7,7 +7,7 @@
  * @FilePath: \mining-dd-finance\src\pages\Projects\index.js
  */
 import React, { useEffect, useState } from 'react'
-import { Row, Col, Input, Button, message } from 'antd'
+import { Row, Col } from 'antd'
 
 import LinkArrow from 'assets/link-arrow.svg'
 import ProjectsTop from 'assets/projects-top.svg'
@@ -45,13 +45,13 @@ export default function Projects() {
             <div className="container">
                 <div className="project-intro">
                     <div className="top">
-                        <div className="title with-line"><span>项目列表</span></div>
+                        <div className="title with-line"><span>{t('projectList.title')}</span></div>
                     </div>
                     <Row type="flex" justify="space-around">
                         <Col md={8}>
                             <div className="desc">
-                                臻选好项目<br />
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;收益更轻松
+                            {t('projectList.slogan1')}<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{t('projectList.slogan2')}
                             </div>
                         </Col>
                         <Col md={8}>

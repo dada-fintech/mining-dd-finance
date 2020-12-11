@@ -80,9 +80,19 @@ export default {
                 }
             },
             sidebar: {
-                yourShares: 'Your Shares',
-                investors: 'Investors',
+                myShare: 'My Share',
+                allShare: 'All the Shares',
+                investment: 'Investment ',
+                return: 'Return',
+                redemption: 'Redemption Date',
+                cycle: 'Project Cycle',
+                gains: 'Accrued Gains',
+                redeemable: 'Redeemable',
                 documents: 'Documents',
+                months: 'Months',
+                subscribe: 'Subscribe',
+                enterEmail: 'Please enter email address',
+
             },
             banner: {
                 title: 'Mining Ecosystem Aggregator',
@@ -115,6 +125,24 @@ export default {
                 voteResult: 'Vote Result',
                 approve: 'Approve',
                 object: 'Object',
+                fundRaised: 'Fund Raised',
+                hardCap: 'Hard Cap',
+                status: 'Status',
+                roles: 'Roles',
+                role: {
+                    manager: 'Fund Manager',
+                    supporter: 'Fund Constituent',
+                    committee: 'Committee Member'
+                },
+                action: {
+                    committeeReviews: 'Committee Reviews',
+                    security: 'Security Deposit',
+                    lock: 'Lock Immediately',
+                    change: 'Initiate Voting to Change the Process',
+                    repay: 'Repay',
+
+                }
+
             },
             createProject: {
                 hint: `<div class="with-line"><span>现在开始创建一个项目</div></span><br /><br />
@@ -166,7 +194,14 @@ export default {
                 projectInfo: 'Project Info',
                 additionalDoc: 'Additional Documents',
                 editDescription: 'Edit Description',
-            }
+            },
+            projectList: {
+                title: 'Project List',
+                slogan1: 'Select High-quality Projects',
+                slogan2: 'Make Your Money Work for You '
+            },
+
+
         }
     },
     zh: {
@@ -256,9 +291,18 @@ export default {
                 }
             },
             sidebar: {
-                yourShares: '你的份额',
-                investors: '投资人',
+                myShare: '我的份额',
+                allShare: '所有份额',
+                investment: '投资份额',
+                return: '收益份额',
+                redemption: '赎回日期',
+                cycle: '项目周期',
+                gains: '收益状态',
+                redeemable: '可赎回',
                 documents: '文件',
+                months: '个月',
+                subscribe: '订阅该项目获得最新动态',
+                enterEmail: '请输入邮箱',
             },
             banner: {
                 title: '矿业生态聚合器',
@@ -292,6 +336,23 @@ export default {
                 voteResult: '投票结果',
                 approve: '支持',
                 object: '反对',
+                fundRaised: '已完成',
+                hardCap: '上限',
+                status: '状态',
+                roles: '角色',
+                role: {
+                    manager: '项目管理人',
+                    supporter: '项目贡献者&支持者',
+                    committee: '委员会成员'
+                },
+                action: {
+                    committeeReviews: '审核评议',
+                    security: '支付保证金',
+                    lock: '立即锁定',
+                    change: '发起变更投票',
+                    repay: '项目回款',
+                }
+
             },
             createProject: {
                 hint: `<div class="with-line"><span>现在开始创建一个项目</div></span><br /><br />
@@ -345,7 +406,12 @@ export default {
                 projectInfo: '项目信息',
                 additionalDoc: '其他文件',
                 editDescription: '编辑描述',
-            }
+            },
+            projectList: {
+                title: '项目列表',
+                slogan1: '甄选好项目',
+                slogan2: '收益更轻松'
+            },
 
 
         }

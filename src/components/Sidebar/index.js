@@ -69,7 +69,7 @@ export default function Sidebar(props) {
         <div className="block">
             {/* user_balance > 0 的时候才显示我的份额 */}
             {role !== 'manager' && myShare && myShare.user_balance > 0 && <>
-                <div className="title">我的份额</div>
+                <div className="title">{t('sidebar.myShare')}</div>
                 <div className="box supporter-box">
                     {myShare.actual_raised > 0 && <div className="box-item">
                         <div className="progress" style={{ width: (myShare.user_balance / myShare.actual_raised) * 100 + '%' }}></div>
@@ -86,23 +86,23 @@ export default function Sidebar(props) {
                 </div>
                 {myShare.actual_raised > 0 && <div className="my-share-box">
                     <div className="line">
-                        <div>投资份额</div>
+                        <div>{t('sidebar.investment')}</div>
                         <div>{myShare.user_balance} USDT</div>
                     </div>
                     <div className="line">
-                        <div>收益份额</div>
+                        <div>{t('sidebar.return')}</div>
                         <div>{myShare.user_profit} USDT</div>
                     </div>
                     <div className="line">
-                        <div>开始赎回</div>
+                        <div>{t('sidebar.redeemable')}</div>
                         <div>{new Date(myShare.income_settlement_time).toLocaleDateString()}</div>
                     </div>
                     <div className="line">
-                        <div>项目周期</div>
-                        <div>{myShare.project_duration}个月</div>
+                        <div>{t('sidebar.cycle')}</div>
+                        <div>{myShare.project_duration} {t('sidebar.months')}</div>
                     </div>
                     {myShare.profit_status && <div className="line">
-                        <div>收益状态</div>
+                        <div>{t('sidebar.gains')}</div>
                         <Button className="btn-green" loading={actionLoading} onClick={() => { doAction() }}>
                             {statusMapping[myShare.profit_status]}
                         </Button>
@@ -111,7 +111,7 @@ export default function Sidebar(props) {
             </>}
 
             {myShare.actual_raised && topInvestList && <>
-                <div className="title">所有份额</div>
+                <div className="title">{t('sidebar.allShare')}</div>
                 <div className="box supporter-box">
                     {topInvestList.map(item => (
                         <div className="box-item">
@@ -139,12 +139,12 @@ export default function Sidebar(props) {
         </div>}
 
         <div>
-            <Button className="btn-action" onClick={() => { setEmail(''); setSubscribeVisible(true) }}>订阅该项目获得最新动态</Button>
+            <Button className="btn-action" onClick={() => { setEmail(''); setSubscribeVisible(true) }}>{t('sidebar.subscribe')}</Button>
         </div>
 
-        {subscribeVisible && <Modal title="订阅项目" visible={true} onOk={() => { doSubscribe() }} onCancel={() => { setSubscribeVisible(false) }}>
+        {subscribeVisible && <Modal title={t('sidebar.subscribe')} visible={true} onOk={() => { doSubscribe() }} onCancel={() => { setSubscribeVisible(false) }}>
             <div style={{ marginBottom: '4px' }}>
-                请输入邮箱
+                {t('sidebar.enterEmail')}
             </div>
             <Input value={email} onChange={(e) => { setEmail(e.target.value) }} />
 

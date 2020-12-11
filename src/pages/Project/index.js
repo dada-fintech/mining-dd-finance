@@ -209,19 +209,19 @@ export default function Project() {
                             {/* 一开始审核评议 */}
                             {project.project_info.status === 'Auditing' && role === 'committee' && <Row>
                                 <div className="handle-area">
-                                    <div className="btn-action" onClick={() => { doAudit() }}><span>审核评议</span></div>
+                                    <div className="btn-action" onClick={() => { doAudit() }}><span>{t('project.action.committeeReviews')}</span></div>
                                 </div>
                             </Row>}
 
                             {project.project_info.status === 'PayingInsurance' && role === 'manager' && <Row>
                                 <div className="handle-area">
-                                    <div className="btn-action" onClick={() => { doInsurance() }}><span>支付保证金</span></div>
+                                    <div className="btn-action" onClick={() => { doInsurance() }}><span>{t('project.action.security')}</span></div>
                                 </div>
                             </Row>}
 
                             {project.project_info.status === 'AllPhasesDone' && role === 'manager' && (new Date().valueOf() < project.project_info.income_settlement_time) && <Row>
                                 <div className="handle-area">
-                                    <div className="btn-action" onClick={() => { doTakeMoney() }}><span>项目回款</span></div>
+                                    <div className="btn-action" onClick={() => { doTakeMoney() }}><span>{t('project.action.repay')}</span></div>
                                 </div>
                             </Row>}
 
@@ -237,7 +237,7 @@ export default function Project() {
                                 <Col md={12}>
                                     <div className="handle-area">
                                         <Input style={{ width: '140px', height: '44px' }} value={lockNum} onChange={(event) => { setLockedNum(event.target.value) }} suffix="USDT" />
-                                        <div className="btn-action" onClick={() => { !lockLoading && doLock() }}><span className="text">立即锁定 {lockLoading && <LoadingOutlined />}</span></div>
+                                        <div className="btn-action" onClick={() => { !lockLoading && doLock() }}><span className="text">{t('project.action.lock')} {lockLoading && <LoadingOutlined />}</span></div>
                                     </div>
                                 </Col>
                             </Row>}
@@ -246,7 +246,7 @@ export default function Project() {
                             {(project.project_info.status === 'Active' || project.project_info.status === 'PhaseFailed' || project.project_info.status === 'ReplanFailed') && role === 'manager' && <Row>
                                 <div className="handle-area">
                                     <a href={`/create-vote/${id}`}>
-                                        <div className="btn-action"><span>发起变更投票</span></div>
+                                        <div className="btn-action"><span>{t('project.action.change')}</span></div>
                                     </a>
                                 </div>
                             </Row>}
@@ -256,10 +256,10 @@ export default function Project() {
                         <Col md={7}>
                             <div className="date-range">{new Date(project.fundraising.start_time).toLocaleDateString()} - {new Date(project.fundraising.end_time).toLocaleDateString()}</div>
                             <div className="top-box">
-                                <div className="item">已完成：{project.fundraising.current_raised_money} USDT</div>
-                                <div className="item">上限：{project.fundraising.max_amount} USDT</div>
-                                <div className="item">状态：{statusMapping[project.project_info.status]}</div>
-                                <div className="item">角色：{role === 'manager' ? '项目管理人' : (role === 'committee' ? '委员会成员' : '项目贡献者')}</div>
+                                <div className="item">{t('project.fundRaised')}：{project.fundraising.current_raised_money} USDT</div>
+                                <div className="item">{t('project.hardCap')}：{project.fundraising.max_amount} USDT</div>
+                                <div className="item">{t('project.status')}：{statusMapping[project.project_info.status]}</div>
+                                <div className="item">{t('project.roles')}：{role === 'manager' ? t('project.role.manager') : (role === 'committee' ? t('project.role.committee') : t('project.role.supporter'))}</div>
                             </div>
                         </Col>
                     </Row>

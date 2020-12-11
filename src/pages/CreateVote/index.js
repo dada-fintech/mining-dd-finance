@@ -116,7 +116,7 @@ export default function CreateVote() {
                     }
                 }
 
-                if (item.status === 'Finished' || !item.status) {
+                if (item.status === 'Finished' || item.status === 'Future' || !item.status) {
                     totalPercent += Number(item.unlock_percentage)
                 }
             })
