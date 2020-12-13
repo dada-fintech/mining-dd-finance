@@ -66,7 +66,7 @@ export default function Homepage() {
             <a target="_blank">
                 <img src={Telegram} className="social-icon" />
             </a>
-            <a className="line-top-bottom" href="https://doc.dd.finance">{t('common.readTheDoc')}</a>
+            {/* <a className="line-top-bottom" href="https://doc.dd.finance">{t('common.readTheDoc')}</a> */}
         </div>
         <div className="banner">
             <Header />
@@ -97,6 +97,8 @@ export default function Homepage() {
                                 <span>{t('common.createNewProject')}</span>
                             </div>
                         </a>
+                        <a className="line-top-bottom" href="https://doc.dd.finance">{t('common.readTheDoc')}</a>
+                        
                         {/* <ul className="feature-list">
                             <li>{t('homepage.banner.feature.1')}</li>
                             <li>{t('homepage.banner.feature.2')}</li>
