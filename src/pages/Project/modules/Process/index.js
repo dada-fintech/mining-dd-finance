@@ -81,10 +81,10 @@ export default function Process(props) {
                     </div>
                 </div>
                 {(process.status === 'VoteNotice' || process.status === 'VoteReplanFailed' || process.status === 'VoteReplanPassed' || process.status === 'VoteReplaning') ? <div>
-                    发起时间：<strong>{new Date(process.replan_time).toLocaleDateString()}</strong>
+                    {t('project.launchTime')}：<strong>{new Date(process.replan_time).toLocaleDateString()}</strong>
                 </div> : <div className="text-area">
                         <div>
-                            释放额度: <strong>{process.unlock_percentage}%</strong>
+                        {t('createProject.shares')}: <strong>{process.unlock_percentage}%</strong>
                         </div>
 
                     </div>}
@@ -109,8 +109,8 @@ export default function Process(props) {
                     </>}
 
                     <div className="vote-action">
-                        <Button onClick={() => { sayYes(process.index, process.status) }}>同意</Button>
-                        <Button onClick={() => { sayNo(process.index, process.status) }}>反对</Button>
+                        <Button onClick={() => { sayYes(process.index, process.status) }}>{t('common.agree')}</Button>
+                        <Button onClick={() => { sayNo(process.index, process.status) }}>{t('common.disagree')}</Button>
                     </div>
                 </>}
             </div>

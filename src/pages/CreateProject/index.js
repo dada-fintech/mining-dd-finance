@@ -4,12 +4,10 @@ import LinkArrow from 'assets/link-arrow.svg'
 import LinkArrowBack from 'assets/link-arrow-back.svg'
 import { useTranslation } from 'react-i18next'
 import { PlusCircleOutlined, MinusCircleOutlined, CloseCircleOutlined, LoadingOutlined } from '@ant-design/icons'
-// import { useWallet } from 'use-wallet'
 import QuestionIcon from 'assets/question.svg'
 import { useWallet } from 'use-wallet'
 import Header from '../../components/Header'
 import moment from 'moment'
-// import Footer from '../../components/Footer'
 import axios from 'utils/axios'
 import mm from 'components/mm'
 
@@ -107,7 +105,7 @@ export default function CreateProject() {
 
     const addCouncilMember = () => {
         if (projectInfo.member_address.length >= 3) {
-            message.error('最多3个理事会成员地址')
+            message.error(i18n.language === 'en' ? 'Max 3 addresses' : '最多3个理事会成员地址')
             return false
         }
         setProjectInfo(prev => {
@@ -148,61 +146,61 @@ export default function CreateProject() {
     }
 
     const goNextStep = () => {
-        console.log(projectInfo)
+        const customHint = i18n.language === 'en' ? 'Please check the required fields' : ''
         // 进行步骤跳转以及字段校验
         if (currentStep === 1) {
             if (!projectInfo.project_name) {
-                message.error('请填写项目名称')
+                message.error(customHint || '请填写项目名称')
                 return false
             }
             if (!projectInfo.project_profile) {
-                message.error('请填写项目简介')
+                message.error(customHint || '请填写项目简介')
                 return false
             }
             if (!projectInfo.creater_email) {
-                message.error('请填写项目订阅邮箱')
+                message.error(customHint || '请填写项目订阅邮箱')
                 return false
             }
         }
 
         if (currentStep === 2) {
             if (!projectInfo.creater_name) {
-                message.error('请填写项目发起人姓名')
+                message.error(customHint || '请填写项目发起人姓名')
                 return false
             }
             if (!projectInfo.creater_profile) {
-                message.error('请填写项目发起人简介')
+                message.error(customHint || '请填写项目发起人简介')
                 return false
             }
             if (!projectInfo.project_description) {
-                message.error('请填写项目详情')
+                message.error(customHint || '请填写项目详情')
                 return false
             }
             if (!projectInfo.project_strategy) {
-                message.error('请填写项目策略')
+                message.error(customHint || '请填写项目策略')
                 return false
             }
             if (!projectInfo.white_paper) {
-                message.error('请上传项目计划书')
+                message.error(customHint || '请上传项目计划书')
                 return false
             }
         }
 
         if (currentStep === 3) {
             if (!projectInfo.project_token_symbol) {
-                message.error('请填写项目币名称')
+                message.error(customHint || '请填写项目币名称')
                 return false
             }
             if (!projectInfo.receiver) {
-                message.error('请填写收款地址')
+                message.error(customHint || '请填写收款地址')
                 return false
             }
             if (!projectInfo.profit) {
-                message.error('请填写收益地址')
+                message.error(customHint || '请填写收益地址')
                 return false
             }
             if (!projectInfo.profit_token) {
-                message.error('请选择收益币种')
+                message.error(customHint || '请选择收益币种')
                 return false
             }
 
@@ -211,7 +209,7 @@ export default function CreateProject() {
                 let findDuplicates = arr => arr.filter((item, index) => arr.indexOf(item) != index)
                 const duplicateArr = findDuplicates(projectInfo.member_address)
                 if (duplicateArr.length > 0) {
-                    message.error('理事会成员地址有重复')
+                    message.error(customHint || '理事会成员地址有重复')
                     return false
                 }
             }
@@ -220,20 +218,20 @@ export default function CreateProject() {
 
         if (currentStep === 4) {
             if (!fundraising.start_time || !fundraising.end_time) {
-                message.error('请选择筹款期限')
+                message.error(customHint || '请选择筹款期限')
                 return false
             }
             if (!fundraising.max_amount) {
-                message.error('请填写最高募集金额')
+                message.error(customHint || '请填写最高募集金额')
                 return false
             }
             if (!fundraising.min_amount) {
-                message.error('请选择最低启动金额')
+                message.error(customHint || '请选择最低启动金额')
                 return false
             }
 
             if (!fundraising.expected_apy) {
-                message.error('请填写预期APY')
+                message.error(customHint || '请填写预期APY')
                 return false
             }
 
@@ -242,11 +240,11 @@ export default function CreateProject() {
 
         if (currentStep === 5) {
             if (!projectInfo.income_settlement_time) {
-                message.error('请填写赎回日期')
+                message.error(customHint || '请填写赎回日期')
                 return false
             }
             if (processList.length < 2) {
-                message.error('至少要有两个进程')
+                message.error(customHint || '至少要有两个进程')
                 return false
             }
             let pass = true
@@ -267,11 +265,11 @@ export default function CreateProject() {
             })
 
             if (!pass) {
-                message.error('请检查所有必填字段')
+                message.error(customHint || '请检查所有必填字段')
                 return false
             }
             if (totalPercent !== 100) {
-                message.error('份额相加需等于100%')
+                message.error(customHint || '份额相加需等于100%')
                 return false
             }
         }
@@ -286,7 +284,7 @@ export default function CreateProject() {
         showUploadList: false,
         beforeUpload(file) {
             if (file.type !== 'application/pdf') {
-                message.error('请上传PDF格式文件')
+                message.error('Only PDF format is supported')
                 return false
             }
         },
@@ -377,7 +375,7 @@ export default function CreateProject() {
         setCreateLoading(true)
         mm.sendTransaction(
             txnParams,
-            '授权',
+            'Approve',
         ).then(res => {
             setCreateLoading(false)
             if (res) {
@@ -396,7 +394,7 @@ export default function CreateProject() {
 
         mm.sendTransaction(
             txnParams,
-            '支付中'
+            'Paying'
         ).then(res => {
             setCreateLoading(false)
 
@@ -422,14 +420,15 @@ export default function CreateProject() {
         <Header />
 
         <div className="container create-project-main">
-            <Row gutter={{ md: 160 }} align="center">
+            <Row gutter={{ md: 36, lg: 64, xl: 160 }} align="center">
                 <Col xs={24} md={14}>
                     <div className="main-content">
                         {currentStep === 0 && <div className="step-0" dangerouslySetInnerHTML={{ __html: t('createProject.hint') }}>
                         </div>}
                         {currentStep === 1 && <div className="step-1">
                             <div className="hint-block small">
-                                这些设置都将展示在项目详情页中，所有设置均为必填项，请规范项目计划书的内容，并确保为PDF格式，我们将会把您上传的内容全部展示出来。
+                                {t('createProject.step1Hint')}
+
                             </div>
                             <div className="form-item">
                                 <div className="label ">{t('createProject.projectName')}</div>
@@ -437,39 +436,39 @@ export default function CreateProject() {
                             </div>
                             <div className="form-item">
                                 <div className="label">{t('createProject.projectIntro')}</div>
-                                <Input.TextArea autoSize={{ minRows: 6 }} maxLength="140" placeholder="限制140字以内" value={projectInfo.project_profile} onChange={(e) => { changeProjectInfo('project_profile', e.target.value) }} />
-                                <div className="hint red">*简单介绍项目的概况、优势等，限制字数140字内</div>
+                                <Input.TextArea autoSize={{ minRows: 6 }} maxLength="140" placeholder={t('createProject.within140')} value={projectInfo.project_profile} onChange={(e) => { changeProjectInfo('project_profile', e.target.value) }} />
+                                <div className="hint red">{t('createProject.projectIntroHint')}</div>
                             </div>
                             <div className="form-item">
-                                <div className="label ">项目订阅邮箱</div>
+                                <div className="label ">{t('createProject.projectEmail')}</div>
                                 <Input value={projectInfo.creater_email} onChange={(e) => { changeProjectInfo('creater_email', e.target.value) }} style={{ width: '360px' }} />
-                                <div className="hint red">*务必填写一个可验证的邮箱，接收项目的各阶段推送消息</div>
+                                <div className="hint red">{t('createProject.projectEmailHint')}</div>
                             </div>
                         </div>}
                         {currentStep === 2 && <div className="step-1">
                             <div className="form-item">
-                                <div className="label ">项目发起人姓名</div>
+                                <div className="label">{t('createProject.managerName')}</div>
                                 <Input value={projectInfo.creater_name} onChange={(e) => { changeProjectInfo('creater_name', e.target.value) }} style={{ width: '360px' }} />
-                                <div className="hint red">*请填写真实信息，该信息将会记录到声誉系统中</div>
+                                <div className="hint red">{t('createProject.managerNameHint')}</div>
                             </div>
                             <div className="form-item">
-                                <div className="label">项目发起人简介</div>
+                                <div className="label">{t('createProject.managerBio')}</div>
                                 <Input.TextArea autoSize={{ minRows: 6 }} maxLength="140" value={projectInfo.creater_profile} onChange={(e) => { changeProjectInfo('creater_profile', e.target.value) }} />
                             </div>
                             <div className="form-item">
-                                <div className="label">项目详情</div>
+                                <div className="label">{t('createProject.projectDetails')}</div>
                                 <Input.TextArea autoSize={{ minRows: 6 }} maxLength="140" value={projectInfo.project_description} onChange={(e) => { changeProjectInfo('project_description', e.target.value) }} />
-                                <div className="hint red">*请详细描述项目相关细节</div>
+                                <div className="hint red">{t('createProject.projectDetailsHint')}</div>
 
                             </div>
                             <div className="form-item">
-                                <div className="label">项目策略</div>
+                                <div className="label">{t('createProject.projectStrategy')}</div>
                                 <Input.TextArea autoSize={{ minRows: 6 }} maxLength="140" value={projectInfo.project_strategy} onChange={(e) => { changeProjectInfo('project_strategy', e.target.value) }} />
-                                <div className="hint red">*请详细介绍该项目收益策略</div>
+                                <div className="hint red">{t('createProject.projectStrategyHint')}</div>
                             </div>
 
                             <div className="form-item">
-                                <div className="label ">上传项目计划书</div>
+                                <div className="label ">{t('createProject.uploadPlan')}</div>
                                 <Upload {...whitePaperUpload}>
                                     <Button className="btn-white" style={{ padding: '0 44px' }}>{t('common.upload')}</Button>
                                     <span style={{ marginLeft: '12px', color: '#707070' }}>*.pdf</span>
@@ -480,49 +479,45 @@ export default function CreateProject() {
                             </div>
                         </div>}
                         {currentStep === 3 && <div className="step-2">
-                            <div className="hint-block small">
-                                这项设置将会配置代表该项目的代币，该代币将可以通过投资筹款来获得。<br />
-                                本合约协议体系将会把大部分治理权限授予项目投资人，以保护他们的权益。<br />
-                                然而，为了避免一些情况的发生，本项目的变更投票决定必须由发起人或者理事成员公开发起。
+                            <div className="hint-block small" dangerouslySetInnerHTML={{ __html: t('createProject.step2Hint') }}>
                             </div>
                             <div className="form-item">
                                 <div className="label ">{t('createProject.nameOfToken')}</div>
                                 <Input style={{ width: '360px' }} value={projectInfo.project_token_symbol} onChange={(e) => { changeProjectInfo('project_token_symbol', e.target.value) }} />
                             </div>
                             <div className="form-item">
-                                <div className="label ">项目经理收款地址</div>
+                                <div className="label ">{t('createProject.managerAddress')}</div>
                                 <Input style={{ width: '500px' }} value={projectInfo.receiver} onChange={(e) => { changeProjectInfo('receiver', e.target.value) }} />
-                                <div className="hint red">*该地址将作为项目唯一指定收款地址，无法更改</div>
+                                <div className="hint red">{t('createProject.managerAddressHint')}</div>
                             </div>
                             <div className="form-item">
-                                <div className="label ">项目收益地址（共管钱包）</div>
+                                <div className="label ">{t('createProject.profitAddress')}</div>
                                 <Input style={{ width: '500px' }} value={projectInfo.profit} addonAfter={profitTokenSelect} onChange={(e) => { changeProjectInfo('profit', e.target.value) }} />
-                                <div className="hint red">*该地址为项目收益地址，矿池收款地址，务必为可验证的多签共管钱包地址，无法更改</div>
+                                <div className="hint red">{t('createProject.profitAddressHint')}</div>
                             </div>
                             <div className="form-item">
                                 <div className="label">{t('createProject.boardMembers')}</div>
                                 {projectInfo.member_address.map((item, index) => <div>
                                     <Input value={item} onChange={(e) => { changeMemberAddress(index, e.target.value) }} style={{ width: '500px', marginBottom: '12px' }} />
-                                    {index != projectInfo.member_address.length - 1 && <Popconfirm title="确定删除该地址吗？" onConfirm={() => { removeCouncilMember(index) }}><MinusCircleOutlined className="handle-icon" /></Popconfirm>}
+                                    {index != projectInfo.member_address.length - 1 && <Popconfirm title={t('createProject.sureToDelete')} onConfirm={() => { removeCouncilMember(index) }}><MinusCircleOutlined className="handle-icon" /></Popconfirm>}
                                     {index == projectInfo.member_address.length - 1 && <PlusCircleOutlined onClick={() => { addCouncilMember() }} className="handle-icon" />}
                                 </div>)}
 
                                 <div className="hint">
-                                    最多可添加3个地址，该地址仅具有<strong>创建变更提案投票、上传项目附件</strong>的权限，可为空
+                                    {t('createProject.boardMembersHint')}
                                 </div>
                             </div>
                         </div>}
                         {currentStep === 4 && <div className="step-3">
-                            <div className="hint-block small">
-                                这些设置将会配置该项目的基础信息，并确定代币分发总额，所有的计费参数均以最高募集金额作为基准。<br />
-                            为确保项目顺利开展，请认真填写项目收益情况，该设置为项目承诺收益。
+                            <div className="hint-block small" dangerouslySetInnerHTML={{ __html: t('createProject.step3Hint') }}>
+
                             </div>
 
                             <div className="form-item">
                                 <div className="label ">{t('createProject.fundraisingPeriod')}</div>
                                 <DatePicker.RangePicker disabledDate={disable5Days} value={fundraising.start_time && [moment(fundraising.start_time), moment(fundraising.end_time)]} onChange={value => dateRangeChange('fundraising', value)} />
-                                <div className="hint">请确认您的筹款开始日期和结束日期</div>
-                                <div className="hint red">*项目专业委员会审核期为5天，筹款开始时间需为5个自然日后</div>
+                                <div className="hint">{t('createProject.fundraisingPeriodHint1')}</div>
+                                <div className="hint red">{t('createProject.fundraisingPeriodHint2')}</div>
                             </div>
 
                             <div className="form-item">
@@ -537,11 +532,11 @@ export default function CreateProject() {
                                     {t('createProject.fundraisingLimitHint')}
                                 </div>
                                 <div className="hint red">
-                                    *审计费用、保证金费用均以该额度作为基准数据
+                                    {t('createProject.fundraisingLimitHint2')}
                                 </div>
                             </div>
                             {fundraising.max_amount && <div className="form-item">
-                                <div className="label ">最低启动金额 <Tooltip title="筹款额达到该目标后视为筹集成功"><img src={QuestionIcon} /></Tooltip></div>
+                                <div className="label ">{t('createProject.softCap')} <Tooltip title={t('createProject.softCapHover')}><img src={QuestionIcon} /></Tooltip></div>
                                 <Slider tipFormatter={(val) => (<span>{val}%</span>)} style={{ width: '360px', }} value={fundraising.softtopPercent} tooltipVisible={true} onChange={value => { fundraisingSofttopChange(value) }} />
                                 <div className="softtop-value">{fundraising.min_amount} USDT</div>
                                 <div className="hint">
@@ -550,32 +545,29 @@ export default function CreateProject() {
                             </div>}
                         </div>}
                         {currentStep === 5 && <div className="step-4">
-                            <div className="hint-block small">
-                                这些设置是用来配置项目的阶段性进展与解锁规则，请根据项目计划分阶段填写解锁计划。<br />
-                                关于投票期限及解锁日期请认真填写，所有的变更计划只能在进程间添加，请预留充足的时间并做好计划。<br />
-                                该环节为项目治理的重要环节，请务必认真填写。<br />
+                            <div className="hint-block small" dangerouslySetInnerHTML={{ __html: t('createProject.step4Hint') }}>
                             </div>
                             <div className="form-item">
-                                <div className="label ">{t('createProject.redemptionDate')}<Tooltip title="计息周期=赎回日期-募集截至日期"><img src={QuestionIcon} /></Tooltip></div>
+                                <div className="label ">{t('createProject.redemptionDate')}<Tooltip title={t('createProject.redemptionDateHover')}><img src={QuestionIcon} /></Tooltip></div>
                                 <DatePicker value={projectInfo.income_settlement_time && moment(projectInfo.income_settlement_time)} onChange={value => { value && changeProjectInfo('income_settlement_time', value.valueOf()) }} />
                                 <div className="hint red">
-                                    *赎回日期为开放用户提取收益的时间，请务必于该日期前完成收益回款
+                                    {t('createProject.redemptionDateHint')}
                                 </div>
                             </div>
                             <div className="assets-rule-title">{t('createProject.assetsRuleHint')}</div>
                             {processList.map((item, index) => <>
                                 <div className="asset-id"># {index + 1}</div>
                                 <div className="assets-rule-item">
-                                    {processList.length > 1 && <Popconfirm title="确定删除该进程吗？" onConfirm={() => { removeProcess(index) }}><CloseCircleOutlined className="remove-btn" /></Popconfirm>}
+                                    {processList.length > 1 && <Popconfirm title={t('createProject.sureToDelete')} onConfirm={() => { removeProcess(index) }}><CloseCircleOutlined className="remove-btn" /></Popconfirm>}
                                     <Row gutter={24}>
                                         {index === 0 ? <Col md={12}>
                                             <div className="form-item">
-                                                <div className="label ">{t('createProject.unlockDate')} <Tooltip title="该时期为本阶段合约放款日期，需在治理投票结束后"><img src={QuestionIcon} /></Tooltip></div>
+                                                <div className="label ">{t('createProject.unlockDate')} <Tooltip title={t('createProject.unlockDateHover')}><img src={QuestionIcon} /></Tooltip></div>
                                                 <DatePicker disabledDate={current => current && current < moment(fundraising.end_time).add(5, 'days').endOf('day')} value={item.vote_start_time && moment(item.vote_start_time)} onChange={value => { value && changeProcess(index, 'vote_start_time', value.valueOf()); }} />
                                             </div>
                                         </Col> : <Col md={12}>
                                                 <div className="form-item">
-                                                    <div className="label ">{t('createProject.votingDate')} <Tooltip title="该时期为本阶段治理投票的时间区间"><img src={QuestionIcon} /></Tooltip></div>
+                                                    <div className="label ">{t('createProject.votingDate')} <Tooltip title={t('createProject.votingDateHover')}><img src={QuestionIcon} /></Tooltip></div>
                                                     <DatePicker.RangePicker disabledDate={current => current && current < moment(fundraising.end_time).add(3, 'days').endOf('day')} value={item.vote_start_time && [moment(item.vote_start_time), moment(item.vote_end_time)]} onChange={value => { value && changeProcess(index, 'vote_start_time', value[0].valueOf()); value && changeProcess(index, 'vote_end_time', value[1].valueOf()) }} />
                                                 </div>
 
@@ -583,7 +575,7 @@ export default function CreateProject() {
 
                                         <Col md={6}>
                                             <div className="form-item">
-                                                <div className="label ">{t('createProject.shares')} <Tooltip title="本阶段放款金额"><img src={QuestionIcon} /></Tooltip></div>
+                                                <div className="label ">{t('createProject.shares')} <Tooltip title={t('createProject.sharesHover')}><img src={QuestionIcon} /></Tooltip></div>
                                                 <InputNumber max={index === 0 ? 80 : 100} min={0} formatter={value => `${value ? value : 0} %`} parser={value => parseInt(value)} value={item.unlock_percentage} onChange={e => changeProcess(index, 'unlock_percentage', e)} style={{ width: '180px' }} />
                                             </div>
                                         </Col>
@@ -600,7 +592,7 @@ export default function CreateProject() {
                         </div>}
                         {currentStep === 6 && <div className="step-5">
                             <div className="hint-block small">
-                                该设置需要添加更多其他关于项目的证明文件，包括但不限于项目计划书、合规性文件、业绩证明、身份证明等，可以为您的项目顺利开展提供更多的支持。
+                                {t('createProject.step5Hint')}
                             </div>
                             <div className="form-item">
                                 <div className="label">{t('createProject.additionalDoc')}</div>
@@ -623,38 +615,38 @@ export default function CreateProject() {
                             </div>
                         </div>}
                         {currentStep === 7 && <div className="step-6">
-                            <div className="title">项目基础信息</div>
+                            <div className="title">{t('createProject.confirm1')}</div>
                             <div className="confirm-box confirm-box-long" style={{ marginBottom: '72px' }}>
                                 <div className="line">
                                     <div className="name">{t('createProject.projectName')}</div>
                                     <div className="value">{projectInfo.project_name}</div>
                                 </div>
                                 <div className="line">
-                                    <div className="name">项目简介</div>
+                                    <div className="name">{t('createProject.projectIntro')}</div>
                                     <div className="value">{projectInfo.project_profile}</div>
                                 </div>
                                 <div className="line">
-                                    <div className="name">订阅邮箱</div>
+                                    <div className="name">{t('createProject.projectEmail')}</div>
                                     <div className="value">{projectInfo.creater_email}</div>
                                 </div>
                                 <div className="line">
-                                    <div className="name">创建者姓名</div>
+                                    <div className="name">{t('createProject.managerName')}</div>
                                     <div className="value">{projectInfo.creater_name}</div>
                                 </div>
                                 <div className="line">
-                                    <div className="name">创建者简介</div>
+                                    <div className="name">{t('createProject.managerBio')}</div>
                                     <div className="value">{projectInfo.creater_profile}</div>
                                 </div>
                                 <div className="line">
-                                    <div className="name">项目详情</div>
+                                    <div className="name">{t('createProject.projectDetails')}</div>
                                     <div className="value">{projectInfo.project_description}</div>
                                 </div>
                                 <div className="line">
-                                    <div className="name">项目策略</div>
+                                    <div className="name">{t('createProject.projectStrategy')}</div>
                                     <div className="value">{projectInfo.project_strategy}</div>
                                 </div>
                             </div>
-                            <div className="title">项目治理信息</div>
+                            <div className="title">{t('createProject.confirm2')}</div>
                             <div className="confirm-box confirm-box-long" style={{ marginBottom: '72px' }}>
                                 <div className="line">
                                     <div className="name">{t('createProject.tokenName')}</div>
@@ -681,11 +673,11 @@ export default function CreateProject() {
                                     <div className="value">{new Date(projectInfo.income_settlement_time).toLocaleDateString()}</div>
                                 </div>
                                 <div className="line">
-                                    <div className="name">项目收款地址</div>
+                                    <div className="name">{t('createProject.managerAddress')}</div>
                                     <div className="value"><Tooltip title={projectInfo.receiver}>{projectInfo.receiver}</Tooltip></div>
                                 </div>
                                 <div className="line">
-                                    <div className="name">项目收益地址</div>
+                                    <div className="name">{t('createProject.profitAddress')}</div>
                                     <div className="value"><Tooltip title={projectInfo.profit}>{projectInfo.profit}</Tooltip></div>
                                 </div>
 
@@ -703,7 +695,7 @@ export default function CreateProject() {
 
                             </div>
 
-                            <div className="title">资金解锁计划</div>
+                            <div className="title">{t('createProject.confirm3')}</div>
 
                             {/* <div className="title" style={{ marginTop: '56px' }}>ASSETS RULE</div> */}
                             {processList.map((item, index) => <>
@@ -753,19 +745,18 @@ export default function CreateProject() {
                         {currentStep === 9 && <div className="step-pay">
                             {payStatus === 'success' ? <>
                                 <div className="dada-circle success">
-                                    支付成功
-                            </div>
-                                <div className="pay-hint">
-                                    您的项目已经上传至以太坊网络中，合约创建时间预计需要1~10分钟<br /><br />
-                            创建成功后将会给推送邮件至您的邮箱中
-                            </div>
+                                    {t('createProject.paySuccess')}
+                                </div>
+                                <div className="pay-hint" dangerouslySetInnerHTML={{ __html: t('createProject.paySuccessHint') }}>
+                                </div>
                             </> : <>
                                     <div className="dada-circle error">
-                                        支付失败
-                            </div>
+                                        {t('createProject.payFailed')}
+
+                                    </div>
                                     <div className="pay-hint">
-                                        请查询链操作记录查看原因
-                            </div>
+                                        {t('createProject.payFailedHint')}
+                                    </div>
                                 </>}
 
                         </div>}
@@ -790,9 +781,8 @@ export default function CreateProject() {
                             <a href="/">
                                 <div className="btn-confirm">
                                     <span>
-                                        返回首页
-
-                                </span>
+                                        {t('createProject.backHome')}
+                                    </span>
                                 </div>
                             </a>
 

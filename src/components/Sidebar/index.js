@@ -52,15 +52,14 @@ export default function Sidebar(props) {
 
     const doSubscribe = () => {
         if (!email) {
-            message.error('请输入邮箱')
+            message.error(t('hint.pleaseInputEmail'))
             return false
         }
         axios.post('/email/subscribe', {
             project_uniq_id: projectId,
             user_email: email
         }).then(res => {
-            console.log(res)
-            message.success('订阅成功!')
+            message.success(t('hint.subscribeSuccess'))
             setSubscribeVisible(false)
         })
     }
@@ -110,7 +109,7 @@ export default function Sidebar(props) {
                 </div>}
             </>}
 
-            {myShare.actual_raised && topInvestList && <>
+            {myShare.actual_raised && topInvestList && topInvestList.length > 0 && <>
                 <div className="title">{t('sidebar.allShare')}</div>
                 <div className="box supporter-box">
                     {topInvestList.map(item => (

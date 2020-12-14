@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Modal, Input, Button, message } from 'antd'
 // import VoteStatus from '../../../../components/VoteStatus'
 import axios from 'utils/axios'
+import { useTranslation } from 'react-i18next'
 import { useWallet } from 'use-wallet'
 import mm from 'components/mm'
 import './style.scss'
@@ -9,6 +10,7 @@ import './style.scss'
 export default function ConfirmVote(props) {
     const params = props.params
     const wallet = useWallet()
+    const { t } = useTranslation()
     const [info, setInfo] = useState({})
     const [loading, setLoading] = useState(false)
 
@@ -36,33 +38,32 @@ export default function ConfirmVote(props) {
         setLoading(true)
 
         if (info.is_satisfied) {
-            mm.sendTransaction(txnParams, '支付保证金').then(res => {
+            mm.sendTransaction(txnParams, 'Pay Insurance').then(res => {
                 setLoading(false)
                 props.cancel()
             })
         } else {
-            mm.sendTransaction(approveParams, '授权支付保证金').then(res => {
+            mm.sendTransaction(approveParams, 'Approve paying insurance').then(res => {
                 if (res) {
-                    mm.sendTransaction(txnParams, '支付保证金').then(res => {
+                    mm.sendTransaction(txnParams, 'Pay Insurance').then(res => {
                         setLoading(false)
                         props.cancel()
                     })
                 }
             })
         }
-
     }
 
     return (
-        <Modal wrapClassName="insurance-modal" footer={null} title="支付保证金" visible={true} onCancel={() => { props.onCancel() }}>
+        <Modal wrapClassName="insurance-modal" footer={null} title={t('modal.payInsurance')} visible={true} onCancel={() => { props.onCancel() }}>
             <div className="dada-circle">
                 {info.approve_balance} DADA
             </div>
-            <div className="hint">
-                您的项目即将启动，您需要支付募集额度10%的DADA作为项目抵押金。<br />项目完成后，将会收取其中25%的费用作为保险费用，返回剩余75%的押金。
+            <div className="hint" dangerouslySetInnerHTML={{__html: t('modal.insuranceHint')}}>
+                
             </div>
             <div className="handle-area">
-                <Button loading={loading} className="btn-green" onClick={() => { doAction() }}>{info.is_satisfied ? '支付' : '授权'}</Button>
+                <Button loading={loading} className="btn-green" onClick={() => { doAction() }}>{info.is_satisfied ? t('commonn.pay') : t('commonn.approve')}</Button>
             </div>
         </Modal>
     )

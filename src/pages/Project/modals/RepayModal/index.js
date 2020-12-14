@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Modal, Input, Button, message } from 'antd'
+import { useTranslation } from 'react-i18next'
 import { useWallet } from 'use-wallet'
 import axios from 'utils/axios'
 import mm from 'components/mm'
@@ -10,6 +11,7 @@ export default function RepayModal(props) {
     const wallet = useWallet()
     const [loading, setLoading] = useState(false)
     const [info, setInfo] = useState({})
+    const { t } = useTranslation()
 
     useEffect(() => {
         axios.post('/project/manager-repay', {
@@ -26,19 +28,19 @@ export default function RepayModal(props) {
             to: info.call_data.contract_addr,
             data: info.call_data.call_data
         }
-        mm.sendTransaction(repayParams, '项目回款').then(res => {
+        mm.sendTransaction(repayParams, 'Repay').then(res => {
             setLoading(false)
             props.onCancel()
         })
     }
 
     return (
-        <Modal wrapClassName="repay-modal" footer={null} title="项目回款" visible={true} onCancel={() => { props.onCancel() }}>
+        <Modal wrapClassName="repay-modal" footer={null} title={t('modal.repayTitle')} visible={true} onCancel={() => { props.onCancel() }}>
             <div className="hint">
-                您需要支付{info.repay_amount}USDT。
+                {t('modal.youNeedPay')} {info.repay_amount}USDT。
             </div>
             <div className="handle-area">
-                <Button loading={loading} className="btn-green" onClick={() => { doRepay() }}>确定</Button>
+                <Button loading={loading} className="btn-green" onClick={() => { doRepay() }}>{t('common.confirm')}</Button>
             </div>
         </Modal>
     )

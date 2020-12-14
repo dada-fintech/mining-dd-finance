@@ -112,7 +112,7 @@ export default function Project() {
 
     const doLock = () => {
         if (!lockNum) {
-            message.error('请输入锁定金额')
+            message.error(t('hint.lockAmount'))
             return false
         }
         setLocklLoading(true)
@@ -135,14 +135,14 @@ export default function Project() {
             }
 
             if (res.data.is_satisfied) {
-                mm.sendTransaction(lockParams, '锁定USDT').then(res => {
+                mm.sendTransaction(lockParams, 'Lock USDT').then(res => {
                     setLocklLoading(false)
                 })
             } else {
-                message.error('请在锁定前先授权')
-                mm.sendTransaction(approveParams, '授权消耗USDT').then(res => {
+                message.error(t('hint.approve'))
+                mm.sendTransaction(approveParams, 'Approve spending USDT').then(res => {
                     if (res) {
-                        mm.sendTransaction(lockParams, '锁定USDT').then(res => {
+                        mm.sendTransaction(lockParams, 'Lock USDT').then(res => {
                             setLocklLoading(false)
                         })
                     }
@@ -199,8 +199,8 @@ export default function Project() {
             <Header />
             <div className="container">
                 <div className="project-intro">
-                    <Row gutter={44} type="flex" align="center">
-                        <Col md={13}>
+                    <Row gutter={{ md: 24, xl: 44 }} type="flex" align="center">
+                        <Col xs={24} md={12} xl={13}>
                             <div className="top">
                                 <div className="title with-line"><span>{project.project_info && project.project_info.project_name}</span></div>
                             </div>
@@ -253,7 +253,7 @@ export default function Project() {
 
 
                         </Col>
-                        <Col md={7}>
+                        <Col xs={24} md={12} xl={7}>
                             <div className="date-range">{new Date(project.fundraising.start_time).toLocaleDateString()} - {new Date(project.fundraising.end_time).toLocaleDateString()}</div>
                             <div className="top-box">
                                 <div className="item">{t('project.fundRaised')}：{project.fundraising.current_raised_money} USDT</div>
@@ -271,7 +271,6 @@ export default function Project() {
                 <ul className="tabs">
                     <li className={currentTab === 'process' && 'active'} onClick={() => { setCurrentTab('process') }}>{t('project.progress')}</li>
                     <li className={currentTab === 'detail' && 'active'} onClick={() => { setCurrentTab('detail') }}>{t('project.details')}</li>
-                    {/* <li className={currentTab === 'vote' && 'active'} onClick={() => { setCurrentTab('vote') }}>{t('project.vote')}</li> */}
                     <li className={currentTab === 'comments' && 'active'} onClick={() => { setCurrentTab('comments') }}>{t('project.comments')}</li>
                 </ul>
                 <div className="apy">{t('common.apy')} {project.fundraising.expected_apy}%</div>
@@ -279,16 +278,13 @@ export default function Project() {
         </div>
         <div className="bottom-area">
             <div className="container">
-                <Row gutter={{ md: 24, lg: 24 }} align="center">
-                    <Col xs={24} md={12} lg={14}>
-                        {/* <div className="project-content"> */}
-                        {/* {currentTab === 'vote' && <VoteModule />} */}
+                <Row gutter={{ lg: 24 }} align="center">
+                    <Col xs={24}  lg={14}>
                         {currentTab === 'process' && <ProcessModule id={id} processList={project.process || []} />}
                         {currentTab === 'detail' && <DetailModule fullDesc={project.fullDesc} projectInfo={project.project_info} />}
                         {currentTab === 'comments' && <CommentsModule />}
-                        {/* </div> */}
                     </Col>
-                    <Col xs={24} md={8} lg={6}>
+                    <Col xs={24} lg={6}>
                         <Sidebar projectId={id} role={role} otherFiles={project.project_info.other_file} />
                     </Col>
                 </Row>
