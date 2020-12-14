@@ -54,14 +54,14 @@ export default function CreateVote() {
         })
     }
 
-    const changeFundraising = (name, value) => {
-        setFundraising(prev => {
-            return {
-                ...prev,
-                [name]: value,
-            }
-        })
-    }
+    // const changeFundraising = (name, value) => {
+    //     setFundraising(prev => {
+    //         return {
+    //             ...prev,
+    //             [name]: value,
+    //         }
+    //     })
+    // }
 
     const removeProcess = (number) => {
         setProcessList(prev => {
@@ -96,10 +96,10 @@ export default function CreateVote() {
     }
 
     const goNextStep = () => {
-        // 进行步骤跳转以及字段校验
+        const customHint = i18n.language === 'en' ? 'Please check the required fields' : ''
         if (currentStep === 1) {
             if (processList.length < 2) {
-                message.error('至少要有两个进程')
+                message.error(customHint || '至少要有两个进程')
                 return false
             }
 
@@ -116,22 +116,22 @@ export default function CreateVote() {
                     }
                 }
 
-                if (item.status === 'Finished' || !item.status) {
+                if (item.status === 'Finished' || item.status === 'Future' || !item.status) {
                     totalPercent += Number(item.unlock_percentage)
                 }
             })
             if (!pass) {
-                message.error('请检查所有必填字段')
+                message.error(customHint || '请检查所有必填字段')
                 return false
             }
 
             if (totalPercent !== 100) {
-                message.error('份额相加需等于100%')
+                message.error(customHint || '份额相加需等于100%')
                 return false
             }
 
             if (!description) {
-                message.error('请填写描述')
+                message.error(customHint || '请填写描述')
                 return false
             }
         }
@@ -190,7 +190,7 @@ export default function CreateVote() {
                 from: wallet.account,
                 to: res.data.contract_addr,
                 data: res.data.call_data
-            }, '更改计划').then(res => {
+            }, 'Change plan').then(res => {
                 setChangeLoading(false)
             })
         })
@@ -200,33 +200,31 @@ export default function CreateVote() {
         <Header />
 
         <div className="container create-vote-main">
-            <Row gutter={{ md: 160 }} align="center">
+            <Row gutter={{ md: 36, lg: 64, xl: 160 }} align="center">
                 <Col xs={24} md={14}>
                     <div className="main-content">
                         {currentStep === 0 && <div className="step-0" dangerouslySetInnerHTML={{ __html: t('createVote.hint') }}>
                         </div>}
 
                         {currentStep === 1 && <div className="step-1">
-                            <div className="hint-block small">
-                                这些设置是用来配置项目的阶段性进展与解锁规则，请根据原定项目计划修改解锁计划。<br />
-                                *计划变更投票期限为4天（1天为公示期，3天为投票期），已完成计划不可变更
+                            <div className="hint-block small" dangerouslySetInnerHTML={{__html: t('createVote.step1Hint')}}>
                             </div>
-                            <div className="title">变更投票信息</div>
+                            <div className="title">{t('createVote.mainTitle')}</div>
                             <div className="confirm-box">
                                 <div className="form-item">
-                                    <div className="label">投票期限 <Tooltip title="投票期限无法更改，合约创建时开始生效。公示期：24小时，投票期：24小时-96小时。"><img src={QuestionIcon} /></Tooltip></div>
+                                    <div className="label">{t('createVote.votingPeriod')} <Tooltip title="投票期限无法更改，合约创建时开始生效。公示期：24小时，投票期：24小时-96小时。"><img src={QuestionIcon} /></Tooltip></div>
                                     <div>
                                         {moment().add(1, 'days').format('MMMM Do YYYY')} - {moment().add(4, 'days').format('MMMM Do YYYY')}
                                     </div>
                                 </div>
                                 <div className="form-item">
-                                    <div className="label">变更说明</div>
+                                    <div className="label">{t('createVote.descriptionOfChange')}</div>
                                     <Input.TextArea autoSize={{ minRows: 6 }} placeholder="200 words limit" value={description} onChange={(e) => { console.log(e); setDescription(e.target.value) }} />
                                 </div>
                             </div>
 
                             <div className="form-item">
-                                <div className="label">请上传其它相关文件</div>
+                                <div className="label">{t('createVote.uploadDoc')}</div>
                                 <Upload {...otherUpload}>
                                     <Button className="btn-white" style={{ padding: '0 44px' }}>{t('common.upload')}</Button>
                                 </Upload>
@@ -245,22 +243,16 @@ export default function CreateVote() {
                                     <div>{t('project.progress')} #{index + 1}</div>
                                 </div>
                                 <div className="confirm-box">
-                                    {(item.status === 'Future' || !item.status) && <Popconfirm title="确定删除该进程吗？" onConfirm={() => { removeProcess(index) }}><CloseCircleOutlined className="remove-btn" /></Popconfirm>}
+                                    {(item.status === 'Future' || !item.status) && <Popconfirm title={t('common.sureToDelete')} onConfirm={() => { removeProcess(index) }}><CloseCircleOutlined className="remove-btn" /></Popconfirm>}
                                     <div className={'status ' + (item.status === 'Active' ? 'finish' : '')}>
                                         {item.status}
                                     </div>
                                     <div className="line">
-                                        <div className="name required">解锁额度</div>
+                                        <div className="name required">{t('project.unlockingAmount')}</div>
                                         <div className="value">
                                             {(item.status && item.status !== 'Future') ? (item.unlock_percentage + '%') : <InputNumber max={index === 0 ? 80 : 100} min={0} formatter={value => `${value ? value : 0} %`} parser={value => parseInt(value)} value={item.unlock_percentage} onChange={e => changeProcess(index, 'unlock_percentage', e)} style={{ width: '180px' }} />}
                                         </div>
                                     </div>
-                                    {/* <div className="line">
-                                        <div className="name required">{t('project.unlockingTime')}</div>
-                                        <div className="value">
-                                            {(item.status && item.status !== 'Future') ? new Date(item.unlock_time).toLocaleDateString() : <DatePicker value={item.unlock_time && moment(item.unlock_time)} onChange={value => changeProcess(index, 'unlock_time', value.valueOf())} />}
-                                        </div>
-                                    </div> */}
                                     {index === 0 ? <div className="line">
                                         <div className="name required">{t('createProject.unlockDate')}</div>
                                         <div className="value">
@@ -292,14 +284,14 @@ export default function CreateVote() {
                         </div>}
 
                         {currentStep === 2 && <div className="step-1">
-                            <div className="title">变更投票信息</div>
+                            <div className="title">{t('createVote.mainTitle')}</div>
                             <div className="confirm-box">
                                 <div className="form-item">
-                                    <div className="label">投票期限 <Tooltip title="投票期限无法更改，合约创建时开始生效。公示期：24小时，投票期：24小时-96小时。"><img src={QuestionIcon} /></Tooltip></div>
+                                    <div className="label">{t('createVote.votingPeriod')} <Tooltip title="投票期限无法更改，合约创建时开始生效。公示期：24小时，投票期：24小时-96小时。"><img src={QuestionIcon} /></Tooltip></div>
                                     <div>{moment().add(1, 'days').format('MMMM Do YYYY')} - {moment().add(4, 'days').format('MMMM Do YYYY')}</div>
                                 </div>
                                 <div className="form-item">
-                                    <div className="label">变更说明</div>
+                                    <div className="label">{t('createVote.descriptionOfChange')}</div>
                                     <div>{description}</div>
                                 </div>
                             </div>
@@ -327,7 +319,7 @@ export default function CreateVote() {
                                 </div>
                                 <div className="confirm-box">
                                     <div className="line">
-                                        <div className="name">解锁额度</div>
+                                        <div className="name">{t('project.unlockingAmount')}</div>
                                         <div className="value">{item.unlock_percentage}%</div>
                                     </div>
                                     {index === 0 ? <div className="line">

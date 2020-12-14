@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Modal, Input, Button, message } from 'antd'
 // import VoteStatus from '../../../../components/VoteStatus'
+import { useTranslation } from 'react-i18next'
 import { useWallet } from 'use-wallet'
 import axios from 'utils/axios'
 import mm from 'components/mm'
@@ -12,10 +13,11 @@ export default function AuditModal(props) {
     const [comment, setComment] = useState('')
     const [approveLoading, setApproveLoading] = useState(false)
     const [rejectLoading, setRejectLoading] = useState(false)
+    const { t } = useTranslation()
 
     const doAudit = (support) => {
         if (!comment) {
-            message.error('请填写专业意见')
+            message.error(t('hint.leaveComment'))
             return false
         }
         if (support) {
@@ -33,7 +35,7 @@ export default function AuditModal(props) {
                 to: res.data.contract_addr,
                 data: res.data.call_data
             }
-            mm.sendTransaction(auditParams, '审计项目').then(res => {
+            mm.sendTransaction(auditParams, 'Audit').then(res => {
                 setApproveLoading(false)
                 setRejectLoading(false)
                 props.onCancel()
@@ -42,18 +44,15 @@ export default function AuditModal(props) {
     }
 
     return (
-        <Modal wrapClassName="audit-modal" footer={null} title="审计意见" visible={true} onCancel={() => { props.onCancel() }}>
+        <Modal wrapClassName="audit-modal" footer={null} title={t('modal.auditTitle')} visible={true} onCancel={() => { props.onCancel() }}>
             <div className="safe-zone">
-                <Input.TextArea value={comment} onChange={(e) => { setComment(e.target.value) }} placeholder="请留下您的专业意见" className="texts" />
+                <Input.TextArea value={comment} onChange={(e) => { setComment(e.target.value) }} placeholder="Leave your comment" className="texts" />
             </div>
-            <div className="hint">
-                请您根据项目详情对项目进行评价，并做出判断<br />
-            通过审核的项目将会得到安全达承保<br />
-            未通过审核的项目将会撤销项目
+            <div className="hint" dangerouslySetInnerHTML={{__html: t('modal.auditHint')}}>
             </div>
             <div className="handle-area">
-                <Button loading={rejectLoading} className="btn-red" onClick={() => { doAudit(false) }}>拒绝</Button>
-                <Button loading={approveLoading} className="btn-green" onClick={() => { doAudit(true) }}>通过</Button>
+                <Button loading={rejectLoading} className="btn-red" onClick={() => { doAudit(false) }}>{t('common.reject')}</Button>
+                <Button loading={approveLoading} className="btn-green" onClick={() => { doAudit(true) }}>{t('common.pass')}</Button>
             </div>
         </Modal>
     )

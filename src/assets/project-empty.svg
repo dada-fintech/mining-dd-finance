@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="146.324" height="187.324" viewBox="0 0 146.324 187.324">
+  <g id="矩形_198" data-name="矩形 198" fill="#fff" stroke="#707070" stroke-width="1" opacity="0.57">
+    <rect width="143" height="175" rx="5" stroke="none"/>
+    <rect x="0.5" y="0.5" width="142" height="174" rx="4.5" fill="none"/>
+  </g>
+  <line id="直线_23" data-name="直线 23" x2="112.506" transform="translate(13.362 44.18)" fill="none" stroke="#707070" stroke-width="1"/>
+  <g id="矩形_201" data-name="矩形 201" transform="translate(90 26)" fill="#fff" stroke="#48cccc" stroke-width="1" stroke-dasharray="1">
+    <rect width="35" height="12" stroke="none"/>
+    <rect x="0.5" y="0.5" width="34" height="11" fill="none"/>
+  </g>
+  <rect id="矩形_481" data-name="矩形 481" width="95" height="8" transform="translate(24 64)" fill="#cfcfcf"/>
+  <rect id="矩形_482" data-name="矩形 482" width="81" height="8" transform="translate(24 78)" fill="#cfcfcf"/>
+  <rect id="矩形_483" data-name="矩形 483" width="69" height="6" transform="translate(24 93)" fill="#cfcfcf"/>
+  <rect id="矩形_484" data-name="矩形 484" width="95" height="8" transform="translate(24 106)" fill="#cfcfcf"/>
+  <rect id="矩形_485" data-name="矩形 485" width="81" height="6" transform="translate(24 121)" fill="#cfcfcf"/>
+  <rect id="矩形_486" data-name="矩形 486" width="81" height="8" transform="translate(24 134)" fill="#cfcfcf"/>
+  <rect id="矩形_487" data-name="矩形 487" width="81" height="4" transform="translate(24 150)" fill="#cfcfcf"/>
+  <g id="椭圆_45" data-name="椭圆 45" transform="translate(74 110)" fill="none" stroke="#48cccc" stroke-width="4">
+    <circle cx="28" cy="28" r="28" stroke="none"/>
+    <circle cx="28" cy="28" r="26" fill="none"/>
+  </g>
+  <line id="直线_156" data-name="直线 156" x2="24" y2="27" transform="translate(119.5 157.5)" fill="none" stroke="#48cccc" stroke-linecap="round" stroke-width="4"/>
+</svg>

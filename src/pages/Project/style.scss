@@ -42,7 +42,7 @@
             }
         }
     }
-    .bottom-area{
+    .bottom-area {
         margin: 16px auto 64px;
     }
     .project-intro {
@@ -172,6 +172,25 @@
         .project-main {
             width: 100%;
         }
+        .middle-area {
+            .container{
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+            .apy{
+                font-size: 16px;
+            }
+            .tabs {
+                li {
+                    padding: 2px 4px;
+                    font-size: 14px;
+                    margin-right: 10px;
+                    &.active {
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
         .project-intro {
             .desc {
                 margin-bottom: 32px;
@@ -184,12 +203,6 @@
                 }
                 .apy {
                     font-size: 16px;
-                }
-            }
-            .tabs {
-                li {
-                    font-size: 16px;
-                    margin-right: 24px;
                 }
             }
         }
