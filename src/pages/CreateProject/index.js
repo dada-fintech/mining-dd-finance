@@ -736,7 +736,7 @@ export default function CreateProject() {
                         </div>}
                         {currentStep === 8 && <div className="step-pay">
                             <div className="dada-circle">
-                                {approveBalance} DADA
+                                {approveBalance} USDT
                             </div>
                             <div className="pay-hint">
                                 {t('createProject.payHint')}
