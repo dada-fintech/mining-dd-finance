@@ -20,7 +20,7 @@ import Sidebar from '../../components/Sidebar'
 import ProcessModule from './modules/Process'
 import mm from 'components/mm'
 import DetailModule from './modules/Detail'
-import CommentsModule from './modules/Comments'
+// import CommentsModule from './modules/Comments'
 
 import './style.scss'
 
@@ -271,7 +271,7 @@ export default function Project() {
                 <ul className="tabs">
                     <li className={currentTab === 'process' && 'active'} onClick={() => { setCurrentTab('process') }}>{t('project.progress')}</li>
                     <li className={currentTab === 'detail' && 'active'} onClick={() => { setCurrentTab('detail') }}>{t('project.details')}</li>
-                    <li className={currentTab === 'comments' && 'active'} onClick={() => { setCurrentTab('comments') }}>{t('project.comments')}</li>
+                    {/* <li className={currentTab === 'comments' && 'active'} onClick={() => { setCurrentTab('comments') }}>{t('project.comments')}</li> */}
                 </ul>
                 <div className="apy">{t('common.apy')} {project.fundraising.expected_apy}%</div>
             </div>
@@ -282,7 +282,7 @@ export default function Project() {
                     <Col xs={24}  lg={14}>
                         {currentTab === 'process' && <ProcessModule id={id} processList={project.process || []} />}
                         {currentTab === 'detail' && <DetailModule fullDesc={project.fullDesc} projectInfo={project.project_info} />}
-                        {currentTab === 'comments' && <CommentsModule />}
+                        {/* {currentTab === 'comments' && <CommentsModule />} */}
                     </Col>
                     <Col xs={24} lg={6}>
                         <Sidebar projectId={id} role={role} otherFiles={project.project_info.other_file} />
