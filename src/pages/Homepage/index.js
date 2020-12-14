@@ -123,9 +123,7 @@ export default function Homepage() {
                                         <div className="apy">{t('common.apy')} 10%</div>
                                     </div>
                                 </div>
-                                <div className="desc">
-                                {t('projectList.1.desc')}
-
+                                <div className="desc" dangerouslySetInnerHTML={{__html: t('projectList.1.desc')}}>
                 </div>
                                 <div className="bottom">
                                     <a href="/project/1">
@@ -146,8 +144,7 @@ export default function Homepage() {
                                         <div className="apy">{t('common.apy')} 15%</div>
                                     </div>
                                 </div>
-                                <div className="desc">
-                                {t('projectList.2.desc')}
+                                <div className="desc" dangerouslySetInnerHTML={{__html: t('projectList.2.desc')}}>
                 </div>
                                 <div className="bottom">
                                     <a href="/project/2">
