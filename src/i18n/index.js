@@ -39,6 +39,8 @@ export default {
                 approve: 'Please approve before action',
                 leaveComment: 'Please leave comment',
                 actionSuccess: 'Success',
+                detailHint: 'Please do not use your centralized exchange address to make transfers to the above address, it may lead  to some unpredictable results.',
+
             },
             modal: {
                 repayTitle: 'Repay',
@@ -348,6 +350,7 @@ export default {
                 approve: '请在操作前进行授权',
                 leaveComment: '请填写专业意见',
                 actionSuccess: '操作成功',
+                detailHint: '请不要使用交易所地址向以上地址内转账，可能会出现无法预估的后果',
 
             },
             modal: {
@@ -608,8 +611,8 @@ export default {
             },
             projectList: {
                 title: '项目列表',
-                slogan1: '甄选好项目',
-                slogan2: '收益更轻松'
+                slogan1: '参与优质项目的成长',
+                slogan2: '为您搭建链接矿业的桥梁'
             },
 
 

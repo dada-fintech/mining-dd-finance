@@ -32,7 +32,9 @@ export default function Detail(props) {
             <div>{t('createProject.profitAddr')}</div>
             <div>{projectInfo.profit}</div>
         </div>
-
+        <div style={{color: 'red'}}>
+            {t('hint.detailHint')}
+        </div>
         <div className="pdf-area">
             {loading && <div>Loading PDF...</div>}
             <PDFReader url={fullDesc} onDocumentComplete={() => { setLoading(false) }} />

@@ -515,7 +515,7 @@ export default function CreateProject() {
 
                             <div className="form-item">
                                 <div className="label ">{t('createProject.fundraisingPeriod')}</div>
-                                <DatePicker.RangePicker disabledDate={disable5Days} value={fundraising.start_time && [moment(fundraising.start_time), moment(fundraising.end_time)]} onChange={value => dateRangeChange('fundraising', value)} />
+                                <DatePicker.RangePicker showTime value={fundraising.start_time && [moment(fundraising.start_time), moment(fundraising.end_time)]} onChange={value => dateRangeChange('fundraising', value)} />
                                 <div className="hint">{t('createProject.fundraisingPeriodHint1')}</div>
                                 <div className="hint red">{t('createProject.fundraisingPeriodHint2')}</div>
                             </div>

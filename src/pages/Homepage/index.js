@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Row, Col, Tooltip, Progress, Input, Checkbox, message } from 'antd'
+import { Button, Row, Col, Tooltip, Progress, Input, Checkbox, message, Popover } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { useWallet } from 'use-wallet'
 // import { useWallet } from 'use-wallet'
@@ -12,6 +12,8 @@ import Twiiter from '../../assets/socials/twitter.svg'
 import Discord from '../../assets/socials/discord.svg'
 import Medium from '../../assets/socials/medium.svg'
 import Telegram from '../../assets/socials/telegram.svg'
+import Weixin from '../../assets/socials/weixin.svg'
+import WeixinQR from '../../assets/qr-code.jpeg'
 
 import ProjectListTriangle from '../../assets/project-list-triangle.svg'
 import OngoingTriangle from '../../assets/ongoing-triangle.svg'
@@ -23,10 +25,12 @@ import axios from 'utils/axios'
 import './style.scss'
 
 export default function Homepage() {
-    const wallet = useWallet()
+    // const wallet = useWallet()
     const [projectList, setProjectList] = useState([])
     const [comment, setComment] = useState({})
     const { t, i18n } = useTranslation()
+
+    const WeixinContent = (<img src={WeixinQR} style={{width: '140px'}}/>)
 
     useEffect(() => {
         axios.get('/project/active-items').then(res => {
@@ -66,6 +70,14 @@ export default function Homepage() {
             <a target="_blank" href="https://t.me/joinchat/AAAAAEVqGZbYVB7eR7qFlg">
                 <img src={Telegram} className="social-icon" />
             </a>
+            <a>
+            <Popover content={WeixinContent}>
+                                    <img src={Weixin} className="social-icon" />
+                                </Popover>
+            </a>
+
+
+        
             {/* <a className="line-top-bottom" href="https://doc.dd.finance">{t('common.readTheDoc')}</a> */}
         </div>
         <div className="banner">
@@ -77,14 +89,14 @@ export default function Homepage() {
                         <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="353.001" height="98.444" viewBox="0 0 353.001 98.444">
                             <defs>
                                 <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
-                                    <stop offset="0" stop-color="#48cccc"/>
-                                    <stop offset="1" stop-color="#273460"/>
+                                    <stop offset="0" stop-color="#48cccc" />
+                                    <stop offset="1" stop-color="#273460" />
                                 </linearGradient>
                             </defs>
-                            <path id="路径_1010" data-name="路径 1010" d="M44.814,98.444H0V0H44.814A18.351,18.351,0,0,1,63.18,18.367V80.077A18.351,18.351,0,0,1,44.814,98.444ZM4.408,4.408V94.036H44.446A14.686,14.686,0,0,0,59.14,79.343V19.1A14.71,14.71,0,0,0,44.446,4.408Z" fill="url(#linear-gradient)"/>
-                            <path id="路径_1007" data-name="路径 1007" d="M44.814,98.444H0V0H44.814A18.351,18.351,0,0,1,63.18,18.367V80.077A18.351,18.351,0,0,1,44.814,98.444ZM4.408,4.408V94.036H44.446A14.686,14.686,0,0,0,59.14,79.343V19.1A14.71,14.71,0,0,0,44.446,4.408Z" transform="translate(192.112)" fill="url(#linear-gradient)"/>
-                            <path id="路径_1009" data-name="路径 1009" d="M4.408,97.832h0A7.35,7.35,0,0,1,0,91.1V18.366A18.351,18.351,0,0,1,18.366,0H48.12A18.351,18.351,0,0,1,66.486,18.366V91.1a7.346,7.346,0,0,1-4.041,6.562V50.324H4.408ZM19.1,4.408A14.71,14.71,0,0,0,4.408,19.1V46.283H62.446V19.1A14.71,14.71,0,0,0,47.752,4.408Z" transform="translate(94.403)" fill="url(#linear-gradient)"/>
-                            <path id="路径_1008" data-name="路径 1008" d="M4.408,97.832h0A7.35,7.35,0,0,1,0,91.1V18.366A18.351,18.351,0,0,1,18.366,0H48.12A18.351,18.351,0,0,1,66.486,18.366V91.1a7.346,7.346,0,0,1-4.041,6.562V50.324H4.408ZM19.1,4.408A14.71,14.71,0,0,0,4.408,19.1V46.283H62.446V19.1A14.71,14.71,0,0,0,47.752,4.408Z" transform="translate(286.515)" fill="url(#linear-gradient)"/>
+                            <path id="路径_1010" data-name="路径 1010" d="M44.814,98.444H0V0H44.814A18.351,18.351,0,0,1,63.18,18.367V80.077A18.351,18.351,0,0,1,44.814,98.444ZM4.408,4.408V94.036H44.446A14.686,14.686,0,0,0,59.14,79.343V19.1A14.71,14.71,0,0,0,44.446,4.408Z" fill="url(#linear-gradient)" />
+                            <path id="路径_1007" data-name="路径 1007" d="M44.814,98.444H0V0H44.814A18.351,18.351,0,0,1,63.18,18.367V80.077A18.351,18.351,0,0,1,44.814,98.444ZM4.408,4.408V94.036H44.446A14.686,14.686,0,0,0,59.14,79.343V19.1A14.71,14.71,0,0,0,44.446,4.408Z" transform="translate(192.112)" fill="url(#linear-gradient)" />
+                            <path id="路径_1009" data-name="路径 1009" d="M4.408,97.832h0A7.35,7.35,0,0,1,0,91.1V18.366A18.351,18.351,0,0,1,18.366,0H48.12A18.351,18.351,0,0,1,66.486,18.366V91.1a7.346,7.346,0,0,1-4.041,6.562V50.324H4.408ZM19.1,4.408A14.71,14.71,0,0,0,4.408,19.1V46.283H62.446V19.1A14.71,14.71,0,0,0,47.752,4.408Z" transform="translate(94.403)" fill="url(#linear-gradient)" />
+                            <path id="路径_1008" data-name="路径 1008" d="M4.408,97.832h0A7.35,7.35,0,0,1,0,91.1V18.366A18.351,18.351,0,0,1,18.366,0H48.12A18.351,18.351,0,0,1,66.486,18.366V91.1a7.346,7.346,0,0,1-4.041,6.562V50.324H4.408ZM19.1,4.408A14.71,14.71,0,0,0,4.408,19.1V46.283H62.446V19.1A14.71,14.71,0,0,0,47.752,4.408Z" transform="translate(286.515)" fill="url(#linear-gradient)" />
                         </svg>
                         {i18n.language === 'zh' ? <div className="banner-title">
                             矿业生态聚合器
@@ -98,7 +110,7 @@ export default function Homepage() {
                             </div>
                         </a>
                         <a className="line-top-bottom" href="https://doc.dd.finance">{t('common.readTheDoc')}</a>
-                        
+
                         {/* <ul className="feature-list">
                             <li>{t('homepage.banner.feature.1')}</li>
                             <li>{t('homepage.banner.feature.2')}</li>
@@ -273,6 +285,11 @@ export default function Homepage() {
                             </a>
                             <a target="_blank" href="https://t.me/joinchat/AAAAAEVqGZbYVB7eR7qFlg">
                                 <img src={Telegram} className="social-icon" />
+                            </a>
+                            <a target="_blank">
+                                <Popover content={WeixinContent}>
+                                    <img src={Weixin} className="social-icon" />
+                                </Popover>
                             </a>
                         </div>
 
