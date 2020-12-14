@@ -21,6 +21,7 @@ import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 
 import './style.scss'
+import ProjectFooter from "../../components/ProjectFooter";
 
 export default function Projects() {
     const [currentTab, setCurrentTab] = useState('can_invest_project')
@@ -106,6 +107,6 @@ export default function Projects() {
                     </div>}
             </div>
         </div>
-        <Footer />
+        <ProjectFooter />
     </div>)
 }

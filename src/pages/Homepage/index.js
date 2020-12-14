@@ -66,7 +66,7 @@ export default function Homepage() {
             <a target="_blank">
                 <img src={Telegram} className="social-icon" />
             </a>
-            <a className="line-top-bottom" href="https://doc.dd.finance">{t('common.readTheDoc')}</a>
+            {/* <a className="line-top-bottom" href="https://doc.dd.finance">{t('common.readTheDoc')}</a> */}
         </div>
         <div className="banner">
             <Header />
@@ -74,32 +74,31 @@ export default function Homepage() {
             <div className="container">
                 <Row type="flex" align="middle" justify="center">
                     <Col xs={24} md={24} align="center">
-                        <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="353" height="98.572" viewBox="0 0 353 98.572">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="353.001" height="98.444" viewBox="0 0 353.001 98.444">
                             <defs>
                                 <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
-                                    <stop offset="0" stop-color="#48cccc" />
-                                    <stop offset="1" stop-color="#273460" />
+                                    <stop offset="0" stop-color="#48cccc"/>
+                                    <stop offset="1" stop-color="#273460"/>
                                 </linearGradient>
                             </defs>
-                            <g id="组_166" data-name="组 166" transform="translate(-760 -183)">
-                                <path id="路径_990" data-name="路径 990" d="M3533.834,5465.443H3478V5367h55.833a7.346,7.346,0,0,1,7.346,7.347v83.75a7.347,7.347,0,0,1-7.346,7.347Zm-51.426-94.036v89.627h49.221a5.516,5.516,0,0,0,5.51-5.51v-78.608a5.516,5.516,0,0,0-5.51-5.509Z" transform="translate(-2718 -5184)" fill="url(#linear-gradient)" />
-                                <path id="路径_992" data-name="路径 992" d="M3533.834,5465.443H3478V5367h55.833a7.346,7.346,0,0,1,7.346,7.347v83.75a7.347,7.347,0,0,1-7.346,7.347Zm-51.426-94.036v89.627h49.221a5.516,5.516,0,0,0,5.51-5.51v-78.608a5.516,5.516,0,0,0-5.51-5.509Z" transform="translate(-2525.889 -5184)" fill="url(#linear-gradient)" />
-                                <path id="路径_989" data-name="路径 989" d="M3482.409,5465.572h0a7.35,7.35,0,0,1-4.407-6.735v-84.491a7.346,7.346,0,0,1,7.346-7.347h51.793a7.346,7.346,0,0,1,7.347,7.347v84.491a7.346,7.346,0,0,1-4.041,6.562v-47.7h-58.037Zm5.51-94.131a5.516,5.516,0,0,0-5.51,5.51v36.681h58.037v-36.681a5.516,5.516,0,0,0-5.51-5.51Z" transform="translate(-2623.598 -5184)" fill="url(#linear-gradient)" />
-                                <path id="路径_991" data-name="路径 991" d="M3482.409,5465.572h0a7.35,7.35,0,0,1-4.407-6.735v-84.491a7.346,7.346,0,0,1,7.346-7.347h51.793a7.346,7.346,0,0,1,7.347,7.347v84.491a7.346,7.346,0,0,1-4.041,6.562v-47.7h-58.037Zm5.51-94.131a5.516,5.516,0,0,0-5.51,5.51v36.681h58.037v-36.681a5.516,5.516,0,0,0-5.51-5.51Z" transform="translate(-2431.486 -5184)" fill="url(#linear-gradient)" />
-                            </g>
+                            <path id="路径_1010" data-name="路径 1010" d="M44.814,98.444H0V0H44.814A18.351,18.351,0,0,1,63.18,18.367V80.077A18.351,18.351,0,0,1,44.814,98.444ZM4.408,4.408V94.036H44.446A14.686,14.686,0,0,0,59.14,79.343V19.1A14.71,14.71,0,0,0,44.446,4.408Z" fill="url(#linear-gradient)"/>
+                            <path id="路径_1007" data-name="路径 1007" d="M44.814,98.444H0V0H44.814A18.351,18.351,0,0,1,63.18,18.367V80.077A18.351,18.351,0,0,1,44.814,98.444ZM4.408,4.408V94.036H44.446A14.686,14.686,0,0,0,59.14,79.343V19.1A14.71,14.71,0,0,0,44.446,4.408Z" transform="translate(192.112)" fill="url(#linear-gradient)"/>
+                            <path id="路径_1009" data-name="路径 1009" d="M4.408,97.832h0A7.35,7.35,0,0,1,0,91.1V18.366A18.351,18.351,0,0,1,18.366,0H48.12A18.351,18.351,0,0,1,66.486,18.366V91.1a7.346,7.346,0,0,1-4.041,6.562V50.324H4.408ZM19.1,4.408A14.71,14.71,0,0,0,4.408,19.1V46.283H62.446V19.1A14.71,14.71,0,0,0,47.752,4.408Z" transform="translate(94.403)" fill="url(#linear-gradient)"/>
+                            <path id="路径_1008" data-name="路径 1008" d="M4.408,97.832h0A7.35,7.35,0,0,1,0,91.1V18.366A18.351,18.351,0,0,1,18.366,0H48.12A18.351,18.351,0,0,1,66.486,18.366V91.1a7.346,7.346,0,0,1-4.041,6.562V50.324H4.408ZM19.1,4.408A14.71,14.71,0,0,0,4.408,19.1V46.283H62.446V19.1A14.71,14.71,0,0,0,47.752,4.408Z" transform="translate(286.515)" fill="url(#linear-gradient)"/>
                         </svg>
                         {i18n.language === 'zh' ? <div className="banner-title">
                             矿业生态聚合器
                         </div> : <div className="banner-title">
                                 Crypto Mining Aggregator
                         </div>}
-
                         <div className="subtitle">{t('homepage.subtitle')}</div>
                         <a href="/create-project" className="banner-btn">
                             <div className="btn-before">
                                 <span>{t('common.createNewProject')}</span>
                             </div>
                         </a>
+                        <a className="line-top-bottom" href="https://doc.dd.finance">{t('common.readTheDoc')}</a>
+                        
                         {/* <ul className="feature-list">
                             <li>{t('homepage.banner.feature.1')}</li>
                             <li>{t('homepage.banner.feature.2')}</li>

@@ -13,7 +13,7 @@ export default function ProjectFooter() {
     const { t } = useTranslation()
 
     return (<div className="project-footer">
-        <footer className="container">
+        <footer className="container border-line">
             <Row>
                 <Col md={6}>
                     <img src={LogoBlue} className="footer-logo" />
