@@ -33,13 +33,13 @@ export default function ProjectFooter() {
                         <a target="_blank" href="https://twitter.com/FinanceDada">
                             <img src={Twiiter} className="social-icon" />
                         </a>
-                        <a target="_blank">
+                        <a target="_blank"  href="https://discord.gg/KgT7j6YvPK">
                             <img src={Discord} className="social-icon" />
                         </a>
-                        <a target="_blank">
+                        <a target="_blank" href="https://ddfinance.medium.com/">
                             <img src={Medium} className="social-icon" />
                         </a>
-                        <a target="_blank">
+                        <a target="_blank" href="https://t.me/joinchat/AAAAAEVqGZbYVB7eR7qFlg">
                             <img src={Telegram} className="social-icon" />
                         </a>
                     </div>
