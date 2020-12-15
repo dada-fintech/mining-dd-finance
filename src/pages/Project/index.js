@@ -39,7 +39,7 @@ export default function Project() {
     const [role, setRole] = useState('invester')
     const wallet = useWallet()
     const { id } = useParams()
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
     useEffect(async () => {
         axios.get('/project/detail/' + id).then(res => {
             setProject({
@@ -174,24 +174,26 @@ export default function Project() {
         setInsuranceModalVisible(true)
     }
 
+    const isEn = i18n.language === 'en'
+
     const statusMapping = {
-        'Auditing': '委员会审核中',
-        'Future': '项目即将到来',
-        'Raising': '正在筹款',
-        'PayingInsurance': '正在支付安全达',
-        'Active': '项目正在进行中',
-        'Rolling': '正在投票',
-        'AllPhasesDone': '项目计划完成，等待获取报酬',
-        'Repaying': '用户正在获取回报',
-        'Finished': '项目已完成',
-        'Refunding': '退款中',
-        'PhaseFailed': '进程失败',
-        'ReplanNoticing': '更改计划公示',
-        'ReplanVoting': '更改计划投票',
-        'ReplanFailed': '更改计划失败',
-        'Liquidating': '清算中',
-        'Failed': '项目失败',
-        'PreDefined': '进行中',
+        'Auditing': isEn ? 'Auditing' : '委员会审核中',
+        'Future': isEn ? 'Project Coming Soon' : '项目即将到来',
+        'Raising': isEn ? 'In Mid of Fundraising' : '正在筹款',
+        'PayingInsurance': isEn ? 'Depositing to the Reserve' : '正在支付安全达',
+        'Active': isEn ? 'Active' : '项目正在进行中',
+        'Rolling': isEn ? 'Voting On-going' : '正在投票',
+        'AllPhasesDone': isEn ? 'Project Completes. Waiting for the Redemption' : '项目计划完成，等待获取报酬',
+        'Repaying': isEn ? 'Users are Receiving the Redemption' : '用户正在获取回报',
+        'Finished': isEn ? 'Project Completed' : '项目已完成',
+        'Refunding': isEn ? 'Refunding' : '退款中',
+        'PhaseFailed': isEn ? 'Stage Goal Failed' : '进程失败',
+        'ReplanNoticing': isEn ? 'Update to Change the Plan' : '更改计划公示',
+        'ReplanVoting': isEn ? 'Voting on Changing the Plan' : '更改计划投票',
+        'ReplanFailed': isEn ? 'Failed to Change the Plan' : '更改计划失败',
+        'Liquidating': isEn ? 'Liquidating' : '清算中',
+        'Failed': isEn ? 'Failed' : '项目失败',
+        'PreDefined': isEn ? 'On-going' : '进行中',
     }
 
     return (<div className="project-page">
@@ -279,7 +281,7 @@ export default function Project() {
         <div className="bottom-area">
             <div className="container">
                 <Row gutter={{ lg: 24 }} align="center">
-                    <Col xs={24}  lg={14}>
+                    <Col xs={24} lg={14}>
                         {currentTab === 'process' && <ProcessModule id={id} processList={project.process || []} />}
                         {currentTab === 'detail' && <DetailModule fullDesc={project.fullDesc} projectInfo={project.project_info} />}
                         {/* {currentTab === 'comments' && <CommentsModule />} */}
