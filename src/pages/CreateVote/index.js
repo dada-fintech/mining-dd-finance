@@ -136,6 +136,8 @@ export default function CreateVote() {
             }
         }
 
+        setChangeLoading(false)
+
         //when all required fields are filled
         setCurrentStep(prev => prev + 1)
     }

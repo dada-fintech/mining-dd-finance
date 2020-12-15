@@ -36,11 +36,42 @@ export default function CreateProject() {
         ]
 
 
-    useEffect(()=>{
+    useEffect(() => {
+        const projectInfo = JSON.parse(localStorage.getItem('projectInfo'))
+        const fundraising = JSON.parse(localStorage.getItem('fundraising'))
+        const processList = JSON.parse(localStorage.getItem('processList'))
+
+        if (projectInfo) {
+            setProjectInfo(projectInfo)
+        }
+        if (fundraising) {
+            setFundraising(fundraising)
+        }
+        if (processList) {
+            setProcessList(processList)
+        }
+
+        const currentStep = Number(localStorage.getItem('currentStep'))
+        if(currentStep){
+            setCurrentStep(currentStep)
+        }
+
+        
+
+    }, [])
+
+
+    useEffect(() => {
         if (fundraising.softtopPercent) {
             fundraisingSofttopChange(fundraising.softtopPercent)
         }
     }, [fundraising.max_amount])
+
+    useEffect(() => {
+        localStorage.setItem('projectInfo', JSON.stringify(projectInfo))
+        localStorage.setItem('fundraising', JSON.stringify(fundraising))
+        localStorage.setItem('processList', JSON.stringify(processList))
+    }, [fundraising, processList, projectInfo])
 
     const changeProjectInfo = (name, value) => {
         setProjectInfo(prev => {
@@ -281,8 +312,11 @@ export default function CreateProject() {
             }
         }
 
+        setCreateLoading(false)
+
         //when all required fields are filled
         setCurrentStep(prev => prev + 1)
+        localStorage.setItem('currentStep', currentStep + 1)
     }
 
     const whitePaperUpload = {
@@ -343,9 +377,9 @@ export default function CreateProject() {
         changeProjectInfo('other_file', previousArr)
     }
 
-    const disable5Days = current => {
-        return current && current < moment().add(5, 'days').endOf('day');
-    }
+    // const disable5Days = current => {
+    //     return current && current < moment().add(5, 'days').endOf('day');
+    // }
 
     const confirmInfo = () => {
         let finalInfo = {
@@ -370,6 +404,10 @@ export default function CreateProject() {
             setCurrentStep(prev => prev + 1)
         }).catch(error => {
             message.error(error.response.data.error)
+        }).finally(() => {
+            localStorage.setItem('projectInfo', null)
+            localStorage.setItem('fundraising', null)
+            localStorage.setItem('processList', null)
         })
     }
 
