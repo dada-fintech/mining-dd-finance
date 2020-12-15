@@ -158,7 +158,6 @@
             font-size: 22px;
             width: 6em;
             height: 50px;
-            color: #707070;
             border: 5px #48cccc solid;
             border-radius: 10px;
             cursor: pointer;
@@ -170,9 +169,6 @@
                 transform: translateX(-50%);
                 z-index: 2;
                 white-space: nowrap;
-                .anticon{
-                    font-size: 14px;
-                }
             }
             &::before{
                 content: '';

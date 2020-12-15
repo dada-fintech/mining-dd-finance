@@ -776,12 +776,12 @@ export default function CreateProject() {
                             <div onClick={() => { goNextStep() }} className="line-btn line-btn-next"><img src={LinkArrow} /> {t('common.next')}</div>
                         </div>}
                         {currentStep == 7 && <div>
-                            <div onClick={() => { confirmInfo() }} className="btn-confirm"> <span>{t('common.confirmInfo')}</span></div>
+                            <div onClick={() => { confirmInfo() }} className="btn-confirm"> <span className="text">{t('common.confirmInfo')}</span></div>
                             <span className="hint hint-gasfee">{t('common.gasFeeHint')}</span>
                         </div>
                         }
                         {currentStep == 8 && <div>
-                            {dadaApproved ? <div onClick={() => { !createLoading && doPay() }} className="btn-confirm"> <span>{t('common.pay')}</span></div>
+                            {dadaApproved ? <div onClick={() => { !createLoading && doPay() }} className="btn-confirm"> <span className="text">{t('common.pay')}</span></div>
                                 : <div onClick={() => { !createLoading && doApprove() }} className="btn-confirm"> <span className="text">{t('common.approve')} {createLoading && <LoadingOutlined />}</span></div>}
                         </div>}
                         {currentStep == 9 && <div>
