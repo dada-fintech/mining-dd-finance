@@ -52,11 +52,11 @@ export default function CreateProject() {
         }
 
         const currentStep = Number(localStorage.getItem('currentStep'))
-        if(currentStep){
+        if (currentStep) {
             setCurrentStep(currentStep)
         }
 
-        
+
 
     }, [])
 
@@ -312,7 +312,6 @@ export default function CreateProject() {
             }
         }
 
-        setCreateLoading(false)
 
         //when all required fields are filled
         setCurrentStep(prev => prev + 1)
@@ -382,6 +381,8 @@ export default function CreateProject() {
     // }
 
     const confirmInfo = () => {
+        setCreateLoading(false)
+
         let finalInfo = {
             project_info: projectInfo,
             fundraising: fundraising,
@@ -405,10 +406,15 @@ export default function CreateProject() {
         }).catch(error => {
             message.error(error.response.data.error)
         }).finally(() => {
-            localStorage.setItem('projectInfo', null)
-            localStorage.setItem('fundraising', null)
-            localStorage.setItem('processList', null)
+            clearStorage()
         })
+    }
+
+    const clearStorage = () => {
+        localStorage.setItem('projectInfo', null)
+        localStorage.setItem('fundraising', null)
+        localStorage.setItem('processList', null)
+        localStorage.setItem('currentStep', null)
     }
 
     const doApprove = async () => {
@@ -442,8 +448,8 @@ export default function CreateProject() {
             'Paying'
         ).then(res => {
             setCreateLoading(false)
-
             if (res) {
+                clearStorage()
                 setPayStatus('success')
                 setCurrentStep(prev => prev + 1)
             } else {
@@ -808,7 +814,7 @@ export default function CreateProject() {
                     </div>
                     <div className="step-control">
                         <div>
-                            {currentStep > 0 && currentStep < 9 && <div onClick={() => { setCurrentStep(prev => prev - 1) }} className="line-btn line-btn-back">{t('common.back')} <img src={LinkArrowBack} /></div>}
+                            {((currentStep > 0 && currentStep < 9) || payStatus === 'error') && <div onClick={() => { setCurrentStep(prev => prev - 1) }} className="line-btn line-btn-back">{t('common.back')} <img src={LinkArrowBack} /></div>}
                         </div>
                         {currentStep < 7 && <div>
                             <div onClick={() => { goNextStep() }} className="line-btn line-btn-next"><img src={LinkArrow} /> {t('common.next')}</div>

@@ -20,7 +20,7 @@ import {
   ConfigProvider
 } from 'antd';
 
-const language = localStorage.getItem('language') || 'zh'
+const language = localStorage.getItem('language') || (navigator.language === 'zh-CN' ? 'zh' : 'en')
 
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next

@@ -136,7 +136,6 @@ export default function CreateVote() {
             }
         }
 
-        setChangeLoading(false)
 
         //when all required fields are filled
         setCurrentStep(prev => prev + 1)
@@ -172,6 +171,8 @@ export default function CreateVote() {
     }
 
     const confirmInfo = () => {
+        setChangeLoading(false)
+
         //只传过去Future
         let finalProcessList = processList.filter(item => (item.status === 'Future' || !item.status))
 
