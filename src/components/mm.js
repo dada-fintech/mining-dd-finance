@@ -1,6 +1,7 @@
 // import { web3 } from '~/components/web3'
 import { subscribe } from '@nextcloud/event-bus'
 import { watchTransaction } from 'components/utils'
+import config from 'config'
 
 
 async function sendTransaction(transactionParameters, desc, approvedActionParam) {
@@ -12,7 +13,7 @@ async function sendTransaction(transactionParameters, desc, approvedActionParam)
         await window.ethereum
             .request({
                 method: "eth_sendTransaction",
-                params: [{ ...transactionParameters, chainId: 42 }],
+                params: [{ ...transactionParameters, chainId: config.chainId }],
             })
             .then(async (txHash) => {
                 let previousActionObj = JSON.parse(localStorage.getItem('actionObj')) || {}

@@ -6,12 +6,13 @@ import store from './redux/store'
 import './index.css';
 import App from './App';
 import { UseWalletProvider } from 'use-wallet'
+import config from 'config'
 
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <Provider store={store}>
-    <UseWalletProvider chainId={42}>
+    <UseWalletProvider chainId={config.chainId}>
       <App />
     </UseWalletProvider>
   </Provider>,
