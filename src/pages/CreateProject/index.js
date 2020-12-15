@@ -409,11 +409,11 @@ export default function CreateProject() {
 
     }
 
-    const profitTokenSelect = <Select defaultValue="USDT" value={projectInfo.profit_token} onChange={(val) => { setProjectInfo('profit_token', val) }} className="select-after">
-        <Select.Option value="USDT">USDT(ERC20)</Select.Option>
-        <Select.Option value="USDC">USDC</Select.Option>
-        <Select.Option value="BTC">BTC</Select.Option>
-    </Select>
+    // const profitTokenSelect = <Select defaultValue="USDT" value={projectInfo.profit_token} onChange={(val) => { setProjectInfo('profit_token', val) }} className="select-after">
+    //     <Select.Option value="USDT">USDT(ERC20)</Select.Option>
+    //     <Select.Option value="USDC">USDC</Select.Option>
+    //     <Select.Option value="BTC">BTC</Select.Option>
+    // </Select>
 
 
     return (<div className="create-project-page">
@@ -492,7 +492,7 @@ export default function CreateProject() {
                             </div>
                             <div className="form-item">
                                 <div className="label ">{t('createProject.profitAddress')}</div>
-                                <Input style={{ width: '500px' }} value={projectInfo.profit} addonAfter={profitTokenSelect} onChange={(e) => { changeProjectInfo('profit', e.target.value) }} />
+                                <Input style={{ width: '500px' }} value={projectInfo.profit} onChange={(e) => { changeProjectInfo('profit', e.target.value) }} />
                                 <div className="hint red">{t('createProject.profitAddressHint')}</div>
                             </div>
                             <div className="form-item">
