@@ -114,7 +114,9 @@
         align-items: center;
         justify-content: space-between;
         .hint {
-            color: #010101;
+            font-size: 16px;
+            font-weight: 1000;
+            color: #ff0000;
             margin-right: 12px;
         }
         .hint-gasfee{

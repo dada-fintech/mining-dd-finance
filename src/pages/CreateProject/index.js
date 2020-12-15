@@ -777,7 +777,7 @@ export default function CreateProject() {
                         </div>}
                         {currentStep == 7 && <div>
                             <div onClick={() => { confirmInfo() }} className="btn-confirm"> <span className="text">{t('common.confirmInfo')}</span></div>
-                            <span className="hint hint-gasfee">{t('common.gasFeeHint')}</span>
+                            <span className="hint hint-gasfee" dangerouslySetInnerHTML={{ __html: t('common.gasFeeHint') }}></span>
                         </div>
                         }
                         {currentStep == 8 && <div>
