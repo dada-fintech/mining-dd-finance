@@ -16,12 +16,10 @@ import './style.scss'
 // )
 
 export default function Process(props) {
-    const { processList } = props
+    const { processList, role, id } = props
     const [confirmVoteVisible, setConfirmVoteVisible] = useState(false)
     const [currentParams, setCurrentParams] = useState({})
     const wallet = useWallet()
-
-    const { id } = props
     const { t } = useTranslation()
 
     const statusMapping = {
@@ -84,7 +82,7 @@ export default function Process(props) {
                     {t('project.launchTime')}：<strong>{new Date(process.replan_time).toLocaleDateString()}</strong>
                 </div> : <div className="text-area">
                         <div>
-                        {t('createProject.shares')}: <strong>{process.unlock_percentage}%</strong>
+                            {t('createProject.shares')}: <strong>{process.unlock_percentage}%</strong>
                         </div>
 
                     </div>}
@@ -108,10 +106,11 @@ export default function Process(props) {
                         </div>
                     </>}
 
-                    <div className="vote-action">
+                    {role !== 'visitor' && <div className="vote-action">
                         <Button onClick={() => { sayYes(process.index, process.status) }}>{t('common.agree')}</Button>
                         <Button onClick={() => { sayNo(process.index, process.status) }}>{t('common.disagree')}</Button>
-                    </div>
+                    </div>}
+
                 </>}
             </div>
         ))}

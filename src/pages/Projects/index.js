@@ -69,13 +69,13 @@ export default function Projects() {
         <div className="middle-area">
             <div className="container">
                 <ul className="tabs">
-                    <li className={currentTab === 'can_invest_project' && 'active'} onClick={() => { setCurrentTab('can_invest_project') }}>可参与</li>
-                    <li className={currentTab === 'active_project' && 'active'} onClick={() => { setCurrentTab('active_project') }}>运行中</li>
-                    <li className={currentTab === 'finished_project' && 'active'} onClick={() => { setCurrentTab('finished_project') }}>已完成</li>
+                    <li className={currentTab === 'can_invest_project' && 'active'} onClick={() => { setCurrentTab('can_invest_project') }}>{t('project.category.open')}</li>
+                    <li className={currentTab === 'active_project' && 'active'} onClick={() => { setCurrentTab('active_project') }}>{t('project.category.ongoing')}</li>
+                    <li className={currentTab === 'finished_project' && 'active'} onClick={() => { setCurrentTab('finished_project') }}>{t('project.category.completed')}</li>
                 </ul>
                 <div>
                     <ul className="tabs">
-                        <li className={currentTab === 'auditing_project' && 'active'} onClick={() => { setCurrentTab('auditing_project') }}>公示中-审核期</li>
+                        <li className={currentTab === 'auditing_project' && 'active'} onClick={() => { setCurrentTab('auditing_project') }}>{t('project.category.announced')}</li>
                     </ul>
                 </div>
             </div>

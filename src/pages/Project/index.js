@@ -261,7 +261,7 @@ export default function Project() {
                                 <div className="item">{t('project.fundRaised')}：{project.fundraising.current_raised_money} USDT</div>
                                 <div className="item">{t('project.hardCap')}：{project.fundraising.max_amount} USDT</div>
                                 <div className="item">{t('project.status')}：{statusMapping[project.project_info.status]}</div>
-                                <div className="item">{t('project.roles')}：{role === 'manager' ? t('project.role.manager') : (role === 'committee' ? t('project.role.committee') : t('project.role.supporter'))}</div>
+                                <div className="item">{t('project.roles')}：{role === 'manager' ? t('project.role.manager') : (role === 'committee' ? t('project.role.committee') : (role === 'invester' ? t('project.role.supporter') : t('project.role.visitor')))}</div>
                             </div>
                         </Col>
                     </Row>
@@ -282,7 +282,7 @@ export default function Project() {
             <div className="container">
                 <Row gutter={{ lg: 24 }} align="center">
                     <Col xs={24} lg={14}>
-                        {currentTab === 'process' && <ProcessModule id={id} processList={project.process || []} />}
+                        {currentTab === 'process' && <ProcessModule id={id} role={role} processList={project.process || []} />}
                         {currentTab === 'detail' && <DetailModule fullDesc={project.fullDesc} projectInfo={project.project_info} />}
                         {/* {currentTab === 'comments' && <CommentsModule />} */}
                     </Col>

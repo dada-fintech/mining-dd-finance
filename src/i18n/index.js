@@ -172,7 +172,14 @@ export default {
                 role: {
                     manager: 'Fund Manager',
                     supporter: 'Fund Constituent',
-                    committee: 'Committee Member'
+                    committee: 'Committee Member',
+                    visitor: 'Visitor',
+                },
+                category:{
+                    ongoing: 'On-going',
+                    completed: 'Completed',
+                    open: 'Open for Participation',
+                    announced: 'Announced - in audit'
                 },
                 action: {
                     committeeReviews: 'Committee Reviews',
@@ -480,7 +487,14 @@ export default {
                 role: {
                     manager: '项目管理人',
                     supporter: '项目贡献者&支持者',
-                    committee: '委员会成员'
+                    committee: '委员会成员',
+                    visitor: '游客',
+                },
+                category:{
+                    ongoing: '运行中',
+                    completed: '已完成',
+                    open: '可参与',
+                    announced: '公示中-审核期'
                 },
                 action: {
                     committeeReviews: '审核评议',
