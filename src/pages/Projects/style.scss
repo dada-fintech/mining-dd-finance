@@ -1,8 +1,8 @@
 .projects-page {
-    .projects-empty{
+    .projects-empty {
         text-align: center;
         padding: 64px;
-        img{
+        img {
             margin-bottom: 32px;
         }
     }
@@ -298,7 +298,7 @@
             }
         }
         .middle-area {
-            .apy{
+            .apy {
                 font-size: 16px;
             }
             .container {
@@ -312,6 +312,30 @@
                     margin-right: 10px;
                     &.active {
                         font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.en {
+    .projects-page {
+        .middle-area {
+            .tabs {
+                li {
+                    font-size: 16px;
+                }
+            }
+        }
+        @media screen and (max-width: 992px) {
+            .middle-area {
+                .container {
+                    display: block;
+                }
+                .tabs {
+                    li {
+                        font-size: 12px;
                     }
                 }
             }

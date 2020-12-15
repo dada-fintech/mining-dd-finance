@@ -173,11 +173,11 @@
             width: 100%;
         }
         .middle-area {
-            .container{
+            .container {
                 padding-left: 24px;
                 padding-right: 24px;
             }
-            .apy{
+            .apy {
                 font-size: 16px;
             }
             .tabs {
@@ -203,6 +203,27 @@
                 }
                 .apy {
                     font-size: 16px;
+                }
+            }
+        }
+    }
+}
+
+.en {
+    .project-page {
+        .middle-area {
+            .tabs {
+                li {
+                    font-size: 16px;
+                }
+            }
+        }
+        @media screen and (max-width: 992px) {
+            .middle-area {
+                .tabs {
+                    li {
+                        font-size: 12px;
+                    }
                 }
             }
         }
