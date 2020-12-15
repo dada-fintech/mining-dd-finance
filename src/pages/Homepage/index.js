@@ -169,8 +169,7 @@ export default function Homepage() {
                                             <div className="apy">{t('common.apy')} {item.expected_apy}%</div>
                                         </div>
                                     </div>
-                                    <div className="desc">
-                                        {item.description}
+                                    <div className="desc" dangerouslySetInnerHTML={{__html: item.project_profile}}>
                                     </div>
                                     <div className="bottom">
                                         <Progress strokeColor="#3FAA4D" status="active" percent={((item.current_raised_money / item.max_amount) * 100).toFixed(0)} className="progress-bar" />
