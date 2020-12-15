@@ -35,6 +35,13 @@ export default function CreateProject() {
             '创建项目', '项目信息', '添加地址', '筹款信息', '解锁规则', '上传文件', '确认信息'
         ]
 
+
+    useEffect(()=>{
+        if (fundraising.softtopPercent) {
+            fundraisingSofttopChange(fundraising.softtopPercent)
+        }
+    }, [fundraising.max_amount])
+
     const changeProjectInfo = (name, value) => {
         setProjectInfo(prev => {
             return {
@@ -563,12 +570,12 @@ export default function CreateProject() {
                                         {index === 0 ? <Col md={12}>
                                             <div className="form-item">
                                                 <div className="label ">{t('createProject.unlockDate')} <Tooltip title={t('createProject.unlockDateHover')}><img src={QuestionIcon} /></Tooltip></div>
-                                                <DatePicker disabledDate={current => current && current < moment(fundraising.end_time).add(5, 'days').endOf('day')} value={item.vote_start_time && moment(item.vote_start_time)} onChange={value => { value && changeProcess(index, 'vote_start_time', value.valueOf()); }} />
+                                                <DatePicker disabledDate={current => current && current < moment(fundraising.end_time).add(4, 'days').endOf('day')} value={item.vote_start_time && moment(item.vote_start_time)} onChange={value => { value && changeProcess(index, 'vote_start_time', value.valueOf()); }} />
                                             </div>
                                         </Col> : <Col md={12}>
                                                 <div className="form-item">
                                                     <div className="label ">{t('createProject.votingDate')} <Tooltip title={t('createProject.votingDateHover')}><img src={QuestionIcon} /></Tooltip></div>
-                                                    <DatePicker.RangePicker disabledDate={current => current && current < moment(fundraising.end_time).add(3, 'days').endOf('day')} value={item.vote_start_time && [moment(item.vote_start_time), moment(item.vote_end_time)]} onChange={value => { value && changeProcess(index, 'vote_start_time', value[0].valueOf()); value && changeProcess(index, 'vote_end_time', value[1].valueOf()) }} />
+                                                    <DatePicker.RangePicker disabledDate={current => current && current < moment(fundraising.end_time).add(5, 'days').endOf('day')} value={item.vote_start_time && [moment(item.vote_start_time), moment(item.vote_end_time)]} onChange={value => { value && changeProcess(index, 'vote_start_time', value[0].valueOf()); value && changeProcess(index, 'vote_end_time', value[1].valueOf()) }} />
                                                 </div>
 
                                             </Col>}
