@@ -139,7 +139,7 @@ export default function Project() {
                     setLocklLoading(false)
                 })
             } else {
-                message.error(t('hint.approve'))
+                message.info(t('hint.approve'))
                 mm.sendTransaction(approveParams, 'Approve spending USDT').then(res => {
                     if (res) {
                         mm.sendTransaction(lockParams, 'Lock USDT').then(res => {
