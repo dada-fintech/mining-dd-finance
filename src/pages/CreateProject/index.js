@@ -833,7 +833,7 @@ export default function CreateProject() {
                         {currentStep == 9 && <div>
                             <a href="/">
                                 <div className="btn-confirm">
-                                    <span>
+                                    <span className="text">
                                         {t('createProject.backHome')}
                                     </span>
                                 </div>
