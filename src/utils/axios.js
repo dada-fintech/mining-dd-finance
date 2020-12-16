@@ -1,7 +1,8 @@
 import axios from 'axios'
+import config from 'config'
 
 const instance = axios.create({
-    baseURL: 'https://mining-api.dd.finance'
+    baseURL: config.baseURL
 })
 
 export default instance

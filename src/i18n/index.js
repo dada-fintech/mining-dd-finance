@@ -184,10 +184,9 @@ export default {
                 action: {
                     committeeReviews: 'Committee Reviews',
                     security: 'Security Deposit',
-                    lock: 'Lock Immediately',
+                    lock: 'Lock',
                     change: 'Initiate Voting to Change the Process',
                     repay: 'Repay',
-
                 }
 
             },

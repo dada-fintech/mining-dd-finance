@@ -406,7 +406,7 @@ export default function CreateProject() {
         }).catch(error => {
             message.error(error.response.data.error)
         }).finally(() => {
-            clearStorage()
+            // clearStorage()
         })
     }
 
@@ -794,21 +794,23 @@ export default function CreateProject() {
                             </div>
                         </div>}
                         {currentStep === 9 && <div className="step-pay">
-                            {payStatus === 'success' ? <>
+                            {payStatus === 'success' && <>
                                 <div className="dada-circle success">
                                     {t('createProject.paySuccess')}
                                 </div>
                                 <div className="pay-hint" dangerouslySetInnerHTML={{ __html: t('createProject.paySuccessHint') }}>
                                 </div>
-                            </> : <>
-                                    <div className="dada-circle error">
-                                        {t('createProject.payFailed')}
+                            </>}
 
-                                    </div>
-                                    <div className="pay-hint">
-                                        {t('createProject.payFailedHint')}
-                                    </div>
-                                </>}
+                            {payStatus === 'error' && <>
+                                <div className="dada-circle error">
+                                    {t('createProject.payFailed')}
+
+                                </div>
+                                <div className="pay-hint">
+                                    {t('createProject.payFailedHint')}
+                                </div>
+                            </>}
 
                         </div>}
                     </div>

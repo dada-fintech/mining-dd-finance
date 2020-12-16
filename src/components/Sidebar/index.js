@@ -4,6 +4,7 @@ import { useWallet } from 'use-wallet'
 import mm from 'components/mm'
 import { Button, Input, Modal, message } from 'antd'
 import axios from 'utils/axios'
+import config from 'config'
 import './style.scss'
 
 export default function Sidebar(props) {
@@ -129,7 +130,7 @@ export default function Sidebar(props) {
             <div className="box">
                 {otherFiles.map(item => (
                     <div className="box-item-doc">
-                        <a target="_blank" href={`https://mining-assets.dd.finance/${projectId}/${item.file_name}`}>
+                        <a target="_blank" href={`${config.assetURL}/${projectId}/${item.file_name}`}>
                             {item.file_name.slice(10)}
                         </a>
                     </div>
