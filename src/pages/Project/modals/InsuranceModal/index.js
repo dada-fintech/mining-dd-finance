@@ -49,6 +49,8 @@ export default function ConfirmVote(props) {
                         setLoading(false)
                         props.cancel()
                     })
+                }else{
+                    setLoading(false)
                 }
             })
         }

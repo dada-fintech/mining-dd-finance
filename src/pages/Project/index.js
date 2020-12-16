@@ -145,6 +145,8 @@ export default function Project() {
                         mm.sendTransaction(lockParams, 'Lock USDT').then(res => {
                             setLocklLoading(false)
                         })
+                    }else{
+                        setLocklLoading(false)
                     }
                 })
             }
@@ -228,7 +230,7 @@ export default function Project() {
                             </Row>}
 
                             {/* manager 不需投资 */}
-                            {project.project_info.status === 'Raising' && role !== 'manager' && <Row gutter={32}>
+                            {(true || (project.project_info.status === 'Raising' && role !== 'manager')) && <Row gutter={32}>
                                 <Col md={12}>
                                     <div className="votes-bar">
                                         <div className="done" style={{ width: project.percent + '%' }}></div>

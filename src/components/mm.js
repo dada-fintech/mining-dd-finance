@@ -30,6 +30,7 @@ async function sendTransaction(transactionParameters, desc, approvedActionParam)
                 watchTransaction(txHash)
             })
             .catch((error) => {
+                resolve(false)
                 // me.$message.error(me.$t("hint.rejected"));
             })
     })
