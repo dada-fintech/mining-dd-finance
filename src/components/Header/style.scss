@@ -47,6 +47,10 @@
                 &:hover{
                     font-size: 14px;
                 }
+                .en & {
+                    font-size: 12px;
+                    margin-left: 4px;
+                }
             }
             .hint {
                 display: none;

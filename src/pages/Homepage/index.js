@@ -83,7 +83,7 @@ export default function Homepage() {
         <div className="banner">
             <Header />
 
-            <div className="container">
+            <div className="top-banner container">
                 <Row type="flex" align="middle" justify="center">
                     <Col xs={24} md={24} align="center">
                         <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="353.001" height="98.444" viewBox="0 0 353.001 98.444">

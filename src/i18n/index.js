@@ -178,7 +178,7 @@ export default {
                 category:{
                     ongoing: 'On-going',
                     completed: 'Completed',
-                    open: 'Open for Participation',
+                    open: 'Available',
                     announced: 'Announced - in audit'
                 },
                 action: {

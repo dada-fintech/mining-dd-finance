@@ -18,20 +18,20 @@ export default function ProjectFooter() {
     return (<div className="project-footer">
         <footer className="container border-line">
             <Row>
-                <Col md={6}>
+                <Col xs={24} md={6}>
                     <img src={LogoBlue} className="footer-logo" />
 
                 </Col>
-                <Col md={6}>
+                <Col xs={24} md={6}>
                     <a className="link" href="https://doc.dd.finance" target="_blank">{t('homepage.footer.documentation')}</a>
                     <div></div>
                     <a className="link" href="/projects?tab=can_invest_project">{t('homepage.footer.explore')}</a>
                 </Col>
-                <Col md={6}>
+                <Col xs={24} md={6}>
                     <a className="email" href="mailto:contact@dd.finance">contact@dd.finance</a>
                     <a className="email" href="mailto:media@dd.finance">media@dd.finance</a>
                 </Col>
-                <Col md={6}>
+                <Col xs={24} md={6}>
                     <div className="social-icons">
                         <a target="_blank" href="https://twitter.com/FinanceDada">
                             <img src={Twiiter} className="social-icon" />

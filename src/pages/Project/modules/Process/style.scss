@@ -111,6 +111,21 @@
     }
     @media screen and (max-width: 992px) {
         .process-item {
+            padding: 24px 5px 24px;
+            .top{
+                display: block;
+                margin-bottom: 4px;
+                .title{
+                    font-size: 18px;
+                    margin-bottom: 4px;
+                }
+                .date{
+                    font-size: 16px;
+                }
+                .status{
+                    font-size: 16px;
+                }
+            }
             .text-area {
                 font-size: 16px;
             }
