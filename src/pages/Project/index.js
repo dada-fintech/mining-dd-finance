@@ -41,24 +41,7 @@ export default function Project() {
     const { id } = useParams()
     const { t, i18n } = useTranslation()
     useEffect(async () => {
-        axios.get('/project/detail/' + id).then(res => {
-            setProject({
-                ...res.data,
-                percent: parseInt((res.data.fundraising.current_raised_money / res.data.fundraising.max_amount) * 100),
-                fullDesc: `https://mining-api.dd.finance/project/download/${res.data.project_info.project_uniq_id}/${res.data.project_info.white_paper.file_name}`
-            })
-            //判断下一个进程是否在4天内
-            // const allFutureProcess = res.data.process.filter(item => item.status === 'Future')
-            // if (allFutureProcess.length > 0) {
-            //     const firstItem = allFutureProcess[0]
-            //     if (firstItem.vote_start_time - new Date().valueOf() < 4 * 24 * 60 * 60 * 1000) {
-            //         setNextInFour(true)
-            //     }
-            // } else {
-            //     // 借用一下这个标识位。如果没有Future，可以直接禁用调更改计划
-            //     setNextInFour(true)
-            // }
-        })
+        getInfo()
 
         // committee： 委员会成员，审核项目
         // manager： 理事会，有权限去更改计划
@@ -110,6 +93,27 @@ export default function Project() {
 
     // }, [])
 
+    const getInfo = () => {
+        axios.get('/project/detail/' + id).then(res => {
+            setProject({
+                ...res.data,
+                percent: parseInt((res.data.fundraising.current_raised_money / res.data.fundraising.max_amount) * 100),
+                fullDesc: `https://mining-api.dd.finance/project/download/${res.data.project_info.project_uniq_id}/${res.data.project_info.white_paper.file_name}`
+            })
+            //判断下一个进程是否在4天内
+            // const allFutureProcess = res.data.process.filter(item => item.status === 'Future')
+            // if (allFutureProcess.length > 0) {
+            //     const firstItem = allFutureProcess[0]
+            //     if (firstItem.vote_start_time - new Date().valueOf() < 4 * 24 * 60 * 60 * 1000) {
+            //         setNextInFour(true)
+            //     }
+            // } else {
+            //     // 借用一下这个标识位。如果没有Future，可以直接禁用调更改计划
+            //     setNextInFour(true)
+            // }
+        })
+    }
+
     const doLock = () => {
         if (!lockNum) {
             message.error(t('hint.lockAmount'))
@@ -137,6 +141,7 @@ export default function Project() {
             if (res.data.is_satisfied) {
                 mm.sendTransaction(lockParams, 'Lock USDT').then(res => {
                     setLocklLoading(false)
+                    getInfo()
                 })
             } else {
                 message.info(t('hint.approve'))
@@ -145,8 +150,9 @@ export default function Project() {
                         mm.sendTransaction(lockParams, 'Lock USDT').then(res => {
                             setLocklLoading(false)
                         })
-                    }else{
+                    } else {
                         setLocklLoading(false)
+                        getInfo()
                     }
                 })
             }
@@ -230,15 +236,15 @@ export default function Project() {
                             </Row>}
 
                             {/* manager 不需投资 */}
-                            {(true || (project.project_info.status === 'Raising' && role !== 'manager')) && <Row gutter={32}>
-                                <Col md={12}>
+                            {project.project_info.status === 'Raising' && role !== 'manager' && <Row gutter={32}>
+                                <Col xs={24} lg={12}>
                                     <div className="votes-bar">
                                         <div className="done" style={{ width: project.percent + '%' }}></div>
                                     </div>
                                     <div className="process-tag" style={{ marginLeft: (project.percent > 50 ? (project.percent - 5) : project.percent) + '%' }}>
                                         {project.percent}%</div>
                                 </Col>
-                                <Col md={12}>
+                                <Col xs={24} lg={12}>
                                     <div className="handle-area">
                                         <Input style={{ width: '140px', height: '44px' }} value={lockNum} onChange={(event) => { setLockedNum(event.target.value) }} suffix="USDT" />
                                         <div className="btn-action" onClick={() => { !lockLoading && doLock() }}><span className="text">{t('project.action.lock')} {lockLoading && <LoadingOutlined />}</span></div>

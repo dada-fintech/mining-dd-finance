@@ -169,6 +169,9 @@
         white-space: nowrap;
     }
     @media screen and (max-width: 992px) {
+        .process-tag{
+            margin-bottom: 12px;
+        }
         .project-main {
             width: 100%;
         }
@@ -194,6 +197,9 @@
         .project-intro {
             .desc {
                 margin-bottom: 32px;
+            }
+            .handle-area{
+                margin-bottom: 24px;
             }
             .top {
                 display: block;

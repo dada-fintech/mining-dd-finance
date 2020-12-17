@@ -1,7 +1,12 @@
 @import "~antd/dist/antd.css";
 .App {
     word-break: keep-all;
+    @media screen and (max-width: 992px){
+        word-break: unset;
+    }
 }
+
+
 
 .line-btn {
     //border-top: 1px solid #707070;

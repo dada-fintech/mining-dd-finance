@@ -33,7 +33,7 @@ export default function Process(props) {
         'VoteNotice': '公示中',
         'VoteReplaning': '正在投票表决是否变更计划',
         'VoteReplanFailed': '投票变更计划失败',
-        'VoteReplanPassed': '投票变更计划成功 ',
+        'VoteReplanPassed': '投票变更计划成功',
     }
 
     let finalProcessList = processList.map(item => {
