@@ -10,10 +10,6 @@ import AuditModal from './modals/AuditModal'
 import RepayModal from './modals/RepayModal'
 import { useWallet } from 'use-wallet'
 import InsuranceModal from './modals/InsuranceModal'
-// import web3 from 'components/web3'
-// import BN from 'bignumber.js'
-// import detectEthereumProvider from '@metamask/detect-provider'
-// import { useWallet } from 'use-wallet'
 import Header from '../../components/Header'
 import ProjectFooter from '../../components/ProjectFooter'
 import Sidebar from '../../components/Sidebar'
@@ -21,7 +17,7 @@ import ProcessModule from './modules/Process'
 import mm from 'components/mm'
 import DetailModule from './modules/Detail'
 import { toBr } from 'components/utils'
-// import CommentsModule from './modules/Comments'
+import Timer from 'react-compound-timer'
 
 import './style.scss'
 
@@ -59,42 +55,6 @@ export default function Project() {
 
 
     }, [wallet.account])
-
-    // useEffect(async () => {
-    //     let ABI = [
-    //         // transfer
-    //         {
-    //             "constant": false,
-    //             "inputs": [
-    //                 {
-    //                     "name": "_to",
-    //                     "type": "address"
-    //                 },
-    //                 {
-    //                     "name": "_value",
-    //                     "type": "uint256"
-    //                 }
-    //             ],
-    //             "name": "transfer",
-    //             "outputs": [
-    //                 {
-    //                     "name": "",
-    //                     "type": "bool"
-    //                 }
-    //             ],
-    //             "type": "function"
-    //         }
-    //     ];
-
-    //     let CONTRACT_ADDRESS = '0xdac17f958d2ee523a2206206994597c13d831ec7'
-
-    //     const contractRaw = new web3.eth.Contract(ABI, CONTRACT_ADDRESS)
-
-    //     setContract(contractRaw)
-
-    // }, [])
-
-
 
     const getInfo = () => {
         axios.get('/project/detail/' + id).then(res => {
@@ -148,6 +108,7 @@ export default function Project() {
                 })
             } else {
                 message.info(t('hint.approve'))
+                console.log(approveParams,'ppp')
                 mm.sendTransaction(approveParams, 'Approve spending USDT').then(res => {
                     if (res) {
                         mm.sendTransaction(lockParams, 'Lock USDT').then(res => {
@@ -213,67 +174,136 @@ export default function Project() {
             <div className="container">
                 <div className="project-intro">
                     <Row gutter={{ md: 24, xl: 44 }} type="flex" align="center">
-                        <Col xs={24} md={12} xl={13}>
+                        <Col xs={24} md={17}>
                             <div className="top">
                                 <div className="title with-line"><span>{project.project_info && project.project_info.project_name}</span></div>
                             </div>
                             <div className="desc" dangerouslySetInnerHTML={{ __html: project.project_info && toBr(project.project_info.project_profile) }}></div>
-
-                            {/* 一开始审核评议 */}
-                            {project.project_info.status === 'Auditing' && role === 'committee' && <Row>
-                                <div className="handle-area">
-                                    <div className="btn-action" onClick={() => { doAudit() }}><span>{t('project.action.committeeReviews')}</span></div>
-                                </div>
-                            </Row>}
-
-                            {project.project_info.status === 'PayingInsurance' && role === 'manager' && <Row>
-                                <div className="handle-area">
-                                    <div className="btn-action" onClick={() => { doInsurance() }}><span>{t('project.action.security')}</span></div>
-                                </div>
-                            </Row>}
-
-                            {project.project_info.status === 'AllPhasesDone' && role === 'manager' && (new Date().valueOf() < project.project_info.income_settlement_time) && <Row>
-                                <div className="handle-area">
-                                    <div className="btn-action" onClick={() => { doTakeMoney() }}><span>{t('project.action.repay')}</span></div>
-                                </div>
-                            </Row>}
-
-                            {/* manager 不需投资 */}
-                            {project.project_info.status === 'Raising' && role !== 'manager' && <Row gutter={32}>
-                                <Col xs={24} lg={12}>
-                                    <div className="votes-bar">
-                                        <div className="done" style={{ width: project.percent + '%' }}></div>
-                                    </div>
-                                    <div className="process-tag" style={{ marginLeft: (project.percent > 50 ? (project.percent - 5) : project.percent) + '%' }}>
-                                        {project.percent}%</div>
-                                </Col>
-                                <Col xs={24} lg={12}>
-                                    <div className="handle-area">
-                                        <Input style={{ width: '140px', height: '44px' }} value={lockNum} onChange={(event) => { setLockedNum(event.target.value) }} suffix="USDT" />
-                                        <div className="btn-action" onClick={() => { !lockLoading && doLock() }}><span className="text">{t('project.action.lock')} {lockLoading && <LoadingOutlined />}</span></div>
+                            <Row gutter={24}>
+                                <Col md={8}>
+                                    <div className="info-item">
+                                        <div className="title">项目收益</div>
+                                        <div className="value">{project.fundraising.expected_apy}%</div>
                                     </div>
                                 </Col>
-                            </Row>}
-
-                            {/* manager 可以变更计划. */}
-                            {(project.project_info.status === 'Active' || project.project_info.status === 'PhaseFailed' || project.project_info.status === 'ReplanFailed') && role === 'manager' && <Row>
-                                <div className="handle-area">
-                                    <a href={`/create-vote/${id}`}>
-                                        <div className="btn-action"><span>{t('project.action.change')}</span></div>
-                                    </a>
-                                </div>
-                            </Row>}
-
-
+                                <Col md={8}>
+                                    <div className="info-item">
+                                        <div className="title">项目周期</div>
+                                        <div className="value">{parseInt((project.project_info.income_settlement_time - project.fundraising.end_time) / 1000 / 60 / 60 / 24)}天</div>
+                                    </div>
+                                </Col>
+                                <Col md={8}>
+                                    <div className="info-item">
+                                        <div className="title">回款方式</div>
+                                        <div className="value">到期还本付息</div>
+                                    </div>
+                                </Col>
+                            </Row>
                         </Col>
-                        <Col xs={24} md={12} xl={7}>
-                            <div className="date-range">{new Date(project.fundraising.start_time).toLocaleDateString()} - {new Date(project.fundraising.end_time).toLocaleDateString()}</div>
+                        <Col xs={24} md={7}>
+                            <div className="info-box-title">
+                                项目进程
+                            </div>
+                            <div className="info-box">
+                                <div className="countdown">
+                                    <div className="title">距离下一阶段仅剩</div>
+                                    <div className="timer">
+                                        {project.fundraising.end_time && <Timer initialTime={project.fundraising.end_time - new Date()} direction="backward">
+                                            <div>
+                                                <div className="num">
+                                                    <Timer.Days />
+                                                </div>
+                                                <div>天</div>
+                                            </div>
+                                            <div>:</div>
+                                            <div>
+                                                <div className="num">
+                                                    <Timer.Hours />
+
+                                                </div>
+                                                <div>时</div>
+                                            </div>
+                                            <div>:</div>
+                                            <div>
+                                                <div className="num">
+                                                    <Timer.Minutes />
+
+                                                </div>
+                                                <div>分</div>
+                                            </div>
+                                            <div>:</div>
+                                            <div>
+                                                <div className="num">
+                                                    <Timer.Seconds />
+
+                                                </div>
+                                                <div>秒</div>
+                                            </div>
+                                        </Timer>}
+
+                                    </div>
+
+                                </div>
+                                {/* 一开始审核评议 */}
+                                {project.project_info.status === 'Auditing' && role === 'committee' && <Row>
+                                    <div className="handle-area">
+                                        <div className="btn-action" onClick={() => { doAudit() }}><span>{t('project.action.committeeReviews')}</span></div>
+                                    </div>
+                                </Row>}
+
+                                {project.project_info.status === 'PayingInsurance' && role === 'manager' && <Row>
+                                    <div className="handle-area">
+                                        <div className="btn-action" onClick={() => { doInsurance() }}><span>{t('project.action.security')}</span></div>
+                                    </div>
+                                </Row>}
+
+                                {project.project_info.status === 'AllPhasesDone' && role === 'manager' && (new Date().valueOf() < project.project_info.income_settlement_time) && <Row>
+                                    <div className="handle-area">
+                                        <div className="btn-action" onClick={() => { doTakeMoney() }}><span>{t('project.action.repay')}</span></div>
+                                    </div>
+                                </Row>}
+
+                                {/* manager 不需投资 */}
+                                {project.project_info.status === 'Raising' && role !== 'manager' && <Row gutter={32}>
+                                    <div className="handle-area">
+                                        <Input style={{ width: '140px', height: '44px' }} addonAfter={
+                                            <div className="btn-input-action" onClick={() => { !lockLoading && doLock() }}><span className="text">{t('project.action.invest')} {lockLoading && <LoadingOutlined />
+                                            }</span></div>} value={lockNum} onChange={(event) => { setLockedNum(event.target.value) }} suffix="USDT" />
+                                    </div>
+                                    <div className="votes-bar">
+                                        <div className="done" style={{ width: project.percent + '%' }}>{project.percent}%</div>
+                                    </div>
+                                    <div className="votes-info">
+                                        <div>
+                                            当前投资:{project.fundraising.current_raised_money} USDT
+                                        </div>
+                                        <div>
+                                            募集总额:{project.fundraising.max_amount} USDT
+                                        </div>
+                                    </div>
+                                    {/* <div className="process-tag" style={{ marginLeft: (project.percent > 50 ? (project.percent - 5) : project.percent) + '%' }}>
+                                        {project.percent}%</div> */}
+                                </Row>}
+
+                                {/* manager 可以变更计划. */}
+                                {(project.project_info.status === 'Active' || project.project_info.status === 'PhaseFailed' || project.project_info.status === 'ReplanFailed') && role === 'manager' && <Row>
+                                    <div className="handle-area">
+                                        <a href={`/create-vote/${id}`}>
+                                            <div className="btn-action"><span>{t('project.action.change')}</span></div>
+                                        </a>
+                                    </div>
+                                </Row>}
+                            </div>
+
+
+
+                            {/* <div className="date-range">{new Date(project.fundraising.start_time).toLocaleDateString()} - {new Date(project.fundraising.end_time).toLocaleDateString()}</div>
                             <div className="top-box">
                                 <div className="item">{t('project.fundRaised')}：{project.fundraising.current_raised_money} USDT</div>
                                 <div className="item">{t('project.hardCap')}：{project.fundraising.max_amount} USDT</div>
                                 <div className="item">{t('project.status')}：{statusMapping[project.project_info.status]}</div>
                                 <div className="item">{t('project.roles')}：{role === 'manager' ? t('project.role.manager') : (role === 'committee' ? t('project.role.committee') : (role === 'invester' ? t('project.role.supporter') : t('project.role.visitor')))}</div>
-                            </div>
+                            </div> */}
                         </Col>
                     </Row>
                 </div>

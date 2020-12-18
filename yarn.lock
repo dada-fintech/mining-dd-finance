@@ -12914,6 +12914,11 @@ react-app-polyfill@^2.0.0:
     regenerator-runtime "^0.13.7"
     whatwg-fetch "^3.4.1"
 
+react-compound-timer@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.npm.taobao.org/react-compound-timer/download/react-compound-timer-1.2.0.tgz#52df2980dce0b63ddaf5718235a51188cb223d1d"
+  integrity sha1-Ut8pgNzgtj3a9XGCNaURiMsiPR0=
+
 react-css-modules@^4.7.7:
   version "4.7.11"
   resolved "https://registry.npm.taobao.org/react-css-modules/download/react-css-modules-4.7.11.tgz#e9bc7ac6e3dd7e71c8e46e9d22c1d0abb2110682"

@@ -188,6 +188,7 @@ export default {
                     lock: 'Lock',
                     change: 'Initiate Voting to Change the Process',
                     repay: 'Repay',
+                    invest: 'Invest',
                 }
 
             },
@@ -501,6 +502,7 @@ export default {
                     lock: '立即锁定',
                     change: '发起变更投票',
                     repay: '项目回款',
+                    invest: '投资',
                 }
 
             },
