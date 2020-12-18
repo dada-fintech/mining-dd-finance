@@ -87,7 +87,7 @@ export default function Process(props) {
 
                     </div>}
                 <div>
-                    {t('project.event')}: <strong>{process.description}</strong><br />
+                    {t('project.event')}: <strong dangerouslySetInnerHTML={{ __html: process.description.replace(/\n/g, '<br/>') }}></strong><br />
                 </div>
 
                 {(process.status === 'Active' || process.status === 'VoteReplaning') && <>

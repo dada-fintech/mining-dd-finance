@@ -14,11 +14,11 @@ export default function Detail(props) {
         </div>
         <div className="text-line">
             <div>{t('createProject.projectDetails')}</div>
-            <div>{projectInfo.project_description}</div>
+            <div dangerouslySetInnerHTML={{ __html: projectInfo.project_description.replace(/\n/g, '<br/>') }}></div>
         </div>
         <div className="text-line">
             <div>{t('createProject.projectStrategy')}</div>
-            <div>{projectInfo.project_strategy}</div>
+            <div dangerouslySetInnerHTML={{ __html: projectInfo.project_strategy.replace(/\n/g, '<br/>') }}></div>
         </div>
         <div className="text-line">
             <div>{t('createProject.contractAddress')}</div>
@@ -32,7 +32,7 @@ export default function Detail(props) {
             <div>{t('createProject.profitAddr')}</div>
             <div>{projectInfo.profit}</div>
         </div>
-        <div style={{color: 'red'}}>
+        <div style={{ color: 'red' }}>
             {t('hint.detailHint')}
         </div>
         <div className="pdf-area">

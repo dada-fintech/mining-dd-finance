@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Row, Col, Input, Upload, message, DatePicker, InputNumber, Popconfirm, Tooltip } from 'antd'
+import { Button, Row, Col, Input, Upload, message, DatePicker, InputNumber, Popconfirm, Tooltip, notification } from 'antd'
 import LinkArrow from 'assets/link-arrow.svg'
 import LinkArrowBack from 'assets/link-arrow-back.svg'
 import QuestionIcon from 'assets/question.svg'
@@ -148,18 +148,27 @@ export default function CreateVote() {
         showUploadList: false,
         multiple: true,
         onChange(info) {
-            if (info.file.status !== 'uploading') {
-                console.log(info.file, info.fileList);
-            }
+            // if (info.file.status !== 'uploading') {
+            //     console.log(info.file, info.fileList);
+            // }
+            notification.open({
+                key: info.file.name,
+                message: `Uploading ${info.file.name}`,
+                duration: null,
+                icon: <LoadingOutlined />
+            })
             if (info.file.status === 'done') {
-                message.success(`${info.file.name} file uploaded successfully`);
+                notification.close(info.file.name)
+                // message.success(`${info.file.name} file uploaded successfully`);
                 let previousArr = projectInfo.other_file
                 previousArr.push({
                     file_name: info.file.response.file_name
                 })
                 changeProjectInfo('other_file', previousArr)
             } else if (info.file.status === 'error') {
-                message.error(`${info.file.name} file upload failed.`);
+                notification.error({
+                    message: `${info.file.name} file upload failed.`
+                })
             }
         },
     };
@@ -210,7 +219,7 @@ export default function CreateVote() {
                         </div>}
 
                         {currentStep === 1 && <div className="step-1">
-                            <div className="hint-block small" dangerouslySetInnerHTML={{__html: t('createVote.step1Hint')}}>
+                            <div className="hint-block small" dangerouslySetInnerHTML={{ __html: t('createVote.step1Hint') }}>
                             </div>
                             <div className="title">{t('createVote.mainTitle')}</div>
                             <div className="confirm-box">

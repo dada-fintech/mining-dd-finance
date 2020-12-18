@@ -93,6 +93,10 @@ export default function Project() {
 
     // }, [])
 
+    const toBr = (str) =>{
+        return str.replace(/\n/g, '<br/>')
+    }
+
     const getInfo = () => {
         axios.get('/project/detail/' + id).then(res => {
             setProject({
@@ -214,7 +218,7 @@ export default function Project() {
                             <div className="top">
                                 <div className="title with-line"><span>{project.project_info && project.project_info.project_name}</span></div>
                             </div>
-                            <div className="desc" dangerouslySetInnerHTML={{ __html: project.project_info && project.project_info.project_profile }}></div>
+                            <div className="desc" dangerouslySetInnerHTML={{ __html: project.project_info && toBr(project.project_info.project_profile) }}></div>
 
                             {/* 一开始审核评议 */}
                             {project.project_info.status === 'Auditing' && role === 'committee' && <Row>

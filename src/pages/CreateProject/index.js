@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Row, Col, Input, Upload, message, DatePicker, Tooltip, InputNumber, Popconfirm, Select, Slider } from 'antd'
+import { Button, Row, Col, Input, Upload, message, DatePicker, Tooltip, InputNumber, Popconfirm, notification, Slider } from 'antd'
 import LinkArrow from 'assets/link-arrow.svg'
 import LinkArrowBack from 'assets/link-arrow-back.svg'
 import { useTranslation } from 'react-i18next'
@@ -329,15 +329,23 @@ export default function CreateProject() {
             }
         },
         onChange(info) {
+            notification.open({
+                key: info.file.name,
+                message: `Uploading ${info.file.name}`,
+                duration: null,
+                icon: <LoadingOutlined />
+            })
             if (info.file.status !== 'uploading') {
                 // console.log(info.file, info.fileList);
             }
             if (info.file.status === 'done') {
-                message.success(`${info.file.name} file uploaded successfully`);
-
+                notification.close(info.file.name)
+                // message.success(`${info.file.name} file uploaded successfully`);
                 changeProjectInfo('white_paper', { file_name: info.file.response.file_name })
             } else if (info.file.status === 'error') {
-                message.error(`${info.file.name} file upload failed.`);
+                notification.error({
+                    message: `${info.file.name} file upload failed.`
+                })
             }
         },
     };
@@ -352,12 +360,18 @@ export default function CreateProject() {
         showUploadList: false,
         multiple: true,
         onChange(info) {
+            notification.open({
+                key: info.file.name,
+                message: `Uploading ${info.file.name}`,
+                duration: null,
+                icon: <LoadingOutlined />
+            })
             if (info.file.status !== 'uploading') {
                 console.log(info.file, info.fileList);
             }
             if (info.file.status === 'done') {
-                message.success(`${info.file.name} file uploaded successfully`);
-
+                notification.close(info.file.name)
+                // message.success(`${info.file.name} file uploaded successfully`);
                 let previousArr = projectInfo.other_file
                 previousArr.push({
                     file_name: info.file.response.file_name
@@ -365,7 +379,9 @@ export default function CreateProject() {
                 changeProjectInfo('other_file', previousArr)
 
             } else if (info.file.status === 'error') {
-                message.error(`${info.file.name} file upload failed.`);
+                notification.error({
+                    message: `${info.file.name} file upload failed.`
+                })
             }
         },
     };
