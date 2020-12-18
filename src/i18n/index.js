@@ -30,6 +30,7 @@ export default {
                 reject: 'Reject',
                 agree: 'Agree',
                 disagree: 'Disagree',
+                yourBalance: 'Your balance',
             },
             hint: {
                 projectsEmpty: 'New project is in preparation, stay tuned.',
@@ -345,8 +346,7 @@ export default {
                 reject: '拒绝',
                 agree: '同意',
                 disagree: '拒绝',
-
-
+                yourBalance: '余额',
             },
             hint: {
                 projectsEmpty: '项目即将来临，请保持关注。',

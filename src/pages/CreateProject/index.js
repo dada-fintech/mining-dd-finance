@@ -10,6 +10,8 @@ import Header from '../../components/Header'
 import moment from 'moment'
 import axios from 'utils/axios'
 import mm from 'components/mm'
+import web3 from 'components/web3'
+import config from 'config'
 
 import './style.scss'
 
@@ -24,6 +26,8 @@ export default function CreateProject() {
     const [approveBalance, setApproveBalance] = useState(0)
     const [dadaApproved, setDadaApproved] = useState(false)
     const [callData, setCallData] = useState(false)
+    const [USDTBalance, setUSDTBalance] = useState(0)
+
     const wallet = useWallet()
 
 
@@ -56,9 +60,14 @@ export default function CreateProject() {
             setCurrentStep(currentStep)
         }
 
-
-
     }, [])
+
+    useEffect(() => {
+        // 只有主网才去获取
+        if (config.chainId == 1 && wallet.account) {
+            getUSDTBalance()
+        }
+    }, [wallet.account])
 
 
     useEffect(() => {
@@ -66,6 +75,13 @@ export default function CreateProject() {
             fundraisingSofttopChange(fundraising.softtopPercent)
         }
     }, [fundraising.max_amount])
+
+    const getUSDTBalance = async () => {
+        let CONTRACT_ADDRESS = '0xdac17f958d2ee523a2206206994597c13d831ec7'
+        const contract = new web3.eth.Contract(config.commonABI, CONTRACT_ADDRESS)
+        const result = await contract.methods.balanceOf(wallet.account).call({ from: wallet.account })
+        setUSDTBalance(web3.utils.fromWei(result, 'mwei'))
+    }
 
     useEffect(() => {
         localStorage.setItem('projectInfo', JSON.stringify(projectInfo))
@@ -102,8 +118,6 @@ export default function CreateProject() {
         })
     }
 
-
-
     const dateRangeChange = (type, value) => {
         if (!value) {
             value = [0, 0]
@@ -128,7 +142,6 @@ export default function CreateProject() {
         })
     }
 
-
     const removeProcess = (number) => {
         setProcessList(prev => {
             let newArr = prev
@@ -139,7 +152,6 @@ export default function CreateProject() {
 
         })
     }
-
 
     const addCouncilMember = () => {
         if (projectInfo.member_address.length >= 3) {
@@ -184,6 +196,7 @@ export default function CreateProject() {
     }
 
     const goNextStep = () => {
+
         const customHint = i18n.language === 'en' ? 'Please check the required fields' : ''
         // 进行步骤跳转以及字段校验
         if (currentStep === 1) {
@@ -801,10 +814,13 @@ export default function CreateProject() {
                             </div>
 
                         </div>}
-                        {currentStep === 8 && <div className="step-pay">
+                        {(true || currentStep === 8) && <div className="step-pay">
                             <div className="dada-circle">
                                 {approveBalance} USDT
                             </div>
+                            {USDTBalance && <div class="your-balance">
+                                {t('common.yourBalance')}:{USDTBalance} USDT
+                                </div>}
                             <div className="pay-hint">
                                 {t('createProject.payHint')}
                             </div>
