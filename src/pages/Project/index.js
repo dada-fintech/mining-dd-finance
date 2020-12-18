@@ -219,19 +219,19 @@ export default function Project() {
                             {/* 一开始审核评议 */}
                             {project.project_info.status === 'Auditing' && role === 'committee' && <Row>
                                 <div className="handle-area">
-                                    <div className="btn-action" onClick={() => { doAudit() }}><span>{t('project.action.committeeReviews')}</span></div>
+                                    <div className="btn-action" onClick={() => { doAudit() }}><span className="text">{t('project.action.committeeReviews')}</span></div>
                                 </div>
                             </Row>}
 
                             {project.project_info.status === 'PayingInsurance' && role === 'manager' && <Row>
                                 <div className="handle-area">
-                                    <div className="btn-action" onClick={() => { doInsurance() }}><span>{t('project.action.security')}</span></div>
+                                    <div className="btn-action" onClick={() => { doInsurance() }}><span className="text">{t('project.action.security')}</span></div>
                                 </div>
                             </Row>}
 
                             {project.project_info.status === 'AllPhasesDone' && role === 'manager' && (new Date().valueOf() < project.project_info.income_settlement_time) && <Row>
                                 <div className="handle-area">
-                                    <div className="btn-action" onClick={() => { doTakeMoney() }}><span>{t('project.action.repay')}</span></div>
+                                    <div className="btn-action" onClick={() => { doTakeMoney() }}><span className="text">{t('project.action.repay')}</span></div>
                                 </div>
                             </Row>}
 
