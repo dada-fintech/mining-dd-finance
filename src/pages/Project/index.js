@@ -191,7 +191,7 @@ export default function Project() {
         'Auditing': isEn ? 'Auditing' : '委员会审核中',
         'Future': isEn ? 'Project Coming Soon' : '项目即将到来',
         'Raising': isEn ? 'In Mid of Fundraising' : '正在筹款',
-        'PayingInsurance': isEn ? 'Depositing to the Reserve' : '正在支付安全达',
+        'PayingInsurance': isEn ? 'Depositing to the Reserve' :(role === 'manager' ? '正在支付押金' : '项目筹备中'),
         'Active': isEn ? 'Active' : '项目正在进行中',
         'Rolling': isEn ? 'Voting On-going' : '正在投票',
         'AllPhasesDone': isEn ? 'Project Completes. Waiting for the Redemption' : '项目计划完成，等待获取报酬',
