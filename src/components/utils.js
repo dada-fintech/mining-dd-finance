@@ -4,6 +4,12 @@ import mm from "components/mm";
 import { emit } from '@nextcloud/event-bus'
 import { CheckOutlined, LoadingOutlined, CloseCircleOutlined } from '@ant-design/icons';
 
+const toBr = (str) => {
+    if (str) {
+        return str.replace(/\n/g, '<br/>')
+    }
+}
+
 const getTokenBalance = (balanceList, target) => {
     let result = 0
     balanceList.forEach((balance) => {
@@ -104,7 +110,7 @@ const watchTransaction = async (txHash) => {
                 notification.error({
                     message: 'Failed',
                     description: currentAction.desc,
-                    icon: <CloseCircleOutlined style={{color: 'red'}} />
+                    icon: <CloseCircleOutlined style={{ color: 'red' }} />
                 })
             }
             // remove obj from localstorage
@@ -126,6 +132,7 @@ const watchTransaction = async (txHash) => {
 }
 
 export {
+    toBr,
     getTokenBalance,
     watchTransaction,
     getTxReceipt,

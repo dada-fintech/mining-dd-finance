@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { Input, Select, Button } from 'antd'
+import React, { useState } from 'react'
+import { Button } from 'antd'
 import { useWallet } from 'use-wallet'
 import { useTranslation } from 'react-i18next'
 import ConfirmVote from '../../modals/ConfirmVote'
+import { toBr } from 'components/utils'
 import './style.scss'
 
 
@@ -87,7 +88,7 @@ export default function Process(props) {
 
                     </div>}
                 <div>
-                    {t('project.event')}: <strong dangerouslySetInnerHTML={{ __html: process.description.replace(/\n/g, '<br/>') }}></strong><br />
+                    {t('project.event')}: <strong dangerouslySetInnerHTML={{ __html: toBr(process.description) }}></strong><br />
                 </div>
 
                 {(process.status === 'Active' || process.status === 'VoteReplaning') && <>

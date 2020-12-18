@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Row, Col, Input, Button, message } from 'antd'
+import { Row, Col, Input, message } from 'antd'
 import {
     LoadingOutlined,
 } from '@ant-design/icons';
@@ -20,6 +20,7 @@ import Sidebar from '../../components/Sidebar'
 import ProcessModule from './modules/Process'
 import mm from 'components/mm'
 import DetailModule from './modules/Detail'
+import { toBr } from 'components/utils'
 // import CommentsModule from './modules/Comments'
 
 import './style.scss'
@@ -93,9 +94,7 @@ export default function Project() {
 
     // }, [])
 
-    const toBr = (str) =>{
-        return str.replace(/\n/g, '<br/>')
-    }
+
 
     const getInfo = () => {
         axios.get('/project/detail/' + id).then(res => {

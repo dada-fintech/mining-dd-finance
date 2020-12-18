@@ -1,10 +1,11 @@
 import { useTranslation } from 'react-i18next'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { PDFReader } from 'reactjs-pdf-reader';
+import {toBr} from 'components/utils'
 import './style.scss'
 //todo,这里暂时需要翻墙，来下载 pdf.js
 export default function Detail(props) {
-    const { t, i18n } = useTranslation()
+    const { t } = useTranslation()
     const { fullDesc, projectInfo } = props
     const [loading, setLoading] = useState(true)
     return (<div className="detail-module">
@@ -14,11 +15,11 @@ export default function Detail(props) {
         </div>
         <div className="text-line">
             <div>{t('createProject.projectDetails')}</div>
-            <div dangerouslySetInnerHTML={{ __html: projectInfo.project_description.replace(/\n/g, '<br/>') }}></div>
+            <div dangerouslySetInnerHTML={{ __html: toBr(projectInfo.project_description) }}></div>
         </div>
         <div className="text-line">
             <div>{t('createProject.projectStrategy')}</div>
-            <div dangerouslySetInnerHTML={{ __html: projectInfo.project_strategy.replace(/\n/g, '<br/>') }}></div>
+            <div dangerouslySetInnerHTML={{ __html: toBr(projectInfo.project_strategy) }}></div>
         </div>
         <div className="text-line">
             <div>{t('createProject.contractAddress')}</div>

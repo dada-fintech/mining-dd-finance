@@ -814,7 +814,7 @@ export default function CreateProject() {
                             </div>
 
                         </div>}
-                        {(true || currentStep === 8) && <div className="step-pay">
+                        {currentStep === 8 && <div className="step-pay">
                             <div className="dada-circle">
                                 {approveBalance} USDT
                             </div>

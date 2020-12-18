@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Row, Col, Tooltip, Progress, Input, Checkbox, message, Popover } from 'antd'
+import { Row, Col, Progress, Input, Checkbox, message, Popover } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { useWallet } from 'use-wallet'
 // import { useWallet } from 'use-wallet'
 import Header from '../../components/Header'
 import LinkArrow from 'assets/link-arrow.svg'
@@ -17,7 +16,7 @@ import WeixinQR from '../../assets/qr-code.jpeg'
 
 import ProjectListTriangle from '../../assets/project-list-triangle.svg'
 import OngoingTriangle from '../../assets/ongoing-triangle.svg'
-
+import {toBr} from 'components/utils'
 
 import Footer from '../../components/Footer'
 import axios from 'utils/axios'
@@ -30,7 +29,7 @@ export default function Homepage() {
     const [comment, setComment] = useState({})
     const { t, i18n } = useTranslation()
 
-    const WeixinContent = (<img src={WeixinQR} style={{width: '140px'}}/>)
+    const WeixinContent = (<img src={WeixinQR} style={{ width: '140px' }} />)
 
     useEffect(() => {
         axios.get('/project/active-items').then(res => {
@@ -44,10 +43,6 @@ export default function Homepage() {
             message.success(t('common.submitted'))
             setComment({})
         })
-    }
-
-    const toBr = (str) =>{
-        return str.replace(/\n/g, '<br/>')
     }
 
     const commentChange = (name, value) => {
@@ -75,13 +70,13 @@ export default function Homepage() {
                 <img src={Telegram} className="social-icon" />
             </a>
             <a>
-            <Popover content={WeixinContent}>
-                                    <img src={Weixin} className="social-icon" />
-                                </Popover>
+                <Popover content={WeixinContent}>
+                    <img src={Weixin} className="social-icon" />
+                </Popover>
             </a>
 
 
-        
+
             {/* <a className="line-top-bottom" href="https://doc.dd.finance">{t('common.readTheDoc')}</a> */}
         </div>
         <div className="banner">
@@ -173,7 +168,7 @@ export default function Homepage() {
                                             <div className="apy">{t('common.apy')} {item.expected_apy}%</div>
                                         </div>
                                     </div>
-                                    <div className="desc" dangerouslySetInnerHTML={{__html: toBr(item.project_profile)}}>
+                                    <div className="desc" dangerouslySetInnerHTML={{ __html: toBr(item.project_profile) }}>
                                     </div>
                                     <div className="bottom">
                                         <Progress strokeColor="#3FAA4D" status="active" percent={((item.current_raised_money / item.max_amount) * 100).toFixed(0)} className="progress-bar" />
