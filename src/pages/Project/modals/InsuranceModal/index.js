@@ -65,7 +65,7 @@ export default function ConfirmVote(props) {
                 
             </div>
             <div className="handle-area">
-                <Button loading={loading} className="btn-green" onClick={() => { doAction() }}>{info.is_satisfied ? t('commonn.pay') : t('commonn.approve')}</Button>
+                <Button loading={loading} className="btn-green" onClick={() => { doAction() }}>{info.is_satisfied ? t('common.pay') : t('common.approve')}</Button>
             </div>
         </Modal>
     )
