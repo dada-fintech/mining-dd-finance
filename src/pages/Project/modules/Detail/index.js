@@ -19,7 +19,7 @@ export default function Detail(props) {
         </div>
         <div className="text-line">
             <div>{t('createProject.projectStrategy')}</div>
-            <div dangerouslySetInnerHTML={{ __html: toBr(projectInfo.project_strategy) }}></div>
+            <div dangerouslySetInnerHTML={{ __html: toBr(projectInfo.project_strategy.replace('元mei', '美元')) }}></div>
         </div>
         <div className="text-line">
             <div>{t('createProject.contractAddress')}</div>
