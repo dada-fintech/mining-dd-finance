@@ -46,9 +46,9 @@ export default {
             modal: {
                 repayTitle: 'Repay',
                 youNeedPay: 'You need to pay',
-                payInsurance: 'Pay Insurance',
+                payInsurance: 'Pay Deposit',
                 insuranceHint: `
-                您的项目即将启动，您需要支付募集额度10%的DADA作为项目抵押金。<br />项目完成后，将会收取其中25%的费用作为保险费用，返回剩余75%的押金。`,
+                您的项目即将启动，您需要支付募集额度10%的DADA作为项目抵押金。<br />项目完成后，将会收取其中30%的费用作为保险费用，返回剩余70%的押金。`,
                 confirmVoting: 'Confirm voting',
                 confirmChangeVoting: 'Confirm Change Voting',
                 auditTitle: 'Auditing Reviews ',
@@ -184,7 +184,7 @@ export default {
                 },
                 action: {
                     committeeReviews: 'Committee Reviews',
-                    security: 'Security Deposit',
+                    security: 'Pay Deposit',
                     lock: 'Lock',
                     change: 'Initiate Voting to Change the Process',
                     repay: 'Repay',
@@ -364,7 +364,7 @@ export default {
                 youNeedPay: '你需要支付',
                 payInsurance: '支付保证金',
                 insuranceHint: `
-                您的项目即将启动，您需要支付募集额度10%的DADA作为项目抵押金。<br />项目完成后，将会收取其中25%的费用作为保险费用，返回剩余75%的押金。`,
+                您的项目即将启动，您需要支付募集额度10%的DADA作为项目抵押金。<br />项目完成后，将会收取其中30%的费用作为保险费用，返回剩余70%的押金。`,
                 confirmVoting: '确认投票',
                 confirmChangeVoting: '确认变更投票',
                 auditTitle: '审计意见',
