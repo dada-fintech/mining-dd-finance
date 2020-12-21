@@ -818,9 +818,9 @@ export default function CreateProject() {
                             <div className="dada-circle">
                                 {approveBalance} USDT
                             </div>
-                            {USDTBalance && <div class="your-balance">
+                            <div class="your-balance">
                                 {t('common.yourBalance')}:{USDTBalance} USDT
-                                </div>}
+                            </div>
                             <div className="pay-hint">
                                 {t('createProject.payHint')}
                             </div>
