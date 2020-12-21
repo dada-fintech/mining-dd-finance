@@ -170,7 +170,7 @@ export default function Project() {
 
     return (<div className="project-page">
         <div className="top-area">
-            <Header />
+            <Header role={role}/>
             <div className="container">
                 <div className="project-intro">
                     <Row gutter={{ md: 24, xl: 44 }} type="flex" align="center">
@@ -180,22 +180,28 @@ export default function Project() {
                             </div>
                             <div className="desc" dangerouslySetInnerHTML={{ __html: project.project_info && toBr(project.project_info.project_profile) }}></div>
                             <Row gutter={24}>
-                                <Col md={8}>
+                                <Col md={5}>
                                     <div className="info-item">
                                         <div className="title">项目收益</div>
                                         <div className="value">{project.fundraising.expected_apy}%</div>
                                     </div>
                                 </Col>
-                                <Col md={8}>
+                                <Col md={5}>
                                     <div className="info-item">
                                         <div className="title">项目周期</div>
                                         <div className="value">{parseInt((project.project_info.income_settlement_time - project.fundraising.end_time) / 1000 / 60 / 60 / 24)}天</div>
                                     </div>
                                 </Col>
-                                <Col md={8}>
+                                <Col md={5}>
                                     <div className="info-item">
                                         <div className="title">回款方式</div>
                                         <div className="value">到期还本付息</div>
+                                    </div>
+                                </Col>
+                                <Col md={9}>
+                                    <div className="info-item">
+                                        <div className="title">募集总额</div>
+                                        <div className="value">{project.fundraising.max_amount} USDT</div>
                                     </div>
                                 </Col>
                             </Row>

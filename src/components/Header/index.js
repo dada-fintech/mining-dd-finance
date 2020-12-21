@@ -17,11 +17,10 @@ import i18n from 'i18next'
 
 import './style.scss'
 
-export default function Header() {
+export default function Header(props) {
     const wallet = useWallet()
     const { t } = useTranslation()
-    const role = useSelector(state => state.setting.role)
-    const dispatch = useDispatch()
+    const { role } = props
     useEffect(() => {
         wallet.connect()
     }, [])
@@ -64,8 +63,9 @@ export default function Header() {
                 </a>
                 {wallet.status === 'connected' ? <Tooltip title={wallet.account}>
                     {wallet.account && <a className="line-btn">{wallet.account.slice(0, 4) + '...' + wallet.account.slice(-4)}</a>}
+                    {role ? (<sup className="role">{role === 'manager' ? t('project.role.manager') : (role === 'committee' ? t('project.role.committee') : (role === 'invester' ? t('project.role.supporter') : t('project.role.visitor')))}</sup>) : ''}
                 </Tooltip>
-                    : <a className="border-top-btm" onClick={() => {console.log(11); wallet.connect() }}>Connect Wallet</a>}
+                    : <a className="border-top-btm" onClick={() => { console.log(11); wallet.connect() }}>Connect Wallet</a>}
             </nav>
         </div>
     </header>)
