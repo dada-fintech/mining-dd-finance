@@ -46,7 +46,7 @@ export default {
             modal: {
                 repayTitle: 'Repay',
                 youNeedPay: 'You need to pay',
-                payInsurance: 'Pay Deposit',
+                payInsurance: 'Deposit',
                 insuranceHint: `
                 您的项目即将启动，您需要支付募集额度10%的DADA作为项目抵押金。<br />项目完成后，将会收取其中30%的费用作为保险费用，返回剩余70%的押金。`,
                 confirmVoting: 'Confirm voting',

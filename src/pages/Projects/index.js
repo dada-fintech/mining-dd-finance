@@ -51,13 +51,13 @@ export default function Projects() {
                         <div className="title with-line"><span>{t('projectList.title')}</span></div>
                     </div>
                     <Row type="flex" justify="space-around">
-                        <Col xs={24} md={12} lg={8}>
+                        <Col xs={24} md={12} lg={12}>
                             <div className="desc">
                                 {t('projectList.slogan1')}<br />
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{t('projectList.slogan2')}
+                                &nbsp;&nbsp;{t('projectList.slogan2')}
                             </div>
                         </Col>
-                        <Col xs={24} md={12} lg={8}>
+                        <Col xs={0} md={0} lg={4}>
                             <img src={ProjectsTop} className="top-img" />
                         </Col>
 
