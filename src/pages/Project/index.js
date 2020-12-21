@@ -30,6 +30,9 @@ export default function Project() {
     const [repayModalVisible, setRepayModalVisible] = useState(false)
     const [insuranceModalVisible, setInsuranceModalVisible] = useState(false)
     const [currentParams, setCurrentParams] = useState({})
+    const [timing, setTiming] = useState(0)
+    const [timingHint, setTimingHint] = useState('')
+
     // 下一个进程是否在4天内
     // const [nextInFour, setNextInFour] = useState(false)
     const [lockLoading, setLocklLoading] = useState(false)
@@ -55,6 +58,55 @@ export default function Project() {
 
 
     }, [wallet.account])
+
+    useEffect(() => {
+        // 这里计算倒计时时间
+        const status = project.project_info.status
+        const oneHour = 60 * 60 * 1000
+        const oneDay = 24 * oneHour
+        const dateNow = new Date().valueOf()
+        let result = 0
+        let hint = ''
+        console.log('status is', status)
+        if (status === 'Auditing') {
+            result = project.project_info.create_time + oneHour - dateNow
+            hint = '距离审核结束仅剩'
+        }
+        if (status === 'Raising') {
+            result = project.fundraising.end_time - dateNow
+            hint = '距离筹款结束仅剩'
+        }
+        if (status === 'PayingInsurance') {
+            result = project.fundraising.end_time + oneDay * 3 - dateNow
+            hint = '距离保证金支付结束仅剩'
+        }
+        if (status === 'Rolling') {
+            const item = project.process.filter(item => item.status === 'Active')[0]
+            result = item.vote_end_time - dateNow
+            hint = '距离此阶段结束仅剩'
+        }
+        if (status === 'AllPhaseDone') {
+            result = project.project_info.income_settlement_time - dateNow
+            hint = '距离获取报酬仅剩'
+        }
+        if (status === 'ReplanNoticing') {
+            const item = project.process.filter(item => item.status === 'VoteNotice')[0]
+            result = item.vote_end_time - oneDay * 3 - dateNow
+            hint = '距离更改计划公式结束仅剩'
+        }
+        if (status === 'ReplanVoting') {
+            const item = project.process.filter(item => item.status === 'VoteReplaning')[0]
+            result = item.vote_end_time - dateNow
+            hint = '距离更改计划投票结束仅剩'
+        }
+
+        if (result > 0) {
+            setTiming(result)
+            setTimingHint(hint)
+        }
+
+
+    }, [project])
 
     const getInfo = () => {
         axios.get('/project/detail/' + id).then(res => {
@@ -108,7 +160,7 @@ export default function Project() {
                 })
             } else {
                 message.info(t('hint.approve'))
-                console.log(approveParams,'ppp')
+                console.log(approveParams, 'ppp')
                 mm.sendTransaction(approveParams, 'Approve spending USDT').then(res => {
                     if (res) {
                         mm.sendTransaction(lockParams, 'Lock USDT').then(res => {
@@ -170,7 +222,7 @@ export default function Project() {
 
     return (<div className="project-page">
         <div className="top-area">
-            <Header role={role}/>
+            <Header role={role} />
             <div className="container">
                 <div className="project-intro">
                     <Row gutter={{ md: 24, xl: 44 }} type="flex" align="center">
@@ -211,10 +263,10 @@ export default function Project() {
                                 项目进程
                             </div>
                             <div className="info-box">
-                                <div className="countdown">
-                                    <div className="title">距离下一阶段仅剩</div>
+                                {timing > 0 ? <div className="countdown">
+                                    <div className="title">{timingHint}</div>
                                     <div className="timer">
-                                        {project.fundraising.end_time && <Timer initialTime={project.fundraising.end_time - new Date()} direction="backward">
+                                        {<Timer initialTime={timing} direction="backward" checkpoints={[{ time: 0, callback: () => getInfo() }]}>
                                             <div>
                                                 <div className="num">
                                                     <Timer.Days />
@@ -249,7 +301,8 @@ export default function Project() {
 
                                     </div>
 
-                                </div>
+                                </div> : statusMapping[project.project_info.status]}
+
                                 {/* 一开始审核评议 */}
                                 {project.project_info.status === 'Auditing' && role === 'committee' && <Row>
                                     <div className="handle-area">
@@ -318,9 +371,8 @@ export default function Project() {
         <div className="middle-area">
             <div className="container">
                 <ul className="tabs">
-                    <li className={currentTab === 'process' && 'active'} onClick={() => { setCurrentTab('process') }}>{t('project.progress')}</li>
-                    <li className={currentTab === 'detail' && 'active'} onClick={() => { setCurrentTab('detail') }}>{t('project.details')}</li>
-                    {/* <li className={currentTab === 'comments' && 'active'} onClick={() => { setCurrentTab('comments') }}>{t('project.comments')}</li> */}
+                    <li className={currentTab === 'process' ? 'active' : ''} onClick={() => { setCurrentTab('process') }}>{t('project.progress')}</li>
+                    <li className={currentTab === 'detail' ? 'active' : ''} onClick={() => { setCurrentTab('detail') }}>{t('project.details')}</li>
                 </ul>
                 <div className="apy">{t('common.apy')} {project.fundraising.expected_apy}%</div>
             </div>

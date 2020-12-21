@@ -113,8 +113,8 @@ export default function Sidebar(props) {
             {myShare.actual_raised && topInvestList && topInvestList.length > 0 && <>
                 <div className="title">{t('sidebar.allShare')}</div>
                 <div className="box supporter-box">
-                    {topInvestList.map(item => (
-                        <div className="box-item">
+                    {topInvestList.map((item, index) => (
+                        <div className="box-item" key={index}>
                             <div className="progress" style={{ width: (item.amount / myShare.actual_raised) * 100 + '%' }}></div>
                             <div className="texts">
                                 <div>{((item.amount / myShare.actual_raised) * 100).toFixed(2)}% ({item.amount} USDT)</div>
@@ -128,8 +128,8 @@ export default function Sidebar(props) {
         {otherFiles && otherFiles.length > 0 && <div className="block">
             <div className="title">{t('sidebar.documents')}</div>
             <div className="box">
-                {otherFiles.map(item => (
-                    <div className="box-item-doc">
+                {otherFiles.map((item, index) => (
+                    <div className="box-item-doc" key={index}>
                         <a target="_blank" href={`${config.assetURL}/${projectId}/${item.file_name}`}>
                             {item.file_name.slice(10)}
                         </a>
