@@ -172,7 +172,7 @@ export default {
                 launchTime: 'Launch Time',
                 role: {
                     manager: 'Fund Manager',
-                    supporter: 'Fund Constituent',
+                    supporter: 'project supporter',
                     committee: 'Committee Member',
                     visitor: 'Visitor',
                 },
