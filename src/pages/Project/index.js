@@ -252,18 +252,18 @@ export default function Project() {
                                 </Col>
                                 <Col md={9}>
                                     <div className="info-item">
-                                        <div className="title">募集总额</div>
-                                        <div className="value">{project.fundraising.max_amount} USDT</div>
+                                        <div className="title">已筹集额度/筹集额度</div>
+                                        <div className="value">{project.fundraising.current_raised_money} USDT/{project.fundraising.max_amount} USDT</div>
                                     </div>
                                 </Col>
                             </Row>
                         </Col>
                         <Col xs={24} md={7}>
                             <div className="info-box-title">
-                                项目进程
+                                {statusMapping[project.project_info.status]}
                             </div>
                             <div className="info-box">
-                                {timing > 0 ? <div className="countdown">
+                                {timing > 0 && <div className="countdown">
                                     <div className="title">{timingHint}</div>
                                     <div className="timer">
                                         {<Timer initialTime={timing} direction="backward" checkpoints={[{ time: 0, callback: () => getInfo() }]}>
@@ -301,7 +301,7 @@ export default function Project() {
 
                                     </div>
 
-                                </div> : statusMapping[project.project_info.status]}
+                                </div>}
 
                                 {/* 一开始审核评议 */}
                                 {project.project_info.status === 'Auditing' && role === 'committee' && <Row>
