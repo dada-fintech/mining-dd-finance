@@ -16,7 +16,7 @@ import WeixinQR from '../../assets/qr-code.jpeg'
 
 import ProjectListTriangle from '../../assets/project-list-triangle.svg'
 import OngoingTriangle from '../../assets/ongoing-triangle.svg'
-import {toBr} from 'components/utils'
+import { toBr } from 'components/utils'
 
 import Footer from '../../components/Footer'
 import axios from 'utils/axios'
@@ -52,6 +52,28 @@ export default function Homepage() {
                 [name]: value,
             }
         })
+    }
+
+    const isEn = i18n.language === 'en'
+
+    const statusMapping = {
+        'Auditing': isEn ? 'Auditing' : '委员会审核中',
+        'Future': isEn ? 'Project Coming Soon' : '项目即将到来',
+        'Raising': isEn ? 'In Mid of Fundraising' : '正在筹款',
+        'PayingInsurance': isEn ? 'Depositing to the Reserve' : '正在支付押金',
+        'Active': isEn ? 'Active' : '项目正在进行中',
+        'Rolling': isEn ? 'Voting On-going' : '正在投票',
+        'AllPhasesDone': isEn ? 'Project Completes. Waiting for the Redemption' : '项目计划完成，等待获取报酬',
+        'Repaying': isEn ? 'Users are Receiving the Redemption' : '用户正在获取回报',
+        'Finished': isEn ? 'Project Completed' : '项目已完成',
+        'Refunding': isEn ? 'Refunding' : '退款中',
+        'PhaseFailed': isEn ? 'Stage Goal Failed' : '进程失败',
+        'ReplanNoticing': isEn ? 'Update to Change the Plan' : '更改计划公示',
+        'ReplanVoting': isEn ? 'Voting on Changing the Plan' : '更改计划投票',
+        'ReplanFailed': isEn ? 'Failed to Change the Plan' : '更改计划失败',
+        'Liquidating': isEn ? 'Liquidating' : '清算中',
+        'Failed': isEn ? 'Failed' : '项目失败',
+        'PreDefined': isEn ? 'On-going' : '进行中',
     }
 
     // const wallet = useWallet()
@@ -172,6 +194,7 @@ export default function Homepage() {
                                     </div>
                                     <div className="bottom">
                                         <Progress strokeColor="#3FAA4D" status="active" percent={((item.current_raised_money / item.max_amount) * 100).toFixed(0)} className="progress-bar" />
+                                        {item.status && <div className="status">{statusMapping[item.status]}</div>}
                                     </div>
                                 </a>
                             ))}
