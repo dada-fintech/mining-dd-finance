@@ -1,12 +1,27 @@
 @import "~antd/dist/antd.css";
 .App {
     word-break: keep-all;
-    @media screen and (max-width: 992px){
+    background: radial-gradient(57.44% 57.44% at 36.11% 100%, #ffebc4 0%, rgba(255, 255, 255, 0) 100%),
+        radial-gradient(50% 66.76% at 23.92% 50%, rgba(131, 156, 220, 0.17) 0%, rgba(255, 255, 255, 0) 100%),
+        radial-gradient(44.76% 114.58% at 100% 58.44%, rgba(255, 229, 137, 0.54) 0%, rgba(255, 255, 255, 0) 100%),
+        radial-gradient(93.02% 109.47% at 0% 0%, rgba(255, 0, 0, 0.25) 0%, rgba(255, 255, 255, 0) 65.72%),
+        radial-gradient(74.31% 190.22% at 100% 0%, rgba(72, 204, 204, 0.21) 0%, rgba(255, 255, 255, 0) 100%);
+    @media screen and (max-width: 992px) {
         word-break: unset;
     }
 }
 
+.content-wrapper {
+    height: 100vh;
+    overflow-y: scroll;
+    padding: 0 48px;
+}
 
+ul,
+li {
+    margin: 0;
+    padding: 0;
+}
 
 .line-btn {
     //border-top: 1px solid #707070;
@@ -14,7 +29,8 @@
 }
 
 .container {
-    font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Myriad Pro', 'Hiragino Sans GB', 'Microsoft YaHei', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Myriad Pro", "Hiragino Sans GB", "Microsoft YaHei",
+        "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     width: 100%;
     padding-right: 16px;
     padding-left: 16px;
@@ -62,7 +78,6 @@
     }
 }
 
-
 .btn-action {
     color: #273460;
     background: transparent;
@@ -76,16 +91,15 @@
 }
 
 .btn-white {
-    color: #707070;
+    color: #000000;
     background: #fff;
-    border-radius: 10px;
-    box-shadow: 0pxw 3px 6px rgba(0, 0, 0, 0.16);
+    border-radius: 6px;
+    box-shadow: 0px 3px 6px rgba(100, 100, 100, 0.4);
     border: none;
     &:hover,
     &:focus {
         color: #000000;
         background: #f7f7f7;
-        font-size: 16px;
     }
 }
 .btn-grey {
@@ -166,32 +180,31 @@ img {
     }
 }
 
-.with-line {
-    display: inline-block;
-    position: relative;
-    span {
-        z-index: 10;
-        position: relative;
-    }
-    &::after {
-        content: "";
-        display: block;
-        position: absolute;
-        bottom: 6px;
-        left: 28px;
-        height: 8px;
-        width: 100%;
-        background: #3dffbe;
-    }
-}
+// .with-line {
+//     display: inline-block;
+//     position: relative;
+//     span {
+//         z-index: 10;
+//         position: relative;
+//     }
+//     &::after {
+//         content: "";
+//         display: block;
+//         position: absolute;
+//         bottom: 6px;
+//         left: 28px;
+//         height: 8px;
+//         width: 100%;
+//         background: #3dffbe;
+//     }
+// }
 
 .hint-block {
-    color: #273460;
+    color: #15163d;
     font-size: 14px;
     line-height: 27px;
-    background: rgba(72, 204, 204, 0.18);
-    padding: 20px 64px 20px 8px;
-    border-left: 10px solid #48cccc;
+    background: rgba(72, 204, 204, 0.3);
+    padding: 12px;
     border-radius: 10px;
     &.small {
         font-size: 14px;
@@ -212,16 +225,13 @@ img {
 }
 
 .assets-rule-item {
-    background: #f9f9f9;
-    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
-    border-radius: 15px;
+    border: 1px solid #75d9d9;
+    box-shadow: 0px 3px 6px rgba(200, 200, 200, 0.16);
+    border-radius: 6px;
     padding: 14px 24px;
     margin-bottom: 16px;
     position: relative;
     transition: all 0.5s;
-    &:hover{
-        box-shadow: 3px 6px 9px rgba(0, 0, 0, 0.25);;
-    }
     .ant-picker {
         width: 100%;
     }
@@ -249,7 +259,7 @@ img {
     font-size: 26px;
     cursor: pointer;
     transition: all 0.5s;
-    &:hover{
+    &:hover {
         box-shadow: 3px 6px 9px rgba(0, 0, 0, 0.25);
     }
 }
@@ -289,7 +299,6 @@ img {
     }
 }
 
-
 .dada-circle {
     width: 200px;
     height: 200px;
@@ -300,12 +309,152 @@ img {
     margin: 0 auto 32px;
     border-radius: 100%;
     font-size: 20px;
-    &.success{
+    &.success {
         background: #48cccc;
         color: #fff;
     }
-    &.error{
+    &.error {
         background: red;
         color: #fff;
+    }
+}
+
+.breadcrumb {
+    li {
+        display: inline-block;
+        color: #15163d;
+        opacity: 0.4;
+        &.done {
+            opacity: 1;
+        }
+        &::after {
+            content: "";
+            background: url("./assets/breadcrumb-arrow.svg") no-repeat;
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            margin: 0 12px;
+            background-size: 100%;
+        }
+        &:last-child {
+            &::after {
+                display: none;
+            }
+        }
+    }
+}
+
+.main-breadcrumb {
+    li {
+        display: inline-block;
+        color: #9088a1;
+        &.done {
+            color: #15163d;
+        }
+        &::after {
+            content: "";
+            background: url("./assets/main-breadcrumb-arrow.svg") no-repeat;
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            margin: 0 12px;
+            background-size: 100%;
+        }
+        &:last-child {
+            &::after {
+                display: none;
+            }
+        }
+    }
+}
+
+.card-board {
+    padding: 32px;
+    margin-bottom: 64px;
+    border-radius: 6px;
+    background: #fff;
+    box-shadow: 4px 4px 12px #ccc;
+}
+.red {
+    color: red;
+}
+
+.govern-rule-img {
+    margin: 44px auto;
+}
+
+//创建项目和投票时候的下面操作区域
+.step-control {
+    width: 100%;
+    margin: 56px auto 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .hint {
+        font-size: 16px;
+        font-weight: 1000;
+        color: #ff0000;
+        margin-right: 12px;
+    }
+    .hint-gasfee {
+        padding-top: 10px;
+        position: absolute;
+        right: 80px;
+    }
+    .line-btn {
+        cursor: pointer;
+        padding: 4px 26px;
+        font-size: 20px;
+        border-radius: 5px;
+        color: #15163d;
+        transition: all 0.5s;
+        border: 1px solid #839cdc;
+    }
+    .btn-confirm {
+        position: relative;
+        font-weight: 500;
+        font-size: 22px;
+        width: 6em;
+        height: 50px;
+        border: 5px #48cccc solid;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 1s;
+        .text {
+            position: absolute;
+            line-height: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            white-space: nowrap;
+        }
+        &::before {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 100%;
+            background: #48cccc;
+            z-index: 1;
+            transition: all 0.7s;
+        }
+        &:hover::before {
+            width: 100%;
+        }
+        &:hover {
+            color: white;
+        }
+    }
+}
+
+.ant-picker,
+.ant-input-number,
+.ant-input,
+.ant-input-affix-wrapper {
+    border: 1px solid #839cdc;
+    &:hover,
+    &:focus {
+        border: 1px solid #839cdc;
+        outline: none;
+        box-shadow: unset;
     }
 }

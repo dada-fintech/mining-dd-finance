@@ -1,12 +1,16 @@
 .create-vote-page {
     background: #f1f1f1;
-    color: #707070;
-    min-height: 100vh;
+    color: #15163d;
+    .h1 {
+        font-size: 24px;
+        font-weight: 800;
+        margin: 44px auto 32px;
+    }
     .create-vote-main {
         padding: 64px 0;
         min-height: 73vh;
     }
-    .hint-block{
+    .hint-block {
         margin-bottom: 32px;
     }
     .required {
@@ -19,24 +23,16 @@
     .form-item {
         margin-bottom: 20px;
         .label {
-            font-size: 18px;
-            line-height: 27px;
-            margin-bottom: 8px;
-            // &.required {
-            //     &::after {
-            //         color: red;
-            //         content: "*";
-            //         display: "inline-block";
-            //     }
-            // }
+            color: #000;
+            margin-top: 30px;
+            margin-bottom: 4px;
         }
         .hint {
-            margin-top: 3px;
-            font-size: 14px;
-            line-height: 25px;
-            color: #010101;
+            margin-top: 2px;
+            font-size: 12px;
+            color: #9088a1;
             &.red {
-                color: #ff0000;
+                color: red;
             }
         }
         .handle-icon {
@@ -49,16 +45,6 @@
     .assets-rule-title {
         font-size: 20px;
         margin-bottom: 32px;
-        line-height: 27px;
-    }
-    .asset-id {
-        font-size: 20px;
-        line-height: 27px;
-        margin-bottom: 10px;
-    }
-
-    .step-0 {
-        font-size: 18px;
         line-height: 27px;
     }
     .step-1 {
@@ -130,86 +116,6 @@
             line-height: 25px;
             width: 80%;
             margin: 0 auto;
-        }
-    }
-    .step-control {
-        width: 100%;
-        margin: 120px auto;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        .hint {
-            color: #010101;
-            margin-right: 12px;
-        }
-        .hint-gasfee{
-            padding-top: 10px;
-            position: absolute;
-            right: 80px;
-        }
-        .line-btn{
-            cursor: pointer;
-            padding: 8px 16px;
-            font-weight: 500;
-            font-size: 24px;
-            line-height: 33px;
-            color: #273460;
-            transition: all 0.5s;
-            img{
-                width: 44px;
-                vertical-align: baseline;
-                transition: all 0.5s;
-            }
-        }
-        .line-btn-back{
-            &:hover {
-                img{
-                    transform: translateX(-120px);
-                }
-                transform: translatex(40px);
-            }
-        }
-        .line-btn-next{
-            &:hover {
-                img{
-                    transform: translateX(120px);
-                }
-                transform: translatex(-40px);
-            }
-        }
-        .btn-confirm{
-            position: relative;
-            font-weight: 500;
-            font-size: 22px;
-            width: 6em;
-            height: 50px;
-            border: 5px #48cccc solid;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 1s;
-            .text{
-                position: absolute;
-                line-height: 40px;
-                left: 50%;
-                transform: translateX(-50%);
-                z-index: 2;
-                white-space: nowrap;
-            }
-            &::before{
-                content: '';
-                position: absolute;
-                width: 0;
-                height: 100%;
-                background: #48cccc;
-                z-index: 1;
-                transition: all 0.7s;
-            }
-            &:hover::before{
-                width: 100%;
-            }
-            &:hover{
-                color: white;
-            }
         }
     }
     .step-sidebar {
@@ -293,11 +199,6 @@
         }
         .create-vote-main {
             padding: 64px 16px;
-        }
-        .asset-id {
-            font-size: 18px;
-            line-height: 24px;
-            margin-bottom: 8px;
         }
         .assets-rule-title {
             font-size: 18px;

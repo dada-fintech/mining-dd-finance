@@ -57,13 +57,13 @@ export default {
                 Projects that passed the audit will be insured by SAFD. <br/>
                 Projects that did not pass the audit will be canceled. 
                 `,
-             
 
 
-              
-                
 
-                
+
+
+
+
             },
             homepage: {
                 subtitle: 'Decentralized Platform for Mining Ecosystem',
@@ -176,7 +176,7 @@ export default {
                     committee: 'Committee Member',
                     visitor: 'Visitor',
                 },
-                category:{
+                category: {
                     ongoing: 'On-going',
                     completed: 'Completed',
                     open: 'Available',
@@ -193,14 +193,52 @@ export default {
 
             },
             createProject: {
-                hint: `<div class="with-line"><span>Create a New Project </div></span><br /><br />
+                hint: `<div class="h1">Create a New Project</div>
                 Next, we will guide you through filling in the project information and governance rules. We will create a new smart contract using the information you submitted. <br/><br/>
                 Please make sure the information is authentic. Once filled in, it is unchangeable.<br /><br /><br/>
                 <div class="hint-block">
-                Notice: set aside 0.5% of funds raised in DADA token to pay for the auditing fees to the community. <br/><br/>
+                Notice: set aside 0.5% of funds raised in DADA token to pay for the auditing fees to the community. <br/>
                 After the fundraise completes, contribute 10% of the hard cap fund size in DADA token to the security deposit. We will return a major part of your security fund after the project completes. 
                 </div>
                 `,
+                closeGovernRule: `
+                <div>很好！您已经完成了基本信息的录入。<br/>
+                接下来，将会引导您设定项目的<span class="red">治理规则</span>。</div>
+                <br/>
+                <div>
+                <strong>首先，需要了解治理规则的基本模板</strong><br/>
+                    1.审批阶段：所有提交的项目均需要通过专业委员会审批通过方可进入下一阶段（创建后5天内）。<br/>
+                    2.筹款阶段：筹款完成的3天内，需要支付项目筹集最大额度10%的DADA方可进入下一阶段。<br/>
+                    3.治理阶段：根据设定的款项释放规则，每次需要获得50%以上的同意票（未参与投票默认视为同意），方可进入下一阶段。<br/>
+                </div>
+                <img class="govern-rule-img" src="/govern-rule-img.svg"/>
+                <div>
+                <strong>其次，以下为需要设定的日期</strong><br/>
+                    1.筹款开始日期：需为创建日期5天后。<br/>
+                    2.筹款结束日期：筹款结束后，项目开始计算收益。<br/>
+                    3.治理阶段各投票日期：首次款项释放无需投票。<br/>
+                    4.治理阶段各款项释放日期：首次款项释放需要设定，后续款项释放均为投票结束时。<br/>
+                    5.赎回日期：赎回日期前需将本金及收益打入合约地址，以便于投资人赎回本金及收益。<br/>
+                </div>
+            `,
+            openGovernRule: `
+            <div>很好！您已经完成了基本信息的录入。<br/>
+            接下来，将会引导您设定项目的<span class="red">治理规则</span>。</div>
+            <br/>
+            <div>
+            <strong>首先，需要了解治理规则的基本模板</strong><br/>
+                1.审批阶段：所有提交的项目均需要通过专业委员会审批通过方可进入下一阶段（创建后5天内）。<br/>
+                2.筹款阶段：筹款完成的3天内，需要支付项目筹集最大额度10%的DADA方可进入下一阶段。<br/>
+                3.治理阶段：根据设定的款项释放规则，每次需要获得50%以上的同意票（未参与投票默认视为同意），方可进入下一阶段。<br/>
+            </div>
+            <img class="govern-rule-img" src="/govern-rule-img.svg"/>
+            <div>
+            <strong>其次，以下为需要设定的日期</strong><br/>
+                1.筹款开始日期：需为创建日期5天后。<br/>
+                2.筹款结束日期：筹款结束后，项目开始计算收益。<br/>
+                3.赎回日期：赎回日期前需将本金及收益打入合约地址，以便于投资人赎回本金及收益。<br/>
+            </div>
+            `,
                 step1Hint: 'This form will be displayed on the project details page. All the information below is required. Please fill in your Business Plan and upload it as a PDF. ',
                 step2Hint: `
                 This form configures the token representing the proof of stake of your project. You could obtain this token through fundraising. <br />
@@ -219,6 +257,7 @@ export default {
                 `,
                 contractAddress: 'Contract Address',
                 projectName: 'Project Name',
+                projectNameHint: '*为项目创建一个醒目的名字以便人们找到它',
                 projectIntro: 'Project Introduction',
                 projectIntroHint: '*Briefly introduce your project and its advantages, etc. ',
                 within140: 'Within 140 words',
@@ -287,11 +326,11 @@ export default {
                 `
             },
             createVote: {
-                hint: `<div class="with-line"><span>Create a Voting On a Change in the Process</div></span><br /><br />
+                hint: `<div class="h1">Create a Voting On a Change in the Process</div>
                 Next, we will guide you through editing the project’s governance rules. We will create a new voting poll using the information you submitted. <br/><br/>
                 Please make sure the information is authentic. Once filled in, it is unchangeable. <br/><br/><br/>
                 <div class="hint-block">
-                Notice: elaborate on the reasons when creating a voting poll on changing the project’s process. The change will only take place when you obtain over ⅔ votes in support <strong>(Those who abstained from voting are counted as opponents)</strong>.<br/><br/>
+                Notice: elaborate on the reasons when creating a voting poll on changing the project’s process. The change will only take place when you obtain over ⅔ votes in support <strong>(Those who abstained from voting are counted as opponents)</strong>.<br/>
                 Notice: Your voting poll on changing the project’s process will take one day for the announcement. Please make sure to set the voting time before the next step starts, or the smart contract may fail to launch.   
                 </div>
                 `,
@@ -490,7 +529,7 @@ export default {
                     committee: '委员会成员',
                     visitor: '游客',
                 },
-                category:{
+                category: {
                     ongoing: '运行中',
                     completed: '已完成',
                     open: '可参与',
@@ -507,12 +546,50 @@ export default {
 
             },
             createProject: {
-                hint: `<div class="with-line"><span>现在开始创建一个项目</div></span><br /><br />
+                hint: `<div class="h1">现在开始创建一个项目</div>
                 接下来，您将根据引导填写完整的项目信息与治理规则，我们将会根据您所填写的信息创建一个新的智能合约。<br/><br/>
                 请务必保证数据真实准确，您所填写信息一经提交无法更改<br /><br /><br/>
                 <div class="hint-block">
-                    注意：您提交项目时需要准备好所募集金额0.5%的等值DADA用于支付给社区，用于提交项目的审计/验证。<br/><br/>
+                    注意：您提交项目时需要准备好所募集金额0.5%的等值DADA用于支付给社区，用于提交项目的审计/验证。<br/>
                     筹集目标达成后，您将需要准备好最大募集金额10%的等值DADA用于项目启动保证金，该资金将会于项目完成后返还部分。
+                </div>
+                `,
+                closeGovernRule: `
+                    <div>很好！您已经完成了基本信息的录入。<br/>
+                    接下来，将会引导您设定项目的<span class="red">治理规则</span>。</div>
+                    <br/>
+                    <div>
+                    <strong>首先，需要了解治理规则的基本模板</strong><br/>
+                        1.审批阶段：所有提交的项目均需要通过专业委员会审批通过方可进入下一阶段（创建后5天内）。<br/>
+                        2.筹款阶段：筹款完成的3天内，需要支付项目筹集最大额度10%的DADA方可进入下一阶段。<br/>
+                        3.治理阶段：根据设定的款项释放规则，每次需要获得50%以上的同意票（未参与投票默认视为同意），方可进入下一阶段。<br/>
+                    </div>
+                    <img class="govern-rule-img" src="/govern-rule-img.svg"/>
+                    <div>
+                    <strong>其次，以下为需要设定的日期</strong><br/>
+                        1.筹款开始日期：需为创建日期5天后。<br/>
+                        2.筹款结束日期：筹款结束后，项目开始计算收益。<br/>
+                        3.治理阶段各投票日期：首次款项释放无需投票。<br/>
+                        4.治理阶段各款项释放日期：首次款项释放需要设定，后续款项释放均为投票结束时。<br/>
+                        5.赎回日期：赎回日期前需将本金及收益打入合约地址，以便于投资人赎回本金及收益。<br/>
+                    </div>
+                `,
+                openGovernRule: `
+                <div>很好！您已经完成了基本信息的录入。<br/>
+                接下来，将会引导您设定项目的<span class="red">治理规则</span>。</div>
+                <br/>
+                <div>
+                <strong>首先，需要了解治理规则的基本模板</strong><br/>
+                    1.审批阶段：所有提交的项目均需要通过专业委员会审批通过方可进入下一阶段（创建后5天内）。<br/>
+                    2.筹款阶段：筹款完成的3天内，需要支付项目筹集最大额度10%的DADA方可进入下一阶段。<br/>
+                    3.治理阶段：根据设定的款项释放规则，每次需要获得50%以上的同意票（未参与投票默认视为同意），方可进入下一阶段。<br/>
+                </div>
+                <img class="govern-rule-img" src="/govern-rule-img.svg"/>
+                <div>
+                <strong>其次，以下为需要设定的日期</strong><br/>
+                    1.筹款开始日期：需为创建日期5天后。<br/>
+                    2.筹款结束日期：筹款结束后，项目开始计算收益。<br/>
+                    3.赎回日期：赎回日期前需将本金及收益打入合约地址，以便于投资人赎回本金及收益。<br/>
                 </div>
                 `,
                 step1Hint: '这些设置都将展示在项目详情页中，所有设置均为必填项，请规范项目计划书的内容，并确保为PDF格式，我们将会把您上传的内容全部展示出来。',
@@ -535,18 +612,19 @@ export default {
                 `,
                 contractAddress: '合约地址',
                 projectName: '项目名称',
+                projectNameHint: '*为项目创建一个醒目的名字以便人们找到它',
                 projectIntro: '项目简介',
-                projectIntroHint: '*简单介绍项目的概况、优势等，限制字数140字内',
+                projectIntroHint: '*简单介绍项目的概况、优势等，该字段将会推送到项目首页，限制字数140字内',
                 within140: '限制140字以内',
-                projectEmail: '项目订阅邮箱',
-                projectEmailHint: '*务必填写一个可验证的邮箱，接收项目的各阶段推送消息',
+                projectEmail: '项目发起人邮箱',
+                projectEmailHint: '*该邮箱将会用于接收项目的各阶段推送消息',
                 managerName: '项目发起人姓名',
                 managerNameHint: '*请填写真实信息，该信息将会记录到声誉系统中',
                 managerBio: '项目发起人简介',
                 projectDetails: '项目详情',
-                projectDetailsHint: '*请详细描述项目相关细节',
+                projectDetailsHint: '*详细描述项目相关细节，该字段将会展示在项目详情中，不限字数',
                 projectStrategy: '项目策略',
-                projectStrategyHint: '*请详细介绍该项目收益策略',
+                projectStrategyHint: '*请详细介绍该项目收益策略，该字段将会展示在项目详情中，不限字数',
                 uploadPlan: '上传项目计划书',
                 whitepaper: '白皮书文件',
                 nameOfToken: '项目代币名称',
@@ -571,7 +649,7 @@ export default {
                 fundraisingLimitHint2: '*审计费用、保证金费用均以该额度作为基准数据',
                 softCap: '最低启动金额',
                 softCapHover: '筹款额道道该目标后视为筹集成功',
-                redemptionDate: '开放赎回日期',
+                redemptionDate: '赎回时间（等额本息）',
                 redemptionDateHint: '*赎回日期为开放用户提取收益的时间，请务必于该日期前完成收益回款',
                 redemptionDateHover: '计息周期=赎回日期-募集截至日期',
                 assetsRuleHint: '请根据您的募资计划配置基金解锁规则。',
@@ -581,8 +659,8 @@ export default {
                 sharesHover: '本阶段放款金额',
                 votingDate: '投票期',
                 votingDateHover: '该时期为本阶段治理投票的时间区间，投票结束即可领取阶段款项',
-                additionalDoc: '其他文件',
-                additionalDocHint: '请上传关于这个项目的其他文件。包括白皮书，照片，经理作品集，或其他有关项目信息的文件。',
+                additionalDoc: '上传其他文件',
+                additionalDocHint: '*添加更多其他关于项目的证明文件，包括但不限于项目计划书、合规性文件、业绩证明、身份证明等，可以为您的项目顺利开展提供更多的支持。',
                 projectInfo: '项目信息',
                 tokenName: '项目币名称',
                 fundAddress: '基金持有地址',
@@ -604,11 +682,11 @@ export default {
 
             },
             createVote: {
-                hint: `<div class="with-line"><span>现在开始创建一个变更投票</div></span><br /><br />
+                hint: `<div class="h1">现在开始创建一个变更投票</div>
                 接下来，您将根据引导修改项目的治理规则，我们将会根据您所填写的信息创建一个新的治理投票。<br/><br/>
                 请务必保证数据真实准确，您所填写信息一经提交无法更改<br/><br/><br/>
                 <div class="hint-block">
-                    注意：变更投票时请充分说明理由，有且仅有在获得超过2/3的支持票数，您所做出的变更才可以生效（<strong>变更投票中，未投票数均计入反对票</strong>)<br/><br/>
+                    注意：变更投票时请充分说明理由，有且仅有在获得超过2/3的支持票数，您所做出的变更才可以生效（<strong>变更投票中，未投票数均计入反对票</strong>)<br/>
                     注意：您所提交的变更投票将会有一天的公示期，请务必保证投票期限位于下一进程开始前，否则可能会导致合约发布失败。
                 </div>
                 `,

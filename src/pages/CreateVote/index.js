@@ -96,6 +96,9 @@ export default function CreateVote() {
     }
 
     const goNextStep = () => {
+        setCurrentStep(prev => prev + 1)
+        localStorage.setItem('currentStep', currentStep + 1)
+        return true
         const customHint = i18n.language === 'en' ? 'Please check the required fields' : ''
         if (currentStep === 1) {
             if (processList.length < 2) {
@@ -353,10 +356,10 @@ export default function CreateVote() {
                     </div>
                     <div className="step-control">
                         <div>
-                            {currentStep > 0 && <div onClick={() => { setCurrentStep(prev => prev - 1) }} className="line-btn line-btn-back">{t('common.back')} <img src={LinkArrowBack} /></div>}
+                            {currentStep > 0 && <div onClick={() => { setCurrentStep(prev => prev - 1) }} className="line-btn line-btn-back">{t('common.back')}</div>}
                         </div>
                         {currentStep < 2 && <div>
-                            <div onClick={() => { goNextStep() }} className="line-btn line-btn-next"><img src={LinkArrow} /> {t('common.next')}</div>
+                            <div onClick={() => { goNextStep() }} className="line-btn line-btn-next">{t('common.next')}</div>
                         </div>}
                         {currentStep == 2 && <div>
                             <div onClick={() => { !changeLoading && confirmInfo() }} className="btn-confirm"><span className="text">{t('common.confirmInfo')} {changeLoading && <LoadingOutlined />}</span> </div>

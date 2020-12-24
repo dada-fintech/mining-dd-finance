@@ -10,6 +10,7 @@ import React, { useEffect } from 'react'
 import Logo from '../../assets/logo.png'
 import { Tooltip } from 'antd'
 import { useWallet } from 'use-wallet'
+import MainBreadcrumbArrow from 'assets/main-breadcrumb-arrow.svg'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import i18n from 'i18next'
@@ -52,21 +53,20 @@ export default function Header(props) {
     // </Menu>
 
     return (<header className="header">
-        <div className="container">
-            <a href="/">
-                <img src={Logo} className="logo" />
+        <ul className="main-breadcrumb">
+            <li>Crypto Mining</li>
+            <li className="done">Create DAO</li>
+        </ul>
+        <nav>
+            <a href="/projects">{t('common.projectList')}</a>
+            <a onClick={() => { changeLanguage(i18n.language === 'en' ? 'zh' : 'en') }}>
+                {i18n.language === 'en' ? '简体中文' : 'English'}
             </a>
-            <nav>
-                <a href="/projects">{t('common.projectList')}</a>
-                <a onClick={() => { changeLanguage(i18n.language === 'en' ? 'zh' : 'en') }}>
-                    {i18n.language === 'en' ? '简体中文' : 'English'}
-                </a>
-                {wallet.status === 'connected' ? <Tooltip title={wallet.account}>
-                    {wallet.account && <a className="line-btn">{wallet.account.slice(0, 4) + '...' + wallet.account.slice(-4)}</a>}
-                    {role ? (<sup className="role">{role === 'manager' ? t('project.role.manager') : (role === 'committee' ? t('project.role.committee') : (role === 'invester' ? t('project.role.supporter') : t('project.role.visitor')))}</sup>) : ''}
-                </Tooltip>
-                    : <a className="border-top-btm" onClick={() => { console.log(11); wallet.connect() }}>Connect Wallet</a>}
-            </nav>
-        </div>
+            {wallet.status === 'connected' ? <Tooltip title={wallet.account}>
+                {wallet.account && <a className="line-btn">{wallet.account.slice(0, 4) + '...' + wallet.account.slice(-4)}</a>}
+                {role ? (<sup className="role">{role === 'manager' ? t('project.role.manager') : (role === 'committee' ? t('project.role.committee') : (role === 'invester' ? t('project.role.supporter') : t('project.role.visitor')))}</sup>) : ''}
+            </Tooltip>
+                : <a className="border-top-btm" onClick={() => { console.log(11); wallet.connect() }}>Connect Wallet</a>}
+        </nav>
     </header>)
 }

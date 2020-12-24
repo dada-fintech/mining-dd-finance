@@ -1,19 +1,15 @@
 .header {
     padding: 24px 0;
-    .container {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 95%;
-        max-width: unset;
-    }
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     .logo {
         width: 80px;
     }
-    .role{
+    .role {
     }
     nav {
-        .border-top-btm{
+        .border-top-btm {
             border-top: 1px black solid;
             border-bottom: 1px black solid;
         }
@@ -24,29 +20,21 @@
             vertical-align: middle;
             margin-left: 24px;
             padding: 8px 4px;
-            transition: all 0.5s;
-            &:hover{
-                font-size: 20px;
-            }
-            &.highlight{
-                
-              
-            }
         }
     }
     @media screen and (max-width: 768px) {
-        .container{
+        .container {
             width: 98%;
         }
-        .logo{
+        .logo {
             width: 52px;
         }
         nav {
             text-align: right;
-            a{
+            a {
                 font-size: 14px;
                 margin-left: 8px;
-                &:hover{
+                &:hover {
                     font-size: 14px;
                 }
                 .en & {
