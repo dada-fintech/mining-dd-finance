@@ -24,6 +24,10 @@ export default function Sidebar(props) {
         "BonusCanClaim": "可领取",
     }
     useEffect(() => {
+        getInvestInfo()
+    }, [wallet.account])
+
+    const getInvestInfo = () => {
         //获取当前user的投资
         if (wallet.account) {
             axios.post('/project/user-invest', {
@@ -33,12 +37,11 @@ export default function Sidebar(props) {
                 setMyShare(res.data)
             })
         }
-
         //获取投资top用户
         axios.get(`/project/top-invest/${projectId}`).then(res => {
             setTopInvestList(res.data)
         })
-    }, [wallet.account])
+    }
 
     const doAction = () => {
         const params = {
@@ -49,6 +52,7 @@ export default function Sidebar(props) {
         setActionLoading(true)
         mm.sendTransaction(params, statusMapping[myShare.status]).then(res => {
             setActionLoading(false)
+            getInvestInfo()
         })
     }
 
