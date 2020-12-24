@@ -21,6 +21,7 @@ export default function Sidebar(props) {
         "Refunding": "可退款",
         "Repaying": "可赎回",
         "Liquiditing": "可清算",
+        "BonusCanClaim": "可领取",
     }
     useEffect(() => {
         //获取当前user的投资
@@ -91,7 +92,7 @@ export default function Sidebar(props) {
                     </div>
                     <div className="line">
                         <div>{t('sidebar.return')}</div>
-                        <div>{myShare.user_profit} USDT</div>
+                        <div>{myShare.user_profit} DADA</div>
                     </div>
                     <div className="line">
                         <div>{t('sidebar.redeemable')}</div>
