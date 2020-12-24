@@ -132,6 +132,7 @@ export default {
                 months: 'Months',
                 subscribe: 'Subscribe',
                 enterEmail: 'Please enter email address',
+                bonus: 'Bonus',
 
             },
             banner: {
@@ -445,6 +446,7 @@ export default {
                 months: '个月',
                 subscribe: '订阅该项目获得最新动态',
                 enterEmail: '请输入邮箱',
+                bonus: '投资奖励',
             },
             banner: {
                 title: '矿业生态聚合器',

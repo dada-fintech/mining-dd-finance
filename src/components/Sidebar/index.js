@@ -94,10 +94,14 @@ export default function Sidebar(props) {
                         <div>{t('sidebar.investment')}</div>
                         <div>{myShare.user_balance} USDT</div>
                     </div>
-                    <div className="line">
-                        <div>{t('sidebar.return')}</div>
+                    {myShare.profit_status === 'BonusCanClaim' && <div className="line">
+                        <div>{t('sidebar.bonus')}</div>
                         <div>{myShare.user_profit} DADA</div>
-                    </div>
+                    </div>}
+                    {myShare.profit_status !== 'BonusCanClaim' && <div className="line">
+                        <div>{t('sidebar.return')}</div>
+                        <div>{myShare.user_profit} USDT</div>
+                    </div>}
                     <div className="line">
                         <div>{t('sidebar.redeemable')}</div>
                         <div>{new Date(myShare.income_settlement_time).toLocaleDateString()}</div>
