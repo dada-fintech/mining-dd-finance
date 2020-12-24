@@ -309,7 +309,7 @@ export default {
             projectList: {
                 title: 'Project List',
                 slogan1: 'Your Control Panel to a Myriad of Crypto Mining Projects',
-                slogan2: 'In one click, Oversee Capital Flow, govern the vehicle, Ride with the Boom'
+                slogan2: 'In one click, oversee capital flow, govern the vehicle, ride with the Boom'
             },
 
 
