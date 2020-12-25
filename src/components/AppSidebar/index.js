@@ -20,7 +20,9 @@ export default function AppSidebar() {
 
     return (<div className="app-sidebar">
         <div className="top">
-            <img src={SidebarLogo} className="sidebar-logo" />
+            <a href="/">
+                <img src={SidebarLogo} className="sidebar-logo" />
+            </a>
             <ul className="nav">
                 <li><a href="/"><img src={CryptoMiningIcon} />Crypto Mining</a></li>
                 <li><a href="/"><img src={MiningSwapIcon} />Mining Swap</a></li>
