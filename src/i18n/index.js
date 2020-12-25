@@ -187,7 +187,7 @@ export default {
                     committeeReviews: 'Committee Reviews',
                     security: 'Pay Deposit',
                     lock: 'Lock',
-                    change: 'Initiate Voting to Change the Process',
+                    change: 'Revise the Plan',
                     repay: 'Repay',
                 }
 
