@@ -1,12 +1,13 @@
 import { useTranslation } from 'react-i18next'
 import React, { useState } from 'react'
 import { PDFReader } from 'reactjs-pdf-reader';
-import {toBr} from 'components/utils'
+import { toBr } from 'components/utils'
+import config from 'config'
 import './style.scss'
 //todo,这里暂时需要翻墙，来下载 pdf.js
 export default function Detail(props) {
     const { t } = useTranslation()
-    const { fullDesc, projectInfo } = props
+    const { fullDesc, projectInfo, otherFiles, projectId } = props
     const [loading, setLoading] = useState(true)
     return (<div className="detail-module">
         <div className="text-line">
@@ -33,9 +34,26 @@ export default function Detail(props) {
             <div>{t('createProject.profitAddr')}</div>
             <div>{projectInfo.profit}</div>
         </div>
+        <div className="text-line">
+            <div>{t('sidebar.documents')}</div>
+            <div>   
+                {otherFiles && otherFiles.length > 0 && <div className="block">
+                <div className="box">
+                    {otherFiles.map((item, index) => (
+                        <div className="box-item-doc" key={index}>
+                            <a target="_blank" href={`${config.assetURL}/${projectId}/${item.file_name}`}>
+                                {item.file_name.slice(10)}
+                            </a>
+                        </div>
+                    ))}
+                </div>
+            </div>}</div>
+        </div>
+
         <div style={{ color: 'red' }}>
             {t('hint.detailHint')}
         </div>
+
         <div className="pdf-area">
             {loading && <div>Loading PDF...</div>}
             <PDFReader url={fullDesc} onDocumentComplete={() => { setLoading(false) }} />

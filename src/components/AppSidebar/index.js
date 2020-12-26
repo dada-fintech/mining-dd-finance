@@ -1,6 +1,7 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Popover } from 'antd'
+import i18n from 'i18next'
 import './style.scss'
 import LogoBlue from "assets/logo-blue.svg";
 import SidebarLogo from "assets/sidebar-logo.svg";
@@ -16,6 +17,10 @@ import WeixinQR from 'assets/qr-code.jpeg'
 
 export default function AppSidebar() {
     const { t } = useTranslation()
+    const changeLanguage = language => {
+        localStorage.setItem('language', language)
+        i18n.changeLanguage(language)
+    }
     const WeixinContent = (<img src={WeixinQR} style={{ width: '140px' }} />)
 
     return (<div className="app-sidebar">
@@ -24,13 +29,21 @@ export default function AppSidebar() {
                 <img src={SidebarLogo} className="sidebar-logo" />
             </a>
             <ul className="nav">
-                <li><a href="/"><img src={CryptoMiningIcon} />Crypto Mining</a></li>
+                <li>
+                    <a href="/projects"><img src={CryptoMiningIcon} />Crypto Mining</a>
+                    <a href="/create-project">
+                        <div className="btn-create">Create</div>
+                    </a>
+                </li>
                 <li><a href="/"><img src={MiningSwapIcon} />Mining Swap</a></li>
                 <li><a href="/"><img src={DashboardIcon} />Dashboard</a></li>
             </ul>
         </div>
         <div className="bottom">
             <div className="more-links">
+                <a onClick={() => { changeLanguage(i18n.language === 'en' ? 'zh' : 'en') }}>
+                    {i18n.language === 'en' ? '简体中文' : 'English'}
+                </a>
                 <a href="https://doc.dd.finance" target="_blank">{t('homepage.footer.documentation')}</a>
                 <a href="mainto:contact@dd.finance">contact@dd.finance</a>
                 <a href="mainto:media@dd.finance">media@dd.finance</a>

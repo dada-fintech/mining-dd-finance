@@ -90,9 +90,9 @@ export default function CreateProject() {
     }, [])
 
     useEffect(() => {
-        // 只有主网才去获取
+        // 只有主网才去获取, todo，是否改成dada了
         if (config.chainId == 1 && wallet.account) {
-            getUSDTBalance()
+            // getUSDTBalance()
         }
     }, [wallet.account])
 
@@ -223,36 +223,30 @@ export default function CreateProject() {
     }
 
     const goNextStep = () => {
-
-        //重构中，暂时停止校验
-        setCurrentStep(prev => prev + 1)
-        localStorage.setItem('currentStep', currentStep + 1)
-        return true
-
         const customHint = i18n.language === 'en' ? 'Please check the required fields' : ''
         // 进行步骤跳转以及字段校验
         if (currentStep === 1) {
-            if (!projectInfo.project_name) {
-                message.error(customHint || '请填写项目名称')
-                return false
-            }
-            if (!projectInfo.project_profile) {
-                message.error(customHint || '请填写项目简介')
-                return false
-            }
-            if (!projectInfo.creater_email) {
-                message.error(customHint || '请填写项目订阅邮箱')
-                return false
-            }
-        }
-
-        if (currentStep === 2) {
             if (!projectInfo.creater_name) {
                 message.error(customHint || '请填写项目发起人姓名')
                 return false
             }
             if (!projectInfo.creater_profile) {
                 message.error(customHint || '请填写项目发起人简介')
+                return false
+            }
+            if (!projectInfo.creater_email) {
+                message.error(customHint || '请填写项目发起人邮箱')
+                return false
+            }
+        }
+
+        if (currentStep === 2) {
+            if (!projectInfo.project_name) {
+                message.error(customHint || '请填写项目名称')
+                return false
+            }
+            if (!projectInfo.project_profile) {
+                message.error(customHint || '请填写项目简介')
                 return false
             }
             if (!projectInfo.project_description) {
@@ -263,73 +257,30 @@ export default function CreateProject() {
                 message.error(customHint || '请填写项目策略')
                 return false
             }
-            if (!projectInfo.white_paper) {
-                message.error(customHint || '请上传项目计划书')
-                return false
-            }
+
         }
 
         if (currentStep === 3) {
-            if (!projectInfo.project_token_symbol) {
-                message.error(customHint || '请填写项目币名称')
-                return false
-            }
-            if (!projectInfo.receiver) {
-                message.error(customHint || '请填写收款地址')
-                return false
-            }
-            if (!projectInfo.profit) {
-                message.error(customHint || '请填写收益地址')
-                return false
-            }
-            if (!projectInfo.profit_token) {
-                message.error(customHint || '请选择收益币种')
-                return false
-            }
 
-            //检测重复地址
-            if (projectInfo.member_address.length > 1) {
-                let findDuplicates = arr => arr.filter((item, index) => arr.indexOf(item) != index)
-                const duplicateArr = findDuplicates(projectInfo.member_address)
-                if (duplicateArr.length > 0) {
-                    message.error(customHint || '理事会成员地址有重复')
-                    return false
-                }
-            }
+
+
+
+
 
         }
 
         if (currentStep === 4) {
+
             if (!fundraising.start_time || !fundraising.end_time) {
                 message.error(customHint || '请选择筹款期限')
                 return false
             }
-            if (!fundraising.max_amount) {
-                message.error(customHint || '请填写最高募集金额')
-                return false
-            }
-            if (!fundraising.min_amount) {
-                message.error(customHint || '请选择最低启动金额')
-                return false
-            }
 
-            if (!fundraising.expected_apy) {
-                message.error(customHint || '请填写预期APY')
-                return false
-            }
-
-
-        }
-
-        if (currentStep === 5) {
             if (!projectInfo.income_settlement_time) {
                 message.error(customHint || '请填写赎回日期')
                 return false
             }
-            if (processList.length < 2) {
-                message.error(customHint || '至少要有两个进程')
-                return false
-            }
+
             let pass = true
             let totalPercent = 0
 
@@ -355,6 +306,66 @@ export default function CreateProject() {
                 message.error(customHint || '份额相加需等于100%')
                 return false
             }
+        }
+
+        if (currentStep === 5) {
+
+            if (!fundraising.expected_apy) {
+                message.error(customHint || '请填写预期APY')
+                return false
+            }
+
+            if (!fundraising.max_amount) {
+                message.error(customHint || '请填写最高募集金额')
+                return false
+            }
+            if (!fundraising.min_amount) {
+                message.error(customHint || '请选择最低启动金额')
+                return false
+            }
+
+            if (processList.length < 2) {
+                message.error(customHint || '至少要有两个进程')
+                return false
+            }
+
+        }
+
+        if (currentStep === 6) {
+            if (!projectInfo.project_token_symbol) {
+                message.error(customHint || '请填写项目币名称')
+                return false
+            }
+            if (!projectInfo.receiver) {
+                message.error(customHint || '请填写收款地址')
+                return false
+            }
+            if (!projectInfo.profit) {
+                message.error(customHint || '请填写收益地址')
+                return false
+            }
+            //这个默认是usdt传过去的，暂时不选择
+            if (!projectInfo.profit_token) {
+                message.error(customHint || '请选择收益币种')
+                return false
+            }
+            //检测重复地址
+            if (projectInfo.member_address.length > 1) {
+                let findDuplicates = arr => arr.filter((item, index) => arr.indexOf(item) != index)
+                const duplicateArr = findDuplicates(projectInfo.member_address)
+                if (duplicateArr.length > 0) {
+                    message.error(customHint || '理事会成员地址有重复')
+                    return false
+                }
+            }
+        }
+
+        if (currentStep === 7) {
+            if (!projectInfo.white_paper) {
+                message.error(customHint || '请上传项目计划书')
+                return false
+            }
+
         }
 
 
@@ -530,12 +541,12 @@ export default function CreateProject() {
 
     return (<div className="create-project-page">
         <Row>
-            <Col md={4}>
+            <Col md={4} xs={0}>
                 <AppSidebar />
             </Col>
-            <Col md={20}>
+            <Col md={20} xs={24}>
                 <div className="content-wrapper">
-                    <Header />
+                    <Header breadCrumb={['Crypto Mining', 'Create DAO']} />
                     <div className="card-board">
                         <ul className="breadcrumb">
                             {sidebarList.map((item, index) => <li className={(currentStep >= item.step ? 'done' : '')}>
@@ -712,7 +723,7 @@ export default function CreateProject() {
                                     {projectInfo.white_paper.file_name.slice(10)} <CloseCircleOutlined onClick={() => { removeWhitePaper() }} />
                                 </div>}
                                 <div className="hint">
-                                *该文件将会展示在项目详情页中,文件需PDF格式
+                                    *该文件将会展示在项目详情页中,文件需PDF格式
                                 </div>
                             </div>
                             <div className="form-item">
@@ -738,7 +749,7 @@ export default function CreateProject() {
 
                         </div>}
                         {currentStep === 8 && <div className="step-6">
-                            <div className="title">{t('createProject.confirm1')}</div>
+                            <div className="h1">请确认您所填写的信息</div>
                             <div className="confirm-box confirm-box-long" style={{ marginBottom: '72px' }}>
                                 <div className="line">
                                     <div className="name">{t('createProject.projectName')}</div>
@@ -804,7 +815,6 @@ export default function CreateProject() {
                                     <div className="value"><Tooltip title={projectInfo.profit}>{projectInfo.profit}</Tooltip></div>
                                 </div>
 
-
                                 {projectInfo.member_address.filter(item => item).length > 0 && <div className="line">
                                     <div className="name">{t('createProject.councilAddress')}</div>
                                     <div className="value">
@@ -857,16 +867,17 @@ export default function CreateProject() {
                             </div>
 
                         </div>}
-                       
+
                         {currentStep === 9 && <div className="step-pay">
-                            <div className="dada-circle">
-                                {approveBalance} USDT
+                            <div className="h1">支付审计费用</div>
+                            <div>您需要支付 <span className="num">{approveBalance}</span> USDT
+                                {dadaApproved ? <div onClick={() => { !createLoading && doPay() }} className="btn-pay"> <span className="text">{t('common.pay')}</span></div>
+                                    : <div onClick={() => { !createLoading && doApprove() }} className="btn-pay"> <span className="text">{t('common.approve')} {createLoading && <LoadingOutlined />}</span></div>}
                             </div>
-                            <div class="your-balance">
-                                {t('common.yourBalance')}:{USDTBalance} USDT
-                            </div>
-                            <div className="pay-hint">
-                                {t('createProject.payHint')}
+                            <div>您的余额 <span className="num">{USDTBalance}</span> USDT</div>
+                            <div className="hint">
+                                <div>即将支付最大募集金额0.5%的等值DADA用于审计/验证费用，该费用一经支付不再退还。</div>
+                                <div>创建合约时将会消耗一定的Gas。</div>
                             </div>
                         </div>}
                         {currentStep === 10 && <div className="step-pay">
@@ -893,7 +904,7 @@ export default function CreateProject() {
                             <div>
                                 {((currentStep > 0 && currentStep < 10) || payStatus === 'error') && <div onClick={() => { setCurrentStep(prev => prev - 1) }} className="line-btn line-btn-back">{t('common.back')}</div>}
                             </div>
-                            {currentStep < 9 && <div>
+                            {currentStep < 8 && <div>
                                 <div onClick={() => { goNextStep() }} className="line-btn line-btn-next">{t('common.next')}</div>
                             </div>}
                             {currentStep == 8 && <div>
@@ -901,10 +912,7 @@ export default function CreateProject() {
                                 <span className="hint hint-gasfee" dangerouslySetInnerHTML={{ __html: t('common.gasFeeHint') }}></span>
                             </div>
                             }
-                            {currentStep == 9 && <div>
-                                {dadaApproved ? <div onClick={() => { !createLoading && doPay() }} className="btn-confirm"> <span className="text">{t('common.pay')}</span></div>
-                                    : <div onClick={() => { !createLoading && doApprove() }} className="btn-confirm"> <span className="text">{t('common.approve')} {createLoading && <LoadingOutlined />}</span></div>}
-                            </div>}
+
                             {currentStep == 10 && <div>
                                 <a href="/">
                                     <div className="btn-confirm">

@@ -68,51 +68,48 @@ export default function Process(props) {
         setConfirmVoteVisible(true)
     }
 
-
     return (<div className="process-module">
         {finalProcessList.map((process, index) => (
             <div className="process-item" key={index}>
-                <div className="top">
+                <div className="left">
+                    {(process.status === 'VoteNotice' || process.status === 'VoteReplanFailed' || process.status === 'VoteReplanPassed' || process.status === 'VoteReplaning') ? <div>
+                        <div>{new Date(process.replan_time).toLocaleDateString()}</div><div className="title">{t('project.launchTime')}</div>
+                    </div> : <div className="text-area">
+                            <div>
+                                <div className="value">{process.unlock_percentage}%</div>
+                                <div className="title">解锁比例</div>
+                            </div>
+                        </div>}
+                </div>
+                <div className="right">
                     {(process.status === 'VoteNotice' || process.status === 'VoteReplanFailed' || process.status === 'VoteReplanPassed' || process.status === 'VoteReplaning') ? <div className="title">变更计划</div> : <div className="title">{t('project.progress')} #{index + 1}</div>}
-                    <div>
-                        <span className="date">{new Date(process.vote_start_time).toLocaleDateString()} - {new Date(process.vote_end_time).toLocaleDateString()}</span>
-                        <span className={`status ${process.status}`}>{statusMapping[process.status]}</span>
+                    <div className={`status ${process.status}`}><span className="title">状态: </span>{statusMapping[process.status]}</div>
+                    <div className="desc" dangerouslySetInnerHTML={{ __html: toBr(process.description) }}>
                     </div>
-                </div>
-                {(process.status === 'VoteNotice' || process.status === 'VoteReplanFailed' || process.status === 'VoteReplanPassed' || process.status === 'VoteReplaning') ? <div>
-                    {t('project.launchTime')}：<strong>{new Date(process.replan_time).toLocaleDateString()}</strong>
-                </div> : <div className="text-area">
-                        <div>
-                            {t('createProject.shares')}: <strong>{process.unlock_percentage}%</strong>
-                        </div>
-
-                    </div>}
-                <div>
-                    {t('project.event')}: <strong dangerouslySetInnerHTML={{ __html: toBr(process.description) }}></strong><br />
-                </div>
-
-                {(process.status === 'Active' || process.status === 'VoteReplaning') && <>
-                    {process.affirmative_vote && process.dissenting_vote && <>
-                        <div className="vs-bar">
-                            <div className="yes" style={{ width: process.yesPercent + '%' }}></div>
-                            <div className="no" style={{ width: process.noPercent + '%' }}></div>
-                        </div>
-                        <div className="vote-result">
-                            <div>
-                                {process.affirmative_vote} {t('project.approve')}
+                    {(process.status === 'Active' || process.status === 'VoteReplaning') && <>
+                        {process.affirmative_vote && process.dissenting_vote && <>
+                            <div className="vs-bar">
+                                <div className="yes" style={{ width: process.yesPercent + '%' }}></div>
+                                <div className="no" style={{ width: process.noPercent + '%' }}></div>
                             </div>
-                            <div>
-                                {process.dissenting_vote} {t('project.object')}
+                            <div className="vote-result">
+                                <div>
+                                    {process.affirmative_vote} {t('project.approve')}
+                                </div>
+                                <div>
+                                    {process.dissenting_vote} {t('project.object')}
+                                </div>
                             </div>
-                        </div>
+                        </>}
+
+                        {role !== 'visitor' && <div className="vote-action">
+                            <Button onClick={() => { sayYes(process.index, process.status) }}>{t('common.agree')}</Button>
+                            <Button onClick={() => { sayNo(process.index, process.status) }}>{t('common.disagree')}</Button>
+                        </div>}
                     </>}
+                </div>
 
-                    {role !== 'visitor' && <div className="vote-action">
-                        <Button onClick={() => { sayYes(process.index, process.status) }}>{t('common.agree')}</Button>
-                        <Button onClick={() => { sayNo(process.index, process.status) }}>{t('common.disagree')}</Button>
-                    </div>}
 
-                </>}
             </div>
         ))}
         {/* <a href={`/create-vote/${id}`}>

@@ -7,29 +7,21 @@
  * @FilePath: \mining-dd-finance\src\components\Header\index.js
  */
 import React, { useEffect } from 'react'
-import Logo from '../../assets/logo.png'
+// import Logo from '../../assets/logo.png'
 import { Tooltip } from 'antd'
 import { useWallet } from 'use-wallet'
-import MainBreadcrumbArrow from 'assets/main-breadcrumb-arrow.svg'
 import { useTranslation } from 'react-i18next'
-import { useDispatch, useSelector } from 'react-redux'
-import i18n from 'i18next'
-
+// import { useDispatch, useSelector } from 'react-redux'
 
 import './style.scss'
 
 export default function Header(props) {
     const wallet = useWallet()
     const { t } = useTranslation()
-    const { role } = props
+    const { role, breadCrumb } = props
     useEffect(() => {
         wallet.connect()
     }, [])
-
-    const changeLanguage = language => {
-        localStorage.setItem('language', language)
-        i18n.changeLanguage(language)
-    }
 
     // const changeRole = role => {
     //     dispatch({
@@ -52,21 +44,28 @@ export default function Header(props) {
     //     </Menu.Item>
     // </Menu>
 
+    // if(!role){
+    //     role = '123'
+    // }
+
     return (<header className="header">
-        <ul className="main-breadcrumb">
-            <li>Crypto Mining</li>
-            <li className="done">Create DAO</li>
-        </ul>
+        {breadCrumb && <ul className="main-breadcrumb">
+            {breadCrumb.map((item, index) => (
+                <li className={index === breadCrumb.length - 1 ? 'done' : ''}>{item}</li>
+            ))}
+        </ul>}
+
         <nav>
-            <a href="/projects">{t('common.projectList')}</a>
-            <a onClick={() => { changeLanguage(i18n.language === 'en' ? 'zh' : 'en') }}>
-                {i18n.language === 'en' ? '简体中文' : 'English'}
-            </a>
+            {/* <a href="/projects">{t('common.projectList')}</a> */}
+          
+            {role ? (<div className="role">
+                {role === 'manager' ? t('project.role.manager') : (role === 'committee' ? t('project.role.committee') : (role === 'invester' ? t('project.role.supporter') : t('project.role.visitor')))}
+                <div className="title">角色</div>
+            </div>) : ''}
             {wallet.status === 'connected' ? <Tooltip title={wallet.account}>
                 {wallet.account && <a className="line-btn">{wallet.account.slice(0, 4) + '...' + wallet.account.slice(-4)}</a>}
-                {role ? (<sup className="role">{role === 'manager' ? t('project.role.manager') : (role === 'committee' ? t('project.role.committee') : (role === 'invester' ? t('project.role.supporter') : t('project.role.visitor')))}</sup>) : ''}
             </Tooltip>
-                : <a className="border-top-btm" onClick={() => { console.log(11); wallet.connect() }}>Connect Wallet</a>}
+                : <a className="btn-connect" onClick={() => { console.log(11); wallet.connect() }}>Connect Wallet</a>}
         </nav>
     </header>)
 }

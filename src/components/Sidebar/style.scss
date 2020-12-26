@@ -1,16 +1,6 @@
 .sidebar {
-    position: sticky;
-    top: 20px;
-    margin-top: 30px;
     color: #010101;
-    // width: 16vw;
     padding: 2px;
-    //background: rgba(0,0,0,0.01);
-    .btn-action{
-        line-height: unset;
-        height: 44px;
-        width:100%;
-    }
     .block {
         .title {
             color: #010101;
@@ -111,18 +101,22 @@
             }
         }
         .my-share-box {
-            border-radius: 0px 0px 10px 10px;
-            box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
-            padding: 24px 12px;
-            font-size: 14px;
+            color: #fff;
+            background: #839cdc;
+            box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            padding: 4px 24px;
+            font-size: 16px;
             line-height: 27px;
-            margin-bottom: 44px;
-            color: #464646;
-            .line{
+            .line {
                 display: flex;
-                margin: 4px auto;
+                padding: 12px 0;
                 align-items: center;
                 justify-content: space-between;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+                &:last-child{
+                    border-bottom: none;
+                }
             }
         }
     }

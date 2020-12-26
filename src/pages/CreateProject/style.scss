@@ -1,7 +1,7 @@
 .create-project-page {
-    color: #15163D;
+    color: #15163d;
     background-size: 100%;
-    .h1{
+    .h1 {
         font-size: 24px;
         font-weight: 800;
         margin: 44px auto 32px;
@@ -10,7 +10,7 @@
         color: #111;
         margin-top: 8px;
     }
-    .softtop-value{
+    .softtop-value {
         font-weight: 600;
         color: #000;
     }
@@ -22,10 +22,10 @@
             margin-bottom: 4px;
         }
         .hint {
-            margin-top: 2px;
+            margin-top: 4px;
             font-size: 12px;
-            color: #9088A1;
-            &.red{
+            color: #9088a1;
+            &.red {
                 color: red;
             }
         }
@@ -48,7 +48,6 @@
             margin-bottom: 15px;
         }
 
-
         .process-top {
             display: flex;
             justify-content: space-between;
@@ -58,7 +57,11 @@
         }
     }
     .step-pay {
-        text-align: center;
+        .num {
+            font-size: 24px;
+            font-weight: 700;
+            padding: 0 16px;
+        }
         .dada-circle {
             width: 200px;
             height: 200px;
@@ -69,12 +72,24 @@
             margin: 0 auto 16px;
             border-radius: 100%;
             font-size: 16px;
-            &.success{
+            &.success {
                 font-size: 26px;
             }
         }
-        .your-balance{
-            margin-bottom: 24px;
+
+        .btn-pay {
+            margin-left: 12px;
+            background: #839cdc;
+            box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            height: 32px;
+            display: inline-block;
+            line-height: 32px;
+            font-size: 18px;
+            padding: 0 24px;
+            color: #fff;
         }
         .pay-hint {
             color: #010101;
@@ -82,6 +97,9 @@
             line-height: 25px;
             width: 80%;
             margin: 0 auto;
+        }
+        .hint {
+            margin-top: 32px;
         }
     }
 
@@ -196,21 +214,21 @@
         }
     }
 }
-.en{
-    .create-project-page{
-        .step-control{
-            .line-btn{
+.en {
+    .create-project-page {
+        .step-control {
+            .line-btn {
                 font-size: 22px;
             }
-            .btn-confirm{
-                span{
+            .btn-confirm {
+                span {
                     font-size: 20px;
                 }
             }
         }
     }
-    .step-sidebar{
-        span{
+    .step-sidebar {
+        span {
             font-size: 16px;
         }
     }

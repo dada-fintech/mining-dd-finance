@@ -6,19 +6,37 @@
     .logo {
         width: 80px;
     }
-    .role {
+
+    .btn-connect {
+        background: rgba(255, 236, 118, 0.4);
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        font-size: 16px;
+        padding: 0 32px;
+        border-radius: 5px;
     }
     nav {
-        .border-top-btm {
-            border-top: 1px black solid;
-            border-bottom: 1px black solid;
+        display: flex;
+        align-items: center;
+        .role {
+            display: inline-block;
+            font-size: 16px;
+            margin-left: 16px;
+            line-height: 1;
+            text-align: center;
+            .title {
+                font-size: 12px;
+                margin-top: 4px;
+                color: #9088a1;
+            }
         }
         a {
             font-size: 16px;
             color: #000;
             font-weight: 800;
             vertical-align: middle;
-            margin-left: 24px;
+            margin-left: 16px;
             padding: 8px 4px;
         }
     }

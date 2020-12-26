@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Row, Col, Input, message } from 'antd'
+import { Row, Col, Input, message, Modal, Button } from 'antd'
 import {
     LoadingOutlined,
 } from '@ant-design/icons';
@@ -7,15 +7,16 @@ import { useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import axios from 'utils/axios'
 import AuditModal from './modals/AuditModal'
+import AppSidebar from 'components/AppSidebar'
 import RepayModal from './modals/RepayModal'
 import { useWallet } from 'use-wallet'
 import InsuranceModal from './modals/InsuranceModal'
 import Header from '../../components/Header'
-import ProjectFooter from '../../components/ProjectFooter'
 import Sidebar from '../../components/Sidebar'
 import ProcessModule from './modules/Process'
 import mm from 'components/mm'
 import DetailModule from './modules/Detail'
+import Countdown from 'components/Countdown'
 import { toBr } from 'components/utils'
 import Timer from 'react-compound-timer'
 
@@ -31,7 +32,9 @@ export default function Project() {
     const [insuranceModalVisible, setInsuranceModalVisible] = useState(false)
     const [currentParams, setCurrentParams] = useState({})
     const [timing, setTiming] = useState(0)
-    const [timingHint, setTimingHint] = useState('')
+    const [nextStatus, setNextStatus] = useState('')
+    const [subscribeVisible, setSubscribeVisible] = useState(false)
+    const [email, setEmail] = useState('')
 
     // 下一个进程是否在4天内
     // const [nextInFour, setNextInFour] = useState(false)
@@ -66,43 +69,42 @@ export default function Project() {
         const oneDay = 24 * oneHour
         const dateNow = new Date().valueOf()
         let result = 0
-        let hint = ''
-        console.log('status is', status)
+        let nextStatusValue = ''
         if (status === 'Auditing') {
             result = project.project_info.create_time + oneHour - dateNow
-            hint = '距离审核结束仅剩'
+            nextStatusValue = 'Future'
         }
         if (status === 'Raising') {
             result = project.fundraising.end_time - dateNow
-            hint = '距离筹款结束仅剩'
+            nextStatusValue = 'PayingInsurance'
         }
         if (status === 'PayingInsurance') {
             result = project.fundraising.end_time + oneDay * 3 - dateNow
-            hint = '距离保证金支付结束仅剩'
+            nextStatusValue = 'Active'
         }
         if (status === 'Rolling') {
             const item = project.process.filter(item => item.status === 'Active')[0]
             result = item.vote_end_time - dateNow
-            hint = '距离此阶段结束仅剩'
+            nextStatusValue = 'AllPhasesDone'
         }
         if (status === 'AllPhaseDone') {
             result = project.project_info.income_settlement_time - dateNow
-            hint = '距离获取报酬仅剩'
+            nextStatusValue = 'Repaying'
         }
         if (status === 'ReplanNoticing') {
             const item = project.process.filter(item => item.status === 'VoteNotice')[0]
             result = item.vote_end_time - oneDay * 3 - dateNow
-            hint = '距离更改计划公式结束仅剩'
+            nextStatusValue = 'empty'
         }
         if (status === 'ReplanVoting') {
             const item = project.process.filter(item => item.status === 'VoteReplaning')[0]
             result = item.vote_end_time - dateNow
-            hint = '距离更改计划投票结束仅剩'
+            nextStatusValue = 'empty'
         }
 
         if (result > 0) {
             setTiming(result)
-            setTimingHint(hint)
+            setNextStatus(nextStatusValue)
         }
 
 
@@ -190,6 +192,20 @@ export default function Project() {
         setAuditModalVisible(true)
     }
 
+    const doSubscribe = () => {
+        if (!email) {
+            message.error(t('hint.pleaseInputEmail'))
+            return false
+        }
+        axios.post('/email/subscribe', {
+            project_uniq_id: id,
+            user_email: email
+        }).then(res => {
+            message.success(t('hint.subscribeSuccess'))
+            setSubscribeVisible(false)
+        })
+    }
+
     const doInsurance = () => {
         setCurrentParams({
             project_uniq_id: id,
@@ -204,11 +220,11 @@ export default function Project() {
         'Auditing': isEn ? 'Auditing' : '委员会审核中',
         'Future': isEn ? 'Project Coming Soon' : '项目即将到来',
         'Raising': isEn ? 'In Mid of Fundraising' : '正在筹款',
-        'PayingInsurance': isEn ? 'Depositing to the Reserve' : '正在支付安全达',
-        'Active': isEn ? 'Active' : '项目正在进行中',
+        'PayingInsurance': isEn ? 'Depositing to the Reserve' : '支付安全达',
+        'Active': isEn ? 'Active' : '进行中',
         'Rolling': isEn ? 'Voting On-going' : '正在投票',
         'AllPhasesDone': isEn ? 'Project Completes. Waiting for the Redemption' : '项目计划完成，等待获取报酬',
-        'Repaying': isEn ? 'Users are Receiving the Redemption' : '用户正在获取回报',
+        'Repaying': isEn ? 'Users are Receiving the Redemption' : '用户获取回报',
         'Finished': isEn ? 'Project Completed' : '项目已完成',
         'Refunding': isEn ? 'Refunding' : '退款中',
         'PhaseFailed': isEn ? 'Stage Goal Failed' : '进程失败',
@@ -218,185 +234,167 @@ export default function Project() {
         'Liquidating': isEn ? 'Liquidating' : '清算中',
         'Failed': isEn ? 'Failed' : '项目失败',
         'PreDefined': isEn ? 'On-going' : '进行中',
+        // front end defined
+        'empty': isEn ? 'None' : '无'
     }
 
     return (<div className="project-page">
-        <div className="top-area">
-            <Header role={role} />
-            <div className="container">
-                <div className="project-intro">
-                    <Row gutter={{ md: 24, xl: 44 }} type="flex" align="center">
-                        <Col xs={24} md={17}>
-                            <div className="top">
-                                <div className="title with-line"><span>{project.project_info && project.project_info.project_name}</span></div>
+        <Row>
+            <Col md={4} xs={0}>
+                <AppSidebar />
+            </Col>
+            <Col md={20} xs={24}>
+                <div className="content-wrapper">
+                    <Header role={role} breadCrumb={['Crypto Mining', project.project_info.project_name]} />
+                    <div className="brief-info">
+                        <div className="title">{project.project_info.project_name}</div>
+                        <div className="date">
+                            {new Date(project.project_info.income_settlement_time).toLocaleDateString()}
+                            <div className="hint">开放赎回</div>
+                        </div>
+                        <Button className="btn-green" onClick={() => { setEmail(''); setSubscribeVisible(true) }}>{t('sidebar.subscribe')}</Button>
+                    </div>
+                    <Row gutter={24}>
+                        <Col xs={24} md={12} lg={4}>
+                            <div className="info-item">
+                                <div className="value">{project.fundraising.expected_apy}%</div>
+                                <div className="title">年化收益率</div>
                             </div>
-                            <div className="desc" dangerouslySetInnerHTML={{ __html: project.project_info && toBr(project.project_info.project_profile) }}></div>
-                            <Row gutter={24}>
-                                <Col md={5}>
-                                    <div className="info-item">
-                                        <div className="title">项目收益</div>
-                                        <div className="value">{project.fundraising.expected_apy}%</div>
-                                    </div>
-                                </Col>
-                                <Col md={5}>
-                                    <div className="info-item">
-                                        <div className="title">项目周期</div>
-                                        <div className="value">{parseInt((project.project_info.income_settlement_time - project.fundraising.end_time) / 1000 / 60 / 60 / 24)}天</div>
-                                    </div>
-                                </Col>
-                                <Col md={5}>
-                                    <div className="info-item">
-                                        <div className="title">回款方式</div>
-                                        <div className="value">到期还本付息</div>
-                                    </div>
-                                </Col>
-                                <Col md={9}>
-                                    <div className="info-item">
-                                        <div className="title">已筹集额度/筹集额度</div>
-                                        <div className="value">{project.fundraising.current_raised_money} USDT/{project.fundraising.max_amount} USDT</div>
-                                    </div>
-                                </Col>
-                            </Row>
                         </Col>
-                        <Col xs={24} md={7}>
-                            <div className="info-box-title">
-                                {statusMapping[project.project_info.status]}
+                        <Col xs={24} md={12} lg={4}>
+                            <div className="info-item">
+                                <div className="value">{parseInt((project.project_info.income_settlement_time - project.fundraising.end_time) / 1000 / 60 / 60 / 24)}天</div>
+                                <div className="title">项目周期</div>
                             </div>
-                            <div className="info-box">
-                                {timing > 0 && <div className="countdown">
-                                    <div className="title">{timingHint}</div>
-                                    <div className="timer">
-                                        {<Timer initialTime={timing} direction="backward" checkpoints={[{ time: 0, callback: () => getInfo() }]}>
-                                            <div>
-                                                <div className="num">
-                                                    <Timer.Days />
-                                                </div>
-                                                <div>天</div>
-                                            </div>
-                                            <div>:</div>
-                                            <div>
-                                                <div className="num">
-                                                    <Timer.Hours />
+                        </Col>
+                        <Col xs={24} md={12} lg={4}>
+                            <div className="info-item">
+                                <div className="value">到期还本付息</div>
 
-                                                </div>
-                                                <div>时</div>
-                                            </div>
-                                            <div>:</div>
-                                            <div>
-                                                <div className="num">
-                                                    <Timer.Minutes />
-
-                                                </div>
-                                                <div>分</div>
-                                            </div>
-                                            <div>:</div>
-                                            <div>
-                                                <div className="num">
-                                                    <Timer.Seconds />
-
-                                                </div>
-                                                <div>秒</div>
-                                            </div>
-                                        </Timer>}
-
-                                    </div>
-
-                                </div>}
-
-                                {/* 一开始审核评议 */}
-                                {project.project_info.status === 'Auditing' && role === 'committee' && <Row>
-                                    <div className="handle-area">
-                                        <div className="btn-action" onClick={() => { doAudit() }}><span>{t('project.action.committeeReviews')}</span></div>
-                                    </div>
-                                </Row>}
-
-                                {project.project_info.status === 'PayingInsurance' && role === 'manager' && <Row>
-                                    <div className="handle-area">
-                                        <div className="btn-action" onClick={() => { doInsurance() }}><span>{t('project.action.security')}</span></div>
-                                    </div>
-                                </Row>}
-
-                                {project.project_info.status === 'AllPhasesDone' && role === 'manager' && (new Date().valueOf() < project.project_info.income_settlement_time) && <Row>
-                                    <div className="handle-area">
-                                        <div className="btn-action" onClick={() => { doTakeMoney() }}><span>{t('project.action.repay')}</span></div>
-                                    </div>
-                                </Row>}
-
-                                {/* manager 不需投资 */}
-                                {project.project_info.status === 'Raising' && role !== 'manager' && <Row gutter={32}>
-                                    <div className="handle-area">
-                                        <Input style={{ width: '140px', height: '44px' }} addonAfter={
-                                            <div className="btn-input-action" onClick={() => { !lockLoading && doLock() }}><span className="text">{t('project.action.invest')} {lockLoading && <LoadingOutlined />
-                                            }</span></div>} value={lockNum} onChange={(event) => { setLockedNum(event.target.value) }} suffix="USDT" />
-                                    </div>
-                                    <div className="votes-bar">
-                                        <div className="done" style={{ width: project.percent + '%' }}>{project.percent}%</div>
-                                    </div>
-                                    <div className="votes-info">
-                                        <div>
-                                            当前投资:{project.fundraising.current_raised_money} USDT
-                                        </div>
-                                        <div>
-                                            募集总额:{project.fundraising.max_amount} USDT
-                                        </div>
-                                    </div>
-                                    {/* <div className="process-tag" style={{ marginLeft: (project.percent > 50 ? (project.percent - 5) : project.percent) + '%' }}>
-                                        {project.percent}%</div> */}
-                                </Row>}
-
-                                {/* manager 可以变更计划. */}
-                                {(project.project_info.status === 'Active' || project.project_info.status === 'PhaseFailed' || project.project_info.status === 'ReplanFailed') && role === 'manager' && <Row>
-                                    <div className="handle-area">
-                                        <a href={`/create-vote/${id}`}>
-                                            <div className="btn-action"><span>{t('project.action.change')}</span></div>
-                                        </a>
-                                    </div>
-                                </Row>}
+                                <div className="title">收益方式</div>
                             </div>
-
-
-
-                            {/* <div className="date-range">{new Date(project.fundraising.start_time).toLocaleDateString()} - {new Date(project.fundraising.end_time).toLocaleDateString()}</div>
-                            <div className="top-box">
-                                <div className="item">{t('project.fundRaised')}：{project.fundraising.current_raised_money} USDT</div>
-                                <div className="item">{t('project.hardCap')}：{project.fundraising.max_amount} USDT</div>
-                                <div className="item">{t('project.status')}：{statusMapping[project.project_info.status]}</div>
-                                <div className="item">{t('project.roles')}：{role === 'manager' ? t('project.role.manager') : (role === 'committee' ? t('project.role.committee') : (role === 'invester' ? t('project.role.supporter') : t('project.role.visitor')))}</div>
-                            </div> */}
+                        </Col>
+                        <Col xs={24} md={12} lg={4}>
+                            <div className="info-item">
+                                <div className="value">{project.fundraising.max_amount} USDT</div>
+                                <div className="title">项目总额</div>
+                            </div>
+                        </Col>
+                        <Col xs={24} md={24} lg={8}>
+                            <div className="info-item">
+                                {/* todo 这里的显示要确定 */}
+                                <div className="value">{statusMapping[project.project_info.status]}</div>
+                                <div className="title">项目状态</div>
+                            </div>
                         </Col>
                     </Row>
-                </div>
-            </div>
-        </div>
-        <div className="middle-area">
-            <div className="container">
-                <ul className="tabs">
-                    <li className={currentTab === 'process' ? 'active' : ''} onClick={() => { setCurrentTab('process') }}>{t('project.progress')}</li>
-                    <li className={currentTab === 'detail' ? 'active' : ''} onClick={() => { setCurrentTab('detail') }}>{t('project.details')}</li>
-                </ul>
-                <div className="apy">{t('common.apy')} {project.fundraising.expected_apy}%</div>
-            </div>
-        </div>
-        <div className="bottom-area">
-            <div className="container">
-                <Row gutter={{ lg: 24 }} align="center">
-                    <Col xs={24} lg={14}>
-                        {currentTab === 'process' && <ProcessModule id={id} role={role} processList={project.process || []} />}
-                        {currentTab === 'detail' && <DetailModule fullDesc={project.fullDesc} projectInfo={project.project_info} />}
-                        {/* {currentTab === 'comments' && <CommentsModule />} */}
-                    </Col>
-                    <Col xs={24} lg={6}>
-                        <Sidebar projectId={id} role={role} otherFiles={project.project_info.other_file} />
-                    </Col>
-                </Row>
-            </div>
-        </div>
+                    <div className="middle-area">
+                        <Row gutter={32}>
+                            <Col xs={24} md={12}>
+                                <div className="info-box">
+                                    <div className="stage-block">
+                                        {statusMapping[nextStatus] && <div>
+                                            <div className="title">
+                                                下一阶段
+                                            </div>
+                                            <div>
+                                                {statusMapping[nextStatus]}
+                                            </div>
+                                        </div>}
 
-        <ProjectFooter />
+                                        <div>
+                                            <div className="title">
+                                                当前阶段
+                                            </div>
+                                            <div>
+                                                {statusMapping[project.project_info.status]}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {timing > 0 && <Countdown timestamp={timing} done={() => { getInfo() }} />}
+                                    {/* 一开始审核评议 */}
+                                    {project.project_info.status === 'Auditing' && role === 'committee' && <Row>
+                                        <div className="handle-area">
+                                            <div className="btn-action" onClick={() => { doAudit() }}><span>{t('project.action.committeeReviews')}</span></div>
+                                        </div>
+                                    </Row>}
+
+                                    {project.project_info.status === 'PayingInsurance' && role === 'manager' && <Row>
+                                        <div className="handle-area">
+                                            <div className="btn-action" onClick={() => { doInsurance() }}><span>{t('project.action.security')}</span></div>
+                                        </div>
+                                    </Row>}
+
+                                    {project.project_info.status === 'AllPhasesDone' && role === 'manager' && (new Date().valueOf() < project.project_info.income_settlement_time) && <Row>
+                                        <div className="handle-area">
+                                            <div className="btn-action" onClick={() => { doTakeMoney() }}><span>{t('project.action.repay')}</span></div>
+                                        </div>
+                                    </Row>}
+
+                                    {/* manager 不需投资 */}
+                                    {project.project_info.status === 'Raising' && role !== 'manager' && <Row gutter={32}>
+                                        <div className="handle-area">
+                                            <Input style={{ width: '140px', height: '44px' }} addonAfter={
+                                                <div className="btn-input-action" onClick={() => { !lockLoading && doLock() }}><span className="text">{t('project.action.invest')} {lockLoading && <LoadingOutlined />
+                                                }</span></div>} value={lockNum} onChange={(event) => { setLockedNum(event.target.value) }} suffix="USDT" />
+                                        </div>
+                                        <div className="votes-bar">
+                                            <div className="done" style={{ width: project.percent + '%' }}>{project.percent}%</div>
+                                        </div>
+                                        <div className="votes-info">
+                                            <div>
+                                                当前投资:{project.fundraising.current_raised_money} USDT
+                                        </div>
+                                            <div>
+                                                募集总额:{project.fundraising.max_amount} USDT
+                                        </div>
+                                        </div>
+                                        {/* <div className="process-tag" style={{ marginLeft: (project.percent > 50 ? (project.percent - 5) : project.percent) + '%' }}>
+                                        {project.percent}%</div> */}
+                                    </Row>}
+
+                                    {/* manager 可以变更计划. */}
+                                    {(project.project_info.status === 'Active' || project.project_info.status === 'PhaseFailed' || project.project_info.status === 'ReplanFailed') && role === 'manager' && <Row>
+                                        <div className="handle-area">
+                                            <a href={`/create-vote/${id}`}>
+                                                <div className="btn-action"><span>{t('project.action.change')}</span></div>
+                                            </a>
+                                        </div>
+                                    </Row>}
+                                </div>
+                            </Col>
+                            <Col xs={24} md={12}>
+                                <Sidebar projectId={id} role={role} />
+                            </Col>
+                        </Row>
+
+                    </div>
+
+                    <ul className="tabs">
+                        <li className={currentTab === 'process' ? 'active' : ''} onClick={() => { setCurrentTab('process') }}>{t('project.progress')}</li>
+                        <li className={currentTab === 'detail' ? 'active' : ''} onClick={() => { setCurrentTab('detail') }}>{t('project.details')}</li>
+                    </ul>
+
+                    <div className="bottom-area">
+                        <div className="container">
+                            {currentTab === 'process' && <ProcessModule id={id} role={role} processList={project.process || []} />}
+                            {currentTab === 'detail' && <DetailModule projectId={id} otherFiles={project.project_info.other_file} fullDesc={project.fullDesc} projectInfo={project.project_info} />}
+                        </div>
+                    </div>
+                </div>
+            </Col>
+        </Row>
 
         { repayModalVisible && <RepayModal params={currentParams} onCancel={() => { setRepayModalVisible(false) }} />}
         { auditModalVisible && <AuditModal params={currentParams} onCancel={() => { setAuditModalVisible(false) }} />}
         { insuranceModalVisible && <InsuranceModal params={currentParams} onCancel={() => { setInsuranceModalVisible(false) }} />}
+        {subscribeVisible && <Modal title={t('sidebar.subscribe')} visible={true} onOk={() => { doSubscribe() }} onCancel={() => { setSubscribeVisible(false) }}>
+            <div style={{ marginBottom: '4px' }}>
+                {t('sidebar.enterEmail')}
+            </div>
+            <Input value={email} onChange={(e) => { setEmail(e.target.value) }} />
 
+        </Modal>}
     </div>)
 }

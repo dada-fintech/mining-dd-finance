@@ -483,7 +483,7 @@ export default {
                 redeemable: '可赎回',
                 documents: '文件',
                 months: '个月',
-                subscribe: '订阅该项目获得最新动态',
+                subscribe: '订阅',
                 enterEmail: '请输入邮箱',
                 bonus: '投资奖励',
             },
@@ -696,7 +696,7 @@ export default {
                 *计划变更投票期限为4天（1天为公示期，3天为投票期），已完成计划不可变更
                 `,
                 mainTitle: '变更投票信息',
-                votingPeriod: '投票期现',
+                votingPeriod: '投票期限',
                 descriptionOfChange: '变更说明',
                 uploadDoc: '请上传其它相关文件',
                 projectInfo: '项目信息',

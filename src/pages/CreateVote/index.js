@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Row, Col, Input, Upload, message, DatePicker, InputNumber, Popconfirm, Tooltip, notification } from 'antd'
-import LinkArrow from 'assets/link-arrow.svg'
-import LinkArrowBack from 'assets/link-arrow-back.svg'
 import QuestionIcon from 'assets/question.svg'
 import { useWallet } from 'use-wallet'
+import AppSidebar from 'components/AppSidebar'
 import mm from 'components/mm'
 import moment from 'moment'
 import { useTranslation } from 'react-i18next'
@@ -11,7 +10,6 @@ import { PlusCircleOutlined, CloseCircleOutlined, LoadingOutlined } from '@ant-d
 
 import axios from 'utils/axios'
 import { useParams } from 'react-router-dom'
-// import { useWallet } from 'use-wallet'
 import Header from '../../components/Header'
 
 import './style.scss'
@@ -28,11 +26,22 @@ export default function CreateVote() {
     const { t, i18n } = useTranslation()
     const { id } = useParams()
 
-    const sidebarList = i18n.language === 'en' ? [
-        'Create the Voting', 'Project Info', 'Confirmation'
-    ] : [
-            '创建投票', '项目信息', '确认信息'
-        ]
+    const isEn = i18n.language === 'en'
+
+    const sidebarList = [
+        {
+            name: isEn ? 'Create the Voting' : '创建投票',
+            step: 1
+        },
+        {
+            name: isEn ? 'Project Info' : '项目信息',
+            step: 2
+        },
+        {
+            name: isEn ? 'Confirmation' : '确认信息',
+            step: 3
+        },
+    ]
 
     useEffect(() => {
         axios.get('/project/detail/' + id).then(res => {
@@ -54,14 +63,6 @@ export default function CreateVote() {
         })
     }
 
-    // const changeFundraising = (name, value) => {
-    //     setFundraising(prev => {
-    //         return {
-    //             ...prev,
-    //             [name]: value,
-    //         }
-    //     })
-    // }
 
     const removeProcess = (number) => {
         setProcessList(prev => {
@@ -96,9 +97,6 @@ export default function CreateVote() {
     }
 
     const goNextStep = () => {
-        setCurrentStep(prev => prev + 1)
-        localStorage.setItem('currentStep', currentStep + 1)
-        return true
         const customHint = i18n.language === 'en' ? 'Please check the required fields' : ''
         if (currentStep === 1) {
             if (processList.length < 2) {
@@ -138,12 +136,9 @@ export default function CreateVote() {
                 return false
             }
         }
-
-
         //when all required fields are filled
         setCurrentStep(prev => prev + 1)
     }
-
 
     const otherUpload = {
         name: 'file',
@@ -212,19 +207,26 @@ export default function CreateVote() {
     }
 
     return (<div className="create-vote-page">
-        <Header />
-
-        <div className="container create-vote-main">
-            <Row gutter={{ md: 36, lg: 64, xl: 160 }} align="center">
-                <Col xs={24} md={14}>
-                    <div className="main-content">
+        <Row>
+            <Col md={4} xs={0}>
+                <AppSidebar />
+            </Col>
+            <Col md={20} xs={24}>
+                <div className="content-wrapper">
+                    <Header breadCrumb={['Crypto Mining', 'Create Vote']} />
+                    <div className="card-board">
+                        <ul className="breadcrumb">
+                            {sidebarList.map((item, index) => <li className={(currentStep >= item.step ? 'done' : '')}>
+                                <span>{item.name}</span>
+                            </li>)}
+                        </ul>
                         {currentStep === 0 && <div className="step-0" dangerouslySetInnerHTML={{ __html: t('createVote.hint') }}>
                         </div>}
 
                         {currentStep === 1 && <div className="step-1">
+                            <div className="h1">{t('createVote.mainTitle')}</div>
                             <div className="hint-block small" dangerouslySetInnerHTML={{ __html: t('createVote.step1Hint') }}>
                             </div>
-                            <div className="title">{t('createVote.mainTitle')}</div>
                             <div className="confirm-box">
                                 <div className="form-item">
                                     <div className="label">{t('createVote.votingPeriod')} <Tooltip title="投票期限无法更改，合约创建时开始生效。公示期：24小时，投票期：24小时-96小时。"><img src={QuestionIcon} /></Tooltip></div>
@@ -299,7 +301,7 @@ export default function CreateVote() {
                         </div>}
 
                         {currentStep === 2 && <div className="step-1">
-                            <div className="title">{t('createVote.mainTitle')}</div>
+                            <div className="h1">{t('createVote.mainTitle')}</div>
                             <div className="confirm-box">
                                 <div className="form-item">
                                     <div className="label">{t('createVote.votingPeriod')} <Tooltip title="投票期限无法更改，合约创建时开始生效。公示期：24小时，投票期：24小时-96小时。"><img src={QuestionIcon} /></Tooltip></div>
@@ -351,31 +353,23 @@ export default function CreateVote() {
                                     </div>
                                 </div>
                             </>)}
-
                         </div>}
-                    </div>
-                    <div className="step-control">
-                        <div>
-                            {currentStep > 0 && <div onClick={() => { setCurrentStep(prev => prev - 1) }} className="line-btn line-btn-back">{t('common.back')}</div>}
+                        <div className="step-control">
+                            <div>
+                                {currentStep > 0 && <div onClick={() => { setCurrentStep(prev => prev - 1) }} className="line-btn line-btn-back">{t('common.back')}</div>}
+                            </div>
+                            {currentStep < 2 && <div>
+                                <div onClick={() => { goNextStep() }} className="line-btn line-btn-next">{t('common.next')}</div>
+                            </div>}
+                            {currentStep == 2 && <div>
+                                <div onClick={() => { !changeLoading && confirmInfo() }} className="btn-confirm"><span className="text">{t('common.confirmInfo')} {changeLoading && <LoadingOutlined />}</span> </div>
+                                <span className="hint hint-gasfee">{t('common.gasFeeHint')}</span>
+                            </div>}
                         </div>
-                        {currentStep < 2 && <div>
-                            <div onClick={() => { goNextStep() }} className="line-btn line-btn-next">{t('common.next')}</div>
-                        </div>}
-                        {currentStep == 2 && <div>
-                            <div onClick={() => { !changeLoading && confirmInfo() }} className="btn-confirm"><span className="text">{t('common.confirmInfo')} {changeLoading && <LoadingOutlined />}</span> </div>
-                            <span className="hint hint-gasfee">{t('common.gasFeeHint')}</span>
-                        </div>}
                     </div>
-                </Col>
-                <Col xs={24} md={6}>
-                    <ul className="step-sidebar">
-                        {sidebarList.map((item, index) => <li>
-                            <div className={'circle ' + (currentStep === index ? 'active ' : '') + (currentStep > index ? 'done' : '')}></div>
-                            <span>{item}</span>
-                        </li>)}
-                    </ul>
-                </Col>
-            </Row>
-        </div>
+
+                </div>
+            </Col>
+        </Row>
     </div >)
 }

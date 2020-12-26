@@ -89,6 +89,21 @@
         }
     }
 
+    .all-projects{
+        margin: 40px auto;
+        .ant-table-wrapper{
+            overflow: hidden;
+            border-radius: 8px;
+            .ant-table-thead > tr > th{
+                background: #fff;
+            }
+            .apy{
+                color: #289747;
+            }
+
+        }
+    }
+
     @media screen and (max-width: 992px) {
     }
     @media screen and (max-width: 768px) {

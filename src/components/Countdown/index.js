@@ -6,12 +6,9 @@ import './style.scss'
 
 export default function Countdown(props) {
     const { t } = useTranslation()
-    const { timestamp } = props
-
-    console.log(timestamp, 1111)
-
+    const { timestamp, done } = props
     return (<div className="countdown">
-        {<Timer initialTime={timestamp} direction="backward" checkpoints={[{ time: 0, callback: () => console.log('do something') }]}>
+        {<Timer initialTime={timestamp} direction="backward" checkpoints={[{ time: 0, callback: () => done() }]}>
             <div className="num">
                 <Timer.Days />
             </div>
