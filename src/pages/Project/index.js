@@ -240,10 +240,10 @@ export default function Project() {
 
     return (<div className="project-page">
         <Row>
-            <Col md={4} xs={0}>
+            <Col md={4} xs={0} xxl={3}>
                 <AppSidebar />
             </Col>
-            <Col md={20} xs={24}>
+            <Col md={20} xs={24} xxl={21}>
                 <div className="content-wrapper">
                     <Header role={role} breadCrumb={['Crypto Mining', project.project_info.project_name]} />
                     <div className="brief-info">
@@ -274,15 +274,20 @@ export default function Project() {
                                 <div className="title">收益方式</div>
                             </div>
                         </Col>
+                        <Col xs={24} md={24} lg={4}>
+                            <div className="info-item">
+                                <div className="value">{project.fundraising.current_raised_money} USDT</div>
+                                <div className="title">已筹款</div>
+                            </div>
+                        </Col>
                         <Col xs={24} md={12} lg={4}>
                             <div className="info-item">
                                 <div className="value">{project.fundraising.max_amount} USDT</div>
                                 <div className="title">项目总额</div>
                             </div>
                         </Col>
-                        <Col xs={24} md={24} lg={8}>
+                        <Col xs={24} md={24} lg={4}>
                             <div className="info-item">
-                                {/* todo 这里的显示要确定 */}
                                 <div className="value">{statusMapping[project.project_info.status]}</div>
                                 <div className="title">项目状态</div>
                             </div>

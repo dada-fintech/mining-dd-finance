@@ -46,6 +46,51 @@
         padding-bottom: 32px;
     }
 
+
+    .handle-area {
+        // display: flex;
+        // align-items: center;
+        // justify-content: flex-end;
+        margin: 24px auto 0;
+        width: 100%;
+        .ant-input-group-wrapper {
+            width: 100% !important;
+            .ant-input-group-addon {
+                background: #48cccc;
+                color: #fff;
+                border: 1px;
+                cursor: pointer;
+            }
+        }
+        .btn-action {
+            margin-left: 12px;
+            position: relative;
+            font-weight: 600;
+            font-size: 18px;
+            width: 100%;
+            text-align: center;
+            height: 40px;
+            border: 5px #48cccc solid;
+            cursor: pointer;
+            transition: all 0.3s;
+            .text {
+                position: absolute;
+                line-height: 30px;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 2;
+                white-space: nowrap;
+            }
+            .anticon {
+                font-size: 14px;
+            }
+            &:hover {
+                background: #48cccc;
+                color: #fff;
+            }
+        }
+    }
+
     .info-box {
         padding: 24px 36px;
         background: #ffffff;
@@ -114,48 +159,6 @@
             font-weight: 600;
         }
 
-        .handle-area {
-            // display: flex;
-            // align-items: center;
-            // justify-content: flex-end;
-            width: 100%;
-            .ant-input-group-wrapper {
-                width: 100% !important;
-                .ant-input-group-addon {
-                    background: #48cccc;
-                    color: #fff;
-                    border: 1px;
-                    cursor: pointer;
-                }
-            }
-            .btn-action {
-                margin-left: 12px;
-                position: relative;
-                font-weight: 600;
-                font-size: 18px;
-                width: 100%;
-                text-align: center;
-                height: 40px;
-                border: 5px #48cccc solid;
-                cursor: pointer;
-                transition: all 0.3s;
-                .text {
-                    position: absolute;
-                    line-height: 30px;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    z-index: 2;
-                    white-space: nowrap;
-                }
-                .anticon {
-                    font-size: 14px;
-                }
-                &:hover {
-                    background: #48cccc;
-                    color: #fff;
-                }
-            }
-        }
 
         // .top-box {
         //     background: #fff;

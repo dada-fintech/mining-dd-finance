@@ -208,10 +208,10 @@ export default function CreateVote() {
 
     return (<div className="create-vote-page">
         <Row>
-            <Col md={4} xs={0}>
+            <Col md={4} xs={0} xxl={3}>
                 <AppSidebar />
             </Col>
-            <Col md={20} xs={24}>
+            <Col md={20} xs={24} xxl={21}>
                 <div className="content-wrapper">
                     <Header breadCrumb={['Crypto Mining', 'Create Vote']} />
                     <div className="card-board">
