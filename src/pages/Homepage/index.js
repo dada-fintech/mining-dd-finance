@@ -12,7 +12,7 @@ import './style.scss'
 export default function Homepage() {
     // const wallet = useWallet()
     const [projectList, setProjectList] = useState([])
-    const [allProjects, setAllProjects] = useState({})
+    const [allProjects, setAllProjects] = useState([])
 
     const [featuredProject, setFeaturedProject] = useState({})
 
@@ -20,25 +20,19 @@ export default function Homepage() {
     // const { t, i18n } = useTranslation()
 
     useEffect(() => {
-        axios.get('/project/active-items').then(res => {
-            setProjectList(res.data.ActiveProjectOut.slice(1))
-            setFeaturedProject(res.data.ActiveProjectOut[0])
-        })
         axios.get('/project/list').then(res => {
-            setAllProjects({
-                ...res.data,
-            })
+            setProjectList(res.data.filter(item => item.status == 'canInvest'))
+            setAllProjects(res.data.filter(item => item.status != 'canInvest'))
+
+            const futureProjects = res.data.filter(item => item.status == 'future')
+
+            if (futureProjects.length > 0) {
+                setFeaturedProject(futureProjects[0])
+            } else {
+                setFeaturedProject('')
+            }
         })
     }, [])
-
-    const dataSource = [
-        {
-            project_name: '123123',
-            status: '23213',
-            expected_apy: '5%',
-            end_time: '2012',
-        }
-    ]
 
     const columns = [
         {
@@ -57,7 +51,7 @@ export default function Homepage() {
             key: 'expected_apy',
             render: (props) => (
                 <div className="apy">
-                    {props}
+                    {props}%
                 </div>
             )
         },
@@ -66,11 +60,21 @@ export default function Homepage() {
             dataIndex: 'end_time',
             key: 'end_time',
             // todo, 这里要改
-            render: (props) => (
+            render: (props, record) => (
                 <div>
-                    {new Date(props).toLocaleDateString()}
-                    {/* {new Date(props.end_time).toLocaleDateString()} - {new Date(props.income_settlement_time).toLocaleDateString()} */}
+                    {new Date(record.project_start_time).toLocaleDateString()} - {new Date(record.project_end_time).toLocaleDateString()}
                 </div>
+            )
+        },
+        {
+            title: ' ',
+            dataIndex: 'action',
+            key: 'action',
+            // todo, 这里要改
+            render: (props, record) => (
+                <a href={`/project/${record.project_uniq_id}`}>
+                    详情
+                </a>
             )
         },
     ];
@@ -104,12 +108,12 @@ export default function Homepage() {
             </Col>
             <Col md={20} xs={24}>
                 <div className="content-wrapper">
-                    <div className="featured-project">
+                    {featuredProject && <div className="featured-project">
                         <Row>
                             <Col xs={24} md={10}>
                                 <div className="title">{featuredProject.project_name}</div>
                                 <div className="desc" dangerouslySetInnerHTML={{ __html: toBr(featuredProject.project_profile) }}></div>
-                                {featuredProject.income_settlement_time - new Date().valueOf() > 0 && <Countdown timestamp={featuredProject.income_settlement_time - new Date().valueOf()} />}
+                                {featuredProject.raise_start_time - new Date().valueOf() > 0 && <Countdown timestamp={featuredProject.raise_start_time - new Date().valueOf()} />}
                                 <Progress strokeColor="#4CC16D" status="active" percent={((featuredProject.current_raised_money / featuredProject.max_amount) * 100).toFixed(0)} className="progress-bar" />
                                 <a className="join-btn" href={'/project/' + featuredProject.project_uniq_id} key={featuredProject.project_uniq_id}>立即参与</a>
                             </Col>
@@ -117,8 +121,8 @@ export default function Homepage() {
                                 <img src={HomepageBanner} className="homepage-banner" />
                             </Col>
                         </Row>
+                    </div>}
 
-                    </div>
                     <div className="project-list">
                         <Row gutter={28}>
                             {projectList && projectList.map(item => (
@@ -131,11 +135,11 @@ export default function Homepage() {
                                         <a className="join-btn" href={'/project/' + item.project_uniq_id} key={item.project_uniq_id}>立即参与</a>
                                         <div className="date-wrapper">
                                             <div>
-                                                <div>{formatTime(item.start_time)}</div>
+                                                <div>{formatTime(item.raise_start_time)}</div>
                                                 <div className="date-title">开始时间</div>
                                             </div>
                                             <div>
-                                                <div>{formatTime(item.income_settlement_time)}</div>
+                                                <div>{formatTime(item.project_start_time)}</div>
                                                 <div className="date-title">结束时间</div>
                                             </div>
                                         </div>
@@ -148,7 +152,8 @@ export default function Homepage() {
 
                     </div>
                     <div className="all-projects">
-                        <Table pagination={false} dataSource={dataSource || allProjects} columns={columns} />
+
+                        <Table pagination={false} dataSource={allProjects} columns={columns} />
                     </div>
                 </div>
             </Col>
