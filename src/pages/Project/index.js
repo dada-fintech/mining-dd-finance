@@ -274,7 +274,7 @@ export default function Project() {
                                 <div className="title">收益方式</div>
                             </div>
                         </Col>
-                        <Col xs={24} md={24} lg={4}>
+                        <Col xs={24} md={12} lg={4}>
                             <div className="info-item">
                                 <div className="value">{project.fundraising.current_raised_money} USDT</div>
                                 <div className="title">已筹款</div>
@@ -286,7 +286,7 @@ export default function Project() {
                                 <div className="title">项目总额</div>
                             </div>
                         </Col>
-                        <Col xs={24} md={24} lg={4}>
+                        <Col xs={24} md={12} lg={4}>
                             <div className="info-item">
                                 <div className="value">{statusMapping[project.project_info.status]}</div>
                                 <div className="title">项目状态</div>

@@ -16,6 +16,12 @@
     height: 100vh;
     overflow-y: scroll;
     padding: 0 48px;
+    @media screen and (min-width: 1200px){
+        padding: 0 92px;
+    }
+    @media screen and (min-width: 1600px){
+        padding: 0 160px;
+    }
 }
 
 ul,

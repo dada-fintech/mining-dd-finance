@@ -34,7 +34,7 @@
         text-align: center;
         .value {
             font-weight: 800;
-            font-size: 20px;
+            font-size: 18px;
         }
         .title {
             color: #9088a1;
@@ -228,6 +228,9 @@
         }
         .project-main {
             width: 100%;
+        }
+        .info-item{
+            margin-bottom: 16px;
         }
         .middle-area {
             .container {
