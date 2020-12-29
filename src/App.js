@@ -20,7 +20,7 @@ import Coming from './pages/Coming'
 import enUS from 'antd/lib/locale/en_US';
 import zhCN from 'antd/lib/locale/zh_CN';
 import {
-  ConfigProvider
+  ConfigProvider,
 } from 'antd';
 
 const language = localStorage.getItem('language') || (navigator.language === 'zh-CN' ? 'zh' : 'en')
@@ -45,8 +45,8 @@ function App() {
         <Router>
           <Switch>
             <Route exact path="/">
-            <Redirect to="/projects" />
-          </Route>
+              <Redirect to="/projects" />
+            </Route>
             <Route exact path="/projects" component={Homepage} />
             <Route exact path="/project/:id" component={Project} />
             <Route exact path="/create-project" component={CreateProject} />

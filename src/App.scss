@@ -16,6 +16,9 @@
     height: 100vh;
     overflow-y: scroll;
     padding: 0 48px;
+    @media screen and (max-width: 768px){
+        padding: 0 24px;
+    }
     @media screen and (min-width: 1600px){
         padding: 0 160px;
     }
@@ -185,6 +188,7 @@ img {
     .content-container {
         width: 90%;
     }
+ 
 }
 
 @media screen and (max-width: 768px) {
@@ -245,6 +249,7 @@ img {
     margin-bottom: 16px;
     position: relative;
     transition: all 0.5s;
+    width: 80%;
     .ant-picker {
         width: 100%;
     }
@@ -260,6 +265,9 @@ img {
         cursor: pointer;
         font-size: 24px;
         right: 12px;
+    }
+    @media screen and (max-width: 992px){
+        width: 100%;
     }
 }
 

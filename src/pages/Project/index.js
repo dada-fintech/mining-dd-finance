@@ -240,10 +240,10 @@ export default function Project() {
 
     return (<div className="project-page">
         <Row>
-            <Col md={4} xs={0} xxl={3}>
+            <Col md={5} lg={4} xs={0} xxl={3}>
                 <AppSidebar />
             </Col>
-            <Col md={20} xs={24} xxl={21}>
+            <Col md={19} lg={20} xs={24} xxl={21}>
                 <div className="content-wrapper">
                     <Header role={role} breadCrumb={['Crypto Mining', project.project_info.project_name]} />
                     <div className="brief-info">

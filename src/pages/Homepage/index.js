@@ -3,8 +3,10 @@ import { Row, Col, Progress, Table, } from 'antd'
 // import { useWallet } from 'use-wallet'
 import AppSidebar from 'components/AppSidebar'
 import HomepageBanner from 'assets/homepage-banner.svg'
+import { useTranslation } from 'react-i18next'
 import { toBr } from 'components/utils'
 import axios from 'utils/axios'
+import Header from 'components/Header'
 import Countdown from 'components/Countdown'
 
 import './style.scss'
@@ -15,9 +17,30 @@ export default function Homepage() {
     const [allProjects, setAllProjects] = useState([])
 
     const [featuredProject, setFeaturedProject] = useState({})
+    const { i18n } = useTranslation()
 
-    // const [comment, setComment] = useState({})
-    // const { t, i18n } = useTranslation()
+    const isEn = i18n.language === 'en'
+    const statusMapping = {
+        'auditing': isEn ? 'Auditing' : '委员会审核中',
+        'future': isEn ? 'Project Coming Soon' : '项目即将到来',
+        'raising': isEn ? 'In Mid of Fundraising' : '正在筹款',
+        'payingInsurance': isEn ? 'Depositing to the Reserve' : '支付安全达',
+        'active': isEn ? 'Active' : '进行中',
+        'rolling': isEn ? 'Voting On-going' : '正在投票',
+        'allPhasesDone': isEn ? 'Project Completes. Waiting for the Redemption' : '项目计划完成，等待获取报酬',
+        'repaying': isEn ? 'Users are Receiving the Redemption' : '用户获取回报',
+        'finished': isEn ? 'Project Completed' : '项目已完成',
+        'refunding': isEn ? 'Refunding' : '退款中',
+        'phaseFailed': isEn ? 'Stage Goal Failed' : '进程失败',
+        'replanNoticing': isEn ? 'Update to Change the Plan' : '更改计划公示',
+        'replanVoting': isEn ? 'Voting on Changing the Plan' : '更改计划投票',
+        'replanFailed': isEn ? 'Failed to Change the Plan' : '更改计划失败',
+        'liquidating': isEn ? 'Liquidating' : '清算中',
+        'failed': isEn ? 'Failed' : '项目失败',
+        'preDefined': isEn ? 'On-going' : '进行中',
+        // front end defined
+        'empty': isEn ? 'None' : '无'
+    }
 
     useEffect(() => {
         axios.get('/project/list').then(res => {
@@ -44,6 +67,11 @@ export default function Homepage() {
             title: '状态',
             dataIndex: 'status',
             key: 'status',
+            render: props => (
+                <span>
+                    {statusMapping[props] ? statusMapping[props] : props}
+                </span>
+            )
         },
         {
             title: '年化收益率',
@@ -103,11 +131,12 @@ export default function Homepage() {
     // const wallet = useWallet()
     return (<div className="homepage">
         <Row>
-            <Col md={4} xs={0} xxl={3}>
+            <Col lg={4} md={5} xs={0} xxl={3}>
                 <AppSidebar />
             </Col>
-            <Col md={20} xs={24} xxl={21}>
+            <Col lg={20} md={19} xs={24} xxl={21}>
                 <div className="content-wrapper">
+                    <Header hideAction={true} />
                     {featuredProject && <div className="featured-project">
                         <Row>
                             <Col xs={24} md={10}>

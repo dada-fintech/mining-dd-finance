@@ -541,10 +541,10 @@ export default function CreateProject() {
 
     return (<div className="create-project-page">
         <Row>
-            <Col md={4} xs={0} xxl={3}>
+            <Col md={5} lg={4} xs={0} xxl={3}>
                 <AppSidebar />
             </Col>
-            <Col md={20} xs={24} xxl={21}>
+            <Col md={19} lg={20} xs={24} xxl={21}>
                 <div className="content-wrapper">
                     <Header breadCrumb={['Crypto Mining', 'Create DAO']} />
                     <div className="card-board">
@@ -603,7 +603,7 @@ export default function CreateProject() {
                         {currentStep === 4 && <div>
                             <div className="h1">请设定治理规则(闭合式)</div>
                             <img src="/govern-rule-img.svg" className="govern-rule-img" />
-                            <Row type="flex" align="middle">
+                            <Row type="flex" align="middle" style={{marginBottom: '32px'}}>
                                 <Col md={12}>
                                     <div className="form-item" style={{ marginTop: '0' }}>
                                         <div className="label ">{t('createProject.fundraisingPeriod')}</div>

@@ -10,7 +10,7 @@ import { PlusCircleOutlined, CloseCircleOutlined, LoadingOutlined } from '@ant-d
 
 import axios from 'utils/axios'
 import { useParams } from 'react-router-dom'
-import Header from '../../components/Header'
+import Header from 'components/Header'
 
 import './style.scss'
 
@@ -208,10 +208,10 @@ export default function CreateVote() {
 
     return (<div className="create-vote-page">
         <Row>
-            <Col md={4} xs={0} xxl={3}>
+            <Col md={5} lg={4} xs={0} xxl={3}>
                 <AppSidebar />
             </Col>
-            <Col md={20} xs={24} xxl={21}>
+            <Col md={19} lg={20} xs={24} xxl={21}>
                 <div className="content-wrapper">
                     <Header breadCrumb={['Crypto Mining', 'Create Vote']} />
                     <div className="card-board">
