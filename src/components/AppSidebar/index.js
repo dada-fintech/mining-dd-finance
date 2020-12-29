@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Popover } from 'antd'
 import i18n from 'i18next'
 import './style.scss'
+import TemplateChoose from 'components/TemplateChoose'
 import LogoBlue from "assets/logo-blue.svg";
 import SidebarLogo from "assets/sidebar-logo.svg";
 import CryptoMiningIcon from 'assets/sidebar/crypto-mining.svg'
@@ -17,6 +18,7 @@ import WeixinQR from 'assets/qr-code.jpeg'
 
 export default function AppSidebar() {
     const { t } = useTranslation()
+    const [showTemplateChoose, setShowTemplateChoose] = useState(false)
     const changeLanguage = language => {
         localStorage.setItem('language', language)
         i18n.changeLanguage(language)
@@ -72,5 +74,6 @@ export default function AppSidebar() {
                 © DD.FINANCE.All rights reserved
             </div>
         </div>
+        {showTemplateChoose && <TemplateChoose onCancel={() => { setShowTemplateChoose(false) }} />}
     </div >)
 }
