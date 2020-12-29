@@ -1,0 +1,30 @@
+.coming-page {
+    &.dashboard {
+        background: url("../../assets/coming/dashboard.png") no-repeat center;
+        background-size: cover;
+    }
+    &.swap {
+        background: url("../../assets/coming/swap.jpeg") no-repeat center;
+        background-size: cover;
+    }
+    &.overview {
+        background: url("../../assets/coming/overview.png") no-repeat center;
+        background-size: cover;
+    }
+    &.governance {
+        background: url("../../assets/coming/governance.png") no-repeat center;
+        background-size: cover;
+    }
+    &.quick-swap {
+        background: url("../../assets/coming/quick-swap.png") no-repeat center;
+        background-size: cover;
+    }
+    .content-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px;
+        color: #15163d;
+        font-weight: 800;
+    }
+}

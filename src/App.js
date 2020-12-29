@@ -15,6 +15,8 @@ import Project from './pages/Project'
 // import Projects from './pages/Projects'
 import CreateProject from './pages/CreateProject'
 import CreateVote from './pages/CreateVote'
+import Coming from './pages/Coming'
+
 import enUS from 'antd/lib/locale/en_US';
 import zhCN from 'antd/lib/locale/zh_CN';
 import {
@@ -49,6 +51,7 @@ function App() {
             <Route exact path="/project/:id" component={Project} />
             <Route exact path="/create-project" component={CreateProject} />
             <Route exact path="/create-vote/:id" component={CreateVote} />
+            <Route exact path="/coming/:page" component={Coming} />
           </Switch>
         </Router>
       </div>

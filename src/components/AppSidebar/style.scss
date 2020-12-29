@@ -21,6 +21,8 @@
             cursor: pointer;
             a{
                 display: block;
+                display: flex;
+                align-items: center;
             }
 
             img {
@@ -36,6 +38,16 @@
                 border-radius: 50px;
                 padding: 0 16px;
                 font-size: 12px;
+            }
+        }
+        &.second{
+            margin-top: 44px;
+            li{
+                
+                img{
+                    margin-right: 4px;
+                    width: 14px;
+                }
             }
         }
     }

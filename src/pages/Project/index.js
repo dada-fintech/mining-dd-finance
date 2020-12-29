@@ -17,8 +17,8 @@ import ProcessModule from './modules/Process'
 import mm from 'components/mm'
 import DetailModule from './modules/Detail'
 import Countdown from 'components/Countdown'
-import { toBr } from 'components/utils'
-import Timer from 'react-compound-timer'
+// import { toBr } from 'components/utils'
+// import Timer from 'react-compound-timer'
 
 import './style.scss'
 

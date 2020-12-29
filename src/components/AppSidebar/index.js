@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Popover } from 'antd'
+import { Link } from 'react-router-dom'
 import i18n from 'i18next'
 import './style.scss'
 import TemplateChoose from 'components/TemplateChoose'
@@ -9,6 +10,10 @@ import SidebarLogo from "assets/sidebar-logo.svg";
 import CryptoMiningIcon from 'assets/sidebar/crypto-mining.svg'
 import MiningSwapIcon from 'assets/sidebar/mining-swap.svg'
 import DashboardIcon from 'assets/sidebar/dashboard.svg'
+import OverviewIcon from 'assets/sidebar/overview.svg'
+import QuickSwapIcon from 'assets/sidebar/quick-swap.svg'
+import GovernanceIcon from 'assets/sidebar/governance.svg'
+
 import Twiiter from 'assets/socials/twitter.svg'
 import Discord from 'assets/socials/discord.svg'
 import Medium from 'assets/socials/medium.svg'
@@ -32,13 +37,20 @@ export default function AppSidebar() {
             </a>
             <ul className="nav">
                 <li>
-                    <a href="/projects"><img src={CryptoMiningIcon} />Crypto Mining</a>
-                    <a href="/create-project">
+                    <Link to="/projects"><img src={CryptoMiningIcon} />Crypto Mining</Link>
+                    <Link to="/create-project">
                         <div className="btn-create">Create</div>
-                    </a>
+                    </Link>
                 </li>
-                <li><a href="/"><img src={MiningSwapIcon} />Mining Swap</a></li>
-                <li><a href="/"><img src={DashboardIcon} />Dashboard</a></li>
+                <li><Link to="/coming/swap"><img src={MiningSwapIcon} />Mining Swap</Link></li>
+                <li><Link to="/coming/dashboard"><img src={DashboardIcon} />Dashboard</Link></li>
+            </ul>
+            <ul className="nav second">
+                <li>
+                    <Link to="/coming/overview"><img src={OverviewIcon} />Overview</Link>
+                </li>
+                <li><Link to="/coming/quick-swap"><img src={QuickSwapIcon} />Quick Swap</Link></li>
+                <li><Link to="/coming/governance"><img src={GovernanceIcon} />Governance</Link></li>
             </ul>
         </div>
         <div className="bottom">
