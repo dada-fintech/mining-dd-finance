@@ -536,9 +536,20 @@ const commonABI = [
 // }
 
 export default {
-    provider: 'https://kovan.infura.io/v3/e468cafc35eb43f0b6bd2ab4c83fa688',
-    chainId: 42,
+    provider: 'https://data-seed-prebsc-1-s1.binance.org:8545',
+    chainId: 97,
     baseURL: 'https://mining-api-test.dd.finance',
     assetURL: 'https://mining-assets-test.dd.finance',
     commonABI
 }
+
+// export default {
+//     provider: 'https://kovan.infura.io/v3/e468cafc35eb43f0b6bd2ab4c83fa688',
+//     chainId: 42,
+//     baseURL: 'https://mining-api-test.dd.finance',
+//     assetURL: 'https://mining-assets-test.dd.finance',
+//     commonABI
+// }
+
+
+
