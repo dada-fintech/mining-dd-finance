@@ -49,7 +49,7 @@ function App() {
             </Route>
             <Route exact path="/projects" component={Homepage} />
             <Route exact path="/project/:id" component={Project} />
-            <Route exact path="/create-project" component={CreateProject} />
+            <Route exact path="/create-project/:tempType" component={CreateProject} />
             <Route exact path="/create-vote/:id" component={CreateVote} />
             <Route exact path="/coming/:page" component={Coming} />
           </Switch>

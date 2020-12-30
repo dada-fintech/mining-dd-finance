@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Row, Col, Input, Upload, message, DatePicker, Tooltip, InputNumber, Popconfirm, notification, Slider } from 'antd'
+import { Button, Row, Col, Input, Upload, message, Radio, DatePicker, Tooltip, InputNumber, Popconfirm, notification, Slider } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { PlusCircleOutlined, MinusCircleOutlined, CloseCircleOutlined, LoadingOutlined } from '@ant-design/icons'
 import QuestionIcon from 'assets/question.svg'
+import { useParams } from 'react-router-dom'
 import { useWallet } from 'use-wallet'
 import Header from '../../components/Header'
 import AppSidebar from 'components/AppSidebar'
+import Timespan from 'components/Timespan'
 
 import moment from 'moment'
 import axios from 'utils/axios'
@@ -27,6 +29,12 @@ export default function CreateProject() {
     const [dadaApproved, setDadaApproved] = useState(false)
     const [callData, setCallData] = useState(false)
     const [USDTBalance, setUSDTBalance] = useState(0)
+    const [raisingMethod, setRaisingMethod] = useState('1')
+    const [repayMethod, setRepayMethod] = useState('1')
+    const [withdrawMethod, setWithdrawMethod] = useState('1')
+
+
+    const { tempType } = useParams()
 
     const wallet = useWallet()
 
@@ -467,6 +475,8 @@ export default function CreateProject() {
 
         finalInfo.project_info.creater_addr = wallet.account
 
+
+
         finalInfo.process.forEach(item => {
             item.unlock_percentage = String(item.unlock_percentage)
         })
@@ -596,14 +606,18 @@ export default function CreateProject() {
                                 <div className="hint">{t('createProject.projectStrategyHint')}</div>
                             </div>
                         </div>}
-                        {currentStep === 3 && <div>
+                        {currentStep === 3 && tempType === 'close' && <div>
                             <div className="h1">请设定治理规则(闭合式)</div>
                             <div dangerouslySetInnerHTML={{ __html: t('createProject.closeGovernRule') }}></div>
                         </div>}
-                        {currentStep === 4 && <div>
+                        {currentStep === 3 && tempType === 'open' && <div>
+                            <div className="h1">请设定治理规则(开放式)</div>
+                            <div dangerouslySetInnerHTML={{ __html: t('createProject.openGovernRule') }}></div>
+                        </div>}
+                        {currentStep === 4 && tempType === 'close' && <div>
                             <div className="h1">请设定治理规则(闭合式)</div>
                             <img src="/govern-rule-img.svg" className="govern-rule-img" />
-                            <Row type="flex" align="middle" style={{marginBottom: '32px'}}>
+                            <Row type="flex" align="middle" style={{ marginBottom: '32px' }}>
                                 <Col md={12}>
                                     <div className="form-item" style={{ marginTop: '0' }}>
                                         <div className="label ">{t('createProject.fundraisingPeriod')}</div>
@@ -658,7 +672,61 @@ export default function CreateProject() {
                             </div>
 
                         </div>}
+                        {currentStep === 4 && tempType === 'open' && <div>
+                            <div className="h1">请设定治理规则(开放式)</div>
+                            <div className="form-block">
+                                <div className="form-item">
+                                    <div className="label">选择筹款方式</div>
+                                    <Radio.Group className="btn-tabs" value={raisingMethod} onChange={(e) => setRaisingMethod(e.target.value)}>
+                                        <Radio.Button value="1">定期筹款</Radio.Button>
+                                        <Radio.Button value="2">定时筹款</Radio.Button>
+                                    </Radio.Group>
+                                    {raisingMethod === '1' && <div className="hint">
+                                        *确定筹款日期，无法提前或延后
+                                </div>}
+                                    {raisingMethod === '2' && <div className="hint">
+                                        *确定筹款期限，审核通过自动开始
+                                </div>}
+
+                                </div>
+                                {raisingMethod === '1' && <div className="form-item">
+                                    <div className="label ">{t('createProject.fundraisingPeriod')}</div>
+                                    <DatePicker.RangePicker showTime value={fundraising.start_time && [moment(fundraising.start_time), moment(fundraising.end_time)]} onChange={value => dateRangeChange('fundraising', value)} />
+                                </div>}
+                                {raisingMethod === '2' && <div className="form-item">
+                                    <Timespan fieldChange={(value)=>{console.log(value);setFundraising('raise_span', value)}}/>
+                            </div>}
+                            </div>
+
+                            <div className="form-block">
+                                <div className="form-item">
+                                    <div className="label">选择回款方式</div>
+                                    <Radio.Group className="btn-tabs" value={repayMethod} onChange={(e) => setRepayMethod(e.target.value)}>
+                                        <Radio.Button value="1">到期等额本息</Radio.Button>
+                                        {/* <Radio.Button value="2">随还随取</Radio.Button> */}
+                                    </Radio.Group>
+                                </div>
+                                {repayMethod === '1' && <div className="form-item">
+                                    <div className="label ">{t('createProject.redemptionDate')}</div>
+                                    <DatePicker value={projectInfo.income_settlement_time && moment(projectInfo.income_settlement_time)} onChange={value => { value && changeProjectInfo('income_settlement_time', value.valueOf()) }} />
+                                </div>}
+                            </div>
+
+                            <div className="form-block">
+                                <div className="form-item">
+                                    <div className="label">选择取款方式</div>
+                                    <Radio.Group className="btn-tabs" value={withdrawMethod} onChange={(e) => setWithdrawMethod(e.target.value)}>
+                                        <Radio.Button value="1">有条件取款</Radio.Button>
+                                        <Radio.Button value="2">无条件取款</Radio.Button>
+                                    </Radio.Group>
+                                    <div className="hint">
+                                        *筹款完成并于3天内支付押金后，发起取款投票，社区有效票数达到25%，同意票数66%则完成放款<br />可分为多阶段，多次放款
+                                </div>
+                                </div>
+                            </div>
+                        </div>}
                         {currentStep === 5 && <div>
+                            <div className="h1">请设定经济治理规则</div>
                             <div className="form-item">
                                 <div className="label ">{t('common.apy')}</div>
                                 <InputNumber formatter={value => `${value ? value : 0} %`} parser={value => parseInt(value)} value={fundraising.expected_apy} onChange={e => changeFundraising('expected_apy', e)} style={{ width: '180px' }} />
@@ -685,6 +753,7 @@ export default function CreateProject() {
 
                         </div>}
                         {currentStep === 6 && <div>
+                            <div className="h1">请设定经济治理地址</div>
                             <div className="form-item">
                                 <div className="label ">{t('createProject.nameOfToken')}</div>
                                 <Input style={{ width: '360px' }} value={projectInfo.project_token_symbol} onChange={(e) => { changeProjectInfo('project_token_symbol', e.target.value) }} />
@@ -713,6 +782,7 @@ export default function CreateProject() {
                             </div>
                         </div>}
                         {currentStep === 7 && <div className="step-3">
+                            <div className="h1">请上传相关文件</div>
                             <div className="form-item">
                                 <div className="label ">{t('createProject.uploadPlan')}</div>
                                 <Upload {...whitePaperUpload}>

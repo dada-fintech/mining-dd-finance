@@ -10,10 +10,28 @@
         color: #111;
         margin-top: 8px;
     }
+    .btn-tabs {
+        .ant-radio-button-wrapper {
+            margin-right: 20px;
+            color: #15163d;
+            padding: 0 24px;
+            height: 40px;
+            line-height: 40px;
+            opacity: 0.3;
+            border: 1px solid #839cdc !important;
+            &::before {
+                display: none;
+            }
+            &.ant-radio-button-wrapper-checked {
+                opacity: 1;
+            }
+        }
+    }
     .softtop-value {
         font-weight: 600;
         color: #000;
     }
+
     .form-item {
         margin-bottom: 20px;
         .label {
@@ -34,6 +52,15 @@
             margin-left: 8px;
             cursor: pointer;
             vertical-align: middle;
+        }
+    }
+    .form-block {
+        margin-bottom: 56px;
+        .form-item {
+            margin-bottom: 12px;
+            .label{
+                margin-top: 12px;
+            }
         }
     }
     .assets-rule-title {
@@ -194,6 +221,7 @@
         .assets-rule-item {
             padding: 12px 16px 16px;
         }
+
         .form-item {
             margin-bottom: 0;
             .label {

@@ -38,9 +38,9 @@ export default function AppSidebar() {
             <ul className="nav">
                 <li>
                     <Link to="/projects"><img src={CryptoMiningIcon} />Crypto Mining</Link>
-                    <Link to="/create-project">
+                    <a onClick={() => { setShowTemplateChoose(true) }}>
                         <div className="btn-create">Create</div>
-                    </Link>
+                    </a>
                 </li>
                 <li><Link to="/coming/swap"><img src={MiningSwapIcon} />Mining Swap</Link></li>
                 <li><Link to="/coming/dashboard"><img src={DashboardIcon} />Dashboard</Link></li>

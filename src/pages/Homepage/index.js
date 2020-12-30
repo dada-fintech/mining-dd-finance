@@ -107,6 +107,7 @@ export default function Homepage() {
         },
     ];
 
+
     // const leaveComment = () => {
     //     axios.post('/comment/main-page', comment).then(res => {
     //         message.success(t('common.submitted'))
