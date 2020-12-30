@@ -363,7 +363,7 @@ export default function CreateVote() {
                             </div>}
                             {currentStep == 2 && <div>
                                 <div onClick={() => { !changeLoading && confirmInfo() }} className="btn-confirm"><span className="text">{t('common.confirmInfo')} {changeLoading && <LoadingOutlined />}</span> </div>
-                                <span className="hint hint-gasfee">{t('common.gasFeeHint')}</span>
+                                {/* <span className="hint hint-gasfee">{t('common.gasFeeHint')}</span> */}
                             </div>}
                         </div>
                     </div>
