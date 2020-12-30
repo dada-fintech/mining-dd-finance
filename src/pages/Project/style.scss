@@ -30,11 +30,15 @@
         background: #ffffff;
         box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.15);
         border-radius: 5px;
-        padding: 12px 16px;
+        padding: 16px 16px;
         text-align: center;
         .value {
             font-weight: 800;
             font-size: 18px;
+            line-height: 1.1;
+            height: 38px;
+            //todo,限制两行
+            overflow: hidden;
         }
         .title {
             color: #9088a1;
