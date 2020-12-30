@@ -616,7 +616,7 @@ export default function CreateProject() {
     return (<div className="create-project-page">
         <Row>
             <Col md={5} lg={4} xs={0} xxl={3}>
-                <AppSidebar />
+                <AppSidebar hideCreate={true}/>
             </Col>
             <Col md={19} lg={20} xs={24} xxl={21}>
                 <div className="content-wrapper">
@@ -784,7 +784,7 @@ export default function CreateProject() {
                                         <Radio.Button value="2">无条件取款</Radio.Button>
                                     </Radio.Group>
                                     <div className="hint">
-                                        *筹款完成并于3天内支付押金后，发起取款投票，社区有效票数达到25%，同意票数66%则完成放款<br />可分为多阶段，多次放款
+                                        *筹款完成并于3天内支付押金后，发起取款投票，同意票数66%则完成放款<br />可分为多阶段，多次放款
                                 </div>
                                 </div>
                             </div>

@@ -23,7 +23,7 @@ export default function TemplateChoose(props) {
 
     const goPage = (tempType) => {
         clearStorage()
-        history.go(`/create-project/${tempType}`)
+        history.push(`/create-project/${tempType}`)
     }
 
     return (<Modal visible={true} title="请选择一个治理模版" width="80%" footer={null} onCancel={() => { onCancel() }} className="template-choose">

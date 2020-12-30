@@ -103,6 +103,7 @@
         .my-share-box {
             color: #fff;
             background: #839cdc;
+            min-height: 260px;
             box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.1);
             border-radius: 5px;
             padding: 4px 24px;
@@ -114,7 +115,7 @@
                 align-items: center;
                 justify-content: space-between;
                 border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-                &:last-child{
+                &:last-child {
                     border-bottom: none;
                 }
             }

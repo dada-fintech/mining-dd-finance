@@ -5,6 +5,7 @@ import AppSidebar from 'components/AppSidebar'
 import HomepageBanner from 'assets/homepage-banner.svg'
 import { useTranslation } from 'react-i18next'
 import { toBr } from 'components/utils'
+import { Link } from 'react-router-dom'
 import axios from 'utils/axios'
 import Header from 'components/Header'
 import Countdown from 'components/Countdown'
@@ -47,7 +48,7 @@ export default function Homepage() {
             setProjectList(res.data.filter(item => item.status == 'canInvest'))
             setAllProjects(res.data.filter(item => item.status != 'canInvest'))
 
-            const futureProjects = res.data.filter(item => item.status == 'future')
+            const futureProjects = res.data.filter(item => item.status == 'canInvest')
 
             if (futureProjects.length > 0) {
                 setFeaturedProject(futureProjects[0])
@@ -100,9 +101,9 @@ export default function Homepage() {
             key: 'action',
             // todo, 这里要改
             render: (props, record) => (
-                <a href={`/project/${record.project_uniq_id}`}>
+                <Link to={`/project/${record.project_uniq_id}`}>
                     详情
-                </a>
+                </Link>
             )
         },
     ];
@@ -169,7 +170,7 @@ export default function Homepage() {
                                                 <div className="date-title">开始时间</div>
                                             </div>
                                             <div>
-                                                <div>{formatTime(item.project_start_time)}</div>
+                                                <div>{formatTime(item.project_end_time)}</div>
                                                 <div className="date-title">结束时间</div>
                                             </div>
                                         </div>

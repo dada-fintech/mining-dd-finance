@@ -21,8 +21,9 @@ import Telegram from 'assets/socials/telegram.svg'
 import Weixin from 'assets/socials/weixin.svg'
 import WeixinQR from 'assets/qr-code.jpeg'
 
-export default function AppSidebar() {
+export default function AppSidebar(props) {
     const { t } = useTranslation()
+    const { hideCreate } = props
     const [showTemplateChoose, setShowTemplateChoose] = useState(false)
     const changeLanguage = language => {
         localStorage.setItem('language', language)
@@ -38,9 +39,9 @@ export default function AppSidebar() {
             <ul className="nav">
                 <li>
                     <Link to="/projects"><img src={CryptoMiningIcon} />Crypto Mining</Link>
-                    <a onClick={() => { setShowTemplateChoose(true) }}>
+                    {!hideCreate && <a onClick={() => { setShowTemplateChoose(true) }}>
                         <div className="btn-create">Create</div>
-                    </a>
+                    </a>}
                 </li>
                 <li><Link to="/coming/swap"><img src={MiningSwapIcon} />Mining Swap</Link></li>
                 <li><Link to="/coming/dashboard"><img src={DashboardIcon} />Dashboard</Link></li>

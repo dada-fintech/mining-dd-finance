@@ -81,11 +81,11 @@ export default function Sidebar(props) {
                     </div>
                     {myShare.profit_status === 'BonusCanClaim' && <div className="line">
                         <div>{t('sidebar.bonus')}</div>
-                        <div>{myShare.user_profit} DADA</div>
+                        <div>{myShare.profit_dada} DADA</div>
                     </div>}
                     {myShare.profit_status !== 'BonusCanClaim' && <div className="line">
                         <div>{t('sidebar.return')}</div>
-                        <div>{myShare.user_profit} USDT</div>
+                        <div>{myShare.profit_usdt} USDT</div>
                     </div>}
                     {myShare.profit_status && <div className="line">
                         <div>{t('sidebar.gains')}</div>

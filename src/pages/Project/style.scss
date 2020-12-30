@@ -46,7 +46,6 @@
         padding-bottom: 32px;
     }
 
-
     .handle-area {
         // display: flex;
         // align-items: center;
@@ -93,6 +92,7 @@
 
     .info-box {
         padding: 24px 36px;
+        min-height: 260px;
         background: #ffffff;
         box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.1);
         border-radius: 5px;
@@ -158,7 +158,6 @@
             margin-bottom: 12px;
             font-weight: 600;
         }
-
 
         // .top-box {
         //     background: #fff;
@@ -229,7 +228,7 @@
         .project-main {
             width: 100%;
         }
-        .info-item{
+        .info-item {
             margin-bottom: 16px;
         }
         .middle-area {

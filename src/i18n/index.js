@@ -476,7 +476,7 @@ export default {
                 myShare: '我的份额',
                 allShare: '所有份额',
                 investment: '投资份额',
-                return: '收益份额',
+                return: '累计收益',
                 redemption: '赎回日期',
                 cycle: '项目周期',
                 gains: '收益状态',
@@ -485,7 +485,7 @@ export default {
                 months: '个月',
                 subscribe: '订阅',
                 enterEmail: '请输入邮箱',
-                bonus: '投资奖励',
+                bonus: '累计奖励',
             },
             banner: {
                 title: '矿业生态聚合器',
