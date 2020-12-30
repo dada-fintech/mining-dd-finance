@@ -16,6 +16,13 @@ export default function TemplateChoose(props) {
         localStorage.setItem('fundraising', null)
         localStorage.setItem('processList', null)
         localStorage.setItem('currentStep', null)
+        localStorage.setItem('projectInfo', null)
+        localStorage.setItem('fundraising', null)
+        localStorage.setItem('processList', null)
+        localStorage.setItem('currentStep', null)
+        localStorage.setItem('raisingMethod', null)
+        localStorage.setItem('repayMethod', null)
+        localStorage.setItem('withdrawMethod', null)
     }
 
     const goPage = (tempType) => {

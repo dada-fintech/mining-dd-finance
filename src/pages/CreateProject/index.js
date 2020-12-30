@@ -79,6 +79,9 @@ export default function CreateProject() {
         const projectInfo = JSON.parse(localStorage.getItem('projectInfo'))
         const fundraising = JSON.parse(localStorage.getItem('fundraising'))
         const processList = JSON.parse(localStorage.getItem('processList'))
+        const raisingMethod = JSON.parse(localStorage.getItem('raisingMethod'))
+        const repayMethod = JSON.parse(localStorage.getItem('repayMethod'))
+        const withdrawMethod = JSON.parse(localStorage.getItem('withdrawMethod'))
 
         if (projectInfo) {
             setProjectInfo(projectInfo)
@@ -89,6 +92,15 @@ export default function CreateProject() {
         if (processList) {
             setProcessList(processList)
         }
+        if (raisingMethod) {
+            setRaisingMethod(raisingMethod)
+        }
+        if (repayMethod) {
+            setRepayMethod(repayMethod)
+        }
+        if (withdrawMethod) {
+            setWithdrawMethod(withdrawMethod)
+        }
 
         const currentStep = Number(localStorage.getItem('currentStep'))
         if (currentStep) {
@@ -98,9 +110,8 @@ export default function CreateProject() {
     }, [])
 
     useEffect(() => {
-        // 只有主网才去获取, todo，是否改成dada了
         if (config.chainId == 1 && wallet.account) {
-            // getUSDTBalance()
+            getUSDTBalance()
         }
     }, [wallet.account])
 
@@ -122,7 +133,11 @@ export default function CreateProject() {
         localStorage.setItem('projectInfo', JSON.stringify(projectInfo))
         localStorage.setItem('fundraising', JSON.stringify(fundraising))
         localStorage.setItem('processList', JSON.stringify(processList))
-    }, [fundraising, processList, projectInfo])
+        localStorage.setItem('raisingMethod', JSON.stringify(raisingMethod))
+        localStorage.setItem('repayMethod', JSON.stringify(repayMethod))
+        localStorage.setItem('withdrawMethod', JSON.stringify(withdrawMethod))
+
+    }, [fundraising, processList, projectInfo, raisingMethod, repayMethod, withdrawMethod])
 
     const changeProjectInfo = (name, value) => {
         setProjectInfo(prev => {
@@ -277,7 +292,7 @@ export default function CreateProject() {
 
         }
 
-        if (currentStep === 4) {
+        if (currentStep === 4 && tempType === 'close') {
 
             if (!fundraising.start_time || !fundraising.end_time) {
                 message.error(customHint || '请选择筹款期限')
@@ -315,6 +330,33 @@ export default function CreateProject() {
                 return false
             }
         }
+
+        if (currentStep === 4 && tempType === 'open') {
+            if (raisingMethod === '1') {
+                if (!fundraising.start_time || !fundraising.end_time) {
+                    message.error(customHint || '请选择筹款期限')
+                    return false
+                }
+            } else {
+                console.log(fundraising.raise_span)
+                if (!fundraising.raise_span) {
+                    message.error(customHint || '请填写时间')
+                    return false
+                }
+            }
+
+            if (!projectInfo.income_settlement_time) {
+                message.error(customHint || '请填写赎回日期')
+                return false
+            }
+
+            if (!withdrawMethod) {
+                message.error(customHint || '请选择取款方式')
+                return false
+            }
+
+        }
+
 
         if (currentStep === 5) {
 
@@ -462,11 +504,35 @@ export default function CreateProject() {
 
     const confirmInfo = () => {
         setCreateLoading(false)
-
+        let finalURL = ''
+        let templateId = ''
         let finalInfo = {
             project_info: projectInfo,
             fundraising: fundraising,
-            process: processList,
+        }
+        if (tempType === 'close') {
+            finalURL = '/project/create-project'
+            finalInfo.process = processList
+            finalInfo.process.forEach(item => {
+                item.unlock_percentage = String(item.unlock_percentage)
+            })
+        } else if (tempType === 'open') {
+            if (raisingMethod === '2') {
+                // delete fundraising.start_time;
+                // delete fundraising.end_time
+                if (withdrawMethod === '1') {
+                    templateId = '1'
+                } else {
+                    templateId = '2'
+                }
+            } else if (raisingMethod === '1') {
+                if (withdrawMethod === '1') {
+                    templateId = '3'
+                } else {
+                    templateId = '4'
+                }
+            }
+            finalURL += `/project/create-project/${templateId}`
         }
 
         finalInfo.fundraising.expected_apy = String(finalInfo.fundraising.expected_apy)
@@ -475,12 +541,7 @@ export default function CreateProject() {
 
         finalInfo.project_info.creater_addr = wallet.account
 
-
-
-        finalInfo.process.forEach(item => {
-            item.unlock_percentage = String(item.unlock_percentage)
-        })
-        axios.post('/project/create-project', finalInfo).then(res => {
+        axios.post(finalURL, finalInfo).then(res => {
             setDadaApproved(res.data.is_satisfied)
             setApproveBalance(res.data.approve_balance)
             setCallData(res.data.call_contract)
@@ -497,6 +558,9 @@ export default function CreateProject() {
         localStorage.setItem('fundraising', null)
         localStorage.setItem('processList', null)
         localStorage.setItem('currentStep', null)
+        localStorage.setItem('raisingMethod', null)
+        localStorage.setItem('repayMethod', null)
+        localStorage.setItem('withdrawMethod', null)
     }
 
     const doApprove = async () => {
@@ -694,8 +758,8 @@ export default function CreateProject() {
                                     <DatePicker.RangePicker showTime value={fundraising.start_time && [moment(fundraising.start_time), moment(fundraising.end_time)]} onChange={value => dateRangeChange('fundraising', value)} />
                                 </div>}
                                 {raisingMethod === '2' && <div className="form-item">
-                                    <Timespan fieldChange={(value)=>{console.log(value);setFundraising('raise_span', value)}}/>
-                            </div>}
+                                    <Timespan timestamp={fundraising.raise_span} fieldChange={(value) => { changeFundraising('raise_span', value) }} />
+                                </div>}
                             </div>
 
                             <div className="form-block">
@@ -898,34 +962,35 @@ export default function CreateProject() {
 
                             </div>
 
-                            <div className="title">{t('createProject.confirm3')}</div>
-
-                            {/* <div className="title" style={{ marginTop: '56px' }}>ASSETS RULE</div> */}
-                            {processList.map((item, index) => <>
-                                <div className="process-top">
-                                    <div>{t('project.progress')} #{index + 1}</div>
-                                    {/* <div>{item.time}</div> */}
-                                </div>
-                                <div className="confirm-box">
-                                    <div className="line">
-                                        <div className="name">{t('project.unlockingAmount')}</div>
-                                        <div className="value">{item.unlock_percentage}%</div>
+                            {tempType === 'close' && <>
+                                <div className="title">{t('createProject.confirm3')}</div>
+                                {processList.map((item, index) => <>
+                                    <div className="process-top">
+                                        <div>{t('project.progress')} #{index + 1}</div>
+                                        {/* <div>{item.time}</div> */}
                                     </div>
-                                    {index === 0 ? <div className="line">
-                                        <div className="name">{t('createProject.unlockDate')}</div>
-                                        <div className="value">{new Date(item.vote_start_time).toLocaleDateString()}</div>
-                                    </div> : <div className="line">
-                                            <div className="name">{t('project.voteTime')}</div>
-                                            <div className="value">{new Date(item.vote_start_time).toLocaleDateString()} - {new Date(item.vote_end_time).toLocaleDateString()}</div>
-                                        </div>}
+                                    <div className="confirm-box">
+                                        <div className="line">
+                                            <div className="name">{t('project.unlockingAmount')}</div>
+                                            <div className="value">{item.unlock_percentage}%</div>
+                                        </div>
+                                        {index === 0 ? <div className="line">
+                                            <div className="name">{t('createProject.unlockDate')}</div>
+                                            <div className="value">{new Date(item.vote_start_time).toLocaleDateString()}</div>
+                                        </div> : <div className="line">
+                                                <div className="name">{t('project.voteTime')}</div>
+                                                <div className="value">{new Date(item.vote_start_time).toLocaleDateString()} - {new Date(item.vote_end_time).toLocaleDateString()}</div>
+                                            </div>}
 
-                                    <div className="line">
-                                        <div className="name">{t('project.event')}</div>
-                                        <div className="value">{item.description}</div>
+                                        <div className="line">
+                                            <div className="name">{t('project.event')}</div>
+                                            <div className="value">{item.description}</div>
+                                        </div>
                                     </div>
-                                </div>
+                                </>)}
+                            </>}
 
-                            </>)}
+
                             <div>
                                 <div className="title" style={{ marginTop: '56px' }}>{t('createProject.additionalDoc')}</div>
                                 <div className="confirm-box">

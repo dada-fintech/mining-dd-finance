@@ -7,11 +7,16 @@ import './style.scss'
 
 export default function Timespan(props) {
     const { t } = useTranslation()
-    const { fieldChange } = props
+    const { fieldChange, timestamp } = props
     const [days, setDays] = useState('')
     const [hours, setHours] = useState('')
     const [minutes, setMinutes] = useState('')
     const [seconds, setSeconds] = useState('')
+
+    useEffect(()=>{
+        //todo, 初始化数据
+
+    }, [])
 
     useEffect(() => {
         let finalTime = 0
