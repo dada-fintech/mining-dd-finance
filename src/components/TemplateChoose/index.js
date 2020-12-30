@@ -2,20 +2,16 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Modal, Row, Col, Button } from 'antd'
 import DoubleCheckIcon from 'assets/double-check.svg'
-import { Router } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import TimeIcon from 'assets/time.svg'
 // import i18n from 'i18next'
 import './style.scss'
 
 export default function TemplateChoose(props) {
     const { t } = useTranslation()
+    const history = useHistory()
     const { onCancel } = props
-
     const clearStorage = () => {
-        localStorage.setItem('projectInfo', null)
-        localStorage.setItem('fundraising', null)
-        localStorage.setItem('processList', null)
-        localStorage.setItem('currentStep', null)
         localStorage.setItem('projectInfo', null)
         localStorage.setItem('fundraising', null)
         localStorage.setItem('processList', null)
@@ -27,7 +23,7 @@ export default function TemplateChoose(props) {
 
     const goPage = (tempType) => {
         clearStorage()
-        Router.push(`/create-project/${tempType}`)
+        history.go(`/create-project/${tempType}`)
     }
 
     return (<Modal visible={true} title="请选择一个治理模版" width="80%" footer={null} onCancel={() => { onCancel() }} className="template-choose">

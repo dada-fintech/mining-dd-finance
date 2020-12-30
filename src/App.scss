@@ -335,8 +335,9 @@ img {
         color: #fff;
     }
     &.error {
-        background: red;
+        background: #ef6e6e;
         color: #fff;
+        border: none;
     }
 }
 
