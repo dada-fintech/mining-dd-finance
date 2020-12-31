@@ -33,7 +33,7 @@ export default function TemplateChoose(props) {
                 <div className="template-item">
                     <div className="top">
                         <div className="type">
-                            开放式
+                            {t('common.customizable')}
                         </div>
                         <a onClick={() => goPage('open')}>
                             <Button className="btn-blue">{t('template.select')}</Button>
@@ -72,7 +72,7 @@ export default function TemplateChoose(props) {
                 <div className="template-item">
                     <div className="top">
                         <div className="type">
-                            闭合式
+                        {t('common.standard')}
                         </div>
                         <a onClick={() => goPage('close')}>
                             <Button className="btn-blue">{t('template.select')}</Button>

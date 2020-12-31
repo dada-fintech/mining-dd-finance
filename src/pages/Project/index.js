@@ -87,8 +87,10 @@ export default function Project() {
         }
         if (status === 'Rolling') {
             const item = project.process.filter(item => item.status === 'Active')[0]
-            result = item.vote_end_time - dateNow
-            nextStatusValue = 'AllPhasesDone'
+            if (item && item.vote_end_time) {
+                result = item.vote_end_time - dateNow
+                nextStatusValue = 'AllPhasesDone'
+            }
         }
         if (status === 'AllPhaseDone') {
             result = project.project_info.income_settlement_time - dateNow
@@ -96,13 +98,17 @@ export default function Project() {
         }
         if (status === 'ReplanNoticing') {
             const item = project.process.filter(item => item.status === 'VoteNotice')[0]
-            result = item.vote_end_time - oneDay * 3 - dateNow
-            nextStatusValue = 'empty'
+            if (item && item.vote_end_time) {
+                result = item.vote_end_time - oneDay * 3 - dateNow
+                nextStatusValue = 'empty'
+            }
         }
         if (status === 'ReplanVoting') {
             const item = project.process.filter(item => item.status === 'VoteReplaning')[0]
-            result = item.vote_end_time - dateNow
-            nextStatusValue = 'empty'
+            if (item && item.vote_end_time) {
+                result = item.vote_end_time - dateNow
+                nextStatusValue = 'empty'
+            }
         }
 
         if (result > 0) {
@@ -376,7 +382,7 @@ export default function Project() {
                                     </Row>}
 
                                     {/* manager 可以变更计划. */}
-                                    {(project.project_info.status === 'Active' || project.project_info.status === 'PhaseFailed' || project.project_info.status === 'ReplanFailed') && role === 'manager' && <Row>
+                                    {(project.project_info.status === 'Active' || project.project_info.status === 'PhaseFailed' || project.project_info.status === 'ReplanFailed') && role === 'manager' && !project.project_info.template_id && <Row>
                                         <div className="handle-area">
                                             <a href={`/create-vote/${id}`}>
                                                 <div className="btn-action"><span>{t('project.action.change')}</span></div>

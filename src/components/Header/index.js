@@ -16,8 +16,12 @@ export default function Header(props) {
     const [drawerVisible, setDrawerVisible] = useState(false)
 
     useEffect(() => {
-        wallet.connect()
+        //防止重复连接
+        if(!hideAction){
+            wallet.connect()
+        }
     }, [])
+
 
     // const changeRole = role => {
     //     dispatch({
@@ -50,7 +54,7 @@ export default function Header(props) {
         {!hideAction && <>
             {breadCrumb && <ul className="main-breadcrumb">
                 {breadCrumb.map((item, index) => (
-                    <li className={index === breadCrumb.length - 1 ? 'done' : ''}>{item}</li>
+                    <li key={index} className={index === breadCrumb.length - 1 ? 'done' : ''}>{item}</li>
                 ))}
             </ul>}
             <nav>

@@ -8,7 +8,8 @@ import mm from 'components/mm'
 import './style.scss'
 
 export default function AuditModal(props) {
-    const { project_uniq_id, maxAmount } = props.params
+    const { project_uniq_id } = props.params
+    const { maxAmount } = props
     const wallet = useWallet()
     const [loading, setLoading] = useState(false)
     const [description, setDescription] = useState(false)
@@ -51,7 +52,7 @@ export default function AuditModal(props) {
                 <Row gutter={24}>
                     <Col md={12}>
                         <div className="form-item">
-                            <div className="label ">{t('project.unlockingAmount')} {maxAmount > 0 && <span>(最大值{maxAmount}USDT)</span>} </div>
+                            <div className="label ">{t('project.unlockingAmount')} {maxAmount > 0 && <span>({t('common.maxValue')} {maxAmount}USDT)</span>} </div>
                             <Input suffix="USDT" value={amount} onChange={e => { e.target.value <= maxAmount && setAmount(e.target.value) }} />
                         </div>
                     </Col>
@@ -68,7 +69,7 @@ export default function AuditModal(props) {
                 </div>
             </div>
             <div className="handle-area">
-                <Button loading={loading} className="btn-green" onClick={() => { doAsk() }}>确定</Button>
+                <Button loading={loading} className="btn-green" onClick={() => { doAsk() }}>{t('common.confirm')}</Button>
             </div>
         </Modal>
     )

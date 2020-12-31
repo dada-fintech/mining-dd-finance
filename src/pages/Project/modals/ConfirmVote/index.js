@@ -38,12 +38,22 @@ export default function ConfirmVote(props) {
         axios.post(target, {
             ...params,
         }).then(res => {
-            if (res.data.need_call) {
-                const txnParams = {
-                    from: wallet.account,
-                    to: res.data.call_data.contract_addr,
-                    data: res.data.call_data.call_data
+            if (res.data.need_call || params.isTemplate) {
+                let txnParams = {}
+                if(res.data.need_call){
+                    txnParams = {
+                        from: wallet.account,
+                        to: res.data.call_data.contract_addr,
+                        data: res.data.call_data.call_data
+                    }
+                }else{
+                    txnParams = {
+                        from: wallet.account,
+                        to: res.data.contract_addr,
+                        data: res.data.call_data
+                    }
                 }
+             
                 mm.sendTransaction(txnParams, params.status === 'Active' ? t('modal.confirmVoting') : t('modal.confirmChangeVoting')).then(res => {
                     setLoading(false)
                     props.onCancel()

@@ -46,10 +46,12 @@ export default {
                 role: 'Role',
                 changePlan: 'Change Plan',
                 rulesBelow: 'Enter rules below',
-                pdfRequired: '*Only PDF format is supported',
+                pdfRequired: '*Please upload in PDF format. The file will be displayed in the project details page. ',
                 billHint1: 'You will be paying 0.5% of the hard cap in DADA for the auditing and verification fee. The fee is nonrefundable. ',
-                billHint2: 'Creating smart contracts will cost a certain amount of Gas.  '
-
+                billHint2: 'Creating smart contracts will cost a certain amount of Gas.  ',
+                maxValue: 'Max value',
+                standard: 'Static',
+                customizable: 'Dynamic',
             },
             template: {
                 title: 'Choose a Governing Template',
@@ -84,7 +86,7 @@ export default {
                 youNeedPay: 'You need to pay',
                 payInsurance: 'Pay Insurance',
                 insuranceHint: `
-                您的项目即将启动，您需要支付募集额度10%的DADA作为项目抵押金。<br />项目完成后，将会收取其中25%的费用作为保险费用，返回剩余75%的押金。`,
+                Your project is about to start, you need to pay 10% of the raised amount of DADA as the project deposit. <br />After the project is completed, 25% of the cost will be charged as insurance expenses, and the remaining 75% of the deposit will be returned.`,
                 confirmVoting: 'Confirm voting',
                 confirmChangeVoting: 'Confirm Change Voting',
                 auditTitle: 'Auditing Reviews ',
@@ -246,9 +248,9 @@ export default {
                 <br/>
                 <div>
                 <strong>First, here is a template for the core steps: </strong><br/>
-                    1.审批阶段：所有提交的项目均需要通过专业委员会审批通过方可进入下一阶段（创建后5天内）。<br/>
-                    2.筹款阶段：筹款完成的3天内，需要支付项目筹集最大额度10%的DADA方可进入下一阶段。<br/>
-                    3.治理阶段：根据设定的款项释放规则，每次需要获得50%以上的同意票（未参与投票默认视为同意），方可进入下一阶段。<br/>
+                1.Auditing Phase: All submitted projects need to be approved by the professional committee before moving to the next stage (within 5 days after creation).<br/>
+                2.Fundraising Phase: Within 3 days after the fundraise completes, 10% of the hard cap should be paid in DADA before moving on to the next phase.<br/>
+                3.Governance Phase: According to the rules on capital unlock, you need to get over 50% approval votes (abstaining from voting is considered as approval by default) in order to move to the next phase.<br/>
                 </div>
                 <img class="govern-rule-img" src="/govern-rule-img.svg"/>
                 <div>
@@ -265,10 +267,10 @@ export default {
             Next, we guide you through setting the <span class="red">governance rules</span> for the project. </div>
             <br/>
             <div>
-            <strong>首先，需要了解治理规则的基本模板</strong><br/>
-                1.审批阶段：所有提交的项目均需要通过专业委员会审批通过方可进入下一阶段（创建后5天内）。<br/>
-                2.筹款阶段：筹款完成的3天内，需要支付项目筹集最大额度10%的DADA方可进入下一阶段。<br/>
-                3.治理阶段：根据设定的款项释放规则，每次需要获得50%以上的同意票（未参与投票默认视为同意），方可进入下一阶段。<br/>
+            <strong>First, here is a template for the core steps: </strong><br/>
+            1.Auditing Phase: All submitted projects need to be approved by the professional committee before moving to the next stage (within 5 days after creation).<br/>
+            2.Fundraising Phase: Within 3 days after the fundraise completes, 10% of the hard cap should be paid in DADA before moving on to the next phase.<br/>
+            3.Governance Phase: According to the rules on capital unlock, you need to get over 50% approval votes (abstaining from voting is considered as approval by default) in order to move to the next phase.<br/>
             </div>
             <img class="govern-rule-img" src="/govern-rule-img.svg"/>
             <div>
@@ -291,10 +293,9 @@ export default {
                 step4Hint: `
                 This setting configures the basic information of the project and determines the total supply of the Proof of Stake token on our platform. All the fee is calculated using the hard cap fund size as the parameter.  
                 `,
-             
                 contractAddress: 'Contract Address',
                 projectName: 'Project Name',
-                projectNameHint: '*Give it a name',
+                projectNameHint: '*Create an eye-catching name for people to find it easily ',
                 projectIntro: 'Project Introduction',
                 projectIntroHint: '*Briefly introduce your project and its advantages, etc. ',
                 within140: 'Within 140 words',
@@ -360,7 +361,19 @@ export default {
                 payFailed: 'Failed',
                 payFailedHint: `
                 Please check your transaction history to find the reason.
-                `
+                `,
+                selectFundraisingMethod: 'Select a Fundraising Method',
+                setFundraiseDate: 'Set the Fundraise Date',
+                setFundraiseTimeframe: ' Set the Fundraise Timeframe',
+                selectFundraisingMethodHint1: 'Once confirmed, the date can not be changed.',
+                selectFundraisingMethodHint2: 'Once confirmed，it will start automatically after auditing.',
+                selectRedemptionMethod: 'Select a Redemption Method ',
+                selectRedemptionMethodValue1: 'Repay the Principal and Interest on the set date',
+                selectRepaymentMethod: 'Select a Repayment Method ',
+                selectRepaymentMethodHint: 'Redeem as the Fund Manager Repays',
+                selectRepaymentMethodHint2: '*A full loan is triggered after the deposit is paid within 3 days of the fundraising. Regular fundraising: The deposit is paid within 3 days after the fundraising is completed, and the full amount is released after 3 days.',
+                conditionalRedemption: 'Conditional redemption',
+                unconditionalRedemption : 'Unconditional redemption ',
             },
             createVote: {
                 hint: `<div class="h1">Create a Voting On a Change in the Process</div>
@@ -441,7 +454,10 @@ export default {
                 rulesBelow: '下方填写释放规则',
                 pdfRequired: '*该文件将会展示在项目详情页中,文件需PDF格式',
                 billHint1: '即将支付最大募集金额0.5%的等值DADA用于审计/验证费用，该费用一经支付不再退还。',
-                billHint2: '创建合约时将会消耗一定的Gas。'
+                billHint2: '创建合约时将会消耗一定的Gas。',
+                maxValue: '最大值',
+                standard: '标准版',
+                customizable: '定制版',
             },
             template: {
                 title: '请选择一个治理模版',
@@ -757,8 +773,19 @@ export default {
                 payFailed: '支付失败',
                 payFailedHint: `
                 请查询链操作记录查看原因
-                `
-
+                `,
+                selectFundraisingMethod: '选择筹款方式',
+                setFundraiseDate: '定期筹款',
+                setFundraiseTimeframe: '定时筹款',
+                selectFundraisingMethodHint1: '*确定筹款日期，无法提前或延后',
+                selectFundraisingMethodHint2: '*确定筹款期限，审核通过自动开始',
+                selectRedemptionMethod: '选择回款方式',
+                selectRedemptionMethodValue1: '到期等额本息',
+                selectRepaymentMethod: '选择取款方式',
+                selectRepaymentMethodHint: '*筹款完成并于3天内支付押金后，发起取款投票，同意票数66%则完成放款。可分为多阶段，多次放款。',
+                selectRepaymentMethodHint2: '*定时筹款：筹款完成3天内支付押金后触发全额放款。定期筹款：筹款完成3天内支付押金，3天期满全额放款。',
+                conditionalRedemption: '有条件取款',
+                unconditionalRedemption : '无条件',
             },
             createVote: {
                 hint: `<div class="h1">现在开始创建一个变更投票</div>

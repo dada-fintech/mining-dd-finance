@@ -18,6 +18,8 @@ export default function Homepage() {
     const [allProjects, setAllProjects] = useState([])
 
     const [featuredProject, setFeaturedProject] = useState({})
+    const [featuredCountdown, setFeaturedCountdown] = useState(0)
+
     const { i18n, t } = useTranslation()
 
     const isEn = i18n.language === 'en'
@@ -48,10 +50,22 @@ export default function Homepage() {
             setProjectList(res.data.filter(item => item.status == 'canInvest'))
             setAllProjects(res.data.filter(item => item.status != 'canInvest'))
 
-            const futureProjects = res.data.filter(item => item.status == 'canInvest')
+            const futureProjects = res.data.filter(item => (item.status == 'canInvest' || item.status == 'raising' || item.status == 'active'))
 
             if (futureProjects.length > 0) {
                 setFeaturedProject(futureProjects[0])
+                const status = futureProjects[0].status
+                const dateNow = new Date().valueOf()
+                let time = 0
+                if (status === 'canInvest') {
+                    time = futureProjects[0].raise_start_time - dateNow
+                } else if (status === 'raising') {
+                    time = futureProjects[0].project_start_time - dateNow
+                } else if (status === 'active') {
+                    time = futureProjects[0].project_end_time - dateNow
+                }
+                setFeaturedCountdown(time)
+
             } else {
                 setFeaturedProject('')
             }
@@ -142,8 +156,8 @@ export default function Homepage() {
                             <Col xs={24} md={10}>
                                 <div className="title">{featuredProject.project_name}</div>
                                 <div className="desc" dangerouslySetInnerHTML={{ __html: toBr(featuredProject.project_profile) }}></div>
-                                {featuredProject.raise_start_time - new Date().valueOf() > 0 && <Countdown timestamp={featuredProject.raise_start_time - new Date().valueOf()} />}
-                                <Progress strokeColor="#4CC16D" status="active" percent={((featuredProject.current_raised_money / featuredProject.max_amount) * 100).toFixed(0)} className="progress-bar" />
+                                {featuredCountdown > 0 && <Countdown timestamp={featuredCountdown} />}
+                                {(featuredProject.status === 'raising' || featuredProject.status === 'active') && <Progress strokeColor="#4CC16D" status="active" percent={((featuredProject.current_raised_money / featuredProject.max_amount) * 100).toFixed(0)} className="progress-bar" />}
                                 <a className="join-btn" href={'/project/' + featuredProject.project_uniq_id} key={featuredProject.project_uniq_id}>{t('common.joinNow')}</a>
                             </Col>
                             <Col xs={24} md={14}>

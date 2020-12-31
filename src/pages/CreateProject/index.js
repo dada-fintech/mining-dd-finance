@@ -650,7 +650,7 @@ export default function CreateProject() {
                     <Header breadCrumb={['Crypto Mining', 'Create DAO']} />
                     <div className="card-board">
                         <ul className="breadcrumb">
-                            {sidebarList.map((item, index) => <li className={(currentStep >= item.step ? 'done' : '')}>
+                            {sidebarList.map((item, index) => <li key={index} className={(currentStep >= item.step ? 'done' : '')}>
                                 <span>{item.name}</span>
                             </li>)}
                         </ul>
@@ -697,15 +697,15 @@ export default function CreateProject() {
                             </div>
                         </div>}
                         {currentStep === 3 && tempType === 'close' && <div>
-                            <div className="h1">{sidebarList[1].name}(闭合式)</div>
+                            <div className="h1">{sidebarList[1].name}({t('common.standard')})</div>
                             <div dangerouslySetInnerHTML={{ __html: t('createProject.closeGovernRule') }}></div>
                         </div>}
                         {currentStep === 3 && tempType === 'open' && <div>
-                            <div className="h1">{sidebarList[1].name}(开放式)</div>
+                            <div className="h1">{sidebarList[1].name}({t('common.customizable')})</div>
                             <div dangerouslySetInnerHTML={{ __html: t('createProject.openGovernRule') }}></div>
                         </div>}
                         {currentStep === 4 && tempType === 'close' && <div>
-                            <div className="h1">{sidebarList[1].name}(闭合式)</div>
+                            <div className="h1">{sidebarList[1].name}({t('common.standard')})</div>
                             <img src="/govern-rule-img.svg" className="govern-rule-img" />
                             <Row type="flex" align="middle" style={{ marginBottom: '32px' }}>
                                 <Col md={12}>
@@ -727,7 +727,7 @@ export default function CreateProject() {
 
 
                             {processList.map((item, index) => <>
-                                <div className="assets-rule-item">
+                                <div className="assets-rule-item" key={index}>
                                     <div className="asset-id"># {index + 1}</div>
                                     {processList.length > 1 && <Popconfirm title={t('createProject.sureToDelete')} onConfirm={() => { removeProcess(index) }}><CloseCircleOutlined className="remove-btn" /></Popconfirm>}
                                     <Row gutter={24}>
@@ -763,20 +763,20 @@ export default function CreateProject() {
 
                         </div>}
                         {currentStep === 4 && tempType === 'open' && <div>
-                            <div className="h1">{sidebarList[1].name}(开放式)</div>
+                            <div className="h1">{sidebarList[1].name}({t('common.customizable')})</div>
                             <div className="form-block">
                                 <div className="form-item">
-                                    <div className="label">选择筹款方式</div>
+                                    <div className="label">{t('createProject.selectFundraisingMethod')}</div>
                                     <Radio.Group className="btn-tabs" value={raisingMethod} onChange={(e) => setRaisingMethod(e.target.value)}>
-                                        <Radio.Button value="1">定期筹款</Radio.Button>
-                                        <Radio.Button value="2">定时筹款</Radio.Button>
+                                        <Radio.Button value="1">{t('createProject.setFundraiseDate')}</Radio.Button>
+                                        <Radio.Button value="2">{t('createProject.setFundraiseTimeframe')}</Radio.Button>
                                     </Radio.Group>
                                     {raisingMethod === '1' && <div className="hint">
-                                        *确定筹款日期，无法提前或延后
-                                </div>}
+                                        {t('createProject.selectFundraisingMethodHint1')}
+                                    </div>}
                                     {raisingMethod === '2' && <div className="hint">
-                                        *确定筹款期限，审核通过自动开始
-                                </div>}
+                                        {t('createProject.selectFundraisingMethodHint2')}
+                                    </div>}
 
                                 </div>
                                 {raisingMethod === '1' && <div className="form-item">
@@ -790,9 +790,9 @@ export default function CreateProject() {
 
                             <div className="form-block">
                                 <div className="form-item">
-                                    <div className="label">选择回款方式</div>
+                                    <div className="label">{t('createProject.selectRedemptionMethod')}</div>
                                     <Radio.Group className="btn-tabs" value={repayMethod} onChange={(e) => setRepayMethod(e.target.value)}>
-                                        <Radio.Button value="1">到期等额本息</Radio.Button>
+                                        <Radio.Button value="1">{t('createProject.selectRedemptionMethodValue1')}</Radio.Button>
                                         {/* <Radio.Button value="2">随还随取</Radio.Button> */}
                                     </Radio.Group>
                                 </div>
@@ -804,14 +804,15 @@ export default function CreateProject() {
 
                             <div className="form-block">
                                 <div className="form-item">
-                                    <div className="label">选择取款方式</div>
+                                    <div className="label">{t('createProject.selectRepaymentMethod')}</div>
                                     <Radio.Group className="btn-tabs" value={withdrawMethod} onChange={(e) => setWithdrawMethod(e.target.value)}>
-                                        <Radio.Button value="1">有条件取款</Radio.Button>
-                                        <Radio.Button value="2">无条件取款</Radio.Button>
+                                        <Radio.Button value="1">{t('createProject.conditionalRedemption')}</Radio.Button>
+                                        <Radio.Button value="2">{t('createProject.unconditionalRedemption')}</Radio.Button>
                                     </Radio.Group>
                                     <div className="hint">
-                                        *筹款完成并于3天内支付押金后，发起取款投票，同意票数66%则完成放款<br />可分为多阶段，多次放款
-                                </div>
+                                        {withdrawMethod === '1' && t('createProject.selectRepaymentMethodHint')}
+                                        {withdrawMethod === '2' && t('createProject.selectRepaymentMethodHint')}
+                                    </div>
                                 </div>
                             </div>
                         </div>}
@@ -821,7 +822,6 @@ export default function CreateProject() {
                                 <div className="label ">{t('common.apy')}</div>
                                 <InputNumber formatter={value => `${value ? value : 0} %`} parser={value => parseInt(value)} value={fundraising.expected_apy} onChange={e => changeFundraising('expected_apy', e)} style={{ width: '180px' }} />
                             </div>
-
                             <div className="form-item">
                                 <div className="label">{t('createProject.fundraisingLimit')}</div>
                                 <Input value={fundraising.max_amount} onChange={e => changeFundraising('max_amount', e.target.value)} style={{ width: '300px' }} suffix="USDT" />
@@ -1041,7 +1041,7 @@ export default function CreateProject() {
                                 <div>{t('common.billHint2')}</div>
                             </div>
                         </div>}
-                        {currentStep === 10 && <div className="step-pay">
+                        {currentStep === 10 && <div className="step-pay text-center">
                             {payStatus === 'success' && <>
                                 <div className="dada-circle success">
                                     {t('createProject.paySuccess')}
