@@ -12,19 +12,19 @@ export default function Countdown(props) {
             <div className="num">
                 <Timer.Days />
             </div>
-            <div className="unit">天</div>
+            <div className="unit">{t('common.days')}</div>
             <div className="num">
                 <Timer.Hours />
             </div>
-            <div className="unit">时</div>
+            <div className="unit">{t('common.hours')}</div>
             <div className="num">
                 <Timer.Minutes />
             </div>
-            <div className="unit">分</div>
+            <div className="unit">{t('common.minutes')}</div>
             <div className="num">
                 <Timer.Seconds />
             </div>
-            <div className="unit">秒</div>
+            <div className="unit">{t('common.seconds')}</div>
         </Timer>}
 
     </div >)

@@ -52,6 +52,10 @@ export default {
                 maxValue: 'Max value',
                 standard: 'Static',
                 customizable: 'Dynamic',
+                days: 'Days',
+                hours: 'Hours',
+                minutes: 'Minutes',
+                seconds: 'Seconds',
             },
             template: {
                 title: 'Choose a Governing Template',
@@ -458,6 +462,10 @@ export default {
                 maxValue: '最大值',
                 standard: '标准版',
                 customizable: '定制版',
+                days: '天',
+                hours: '时',
+                minutes: '分',
+                seconds: '秒',
             },
             template: {
                 title: '请选择一个治理模版',

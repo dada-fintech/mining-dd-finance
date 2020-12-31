@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import Timer from 'react-compound-timer'
+// import Timer from 'react-compound-timer'
 import { Input } from 'antd'
 
 import './style.scss'
@@ -56,12 +56,12 @@ export default function Timespan(props) {
 
     return (<div className="timespan">
         <Input className="num" value={days} onChange={(e) => { timeChange(e.target.value, 'days') }} />
-        <div className="unit">天</div>
+        <div className="unit">{t('common.days')}</div>
         <Input className="num" value={hours} onChange={(e) => { timeChange(e.target.value, 'hours') }} />
-        <div className="unit">时</div>
+        <div className="unit">{t('common.hours')}</div>
         <Input className="num" value={minutes} onChange={(e) => { timeChange(e.target.value, 'minutes') }} />
-        <div className="unit">分</div>
+        <div className="unit">{t('common.minutes')}</div>
         <Input className="num" value={seconds} onChange={(e) => { timeChange(e.target.value, 'seconds') }} />
-        <div className="unit">秒</div>
+        <div className="unit">{t('common.seconds')}</div>
     </div >)
 }
