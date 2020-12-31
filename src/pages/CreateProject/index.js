@@ -42,7 +42,34 @@ export default function CreateProject() {
     const { t, i18n } = useTranslation()
 
     const sidebarList = i18n.language === 'en' ? [
-        '项目信息', '治理规则', '筹集规则', '治理地址', '上传文件', '确认信息', '支付审计费用'
+        {
+            name: 'Project Info',
+            step: 1
+        },
+        {
+            name: 'Governance Rules',
+            step: 3
+        },
+        {
+            name: 'Fundraising Rules',
+            step: 5
+        },
+        {
+            name: 'Governing Address',
+            step: 6
+        },
+        {
+            name: 'Upload Files',
+            step: 7
+        },
+        {
+            name: 'Confirmation',
+            step: 8
+        },
+        {
+            name: 'Auditing Fee Payment',
+            step: 9
+        },
     ] : [
             {
                 name: '项目信息',
@@ -616,7 +643,7 @@ export default function CreateProject() {
     return (<div className="create-project-page">
         <Row>
             <Col md={5} lg={4} xs={0} xxl={3}>
-                <AppSidebar hideCreate={true}/>
+                <AppSidebar hideCreate={true} />
             </Col>
             <Col md={19} lg={20} xs={24} xxl={21}>
                 <div className="content-wrapper">
@@ -630,8 +657,7 @@ export default function CreateProject() {
                         {currentStep === 0 && <div className="step-0" dangerouslySetInnerHTML={{ __html: t('createProject.hint') }}>
                         </div>}
                         {currentStep === 1 && <div className="step-1">
-                            <div className="h1">请录入项目信息</div>
-
+                            <div className="h1">{sidebarList[0].name}</div>
                             <div className="form-item">
                                 <div className="label">{t('createProject.managerName')}</div>
                                 <Input value={projectInfo.creater_name} onChange={(e) => { changeProjectInfo('creater_name', e.target.value) }} style={{ width: '360px' }} />
@@ -648,7 +674,7 @@ export default function CreateProject() {
                             </div>
                         </div>}
                         {currentStep === 2 && <div className="step-1">
-                            <div className="h1">请录入项目信息</div>
+                            <div className="h1">{sidebarList[0].name}</div>
                             <div className="form-item">
                                 <div className="label ">{t('createProject.projectName')}</div>
                                 <Input value={projectInfo.project_name} onChange={(e) => { changeProjectInfo('project_name', e.target.value) }} style={{ width: '360px' }} />
@@ -671,15 +697,15 @@ export default function CreateProject() {
                             </div>
                         </div>}
                         {currentStep === 3 && tempType === 'close' && <div>
-                            <div className="h1">请设定治理规则(闭合式)</div>
+                            <div className="h1">{sidebarList[1].name}(闭合式)</div>
                             <div dangerouslySetInnerHTML={{ __html: t('createProject.closeGovernRule') }}></div>
                         </div>}
                         {currentStep === 3 && tempType === 'open' && <div>
-                            <div className="h1">请设定治理规则(开放式)</div>
+                            <div className="h1">{sidebarList[1].name}(开放式)</div>
                             <div dangerouslySetInnerHTML={{ __html: t('createProject.openGovernRule') }}></div>
                         </div>}
                         {currentStep === 4 && tempType === 'close' && <div>
-                            <div className="h1">请设定治理规则(闭合式)</div>
+                            <div className="h1">{sidebarList[1].name}(闭合式)</div>
                             <img src="/govern-rule-img.svg" className="govern-rule-img" />
                             <Row type="flex" align="middle" style={{ marginBottom: '32px' }}>
                                 <Col md={12}>
@@ -689,7 +715,7 @@ export default function CreateProject() {
                                     </div>
                                 </Col>
                                 <Col md={6}>
-                                    下方填写释放规则
+                                    {t('common.rulesBelow')}
                                 </Col>
                                 <Col md={6}>
                                     <div className="form-item" style={{ marginTop: '0' }}>
@@ -737,7 +763,7 @@ export default function CreateProject() {
 
                         </div>}
                         {currentStep === 4 && tempType === 'open' && <div>
-                            <div className="h1">请设定治理规则(开放式)</div>
+                            <div className="h1">{sidebarList[1].name}(开放式)</div>
                             <div className="form-block">
                                 <div className="form-item">
                                     <div className="label">选择筹款方式</div>
@@ -790,7 +816,7 @@ export default function CreateProject() {
                             </div>
                         </div>}
                         {currentStep === 5 && <div>
-                            <div className="h1">请设定经济治理规则</div>
+                            <div className="h1">{sidebarList[2].name}</div>
                             <div className="form-item">
                                 <div className="label ">{t('common.apy')}</div>
                                 <InputNumber formatter={value => `${value ? value : 0} %`} parser={value => parseInt(value)} value={fundraising.expected_apy} onChange={e => changeFundraising('expected_apy', e)} style={{ width: '180px' }} />
@@ -817,7 +843,7 @@ export default function CreateProject() {
 
                         </div>}
                         {currentStep === 6 && <div>
-                            <div className="h1">请设定经济治理地址</div>
+                            <div className="h1">{sidebarList[3].name}</div>
                             <div className="form-item">
                                 <div className="label ">{t('createProject.nameOfToken')}</div>
                                 <Input style={{ width: '360px' }} value={projectInfo.project_token_symbol} onChange={(e) => { changeProjectInfo('project_token_symbol', e.target.value) }} />
@@ -846,7 +872,7 @@ export default function CreateProject() {
                             </div>
                         </div>}
                         {currentStep === 7 && <div className="step-3">
-                            <div className="h1">请上传相关文件</div>
+                            <div className="h1">{sidebarList[4].name}</div>
                             <div className="form-item">
                                 <div className="label ">{t('createProject.uploadPlan')}</div>
                                 <Upload {...whitePaperUpload}>
@@ -857,7 +883,7 @@ export default function CreateProject() {
                                     {projectInfo.white_paper.file_name.slice(10)} <CloseCircleOutlined onClick={() => { removeWhitePaper() }} />
                                 </div>}
                                 <div className="hint">
-                                    *该文件将会展示在项目详情页中,文件需PDF格式
+                                    {t('common.pdfRequired')}
                                 </div>
                             </div>
                             <div className="form-item">
@@ -883,7 +909,7 @@ export default function CreateProject() {
 
                         </div>}
                         {currentStep === 8 && <div className="step-6">
-                            <div className="h1">请确认您所填写的信息</div>
+                            <div className="h1">{sidebarList[5].name}</div>
                             <div className="confirm-box confirm-box-long" style={{ marginBottom: '72px' }}>
                                 <div className="line">
                                     <div className="name">{t('createProject.projectName')}</div>
@@ -1004,15 +1030,15 @@ export default function CreateProject() {
                         </div>}
 
                         {currentStep === 9 && <div className="step-pay">
-                            <div className="h1">支付审计费用</div>
-                            <div>您需要支付 <span className="num">{approveBalance}</span> USDT
+                            <div className="h1">{sidebarList[6].name}</div>
+                            <div>{t('common.yourBill')} <span className="num">{approveBalance}</span> USDT
                                 {dadaApproved ? <div onClick={() => { !createLoading && doPay() }} className="btn-pay"> <span className="text">{t('common.pay')}</span></div>
                                     : <div onClick={() => { !createLoading && doApprove() }} className="btn-pay"> <span className="text">{t('common.approve')} {createLoading && <LoadingOutlined />}</span></div>}
                             </div>
-                            <div>您的余额 <span className="num">{USDTBalance}</span> USDT</div>
+                            <div>{t('common.yourBalance')} <span className="num">{USDTBalance}</span> USDT</div>
                             <div className="hint">
-                                <div>即将支付最大募集金额0.5%的等值DADA用于审计/验证费用，该费用一经支付不再退还。</div>
-                                <div>创建合约时将会消耗一定的Gas。</div>
+                                <div>{t('common.billHint1')}</div>
+                                <div>{t('common.billHint2')}</div>
                             </div>
                         </div>}
                         {currentStep === 10 && <div className="step-pay">

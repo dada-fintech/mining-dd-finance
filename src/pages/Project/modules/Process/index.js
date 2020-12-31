@@ -77,13 +77,13 @@ export default function Process(props) {
                     </div> : <div className="text-area">
                             <div>
                                 <div className="value">{process.unlock_percentage}%</div>
-                                <div className="title">解锁比例</div>
+                                <div className="title">{t('project.unlockingPercent')}</div>
                             </div>
                         </div>}
                 </div>
                 <div className="right">
-                    {(process.status === 'VoteNotice' || process.status === 'VoteReplanFailed' || process.status === 'VoteReplanPassed' || process.status === 'VoteReplaning') ? <div className="title">变更计划</div> : <div className="title">{t('project.progress')} #{index + 1}</div>}
-                    <div className={`status ${process.status}`}><span className="title">状态: </span>{statusMapping[process.status]}</div>
+                    {(process.status === 'VoteNotice' || process.status === 'VoteReplanFailed' || process.status === 'VoteReplanPassed' || process.status === 'VoteReplaning') ? <div className="title">{t('common.changePlan')}</div> : <div className="title">{t('project.progress')} #{index + 1}</div>}
+                    <div className={`status ${process.status}`}><span className="title">{t('project.status')}: </span>{statusMapping[process.status]}</div>
                     <div className="desc" dangerouslySetInnerHTML={{ __html: toBr(process.description) }}>
                     </div>
                     {(process.status === 'Active' || process.status === 'VoteReplaning') && <>

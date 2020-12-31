@@ -250,7 +250,7 @@ export default function Project() {
                         <div className="title">{project.project_info.project_name}</div>
                         <div className="date">
                             {new Date(project.project_info.income_settlement_time).toLocaleDateString()}
-                            <div className="hint">开放赎回</div>
+                            <div className="hint">{t('createProject.redemptionDate')}</div>
                         </div>
                         <Button className="btn-green" onClick={() => { setEmail(''); setSubscribeVisible(true) }}>{t('sidebar.subscribe')}</Button>
                     </div>
@@ -258,38 +258,37 @@ export default function Project() {
                         <Col xs={24} md={12} lg={4}>
                             <div className="info-item">
                                 <div className="value">{project.fundraising.expected_apy}%</div>
-                                <div className="title">年化收益率</div>
+                                <div className="title">{t('common.apy')}</div>
                             </div>
                         </Col>
                         <Col xs={24} md={12} lg={4}>
                             <div className="info-item">
                                 <div className="value">{parseInt((project.project_info.income_settlement_time - project.fundraising.end_time) / 1000 / 60 / 60 / 24)}天</div>
-                                <div className="title">项目周期</div>
+                                <div className="title">{t('sidebar.cycle')}</div>
                             </div>
                         </Col>
                         <Col xs={24} md={12} lg={4}>
                             <div className="info-item">
-                                <div className="value">到期还本付息</div>
-
-                                <div className="title">收益方式</div>
+                                <div className="value">{t('common.redemption')}</div>
+                                <div className="title">{t('common.repaymentModel')}</div>
                             </div>
                         </Col>
                         <Col xs={24} md={12} lg={4}>
                             <div className="info-item">
-                                <div className="value">{project.fundraising.current_raised_money} USDT</div>
-                                <div className="title">已筹款</div>
+                                <div className="value">{project.fundraising.min_amount} USDT</div>
+                                <div className="title">{t('common.softCap')}</div>
                             </div>
                         </Col>
                         <Col xs={24} md={12} lg={4}>
                             <div className="info-item">
                                 <div className="value">{project.fundraising.max_amount} USDT</div>
-                                <div className="title">项目总额</div>
+                                <div className="title">{t('common.fundSize')}</div>
                             </div>
                         </Col>
                         <Col xs={24} md={12} lg={4}>
                             <div className="info-item">
                                 <div className="value">{statusMapping[project.project_info.status]}</div>
-                                <div className="title">项目状态</div>
+                                <div className="title">{t('project.status')}</div>
                             </div>
                         </Col>
                     </Row>
@@ -300,7 +299,7 @@ export default function Project() {
                                     <div className="stage-block">
                                         {statusMapping[nextStatus] && <div>
                                             <div className="title">
-                                                下一阶段
+                                                {t('common.nextStage')}
                                             </div>
                                             <div>
                                                 {statusMapping[nextStatus]}
@@ -309,7 +308,7 @@ export default function Project() {
 
                                         <div>
                                             <div className="title">
-                                                当前阶段
+                                                {t('common.currentStage')}
                                             </div>
                                             <div>
                                                 {statusMapping[project.project_info.status]}
@@ -349,10 +348,10 @@ export default function Project() {
                                         </div>
                                         <div className="votes-info">
                                             <div>
-                                                当前投资:{project.fundraising.current_raised_money} USDT
+                                                {t('common.currentRaised')}:{project.fundraising.current_raised_money} USDT
                                         </div>
                                             <div>
-                                                募集总额:{project.fundraising.max_amount} USDT
+                                                {t('common.fundSize')}:{project.fundraising.max_amount} USDT
                                         </div>
                                         </div>
                                         {/* <div className="process-tag" style={{ marginLeft: (project.percent > 50 ? (project.percent - 5) : project.percent) + '%' }}>

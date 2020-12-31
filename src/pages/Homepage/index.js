@@ -18,7 +18,7 @@ export default function Homepage() {
     const [allProjects, setAllProjects] = useState([])
 
     const [featuredProject, setFeaturedProject] = useState({})
-    const { i18n } = useTranslation()
+    const { i18n, t } = useTranslation()
 
     const isEn = i18n.language === 'en'
     const statusMapping = {
@@ -60,12 +60,12 @@ export default function Homepage() {
 
     const columns = [
         {
-            title: '项目名称（代币名称）',
+            title: t('project.name'),
             dataIndex: 'project_name',
             key: 'project_name',
         },
         {
-            title: '状态',
+            title: t('project.status'),
             dataIndex: 'status',
             key: 'status',
             render: props => (
@@ -75,7 +75,7 @@ export default function Homepage() {
             )
         },
         {
-            title: '年化收益率',
+            title: t('common.apy'),
             dataIndex: 'expected_apy',
             key: 'expected_apy',
             render: (props) => (
@@ -85,10 +85,9 @@ export default function Homepage() {
             )
         },
         {
-            title: '项目周期',
+            title: t('sidebar.cycle'),
             dataIndex: 'end_time',
             key: 'end_time',
-            // todo, 这里要改
             render: (props, record) => (
                 <div>
                     {new Date(record.project_start_time).toLocaleDateString()} - {new Date(record.project_end_time).toLocaleDateString()}
@@ -99,10 +98,9 @@ export default function Homepage() {
             title: ' ',
             dataIndex: 'action',
             key: 'action',
-            // todo, 这里要改
             render: (props, record) => (
                 <Link to={`/project/${record.project_uniq_id}`}>
-                    详情
+                    {t('common.detail')}
                 </Link>
             )
         },
@@ -146,7 +144,7 @@ export default function Homepage() {
                                 <div className="desc" dangerouslySetInnerHTML={{ __html: toBr(featuredProject.project_profile) }}></div>
                                 {featuredProject.raise_start_time - new Date().valueOf() > 0 && <Countdown timestamp={featuredProject.raise_start_time - new Date().valueOf()} />}
                                 <Progress strokeColor="#4CC16D" status="active" percent={((featuredProject.current_raised_money / featuredProject.max_amount) * 100).toFixed(0)} className="progress-bar" />
-                                <a className="join-btn" href={'/project/' + featuredProject.project_uniq_id} key={featuredProject.project_uniq_id}>立即参与</a>
+                                <a className="join-btn" href={'/project/' + featuredProject.project_uniq_id} key={featuredProject.project_uniq_id}>{t('common.joinNow')}</a>
                             </Col>
                             <Col xs={24} md={14}>
                                 <img src={HomepageBanner} className="homepage-banner" />
@@ -163,15 +161,15 @@ export default function Homepage() {
                                         <div className="desc" dangerouslySetInnerHTML={{ __html: toBr(item.project_profile) }}>
                                         </div>
                                         <Progress strokeColor="#4CC16D" status="active" percent={((item.current_raised_money / item.max_amount) * 100).toFixed(0)} className="progress-bar" />
-                                        <a className="join-btn" href={'/project/' + item.project_uniq_id} key={item.project_uniq_id}>立即参与</a>
+                                        <a className="join-btn" href={'/project/' + item.project_uniq_id} key={item.project_uniq_id}>{t('common.joinNow')}</a>
                                         <div className="date-wrapper">
                                             <div>
                                                 <div>{formatTime(item.raise_start_time)}</div>
-                                                <div className="date-title">开始时间</div>
+                                                <div className="date-title">{t('common.startTime')}</div>
                                             </div>
                                             <div>
                                                 <div>{formatTime(item.project_end_time)}</div>
-                                                <div className="date-title">结束时间</div>
+                                                <div className="date-title">{t('common.startTime')}</div>
                                             </div>
                                         </div>
                                     </div>

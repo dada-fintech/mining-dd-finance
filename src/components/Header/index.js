@@ -56,7 +56,7 @@ export default function Header(props) {
             <nav>
                 {role ? (<div className="role">
                     {role === 'manager' ? t('project.role.manager') : (role === 'committee' ? t('project.role.committee') : (role === 'invester' ? t('project.role.supporter') : t('project.role.visitor')))}
-                    <div className="title">角色</div>
+                    <div className="title">{t('common.role')}</div>
                 </div>) : ''}
                 {wallet.status === 'connected' ? <Tooltip title={wallet.account}>
                     {wallet.account && <a className="line-btn">{wallet.account.slice(0, 4) + '...' + wallet.account.slice(-4)}</a>}

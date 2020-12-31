@@ -38,20 +38,20 @@ export default function AppSidebar(props) {
             </a>
             <ul className="nav">
                 <li>
-                    <Link to="/projects"><img src={CryptoMiningIcon} />Crypto Mining</Link>
+                    <Link to="/projects"><img src={CryptoMiningIcon} />{t('sidebar.cryptoMining')}</Link>
                     {!hideCreate && <a onClick={() => { setShowTemplateChoose(true) }}>
-                        <div className="btn-create">Create</div>
+                        <div className="btn-create">{t('sidebar.create')}</div>
                     </a>}
                 </li>
-                <li><Link to="/coming/swap"><img src={MiningSwapIcon} />Mining Swap</Link></li>
-                <li><Link to="/coming/dashboard"><img src={DashboardIcon} />Dashboard</Link></li>
+                <li><Link to="/coming/swap"><img src={MiningSwapIcon} />{t('sidebar.miningSwap')}</Link></li>
+                <li><Link to="/coming/dashboard"><img src={DashboardIcon} />{t('sidebar.dashboard')}</Link></li>
             </ul>
             <ul className="nav second">
                 <li>
-                    <Link to="/coming/overview"><img src={OverviewIcon} />Overview</Link>
+                    <Link to="/coming/overview"><img src={OverviewIcon} />{t('sidebar.overview')}</Link>
                 </li>
-                <li><Link to="/coming/quick-swap"><img src={QuickSwapIcon} />Quick Swap</Link></li>
-                <li><Link to="/coming/governance"><img src={GovernanceIcon} />Governance</Link></li>
+                <li><Link to="/coming/quick-swap"><img src={QuickSwapIcon} />{t('sidebar.quickSwap')}</Link></li>
+                <li><Link to="/coming/governance"><img src={GovernanceIcon} />{t('sidebar.governance')}</Link></li>
             </ul>
         </div>
         <div className="bottom">

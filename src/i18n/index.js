@@ -31,6 +31,42 @@ export default {
                 agree: 'Agree',
                 disagree: 'Disagree',
                 yourBalance: 'Your balance',
+                yourBill: 'Your Bill',
+                detail: 'Detail',
+                joinNow: 'Join Now',
+                startTime: 'Start Time',
+                endTime: 'End Time',
+                redemption: 'Redemption',
+                repaymentModel: 'Repayment Model',
+                fundSize: 'Fund Size',
+                softCap: 'Softcap',
+                currentStage: 'Current Stage',
+                nextStage: 'Next Stage',
+                currentRaised: 'Current Raised',
+                role: 'Role',
+                changePlan: 'Change Plan',
+                rulesBelow: 'Enter rules below',
+                pdfRequired: '*Only PDF format is supported',
+                billHint1: 'You will be paying 0.5% of the hard cap in DADA for the auditing and verification fee. The fee is nonrefundable. ',
+                billHint2: 'Creating smart contracts will cost a certain amount of Gas.  '
+
+            },
+            template: {
+                title: 'Choose a Governing Template',
+                select: 'Select this template',
+                fundraisingRules: 'Fundraising Rules',
+                unlockRules: 'Unlock Rules',
+                redemptionRules: 'Redemption Rules',
+                open: {
+                    1: 'Choose a fundraising type according to your plan: set the fundraising timeframe by dates or the number of days.',
+                    2: 'Propose to unlocking the capital; Investors vote to pass the proposal. No pre-setting is required.',
+                    3: 'The investors redeem the principal and interests in the redemption days. '
+                },
+                close: {
+                    1: 'Create a thorough fundraising plan, softcap and hardcap. ',
+                    2: 'Reset the fund release rules according to the plan.',
+                    3: 'Preset the redemption date and send the repayment before the deadline.'
+                }
             },
             hint: {
                 projectsEmpty: 'New project is in preparation, stay tuned.',
@@ -57,12 +93,6 @@ export default {
                 Projects that passed the audit will be insured by SAFD. <br/>
                 Projects that did not pass the audit will be canceled. 
                 `,
-
-
-
-
-
-
 
             },
             homepage: {
@@ -133,6 +163,13 @@ export default {
                 subscribe: 'Subscribe',
                 enterEmail: 'Please enter email address',
                 bonus: 'Bonus',
+                cryptoMining: 'Crypto Mining',
+                miningSwap: 'Mining Swap',
+                dashboard: 'Dashboard',
+                overview: 'Overview',
+                quickSwap: 'Quick Swap',
+                governance: 'Governance',
+                create: 'Create',
             },
             banner: {
                 title: 'Mining Ecosystem Aggregator',
@@ -159,6 +196,7 @@ export default {
                 vote: 'Vote',
                 comments: 'Comments',
                 unlockingAmount: 'Unlocking Amount',
+                unlockingPercent: 'Unlocking Percent',
                 unlockingTime: 'Unlocking Time',
                 voteTime: 'Vote Time',
                 event: 'Event',
@@ -170,6 +208,7 @@ export default {
                 status: 'Status',
                 roles: 'Roles',
                 launchTime: 'Launch Time',
+                name: 'Project Name',
                 role: {
                     manager: 'Fund Manager',
                     supporter: 'Fund Constituent',
@@ -202,28 +241,28 @@ export default {
                 </div>
                 `,
                 closeGovernRule: `
-                <div>很好！您已经完成了基本信息的录入。<br/>
-                接下来，将会引导您设定项目的<span class="red">治理规则</span>。</div>
+                <div>You have filled in the basic information. <br/>
+                Next, we guide you through setting the <span class="red">governance rules</span> for the project. </div>
                 <br/>
                 <div>
-                <strong>首先，需要了解治理规则的基本模板</strong><br/>
+                <strong>First, here is a template for the core steps: </strong><br/>
                     1.审批阶段：所有提交的项目均需要通过专业委员会审批通过方可进入下一阶段（创建后5天内）。<br/>
                     2.筹款阶段：筹款完成的3天内，需要支付项目筹集最大额度10%的DADA方可进入下一阶段。<br/>
                     3.治理阶段：根据设定的款项释放规则，每次需要获得50%以上的同意票（未参与投票默认视为同意），方可进入下一阶段。<br/>
                 </div>
                 <img class="govern-rule-img" src="/govern-rule-img.svg"/>
                 <div>
-                <strong>其次，以下为需要设定的日期</strong><br/>
-                    1.筹款开始日期：需为创建日期5天后。<br/>
-                    2.筹款结束日期：筹款结束后，项目开始计算收益。<br/>
-                    3.治理阶段各投票日期：首次款项释放无需投票。<br/>
-                    4.治理阶段各款项释放日期：首次款项释放需要设定，后续款项释放均为投票结束时。<br/>
-                    5.赎回日期：赎回日期前需将本金及收益打入合约地址，以便于投资人赎回本金及收益。<br/>
+                <strong>Next: you need to set certain important dates: </strong><br/>
+                    1.tarting date of the fundraise: it needs to be 5 days after the date that the project is created. <br/>
+                    2.Ending date of the fundraise: as soon as the fundraise ends, the calculation of the profits starts. <br/>
+                    3.Voting Dates: the first capital unlock does not require voting. <br/>
+                    4.Voting Dates for Unlocking the Capitals: preset the first capital unlock date; the following capital unlocks occur after the voting ends.<br/>
+                    5.Redemption Date: send the principal and profits to the smart contract address, so that the investors can redeem their assets. <br/>
                 </div>
             `,
-            openGovernRule: `
-            <div>很好！您已经完成了基本信息的录入。<br/>
-            接下来，将会引导您设定项目的<span class="red">治理规则</span>。</div>
+                openGovernRule: `
+            <div>You have filled in the basic information. <br/>
+            Next, we guide you through setting the <span class="red">governance rules</span> for the project. </div>
             <br/>
             <div>
             <strong>首先，需要了解治理规则的基本模板</strong><br/>
@@ -233,10 +272,10 @@ export default {
             </div>
             <img class="govern-rule-img" src="/govern-rule-img.svg"/>
             <div>
-            <strong>其次，以下为需要设定的日期</strong><br/>
-                1.筹款开始日期：需为创建日期5天后。<br/>
-                2.筹款结束日期：筹款结束后，项目开始计算收益。<br/>
-                3.赎回日期：赎回日期前需将本金及收益打入合约地址，以便于投资人赎回本金及收益。<br/>
+            <strong>Next: you need to set certain important dates:</strong><br/>
+            1.tarting date of the fundraise: it needs to be 5 days after the date that the project is created. <br/>
+            2.Ending date of the fundraise: as soon as the fundraise ends, the calculation of the profits starts. <br/>
+            3.Redemption Date: send the principal and profits to the smart contract address, so that the investors can redeem their assets. <br/>
             </div>
             `,
                 step1Hint: 'This form will be displayed on the project details page. All the information below is required. Please fill in your Business Plan and upload it as a PDF. ',
@@ -252,12 +291,10 @@ export default {
                 step4Hint: `
                 This setting configures the basic information of the project and determines the total supply of the Proof of Stake token on our platform. All the fee is calculated using the hard cap fund size as the parameter.  
                 `,
-                step5Hint: `
-                该设置需要添加更多其他关于项目的证明文件，包括但不限于项目计划书、合规性文件、业绩证明、身份证明等，可以为您的项目顺利开展提供更多的支持。
-                `,
+             
                 contractAddress: 'Contract Address',
                 projectName: 'Project Name',
-                projectNameHint: '*为项目创建一个醒目的名字以便人们找到它',
+                projectNameHint: '*Give it a name',
                 projectIntro: 'Project Introduction',
                 projectIntroHint: '*Briefly introduce your project and its advantages, etc. ',
                 within140: 'Within 140 words',
@@ -387,6 +424,41 @@ export default {
                 agree: '同意',
                 disagree: '拒绝',
                 yourBalance: '余额',
+                yourBill: '您需要支付',
+                detail: '详情',
+                joinNow: '立即参与',
+                startTime: '开始时间',
+                endTime: '结束时间',
+                redemption: '到期还本付息',
+                repaymentModel: '收益方式',
+                fundSize: '项目总额',
+                softCap: '目标总额',
+                currentStage: '当前阶段',
+                nextStage: '下一阶段',
+                currentRaised: '当前投资',
+                role: '角色',
+                changePlan: '变更计划',
+                rulesBelow: '下方填写释放规则',
+                pdfRequired: '*该文件将会展示在项目详情页中,文件需PDF格式',
+                billHint1: '即将支付最大募集金额0.5%的等值DADA用于审计/验证费用，该费用一经支付不再退还。',
+                billHint2: '创建合约时将会消耗一定的Gas。'
+            },
+            template: {
+                title: '请选择一个治理模版',
+                select: '选择该模版',
+                fundraisingRules: '筹款规则',
+                unlockRules: '释放规则',
+                redemptionRules: '赎回规则',
+                open: {
+                    1: '筹款规则：根据项目计划，选择筹款方式：定期筹款和定时筹款。',
+                    2: '释放规则：根据项目推进情况择时发起款项释放，无需预设定，需要通过投资者投票。',
+                    3: '赎回规则：请在创建时选择用户赎回本金及利息的方式：等额本息和随还随取。'
+                },
+                close: {
+                    1: '筹款规则：根据项目策略制定完善的筹款计划及额度。',
+                    2: '释放规则：根据项目计划，预先设定款项释放规则。',
+                    3: '赎回规则：根据项目计划，预先设定回报日期并于规定日期前完成回款。'
+                }
             },
             hint: {
                 projectsEmpty: '项目即将来临，请保持关注。',
@@ -486,6 +558,13 @@ export default {
                 subscribe: '订阅',
                 enterEmail: '请输入邮箱',
                 bonus: '累计奖励',
+                cryptoMining: '矿业项目',
+                miningSwap: '权益交易',
+                dashboard: '数据面板',
+                overview: '数据总览',
+                quickSwap: '代币闪兑',
+                governance: '治理社区',
+                create: '发起项目',
             },
             banner: {
                 title: '矿业生态聚合器',
@@ -513,6 +592,7 @@ export default {
                 vote: '投票',
                 comments: '评论',
                 unlockingAmount: '解锁数额',
+                unlockingPercent: '解锁比例',
                 unlockingTime: '解锁时间',
                 voteTime: '投票时段',
                 event: '进程说明',
@@ -524,6 +604,7 @@ export default {
                 status: '状态',
                 roles: '角色',
                 launchTime: '发起时间',
+                name: '项目名称',
                 role: {
                     manager: '项目管理人',
                     supporter: '项目贡献者&支持者',
@@ -607,9 +688,6 @@ export default {
                 这些设置是用来配置项目的阶段性进展与解锁规则，请根据项目计划分阶段填写解锁计划。<br />
                 关于投票期限及解锁日期请认真填写，所有的变更计划只能在进程间添加，请预留充足的时间并做好计划。<br />
                 该环节为项目治理的重要环节，请务必认真填写。<br />
-                `,
-                step5Hint: `
-                该设置需要添加更多其他关于项目的证明文件，包括但不限于项目计划书、合规性文件、业绩证明、身份证明等，可以为您的项目顺利开展提供更多的支持。
                 `,
                 contractAddress: '合约地址',
                 projectName: '项目名称',
