@@ -548,15 +548,15 @@ export default function CreateProject() {
                 // delete fundraising.start_time;
                 // delete fundraising.end_time
                 if (withdrawMethod === '1') {
-                    templateId = '1'
+                    templateId = config.templateIds[0]
                 } else {
-                    templateId = '2'
+                    templateId = config.templateIds[1]
                 }
             } else if (raisingMethod === '1') {
                 if (withdrawMethod === '1') {
-                    templateId = '3'
+                    templateId = config.templateIds[2]
                 } else {
-                    templateId = '4'
+                    templateId = config.templateIds[3]
                 }
             }
             finalURL += `/project/create-project/${templateId}`

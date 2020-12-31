@@ -8,30 +8,35 @@ import mm from 'components/mm'
 import './style.scss'
 
 export default function ConfirmVote(props) {
-    const params = props.params
+    const { params } = props
     const wallet = useWallet()
     const [loading, setLoading] = useState(false)
     const { t, i18n } = useTranslation()
     const [comment, setComment] = useState('')
     const doAction = () => {
         let target = ''
-        if (params.status === 'Active') {
-            if (params.vote === 'yes') {
-                target = '/project/vote-for-phase'
-            } else {
-                target = '/project/vote-against-phase'
-            }
+        if (params.isTemplate) {
+            target = '/project/vote-proposal'
         } else {
-            if (params.vote === 'yes') {
-                target = '/project/vote-for-replan'
+            params.comment = comment
+            if (params.status === 'Active') {
+                if (params.vote === 'yes') {
+                    target = '/project/vote-for-phase'
+                } else {
+                    target = '/project/vote-against-phase'
+                }
             } else {
-                target = '/project/vote-against-replan'
+                if (params.vote === 'yes') {
+                    target = '/project/vote-for-replan'
+                } else {
+                    target = '/project/vote-against-replan'
+                }
             }
         }
+
         setLoading(true)
         axios.post(target, {
             ...params,
-            comment: comment,
         }).then(res => {
             if (res.data.need_call) {
                 const txnParams = {
@@ -52,7 +57,7 @@ export default function ConfirmVote(props) {
     }
 
     return (
-        <Modal wrapClassName="vote-confirm-modal" footer={null} title={params.status === 'Active' ? t('modal.confirmVoting') : t('modal.confirmChangeVoting')} visible={true} onCancel={() => { props.onCancel() }}>
+        <Modal wrapClassName="vote-confirm-modal" footer={null} title={(params.status === 'Active' || params.isTemplate) ? t('modal.confirmVoting') : t('modal.confirmChangeVoting')} visible={true} onCancel={() => { props.onCancel() }}>
             {/* <div className="hint">You are voting for the following proposal:</div>
             <div className="description">
                 Vote #3 PIP-3 : Unlock 10% in advance for deposit
@@ -76,7 +81,7 @@ export default function ConfirmVote(props) {
                 </div> : <div>
                         确定要投{params.vote === 'yes' ? '同意' : '拒绝'}票吗？
                 </div>}
-                <Input.TextArea value={comment} onChange={(e) => { setComment(e.target.value) }} placeholder="Leave your comment" className="texts" />
+                {!params.isTemplate && <Input.TextArea value={comment} onChange={(e) => { setComment(e.target.value) }} placeholder="Leave your comment" className="texts" />}
             </div>
             <Button loading={loading} className="btn-green" onClick={() => { doAction() }}>{t('common.confirm')}</Button>
         </Modal>

@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import axios from 'utils/axios'
 import AuditModal from './modals/AuditModal'
+import AskModal from './modals/AskModal'
 import AppSidebar from 'components/AppSidebar'
 import RepayModal from './modals/RepayModal'
 import { useWallet } from 'use-wallet'
@@ -17,6 +18,7 @@ import ProcessModule from './modules/Process'
 import mm from 'components/mm'
 import DetailModule from './modules/Detail'
 import Countdown from 'components/Countdown'
+import config from 'config'
 // import { toBr } from 'components/utils'
 // import Timer from 'react-compound-timer'
 
@@ -27,6 +29,7 @@ export default function Project() {
     const [project, setProject] = useState({ fundraising: {}, project_info: {} })
     const [lockNum, setLockedNum] = useState('')
     // const [contract, setContract] = useState('')
+    const [askModalVisible, setAskModalVisible] = useState(false)
     const [auditModalVisible, setAuditModalVisible] = useState(false)
     const [repayModalVisible, setRepayModalVisible] = useState(false)
     const [insuranceModalVisible, setInsuranceModalVisible] = useState(false)
@@ -192,6 +195,13 @@ export default function Project() {
         setAuditModalVisible(true)
     }
 
+    const doAsk = () => {
+        setCurrentParams({
+            project_uniq_id: id
+        })
+        setAskModalVisible(true)
+    }
+
     const doSubscribe = () => {
         if (!email) {
             message.error(t('hint.pleaseInputEmail'))
@@ -324,6 +334,13 @@ export default function Project() {
                                         </div>
                                     </Row>}
 
+
+                                    {project.project_info.status === 'Active' && role === 'manager' && project.fundraising.money_left > 0 && (project.project_info.template_id == config.templateIds[0] || project.project_info.template_id == config.templateIds[2]) && <Row>
+                                        <div className="handle-area">
+                                            <div className="btn-action" onClick={() => { doAsk() }}><span>发起请款</span></div>
+                                        </div>
+                                    </Row>}
+
                                     {project.project_info.status === 'PayingInsurance' && role === 'manager' && <Row>
                                         <div className="handle-area">
                                             <div className="btn-action" onClick={() => { doInsurance() }}><span>{t('project.action.security')}</span></div>
@@ -382,7 +399,7 @@ export default function Project() {
 
                     <div className="bottom-area">
                         <div className="container">
-                            {currentTab === 'process' && <ProcessModule id={id} role={role} processList={project.process || []} />}
+                            {currentTab === 'process' && <ProcessModule id={id} role={role} processList={project.process || []} isTemplate={project.project_info.template_id == config.templateIds[0] || project.project_info.template_id == config.templateIds[2]} />}
                             {currentTab === 'detail' && <DetailModule projectId={id} otherFiles={project.project_info.other_file} fullDesc={project.fullDesc} projectInfo={project.project_info} />}
                         </div>
                     </div>
@@ -390,10 +407,11 @@ export default function Project() {
             </Col>
         </Row>
 
-        { repayModalVisible && <RepayModal params={currentParams} onCancel={() => { setRepayModalVisible(false) }} />}
-        { auditModalVisible && <AuditModal params={currentParams} onCancel={() => { setAuditModalVisible(false) }} />}
-        { insuranceModalVisible && <InsuranceModal params={currentParams} onCancel={() => { setInsuranceModalVisible(false) }} />}
-        {subscribeVisible && <Modal title={t('sidebar.subscribe')} visible={true} onOk={() => { doSubscribe() }} onCancel={() => { setSubscribeVisible(false) }}>
+        { repayModalVisible && <RepayModal params={currentParams} onCancel={() => { setRepayModalVisible(false); getInfo(); }} />}
+        { askModalVisible && <AskModal maxAmount={project.fundraising.money_left} params={currentParams} onCancel={() => { setAskModalVisible(false); getInfo(); }} />}
+        { auditModalVisible && <AuditModal params={currentParams} onCancel={() => { setAuditModalVisible(false); getInfo(); }} />}
+        { insuranceModalVisible && <InsuranceModal params={currentParams} onCancel={() => { setInsuranceModalVisible(false); getInfo(); }} />}
+        {subscribeVisible && <Modal title={t('sidebar.subscribe')} visible={true} onOk={() => { doSubscribe() }} onCancel={() => { setSubscribeVisible(false); getInfo(); }}>
             <div style={{ marginBottom: '4px' }}>
                 {t('sidebar.enterEmail')}
             </div>

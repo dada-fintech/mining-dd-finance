@@ -17,7 +17,7 @@ import './style.scss'
 // )
 
 export default function Process(props) {
-    const { processList, role, id } = props
+    const { processList, role, id, isTemplate } = props
     const [confirmVoteVisible, setConfirmVoteVisible] = useState(false)
     const [currentParams, setCurrentParams] = useState({})
     const wallet = useWallet()
@@ -47,24 +47,46 @@ export default function Process(props) {
     })
 
     const sayYes = (phase_id, status) => {
-        setCurrentParams({
-            project_uniq_id: id,
-            phase_id: phase_id,
-            user_addr: wallet.account,
-            vote: 'yes',
-            status: status,
-        })
+        if (isTemplate) {
+            setCurrentParams({
+                project_uniq_id: id,
+                user_addr: wallet.account,
+                support: true,
+                vote: 'yes',
+                isTemplate: isTemplate,
+            })
+        } else {
+            setCurrentParams({
+                project_uniq_id: id,
+                phase_id: phase_id,
+                user_addr: wallet.account,
+                vote: 'yes',
+                status: status,
+            })
+        }
+
         setConfirmVoteVisible(true)
     }
 
     const sayNo = (phase_id, status) => {
-        setCurrentParams({
-            project_uniq_id: id,
-            phase_id: phase_id,
-            user_addr: wallet.account,
-            vote: 'no',
-            status: status,
-        })
+        if (isTemplate) {
+            setCurrentParams({
+                project_uniq_id: id,
+                user_addr: wallet.account,
+                support: false,
+                vote: 'no',
+                isTemplate: isTemplate,
+            })
+        } else {
+            setCurrentParams({
+                project_uniq_id: id,
+                phase_id: phase_id,
+                user_addr: wallet.account,
+                vote: 'no',
+                status: status,
+            })
+        }
+
         setConfirmVoteVisible(true)
     }
 

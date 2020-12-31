@@ -535,12 +535,18 @@ const commonABI = [
 //     commonABI
 // }
 
+//template_id 1: moneyDao 定时筹款，投票释放
+// template_id 2: moneyDaoFullRelease 定时筹款，全款释放
+// template_id 3: moneyDaoFixRaise 定期筹款，投票释放
+// template_id 4: moneyDaoFixRaiseFullRelease 定期筹款，全款释放
+
 export default {
     provider: 'https://data-seed-prebsc-1-s1.binance.org:8545',
     chainId: 97,
     baseURL: 'https://mining-api-test.dd.finance',
     assetURL: 'https://mining-assets-test.dd.finance',
-    commonABI
+    commonABI,
+    templateIds: ['1', '2', '3', '4']
 }
 
 // export default {
@@ -548,7 +554,8 @@ export default {
 //     chainId: 42,
 //     baseURL: 'https://mining-api-test.dd.finance',
 //     assetURL: 'https://mining-assets-test.dd.finance',
-//     commonABI
+//     commonABI,
+//     templateIds: ['1', '2', '3', '4']
 // }
 
 
