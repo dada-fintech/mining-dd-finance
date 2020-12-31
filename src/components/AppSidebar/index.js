@@ -8,6 +8,7 @@ import TemplateChoose from 'components/TemplateChoose'
 import LogoBlue from "assets/logo-blue.svg";
 import SidebarLogo from "assets/sidebar-logo.svg";
 import CryptoMiningIcon from 'assets/sidebar/crypto-mining.svg'
+import PlusIcon from 'assets/sidebar/plus.svg'
 import MiningSwapIcon from 'assets/sidebar/mining-swap.svg'
 import DashboardIcon from 'assets/sidebar/dashboard.svg'
 import OverviewIcon from 'assets/sidebar/overview.svg'
@@ -37,11 +38,12 @@ export default function AppSidebar(props) {
                 <img src={SidebarLogo} className="sidebar-logo" />
             </a>
             <ul className="nav">
+                {!hideCreate && <li>
+                    <a onClick={() => { setShowTemplateChoose(true) }}>
+                        <img src={PlusIcon} />{t('sidebar.create')}</a>
+                </li>}
                 <li>
                     <Link to="/projects"><img src={CryptoMiningIcon} />{t('sidebar.cryptoMining')}</Link>
-                    {!hideCreate && <a onClick={() => { setShowTemplateChoose(true) }}>
-                        <div className="btn-create">{t('sidebar.create')}</div>
-                    </a>}
                 </li>
                 <li><Link to="/coming/swap"><img src={MiningSwapIcon} />{t('sidebar.miningSwap')}</Link></li>
                 <li><Link to="/coming/dashboard"><img src={DashboardIcon} />{t('sidebar.dashboard')}</Link></li>
@@ -87,6 +89,6 @@ export default function AppSidebar(props) {
                 © DD.FINANCE.All rights reserved
             </div>
         </div>
-        {showTemplateChoose && <TemplateChoose onCancel={() => { setShowTemplateChoose(false) }} />}
+        { showTemplateChoose && <TemplateChoose onCancel={() => { setShowTemplateChoose(false) }} />}
     </div >)
 }

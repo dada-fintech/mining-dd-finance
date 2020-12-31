@@ -34,6 +34,7 @@ export default {
                 yourBill: 'Your Bill',
                 detail: 'Detail',
                 joinNow: 'Join Now',
+                viewProject: 'View project',
                 startTime: 'Start Time',
                 endTime: 'End Time',
                 redemption: 'Redemption',
@@ -175,7 +176,7 @@ export default {
                 overview: 'Overview',
                 quickSwap: 'Quick Swap',
                 governance: 'Governance',
-                create: 'Create',
+                create: 'Create Project',
             },
             banner: {
                 title: 'Mining Ecosystem Aggregator',
@@ -372,7 +373,7 @@ export default {
                 selectFundraisingMethodHint1: 'Once confirmed, the date can not be changed.',
                 selectFundraisingMethodHint2: 'Once confirmed，it will start automatically after auditing.',
                 selectRedemptionMethod: 'Select a Redemption Method ',
-                selectRedemptionMethodValue1: 'Repay the Principal and Interest on the set date',
+                selectRedemptionMethodValue1: 'Repay capital with interest on the set date',
                 selectRepaymentMethod: 'Select a Repayment Method ',
                 selectRepaymentMethodHint: 'Redeem as the Fund Manager Repays',
                 selectRepaymentMethodHint2: '*A full loan is triggered after the deposit is paid within 3 days of the fundraising. Regular fundraising: The deposit is paid within 3 days after the fundraising is completed, and the full amount is released after 3 days.',
@@ -444,6 +445,7 @@ export default {
                 yourBill: '您需要支付',
                 detail: '详情',
                 joinNow: '立即参与',
+                viewProject: '查看项目',
                 startTime: '开始时间',
                 endTime: '结束时间',
                 redemption: '到期还本付息',
@@ -476,7 +478,7 @@ export default {
                 open: {
                     1: '筹款规则：根据项目计划，选择筹款方式：定期筹款和定时筹款。',
                     2: '释放规则：根据项目推进情况择时发起款项释放，无需预设定，需要通过投资者投票。',
-                    3: '赎回规则：请在创建时选择用户赎回本金及利息的方式：等额本息和随还随取。'
+                    3: '赎回规则：请在创建时选择用户赎回本金及利息的方式：还本付息和随还随取。'
                 },
                 close: {
                     1: '筹款规则：根据项目策略制定完善的筹款计划及额度。',
@@ -752,7 +754,7 @@ export default {
                 fundraisingLimitHint2: '*审计费用、保证金费用均以该额度作为基准数据',
                 softCap: '最低启动金额',
                 softCapHover: '筹款额道道该目标后视为筹集成功',
-                redemptionDate: '赎回时间（等额本息）',
+                redemptionDate: '赎回时间（还本付息）',
                 redemptionDateHint: '*赎回日期为开放用户提取收益的时间，请务必于该日期前完成收益回款',
                 redemptionDateHover: '计息周期=赎回日期-募集截至日期',
                 assetsRuleHint: '请根据您的募资计划配置基金解锁规则。',
@@ -788,7 +790,7 @@ export default {
                 selectFundraisingMethodHint1: '*确定筹款日期，无法提前或延后',
                 selectFundraisingMethodHint2: '*确定筹款期限，审核通过自动开始',
                 selectRedemptionMethod: '选择回款方式',
-                selectRedemptionMethodValue1: '到期等额本息',
+                selectRedemptionMethodValue1: '到期还本付息',
                 selectRepaymentMethod: '选择取款方式',
                 selectRepaymentMethodHint: '*筹款完成并于3天内支付押金后，发起取款投票，同意票数66%则完成放款。可分为多阶段，多次放款。',
                 selectRepaymentMethodHint2: '*定时筹款：筹款完成3天内支付押金后触发全额放款。定期筹款：筹款完成3天内支付押金，3天期满全额放款。',

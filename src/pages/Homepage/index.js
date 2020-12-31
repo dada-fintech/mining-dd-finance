@@ -49,7 +49,7 @@ export default function Homepage() {
         axios.get('/project/list').then(res => {
             // setProjectList(res.data.filter(item => item.status == 'canInvest'))
             // setAllProjects(res.data.filter(item => item.status != 'canInvest'))
-            setProjectList(res.data)
+            setProjectList(res.data.slice(0,3))
             setAllProjects(res.data)
             const futureProjects = res.data.filter(item => (item.status == 'canInvest' || item.status == 'raising' || item.status == 'active'))
 
@@ -140,7 +140,9 @@ export default function Homepage() {
 
     const formatTime = (time) => {
         const myDate = new Date(time)
-        return `${myDate.toLocaleDateString()} ${myDate.getHours()}:${myDate.getMinutes()}`
+        const myHour = myDate.getHours()
+        const myMinutes = myDate.getMinutes()
+        return `${myDate.toLocaleDateString()} ${myHour <= 9 ? '0' + myHour : myHour}:${myMinutes <= 9 ? '0' + myMinutes : myMinutes}`
     }
 
     // const wallet = useWallet()
