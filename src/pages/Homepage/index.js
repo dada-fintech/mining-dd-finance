@@ -27,7 +27,7 @@ export default function Homepage() {
         'auditing': isEn ? 'Auditing' : '委员会审核中',
         'future': isEn ? 'Project Coming Soon' : '项目即将到来',
         'raising': isEn ? 'In Mid of Fundraising' : '正在筹款',
-        'payingInsurance': isEn ? 'Depositing to the Reserve' : '支付安全达',
+        'payingInsurance': isEn ? 'Depositing to the Reserve' : '支付押金',
         'active': isEn ? 'Active' : '进行中',
         'rolling': isEn ? 'Voting On-going' : '正在投票',
         'allPhasesDone': isEn ? 'Project Completes. Waiting for the Redemption' : '项目计划完成，等待获取报酬',
@@ -47,9 +47,10 @@ export default function Homepage() {
 
     useEffect(() => {
         axios.get('/project/list').then(res => {
-            setProjectList(res.data.filter(item => item.status == 'canInvest'))
-            setAllProjects(res.data.filter(item => item.status != 'canInvest'))
-
+            // setProjectList(res.data.filter(item => item.status == 'canInvest'))
+            // setAllProjects(res.data.filter(item => item.status != 'canInvest'))
+            setProjectList(res.data)
+            setAllProjects(res.data)
             const futureProjects = res.data.filter(item => (item.status == 'canInvest' || item.status == 'raising' || item.status == 'active'))
 
             if (futureProjects.length > 0) {
@@ -157,7 +158,7 @@ export default function Homepage() {
                                 <div className="title">{featuredProject.project_name}</div>
                                 <div className="desc" dangerouslySetInnerHTML={{ __html: toBr(featuredProject.project_profile) }}></div>
                                 {featuredCountdown > 0 && <Countdown timestamp={featuredCountdown} />}
-                                {(featuredProject.status === 'raising' || featuredProject.status === 'active') && <Progress strokeColor="#4CC16D" status="active" percent={((featuredProject.current_raised_money / featuredProject.max_amount) * 100).toFixed(0)} className="progress-bar" />}
+                                {(featuredProject.status === 'raising' || featuredProject.status === 'canInvest') && <Progress strokeColor="#4CC16D" status="active" percent={((featuredProject.current_raised_money / featuredProject.max_amount) * 100).toFixed(0)} className="progress-bar" />}
                                 <a className="join-btn" href={'/project/' + featuredProject.project_uniq_id} key={featuredProject.project_uniq_id}>{t('common.joinNow')}</a>
                             </Col>
                             <Col xs={24} md={14}>
