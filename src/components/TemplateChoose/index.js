@@ -42,24 +42,27 @@ export default function TemplateChoose(props) {
                     <div className="bottom">
                         <div className="line">
                             <div className="title">
-                                {t('template.fundraisingRules')} <img src={TimeIcon} />
+                                {t('template.fundraisingRules')}
                             </div>
+                            <img src={TimeIcon} />
                             <div className="text">
                                 {t('template.open.1')}
                             </div>
                         </div>
                         <div className="line">
                             <div className="title">
-                                {t('template.unlockRules')} <img src={TimeIcon} />
+                                {t('template.unlockRules')}
                             </div>
+                            <img src={TimeIcon} />
                             <div className="text">
                                 {t('template.open.2')}
                             </div>
                         </div>
                         <div className="line">
                             <div className="title">
-                                {t('template.redemptionRules')} <img src={TimeIcon} />
+                                {t('template.redemptionRules')}
                             </div>
+                            <img src={TimeIcon} />
                             <div className="text">
                                 {t('template.open.3')}
                             </div>
@@ -72,7 +75,7 @@ export default function TemplateChoose(props) {
                 <div className="template-item">
                     <div className="top">
                         <div className="type">
-                        {t('common.standard')}
+                            {t('common.standard')}
                         </div>
                         <a onClick={() => goPage('close')}>
                             <Button className="btn-blue">{t('template.select')}</Button>
@@ -81,16 +84,18 @@ export default function TemplateChoose(props) {
                     <div className="bottom">
                         <div className="line">
                             <div className="title">
-                                {t('template.fundraisingRules')} <img src={DoubleCheckIcon} />
+                                {t('template.fundraisingRules')}
                             </div>
+                            <img src={DoubleCheckIcon} />
                             <div className="text">
                                 {t('template.close.1')}
                             </div>
                         </div>
                         <div className="line">
                             <div className="title">
-                                {t('template.unlockRules')} <img src={DoubleCheckIcon} />
+                                {t('template.unlockRules')}
                             </div>
+                            <img src={DoubleCheckIcon} />
                             <div className="text">
                                 {t('template.close.2')}
 
@@ -98,8 +103,9 @@ export default function TemplateChoose(props) {
                         </div>
                         <div className="line">
                             <div className="title">
-                                {t('template.redemptionRules')} <img src={DoubleCheckIcon} />
+                                {t('template.redemptionRules')}
                             </div>
+                            <img src={DoubleCheckIcon} />
                             <div className="text">
                                 {t('template.close.3')}
 

@@ -161,7 +161,7 @@ export default function Homepage() {
                                 <div className="desc" dangerouslySetInnerHTML={{ __html: toBr(featuredProject.project_profile) }}></div>
                                 {featuredCountdown > 0 && <Countdown timestamp={featuredCountdown} />}
                                 {(featuredProject.status === 'raising' || featuredProject.status === 'canInvest') && <Progress strokeColor="#4CC16D" status="active" percent={((featuredProject.current_raised_money / featuredProject.max_amount) * 100).toFixed(0)} className="progress-bar" />}
-                                <a className="join-btn" href={'/project/' + featuredProject.project_uniq_id} key={featuredProject.project_uniq_id}>{t('common.joinNow')}</a>
+                                <a className="join-btn" href={'/project/' + featuredProject.project_uniq_id} key={featuredProject.project_uniq_id}>{t('common.viewProject')}</a>
                             </Col>
                             <Col xs={24} md={14}>
                                 <img src={HomepageBanner} className="homepage-banner" />
@@ -177,8 +177,8 @@ export default function Homepage() {
                                         <div className="project-name">{item.project_name}</div>
                                         <div className="desc" dangerouslySetInnerHTML={{ __html: toBr(item.project_profile) }}>
                                         </div>
-                                        <Progress strokeColor="#4CC16D" status="active" percent={((item.current_raised_money / item.max_amount) * 100).toFixed(0)} className="progress-bar" />
-                                        <a className="join-btn" href={'/project/' + item.project_uniq_id} key={item.project_uniq_id}>{t('common.joinNow')}</a>
+                                        {(item.status === 'raising' || item.status === 'canInvest') && <Progress strokeColor="#4CC16D" status="active" percent={((item.current_raised_money / item.max_amount) * 100).toFixed(0)} className="progress-bar" />}
+                                        <a className="join-btn" href={'/project/' + item.project_uniq_id} key={item.project_uniq_id}>{t('common.viewProject')}</a>
                                         <div className="date-wrapper">
                                             <div>
                                                 <div>{formatTime(item.raise_start_time)}</div>
