@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom'
 import axios from 'utils/axios'
 import Header from 'components/Header'
 import Countdown from 'components/Countdown'
+import config from 'config'
 
 import './style.scss'
 
@@ -49,9 +50,14 @@ export default function Homepage() {
         axios.get('/project/list').then(res => {
             // setProjectList(res.data.filter(item => item.status == 'canInvest'))
             // setAllProjects(res.data.filter(item => item.status != 'canInvest'))
-            setProjectList(res.data.slice(0,3))
+            setProjectList(res.data.slice(0, 3))
             setAllProjects(res.data)
-            const futureProjects = res.data.filter(item => (item.status == 'canInvest' || item.status == 'raising' || item.status == 'active'))
+            var futureProjects = []
+            if (config.featuredId) {
+                futureProjects = res.data.filter(item => item.project_uniq_id)
+            } else {
+                futureProjects = res.data.filter(item => (item.status == 'canInvest' || item.status == 'raising' || item.status == 'active'))
+            }
 
             if (futureProjects.length > 0) {
                 setFeaturedProject(futureProjects[0])
@@ -64,9 +70,11 @@ export default function Homepage() {
                     time = futureProjects[0].project_start_time - dateNow
                 } else if (status === 'active') {
                     time = futureProjects[0].project_end_time - dateNow
+                } else if (status === 'allPhaseDone' && futureProjects[0].income_settlement_time) {
+                    //todo, 这个后端没返回
+                    time = futureProjects[0].income_settlement_time - dateNow
                 }
                 setFeaturedCountdown(time)
-
             } else {
                 setFeaturedProject('')
             }

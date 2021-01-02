@@ -17,7 +17,7 @@
             font-size: 24px;
             margin-bottom: 12px;
         }
-        .countdown{
+        .countdown {
             margin: 16px auto 0;
         }
         .desc {
@@ -62,6 +62,7 @@
             }
             .desc {
                 font-size: 14px;
+                margin-bottom: 12px;
             }
             .progress-bar {
                 margin: 16px auto;
@@ -90,18 +91,17 @@
         }
     }
 
-    .all-projects{
+    .all-projects {
         margin: 40px auto;
-        .ant-table-wrapper{
+        .ant-table-wrapper {
             overflow: hidden;
             border-radius: 8px;
-            .ant-table-thead > tr > th{
+            .ant-table-thead > tr > th {
                 background: #fff;
             }
-            .apy{
+            .apy {
                 color: #289747;
             }
-
         }
     }
 

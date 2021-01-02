@@ -61,7 +61,7 @@ export default function AppSidebar(props) {
                 <a onClick={() => { changeLanguage(i18n.language === 'en' ? 'zh' : 'en') }}>
                     {i18n.language === 'en' ? '简体中文' : 'English'}
                 </a>
-                <a href="https://doc.dd.finance" target="_blank">{t('homepage.footer.documentation')}</a>
+                <a href={i18n.language === 'en' ? 'https://doc-en.dd.finance' : 'https://doc.dd.finance'} target="_blank">{t('homepage.footer.documentation')}</a>
                 <a href="mainto:contact@dd.finance">contact@dd.finance</a>
                 <a href="mainto:media@dd.finance">media@dd.finance</a>
             </div>
