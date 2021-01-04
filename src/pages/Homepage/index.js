@@ -180,7 +180,7 @@ export default function Homepage() {
                     <div className="project-list">
                         <Row gutter={28}>
                             {projectList && projectList.map(item => (
-                                <Col xs={24} sm={12} md={8}>
+                                <Col xs={24} sm={12} md={24} lg={12} xl={8}>
                                     <div className="project-item">
                                         <div className="project-name">{item.project_name}</div>
                                         <div className="desc" dangerouslySetInnerHTML={{ __html: toBr(item.project_profile) }}>
@@ -190,11 +190,11 @@ export default function Homepage() {
                                         <div className="date-wrapper">
                                             <div>
                                                 <div>{formatTime(item.raise_start_time)}</div>
-                                                <div className="date-title">{t('common.startTime')}</div>
+                                                <div className="date-title">{t('common.fundStartTime')}</div>
                                             </div>
                                             <div>
                                                 <div>{formatTime(item.project_end_time)}</div>
-                                                <div className="date-title">{t('common.startTime')}</div>
+                                                <div className="date-title">{t('common.fundEndTime')}</div>
                                             </div>
                                         </div>
                                     </div>

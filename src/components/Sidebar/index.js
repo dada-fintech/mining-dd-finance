@@ -77,15 +77,15 @@ export default function Sidebar(props) {
                 {<div className="my-share-box">
                     <div className="line">
                         <div>{t('sidebar.myShare')}</div>
-                        <div>{myShare.user_balance} USDT</div>
+                        <div>{myShare.user_balance || 0} USDT</div>
                     </div>
                     {myShare.profit_status === 'BonusCanClaim' && <div className="line">
                         <div>{t('sidebar.bonus')}</div>
-                        <div>{myShare.profit_dada} DADA</div>
+                        <div>{myShare.profit_dada || 0} DADA</div>
                     </div>}
                     {myShare.profit_status !== 'BonusCanClaim' && <div className="line">
                         <div>{t('sidebar.return')}</div>
-                        <div>{myShare.profit_usdt} USDT</div>
+                        <div>{myShare.profit_usdt || 0} USDT</div>
                     </div>}
                     {myShare.profit_status && <div className="line">
                         <div>{t('sidebar.gains')}</div>

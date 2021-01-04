@@ -63,9 +63,9 @@ export default function Header(props) {
                     <div className="title">{t('common.role')}</div>
                 </div>) : ''}
                 {wallet.status === 'connected' ? <Tooltip title={wallet.account}>
-                    {wallet.account && <a className="line-btn">{wallet.account.slice(0, 4) + '...' + wallet.account.slice(-4)}</a>}
+                    {wallet.account && <a className="btn-connect"><span className="green-dot"></span>Connected</a>}
                 </Tooltip>
-                    : <a className="btn-connect" onClick={() => { console.log(11); wallet.connect() }}>Connect Wallet</a>}
+                    : <a className="btn-connect" onClick={() => { wallet.connect() }}><span className="red-dot"></span>Connect Wallet</a>}
             </nav>
         </>}
         {drawerVisible && <Drawer visible={true} placement="left" onClose={() => { setDrawerVisible(false) }}>

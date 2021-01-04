@@ -1,25 +1,26 @@
 @import "~antd/dist/antd.css";
 .App {
-    // word-break: keep-all;
-    color: #15163D;
+    word-break: break-all;
+    color: #15163d;
+    // overflow-wrap: break-word;
     background: radial-gradient(57.44% 57.44% at 36.11% 100%, #ffebc4 0%, rgba(255, 255, 255, 0) 100%),
         radial-gradient(50% 66.76% at 23.92% 50%, rgba(131, 156, 220, 0.17) 0%, rgba(255, 255, 255, 0) 100%),
         radial-gradient(44.76% 114.58% at 100% 58.44%, rgba(255, 229, 137, 0.54) 0%, rgba(255, 255, 255, 0) 100%),
         radial-gradient(93.02% 109.47% at 0% 0%, rgba(255, 0, 0, 0.25) 0%, rgba(255, 255, 255, 0) 65.72%),
         radial-gradient(74.31% 190.22% at 100% 0%, rgba(72, 204, 204, 0.21) 0%, rgba(255, 255, 255, 0) 100%);
-    // @media screen and (max-width: 992px) {
-    //     word-break: unset;
-    // }
+    @media screen and (max-width: 992px) {
+        word-break: unset;
+    }
 }
 
 .content-wrapper {
     height: 100vh;
     overflow-y: scroll;
     padding: 0 48px;
-    @media screen and (max-width: 768px){
+    @media screen and (max-width: 768px) {
         padding: 0 24px;
     }
-    @media screen and (min-width: 1600px){
+    @media screen and (min-width: 1600px) {
         padding: 0 160px;
     }
 }
@@ -67,17 +68,16 @@ li {
     }
 }
 
-
 .btn-blue {
     color: #fff;
-    background: #839CDC;
+    background: #839cdc;
     border-radius: 5px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border: none;
     &:hover,
     &:focus {
         color: #fff;
-        background: #839CDC;
+        background: #839cdc;
     }
 }
 
@@ -188,7 +188,6 @@ img {
     .content-container {
         width: 90%;
     }
- 
 }
 
 @media screen and (max-width: 768px) {
@@ -266,7 +265,7 @@ img {
         font-size: 24px;
         right: 12px;
     }
-    @media screen and (max-width: 992px){
+    @media screen and (max-width: 992px) {
         width: 100%;
     }
 }
@@ -481,7 +480,41 @@ img {
     }
 }
 
-
-.text-center{
+.text-center {
     text-align: center;
+}
+
+// .green-dot {
+//     width: 5px;
+//     height: 5px;
+//     padding: 0;
+//     background: #289747;
+//     border-radius: 100%;
+//     border: 6px solid rgba(40, 151, 71, 0.5);
+//     display: inline-block;
+//     margin-right: 12px;
+// }
+
+.green-dot {
+    width: 5px;
+    height: 5px;
+    padding: 0;
+    background: #289747;
+    border-radius: 100%;
+    border: 4px solid rgb(148, 196, 114);
+    border-radius: 100%;
+    display: inline-block;
+    margin-right: 12px;
+    box-sizing: content-box;
+}
+
+.red-dot {
+    width: 5px;
+    height: 5px;
+    background: #ba0000;
+    border-radius: 100%;
+    border: 4px solid rgb(220, 128, 128);
+    display: inline-block;
+    margin-right: 12px;
+    box-sizing: content-box;
 }

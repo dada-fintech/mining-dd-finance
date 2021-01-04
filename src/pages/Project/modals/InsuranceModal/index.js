@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Modal, Input, Button, message } from 'antd'
+import { Modal, Button } from 'antd'
 // import VoteStatus from '../../../../components/VoteStatus'
 import axios from 'utils/axios'
 import { useTranslation } from 'react-i18next'

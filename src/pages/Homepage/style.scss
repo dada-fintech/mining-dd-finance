@@ -63,6 +63,9 @@
             .desc {
                 font-size: 14px;
                 margin-bottom: 12px;
+                height: 88px;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
             .progress-bar {
                 margin: 16px auto;
@@ -83,9 +86,11 @@
                 align-items: top;
                 justify-content: space-between;
                 margin: 24px auto 0;
+                font-size: 12px;
                 .date-title {
                     text-align: center;
                     color: #9088a1;
+                    font-size: 14px;
                 }
             }
         }
