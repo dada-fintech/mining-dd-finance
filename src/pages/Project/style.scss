@@ -31,14 +31,16 @@
         box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.15);
         border-radius: 5px;
         padding: 16px 16px;
+        margin-bottom: 16px;
         text-align: center;
         .value {
             font-weight: 800;
-            font-size: 18px;
+            font-size: 16px;
             line-height: 1.1;
-            height: 38px;
+            margin-bottom: 12px;
+            // height: 38px;
             //todo,限制两行
-            overflow: hidden;
+            // overflow: hidden;
         }
         .title {
             color: #9088a1;

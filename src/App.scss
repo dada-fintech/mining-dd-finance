@@ -13,6 +13,14 @@
     }
 }
 
+
+.nowrap{
+    white-space: nowrap;
+    width:100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .content-wrapper {
     height: 100vh;
     overflow-y: scroll;

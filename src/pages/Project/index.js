@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Row, Col, Input, message, Modal, Button } from 'antd'
+import { Row, Col, Input, message, Modal, Button, Tooltip } from 'antd'
 import {
     LoadingOutlined,
 } from '@ant-design/icons';
@@ -171,11 +171,11 @@ export default function Project() {
                 })
             } else {
                 message.info(t('hint.approve'))
-                console.log(approveParams, 'ppp')
                 mm.sendTransaction(approveParams, 'Approve spending USDT').then(res => {
                     if (res) {
                         mm.sendTransaction(lockParams, 'Lock USDT').then(res => {
                             setLocklLoading(false)
+                            getInfo()
                         })
                     } else {
                         setLocklLoading(false)
@@ -271,41 +271,53 @@ export default function Project() {
                         <Button className="btn-green" onClick={() => { setEmail(''); setSubscribeVisible(true) }}>{t('sidebar.subscribe')}</Button>
                     </div>
                     <Row gutter={24}>
-                        <Col xs={24} md={12} lg={4}>
-                            <div className="info-item">
-                                <div className="value">{project.fundraising.expected_apy}%</div>
-                                <div className="title">{t('common.apy')}</div>
-                            </div>
+                        <Col xs={24} md={12} lg={8} xl={4}>
+                            <Tooltip title={`${project.fundraising.expected_apy} %`}>
+                                <div className="info-item">
+                                    <div className="value nowrap">{project.fundraising.expected_apy}%</div>
+                                    <div className="title">{t('common.apy')}</div>
+                                </div>
+                            </Tooltip>
                         </Col>
-                        <Col xs={24} md={12} lg={4}>
-                            <div className="info-item">
-                                <div className="value">{parseInt((project.project_info.income_settlement_time - project.fundraising.end_time) / 1000 / 60 / 60 / 24)}{t('common.days')}</div>
-                                <div className="title">{t('sidebar.cycle')}</div>
-                            </div>
+                        <Col xs={24} md={12} lg={8} xl={4}>
+                            <Tooltip title={`${parseInt((project.project_info.income_settlement_time - project.fundraising.end_time) / 1000 / 60 / 60 / 24)} ${t('common.days')}`}>
+                                <div className="info-item">
+                                    <div className="value nowrap">{parseInt((project.project_info.income_settlement_time - project.fundraising.end_time) / 1000 / 60 / 60 / 24)} {t('common.days')}</div>
+                                    <div className="title">{t('sidebar.cycle')}</div>
+                                </div>
+                            </Tooltip>
                         </Col>
-                        <Col xs={24} md={12} lg={4}>
-                            <div className="info-item">
-                                <div className="value">{t('common.redemption')}</div>
-                                <div className="title">{t('common.repaymentModel')}</div>
-                            </div>
+                        <Col xs={24} md={12} lg={8} xl={4}>
+                            <Tooltip title={t('common.redemption')}>
+                                <div className="info-item">
+                                    <div className="value nowrap">{t('common.redemption')}</div>
+                                    <div className="title">{t('common.repaymentModel')}</div>
+                                </div>
+                            </Tooltip>
                         </Col>
-                        <Col xs={24} md={12} lg={4}>
-                            <div className="info-item">
-                                <div className="value">{project.fundraising.min_amount} USDT</div>
-                                <div className="title">{t('common.softCap')}</div>
-                            </div>
+                        <Col xs={24} md={12} lg={8} xl={4}>
+                            <Tooltip title={`${project.fundraising.min_amount} USDT`}>
+                                <div className="info-item">
+                                    <div className="value nowrap">{project.fundraising.min_amount} USDT</div>
+                                    <div className="title">{t('common.softCap')}</div>
+                                </div>
+                            </Tooltip>
                         </Col>
-                        <Col xs={24} md={12} lg={4}>
-                            <div className="info-item">
-                                <div className="value">{project.fundraising.max_amount} USDT</div>
-                                <div className="title">{t('common.fundSize')}</div>
-                            </div>
+                        <Col xs={24} md={12} lg={8} xl={4}>
+                            <Tooltip title={`${project.fundraising.max_amount} USDT`}>
+                                <div className="info-item">
+                                    <div className="value nowrap">{project.fundraising.max_amount} USDT</div>
+                                    <div className="title">{t('common.fundSize')}</div>
+                                </div>
+                            </Tooltip>
                         </Col>
-                        <Col xs={24} md={12} lg={4}>
-                            <div className="info-item">
-                                <div className="value">{statusMapping[project.project_info.status]}</div>
-                                <div className="title">{t('project.status')}</div>
-                            </div>
+                        <Col xs={24} md={12} lg={8} xl={4}>
+                            <Tooltip title={statusMapping[project.project_info.status]}>
+                                <div className="info-item">
+                                    <div className="value nowrap">{statusMapping[project.project_info.status]}</div>
+                                    <div className="title">{t('project.status')}</div>
+                                </div>
+                            </Tooltip>
                         </Col>
                     </Row>
                     <div className="middle-area">

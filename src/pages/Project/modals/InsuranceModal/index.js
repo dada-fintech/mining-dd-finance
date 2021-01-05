@@ -15,12 +15,16 @@ export default function ConfirmVote(props) {
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
+        getInfo()
+    }, [])
+
+    const getInfo = () => {
         axios.post('/project/pay-insurance', {
             ...params,
         }).then(res => {
             setInfo(res.data)
         })
-    }, [])
+    }
 
     const doAction = () => {
         const approveParams = {
@@ -38,18 +42,17 @@ export default function ConfirmVote(props) {
         setLoading(true)
 
         if (info.is_satisfied) {
-            mm.sendTransaction(txnParams, 'Pay Insurance').then(res => {
+            mm.sendTransaction(txnParams, 'Pay Insurance').then(async res => {
                 setLoading(false)
+                await getInfo()
                 props.cancel()
             })
         } else {
-            mm.sendTransaction(approveParams, 'Approve paying insurance').then(res => {
+            mm.sendTransaction(approveParams, 'Approve paying insurance').then(async res => {
+                await getInfo()
                 if (res) {
-                    mm.sendTransaction(txnParams, 'Pay Insurance').then(res => {
-                        setLoading(false)
-                        props.cancel()
-                    })
-                }else{
+                    doAction()
+                } else {
                     setLoading(false)
                 }
             })
@@ -61,8 +64,8 @@ export default function ConfirmVote(props) {
             <div className="dada-circle">
                 {info.approve_balance} DADA
             </div>
-            <div className="hint" dangerouslySetInnerHTML={{__html: t('modal.insuranceHint')}}>
-                
+            <div className="hint" dangerouslySetInnerHTML={{ __html: t('modal.insuranceHint') }}>
+
             </div>
             <div className="handle-area">
                 <Button loading={loading} className="btn-green" onClick={() => { doAction() }}>{info.is_satisfied ? t('common.pay') : t('common.approve')}</Button>

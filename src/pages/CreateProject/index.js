@@ -3,7 +3,7 @@ import { Button, Row, Col, Input, Upload, message, Radio, DatePicker, Tooltip, I
 import { useTranslation } from 'react-i18next'
 import { PlusCircleOutlined, MinusCircleOutlined, CloseCircleOutlined, LoadingOutlined } from '@ant-design/icons'
 import QuestionIcon from 'assets/question.svg'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { useWallet } from 'use-wallet'
 import Header from '../../components/Header'
 import AppSidebar from 'components/AppSidebar'
@@ -1075,13 +1075,13 @@ export default function CreateProject() {
                             }
 
                             {currentStep == 10 && <div>
-                                <a href="/">
+                                <Link to="/projects">
                                     <div className="btn-confirm">
                                         <span className="text">
                                             {t('createProject.backHome')}
                                         </span>
                                     </div>
-                                </a>
+                                </Link>
 
                             </div>}
                         </div>
