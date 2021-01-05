@@ -55,9 +55,9 @@ export default function Header(props) {
                     <div className="title">{t('common.role')}</div>
                 </div>) : ''}
                 {wallet.status === 'connected' ? <Tooltip title={wallet.account}>
-                    {wallet.account && <a className="btn-connect"><span className="green-dot"></span>Connected</a>}
+                    {wallet.account && <a className="btn-connect"><span className="green-dot"></span>{t('common.walletConnected')}</a>}
                 </Tooltip>
-                    : <a className="btn-connect" onClick={() => { wallet.connect() }}><span className="red-dot"></span>Connect Wallet</a>}
+                    : <a className="btn-connect" onClick={() => { wallet.connect() }}><span className="red-dot"></span>{t('common.connectWallet')}</a>}
             </nav>
         </>}
         {drawerVisible && <Drawer visible={true} placement="left" onClose={() => { setDrawerVisible(false) }}>

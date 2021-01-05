@@ -70,9 +70,8 @@ export default function Homepage() {
                     time = futureProjects[0].project_start_time - dateNow
                 } else if (status === 'active') {
                     time = futureProjects[0].project_end_time - dateNow
-                } else if (status === 'allPhaseDone' && futureProjects[0].income_settlement_time) {
-                    //todo, 这个后端没返回
-                    time = futureProjects[0].income_settlement_time - dateNow
+                } else if (status === 'allPhaseDone') {
+                    time = futureProjects[0].project_end_time - dateNow
                 }
                 setFeaturedCountdown(time)
             } else {

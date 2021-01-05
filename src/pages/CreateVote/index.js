@@ -213,7 +213,7 @@ export default function CreateVote() {
             </Col>
             <Col md={19} lg={20} xs={24} xxl={21}>
                 <div className="content-wrapper">
-                    <Header breadCrumb={['Crypto Mining', 'Create Vote']} />
+                    <Header breadCrumb={[t('sidebar.cryptoMining'), 'Create Vote']} />
                     <div className="card-board">
                         <ul className="breadcrumb">
                             {sidebarList.map((item, index) => <li className={(currentStep >= item.step ? 'done' : '')}>

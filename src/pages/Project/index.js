@@ -261,7 +261,7 @@ export default function Project() {
             </Col>
             <Col md={19} lg={20} xs={24} xxl={21}>
                 <div className="content-wrapper">
-                    <Header role={role} breadCrumb={['Crypto Mining', project.project_info.project_name]} />
+                    <Header role={role} breadCrumb={[t('sidebar.cryptoMining'), project.project_info.project_name]} />
                     <div className="brief-info">
                         <div className="title">{project.project_info.project_name}</div>
                         <div className="date">
