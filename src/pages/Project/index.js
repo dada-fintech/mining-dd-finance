@@ -279,7 +279,7 @@ export default function Project() {
                         </Col>
                         <Col xs={24} md={12} lg={4}>
                             <div className="info-item">
-                                <div className="value">{parseInt((project.project_info.income_settlement_time - project.fundraising.end_time) / 1000 / 60 / 60 / 24)}天</div>
+                                <div className="value">{parseInt((project.project_info.income_settlement_time - project.fundraising.end_time) / 1000 / 60 / 60 / 24)}{t('common.days')}</div>
                                 <div className="title">{t('sidebar.cycle')}</div>
                             </div>
                         </Col>
