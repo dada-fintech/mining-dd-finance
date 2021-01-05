@@ -15,14 +15,6 @@ export default function Header(props) {
     const { role, breadCrumb, hideAction } = props
     const [drawerVisible, setDrawerVisible] = useState(false)
 
-    useEffect(() => {
-        //防止重复连接
-        if(!hideAction){
-            wallet.connect()
-        }
-    }, [])
-
-
     // const changeRole = role => {
     //     dispatch({
     //         type: 'SWITCH_ROLE',

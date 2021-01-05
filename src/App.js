@@ -5,6 +5,8 @@ import {
   Redirect,
 } from 'react-router-dom'
 import './App.scss';
+import React, { useEffect } from 'react'
+import { useWallet } from 'use-wallet'
 
 import i18n from "i18next";
 import { initReactI18next, useTranslation } from 'react-i18next'
@@ -38,6 +40,11 @@ i18n
 
 function App() {
   const { i18n } = useTranslation()
+  const wallet = useWallet()
+
+  useEffect(() => {
+    wallet.connect()
+  }, [])
 
   return (
     <ConfigProvider locale={i18n.language === 'en' ? enUS : zhCN}>
