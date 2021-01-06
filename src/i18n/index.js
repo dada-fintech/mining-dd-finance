@@ -59,6 +59,7 @@ export default {
                 hours: 'h',
                 minutes: 'min',
                 seconds: 'sec',
+                noProcess: 'No processes yet.',
             },
             template: {
                 title: 'Choose a Governing Template',
@@ -472,6 +473,7 @@ export default {
                 hours: '时',
                 minutes: '分',
                 seconds: '秒',
+                noProcess: '暂无进程。',
             },
             template: {
                 title: '请选择一个治理模版',

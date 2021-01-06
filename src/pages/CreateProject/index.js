@@ -705,7 +705,7 @@ export default function CreateProject() {
                         </div>}
                         {currentStep === 4 && tempType === 'close' && <div>
                             <div className="h1">{sidebarList[1].name}({t('common.standard')})</div>
-                            <img src="/govern-rule-img.svg" className="govern-rule-img" />
+                            {i18n.language === 'en' ? <img src="/govern-rule-en-img.svg" className="govern-rule-img" /> : <img src="/govern-rule-img.svg" className="govern-rule-img" />}
                             <Row type="flex" align="middle" style={{ marginBottom: '32px' }}>
                                 <Col md={12}>
                                     <div className="form-item" style={{ marginTop: '0' }}>
@@ -945,10 +945,11 @@ export default function CreateProject() {
                                     <div className="name">{t('createProject.tokenName')}</div>
                                     <div className="value">{projectInfo.project_token_symbol}</div>
                                 </div>
-                                <div className="line">
+                                {fundraising.start_time && fundraising.end_time && <div className="line">
                                     <div className="name">{t('createProject.fundraisingPeriod')}</div>
                                     <div className="value">{new Date(fundraising.start_time).toLocaleDateString()} - {new Date(fundraising.end_time).toLocaleDateString()}</div>
-                                </div>
+                                </div>}
+
                                 <div className="line">
                                     <div className="name">{t('common.apy')}</div>
                                     <div className="value">{fundraising.expected_apy}%</div>

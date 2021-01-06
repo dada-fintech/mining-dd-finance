@@ -133,7 +133,7 @@ export default function Process(props) {
 
 
             </div>
-        )) : <div>No processes yet.</div>}
+        )) : <div>{t('common.noProcess')}</div>}
         {/* <a href={`/create-vote/${id}`}>
             {finalProcessList.filter(item => item.status === 'Active').length != 0 && <Button className="btn-green">变更计划</Button>}
         </a> */}
