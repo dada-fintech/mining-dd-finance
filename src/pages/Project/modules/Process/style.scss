@@ -2,7 +2,7 @@
     min-height: 100vh;
     color: #273460;
     .process-item {
-        padding: 24px 12px;
+        padding: 20px 12px;
         margin-bottom: 12px;
         background: #fff;
         display: flex;
@@ -11,12 +11,13 @@
             color: #9088a1;
         }
         .left {
-            padding: 0 20px;
+            width: 25%;
+            // padding: 0 20px;
             text-align: center;
             border-right: 1px solid rgba(21, 22, 61, 0.4);
-            margin-right: 20px;
+            margin-right: 24px;
             .value {
-                font-size: 36px;
+                font-size: 28px;
             }
         }
 
@@ -54,6 +55,7 @@
         //     }
         // }
         .right {
+            width: 75%;
             .desc {
                 font-size: 18px;
                 margin-top: 4px;

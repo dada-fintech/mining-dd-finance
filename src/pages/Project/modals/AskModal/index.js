@@ -46,6 +46,18 @@ export default function AskModal(props) {
         })
     }
 
+    const dateChange = (value) => {
+        if (value && (value[0].valueOf() == value[1].valueOf())) {
+            message.error(t('common.notSameDay'))
+            return
+        }
+        if (value) {
+            setStartTime(value[0].valueOf());
+            setEndTime(value[1].valueOf())
+        }
+
+    }
+
     return (
         <Modal wrapClassName="ask-modal" footer={null} width="60%" title="请款" visible={true} onCancel={() => { props.onCancel() }}>
             <div className="assets-rule-item">
@@ -53,13 +65,13 @@ export default function AskModal(props) {
                     <Col md={12}>
                         <div className="form-item">
                             <div className="label ">{t('project.unlockingAmount')} {maxAmount > 0 && <span>({t('common.maxValue')} {maxAmount}USDT)</span>} </div>
-                            <Input suffix="USDT" value={amount} onChange={e => { e.target.value <= maxAmount && setAmount(e.target.value) }} />
+                            <Input suffix="USDT" value={amount} onChange={e => { Number(e.target.value) <= Number(maxAmount) && setAmount(e.target.value) }} />
                         </div>
                     </Col>
                     <Col md={12}>
                         <div className="form-item">
                             <div className="label ">{t('createProject.votingDate')} </div>
-                            <DatePicker.RangePicker value={start_time && [moment(start_time), moment(end_time)]} onChange={value => { value && setStartTime(value[0].valueOf()); value && setEndTime(value[1].valueOf()) }} />
+                            <DatePicker.RangePicker value={start_time && [moment(start_time), moment(end_time)]} onChange={(value) => dateChange(value)} />
                         </div>
                     </Col>
                 </Row>

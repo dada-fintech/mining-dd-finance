@@ -60,6 +60,7 @@ export default {
                 minutes: 'min',
                 seconds: 'sec',
                 noProcess: 'No processes yet.',
+                notSameDay: 'You can not choose the same day',
             },
             template: {
                 title: 'Choose a Governing Template',
@@ -205,6 +206,7 @@ export default {
                 details: 'Details',
                 vote: 'Vote',
                 comments: 'Comments',
+                votePeriod: 'Vote Period',
                 unlockingAmount: 'Unlocking Amount',
                 unlockingPercent: 'Unlocking Percent',
                 unlockingTime: 'Unlocking Time',
@@ -474,6 +476,7 @@ export default {
                 minutes: '分',
                 seconds: '秒',
                 noProcess: '暂无进程。',
+                notSameDay: '不可选择同一天',
             },
             template: {
                 title: '请选择一个治理模版',
@@ -624,6 +627,7 @@ export default {
                 vote: '投票',
                 comments: '评论',
                 unlockingAmount: '解锁数额',
+                votePeriod: '投票时段',
                 unlockingPercent: '解锁比例',
                 unlockingTime: '解锁时间',
                 voteTime: '投票时段',

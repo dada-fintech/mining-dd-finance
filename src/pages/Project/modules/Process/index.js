@@ -94,17 +94,20 @@ export default function Process(props) {
         {finalProcessList.length > 0 ? finalProcessList.map((process, index) => (
             <div className="process-item" key={index}>
                 <div className="left">
-                    {(process.status === 'VoteNotice' || process.status === 'VoteReplanFailed' || process.status === 'VoteReplanPassed' || process.status === 'VoteReplaning') ? <div>
-                        <div>{new Date(process.replan_time).toLocaleDateString()}</div><div className="title">{t('project.launchTime')}</div>
-                    </div> : <div className="text-area">
-                            <div>
-                                <div className="value">{process.unlock_percentage}%</div>
-                                <div className="title">{t('project.unlockingPercent')}</div>
-                            </div>
-                        </div>}
+                    <div className="text-area">
+                        {process.unlock_percentage ? <div>
+                            <div className="value">{process.unlock_percentage} %</div>
+                            <div className="title">{t('project.unlockingPercent')}</div>
+                        </div> : <div>
+                                <div className="value">{process.unlock_amount} USDT</div>
+                                <div className="title">{t('project.unlockingAmount')}</div>
+                            </div>}
+                    </div>
                 </div>
                 <div className="right">
                     {(process.status === 'VoteNotice' || process.status === 'VoteReplanFailed' || process.status === 'VoteReplanPassed' || process.status === 'VoteReplaning') ? <div className="title">{t('common.changePlan')}</div> : <div className="title">{t('project.progress')} #{index + 1}</div>}
+                    {process.replan_time > 0 && <div><span className="title">{t('project.launchTime')}: </span>{new Date(process.replan_time).toLocaleDateString()}</div>}
+                    <div><span className="title">{t('project.votePeriod')}: </span>{new Date(process.vote_start_time).toLocaleDateString()} - {new Date(process.vote_end_time).toLocaleDateString()}</div>
                     <div className={`status ${process.status}`}><span className="title">{t('project.status')}: </span>{statusMapping[process.status]}</div>
                     <div className="desc" dangerouslySetInnerHTML={{ __html: toBr(process.description) }}>
                     </div>

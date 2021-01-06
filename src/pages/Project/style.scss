@@ -228,6 +228,11 @@
     //     color: #707070;
     //     white-space: nowrap;
     // }
+    @media screen and (max-width: 1200px) {
+        .info-box{
+            min-height: unset;
+        }
+    }
     @media screen and (max-width: 992px) {
         .process-tag {
             margin-bottom: 12px;
