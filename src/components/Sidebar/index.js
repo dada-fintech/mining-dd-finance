@@ -3,12 +3,12 @@ import { useTranslation } from 'react-i18next'
 import { useWallet } from 'use-wallet'
 import mm from 'components/mm'
 import { Button } from 'antd'
-import axios from 'utils/axios'
+// import axios from 'utils/axios'
 import './style.scss'
 
 export default function Sidebar(props) {
-    const { projectId, role} = props
-    const [myShare, setMyShare] = useState({})
+    const { role, myShare, refreshInvestInfo } = props
+    // const [myShare, setMyShare] = useState({})
     const [actionLoading, setActionLoading] = useState(false)
 
     // const [topInvestList, setTopInvestList] = useState([])
@@ -20,26 +20,26 @@ export default function Sidebar(props) {
         "Liquiditing": "可清算",
         "BonusCanClaim": "可领取",
     }
-    useEffect(() => {
-        getInvestInfo()
-    }, [wallet.account])
+    // useEffect(() => {
+    //     getInvestInfo()
+    // }, [wallet.account])
 
-    const getInvestInfo = () => {
-        //获取当前user的投资
-        if (wallet.account) {
-            axios.post('/project/user-invest', {
-                project_uniq_id: projectId,
-                user_addr: wallet.account,
-            }).then(res => {
-                setMyShare(res.data)
-            })
-        }
+    // const getInvestInfo = () => {
+    //     //获取当前user的投资
+    //     if (wallet.account) {
+    //         axios.post('/project/user-invest', {
+    //             project_uniq_id: projectId,
+    //             user_addr: wallet.account,
+    //         }).then(res => {
+    //             setMyShare(res.data)
+    //         })
+    //     }
 
-        //获取投资top用户
-        // axios.get(`/project/top-invest/${projectId}`).then(res => {
-        //     setTopInvestList(res.data)
-        // })
-    }
+    //     //获取投资top用户
+    //     // axios.get(`/project/top-invest/${projectId}`).then(res => {
+    //     //     setTopInvestList(res.data)
+    //     // })
+    // }
 
     const doAction = () => {
         const params = {
@@ -50,7 +50,7 @@ export default function Sidebar(props) {
         setActionLoading(true)
         mm.sendTransaction(params, statusMapping[myShare.status]).then(res => {
             setActionLoading(false)
-            getInvestInfo()
+            refreshInvestInfo()
         })
     }
 

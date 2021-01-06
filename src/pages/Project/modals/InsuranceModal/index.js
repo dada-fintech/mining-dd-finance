@@ -7,7 +7,7 @@ import { useWallet } from 'use-wallet'
 import mm from 'components/mm'
 import './style.scss'
 
-export default function ConfirmVote(props) {
+export default function InsuranceModal(props) {
     const params = props.params
     const wallet = useWallet()
     const { t } = useTranslation()
@@ -45,13 +45,16 @@ export default function ConfirmVote(props) {
             mm.sendTransaction(txnParams, 'Pay Insurance').then(async res => {
                 setLoading(false)
                 await getInfo()
-                props.cancel()
+                props.onCancel()
             })
         } else {
             mm.sendTransaction(approveParams, 'Approve paying insurance').then(async res => {
-                await getInfo()
                 if (res) {
-                    doAction()
+                    mm.sendTransaction(txnParams, 'Pay Insurance').then(async secRes => {
+                        setLoading(false)
+                        await getInfo()
+                        props.onCancel()
+                    })
                 } else {
                     setLoading(false)
                 }

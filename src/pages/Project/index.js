@@ -38,6 +38,7 @@ export default function Project() {
     const [nextStatus, setNextStatus] = useState('')
     const [subscribeVisible, setSubscribeVisible] = useState(false)
     const [email, setEmail] = useState('')
+    const [myShare, setMyShare] = useState({})
 
     // 下一个进程是否在4天内
     // const [nextInFour, setNextInFour] = useState(false)
@@ -48,11 +49,11 @@ export default function Project() {
     const { t, i18n } = useTranslation()
     useEffect(async () => {
         getInfo()
-
         // committee： 委员会成员，审核项目
         // manager： 理事会，有权限去更改计划
         // invester： 普通投资者
         if (wallet.account) {
+            getUserInvest()
             axios.post('/project/user-role', {
                 project_uniq_id: id,
                 user_addr: wallet.account
@@ -61,8 +62,6 @@ export default function Project() {
                 setRole(role)
             })
         }
-
-
     }, [wallet.account])
 
     useEffect(() => {
@@ -119,6 +118,15 @@ export default function Project() {
 
     }, [project])
 
+    const getUserInvest = () => {
+        axios.post('/project/user-invest', {
+            project_uniq_id: id,
+            user_addr: wallet.account,
+        }).then(res => {
+            setMyShare(res.data)
+        })
+    }
+
     const getInfo = () => {
         axios.get('/project/detail/' + id).then(res => {
             setProject({
@@ -168,6 +176,7 @@ export default function Project() {
                 mm.sendTransaction(lockParams, 'Lock USDT').then(res => {
                     setLocklLoading(false)
                     getInfo()
+                    getUserInvest()
                 })
             } else {
                 message.info(t('hint.approve'))
@@ -176,10 +185,12 @@ export default function Project() {
                         mm.sendTransaction(lockParams, 'Lock USDT').then(res => {
                             setLocklLoading(false)
                             getInfo()
+                            getUserInvest()
                         })
                     } else {
                         setLocklLoading(false)
                         getInfo()
+                        getUserInvest()
                     }
                 })
             }
@@ -322,7 +333,7 @@ export default function Project() {
                     </Row>
                     <div className="middle-area">
                         <Row gutter={32}>
-                            <Col xs={24} md={12}>
+                            <Col xs={24} xl={12}>
                                 <div className="info-box">
                                     <div className="stage-block">
                                         {statusMapping[nextStatus] && <div>
@@ -403,8 +414,8 @@ export default function Project() {
                                     </Row>}
                                 </div>
                             </Col>
-                            <Col xs={24} md={12}>
-                                <Sidebar projectId={id} role={role} />
+                            <Col xs={24} xl={12}>
+                                <Sidebar myShare={myShare} role={role} rereshInvestInfo={() => { getUserInvest() }} />
                             </Col>
                         </Row>
 

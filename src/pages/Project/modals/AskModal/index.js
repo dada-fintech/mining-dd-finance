@@ -7,7 +7,7 @@ import axios from 'utils/axios'
 import mm from 'components/mm'
 import './style.scss'
 
-export default function AuditModal(props) {
+export default function AskModal(props) {
     const { project_uniq_id } = props.params
     const { maxAmount } = props
     const wallet = useWallet()

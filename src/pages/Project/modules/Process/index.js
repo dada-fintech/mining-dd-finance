@@ -91,7 +91,7 @@ export default function Process(props) {
     }
 
     return (<div className="process-module">
-        {finalProcessList.map((process, index) => (
+        {finalProcessList.length > 0 ? finalProcessList.map((process, index) => (
             <div className="process-item" key={index}>
                 <div className="left">
                     {(process.status === 'VoteNotice' || process.status === 'VoteReplanFailed' || process.status === 'VoteReplanPassed' || process.status === 'VoteReplaning') ? <div>
@@ -133,7 +133,7 @@ export default function Process(props) {
 
 
             </div>
-        ))}
+        )) : <div>No processes yet.</div>}
         {/* <a href={`/create-vote/${id}`}>
             {finalProcessList.filter(item => item.status === 'Active').length != 0 && <Button className="btn-green">变更计划</Button>}
         </a> */}

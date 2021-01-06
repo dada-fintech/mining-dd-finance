@@ -533,7 +533,8 @@ const commonABI = [
 //     commonABI,
 //     templateIds: ['1', '2', '3', '4'],
 //     //设置了之后，会占用首页广告位
-//     featuredId: 'fd7798d918799f5f1c7cc98a8900feb69d6a8cbb5dc8f036477fc4bca349e405'
+//     featuredId: 'fd7798d918799f5f1c7cc98a8900feb69d6a8cbb5dc8f036477fc4bca349e405',
+//     usdtAddress: '0xdac17f958d2ee523a2206206994597c13d831ec7',
 // }
 
 //template_id 1: moneyDao 定时筹款，投票释放
@@ -547,7 +548,8 @@ export default {
     baseURL: 'https://mining-api-test.dd.finance',
     assetURL: 'https://mining-assets-test.dd.finance',
     commonABI,
-    templateIds: ['1', '2', '3', '4']
+    templateIds: ['1', '2', '3', '4'],
+    usdtAddress: '0xB2eA07bd51527179a366CBB699aE7164F9B5E509',
 }
 
 // export default {
@@ -557,6 +559,7 @@ export default {
 //     assetURL: 'https://mining-assets-test.dd.finance',
 //     commonABI,
 //     templateIds: ['1', '2', '3', '4']
+//     usdtAddress: '',
 // }
 
 

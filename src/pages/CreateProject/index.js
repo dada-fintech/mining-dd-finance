@@ -150,7 +150,7 @@ export default function CreateProject() {
     }, [fundraising.max_amount])
 
     const getUSDTBalance = async () => {
-        let CONTRACT_ADDRESS = '0xdac17f958d2ee523a2206206994597c13d831ec7'
+        let CONTRACT_ADDRESS = config.usdtAddress
         const contract = new web3.eth.Contract(config.commonABI, CONTRACT_ADDRESS)
         const result = await contract.methods.balanceOf(wallet.account).call({ from: wallet.account })
         setUSDTBalance(web3.utils.fromWei(result, 'mwei'))
@@ -160,10 +160,9 @@ export default function CreateProject() {
         localStorage.setItem('projectInfo', JSON.stringify(projectInfo))
         localStorage.setItem('fundraising', JSON.stringify(fundraising))
         localStorage.setItem('processList', JSON.stringify(processList))
-        localStorage.setItem('raisingMethod', JSON.stringify(raisingMethod))
-        localStorage.setItem('repayMethod', JSON.stringify(repayMethod))
-        localStorage.setItem('withdrawMethod', JSON.stringify(withdrawMethod))
-
+        localStorage.setItem('raisingMethod', raisingMethod)
+        localStorage.setItem('repayMethod', repayMethod)
+        localStorage.setItem('withdrawMethod', withdrawMethod)
     }, [fundraising, processList, projectInfo, raisingMethod, repayMethod, withdrawMethod])
 
     const changeProjectInfo = (name, value) => {
@@ -810,8 +809,8 @@ export default function CreateProject() {
                                         <Radio.Button value="2">{t('createProject.unconditionalRedemption')}</Radio.Button>
                                     </Radio.Group>
                                     <div className="hint">
-                                        {withdrawMethod === '1' && t('createProject.selectRepaymentMethodHint')}
-                                        {withdrawMethod === '2' && t('createProject.selectRepaymentMethodHint')}
+                                        {withdrawMethod === '1' && <span>{t('createProject.selectRepaymentMethodHint')}</span>}
+                                        {withdrawMethod === '2' && <span>{t('createProject.selectRepaymentMethodHint')}</span>}
                                     </div>
                                 </div>
                             </div>
