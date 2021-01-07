@@ -363,7 +363,6 @@ export default function Project() {
                                         </div>
                                     </Row>}
 
-
                                     {project.project_info.status === 'Active' && role === 'manager' && project.fundraising.money_left > 0 && (project.project_info.template_id == config.templateIds[0] || project.project_info.template_id == config.templateIds[2]) && <Row>
                                         <div className="handle-area">
                                             <div className="btn-action" onClick={() => { doAsk() }}><span>发起请款</span></div>

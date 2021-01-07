@@ -8,7 +8,7 @@ import TimeIcon from 'assets/time.svg'
 import './style.scss'
 
 export default function TemplateChoose(props) {
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
     const history = useHistory()
     const { onCancel } = props
     const clearStorage = () => {
@@ -26,7 +26,7 @@ export default function TemplateChoose(props) {
         history.push(`/create-project/${tempType}`)
     }
 
-    return (<Modal visible={true} width="80%" footer={null} onCancel={() => { onCancel() }} className="template-choose">
+    return (<Modal visible={true} width="80%" footer={null} onCancel={() => { onCancel() }} className={`template-choose ${i18n.language}`}>
         <div className="modal-title">{t('template.title')}</div>
         <Row gutter={64}>
             <Col xs={24} lg={12}>

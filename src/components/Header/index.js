@@ -15,8 +15,6 @@ export default function Header(props) {
     const { role, breadCrumb, hideAction } = props
     const [drawerVisible, setDrawerVisible] = useState(false)
 
-    console.log('role', role)
-
     // const changeRole = role => {
     //     dispatch({
     //         type: 'SWITCH_ROLE',
@@ -28,7 +26,7 @@ export default function Header(props) {
 
     // const roleMenu = <Menu>
     //     <Menu.Item onClick={changeRole('1')}>
-    //         项目贡献者
+    //         项目贡献者s
     //     </Menu.Item>
     //     <Menu.Item onClick={changeRole('2')}>
     //         项目管理人

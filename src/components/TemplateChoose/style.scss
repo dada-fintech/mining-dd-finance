@@ -60,6 +60,23 @@
     }
 }
 
+.template-choose.en {
+    .template-item {
+        min-height: 370px;
+        .bottom {
+            .line {
+                .title {
+                    width: 30%;
+                    font-size: 15px;
+                }
+                img{
+                    margin: 0 16px;
+                }
+            }
+        }
+    }
+}
+
 // .en .template-choose {
 //     .template-item {
 //         .bottom {
