@@ -112,7 +112,7 @@ export default function Process(props) {
                     <div className="desc" dangerouslySetInnerHTML={{ __html: toBr(process.description) }}>
                     </div>
                     {(process.status === 'Active' || process.status === 'VoteReplaning') && <>
-                        {process.affirmative_vote && process.dissenting_vote && <>
+                        {(process.affirmative_vote > 0 || process.dissenting_vote > 0) && <>
                             <div className="vs-bar">
                                 <div className="yes" style={{ width: process.yesPercent + '%' }}></div>
                                 <div className="no" style={{ width: process.noPercent + '%' }}></div>

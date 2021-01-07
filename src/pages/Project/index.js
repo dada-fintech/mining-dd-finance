@@ -43,7 +43,7 @@ export default function Project() {
     // 下一个进程是否在4天内
     // const [nextInFour, setNextInFour] = useState(false)
     const [lockLoading, setLocklLoading] = useState(false)
-    const [role, setRole] = useState('invester')
+    const [role, setRole] = useState('visitor')
     const wallet = useWallet()
     const { id } = useParams()
     const { t, i18n } = useTranslation()
