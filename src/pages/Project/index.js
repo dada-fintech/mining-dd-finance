@@ -173,16 +173,16 @@ export default function Project() {
             }
 
             if (res.data.is_satisfied) {
-                mm.sendTransaction(lockParams, 'Lock USDT').then(res => {
+                mm.sendTransaction(lockParams, `Lock ${config.usdUnit}`).then(res => {
                     setLocklLoading(false)
                     getInfo()
                     getUserInvest()
                 })
             } else {
                 message.info(t('hint.approve'))
-                mm.sendTransaction(approveParams, 'Approve spending USDT').then(res => {
+                mm.sendTransaction(approveParams, `Approve spending ${config.usdUnit}`).then(res => {
                     if (res) {
-                        mm.sendTransaction(lockParams, 'Lock USDT').then(res => {
+                        mm.sendTransaction(lockParams, `Lock ${config.usdUnit}`).then(res => {
                             setLocklLoading(false)
                             getInfo()
                             getUserInvest()
@@ -307,17 +307,17 @@ export default function Project() {
                             </Tooltip>
                         </Col>
                         <Col xs={24} md={12} lg={8} xl={4}>
-                            <Tooltip title={`${project.fundraising.min_amount} USDT`}>
+                            <Tooltip title={`${project.fundraising.min_amount} ${config.usdUnit}`}>
                                 <div className="info-item">
-                                    <div className="value nowrap">{project.fundraising.min_amount} USDT</div>
+                                    <div className="value nowrap">{project.fundraising.min_amount} {config.usdUnit}</div>
                                     <div className="title">{t('common.softCap')}</div>
                                 </div>
                             </Tooltip>
                         </Col>
                         <Col xs={24} md={12} lg={8} xl={4}>
-                            <Tooltip title={`${project.fundraising.max_amount} USDT`}>
+                            <Tooltip title={`${project.fundraising.max_amount} ${config.usdUnit}`}>
                                 <div className="info-item">
-                                    <div className="value nowrap">{project.fundraising.max_amount} USDT</div>
+                                    <div className="value nowrap">{project.fundraising.max_amount} {config.usdUnit}</div>
                                     <div className="title">{t('common.fundSize')}</div>
                                 </div>
                             </Tooltip>
@@ -386,17 +386,17 @@ export default function Project() {
                                         <div className="handle-area">
                                             <Input style={{ width: '140px', height: '44px' }} addonAfter={
                                                 <div className="btn-input-action" onClick={() => { !lockLoading && doLock() }}><span className="text">{t('project.action.invest')} {lockLoading && <LoadingOutlined />
-                                                }</span></div>} value={lockNum} onChange={(event) => { setLockedNum(event.target.value) }} suffix="USDT" />
+                                                }</span></div>} value={lockNum} onChange={(event) => { setLockedNum(event.target.value) }} suffix={config.usdUnit} />
                                         </div>
                                         <div className="votes-bar">
                                             <div className="done" style={{ width: project.percent + '%' }}>{project.percent}%</div>
                                         </div>
                                         <div className="votes-info">
                                             <div>
-                                                {t('common.currentRaised')}:{project.fundraising.current_raised_money} USDT
+                                                {t('common.currentRaised')}:{project.fundraising.current_raised_money} {config.usdUnit}
                                         </div>
                                             <div>
-                                                {t('common.fundSize')}:{project.fundraising.max_amount} USDT
+                                                {t('common.fundSize')}:{project.fundraising.max_amount} {config.usdUnit}
                                         </div>
                                         </div>
                                         {/* <div className="process-tag" style={{ marginLeft: (project.percent > 50 ? (project.percent - 5) : project.percent) + '%' }}>

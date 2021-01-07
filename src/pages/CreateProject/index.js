@@ -19,7 +19,7 @@ import './style.scss'
 
 export default function CreateProject() {
     const [currentStep, setCurrentStep] = useState(0)
-    const [projectInfo, setProjectInfo] = useState({ member_address: [''], profit_token: 'USDT', other_file: [] })
+    const [projectInfo, setProjectInfo] = useState({ member_address: [''], profit_token: config.usdUnit, other_file: [] })
     const [fundraising, setFundraising] = useState({})
     const [payStatus, setPayStatus] = useState('')
     const [createLoading, setCreateLoading] = useState(false)
@@ -150,10 +150,14 @@ export default function CreateProject() {
     }, [fundraising.max_amount])
 
     const getUSDTBalance = async () => {
-        let CONTRACT_ADDRESS = config.usdtAddress
+        let CONTRACT_ADDRESS = config.usdAddress
         const contract = new web3.eth.Contract(config.commonABI, CONTRACT_ADDRESS)
         const result = await contract.methods.balanceOf(wallet.account).call({ from: wallet.account })
-        setUSDTBalance(web3.utils.fromWei(result, 'mwei'))
+        if(config.usdUnit === 'USDT'){
+            setUSDTBalance(web3.utils.fromWei(result, 'mwei'))
+        }else{
+            setUSDTBalance(web3.utils.fromWei(result, 'ether'))
+        }
     }
 
     useEffect(() => {
@@ -823,7 +827,7 @@ export default function CreateProject() {
                             </div>
                             <div className="form-item">
                                 <div className="label">{t('createProject.fundraisingLimit')}</div>
-                                <Input value={fundraising.max_amount} onChange={e => changeFundraising('max_amount', e.target.value)} style={{ width: '300px' }} suffix="USDT" />
+                                <Input value={fundraising.max_amount} onChange={e => changeFundraising('max_amount', e.target.value)} style={{ width: '300px' }} suffix={config.usdUnit} />
                                 <div className="hint">
                                     {t('createProject.fundraisingLimitHint')}
                                 </div>
@@ -834,7 +838,7 @@ export default function CreateProject() {
                             {fundraising.max_amount && <div className="form-item">
                                 <div className="label ">{t('createProject.softCap')} <Tooltip title={t('createProject.softCapHover')}><img src={QuestionIcon} /></Tooltip></div>
                                 <Slider tipFormatter={(val) => (<span>{val}%</span>)} style={{ width: '360px', }} value={fundraising.softtopPercent} tooltipVisible={true} onChange={value => { fundraisingSofttopChange(value) }} />
-                                <div className="softtop-value">{fundraising.min_amount} USDT</div>
+                                <div className="softtop-value">{fundraising.min_amount} {config.usdUnit}</div>
                                 <div className="hint">
                                     {t('createProject.fundraisingGoalHint')}
                                 </div>
@@ -956,11 +960,11 @@ export default function CreateProject() {
                                 </div>
                                 <div className="line">
                                     <div className="name">{t('createProject.fundraisingGoal')}</div>
-                                    <div className="value">{fundraising.min_amount} USDT</div>
+                                    <div className="value">{fundraising.min_amount} {config.usdUnit}</div>
                                 </div>
                                 <div className="line">
                                     <div className="name">{t('createProject.fundraisingLimit')}</div>
-                                    <div className="value">{fundraising.max_amount} USDT</div>
+                                    <div className="value">{fundraising.max_amount} {config.usdUnit}</div>
                                 </div>
                                 <div className="line">
                                     <div className="name">{t('createProject.redemptionDate')}</div>
@@ -1031,11 +1035,11 @@ export default function CreateProject() {
 
                         {currentStep === 9 && <div className="step-pay">
                             <div className="h1">{sidebarList[6].name}</div>
-                            <div>{t('common.yourBill')} <span className="num">{approveBalance}</span> USDT
+                            <div>{t('common.yourBill')} <span className="num">{approveBalance}</span> {config.usdUnit}
                                 {dadaApproved ? <div onClick={() => { !createLoading && doPay() }} className="btn-pay"> <span className="text">{t('common.pay')}</span></div>
                                     : <div onClick={() => { !createLoading && doApprove() }} className="btn-pay"> <span className="text">{t('common.approve')} {createLoading && <LoadingOutlined />}</span></div>}
                             </div>
-                            <div>{t('common.yourBalance')} <span className="num">{USDTBalance}</span> USDT</div>
+                            <div>{t('common.yourBalance')} <span className="num">{USDTBalance}</span> {config.usdUnit}</div>
                             <div className="hint">
                                 <div>{t('common.billHint1')}</div>
                                 <div>{t('common.billHint2')}</div>

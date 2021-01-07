@@ -3,6 +3,7 @@ import { Button } from 'antd'
 import { useWallet } from 'use-wallet'
 import { useTranslation } from 'react-i18next'
 import ConfirmVote from '../../modals/ConfirmVote'
+import config from 'config'
 import { toBr } from 'components/utils'
 import './style.scss'
 
@@ -99,7 +100,7 @@ export default function Process(props) {
                             <div className="value">{process.unlock_percentage} %</div>
                             <div className="title">{t('project.unlockingPercent')}</div>
                         </div> : <div>
-                                <div className="value">{process.unlock_amount} USDT</div>
+                                <div className="value">{process.unlock_amount} {config.usdUnit}</div>
                                 <div className="title">{t('project.unlockingAmount')}</div>
                             </div>}
                     </div>

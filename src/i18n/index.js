@@ -361,7 +361,7 @@ export default {
                 confirm1: 'Basic Information on the Project',
                 confirm2: 'Governance Information on the Project ',
                 confirm3: 'Capital Unlock Rules ',
-                payHint: 'Buy DADA amounts to 0.5% of your total funds needed for the fundraising, and submit the proposal to the DADA DAO Committee for approval and verification. ',
+                // payHint: 'Buy DADA amounts to 0.5% of your total funds needed for the fundraising, and submit the proposal to the DADA DAO Committee for approval and verification. ',
                 backHome: 'Home',
                 paySuccess: 'Success',
                 paySuccessHint: `
@@ -783,7 +783,7 @@ export default {
                 confirm1: '项目基础信息',
                 confirm2: '项目治理信息',
                 confirm3: '资金解锁计划',
-                payHint: '您需要购买/募集所需募集金额的0.5%的USDT，将提案提交给治理委员会进行批准/验证。',
+                // payHint: `您需要购买/募集所需募集金额的0.5%的${config.usdUnit}，将提案提交给治理委员会进行批准/验证。`,
                 backHome: '返回首页',
                 paySuccess: '支付成功',
                 paySuccessHint: `

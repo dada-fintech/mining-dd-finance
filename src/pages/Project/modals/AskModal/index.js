@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { useWallet } from 'use-wallet'
 import axios from 'utils/axios'
 import mm from 'components/mm'
+import config from 'config'
 import './style.scss'
 
 export default function AskModal(props) {
@@ -64,8 +65,8 @@ export default function AskModal(props) {
                 <Row gutter={24}>
                     <Col md={12}>
                         <div className="form-item">
-                            <div className="label ">{t('project.unlockingAmount')} {maxAmount > 0 && <span>({t('common.maxValue')} {maxAmount}USDT)</span>} </div>
-                            <Input suffix="USDT" value={amount} onChange={e => { Number(e.target.value) <= Number(maxAmount) && setAmount(e.target.value) }} />
+                            <div className="label ">{t('project.unlockingAmount')} {maxAmount > 0 && <span>({t('common.maxValue')} {maxAmount} {config.usdUnit})</span>} </div>
+                            <Input suffix={config.usdUnit} value={amount} onChange={e => { Number(e.target.value) <= Number(maxAmount) && setAmount(e.target.value) }} />
                         </div>
                     </Col>
                     <Col md={12}>

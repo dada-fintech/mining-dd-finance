@@ -534,7 +534,8 @@ const commonABI = [
 //     templateIds: ['1', '2', '3', '4'],
 //     //设置了之后，会占用首页广告位
 //     featuredId: 'fd7798d918799f5f1c7cc98a8900feb69d6a8cbb5dc8f036477fc4bca349e405',
-//     usdtAddress: '0xdac17f958d2ee523a2206206994597c13d831ec7',
+//     usdAddress: '0xdac17f958d2ee523a2206206994597c13d831ec7',
+//     usdUnit: 'USDT',
 // }
 
 //template_id 1: moneyDao 定时筹款，投票释放
@@ -542,16 +543,32 @@ const commonABI = [
 // template_id 3: moneyDaoFixRaise 定期筹款，投票释放
 // template_id 4: moneyDaoFixRaiseFullRelease 定期筹款，全款释放
 
+// binance testnet
+// export default {
+//     provider: 'https://data-seed-prebsc-1-s1.binance.org:8545',
+//     chainId: 97,
+//     baseURL: 'https://mining-api-test.dd.finance',
+//     assetURL: 'https://mining-assets-test.dd.finance',
+//     commonABI,
+//     templateIds: ['1', '2', '3', '4'],
+//     usdAddress: '0xB2eA07bd51527179a366CBB699aE7164F9B5E509',
+//     usdUnit: 'BUSD',
+// }
+
+// binance mainnet
 export default {
-    provider: 'https://data-seed-prebsc-1-s1.binance.org:8545',
-    chainId: 97,
-    baseURL: 'https://mining-api-test.dd.finance',
-    assetURL: 'https://mining-assets-test.dd.finance',
+    provider: 'https://bsc-dataseed.binance.org/',
+    chainId: 56,
+    baseURL: 'https://mining-api-binance.dd.finance',
+    assetURL: 'https://mining-assets-binance.dd.finance',
     commonABI,
     templateIds: ['1', '2', '3', '4'],
-    usdtAddress: '0xB2eA07bd51527179a366CBB699aE7164F9B5E509',
+    usdAddress: '0xe9e7cea3dedca5984780bafc599bd69add087d56',
+    usdUnit: 'BUSD',
 }
 
+
+//infura
 // export default {
 //     provider: 'https://kovan.infura.io/v3/e468cafc35eb43f0b6bd2ab4c83fa688',
 //     chainId: 42,
@@ -559,8 +576,11 @@ export default {
 //     assetURL: 'https://mining-assets-test.dd.finance',
 //     commonABI,
 //     templateIds: ['1', '2', '3', '4']
-//     usdtAddress: '',
+//     usdAddress: '',
+//     usdUnit: 'USDT',
+
 // }
+
 
 
 

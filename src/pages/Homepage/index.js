@@ -50,6 +50,9 @@ export default function Homepage() {
         axios.get('/project/list').then(res => {
             // setProjectList(res.data.filter(item => item.status == 'canInvest'))
             // setAllProjects(res.data.filter(item => item.status != 'canInvest'))
+            if (!res.data) {
+                return
+            }
             setProjectList(res.data.slice(0, 3))
             setAllProjects(res.data)
             var futureProjects = []

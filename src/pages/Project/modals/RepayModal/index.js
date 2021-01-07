@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useWallet } from 'use-wallet'
 import axios from 'utils/axios'
 import mm from 'components/mm'
+import config from 'config'
 import './style.scss'
 
 export default function RepayModal(props) {
@@ -37,7 +38,7 @@ export default function RepayModal(props) {
     return (
         <Modal wrapClassName="repay-modal" footer={null} title={t('modal.repayTitle')} visible={true} onCancel={() => { props.onCancel() }}>
             <div className="hint">
-                {t('modal.youNeedPay')} {info.repay_amount}USDT。
+                {t('modal.youNeedPay')} {info.repay_amount} {config.usdUnit}。
             </div>
             <div className="handle-area">
                 <Button loading={loading} className="btn-green" onClick={() => { doRepay() }}>{t('common.confirm')}</Button>
