@@ -131,7 +131,7 @@ export default function CreateProject() {
 
         const currentStep = Number(localStorage.getItem('currentStep'))
         if (currentStep) {
-            setCurrentStep(currentStep)
+            setCurrentStep(currentStep > 8 ? 8 : currentStep)
         }
 
     }, [])
