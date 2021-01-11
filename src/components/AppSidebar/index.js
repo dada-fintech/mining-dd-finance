@@ -1,12 +1,17 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Popover } from 'antd'
+import { Popover, Tooltip } from 'antd'
 import { Link } from 'react-router-dom'
 import i18n from 'i18next'
+import config from 'config'
 import './style.scss'
 import TemplateChoose from 'components/TemplateChoose'
 import LogoBlue from "assets/logo-blue.svg";
-import SidebarLogo from "assets/sidebar-logo.svg";
+import NetworkEthereum from "assets/network-ethereum.svg";
+import NetworkBinance from "assets/network-binance.svg";
+
+import SidebarLogoEther from "assets/sidebar-logo-ether.svg";
+import SidebarLogoBinance from "assets/sidebar-logo-binance.svg";
 import CryptoMiningIcon from 'assets/sidebar/crypto-mining.svg'
 import PlusIcon from 'assets/sidebar/plus.svg'
 import MiningSwapIcon from 'assets/sidebar/mining-swap.svg'
@@ -35,7 +40,8 @@ export default function AppSidebar(props) {
     return (<div className="app-sidebar">
         <div className="top">
             <a href="/">
-                <img src={SidebarLogo} className="sidebar-logo" />
+                {config.network === 'ethereum' ? <img src={SidebarLogoEther} className="sidebar-logo" /> :
+                    <img src={SidebarLogoBinance} className="sidebar-logo" />}
             </a>
             <ul className="nav">
                 {!hideCreate && <li>
@@ -58,6 +64,10 @@ export default function AppSidebar(props) {
         </div>
         <div className="bottom">
             <div className="more-links">
+                {config.mode === 'prod' && <div className={`network-switch ${config.network}`}>
+                    Network <img src={config.network === 'ethereum' ? NetworkEthereum : NetworkBinance} />
+                    <a href={config.network === 'ethereum' ? 'https://mining-binance.dd.finance/' : 'https://mining.dd.finance/'}><img src={config.network === 'ethereum' ? NetworkBinance : NetworkEthereum} /></a>
+                </div>}
                 <a onClick={() => { changeLanguage(i18n.language === 'en' ? 'zh' : 'en') }}>
                     {i18n.language === 'en' ? '简体中文' : 'English'}
                 </a>

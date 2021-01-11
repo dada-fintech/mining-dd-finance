@@ -525,7 +525,15 @@ const commonABI = [
     }
 ]
 
+//template_id 1: moneyDao 定时筹款，投票释放
+// template_id 2: moneyDaoFullRelease 定时筹款，全款释放
+// template_id 3: moneyDaoFixRaise 定期筹款，投票释放
+// template_id 4: moneyDaoFixRaiseFullRelease 定期筹款，全款释放
+
+
 // export default {
+//     network: 'ethereum',
+//     mode: 'prod',
 //     provider: 'wss://mainnet.infura.io/ws/v3/89db527f19e14a00902a439ae587a25b',
 //     chainId: 1,
 //     baseURL: 'https://mining-api.dd.finance',
@@ -538,13 +546,10 @@ const commonABI = [
 //     usdUnit: 'USDT',
 // }
 
-//template_id 1: moneyDao 定时筹款，投票释放
-// template_id 2: moneyDaoFullRelease 定时筹款，全款释放
-// template_id 3: moneyDaoFixRaise 定期筹款，投票释放
-// template_id 4: moneyDaoFixRaiseFullRelease 定期筹款，全款释放
-
 // binance testnet
 // export default {
+//     network: 'binance',
+//     mode: 'test',
 //     provider: 'https://data-seed-prebsc-1-s1.binance.org:8545',
 //     chainId: 97,
 //     baseURL: 'https://mining-api-test.dd.finance',
@@ -557,6 +562,8 @@ const commonABI = [
 
 // binance mainnet
 export default {
+    network: 'binance',
+    mode: 'prod',
     provider: 'https://bsc-dataseed.binance.org/',
     chainId: 56,
     baseURL: 'https://mining-api-binance.dd.finance',
@@ -570,6 +577,8 @@ export default {
 
 //infura
 // export default {
+//     network: 'ethereum',
+//     mode: 'test',
 //     provider: 'https://kovan.infura.io/v3/e468cafc35eb43f0b6bd2ab4c83fa688',
 //     chainId: 42,
 //     baseURL: 'https://mining-api-test.dd.finance',
