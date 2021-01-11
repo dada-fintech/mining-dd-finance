@@ -184,7 +184,7 @@ export default function Homepage() {
                             {projectList && projectList.map(item => (
                                 <Col xs={24} sm={12} md={24} lg={12} xl={8}>
                                     <div className="project-item">
-                                        <div className="project-name">{item.project_name}</div>
+                                        <div className="project-name nowrap">{item.project_name}</div>
                                         <div className="desc" dangerouslySetInnerHTML={{ __html: toBr(item.project_profile) }}>
                                         </div>
                                         {(item.status === 'raising' || item.status === 'canInvest') && <Progress strokeColor="#4CC16D" status="active" percent={((item.current_raised_money / item.max_amount) * 100).toFixed(0)} className="progress-bar" />}
