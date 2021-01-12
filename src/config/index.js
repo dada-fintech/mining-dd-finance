@@ -531,20 +531,20 @@ const commonABI = [
 // template_id 4: moneyDaoFixRaiseFullRelease 定期筹款，全款释放
 
 
-export default {
-    network: 'ethereum',
-    mode: 'prod',
-    provider: 'wss://mainnet.infura.io/ws/v3/89db527f19e14a00902a439ae587a25b',
-    chainId: 1,
-    baseURL: 'https://mining-api.dd.finance',
-    assetURL: 'https://mining-assets.dd.finance',
-    commonABI,
-    templateIds: ['1', '2', '3', '4'],
-    //设置了之后，会占用首页广告位
-    featuredId: 'fd7798d918799f5f1c7cc98a8900feb69d6a8cbb5dc8f036477fc4bca349e405',
-    usdAddress: '0xdac17f958d2ee523a2206206994597c13d831ec7',
-    usdUnit: 'USDT',
-}
+// export default {
+//     network: 'ethereum',
+//     mode: 'prod',
+//     provider: 'wss://mainnet.infura.io/ws/v3/89db527f19e14a00902a439ae587a25b',
+//     chainId: 1,
+//     baseURL: 'https://mining-api.dd.finance',
+//     assetURL: 'https://mining-assets.dd.finance',
+//     commonABI,
+//     templateIds: ['1', '2', '3', '4'],
+//     //设置了之后，会占用首页广告位
+//     featuredId: 'fd7798d918799f5f1c7cc98a8900feb69d6a8cbb5dc8f036477fc4bca349e405',
+//     usdAddress: '0xdac17f958d2ee523a2206206994597c13d831ec7',
+//     usdUnit: 'USDT',
+// }
 
 // binance testnet
 // export default {
@@ -561,18 +561,19 @@ export default {
 // }
 
 // binance mainnet
-// export default {
-//     network: 'binance',
-//     mode: 'prod',
-//     provider: 'https://bsc-dataseed.binance.org/',
-//     chainId: 56,
-//     baseURL: 'https://mining-api-binance.dd.finance',
-//     assetURL: 'https://mining-assets-binance.dd.finance',
-//     commonABI,
-//     templateIds: ['1', '2', '3', '4'],
-//     usdAddress: '0xe9e7cea3dedca5984780bafc599bd69add087d56',
-//     usdUnit: 'BUSD',
-// }
+export default {
+    network: 'binance',
+    mode: 'prod',
+    provider: 'https://bsc-dataseed.binance.org/',
+    chainId: 56,
+    baseURL: 'https://mining-api-binance.dd.finance',
+    assetURL: 'https://mining-assets-binance.dd.finance',
+    commonABI,
+    templateIds: ['1', '2', '3', '4'],
+    featuredId: '08b90ac9c815f82277463d63152d2822ba192d33fda2d74e2651a505b1678ff6',
+    usdAddress: '0xe9e7cea3dedca5984780bafc599bd69add087d56',
+    usdUnit: 'BUSD',
+}
 
 
 //infura

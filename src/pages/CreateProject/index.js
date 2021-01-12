@@ -709,7 +709,7 @@ export default function CreateProject() {
                         </div>}
                         {currentStep === 4 && tempType === 'close' && <div>
                             <div className="h1">{sidebarList[1].name}({t('common.standard')})</div>
-                            {i18n.language === 'en' ? <img src="/govern-rule-en-img.svg" className="govern-rule-img" /> : <img src="/govern-rule-img.svg" className="govern-rule-img" />}
+                            {i18n.language === 'en' ? <img src="/govern-rule-img-en.svg" className="govern-rule-img" /> : <img src="/govern-rule-img.svg" className="govern-rule-img" />}
                             <Row type="flex" align="middle" style={{ marginBottom: '32px' }}>
                                 <Col md={12}>
                                     <div className="form-item" style={{ marginTop: '0' }}>

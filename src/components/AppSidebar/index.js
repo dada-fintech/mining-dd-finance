@@ -64,6 +64,7 @@ export default function AppSidebar(props) {
         </div>
         <div className="bottom">
             <div className="more-links">
+                {/** 暂时不显示 */}
                 {config.mode === 'prod' && <div className={`network-switch ${config.network}`}>
                     Network <img src={config.network === 'ethereum' ? NetworkEthereum : NetworkBinance} />
                     <a href={config.network === 'ethereum' ? 'https://mining-binance.dd.finance/' : 'https://mining.dd.finance/'}><img src={config.network === 'ethereum' ? NetworkBinance : NetworkEthereum} /></a>

@@ -65,18 +65,20 @@ export default {
             template: {
                 title: 'Choose a Governing Template',
                 select: 'Select this template',
-                fundraisingRules: 'Fundraising Rules',
-                unlockRules: 'Unlock Rules',
-                redemptionRules: 'Redemption Rules',
+                fundraisingRules: 'Fundraising',
+                unlockRules: 'Unlock',
+                redemptionRules: 'Redemption',
                 open: {
-                    1: 'Choose a fundraising type according to your plan: set the fundraising timeframe by dates or the number of days.',
-                    2: 'Propose to unlocking the capital; Investors vote to pass the proposal. No pre-setting is required.',
-                    3: 'The investors redeem the principal and interests in the redemption days. '
+                    desc: 'Flexibly customize your project in multiple links such as fundraising, voting, redemption, etc.',
+                    1: 'After approval, you can start fundraising',
+                    2: '*Choose one of the two: Conditional, set voting conditions. Unconditional, you can ask for money after fundraising is completed',
+                    3: 'After the fundraising is completed, set the method and time for repayment of principal and interest'
                 },
                 close: {
-                    1: 'Create a thorough fundraising plan, softcap and hardcap. ',
-                    2: 'Reset the fund release rules according to the plan.',
-                    3: 'Preset the redemption date and send the repayment before the deadline.'
+                    desc: 'Use standardized templates to create projects more easily',
+                    1: 'Set the fundraising start date (5 days are reserved for review, fundraising will start after 5 days at the earliest)',
+                    2: 'Set unlock time and voting period',
+                    3: 'Pre-set the payment date'
                 }
             },
             hint: {
@@ -262,7 +264,7 @@ export default {
                 2.Fundraising Phase: Within 3 days after the fundraise completes, 10% of the hard cap should be paid in DADA before moving on to the next phase.<br/>
                 3.Governance Phase: According to the rules on capital unlock, you need to get over 50% approval votes (abstaining from voting is considered as approval by default) in order to move to the next phase.<br/>
                 </div>
-                <img class="govern-rule-img" src="/govern-rule-img.svg"/>
+                <img class="govern-rule-img" src="/govern-rule-img-en.svg"/>
                 <div>
                 <strong>Next: you need to set certain important dates: </strong><br/>
                     1.tarting date of the fundraise: it needs to be 5 days after the date that the project is created. <br/>
@@ -282,7 +284,7 @@ export default {
             2.Fundraising Phase: Within 3 days after the fundraise completes, 10% of the hard cap should be paid in DADA before moving on to the next phase.<br/>
             3.Governance Phase: According to the rules on capital unlock, you need to get over 50% approval votes (abstaining from voting is considered as approval by default) in order to move to the next phase.<br/>
             </div>
-            <img class="govern-rule-img" src="/govern-rule-img.svg"/>
+            <img class="govern-rule-img" src="/govern-rule-img-en.svg"/>
             <div>
             <strong>Next: you need to set certain important dates:</strong><br/>
             1.tarting date of the fundraise: it needs to be 5 days after the date that the project is created. <br/>
@@ -481,18 +483,20 @@ export default {
             template: {
                 title: '请选择一个治理模版',
                 select: '选择该模版',
-                fundraisingRules: '筹款规则',
-                unlockRules: '释放规则',
-                redemptionRules: '赎回规则',
+                fundraisingRules: '筹款',
+                unlockRules: '释放',
+                redemptionRules: '赎回',
                 open: {
-                    1: '筹款规则：根据项目计划，选择筹款方式：定期筹款和定时筹款。',
-                    2: '释放规则：根据项目推进情况择时发起款项释放，无需预设定，需要通过投资者投票。',
-                    3: '赎回规则：请在创建时选择用户赎回本金及利息的方式：还本付息和随还随取。'
+                    desc: '在筹款、投票、赎回等多个环节灵活定制你的项目',
+                    1: '审核通过，即可开始筹款',
+                    2: '*二选一：有条件，设置投票请款条件。无条件，筹款完成后即可请款',
+                    3: '筹款完成后，设定回本付息方式和时间'
                 },
                 close: {
-                    1: '筹款规则：根据项目策略制定完善的筹款计划及额度。',
-                    2: '释放规则：根据项目计划，预先设定款项释放规则。',
-                    3: '赎回规则：根据项目计划，预先设定回报日期并于规定日期前完成回款。'
+                    desc: '使用标准化模板，更加简便地创建项目',
+                    1: '设置筹款开始日期（预留5天审核，最快5天后开始筹款）',
+                    2: '设置解锁时间和投票期',
+                    3: '预先设定回本付息日期'
                 }
             },
             hint: {
