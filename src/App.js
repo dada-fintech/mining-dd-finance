@@ -14,6 +14,7 @@ import message from './i18n'
 
 import Homepage from './pages/Homepage'
 import Project from './pages/Project'
+import Blog from './pages/Blog'
 // import Projects from './pages/Projects'
 import CreateProject from './pages/CreateProject'
 import CreateVote from './pages/CreateVote'
@@ -59,6 +60,8 @@ function App() {
             <Route exact path="/create-project/:tempType" component={CreateProject} />
             <Route exact path="/create-vote/:id" component={CreateVote} />
             <Route exact path="/coming/:page" component={Coming} />
+            <Route exact path="/blog" component={Blog} />
+
           </Switch>
         </Router>
       </div>

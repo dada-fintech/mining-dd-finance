@@ -183,6 +183,7 @@ export default {
                 quickSwap: 'Quick Swap',
                 governance: 'Governance',
                 create: 'Create Project',
+                blog: 'Blog',
             },
             banner: {
                 title: 'Mining Ecosystem Aggregator',
@@ -604,6 +605,7 @@ export default {
                 quickSwap: '代币闪兑',
                 governance: '治理社区',
                 create: '发起项目',
+                blog: '博客',
             },
             banner: {
                 title: '矿业生态聚合器',

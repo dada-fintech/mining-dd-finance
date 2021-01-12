@@ -19,6 +19,7 @@ import DashboardIcon from 'assets/sidebar/dashboard.svg'
 import OverviewIcon from 'assets/sidebar/overview.svg'
 import QuickSwapIcon from 'assets/sidebar/quick-swap.svg'
 import GovernanceIcon from 'assets/sidebar/governance.svg'
+import BlogIcon from 'assets/sidebar/blog.svg'
 
 import Twiiter from 'assets/socials/twitter.svg'
 import Discord from 'assets/socials/discord.svg'
@@ -50,6 +51,9 @@ export default function AppSidebar(props) {
                 </li>}
                 <li>
                     <Link to="/projects"><img src={CryptoMiningIcon} />{t('sidebar.cryptoMining')}</Link>
+                </li>
+                <li>
+                    <Link to="/blog"><img src={BlogIcon} />{t('sidebar.blog')}</Link>
                 </li>
                 <li><Link to="/coming/swap"><img src={MiningSwapIcon} />{t('sidebar.miningSwap')}</Link></li>
                 <li><Link to="/coming/dashboard"><img src={DashboardIcon} />{t('sidebar.dashboard')}</Link></li>
