@@ -1,17 +1,20 @@
-.homepage {
+.community-projects {
     .featured-project {
         padding: 26px 48px;
         margin: 40px auto;
         border-radius: 12px;
-        background: radial-gradient(
-                96.13% 96.13% at 51.49% 100%,
-                rgba(0, 255, 71, 0.07) 0%,
-                rgba(255, 255, 255, 0) 100%
-            ),
-            radial-gradient(61.88% 432.18% at 100% 100%, rgba(0, 224, 255, 0.152) 0%, rgba(255, 255, 255, 0) 100%),
-            radial-gradient(118.75% 118.75% at 50% 0%, rgba(255, 0, 0, 0.094) 0%, rgba(255, 255, 255, 0) 100%),
-            linear-gradient(79.39deg, rgba(82, 0, 255, 0.116) 0%, rgba(255, 255, 255, 0) 67.77%),
-            radial-gradient(93.88% 162.44% at 0% 0%, rgba(249, 0, 239, 0.124) 0%, rgba(196, 196, 196, 0) 100%);
+        background-position: center top;
+        background-size: cover;
+        background-repeat: no-repeat;
+        // background: radial-gradient(
+        //         96.13% 96.13% at 51.49% 100%,
+        //         rgba(0, 255, 71, 0.07) 0%,
+        //         rgba(255, 255, 255, 0) 100%
+        //     ),
+        //     radial-gradient(61.88% 432.18% at 100% 100%, rgba(0, 224, 255, 0.152) 0%, rgba(255, 255, 255, 0) 100%),
+        //     radial-gradient(118.75% 118.75% at 50% 0%, rgba(255, 0, 0, 0.094) 0%, rgba(255, 255, 255, 0) 100%),
+        //     linear-gradient(79.39deg, rgba(82, 0, 255, 0.116) 0%, rgba(255, 255, 255, 0) 67.77%),
+        //     radial-gradient(93.88% 162.44% at 0% 0%, rgba(249, 0, 239, 0.124) 0%, rgba(196, 196, 196, 0) 100%);
 
         .title {
             font-size: 24px;
@@ -28,6 +31,7 @@
         }
 
         .join-btn {
+            cursor: pointer;
             color: #15163d;
             font-size: 18px;
             height: 44px;
@@ -52,10 +56,13 @@
             padding: 16px 24px;
             margin-bottom: 24px;
             border-radius: 12px;
-            box-shadow: 4px 4px 4px rgba(235, 229, 181, 0.3);
-            border: 1px solid #ece6b6;
+            // box-shadow: 4px 4px 4px rgba(235, 229, 181, 0.3);
+            // border: 1px solid #ece6b6;
             background: #fff;
             color: #15163d;
+            background-position: center top;
+            background-size: cover;
+            background-repeat: no-repeat;
             .project-name {
                 font-size: 18px;
                 margin-bottom: 12px;
@@ -71,6 +78,7 @@
                 margin: 16px auto;
             }
             .join-btn {
+                cursor: pointer;
                 color: #15163d;
                 font-size: 18px;
                 height: 36px;

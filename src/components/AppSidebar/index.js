@@ -13,6 +13,7 @@ import NetworkBinance from "assets/network-binance.svg";
 import SidebarLogoEther from "assets/sidebar-logo-ether.svg";
 import SidebarLogoBinance from "assets/sidebar-logo-binance.svg";
 import CryptoMiningIcon from 'assets/sidebar/crypto-mining.svg'
+import CommunityProjectIcon from 'assets/sidebar/community-project.svg'
 import PlusIcon from 'assets/sidebar/plus.svg'
 import MiningSwapIcon from 'assets/sidebar/mining-swap.svg'
 import DashboardIcon from 'assets/sidebar/dashboard.svg'
@@ -50,13 +51,16 @@ export default function AppSidebar(props) {
                         <img src={PlusIcon} />{t('sidebar.create')}</a>
                 </li>}
                 <li>
-                    <Link to="/projects"><img src={CryptoMiningIcon} />{t('sidebar.cryptoMining')}</Link>
+                    <Link to="/community-projects"><img src={CommunityProjectIcon} />{t('sidebar.communityProjects')}</Link>
                 </li>
                 <li>
-                    <Link to="/blog"><img src={BlogIcon} />{t('sidebar.blog')}</Link>
+                    <Link to="/projects"><img src={CryptoMiningIcon} />{t('sidebar.cryptoMining')}</Link>
                 </li>
                 <li><Link to="/coming/swap"><img src={MiningSwapIcon} />{t('sidebar.miningSwap')}</Link></li>
                 <li><Link to="/coming/dashboard"><img src={DashboardIcon} />{t('sidebar.dashboard')}</Link></li>
+                <li>
+                    <Link to="/blog"><img src={BlogIcon} />{t('sidebar.blog')}</Link>
+                </li>
             </ul>
             <ul className="nav second">
                 <li>

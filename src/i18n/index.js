@@ -2,6 +2,7 @@ export default {
     en: {
         translation: {
             common: {
+                comingSoon: 'Coming Soon',
                 connectWallet: 'Connect Wallet',
                 walletConnected: 'Wallet Connected',
                 viewAll: 'View All',
@@ -177,6 +178,7 @@ export default {
                 enterEmail: 'Please enter email address',
                 bonus: 'Bonus',
                 cryptoMining: 'Crypto Mining',
+                communityProjects: 'Community Projects',
                 miningSwap: 'Mining Swap',
                 dashboard: 'Dashboard',
                 overview: 'Overview',
@@ -421,6 +423,7 @@ export default {
     zh: {
         translation: {
             common: {
+                comingSoon: '即将到来',
                 connectWallet: '连接钱包',
                 walletConnected: '钱包已连接',
                 viewAll: '查看详情',
@@ -599,6 +602,7 @@ export default {
                 enterEmail: '请输入邮箱',
                 bonus: '累计奖励',
                 cryptoMining: '矿业项目',
+                communityProjects: '社区项目',
                 miningSwap: '权益交易',
                 dashboard: '数据面板',
                 overview: '数据总览',

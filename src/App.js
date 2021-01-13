@@ -12,7 +12,8 @@ import i18n from "i18next";
 import { initReactI18next, useTranslation } from 'react-i18next'
 import message from './i18n'
 
-import Homepage from './pages/Homepage'
+import Projects from './pages/Projects'
+import CommunityProjects from './pages/CommunityProjects'
 import Project from './pages/Project'
 import Blog from './pages/Blog'
 // import Projects from './pages/Projects'
@@ -55,7 +56,8 @@ function App() {
             <Route exact path="/">
               <Redirect to="/projects" />
             </Route>
-            <Route exact path="/projects" component={Homepage} />
+            <Route exact path="/community-projects" component={CommunityProjects} />
+            <Route exact path="/projects" component={Projects} />
             <Route exact path="/project/:id" component={Project} />
             <Route exact path="/create-project/:tempType" component={CreateProject} />
             <Route exact path="/create-vote/:id" component={CreateVote} />

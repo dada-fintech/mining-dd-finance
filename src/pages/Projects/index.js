@@ -13,7 +13,7 @@ import config from 'config'
 
 import './style.scss'
 
-export default function Homepage() {
+export default function Projects() {
     // const wallet = useWallet()
     const [projectList, setProjectList] = useState([])
     const [allProjects, setAllProjects] = useState([])
@@ -156,7 +156,7 @@ export default function Homepage() {
     }
 
     // const wallet = useWallet()
-    return (<div className="homepage">
+    return (<div className="projects">
         <Row>
             <Col lg={4} md={5} xs={0} xxl={3}>
                 <AppSidebar />
