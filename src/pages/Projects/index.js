@@ -158,10 +158,10 @@ export default function Projects() {
     // const wallet = useWallet()
     return (<div className="projects">
         <Row>
-            <Col lg={4} md={5} xs={0} xxl={3}>
+            <Col xs={0} lg={4} xxl={3}>
                 <AppSidebar />
             </Col>
-            <Col lg={20} md={19} xs={24} xxl={21}>
+            <Col xs={24} lg={20} xxl={21}>
                 <div className="content-wrapper">
                     <Header hideAction={true} />
                     {featuredProject && <div className="featured-project">

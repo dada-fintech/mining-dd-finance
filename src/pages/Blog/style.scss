@@ -53,6 +53,15 @@
             }
         }
     }
+    .media-list{
+        text-align: right;
+        margin-top: 64px;
+        img{
+            display: block;
+            margin: 0 0 24px auto;
+            // margin-bottom: 24px;
+        }
+    }
     @media screen and (max-width: 768px) {
         .article-list {
             .article-item {

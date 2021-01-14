@@ -267,10 +267,10 @@ export default function Project() {
 
     return (<div className="project-page">
         <Row>
-            <Col md={5} lg={4} xs={0} xxl={3}>
+            <Col xs={0} lg={4} xxl={3}>
                 <AppSidebar />
             </Col>
-            <Col md={19} lg={20} xs={24} xxl={21}>
+            <Col xs={24} lg={20} xxl={21}>
                 <div className="content-wrapper">
                     <Header role={role} breadCrumb={[t('sidebar.cryptoMining'), project.project_info.project_name]} />
                     <div className="brief-info">

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Popover, Tooltip } from 'antd'
-import { Link } from 'react-router-dom'
+import { Popover } from 'antd'
+import { NavLink } from 'react-router-dom'
 import i18n from 'i18next'
 import config from 'config'
 import './style.scss'
@@ -28,6 +28,8 @@ import Medium from 'assets/socials/medium.svg'
 import Telegram from 'assets/socials/telegram.svg'
 import Weixin from 'assets/socials/weixin.svg'
 import WeixinQR from 'assets/qr-code.jpeg'
+import Linkedin from 'assets/socials/linkedin.svg'
+
 
 export default function AppSidebar(props) {
     const { t } = useTranslation()
@@ -40,36 +42,34 @@ export default function AppSidebar(props) {
     const WeixinContent = (<img src={WeixinQR} style={{ width: '140px' }} />)
 
     return (<div className="app-sidebar">
-        <div className="top">
-            <a href="/">
-                {config.network === 'ethereum' ? <img src={SidebarLogoEther} className="sidebar-logo" /> :
-                    <img src={SidebarLogoBinance} className="sidebar-logo" />}
-            </a>
-            <ul className="nav">
-                {!hideCreate && <li>
-                    <a onClick={() => { setShowTemplateChoose(true) }}>
-                        <img src={PlusIcon} />{t('sidebar.create')}</a>
-                </li>}
-                <li>
-                    <Link to="/community-projects"><img src={CommunityProjectIcon} />{t('sidebar.communityProjects')}</Link>
-                </li>
-                <li>
-                    <Link to="/projects"><img src={CryptoMiningIcon} />{t('sidebar.cryptoMining')}</Link>
-                </li>
-                <li><Link to="/coming/swap"><img src={MiningSwapIcon} />{t('sidebar.miningSwap')}</Link></li>
-                <li><Link to="/coming/dashboard"><img src={DashboardIcon} />{t('sidebar.dashboard')}</Link></li>
-                <li>
-                    <Link to="/blog"><img src={BlogIcon} />{t('sidebar.blog')}</Link>
-                </li>
-            </ul>
-            <ul className="nav second">
-                <li>
-                    <Link to="/coming/overview"><img src={OverviewIcon} />{t('sidebar.overview')}</Link>
-                </li>
-                <li><Link to="/coming/quick-swap"><img src={QuickSwapIcon} />{t('sidebar.quickSwap')}</Link></li>
-                <li><Link to="/coming/governance"><img src={GovernanceIcon} />{t('sidebar.governance')}</Link></li>
-            </ul>
-        </div>
+        <a href="/" className="top-link">
+            {config.network === 'ethereum' ? <img src={SidebarLogoEther} className="sidebar-logo" /> :
+                <img src={SidebarLogoBinance} className="sidebar-logo" />}
+        </a>
+        <ul className="nav">
+            {!hideCreate && <li>
+                <a onClick={() => { setShowTemplateChoose(true) }}>
+                    <img src={PlusIcon} />{t('sidebar.create')}</a>
+            </li>}
+            <li>
+                <NavLink className="nowrap" activeClassName="active" to="/community-projects"><img src={CommunityProjectIcon} />{t('sidebar.communityProjects')}</NavLink>
+            </li>
+            <li>
+                <NavLink className="nowrap" activeClassName="active" to="/projects"><img src={CryptoMiningIcon} />{t('sidebar.cryptoMining')}</NavLink>
+            </li>
+            <li><NavLink className="nowrap" activeClassName="active" to="/coming/swap"><img src={MiningSwapIcon} />{t('sidebar.miningSwap')}</NavLink></li>
+            <li><NavLink className="nowrap" activeClassName="active" to="/coming/dashboard"><img src={DashboardIcon} />{t('sidebar.dashboard')}</NavLink></li>
+            <li>
+                <NavLink className="nowrap" activeClassName="active" to="/blog"><img src={BlogIcon} />{t('sidebar.blog')}</NavLink>
+            </li>
+        </ul>
+        {/* <ul className="nav second">
+            <li>
+                <Link to="/coming/overview"><img src={OverviewIcon} />{t('sidebar.overview')}</Link>
+            </li>
+            <li><Link to="/coming/quick-swap"><img src={QuickSwapIcon} />{t('sidebar.quickSwap')}</Link></li>
+            <li><Link to="/coming/governance"><img src={GovernanceIcon} />{t('sidebar.governance')}</Link></li>
+        </ul> */}
         <div className="bottom">
             <div className="more-links">
                 {/** 暂时不显示 */}
@@ -101,6 +101,9 @@ export default function AppSidebar(props) {
                     <Popover content={WeixinContent}>
                         <img src={Weixin} className="social-icon" />
                     </Popover>
+                </a>
+                <a target="_blank" href="https://www.linkedin.com/company/dadafinance/">
+                    <img src={Linkedin} className="social-icon" />
                 </a>
             </div>
             <div className="copyright">

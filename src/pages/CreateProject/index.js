@@ -645,10 +645,10 @@ export default function CreateProject() {
 
     return (<div className="create-project-page">
         <Row>
-            <Col md={5} lg={4} xs={0} xxl={3}>
+            <Col xs={0} lg={4} xxl={3}>
                 <AppSidebar hideCreate={true} />
             </Col>
-            <Col md={19} lg={20} xs={24} xxl={21}>
+            <Col xs={24} lg={20} xxl={21}>
                 <div className="content-wrapper">
                     <Header breadCrumb={[t('sidebar.cryptoMining'), 'Create DAO']} />
                     <div className="card-board">
@@ -690,7 +690,7 @@ export default function CreateProject() {
                             </div>
                             <div className="form-item">
                                 <div className="label">{t('createProject.projectDetails')}</div>
-                                <Input.TextArea autoSize={{ minRows: 6 }} maxLength="140" value={projectInfo.project_description} onChange={(e) => { changeProjectInfo('project_description', e.target.value) }} />
+                                <Input.TextArea autoSize={{ minRows: 6 }} value={projectInfo.project_description} onChange={(e) => { changeProjectInfo('project_description', e.target.value) }} />
                                 <div className="hint">{t('createProject.projectDetailsHint')}</div>
                             </div>
                             <div className="form-item">

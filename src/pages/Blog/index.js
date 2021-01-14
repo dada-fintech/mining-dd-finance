@@ -2,6 +2,11 @@ import React from 'react'
 import AppSidebar from 'components/AppSidebar'
 import { Row, Col } from 'antd'
 import Header from 'components/Header'
+import MediaChainnews from 'assets/medias/chainnews.svg'
+import MediaOdaily from 'assets/medias/odaily.svg'
+import MediaTheblock from 'assets/medias/theblock.svg'
+import MediaSosob from 'assets/medias/sosob.svg'
+
 import './style.scss'
 
 const mediaMapping = {
@@ -9,9 +14,9 @@ const mediaMapping = {
         link: 'medium.com',
         img: '/img/blog/medium.png',
     },
-    chainnews:{
+    chainnews: {
         link: 'chainnews.com',
-        img:'/img/blog/chainnews.png',
+        img: '/img/blog/chainnews.png',
     },
     weixin: {
         link: 'weixin.qq.com',
@@ -20,6 +25,13 @@ const mediaMapping = {
 }
 
 const blogList = [
+    {
+        title: 'Crypto Market Value Hits Record $1T, Here Comes the Liquidity Provider to the Real-Economy',
+        desc: 'In an epic crypto boom, DADA Finance is the only DeFi platform that does not profit from just loaning and trading, but by growing real value in the real economy —Bitcoin, Ethereum mining, and more, with 20% APY.',
+        link: 'https://ddfinance.medium.com/crypto-market-value-hits-record-1t-hear-the-sound-of-reason-39946aab376',
+        img: '/img/blog/11.png',
+        source: 'medium'
+    },
     {
         title: 'DADA 进军传统行业，将房地产代币化 DAO',
         desc: 'DADA 金融和在迪拜 , 上海和香港有投资咨询公司的 Dynamigs 联手探索通过区块链代币化技术，将尼日利亚的一个大型商城分解成小单元可交易资产的可能性。',
@@ -45,7 +57,8 @@ const blogList = [
         title: 'CeFi, DeFi, or a DAO Platform — Who is the Fastest and Steadiest Horse in 2021？',
         desc: 'In an arena set with negative real interest rates, fund managers and retail investors are racing to the fastest horse under the profit-maximizing strategy.',
         link: 'https://ddfinance.medium.com/cefi-defi-or-a-dao-platform-d1940084e4da',
-        source: 'medium'
+        source: 'medium',
+        img: '/img/blog/10.png',
     },
     {
         title: 'DADA将在Polkadot上推出DAO平台',
@@ -61,39 +74,75 @@ const blogList = [
         img: '/img/blog/1.png',
         source: 'medium'
     },
+    {
+        title: '三分钟了解 DeFi 一站式智能投顾平台 DADA',
+        desc: 'DADA 金融和在迪拜 , 上海和香港有投资咨询公司的 Dynamigs 联手探索通过区块链代币化技术，将尼日利亚的一个大型商城分解成小单元可交易资产的可能性。',
+        link: 'https://www.chainnews.com/articles/809652537467.htm',
+        img: '/img/blog/12.png',
+        source: 'chainnews'
+    },
+    {
+        title: 'Bulk preorders for the latest bitcoin ASIC miners are sold out until next spring',
+        desc: 'DAO 在信息不对称领域可发挥重要作用，加密货币矿业可将矿机、矿场、矿池等生产数据上链，为 DAO 治理提供可靠数据。',
+        link: 'https://www.chainnews.com/articles/896772592545.htm',
+        img: '/img/blog/13.png',
+        source: 'chainnews'
+    },
 ]
 
 export default function Blog() {
     return (<div className={`blog-page`}>
 
         <Row>
-            <Col lg={4} md={5} xs={0} xxl={3}>
+            <Col xs={0} lg={4} xxl={3}>
                 <AppSidebar />
             </Col>
-            <Col lg={20} md={19} xs={24} xxl={21}>
+            <Col xs={24} lg={20} xxl={21}>
                 <div className="content-wrapper">
                     <Header hideAction={true} />
                     <div className="page-title">DADA Blog</div>
                     <div className="page-desc">
                         News, stories, and announcements from DADA.
                     </div>
-                    <div className="article-list">
-                        {blogList.map((item, index) => (
-                            <div key={index} className="article-item">
-                                <a target="_blank" className="title" href={item.link}>{item.title}</a>
-                                <div className="main-text">
-                                    {item.img && <img src={item.img} />}
-                                    <div className="text">
-                                        {item.desc}
+                    <Row>
+                        <Col xs={24} lg={18}>
+                            <div className="article-list">
+                                {blogList.map((item, index) => (
+                                    <div key={index} className="article-item">
+                                        <a target="_blank" className="title" href={item.link}>{item.title}</a>
+                                        <div className="main-text">
+                                            {item.img && <img src={item.img} />}
+                                            <div className="text">
+                                                {item.desc}
+                                            </div>
+                                        </div>
+                                        <div className="source">
+                                            From {mediaMapping[item.source] && mediaMapping[item.source].link}
+                                            {mediaMapping[item.source] && mediaMapping[item.source].img && <img src={mediaMapping[item.source].img} />}
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="source">
-                                    From {mediaMapping[item.source] && mediaMapping[item.source].link}
-                                    {mediaMapping[item.source] && mediaMapping[item.source].img && <img src={mediaMapping[item.source].img}/>}
-                                </div>
+                                ))}
                             </div>
-                        ))}
-                    </div>
+                        </Col>
+                        <Col xs={0} lg={6}>
+                            <div className="media-list">
+                                <a href="https://www.chainnews.com/u/785055704172.htm" target="_blank">
+                                    <img src={MediaChainnews} />
+                                </a>
+                                <a href="https://www.odaily.com/post/5160033" target="_blank">
+                                    <img src={MediaOdaily} />
+                                </a>
+                                <a href="https://www.theblockcrypto.com/post/84781/bulk-preorders-bitcoin-miners-spring-2021" target="_blank">
+                                    <img src={MediaTheblock} />
+                                </a>
+                                <a href="https://www.sosob.com/hot/26028.html" target="_blank">
+                                    <img src={MediaSosob} />
+                                </a>
+                            </div>
+                        </Col>
+                    </Row>
+
+
                 </div>
             </Col>
         </Row>

@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Row, Col, Progress, Table, } from 'antd'
-// import { useWallet } from 'use-wallet'
+import { Row, Col, Progress } from 'antd'
 import AppSidebar from 'components/AppSidebar'
-import HomepageBanner from 'assets/homepage-banner.svg'
 import { useTranslation } from 'react-i18next'
 import { toBr } from 'components/utils'
-import { Link } from 'react-router-dom'
-import axios from 'utils/axios'
+// import axios from 'utils/axios'
 import Header from 'components/Header'
 import Countdown from 'components/Countdown'
-import config from 'config'
 
 import './style.scss'
 
@@ -170,15 +166,15 @@ export default function Projects() {
 
     return (<div className="community-projects">
         <Row>
-            <Col lg={4} md={5} xs={0} xxl={3}>
+            <Col xs={0} lg={4} xxl={3}>
                 <AppSidebar />
             </Col>
-            <Col lg={20} md={19} xs={24} xxl={21}>
+            <Col xs={24} lg={20} xxl={21}>
                 <div className="content-wrapper">
                     <Header hideAction={true} />
                     {featuredProject && <div className="featured-project" style={{ backgroundImage: "url(" + featuredProject.img + ")" }}>
                         <Row>
-                            <Col xs={24} md={16}>
+                            <Col xs={24} md={20} lg={14} xl={10}>
                                 <div className="title">{featuredProject.project_name}</div>
                                 <div className="desc" dangerouslySetInnerHTML={{ __html: toBr(featuredProject.project_profile) }}></div>
                                 {featuredCountdown > 0 && <Countdown timestamp={featuredCountdown} />}

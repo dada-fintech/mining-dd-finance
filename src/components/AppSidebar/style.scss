@@ -1,30 +1,51 @@
 .app-sidebar {
-    background: #fff;
     height: 100vh;
     // overflow-y: scroll;
-    padding: 16px 24px;
-    border-radius: 0 20px 20px 0;
+    // padding: 16px 0 0 24px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     .sidebar-logo {
-        // width: 80%;
-        margin-bottom: 64px;
+        margin-bottom: 44px;
     }
     a {
         color: #15163d;
     }
+    .top-link {
+        border-radius: 0 20px 0 0;
+        background: #fff;
+        padding: 16px 0 0 24px;
+    }
     .nav {
+        position: relative;
+        // background: #fff;
+        &::before {
+            content: "";
+            display: block;
+            position: absolute;
+            left: 0;
+            height: 100%;
+            width: 24px;
+            background: #fff;
+        }
         li {
             list-style: none;
-            margin-bottom: 16px;
             cursor: pointer;
+            margin-left: 24px;
+
             a {
-                display: block;
                 display: flex;
                 align-items: center;
+                padding: 10px 10px;
+                background: #fff;
+                &.active {
+                    // background: url(../../assets/nav-active.svg) no-repeat;
+                    background: transparent;
+                    border-radius: 200px 0 0 200px;
+                    border-left: 14px solid #fff;
+                    margin-left: -16px;
+                }
             }
-
             img {
                 width: 22px;
                 margin-right: 6px;
@@ -87,7 +108,6 @@
         }
         &:hover {
             a {
-
                 img {
                     height: 30px;
                 }
@@ -107,6 +127,11 @@
                 margin-right: 0;
             }
         }
+    }
+    .bottom {
+        background: #fff;
+        border-radius: 0 0 20px 0;
+        padding: 24px 24px 16px;
     }
     .copyright {
         color: #9088a1;

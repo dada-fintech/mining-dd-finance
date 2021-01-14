@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="154px" height="28px" viewBox="0 0 154 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 56.2 (81672) - https://sketch.com -->
+    <title>nav-active</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="-0.0323411033%" y1="50.2618%" x2="108.353158%" y2="50.2618%" id="linearGradient-1">
+            <stop stop-color="#FAD9DA" offset="0%"></stop>
+            <stop stop-color="#F9DDE0" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="nav-active" fill="url(#linearGradient-1)" fill-rule="nonzero">
+            <path d="M153.642,0.7435 L153.642,27.9686 L12.8714,27.9686 C-4.53829,27.8105 -4.04084,0.7435 12.8714,0.7435 L153.642,0.7435 Z" id="路径"></path>
+        </g>
+    </g>
+</svg>

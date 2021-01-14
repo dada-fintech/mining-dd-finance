@@ -1,6 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import AppSidebar from 'components/AppSidebar'
+import Header from 'components/Header'
 import { Row, Col } from 'antd'
 import './style.scss'
 
@@ -8,12 +9,15 @@ export default function Homepage() {
     const { page } = useParams()
     return (<div className={`coming-page ${page}`}>
         <Row>
-            <Col lg={4} md={5} xs={0} xxl={3}>
+            <Col xs={0} lg={4} xxl={3}>
                 <AppSidebar />
             </Col>
-            <Col lg={20} md={19} xs={24} xxl={21}>
+            <Col xs={24} lg={20} xxl={21}>
                 <div className="content-wrapper">
-                    COMING SOON
+                    <Header hideAction={true} />
+                    <div className="coming-text">
+                        COMING SOON
+                </div>
                 </div>
             </Col>
         </Row>
