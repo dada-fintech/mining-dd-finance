@@ -6,7 +6,9 @@ import {
 } from 'react-router-dom'
 import './App.scss';
 import React, { useEffect } from 'react'
+import AppSidebar from 'components/AppSidebar'
 import { useWallet } from 'use-wallet'
+import { Row, Col } from 'antd'
 
 import i18n from "i18next";
 import { initReactI18next, useTranslation } from 'react-i18next'
@@ -52,19 +54,28 @@ function App() {
     <ConfigProvider locale={i18n.language === 'en' ? enUS : zhCN}>
       <div className={`App ${i18n.language}`}>
         <Router>
-          <Switch>
-            <Route exact path="/">
-              <Redirect to="/projects" />
-            </Route>
-            <Route exact path="/community-projects" component={CommunityProjects} />
-            <Route exact path="/projects" component={Projects} />
-            <Route exact path="/project/:id" component={Project} />
-            <Route exact path="/create-project/:tempType" component={CreateProject} />
-            <Route exact path="/create-vote/:id" component={CreateVote} />
-            <Route exact path="/coming/:page" component={Coming} />
-            <Route exact path="/blog" component={Blog} />
+          <Row>
+            <Col xs={0} lg={4} xxl={3}>
+              <AppSidebar />
+            </Col>
+            <Col xs={24} lg={20} xxl={21}>
+              <div className="content-wrapper">
+                <Switch>
+                  <Route exact path="/">
+                    <Redirect to="/projects" />
+                  </Route>
+                  <Route exact path="/community-projects" component={CommunityProjects} />
+                  <Route exact path="/projects" component={Projects} />
+                  <Route exact path="/project/:id" component={Project} />
+                  <Route exact path="/create-project/:tempType" component={CreateProject} />
+                  <Route exact path="/create-vote/:id" component={CreateVote} />
+                  <Route exact path="/coming/:page" component={Coming} />
+                  <Route exact path="/blog" component={Blog} />
+                </Switch>
+              </div>
+            </Col>
+          </Row>
 
-          </Switch>
         </Router>
       </div>
     </ConfigProvider>

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { Button, Row, Col, Input, Upload, message, DatePicker, InputNumber, Popconfirm, Tooltip, notification } from 'antd'
 import QuestionIcon from 'assets/question.svg'
 import { useWallet } from 'use-wallet'
-import AppSidebar from 'components/AppSidebar'
 import mm from 'components/mm'
 import moment from 'moment'
 import { useTranslation } from 'react-i18next'
@@ -207,169 +206,160 @@ export default function CreateVote() {
     }
 
     return (<div className="create-vote-page">
-        <Row>
-            <Col xs={0} lg={4} xxl={3}>
-                <AppSidebar />
-            </Col>
-            <Col xs={24} lg={20} xxl={21}>
-                <div className="content-wrapper">
-                    <Header breadCrumb={[t('sidebar.cryptoMining'), 'Create Vote']} />
-                    <div className="card-board">
-                        <ul className="breadcrumb">
-                            {sidebarList.map((item, index) => <li className={(currentStep >= item.step ? 'done' : '')}>
-                                <span>{item.name}</span>
-                            </li>)}
-                        </ul>
-                        {currentStep === 0 && <div className="step-0" dangerouslySetInnerHTML={{ __html: t('createVote.hint') }}>
-                        </div>}
 
-                        {currentStep === 1 && <div className="step-1">
-                            <div className="h1">{t('createVote.mainTitle')}</div>
-                            <div className="hint-block small" dangerouslySetInnerHTML={{ __html: t('createVote.step1Hint') }}>
-                            </div>
-                            <div className="confirm-box">
-                                <div className="form-item">
-                                    <div className="label">{t('createVote.votingPeriod')} <Tooltip title="投票期限无法更改，合约创建时开始生效。公示期：24小时，投票期：24小时-96小时。"><img src={QuestionIcon} /></Tooltip></div>
-                                    <div>
-                                        {moment().add(1, 'days').format('MMMM Do YYYY')} - {moment().add(4, 'days').format('MMMM Do YYYY')}
-                                    </div>
-                                </div>
-                                <div className="form-item">
-                                    <div className="label">{t('createVote.descriptionOfChange')}</div>
-                                    <Input.TextArea autoSize={{ minRows: 6 }} placeholder="200 words limit" value={description} onChange={(e) => { console.log(e); setDescription(e.target.value) }} />
-                                </div>
-                            </div>
+        <Header breadCrumb={[t('sidebar.cryptoMining'), 'Create Vote']} />
+        <div className="card-board">
+            <ul className="breadcrumb">
+                {sidebarList.map((item, index) => <li className={(currentStep >= item.step ? 'done' : '')}>
+                    <span>{item.name}</span>
+                </li>)}
+            </ul>
+            {currentStep === 0 && <div className="step-0" dangerouslySetInnerHTML={{ __html: t('createVote.hint') }}>
+            </div>}
 
-                            <div className="form-item">
-                                <div className="label">{t('createVote.uploadDoc')}</div>
-                                <Upload {...otherUpload}>
-                                    <Button className="btn-white" style={{ padding: '0 44px' }}>{t('common.upload')}</Button>
-                                </Upload>
-                                {
-                                    projectInfo.other_file && projectInfo.other_file.length > 0 && <div className="uploaded-box">
-                                        {projectInfo.other_file.map((item, index) => (
-                                            <div>
-                                                {item.file_name.slice(10)} <CloseCircleOutlined onClick={() => { removeOtherFile(index) }} />
-                                            </div>
-                                        ))}
-                                    </div>
-                                }
-                            </div>
-                            {processList.map((item, index) => <>
-                                <div className="process-top">
-                                    <div>{t('project.progress')} #{index + 1}</div>
-                                </div>
-                                <div className="confirm-box">
-                                    {(item.status === 'Future' || !item.status) && <Popconfirm title={t('common.sureToDelete')} onConfirm={() => { removeProcess(index) }}><CloseCircleOutlined className="remove-btn" /></Popconfirm>}
-                                    <div className={'status ' + (item.status === 'Active' ? 'finish' : '')}>
-                                        {item.status}
-                                    </div>
-                                    <div className="line">
-                                        <div className="name required">{t('project.unlockingAmount')}</div>
-                                        <div className="value">
-                                            {(item.status && item.status !== 'Future') ? (item.unlock_percentage + '%') : <InputNumber max={index === 0 ? 80 : 100} min={0} formatter={value => `${value ? value : 0} %`} parser={value => parseInt(value)} value={item.unlock_percentage} onChange={e => changeProcess(index, 'unlock_percentage', e)} style={{ width: '180px' }} />}
-                                        </div>
-                                    </div>
-                                    {index === 0 ? <div className="line">
-                                        <div className="name required">{t('createProject.unlockDate')}</div>
-                                        <div className="value">
-                                            {(item.status && item.status !== 'Future') ? `${new Date(item.vote_start_time).toLocaleDateString()}` :
-                                                <DatePicker value={item.vote_start_time && moment(item.vote_start_time)} onChange={value => { value && changeProcess(index, 'vote_start_time', value.valueOf()); }} />
-                                            }
-                                        </div>
-                                    </div> : <div className="line">
-                                            <div className="name required">{t('createProject.votingDate')}</div>
-                                            <div className="value">
-                                                {(item.status && item.status !== 'Future') ? `${new Date(item.vote_start_time).toLocaleDateString()}-${new Date(item.vote_end_time).toLocaleDateString()}` :
-                                                    <DatePicker.RangePicker value={item.vote_start_time && [moment(item.vote_start_time), moment(item.vote_end_time)]} onChange={value => { value && changeProcess(index, 'vote_start_time', value[0].valueOf()); value && changeProcess(index, 'vote_end_time', value[1].valueOf()) }} />
-                                                }
-                                            </div>
-                                        </div>}
-
-                                    <div className="line">
-                                        <div className="name">{t('project.event')}</div>
-                                        <div className="value">
-                                            {(item.status && item.status !== 'Future') ? item.description : <Input.TextArea value={item.description} onChange={e => changeProcess(index, 'description', e.target.value)} autoSize={{ minRows: 6 }} />}
-                                        </div>
-                                    </div>
-                                </div>
-                            </>)}
-                            <div className="add-item-box" onClick={() => { addProcessList() }}>
-                                <PlusCircleOutlined />
-                            </div>
-
-                        </div>}
-
-                        {currentStep === 2 && <div className="step-1">
-                            <div className="h1">{t('createVote.mainTitle')}</div>
-                            <div className="confirm-box">
-                                <div className="form-item">
-                                    <div className="label">{t('createVote.votingPeriod')} <Tooltip title="投票期限无法更改，合约创建时开始生效。公示期：24小时，投票期：24小时-96小时。"><img src={QuestionIcon} /></Tooltip></div>
-                                    <div>{moment().add(1, 'days').format('MMMM Do YYYY')} - {moment().add(4, 'days').format('MMMM Do YYYY')}</div>
-                                </div>
-                                <div className="form-item">
-                                    <div className="label">{t('createVote.descriptionOfChange')}</div>
-                                    <div>{description}</div>
-                                </div>
-                            </div>
-                            {
-                                projectInfo.other_file && projectInfo.other_file.length > 0 && <>
-                                    <div className="title" style={{ marginTop: '56px' }}>{t('createVote.additionalDoc')}</div>
-                                    <div className="confirm-box">
-                                        {
-                                            <div className="uploaded-box">
-                                                {projectInfo.other_file.map((item, index) => (
-                                                    <div>
-                                                        {item.file_name.slice(10)}
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        }
-                                    </div>
-                                </>
-                            }
-
-
-                            {processList.map((item, index) => <>
-                                <div className="process-top">
-                                    <div>{t('project.progress')} #{index}</div>
-                                </div>
-                                <div className="confirm-box">
-                                    <div className="line">
-                                        <div className="name">{t('project.unlockingAmount')}</div>
-                                        <div className="value">{item.unlock_percentage}%</div>
-                                    </div>
-                                    {index === 0 ? <div className="line">
-                                        <div className="name">{t('createProject.unlockDate')}</div>
-                                        <div className="value">{new Date(item.unlock_time).toLocaleDateString()}</div>
-                                    </div> : <div className="line">
-                                            <div className="name">{t('project.voteTime')}</div>
-                                            <div className="value">{new Date(item.vote_start_time).toLocaleDateString()} - {new Date(item.vote_end_time).toLocaleDateString()}</div>
-                                        </div>}
-
-                                    <div className="line">
-                                        <div className="name">{t('project.event')}</div>
-                                        <div className="value">{item.description}</div>
-                                    </div>
-                                </div>
-                            </>)}
-                        </div>}
-                        <div className="step-control">
-                            <div>
-                                {currentStep > 0 && <div onClick={() => { setCurrentStep(prev => prev - 1) }} className="line-btn line-btn-back">{t('common.back')}</div>}
-                            </div>
-                            {currentStep < 2 && <div>
-                                <div onClick={() => { goNextStep() }} className="line-btn line-btn-next">{t('common.next')}</div>
-                            </div>}
-                            {currentStep == 2 && <div>
-                                <div onClick={() => { !changeLoading && confirmInfo() }} className="btn-confirm"><span className="text">{t('common.confirmInfo')} {changeLoading && <LoadingOutlined />}</span> </div>
-                                {/* <span className="hint hint-gasfee">{t('common.gasFeeHint')}</span> */}
-                            </div>}
+            {currentStep === 1 && <div className="step-1">
+                <div className="h1">{t('createVote.mainTitle')}</div>
+                <div className="hint-block small" dangerouslySetInnerHTML={{ __html: t('createVote.step1Hint') }}>
+                </div>
+                <div className="confirm-box">
+                    <div className="form-item">
+                        <div className="label">{t('createVote.votingPeriod')} <Tooltip title="投票期限无法更改，合约创建时开始生效。公示期：24小时，投票期：24小时-96小时。"><img src={QuestionIcon} /></Tooltip></div>
+                        <div>
+                            {moment().add(1, 'days').format('MMMM Do YYYY')} - {moment().add(4, 'days').format('MMMM Do YYYY')}
                         </div>
                     </div>
-
+                    <div className="form-item">
+                        <div className="label">{t('createVote.descriptionOfChange')}</div>
+                        <Input.TextArea autoSize={{ minRows: 6 }} placeholder="200 words limit" value={description} onChange={(e) => { console.log(e); setDescription(e.target.value) }} />
+                    </div>
                 </div>
-            </Col>
-        </Row>
+
+                <div className="form-item">
+                    <div className="label">{t('createVote.uploadDoc')}</div>
+                    <Upload {...otherUpload}>
+                        <Button className="btn-white" style={{ padding: '0 44px' }}>{t('common.upload')}</Button>
+                    </Upload>
+                    {
+                        projectInfo.other_file && projectInfo.other_file.length > 0 && <div className="uploaded-box">
+                            {projectInfo.other_file.map((item, index) => (
+                                <div>
+                                    {item.file_name.slice(10)} <CloseCircleOutlined onClick={() => { removeOtherFile(index) }} />
+                                </div>
+                            ))}
+                        </div>
+                    }
+                </div>
+                {processList.map((item, index) => <>
+                    <div className="process-top">
+                        <div>{t('project.progress')} #{index + 1}</div>
+                    </div>
+                    <div className="confirm-box">
+                        {(item.status === 'Future' || !item.status) && <Popconfirm title={t('common.sureToDelete')} onConfirm={() => { removeProcess(index) }}><CloseCircleOutlined className="remove-btn" /></Popconfirm>}
+                        <div className={'status ' + (item.status === 'Active' ? 'finish' : '')}>
+                            {item.status}
+                        </div>
+                        <div className="line">
+                            <div className="name required">{t('project.unlockingAmount')}</div>
+                            <div className="value">
+                                {(item.status && item.status !== 'Future') ? (item.unlock_percentage + '%') : <InputNumber max={index === 0 ? 80 : 100} min={0} formatter={value => `${value ? value : 0} %`} parser={value => parseInt(value)} value={item.unlock_percentage} onChange={e => changeProcess(index, 'unlock_percentage', e)} style={{ width: '180px' }} />}
+                            </div>
+                        </div>
+                        {index === 0 ? <div className="line">
+                            <div className="name required">{t('createProject.unlockDate')}</div>
+                            <div className="value">
+                                {(item.status && item.status !== 'Future') ? `${new Date(item.vote_start_time).toLocaleDateString()}` :
+                                    <DatePicker value={item.vote_start_time && moment(item.vote_start_time)} onChange={value => { value && changeProcess(index, 'vote_start_time', value.valueOf()); }} />
+                                }
+                            </div>
+                        </div> : <div className="line">
+                                <div className="name required">{t('createProject.votingDate')}</div>
+                                <div className="value">
+                                    {(item.status && item.status !== 'Future') ? `${new Date(item.vote_start_time).toLocaleDateString()}-${new Date(item.vote_end_time).toLocaleDateString()}` :
+                                        <DatePicker.RangePicker value={item.vote_start_time && [moment(item.vote_start_time), moment(item.vote_end_time)]} onChange={value => { value && changeProcess(index, 'vote_start_time', value[0].valueOf()); value && changeProcess(index, 'vote_end_time', value[1].valueOf()) }} />
+                                    }
+                                </div>
+                            </div>}
+
+                        <div className="line">
+                            <div className="name">{t('project.event')}</div>
+                            <div className="value">
+                                {(item.status && item.status !== 'Future') ? item.description : <Input.TextArea value={item.description} onChange={e => changeProcess(index, 'description', e.target.value)} autoSize={{ minRows: 6 }} />}
+                            </div>
+                        </div>
+                    </div>
+                </>)}
+                <div className="add-item-box" onClick={() => { addProcessList() }}>
+                    <PlusCircleOutlined />
+                </div>
+
+            </div>}
+
+            {currentStep === 2 && <div className="step-1">
+                <div className="h1">{t('createVote.mainTitle')}</div>
+                <div className="confirm-box">
+                    <div className="form-item">
+                        <div className="label">{t('createVote.votingPeriod')} <Tooltip title="投票期限无法更改，合约创建时开始生效。公示期：24小时，投票期：24小时-96小时。"><img src={QuestionIcon} /></Tooltip></div>
+                        <div>{moment().add(1, 'days').format('MMMM Do YYYY')} - {moment().add(4, 'days').format('MMMM Do YYYY')}</div>
+                    </div>
+                    <div className="form-item">
+                        <div className="label">{t('createVote.descriptionOfChange')}</div>
+                        <div>{description}</div>
+                    </div>
+                </div>
+                {
+                    projectInfo.other_file && projectInfo.other_file.length > 0 && <>
+                        <div className="title" style={{ marginTop: '56px' }}>{t('createVote.additionalDoc')}</div>
+                        <div className="confirm-box">
+                            {
+                                <div className="uploaded-box">
+                                    {projectInfo.other_file.map((item, index) => (
+                                        <div>
+                                            {item.file_name.slice(10)}
+                                        </div>
+                                    ))}
+                                </div>
+                            }
+                        </div>
+                    </>
+                }
+
+
+                {processList.map((item, index) => <>
+                    <div className="process-top">
+                        <div>{t('project.progress')} #{index}</div>
+                    </div>
+                    <div className="confirm-box">
+                        <div className="line">
+                            <div className="name">{t('project.unlockingAmount')}</div>
+                            <div className="value">{item.unlock_percentage}%</div>
+                        </div>
+                        {index === 0 ? <div className="line">
+                            <div className="name">{t('createProject.unlockDate')}</div>
+                            <div className="value">{new Date(item.unlock_time).toLocaleDateString()}</div>
+                        </div> : <div className="line">
+                                <div className="name">{t('project.voteTime')}</div>
+                                <div className="value">{new Date(item.vote_start_time).toLocaleDateString()} - {new Date(item.vote_end_time).toLocaleDateString()}</div>
+                            </div>}
+
+                        <div className="line">
+                            <div className="name">{t('project.event')}</div>
+                            <div className="value">{item.description}</div>
+                        </div>
+                    </div>
+                </>)}
+            </div>}
+            <div className="step-control">
+                <div>
+                    {currentStep > 0 && <div onClick={() => { setCurrentStep(prev => prev - 1) }} className="line-btn line-btn-back">{t('common.back')}</div>}
+                </div>
+                {currentStep < 2 && <div>
+                    <div onClick={() => { goNextStep() }} className="line-btn line-btn-next">{t('common.next')}</div>
+                </div>}
+                {currentStep == 2 && <div>
+                    <div onClick={() => { !changeLoading && confirmInfo() }} className="btn-confirm"><span className="text">{t('common.confirmInfo')} {changeLoading && <LoadingOutlined />}</span> </div>
+                    {/* <span className="hint hint-gasfee">{t('common.gasFeeHint')}</span> */}
+                </div>}
+            </div>
+        </div>
     </div >)
 }

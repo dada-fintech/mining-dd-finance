@@ -1,5 +1,4 @@
 import React from 'react'
-import AppSidebar from 'components/AppSidebar'
 import { Row, Col } from 'antd'
 import Header from 'components/Header'
 import MediaChainnews from 'assets/medias/chainnews.svg'
@@ -93,58 +92,50 @@ const blogList = [
 export default function Blog() {
     return (<div className={`blog-page`}>
 
-        <Row>
-            <Col xs={0} lg={4} xxl={3}>
-                <AppSidebar />
-            </Col>
-            <Col xs={24} lg={20} xxl={21}>
-                <div className="content-wrapper">
-                    <Header hideAction={true} />
-                    <div className="page-title">DADA Blog</div>
-                    <div className="page-desc">
-                        News, stories, and announcements from DADA.
+        <Header hideAction={true} />
+        <div className="page-title">DADA Blog</div>
+        <div className="page-desc">
+            News, stories, and announcements from DADA.
                     </div>
-                    <Row>
-                        <Col xs={24} lg={18}>
-                            <div className="article-list">
-                                {blogList.map((item, index) => (
-                                    <div key={index} className="article-item">
-                                        <a target="_blank" className="title" href={item.link}>{item.title}</a>
-                                        <div className="main-text">
-                                            {item.img && <img src={item.img} />}
-                                            <div className="text">
-                                                {item.desc}
-                                            </div>
-                                        </div>
-                                        <div className="source">
-                                            From {mediaMapping[item.source] && mediaMapping[item.source].link}
-                                            {mediaMapping[item.source] && mediaMapping[item.source].img && <img src={mediaMapping[item.source].img} />}
-                                        </div>
-                                    </div>
-                                ))}
+        <Row>
+            <Col xs={24} lg={18}>
+                <div className="article-list">
+                    {blogList.map((item, index) => (
+                        <div key={index} className="article-item">
+                            <a target="_blank" className="title" href={item.link}>{item.title}</a>
+                            <div className="main-text">
+                                {item.img && <img src={item.img} />}
+                                <div className="text">
+                                    {item.desc}
+                                </div>
                             </div>
-                        </Col>
-                        <Col xs={0} lg={6}>
-                            <div className="media-list">
-                                <a href="https://www.chainnews.com/u/785055704172.htm" target="_blank">
-                                    <img src={MediaChainnews} />
-                                </a>
-                                <a href="https://www.odaily.com/post/5160033" target="_blank">
-                                    <img src={MediaOdaily} />
-                                </a>
-                                <a href="https://www.theblockcrypto.com/post/84781/bulk-preorders-bitcoin-miners-spring-2021" target="_blank">
-                                    <img src={MediaTheblock} />
-                                </a>
-                                <a href="https://www.sosob.com/hot/26028.html" target="_blank">
-                                    <img src={MediaSosob} />
-                                </a>
+                            <div className="source">
+                                From {mediaMapping[item.source] && mediaMapping[item.source].link}
+                                {mediaMapping[item.source] && mediaMapping[item.source].img && <img src={mediaMapping[item.source].img} />}
                             </div>
-                        </Col>
-                    </Row>
-
-
+                        </div>
+                    ))}
+                </div>
+            </Col>
+            <Col xs={0} lg={6}>
+                <div className="media-list">
+                    <a href="https://www.chainnews.com/u/785055704172.htm" target="_blank">
+                        <img src={MediaChainnews} />
+                    </a>
+                    <a href="https://www.odaily.com/post/5160033" target="_blank">
+                        <img src={MediaOdaily} />
+                    </a>
+                    <a href="https://www.theblockcrypto.com/post/84781/bulk-preorders-bitcoin-miners-spring-2021" target="_blank">
+                        <img src={MediaTheblock} />
+                    </a>
+                    <a href="https://www.sosob.com/hot/26028.html" target="_blank">
+                        <img src={MediaSosob} />
+                    </a>
                 </div>
             </Col>
         </Row>
+
+
+
     </div >)
 }

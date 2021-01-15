@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Popover } from 'antd'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import i18n from 'i18next'
 import config from 'config'
 import './style.scss'
@@ -17,9 +17,9 @@ import CommunityProjectIcon from 'assets/sidebar/community-project.svg'
 import PlusIcon from 'assets/sidebar/plus.svg'
 import MiningSwapIcon from 'assets/sidebar/mining-swap.svg'
 import DashboardIcon from 'assets/sidebar/dashboard.svg'
-import OverviewIcon from 'assets/sidebar/overview.svg'
-import QuickSwapIcon from 'assets/sidebar/quick-swap.svg'
-import GovernanceIcon from 'assets/sidebar/governance.svg'
+// import OverviewIcon from 'assets/sidebar/overview.svg'
+// import QuickSwapIcon from 'assets/sidebar/quick-swap.svg'
+// import GovernanceIcon from 'assets/sidebar/governance.svg'
 import BlogIcon from 'assets/sidebar/blog.svg'
 
 import Twiiter from 'assets/socials/twitter.svg'
@@ -34,7 +34,12 @@ import Linkedin from 'assets/socials/linkedin.svg'
 export default function AppSidebar(props) {
     const { t } = useTranslation()
     const { hideCreate } = props
+    const location = useLocation()
     const [showTemplateChoose, setShowTemplateChoose] = useState(false)
+    const [currentRoute, setCurrentRoute] = useState('')
+    useEffect(() => {
+        console.log(location, 'bbbb')
+    }, [location])
     const changeLanguage = language => {
         localStorage.setItem('language', language)
         i18n.changeLanguage(language)
@@ -48,19 +53,26 @@ export default function AppSidebar(props) {
         </a>
         <ul className="nav">
             {!hideCreate && <li>
-                <a onClick={() => { setShowTemplateChoose(true) }}>
+                <a className={`nowrap ${location.pathname === '/community-projects' ? 'bottom-curve' : ''}`} onClick={() => { setShowTemplateChoose(true) }}>
                     <img src={PlusIcon} />{t('sidebar.create')}</a>
             </li>}
             <li>
-                <NavLink className="nowrap" activeClassName="active" to="/community-projects"><img src={CommunityProjectIcon} />{t('sidebar.communityProjects')}</NavLink>
+                <NavLink className={`nowrap ${location.pathname === '/projects' ? 'bottom-curve' : ''}`} activeClassName="active" to="/community-projects"><img src={CommunityProjectIcon} />{t('sidebar.communityProjects')}</NavLink>
             </li>
             <li>
-                <NavLink className="nowrap" activeClassName="active" to="/projects"><img src={CryptoMiningIcon} />{t('sidebar.cryptoMining')}</NavLink>
+                <NavLink className={`nowrap ${location.pathname === '/community-projects' ? 'top-curve' : ''} ${location.pathname === '/coming/swap' ? 'bottom-curve' : ''}`} activeClassName="active" to="/projects"><img src={CryptoMiningIcon} />{t('sidebar.cryptoMining')}</NavLink>
             </li>
-            <li><NavLink className="nowrap" activeClassName="active" to="/coming/swap"><img src={MiningSwapIcon} />{t('sidebar.miningSwap')}</NavLink></li>
-            <li><NavLink className="nowrap" activeClassName="active" to="/coming/dashboard"><img src={DashboardIcon} />{t('sidebar.dashboard')}</NavLink></li>
             <li>
-                <NavLink className="nowrap" activeClassName="active" to="/blog"><img src={BlogIcon} />{t('sidebar.blog')}</NavLink>
+                <NavLink className={`nowrap ${location.pathname === '/projects' ? 'top-curve' : ''} ${location.pathname === '/coming/dashboard' ? 'bottom-curve' : ''}`} activeClassName="active" to="/coming/swap"><img src={MiningSwapIcon} />{t('sidebar.tokenSwap')}</NavLink>
+            </li>
+            <li>
+                <NavLink className={`nowrap ${location.pathname === '/coming/swap' ? 'top-curve' : ''} ${location.pathname === '/blog' ? 'bottom-curve' : ''}`} activeClassName="active" to="/coming/dashboard"><img src={DashboardIcon} />{t('sidebar.dashboard')}</NavLink>
+            </li>
+            <li>
+                <NavLink className={`nowrap ${location.pathname === '/coming/dashboard' ? 'top-curve' : ''}`} activeClassName="active" to="/blog"><img src={BlogIcon} />{t('sidebar.blog')}</NavLink>
+            </li>
+            <li>
+                <a className={`nowrap ${location.pathname === '/blog' ? 'top-curve' : ''}`}></a>
             </li>
         </ul>
         {/* <ul className="nav second">

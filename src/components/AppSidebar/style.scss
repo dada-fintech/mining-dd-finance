@@ -2,9 +2,9 @@
     height: 100vh;
     // overflow-y: scroll;
     // padding: 16px 0 0 24px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: space-between;
     .sidebar-logo {
         margin-bottom: 44px;
     }
@@ -15,6 +15,7 @@
         border-radius: 0 20px 0 0;
         background: #fff;
         padding: 16px 0 0 24px;
+        display: block;
     }
     .nav {
         position: relative;
@@ -38,6 +39,12 @@
                 align-items: center;
                 padding: 10px 10px;
                 background: #fff;
+                &.top-curve {
+                    border-radius: 0 12px 0 0;
+                }
+                &.bottom-curve {
+                    border-radius: 0 0 12px 0;
+                }
                 &.active {
                     // background: url(../../assets/nav-active.svg) no-repeat;
                     background: transparent;
@@ -131,7 +138,7 @@
     .bottom {
         background: #fff;
         border-radius: 0 0 20px 0;
-        padding: 24px 24px 16px;
+        padding: 48px 24px 16px;
     }
     .copyright {
         color: #9088a1;

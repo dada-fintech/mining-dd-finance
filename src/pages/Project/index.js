@@ -8,7 +8,6 @@ import { useTranslation } from 'react-i18next'
 import axios from 'utils/axios'
 import AuditModal from './modals/AuditModal'
 import AskModal from './modals/AskModal'
-import AppSidebar from 'components/AppSidebar'
 import RepayModal from './modals/RepayModal'
 import { useWallet } from 'use-wallet'
 import InsuranceModal from './modals/InsuranceModal'
@@ -266,174 +265,166 @@ export default function Project() {
     }
 
     return (<div className="project-page">
-        <Row>
-            <Col xs={0} lg={4} xxl={3}>
-                <AppSidebar />
+
+        <Header role={role} breadCrumb={[t('sidebar.cryptoMining'), project.project_info.project_name]} />
+        <div className="brief-info">
+            <div className="title">{project.project_info.project_name}</div>
+            <div className="date">
+                {new Date(project.project_info.income_settlement_time).toLocaleDateString()}
+                <div className="hint">{t('createProject.redemptionDate')}</div>
+            </div>
+            <Button className="btn-green" onClick={() => { setEmail(''); setSubscribeVisible(true) }}>{t('sidebar.subscribe')}</Button>
+        </div>
+        <Row gutter={24}>
+            <Col xs={24} md={12} lg={8} xl={4}>
+                <Tooltip title={`${project.fundraising.expected_apy} %`}>
+                    <div className="info-item">
+                        <div className="value nowrap">{project.fundraising.expected_apy}%</div>
+                        <div className="title">{t('common.apy')}</div>
+                    </div>
+                </Tooltip>
             </Col>
-            <Col xs={24} lg={20} xxl={21}>
-                <div className="content-wrapper">
-                    <Header role={role} breadCrumb={[t('sidebar.cryptoMining'), project.project_info.project_name]} />
-                    <div className="brief-info">
-                        <div className="title">{project.project_info.project_name}</div>
-                        <div className="date">
-                            {new Date(project.project_info.income_settlement_time).toLocaleDateString()}
-                            <div className="hint">{t('createProject.redemptionDate')}</div>
-                        </div>
-                        <Button className="btn-green" onClick={() => { setEmail(''); setSubscribeVisible(true) }}>{t('sidebar.subscribe')}</Button>
+            <Col xs={24} md={12} lg={8} xl={4}>
+                <Tooltip title={`${parseInt((project.project_info.income_settlement_time - project.fundraising.end_time) / 1000 / 60 / 60 / 24)} ${t('common.days')}`}>
+                    <div className="info-item">
+                        <div className="value nowrap">{parseInt((project.project_info.income_settlement_time - project.fundraising.end_time) / 1000 / 60 / 60 / 24)} {t('common.days')}</div>
+                        <div className="title">{t('sidebar.cycle')}</div>
                     </div>
-                    <Row gutter={24}>
-                        <Col xs={24} md={12} lg={8} xl={4}>
-                            <Tooltip title={`${project.fundraising.expected_apy} %`}>
-                                <div className="info-item">
-                                    <div className="value nowrap">{project.fundraising.expected_apy}%</div>
-                                    <div className="title">{t('common.apy')}</div>
-                                </div>
-                            </Tooltip>
-                        </Col>
-                        <Col xs={24} md={12} lg={8} xl={4}>
-                            <Tooltip title={`${parseInt((project.project_info.income_settlement_time - project.fundraising.end_time) / 1000 / 60 / 60 / 24)} ${t('common.days')}`}>
-                                <div className="info-item">
-                                    <div className="value nowrap">{parseInt((project.project_info.income_settlement_time - project.fundraising.end_time) / 1000 / 60 / 60 / 24)} {t('common.days')}</div>
-                                    <div className="title">{t('sidebar.cycle')}</div>
-                                </div>
-                            </Tooltip>
-                        </Col>
-                        <Col xs={24} md={12} lg={8} xl={4}>
-                            <Tooltip title={t('common.redemption')}>
-                                <div className="info-item">
-                                    <div className="value nowrap">{t('common.redemption')}</div>
-                                    <div className="title">{t('common.repaymentModel')}</div>
-                                </div>
-                            </Tooltip>
-                        </Col>
-                        <Col xs={24} md={12} lg={8} xl={4}>
-                            <Tooltip title={`${project.fundraising.min_amount} ${config.usdUnit}`}>
-                                <div className="info-item">
-                                    <div className="value nowrap">{project.fundraising.min_amount} {config.usdUnit}</div>
-                                    <div className="title">{t('common.softCap')}</div>
-                                </div>
-                            </Tooltip>
-                        </Col>
-                        <Col xs={24} md={12} lg={8} xl={4}>
-                            <Tooltip title={`${project.fundraising.max_amount} ${config.usdUnit}`}>
-                                <div className="info-item">
-                                    <div className="value nowrap">{project.fundraising.max_amount} {config.usdUnit}</div>
-                                    <div className="title">{t('common.fundSize')}</div>
-                                </div>
-                            </Tooltip>
-                        </Col>
-                        <Col xs={24} md={12} lg={8} xl={4}>
-                            <Tooltip title={statusMapping[project.project_info.status]}>
-                                <div className="info-item">
-                                    <div className="value nowrap">{statusMapping[project.project_info.status]}</div>
-                                    <div className="title">{t('project.status')}</div>
-                                </div>
-                            </Tooltip>
-                        </Col>
-                    </Row>
-                    <div className="middle-area">
-                        <Row gutter={32}>
-                            <Col xs={24} xl={12}>
-                                <div className="info-box">
-                                    <div className="stage-block">
-                                        {statusMapping[nextStatus] && <div>
-                                            <div className="title">
-                                                {t('common.nextStage')}
-                                            </div>
-                                            <div>
-                                                {statusMapping[nextStatus]}
-                                            </div>
-                                        </div>}
-
-                                        <div>
-                                            <div className="title">
-                                                {t('common.currentStage')}
-                                            </div>
-                                            <div>
-                                                {statusMapping[project.project_info.status]}
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    {timing > 0 && <Countdown timestamp={timing} done={() => { getInfo() }} />}
-                                    {/* 一开始审核评议 */}
-                                    {project.project_info.status === 'Auditing' && role === 'committee' && <Row>
-                                        <div className="handle-area">
-                                            <div className="btn-action" onClick={() => { doAudit() }}><span>{t('project.action.committeeReviews')}</span></div>
-                                        </div>
-                                    </Row>}
-
-                                    {project.project_info.status === 'Active' && role === 'manager' && project.fundraising.money_left > 0 && (project.project_info.template_id == config.templateIds[0] || project.project_info.template_id == config.templateIds[2]) && <Row>
-                                        <div className="handle-area">
-                                            <div className="btn-action" onClick={() => { doAsk() }}><span>发起请款</span></div>
-                                        </div>
-                                    </Row>}
-
-                                    {project.project_info.status === 'PayingInsurance' && role === 'manager' && <Row>
-                                        <div className="handle-area">
-                                            <div className="btn-action" onClick={() => { doInsurance() }}><span>{t('project.action.security')}</span></div>
-                                        </div>
-                                    </Row>}
-
-                                    {project.project_info.status === 'AllPhasesDone' && role === 'manager' && (new Date().valueOf() < project.project_info.income_settlement_time) && <Row>
-                                        <div className="handle-area">
-                                            <div className="btn-action" onClick={() => { doTakeMoney() }}><span>{t('project.action.repay')}</span></div>
-                                        </div>
-                                    </Row>}
-
-                                    {/* manager 不需投资 */}
-                                    {project.project_info.status === 'Raising' && role !== 'manager' && <Row gutter={32}>
-                                        <div className="handle-area">
-                                            <Input style={{ width: '140px', height: '44px' }} addonAfter={
-                                                <div className="btn-input-action" onClick={() => { !lockLoading && doLock() }}><span className="text">{t('project.action.invest')} {lockLoading && <LoadingOutlined />
-                                                }</span></div>} value={lockNum} onChange={(event) => { setLockedNum(event.target.value) }} suffix={config.usdUnit} />
-                                        </div>
-                                        <div className="votes-bar">
-                                            <div className="done" style={{ width: project.percent + '%' }}>{project.percent}%</div>
-                                        </div>
-                                        <div className="votes-info">
-                                            <div>
-                                                {t('common.currentRaised')}:{project.fundraising.current_raised_money} {config.usdUnit}
-                                        </div>
-                                            <div>
-                                                {t('common.fundSize')}:{project.fundraising.max_amount} {config.usdUnit}
-                                        </div>
-                                        </div>
-                                        {/* <div className="process-tag" style={{ marginLeft: (project.percent > 50 ? (project.percent - 5) : project.percent) + '%' }}>
-                                        {project.percent}%</div> */}
-                                    </Row>}
-
-                                    {/* manager 可以变更计划. */}
-                                    {(project.project_info.status === 'Active' || project.project_info.status === 'PhaseFailed' || project.project_info.status === 'ReplanFailed') && role === 'manager' && !project.project_info.template_id && <Row>
-                                        <div className="handle-area">
-                                            <a href={`/create-vote/${id}`}>
-                                                <div className="btn-action"><span>{t('project.action.change')}</span></div>
-                                            </a>
-                                        </div>
-                                    </Row>}
-                                </div>
-                            </Col>
-                            <Col xs={24} xl={12}>
-                                <Sidebar myShare={myShare} role={role} rereshInvestInfo={() => { getUserInvest() }} />
-                            </Col>
-                        </Row>
-
+                </Tooltip>
+            </Col>
+            <Col xs={24} md={12} lg={8} xl={4}>
+                <Tooltip title={t('common.redemption')}>
+                    <div className="info-item">
+                        <div className="value nowrap">{t('common.redemption')}</div>
+                        <div className="title">{t('common.repaymentModel')}</div>
                     </div>
-
-                    <ul className="tabs">
-                        <li className={currentTab === 'process' ? 'active' : ''} onClick={() => { setCurrentTab('process') }}>{t('project.progress')}</li>
-                        <li className={currentTab === 'detail' ? 'active' : ''} onClick={() => { setCurrentTab('detail') }}>{t('project.details')}</li>
-                    </ul>
-
-                    <div className="bottom-area">
-                        <div className="container">
-                            {currentTab === 'process' && <ProcessModule id={id} role={role} processList={project.process || []} isTemplate={project.project_info.template_id == config.templateIds[0] || project.project_info.template_id == config.templateIds[2]} />}
-                            {currentTab === 'detail' && <DetailModule projectId={id} otherFiles={project.project_info.other_file} fullDesc={project.fullDesc} projectInfo={project.project_info} />}
-                        </div>
+                </Tooltip>
+            </Col>
+            <Col xs={24} md={12} lg={8} xl={4}>
+                <Tooltip title={`${project.fundraising.min_amount} ${config.usdUnit}`}>
+                    <div className="info-item">
+                        <div className="value nowrap">{project.fundraising.min_amount} {config.usdUnit}</div>
+                        <div className="title">{t('common.softCap')}</div>
                     </div>
-                </div>
+                </Tooltip>
+            </Col>
+            <Col xs={24} md={12} lg={8} xl={4}>
+                <Tooltip title={`${project.fundraising.max_amount} ${config.usdUnit}`}>
+                    <div className="info-item">
+                        <div className="value nowrap">{project.fundraising.max_amount} {config.usdUnit}</div>
+                        <div className="title">{t('common.fundSize')}</div>
+                    </div>
+                </Tooltip>
+            </Col>
+            <Col xs={24} md={12} lg={8} xl={4}>
+                <Tooltip title={statusMapping[project.project_info.status]}>
+                    <div className="info-item">
+                        <div className="value nowrap">{statusMapping[project.project_info.status]}</div>
+                        <div className="title">{t('project.status')}</div>
+                    </div>
+                </Tooltip>
             </Col>
         </Row>
+        <div className="middle-area">
+            <Row gutter={32}>
+                <Col xs={24} xl={12}>
+                    <div className="info-box">
+                        <div className="stage-block">
+                            {statusMapping[nextStatus] && <div>
+                                <div className="title">
+                                    {t('common.nextStage')}
+                                </div>
+                                <div>
+                                    {statusMapping[nextStatus]}
+                                </div>
+                            </div>}
+
+                            <div>
+                                <div className="title">
+                                    {t('common.currentStage')}
+                                </div>
+                                <div>
+                                    {statusMapping[project.project_info.status]}
+                                </div>
+                            </div>
+                        </div>
+
+                        {timing > 0 && <Countdown timestamp={timing} done={() => { getInfo() }} />}
+                        {/* 一开始审核评议 */}
+                        {project.project_info.status === 'Auditing' && role === 'committee' && <Row>
+                            <div className="handle-area">
+                                <div className="btn-action" onClick={() => { doAudit() }}><span>{t('project.action.committeeReviews')}</span></div>
+                            </div>
+                        </Row>}
+
+                        {project.project_info.status === 'Active' && role === 'manager' && project.fundraising.money_left > 0 && (project.project_info.template_id == config.templateIds[0] || project.project_info.template_id == config.templateIds[2]) && <Row>
+                            <div className="handle-area">
+                                <div className="btn-action" onClick={() => { doAsk() }}><span>发起请款</span></div>
+                            </div>
+                        </Row>}
+
+                        {project.project_info.status === 'PayingInsurance' && role === 'manager' && <Row>
+                            <div className="handle-area">
+                                <div className="btn-action" onClick={() => { doInsurance() }}><span>{t('project.action.security')}</span></div>
+                            </div>
+                        </Row>}
+
+                        {project.project_info.status === 'AllPhasesDone' && role === 'manager' && (new Date().valueOf() < project.project_info.income_settlement_time) && <Row>
+                            <div className="handle-area">
+                                <div className="btn-action" onClick={() => { doTakeMoney() }}><span>{t('project.action.repay')}</span></div>
+                            </div>
+                        </Row>}
+
+                        {/* manager 不需投资 */}
+                        {project.project_info.status === 'Raising' && role !== 'manager' && <Row gutter={32}>
+                            <div className="handle-area">
+                                <Input style={{ width: '140px', height: '44px' }} addonAfter={
+                                    <div className="btn-input-action" onClick={() => { !lockLoading && doLock() }}><span className="text">{t('project.action.invest')} {lockLoading && <LoadingOutlined />
+                                    }</span></div>} value={lockNum} onChange={(event) => { setLockedNum(event.target.value) }} suffix={config.usdUnit} />
+                            </div>
+                            <div className="votes-bar">
+                                <div className="done" style={{ width: project.percent + '%' }}>{project.percent}%</div>
+                            </div>
+                            <div className="votes-info">
+                                <div>
+                                    {t('common.currentRaised')}:{project.fundraising.current_raised_money} {config.usdUnit}
+                                </div>
+                                <div>
+                                    {t('common.fundSize')}:{project.fundraising.max_amount} {config.usdUnit}
+                                </div>
+                            </div>
+                            {/* <div className="process-tag" style={{ marginLeft: (project.percent > 50 ? (project.percent - 5) : project.percent) + '%' }}>
+                                        {project.percent}%</div> */}
+                        </Row>}
+
+                        {/* manager 可以变更计划. */}
+                        {(project.project_info.status === 'Active' || project.project_info.status === 'PhaseFailed' || project.project_info.status === 'ReplanFailed') && role === 'manager' && !project.project_info.template_id && <Row>
+                            <div className="handle-area">
+                                <a href={`/create-vote/${id}`}>
+                                    <div className="btn-action"><span>{t('project.action.change')}</span></div>
+                                </a>
+                            </div>
+                        </Row>}
+                    </div>
+                </Col>
+                <Col xs={24} xl={12}>
+                    <Sidebar myShare={myShare} role={role} rereshInvestInfo={() => { getUserInvest() }} />
+                </Col>
+            </Row>
+
+        </div>
+
+        <ul className="tabs">
+            <li className={currentTab === 'process' ? 'active' : ''} onClick={() => { setCurrentTab('process') }}>{t('project.progress')}</li>
+            <li className={currentTab === 'detail' ? 'active' : ''} onClick={() => { setCurrentTab('detail') }}>{t('project.details')}</li>
+        </ul>
+
+        <div className="bottom-area">
+            <div className="container">
+                {currentTab === 'process' && <ProcessModule id={id} role={role} processList={project.process || []} isTemplate={project.project_info.template_id == config.templateIds[0] || project.project_info.template_id == config.templateIds[2]} />}
+                {currentTab === 'detail' && <DetailModule projectId={id} otherFiles={project.project_info.other_file} fullDesc={project.fullDesc} projectInfo={project.project_info} />}
+            </div>
+        </div>
 
         { repayModalVisible && <RepayModal params={currentParams} onCancel={() => { setRepayModalVisible(false); getInfo(); }} />}
         { askModalVisible && <AskModal maxAmount={project.fundraising.money_left} params={currentParams} onCancel={() => { setAskModalVisible(false); getInfo(); }} />}

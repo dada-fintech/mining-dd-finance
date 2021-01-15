@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Row, Col, Progress } from 'antd'
-import AppSidebar from 'components/AppSidebar'
 import { useTranslation } from 'react-i18next'
 import { toBr } from 'components/utils'
 // import axios from 'utils/axios'
@@ -165,60 +164,49 @@ export default function Projects() {
     }
 
     return (<div className="community-projects">
-        <Row>
-            <Col xs={0} lg={4} xxl={3}>
-                <AppSidebar />
-            </Col>
-            <Col xs={24} lg={20} xxl={21}>
-                <div className="content-wrapper">
-                    <Header hideAction={true} />
-                    {featuredProject && <div className="featured-project" style={{ backgroundImage: "url(" + featuredProject.img + ")" }}>
-                        <Row>
-                            <Col xs={24} md={20} lg={14} xl={10}>
-                                <div className="title">{featuredProject.project_name}</div>
-                                <div className="desc" dangerouslySetInnerHTML={{ __html: toBr(featuredProject.project_profile) }}></div>
-                                {featuredCountdown > 0 && <Countdown timestamp={featuredCountdown} />}
-                                {(featuredProject.status === 'raising' || featuredProject.status === 'canInvest') && <Progress strokeColor="#4CC16D" status="active" percent={((featuredProject.current_raised_money / featuredProject.max_amount) * 100).toFixed(0)} className="progress-bar" />}
-                                <div className="join-btn">{t('common.comingSoon')}</div>
-                            </Col>
-                            {/* <Col xs={24} md={14}>
+        <Header hideAction={true} />
+        {featuredProject && <div className="featured-project" style={{ backgroundImage: "url(" + featuredProject.img + ")" }}>
+            <Row>
+                <Col xs={24} md={20} lg={14} xl={10}>
+                    <div className="title">{featuredProject.project_name}</div>
+                    <div className="desc" dangerouslySetInnerHTML={{ __html: toBr(featuredProject.project_profile) }}></div>
+                    {featuredCountdown > 0 && <Countdown timestamp={featuredCountdown} />}
+                    {(featuredProject.status === 'raising' || featuredProject.status === 'canInvest') && <Progress strokeColor="#4CC16D" status="active" percent={((featuredProject.current_raised_money / featuredProject.max_amount) * 100).toFixed(0)} className="progress-bar" />}
+                    <div className="join-btn">{t('common.comingSoon')}</div>
+                </Col>
+                {/* <Col xs={24} md={14}>
                                 <img src={HomepageBanner} className="homepage-banner" />
                             </Col> */}
-                        </Row>
-                    </div>}
+            </Row>
+        </div>}
 
-                    <div className="project-list">
-                        <Row gutter={28}>
-                            {projectList && projectList.map(item => (
-                                <Col xs={24} sm={12} md={24} lg={12} xl={8}>
-                                    <div className="project-item" style={{ backgroundImage: "url(" + item.img + ")" }}>
-                                        <div className="project-name nowrap">{item.project_name}</div>
-                                        <div className="desc" dangerouslySetInnerHTML={{ __html: toBr(item.project_profile) }}>
-                                        </div>
-                                        {(item.status === 'raising' || item.status === 'canInvest') && <Progress strokeColor="#4CC16D" status="active" percent={((item.current_raised_money / item.max_amount) * 100).toFixed(0)} className="progress-bar" />}
-                                        <div className="join-btn">{t('common.comingSoon')}</div>
-                                        <div className="date-wrapper">
-                                            <div>
-                                                <div>{formatTime(item.raise_start_time)}</div>
-                                                <div className="date-title">{t('common.fundStartTime')}</div>
-                                            </div>
-                                            <div>
-                                                <div>{formatTime(item.project_end_time)}</div>
-                                                <div className="date-title">{t('common.fundEndTime')}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Col>
+        <div className="project-list">
+            <Row gutter={28}>
+                {projectList && projectList.map(item => (
+                    <Col xs={24} sm={12} md={24} lg={12} xl={8}>
+                        <div className="project-item" style={{ backgroundImage: "url(" + item.img + ")" }}>
+                            <div className="project-name nowrap">{item.project_name}</div>
+                            <div className="desc" dangerouslySetInnerHTML={{ __html: toBr(item.project_profile) }}>
+                            </div>
+                            {(item.status === 'raising' || item.status === 'canInvest') && <Progress strokeColor="#4CC16D" status="active" percent={((item.current_raised_money / item.max_amount) * 100).toFixed(0)} className="progress-bar" />}
+                            <div className="join-btn">{t('common.comingSoon')}</div>
+                            <div className="date-wrapper">
+                                <div>
+                                    <div>{formatTime(item.raise_start_time)}</div>
+                                    <div className="date-title">{t('common.fundStartTime')}</div>
+                                </div>
+                                <div>
+                                    <div>{formatTime(item.project_end_time)}</div>
+                                    <div className="date-title">{t('common.fundEndTime')}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </Col>
 
-                            ))}
+                ))}
 
-                        </Row>
-                    </div>
-                    {/* <div className="all-projects">
-                        <Table pagination={false} dataSource={allProjects} columns={columns} />
-                    </div> */}
-                </div>
-            </Col>
-        </Row>
+            </Row>
+        </div>
+
     </div >)
 }

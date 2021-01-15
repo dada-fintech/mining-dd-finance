@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Row, Col, Progress, Table, } from 'antd'
 // import { useWallet } from 'use-wallet'
-import AppSidebar from 'components/AppSidebar'
 import HomepageBanner from 'assets/homepage-banner.svg'
 import { useTranslation } from 'react-i18next'
 import { toBr } from 'components/utils'
@@ -131,7 +130,6 @@ export default function Projects() {
         },
     ];
 
-
     // const leaveComment = () => {
     //     axios.post('/comment/main-page', comment).then(res => {
     //         message.success(t('common.submitted'))
@@ -157,62 +155,55 @@ export default function Projects() {
 
     // const wallet = useWallet()
     return (<div className="projects">
-        <Row>
-            <Col xs={0} lg={4} xxl={3}>
-                <AppSidebar />
-            </Col>
-            <Col xs={24} lg={20} xxl={21}>
-                <div className="content-wrapper">
-                    <Header hideAction={true} />
-                    {featuredProject && <div className="featured-project">
-                        <Row>
-                            <Col xs={24} md={10}>
-                                <div className="title">{featuredProject.project_name}</div>
-                                <div className="desc" dangerouslySetInnerHTML={{ __html: toBr(featuredProject.project_profile) }}></div>
-                                {featuredCountdown > 0 && <Countdown timestamp={featuredCountdown} />}
-                                {(featuredProject.status === 'raising' || featuredProject.status === 'canInvest') && <Progress strokeColor="#4CC16D" status="active" percent={((featuredProject.current_raised_money / featuredProject.max_amount) * 100).toFixed(0)} className="progress-bar" />}
-                                <Link className="join-btn" to={'/project/' + featuredProject.project_uniq_id} key={featuredProject.project_uniq_id}>{t('common.viewProject')}</Link>
-                            </Col>
-                            <Col xs={24} md={14}>
-                                <img src={HomepageBanner} className="homepage-banner" />
-                            </Col>
-                        </Row>
-                    </div>}
 
-                    <div className="project-list">
-                        <Row gutter={28}>
-                            {projectList && projectList.map(item => (
-                                <Col xs={24} sm={12} md={24} lg={12} xl={8}>
-                                    <div className="project-item">
-                                        <div className="project-name nowrap">{item.project_name}</div>
-                                        <div className="desc" dangerouslySetInnerHTML={{ __html: toBr(item.project_profile) }}>
-                                        </div>
-                                        {(item.status === 'raising' || item.status === 'canInvest') && <Progress strokeColor="#4CC16D" status="active" percent={((item.current_raised_money / item.max_amount) * 100).toFixed(0)} className="progress-bar" />}
-                                        <a className="join-btn" href={'/project/' + item.project_uniq_id} key={item.project_uniq_id}>{t('common.viewProject')}</a>
-                                        <div className="date-wrapper">
-                                            <div>
-                                                <div>{formatTime(item.raise_start_time)}</div>
-                                                <div className="date-title">{t('common.fundStartTime')}</div>
-                                            </div>
-                                            <div>
-                                                <div>{formatTime(item.project_end_time)}</div>
-                                                <div className="date-title">{t('common.fundEndTime')}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Col>
+        <Header hideAction={true} />
+        {featuredProject && <div className="featured-project">
+            <Row>
+                <Col xs={24} md={10}>
+                    <div className="title">{featuredProject.project_name}</div>
+                    <div className="desc" dangerouslySetInnerHTML={{ __html: toBr(featuredProject.project_profile) }}></div>
+                    {featuredCountdown > 0 && <Countdown timestamp={featuredCountdown} />}
+                    {(featuredProject.status === 'raising' || featuredProject.status === 'canInvest') && <Progress strokeColor="#4CC16D" status="active" percent={((featuredProject.current_raised_money / featuredProject.max_amount) * 100).toFixed(0)} className="progress-bar" />}
+                    <Link className="join-btn" to={'/project/' + featuredProject.project_uniq_id} key={featuredProject.project_uniq_id}>{t('common.viewProject')}</Link>
+                </Col>
+                <Col xs={24} md={14}>
+                    <img src={HomepageBanner} className="homepage-banner" />
+                </Col>
+            </Row>
+        </div>}
 
-                            ))}
+        <div className="project-list">
+            <Row gutter={28}>
+                {projectList && projectList.map(item => (
+                    <Col xs={24} sm={12} md={24} lg={12} xl={8}>
+                        <div className="project-item">
+                            <div className="project-name nowrap">{item.project_name}</div>
+                            <div className="desc" dangerouslySetInnerHTML={{ __html: toBr(item.project_profile) }}>
+                            </div>
+                            {(item.status === 'raising' || item.status === 'canInvest') && <Progress strokeColor="#4CC16D" status="active" percent={((item.current_raised_money / item.max_amount) * 100).toFixed(0)} className="progress-bar" />}
+                            <a className="join-btn" href={'/project/' + item.project_uniq_id} key={item.project_uniq_id}>{t('common.viewProject')}</a>
+                            <div className="date-wrapper">
+                                <div>
+                                    <div>{formatTime(item.raise_start_time)}</div>
+                                    <div className="date-title">{t('common.fundStartTime')}</div>
+                                </div>
+                                <div>
+                                    <div>{formatTime(item.project_end_time)}</div>
+                                    <div className="date-title">{t('common.fundEndTime')}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </Col>
 
-                        </Row>
+                ))}
 
-                    </div>
-                    <div className="all-projects">
+            </Row>
 
-                        <Table pagination={false} dataSource={allProjects} columns={columns} />
-                    </div>
-                </div>
-            </Col>
-        </Row>
+        </div>
+        <div className="all-projects">
+
+            <Table pagination={false} dataSource={allProjects} columns={columns} />
+        </div>
+
     </div >)
 }
