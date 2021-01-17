@@ -2,9 +2,9 @@
     height: 100vh;
     // overflow-y: scroll;
     // padding: 16px 0 0 24px;
-    // display: flex;
-    // flex-direction: column;
-    // justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     .sidebar-logo {
         margin-bottom: 44px;
     }
@@ -136,6 +136,7 @@
         }
     }
     .bottom {
+        height: 100%;
         background: #fff;
         border-radius: 0 0 20px 0;
         padding: 48px 24px 16px;

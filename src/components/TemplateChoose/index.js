@@ -23,6 +23,7 @@ export default function TemplateChoose(props) {
 
     const goPage = (tempType) => {
         clearStorage()
+        onCancel()
         history.push(`/create-project/${tempType}`)
     }
 

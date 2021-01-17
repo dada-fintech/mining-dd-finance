@@ -28,9 +28,9 @@ export default function CreateProject() {
     const [dadaApproved, setDadaApproved] = useState(false)
     const [callData, setCallData] = useState(false)
     const [USDTBalance, setUSDTBalance] = useState(0)
-    const [raisingMethod, setRaisingMethod] = useState('1')
+    const [raisingMethod, setRaisingMethod] = useState('2')
     const [repayMethod, setRepayMethod] = useState('1')
-    const [withdrawMethod, setWithdrawMethod] = useState('1')
+    const [withdrawMethod, setWithdrawMethod] = useState('2')
 
 
     const { tempType } = useParams()
@@ -764,8 +764,8 @@ export default function CreateProject() {
                     <div className="form-item">
                         <div className="label">{t('createProject.selectFundraisingMethod')}</div>
                         <Radio.Group className="btn-tabs" value={raisingMethod} onChange={(e) => setRaisingMethod(e.target.value)}>
-                            <Radio.Button value="1">{t('createProject.setFundraiseDate')}</Radio.Button>
                             <Radio.Button value="2">{t('createProject.setFundraiseTimeframe')}</Radio.Button>
+                            <Radio.Button value="1">{t('createProject.setFundraiseDate')}</Radio.Button>
                         </Radio.Group>
                         {raisingMethod === '1' && <div className="hint">
                             {t('createProject.selectFundraisingMethodHint1')}
@@ -802,8 +802,8 @@ export default function CreateProject() {
                     <div className="form-item">
                         <div className="label">{t('createProject.selectRepaymentMethod')}</div>
                         <Radio.Group className="btn-tabs" value={withdrawMethod} onChange={(e) => setWithdrawMethod(e.target.value)}>
-                            <Radio.Button value="1">{t('createProject.conditionalRedemption')}</Radio.Button>
                             <Radio.Button value="2">{t('createProject.unconditionalRedemption')}</Radio.Button>
+                            <Radio.Button value="1">{t('createProject.conditionalRedemption')}</Radio.Button>
                         </Radio.Group>
                         <div className="hint">
                             {withdrawMethod === '1' && <span>{t('createProject.selectRepaymentMethodHint')}</span>}
