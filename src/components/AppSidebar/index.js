@@ -38,8 +38,11 @@ export default function AppSidebar(props) {
     const [hideCreate, setHideCreate] = useState(false)
     const [currentRoute, setCurrentRoute] = useState('')
     useEffect(() => {
+        console.log(location.pathname)
         if(location.pathname === '/create-project/close'|| location.pathname === '/create-project/open'){
             setHideCreate(true)
+        }else{
+            setHideCreate(false)
         }
     }, [location])
     const changeLanguage = language => {
