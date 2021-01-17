@@ -254,7 +254,7 @@ export default {
                 Please make sure the information is authentic. Once filled in, it is unchangeable.<br /><br /><br/>
                 <div class="hint-block">
                 Notice: set aside 0.5% of funds raised in DADA token to pay for the auditing fees to the community. <br/>
-                After the fundraise completes, contribute 10% of the hard cap fund size in DADA token to the security deposit. We will return a major part of your security fund after the project completes. 
+                After the fundraise completes, contribute 5% of the hard cap fund size in DADA token to the security deposit. We will return a major part of your security fund after the project completes. 
                 </div>
                 `,
                 closeGovernRule: `
@@ -679,7 +679,7 @@ export default {
                 请务必保证数据真实准确，您所填写信息一经提交无法更改<br /><br /><br/>
                 <div class="hint-block">
                     注意：您提交项目时需要准备好所募集金额0.5%的等值DADA用于支付给社区，用于提交项目的审计/验证。<br/>
-                    筹集目标达成后，您将需要准备好最大募集金额10%的等值DADA用于项目启动保证金，该资金将会于项目完成后返还部分。
+                    筹集目标达成后，您将需要准备好最大募集金额5%的等值DADA用于项目启动保证金，该资金将会于项目完成后返还部分。
                 </div>
                 `,
                 closeGovernRule: `
