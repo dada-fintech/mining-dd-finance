@@ -1,0 +1,246 @@
+@import '../../../styles/variables';
+.mine-page {
+    text-align: center;
+    overflow: hidden;
+    .total {
+        margin-top: 32px;
+        .earn {
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            line-height: 20px;
+            margin-bottom: 12px;
+        }
+        .amount {
+            font-weight: normal;
+            font-size: 36px;
+            line-height: 52px;
+            text-align: center;
+            letter-spacing: 0.12em;
+        }
+        .text {
+            font-weight: normal;
+            font-size: 18px;
+            line-height: 34px;
+            text-align: center;
+            letter-spacing: 0.12em;
+        }
+        .desc {
+            font-size: 14px;
+            line-height: 20px;
+            text-align: center;
+        }
+    }
+
+    @media screen and (min-width: $MobileWidth-M) {
+        .brun-content {
+            max-width: $MaxWidth;
+            width: 100%;
+            margin: 34px auto 32px 0;
+            display: table;
+            overflow: hidden;
+            .data-item {
+                .data {
+                    margin: 0 auto;
+                    border: 1px solid rgba(255, 255, 255, 0.5);
+                    box-sizing: border-box;
+                    border-radius: 20px;
+                    height: 100%;
+                    display: table-cell;
+                    .data-border {
+                        width: 300px;
+                        margin: 5px;
+                        border: 1px solid rgba(255, 255, 255, 0.5);
+                        padding-bottom: 36px;
+                        border-radius: 15px;
+                        display: inline-block;
+                        .price {
+                            margin-top: 32px;
+                        }
+                        .available {
+                            margin-top: 24px;
+                        }
+                        .amount {
+                            font-weight: normal;
+                            font-size: 36px;
+                            line-height: 52px;
+                            text-align: center;
+                            letter-spacing: 0.12em;
+                        }
+                        .text {
+                            font-weight: normal;
+                            font-size: 18px;
+                            line-height: 34px;
+                            text-align: center;
+                            letter-spacing: 0.12em;
+                        }
+                        .claim {
+                            margin-top: 78px;
+                        }
+                        .start {
+                            margin-top: 38px;
+                        }
+                        .apy {
+                            border: 1px solid rgba(255, 255, 255, 0.5);
+                            box-sizing: border-box;
+                            border-radius: 10px;
+                            display: flex;
+                            justify-content: space-between;
+                            height: 34px;
+                            margin: 6px 22px;
+                            padding: 0 16px;
+
+                            span {
+                                font-size: 16px;
+                                line-height: 34px;
+                                align-items: center; /*纵轴居中*/
+                            }
+                        }
+                    }
+                }
+                .desc {
+                    font-weight: normal;
+                    font-size: 14px;
+                    line-height: 20px;
+                    margin-top: 13px;
+                    text-align: center;
+                }
+            }
+            .data-item:first-child {
+                float: left;
+                // margin-right: 142px;
+            }
+            .data-item:last-child {
+                float: right;
+            }
+
+            .rate {
+                width: auto;
+                min-width: 192px;
+                overflow: hidden;
+                float: left;
+                padding-top: 24px;
+                .amount {
+                    font-weight: normal;
+                    font-size: 22px;
+                    line-height: 34px;
+                    text-align: center;
+                }
+                .text {
+                    font-weight: normal;
+                    font-size: 12px;
+                    line-height: 26px;
+                    text-align: center;
+                    color: rgba(255, 255, 255, 0.5);
+                    margin-bottom: 32px;
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: $MobileWidth-M) {
+        .brun-content {
+            max-width: $MaxWidth;
+            width: $BoxContentWidth;
+            margin: 34px auto 14px 0;
+            display: inline-block;
+            flex-direction: row;
+            .data-item {
+                .data {
+                    margin: 24px auto 45px;
+                    border: 1px solid rgba(255, 255, 255, 0.5);
+                    box-sizing: border-box;
+                    border-radius: 20px;
+                    display: inline-block;
+                    height: 100%;
+                    width: $BoxContentWidth;
+                    margin: 0 auto 44px 0;
+
+                    .data-border {
+                        width: $BoxButWidth-M;
+                        margin: 1%;
+                        border: 1px solid rgba(255, 255, 255, 0.5);
+                        padding-bottom: 36px;
+                        border-radius: 15px;
+                        display: inline-block;
+                        .price {
+                            margin-top: 32px;
+                        }
+                        .available {
+                            margin-top: 24px;
+                        }
+                        .amount {
+                            font-weight: normal;
+                            font-size: 36px;
+                            line-height: 52px;
+                            text-align: center;
+                            letter-spacing: 0.12em;
+                        }
+                        .text {
+                            font-weight: normal;
+                            font-size: 18px;
+                            line-height: 34px;
+                            text-align: center;
+                            letter-spacing: 0.12em;
+                        }
+                        .claim {
+                            margin-top: 78px;
+                        }
+                        .start {
+                            margin-top: 38px;
+                        }
+                        .apy {
+                            border: 1px solid rgba(255, 255, 255, 0.5);
+                            box-sizing: border-box;
+                            border-radius: 10px;
+                            display: flex;
+                            justify-content: space-between;
+                            height: 34px;
+                            margin: 6px 22px;
+                            padding: 0 16px;
+                            span {
+                                font-size: 16px;
+                                line-height: 34px;
+                            }
+                        }
+                    }
+                }
+                .desc {
+                    font-weight: normal;
+                    font-size: 14px;
+                    line-height: 20px;
+                    margin-top: 13px;
+                    text-align: center;
+                    color: rgba(255, 255, 255, 0.5);
+                }
+            }
+            .rate {
+                padding-bottom: 52px;
+                .amount {
+                    font-weight: normal;
+                    font-size: 24px;
+                    line-height: 34px;
+                    text-align: center;
+                }
+                .text {
+                    font-weight: normal;
+                    font-size: 12px;
+                    line-height: 26px;
+                    text-align: center;
+                    color: rgba(255, 255, 255, 0.5);
+                    margin-bottom: 32px;
+                }
+            }
+        }
+    }
+
+    .clues {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 20px;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.3);
+        margin-top: 6px;
+        margin-bottom: 18px;
+    }
+}

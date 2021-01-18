@@ -15,7 +15,8 @@ export default {
                 back: 'Back',
                 pay: 'Pay',
                 confirmInfo: 'Confirm',
-                gasFeeHint: 'Please confirm the above information carefully,<br />you cannot modify the information after confirmation<br />It will cost a certain amount of gas fee to create.',
+                gasFeeHint:
+                    'Please confirm the above information carefully,<br />you cannot modify the information after confirmation<br />It will cost a certain amount of gas fee to create.',
                 upload: 'Upload',
                 projectList: 'Project List',
                 readTheDoc: 'Read the Docs',
@@ -50,9 +51,12 @@ export default {
                 role: 'Role',
                 changePlan: 'Change Plan',
                 rulesBelow: 'Enter rules below',
-                pdfRequired: '*Please upload in PDF format. The file will be displayed in the project details page. ',
-                billHint1: 'You will be paying 0.5% of the hard cap in DADA for the auditing and verification fee. The fee is nonrefundable. ',
-                billHint2: 'Creating smart contracts will cost a certain amount of Gas.  ',
+                pdfRequired:
+                    '*Please upload in PDF format. The file will be displayed in the project details page. ',
+                billHint1:
+                    'You will be paying 0.5% of the hard cap in DADA for the auditing and verification fee. The fee is nonrefundable. ',
+                billHint2:
+                    'Creating smart contracts will cost a certain amount of Gas.  ',
                 maxValue: 'Max value',
                 standard: 'Static',
                 customizable: 'Dynamic',
@@ -70,17 +74,19 @@ export default {
                 unlockRules: 'Unlock',
                 redemptionRules: 'Redemption',
                 open: {
-                    desc: 'Flexibly customize your project in multiple links such as fundraising, voting, redemption, etc.',
+                    desc:
+                        'Flexibly customize your project in multiple links such as fundraising, voting, redemption, etc.',
                     1: 'After approval, you can start fundraising',
                     2: '*Choose one of the two: Conditional, set voting conditions. Unconditional, you can ask for money after fundraising is completed',
-                    3: 'After the fundraising is completed, set the method and time for repayment of principal and interest'
+                    3: 'After the fundraising is completed, set the method and time for repayment of principal and interest',
                 },
                 close: {
-                    desc: 'Use standardized templates to create projects more easily',
+                    desc:
+                        'Use standardized templates to create projects more easily',
                     1: 'Set the fundraising start date (5 days are reserved for review, fundraising will start after 5 days at the earliest)',
                     2: 'Set unlock time and voting period',
-                    3: 'Pre-set the payment date'
-                }
+                    3: 'Pre-set the payment date',
+                },
             },
             hint: {
                 projectsEmpty: 'New project is in preparation, stay tuned.',
@@ -90,8 +96,8 @@ export default {
                 approve: 'Please approve before action',
                 leaveComment: 'Please leave comment',
                 actionSuccess: 'Success',
-                detailHint: 'Please do not use your centralized exchange address to make transfers to the above address, it may lead  to some unpredictable results.',
-
+                detailHint:
+                    'Please do not use your centralized exchange address to make transfers to the above address, it may lead  to some unpredictable results.',
             },
             modal: {
                 repayTitle: 'Repay',
@@ -107,7 +113,6 @@ export default {
                 Projects that passed the audit will be insured by SAFD. <br/>
                 Projects that did not pass the audit will be canceled. 
                 `,
-
             },
             homepage: {
                 subtitle: 'Decentralized Platform for Mining Ecosystem',
@@ -118,8 +123,8 @@ export default {
                         3: 'Integrate Off-chain Resources ',
                         4: 'Establish a DID Reputation Network',
                         5: 'Transparency in Logistics',
-                        6: 'Bridging Crypto Mining with the Traditional World'
-                    }
+                        6: 'Bridging Crypto Mining with the Traditional World',
+                    },
                 },
                 inFundraisingTitle: 'Ongoing Projects',
                 inFundraising: {
@@ -128,7 +133,7 @@ export default {
                     3: 'Verification based on unique IDs',
                     4: 'Endorsement from the DID Reputation Network',
                     5: 'Comprehensive Project Business Strategy',
-                    6: 'High ROI with Easy Onboarding'
+                    6: 'High ROI with Easy Onboarding',
                 },
                 onGoingTitle: 'Fund Release',
                 onGoing: {
@@ -140,11 +145,12 @@ export default {
                 },
                 safd: {
                     title: 'About SAFD',
-                    subtitle: 'SAFD is DADA’s settlement system designed to ensure investors’ principals.  We set up a treasury reserve to protect your investment. ',
+                    subtitle:
+                        'SAFD is DADA’s settlement system designed to ensure investors’ principals.  We set up a treasury reserve to protect your investment. ',
                     slogan: {
                         1: 'We Safeguard and Facilitate the',
                         2: 'Community-driven DID Reputation Network.  ',
-                    }
+                    },
                 },
                 contact: {
                     title: 'Contact Us',
@@ -155,13 +161,13 @@ export default {
                         firstName: 'First Name',
                         email: 'Email',
                         message: 'Message',
-                        checkHint: 'Check to receive project updates '
-                    }
+                        checkHint: 'Check to receive project updates ',
+                    },
                 },
                 footer: {
                     documentation: 'Documentation',
                     explore: 'Explore',
-                }
+                },
             },
             sidebar: {
                 myShare: 'My Share',
@@ -189,21 +195,22 @@ export default {
             },
             banner: {
                 title: 'Mining Ecosystem Aggregator',
-                subtitle: 'DADA Community Selects the Best Project for You'
+                subtitle: 'DADA Community Selects the Best Project for You',
             },
             feature: {
                 1: {
                     title: 'Create A Project',
-                    desc: 'Create a high-quality project for the investors'
+                    desc: 'Create a high-quality project for the investors',
                 },
                 2: {
                     title: 'Participate in the Investment',
-                    desc: 'Find a good project will win you more profit!'
+                    desc: 'Find a good project will win you more profit!',
                 },
                 3: {
                     title: 'Governance Voting',
-                    desc: 'Vote for the project you support and participate in the governing to move the project forward.  '
-                }
+                    desc:
+                        'Vote for the project you support and participate in the governing to move the project forward.  ',
+                },
             },
             onGoingProjects: 'The On-going Projects',
             project: {
@@ -236,7 +243,7 @@ export default {
                     ongoing: 'On-going',
                     completed: 'Completed',
                     open: 'Available',
-                    announced: 'Announced - in audit'
+                    announced: 'Announced - in audit',
                 },
                 action: {
                     committeeReviews: 'Committee Reviews',
@@ -245,8 +252,7 @@ export default {
                     change: 'Initiate Voting to Change the Process',
                     repay: 'Repay',
                     invest: 'Invest',
-                }
-
+                },
             },
             createProject: {
                 hint: `<div class="h1">Create a New Project</div>
@@ -295,7 +301,8 @@ export default {
             3.Redemption Date: send the principal and profits to the smart contract address, so that the investors can redeem their assets. <br/>
             </div>
             `,
-                step1Hint: 'This form will be displayed on the project details page. All the information below is required. Please fill in your Business Plan and upload it as a PDF. ',
+                step1Hint:
+                    'This form will be displayed on the project details page. All the information below is required. Please fill in your Business Plan and upload it as a PDF. ',
                 step2Hint: `
                 This form configures the token representing the proof of stake of your project. You could obtain this token through fundraising. <br />
                 This protocol endows the project investors with the majority of governance authority, to protect their rights and interests. <br />
@@ -310,55 +317,77 @@ export default {
                 `,
                 contractAddress: 'Contract Address',
                 projectName: 'Project Name',
-                projectNameHint: '*Create an eye-catching name for people to find it easily ',
+                projectNameHint:
+                    '*Create an eye-catching name for people to find it easily ',
                 projectIntro: 'Project Introduction',
-                projectIntroHint: '*Briefly introduce your project and its advantages, etc. ',
+                projectIntroHint:
+                    '*Briefly introduce your project and its advantages, etc. ',
                 within140: 'Within 140 words',
                 projectEmail: 'Project Subscription Email',
-                projectEmailHint: '*Fill in a verifiable email to receive notifications from the platform throughout the project. ',
+                projectEmailHint:
+                    '*Fill in a verifiable email to receive notifications from the platform throughout the project. ',
                 managerName: 'Fund Manager Name',
-                managerNameHint: 'Please feel in your legal name. This information will be recorded in the DID Credential Network.',
+                managerNameHint:
+                    'Please feel in your legal name. This information will be recorded in the DID Credential Network.',
                 managerBio: 'Fund Manager Bio',
                 projectDetails: 'Project Details',
                 projectDetailsHint: 'Put in project description in details',
                 projectStrategy: 'Project Strategy ',
-                projectStrategyHint: 'Please introduce the revenue strategy in detail. ',
+                projectStrategyHint:
+                    'Please introduce the revenue strategy in detail. ',
                 uploadPlan: 'Upload the Business Plan ',
                 whitepaper: 'Whitepaper',
                 nameOfToken: 'Project Token Name',
                 addWallet: 'Add the Wallet Address for Holding the Fund',
-                addWalletHint: 'This is your only address for holding the Fund.',
+                addWalletHint:
+                    'This is your only address for holding the Fund.',
                 profitAddr: 'Profit Address',
-                profitAddrHint: 'This is your only address for holding the Fund.',
+                profitAddrHint:
+                    'This is your only address for holding the Fund.',
                 boardMembers: 'Members of the Board of Directors',
-                boardMembersHint: 'Add no more than 3 addresses, or leave it blank. This address has the authority to create voting to change the project processes and upload attachments for the projects. ',
+                boardMembersHint:
+                    'Add no more than 3 addresses, or leave it blank. This address has the authority to create voting to change the project processes and upload attachments for the projects. ',
                 managerAddress: 'Fund Manager Wallet Address (Multisig)',
-                managerAddressHint: '*This address is the only depositing address assigned for this project. Our smart contract deposits funds raised into this address according to the rules. Once submitted, this address cannot be changed.',
+                managerAddressHint:
+                    '*This address is the only depositing address assigned for this project. Our smart contract deposits funds raised into this address according to the rules. Once submitted, this address cannot be changed.',
                 profitAddress: 'Mining Profits Wallet Address (Multisig) ',
-                profitAddressHint: '*This is the address for depositing the mining profits. Please fill in a verifiable multisig wallet. It cannot be changed once submitted. ',
+                profitAddressHint:
+                    '*This is the address for depositing the mining profits. Please fill in a verifiable multisig wallet. It cannot be changed once submitted. ',
                 sureToDelete: 'Are you sure to delete?',
                 fundraisingPeriod: 'Fundraising Period',
-                fundraisingPeriodHint1: 'Please confirm the starting and ending date of your fundraising ',
-                fundraisingPeriodHint2: '*The Project Committee auditing period takes 5 days. The fundraising kick-start date should be 5 calendar days after the project is created.  ',
+                fundraisingPeriodHint1:
+                    'Please confirm the starting and ending date of your fundraising ',
+                fundraisingPeriodHint2:
+                    '*The Project Committee auditing period takes 5 days. The fundraising kick-start date should be 5 calendar days after the project is created.  ',
                 fundraisingGoal: 'Fundraising Goal',
-                fundraisingGoalHint: ' This is the soft cap of the fund raised for this project.',
+                fundraisingGoalHint:
+                    ' This is the soft cap of the fund raised for this project.',
                 fundraisingLimit: 'Fundraising Limit',
-                fundraisingLimitHint: 'This is the hard cap of this fundraising campaign.',
-                fundraisingLimitHint2: '*The auditing fee and security deposit are based on the hard cap fund size. ',
+                fundraisingLimitHint:
+                    'This is the hard cap of this fundraising campaign.',
+                fundraisingLimitHint2:
+                    '*The auditing fee and security deposit are based on the hard cap fund size. ',
                 softCap: 'Soft Cap',
-                softCapHover: 'The minimum amount of funds needed to kick start the project. ',
+                softCapHover:
+                    'The minimum amount of funds needed to kick start the project. ',
                 redemptionDate: 'Redemption Date',
-                redemptionDateHint: '*Redemption date is the day principal and profits withdrawal is open for the users. Please complete the payback before the redemption date.',
-                redemptionDateHover: 'interest bearing period = redemption date - fundraise end date',
-                assetsRuleHint: 'Set the unlock rules according to your fundraising plans. ',
+                redemptionDateHint:
+                    '*Redemption date is the day principal and profits withdrawal is open for the users. Please complete the payback before the redemption date.',
+                redemptionDateHover:
+                    'interest bearing period = redemption date - fundraise end date',
+                assetsRuleHint:
+                    'Set the unlock rules according to your fundraising plans. ',
                 unlockDate: 'Unlock date',
-                unlockDateHover: 'This date is the unlock date for the contract to release funds for this stage',
+                unlockDateHover:
+                    'This date is the unlock date for the contract to release funds for this stage',
                 shares: 'Shares',
                 sharesHover: 'The released amount for this stage ',
                 votingDate: 'Voting Date',
-                votingDateHover: 'This is the time frame for voting. As soon as the voting ends, the fund for this stage will be released. ',
+                votingDateHover:
+                    'This is the time frame for voting. As soon as the voting ends, the fund for this stage will be released. ',
                 additionalDoc: 'Additional Documents',
-                additionalDocHint: "Please upload other relevant documents, including the whitepaper, photos, manager's portfolio, etc. ",
+                additionalDocHint:
+                    "Please upload other relevant documents, including the whitepaper, photos, manager's portfolio, etc. ",
                 projectInfo: 'Project Info',
                 tokenName: 'Token Name',
                 fundAddress: 'Fund Holding Address',
@@ -380,15 +409,19 @@ export default {
                 selectFundraisingMethod: 'Select a Fundraising Method',
                 setFundraiseDate: 'Set the Fundraise Date',
                 setFundraiseTimeframe: ' Set the Fundraise Timeframe',
-                selectFundraisingMethodHint1: 'Once confirmed, the date can not be changed.',
-                selectFundraisingMethodHint2: 'Once confirmed，it will start automatically after auditing.',
+                selectFundraisingMethodHint1:
+                    'Once confirmed, the date can not be changed.',
+                selectFundraisingMethodHint2:
+                    'Once confirmed，it will start automatically after auditing.',
                 selectRedemptionMethod: 'Select a Redemption Method ',
-                selectRedemptionMethodValue1: 'Repay capital with interest on the set date',
+                selectRedemptionMethodValue1:
+                    'Repay capital with interest on the set date',
                 selectRepaymentMethod: 'Select a Repayment Method ',
                 selectRepaymentMethodHint: 'Redeem as the Fund Manager Repays',
-                selectRepaymentMethodHint2: '*A full loan is triggered after the deposit is paid within 3 days of the fundraising. Regular fundraising: The deposit is paid within 3 days after the fundraising is completed, and the full amount is released after 3 days.',
+                selectRepaymentMethodHint2:
+                    '*A full loan is triggered after the deposit is paid within 3 days of the fundraising. Regular fundraising: The deposit is paid within 3 days after the fundraising is completed, and the full amount is released after 3 days.',
                 conditionalRedemption: 'Conditional redemption',
-                unconditionalRedemption : 'Unconditional redemption ',
+                unconditionalRedemption: 'Unconditional redemption ',
             },
             createVote: {
                 hint: `<div class="h1">Create a Voting On a Change in the Process</div>
@@ -414,11 +447,61 @@ export default {
             projectList: {
                 title: 'Project List',
                 slogan1: 'Select High-quality Projects',
-                slogan2: 'Make Your Money Work for You '
+                slogan2: 'Make Your Money Work for You ',
             },
-
-
-        }
+            v1_BUY: 'BUY DHM',
+            v1_MINE: 'MINE WBTC',
+            v1_BURN: 'BURN DHM',
+            v1_Total_supply: 'Total Supply',
+            v1_Current_Price: 'Current Price',
+            v1_Available: 'Available',
+            v1_Balance_eth: 'Balance : {{x}} {{x1}}',
+            v1_Balance: 'Balance : {{x}} USDT',
+            v1_EARN_wBTC: 'MINE DHM AND EARN WBTC',
+            v1_wBTC_DHM_DAY_balance: '{{x}}WBTC/DAY',
+            v1_wBTC_DH_DAY: 'ALL Mined',
+            v1_DHM_TOKEN_STAKED: 'DHM TOKEN STAKED',
+            v1_wBTC_EARNED: 'WBTC EARNED',
+            v1_wBTC: '{{x}}WBTC',
+            v1_START: 'STAKE',
+            v1_CLAIM: 'CLAIM',
+            v1_STOP: 'WITHDRAW',
+            v1_w_TH: '{{x}}W/TH',
+            v1_MINER_TYPE: 'MINER TYPE',
+            v1_Total_Burned: 'Total Burned',
+            v1_Connect_Wallet: 'Connect Wallet',
+            v1_Install_MetaMask: 'Install MetaMask',
+            v1_automagically_wbtc:
+                'When you stop, the contract will automagically claim wBTC on your behalf!',
+            v1_SUPPORT_BY: 'SUPPORT BY',
+            v1_calculated_income_EST:
+                'calculated income based on EST 5:00 (T+1)',
+            v1_Unlock_Wallet: 'Unlock Wallet',
+            v1_Sell: 'Sell DHM',
+            v1_Success: 'Success',
+            v1_START_MINE: 'START MINE',
+            v1_WHITEPAPER: 'WHITEPAPER',
+            v1_You_will_buy: 'You will buy',
+            v1_Approve: 'Approve',
+            v1_authorization: 'Authorization...',
+            v1_Pendding: 'Pendding...',
+            v1_Success_s: 'Success!',
+            v1_Failed: 'Failed!',
+            v1_ALL_Mined: 'ALL Mined',
+            v1_Total_Staked: 'Total Staked',
+            v1_Staked_Rate: 'Staked Rate',
+            v1_APY: 'APY',
+            v1_Decentralized_hash_mining: 'Decentralized hash mining',
+            v1_Rewards_Today: 'Rewards Today',
+            v1_BUY_but: 'BUY',
+            v1_Fail: 'Fail',
+            v1_You_will_burned: 'You will burn',
+            v1_BACK: 'BACK',
+            v1_no_balance: 'No Balance',
+            v1_You_will_staked: 'You will stake',
+            v1_switch_network: 'Please switch network to Mainnet',
+            v1_Settlement_date: 'The income can be claimed on the T+2 day',
+        },
     },
     zh: {
         translation: {
@@ -436,7 +519,8 @@ export default {
                 back: '上一步',
                 pay: '支付',
                 confirmInfo: '确认信息',
-                gasFeeHint: '请认真确认以上信息，确认后无法修改信息<br />创建项目将会耗费一些 Gas fee',
+                gasFeeHint:
+                    '请认真确认以上信息，确认后无法修改信息<br />创建项目将会耗费一些 Gas fee',
                 upload: '上传',
                 projectList: '项目列表',
                 readTheDoc: '阅读文档',
@@ -458,7 +542,7 @@ export default {
                 joinNow: '立即参与',
                 viewProject: '查看项目',
                 startTime: '开始时间',
-                endTime: '结束时间',   
+                endTime: '结束时间',
                 fundStartTime: '众筹开始时间',
                 fundEndTime: '众筹结束时间',
                 redemption: '到期还本付息',
@@ -472,7 +556,8 @@ export default {
                 changePlan: '变更计划',
                 rulesBelow: '下方填写释放规则',
                 pdfRequired: '*该文件将会展示在项目详情页中,文件需PDF格式',
-                billHint1: '即将支付最大募集金额0.5%的等值DADA用于审计/验证费用，该费用一经支付不再退还。',
+                billHint1:
+                    '即将支付最大募集金额0.5%的等值DADA用于审计/验证费用，该费用一经支付不再退还。',
                 billHint2: '创建合约时将会消耗一定的Gas。',
                 maxValue: '最大值',
                 standard: '标准版',
@@ -494,14 +579,14 @@ export default {
                     desc: '在筹款、投票、赎回等多个环节灵活定制你的项目',
                     1: '审核通过，即可开始筹款',
                     2: '*二选一：有条件，设置投票请款条件。无条件，筹款完成后即可请款',
-                    3: '筹款完成后，设定回本付息方式和时间'
+                    3: '筹款完成后，设定回本付息方式和时间',
                 },
                 close: {
                     desc: '使用标准化模板，更加简便地创建项目',
                     1: '设置筹款开始日期（预留5天审核，最快5天后开始筹款）',
                     2: '设置解锁时间和投票期',
-                    3: '预先设定回本付息日期'
-                }
+                    3: '预先设定回本付息日期',
+                },
             },
             hint: {
                 projectsEmpty: '项目即将来临，请保持关注。',
@@ -511,8 +596,8 @@ export default {
                 approve: '请在操作前进行授权',
                 leaveComment: '请填写专业意见',
                 actionSuccess: '操作成功',
-                detailHint: '请不要使用交易所地址向以上地址内转账，可能会出现无法预估的后果',
-
+                detailHint:
+                    '请不要使用交易所地址向以上地址内转账，可能会出现无法预估的后果',
             },
             modal: {
                 repayTitle: '项目回款',
@@ -528,7 +613,6 @@ export default {
                 通过审核的项目将会得到押金承保<br />
                 未通过审核的项目将会撤销项目
                 `,
-
             },
             homepage: {
                 subtitle: '去中心化项目发布平台',
@@ -539,8 +623,8 @@ export default {
                         3: '整合链下资源',
                         4: '构建声誉网络',
                         5: '全链路透明',
-                        6: '让矿圈出圈'
-                    }
+                        6: '让矿圈出圈',
+                    },
                 },
                 inFundraisingTitle: '可参与项目',
                 inFundraising: {
@@ -549,7 +633,7 @@ export default {
                     3: '唯一身份验证',
                     4: '声誉网络背书',
                     5: '详尽项目策略',
-                    6: '收益更轻松'
+                    6: '收益更轻松',
                 },
                 onGoingTitle: '进行中项目',
                 onGoing: {
@@ -561,11 +645,12 @@ export default {
                 },
                 safd: {
                     title: '关于押金（SAFD）',
-                    subtitle: '押金（SAFD）是DADA推出的一项为保障投资人本金而设立的专项赔付体系，为此我们做了充足的准备，为每一位投资人提供最安心的投资保障。',
+                    subtitle:
+                        '押金（SAFD）是DADA推出的一项为保障投资人本金而设立的专项赔付体系，为此我们做了充足的准备，为每一位投资人提供最安心的投资保障。',
                     slogan: {
                         1: '为共同构建最优质的信誉体系',
                         2: '提供最充足的保障',
-                    }
+                    },
                 },
                 contact: {
                     title: '联系我们',
@@ -579,13 +664,13 @@ export default {
                         firstName: '名',
                         email: '邮箱',
                         message: '留言',
-                        checkHint: '勾选时将会接受新项目推送'
-                    }
+                        checkHint: '勾选时将会接受新项目推送',
+                    },
                 },
                 footer: {
                     documentation: '阅读文档',
                     explore: '发现更多',
-                }
+                },
             },
             sidebar: {
                 myShare: '我的份额',
@@ -613,22 +698,22 @@ export default {
             },
             banner: {
                 title: '矿业生态聚合器',
-                subtitle: 'DADA社区为您甄选最好的项目'
+                subtitle: 'DADA社区为您甄选最好的项目',
             },
 
             feature: {
                 1: {
                     title: '创建项目',
-                    desc: '如果您是基金发起人，可以点击这里发起一个新的项目'
+                    desc: '如果您是基金发起人，可以点击这里发起一个新的项目',
                 },
                 2: {
                     title: '参与投资',
-                    desc: '找到一个好的投资，将为您产生更多的收益!'
+                    desc: '找到一个好的投资，将为您产生更多的收益!',
                 },
                 3: {
                     title: '投票治理',
-                    desc: '投票支持你投资的项目，治理推动项目进程。'
-                }
+                    desc: '投票支持你投资的项目，治理推动项目进程。',
+                },
             },
             onGoingProjects: '进行中的项目',
             project: {
@@ -661,7 +746,7 @@ export default {
                     ongoing: '运行中',
                     completed: '已完成',
                     open: '可参与',
-                    announced: '公示中-审核期'
+                    announced: '公示中-审核期',
                 },
                 action: {
                     committeeReviews: '审核评议',
@@ -670,8 +755,7 @@ export default {
                     change: '发起变更投票',
                     repay: '项目回款',
                     invest: '投资',
-                }
-
+                },
             },
             createProject: {
                 hint: `<div class="h1">现在开始创建一个项目</div>
@@ -720,7 +804,8 @@ export default {
                     3.赎回日期：赎回日期前需将本金及收益打入合约地址，以便于投资人赎回本金及收益。<br/>
                 </div>
                 `,
-                step1Hint: '这些设置都将展示在项目详情页中，所有设置均为必填项，请规范项目计划书的内容，并确保为PDF格式，我们将会把您上传的内容全部展示出来。',
+                step1Hint:
+                    '这些设置都将展示在项目详情页中，所有设置均为必填项，请规范项目计划书的内容，并确保为PDF格式，我们将会把您上传的内容全部展示出来。',
                 step2Hint: `
                 这项设置将会配置代表该项目的代币，该代币将可以通过投资筹款来获得。<br />
                 本合约协议体系将会把大部分治理权限授予项目投资人，以保护他们的权益。<br />
@@ -739,7 +824,8 @@ export default {
                 projectName: '项目名称',
                 projectNameHint: '*为项目创建一个醒目的名字以便人们找到它',
                 projectIntro: '项目简介',
-                projectIntroHint: '*简单介绍项目的概况、优势等，该字段将会推送到项目首页，限制字数140字内',
+                projectIntroHint:
+                    '*简单介绍项目的概况、优势等，该字段将会推送到项目首页，限制字数140字内',
                 within140: '限制140字以内',
                 projectEmail: '项目发起人邮箱',
                 projectEmailHint: '*该邮箱将会用于接收项目的各阶段推送消息',
@@ -747,35 +833,44 @@ export default {
                 managerNameHint: '*请填写真实信息，该信息将会记录到声誉系统中',
                 managerBio: '项目发起人简介',
                 projectDetails: '项目详情',
-                projectDetailsHint: '*详细描述项目相关细节，该字段将会展示在项目详情中，不限字数',
+                projectDetailsHint:
+                    '*详细描述项目相关细节，该字段将会展示在项目详情中，不限字数',
                 projectStrategy: '项目策略',
-                projectStrategyHint: '*请详细介绍该项目收益策略，该字段将会展示在项目详情中，不限字数',
+                projectStrategyHint:
+                    '*请详细介绍该项目收益策略，该字段将会展示在项目详情中，不限字数',
                 uploadPlan: '上传项目计划书',
                 whitepaper: '白皮书文件',
                 nameOfToken: '项目代币名称',
                 addWallet: '添加基金持有地址',
                 addWalletHint: '此地址将是持有本基金的唯一地址。',
                 profitAddr: '项目收益地址',
-                profitAddrHint: '该地址为项目盈利的收款钱包地址，务必选择可验证的多方共管钱包地址，无法变更',
+                profitAddrHint:
+                    '该地址为项目盈利的收款钱包地址，务必选择可验证的多方共管钱包地址，无法变更',
                 boardMembers: '添加理事会成员地址',
-                boardMembersHint: '最多可添加3个地址，该地址仅具有创建变更提案投票、上传项目附件的权限，可为空',
+                boardMembersHint:
+                    '最多可添加3个地址，该地址仅具有创建变更提案投票、上传项目附件的权限，可为空',
                 managerAddress: '项目经理收款地址',
-                managerAddressHint: '*该地址将作为项目唯一指定收款地址，无法更改',
+                managerAddressHint:
+                    '*该地址将作为项目唯一指定收款地址，无法更改',
                 profitAddress: '项目收益地址（共管钱包）',
-                profitAddressHint: '*该地址为项目收益地址，矿池收款地址，务必为可验证的多签共管钱包地址，无法更改',
+                profitAddressHint:
+                    '*该地址为项目收益地址，矿池收款地址，务必为可验证的多签共管钱包地址，无法更改',
                 sureToDelete: '确定删除吗?',
                 fundraisingPeriod: '筹款期限',
                 fundraisingPeriodHint1: '确认筹款开始及结束的日期。',
-                fundraisingPeriodHint2: '*项目专业委员会审核期为5天，筹款开始时间需为5个自然日后',
+                fundraisingPeriodHint2:
+                    '*项目专业委员会审核期为5天，筹款开始时间需为5个自然日后',
                 fundraisingGoal: '筹款目标',
                 fundraisingGoalHint: '这是该项目的最低筹资限额。',
                 fundraisingLimit: '最高募集金额',
                 fundraisingLimitHint: '作为该项目的最大募集总额',
-                fundraisingLimitHint2: '*审计费用、保证金费用均以该额度作为基准数据',
+                fundraisingLimitHint2:
+                    '*审计费用、保证金费用均以该额度作为基准数据',
                 softCap: '最低启动金额',
                 softCapHover: '筹款额道道该目标后视为筹集成功',
                 redemptionDate: '赎回时间（还本付息）',
-                redemptionDateHint: '*赎回日期为开放用户提取收益的时间，请务必于该日期前完成收益回款',
+                redemptionDateHint:
+                    '*赎回日期为开放用户提取收益的时间，请务必于该日期前完成收益回款',
                 redemptionDateHover: '计息周期=赎回日期-募集截至日期',
                 assetsRuleHint: '请根据您的募资计划配置基金解锁规则。',
                 unlockDate: '解锁时间',
@@ -783,9 +878,11 @@ export default {
                 shares: '份额',
                 sharesHover: '本阶段放款金额',
                 votingDate: '投票期',
-                votingDateHover: '该时期为本阶段治理投票的时间区间，投票结束即可领取阶段款项',
+                votingDateHover:
+                    '该时期为本阶段治理投票的时间区间，投票结束即可领取阶段款项',
                 additionalDoc: '上传其他文件',
-                additionalDocHint: '*添加更多其他关于项目的证明文件，包括但不限于项目计划书、合规性文件、业绩证明、身份证明等，可以为您的项目顺利开展提供更多的支持。',
+                additionalDocHint:
+                    '*添加更多其他关于项目的证明文件，包括但不限于项目计划书、合规性文件、业绩证明、身份证明等，可以为您的项目顺利开展提供更多的支持。',
                 projectInfo: '项目信息',
                 tokenName: '项目币名称',
                 fundAddress: '基金持有地址',
@@ -812,10 +909,12 @@ export default {
                 selectRedemptionMethod: '选择回款方式',
                 selectRedemptionMethodValue1: '到期还本付息',
                 selectRepaymentMethod: '选择取款方式',
-                selectRepaymentMethodHint: '*筹款完成并于3天内支付押金后，发起取款投票，同意票数66%则完成放款。可分为多阶段，多次放款。',
-                selectRepaymentMethodHint2: '*定时筹款：筹款完成3天内支付押金后触发全额放款。定期筹款：筹款完成3天内支付押金，3天期满全额放款。',
+                selectRepaymentMethodHint:
+                    '*筹款完成并于3天内支付押金后，发起取款投票，同意票数66%则完成放款。可分为多阶段，多次放款。',
+                selectRepaymentMethodHint2:
+                    '*定时筹款：筹款完成3天内支付押金后触发全额放款。定期筹款：筹款完成3天内支付押金，3天期满全额放款。',
                 conditionalRedemption: '有条件取款',
-                unconditionalRedemption : '无条件',
+                unconditionalRedemption: '无条件',
             },
             createVote: {
                 hint: `<div class="h1">现在开始创建一个变更投票</div>
@@ -841,10 +940,58 @@ export default {
             projectList: {
                 title: '项目列表',
                 slogan1: '参与优质项目的成长',
-                slogan2: '为您搭建链接矿业的桥梁'
+                slogan2: '为您搭建链接矿业的桥梁',
             },
-
-
-        }
-    }
-}
+            v1_BUY: '购买DHM',
+            v1_MINE: '挖矿wBTC',
+            v1_BURN: '销毁DHM',
+            v1_Total_supply: '总供应量',
+            v1_Current_Price: '当前价格',
+            v1_Available: '售卖中',
+            v1_Balance_eth: '余额 : {{x}} {{x1}}',
+            v1_Balance: '余额 : {{x}}',
+            v1_EARN_wBTC: '用DHM挖取wBTC',
+            v1_wBTC_DHM_DAY_balance: '{{x}}wBTC/DAY',
+            v1_wBTC_DH_DAY: '全网已挖出',
+            v1_DHM_TOKEN_STAKED: 'DHM抵押量',
+            v1_wBTC_EARNED: '已挖wBTC',
+            v1_wBTC: '{{x}}wBTC',
+            v1_START: '开机',
+            v1_CLAIM: '领取',
+            v1_STOP: '关机',
+            v1_w_TH: '{{x}}W/TH',
+            v1_MINER_TYPE: '矿机型号',
+            v1_Total_Burned: '总销毁量',
+            v1_Connect_Wallet: '链接钱包',
+            v1_Install_MetaMask: '安装MetaMask',
+            v1_automagically_wbtc: '关机时会同时取出已挖取的wBTC收益',
+            v1_SUPPORT_BY: '支持者',
+            v1_calculated_income_EST: '基于美东时间 5:00计算收益(T+1)',
+            v1_Unlock_Wallet: '解锁钱包',
+            v1_Sell: '出售DHM',
+            v1_Success: '成功',
+            v1_START_MINE: '开始挖矿',
+            v1_WHITEPAPER: '白皮书',
+            v1_You_will_buy: '你将购买',
+            v1_Approve: '授权',
+            v1_authorization: '授权中...',
+            v1_Pendding: '等待中...',
+            v1_Success_s: '成功！',
+            v1_Failed: '失败！',
+            v1_ALL_Mined: '所有已挖取的BTC收益',
+            v1_Total_Staked: '总质押数量',
+            v1_Staked_Rate: '总质押比例',
+            v1_APY: '年化收益率',
+            v1_Decentralized_hash_mining: '去中心化永续标准算力币',
+            v1_Rewards_Today: '今日收益',
+            v1_BUY_but: '购买',
+            v1_Fail: '失败',
+            v1_You_will_burned: '即将回收',
+            v1_BACK: '返回',
+            v1_no_balance: '余额不足',
+            v1_You_will_staked: '你将质押',
+            v1_switch_network: '请将网络切换到主网',
+            v1_Settlement_date: '基于EST 5:00结算收益(T+2)',
+        },
+    },
+};

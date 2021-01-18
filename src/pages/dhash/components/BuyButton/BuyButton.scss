@@ -1,0 +1,24 @@
+@import '../../../../styles//variables';
+
+.BuyButton {
+    .BuyButton-content {
+        border: 1px solid #ffffff;
+        box-sizing: border-box;
+        border-radius: 15px;
+        padding: 5px;
+        display: inline-block;
+    }
+
+    @media screen and (max-width: $MobileWidth-M) {
+        width: 92%;
+        margin: 0 auto;
+        .BuyButton-content {
+            border: 1px solid #ffffff;
+            box-sizing: border-box;
+            border-radius: 15px;
+            padding: 5px;
+            display: inline-block;
+            width: 98%;
+        }
+    }
+}
