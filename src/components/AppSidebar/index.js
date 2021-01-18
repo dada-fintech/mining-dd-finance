@@ -72,6 +72,9 @@ export default function AppSidebar(props) {
                     <NavLink className={`nowrap ${location.pathname === '/projects' ? 'top-curve' : ''} ${location.pathname === '/coming/dashboard' ? 'bottom-curve' : ''}`} activeClassName="active" to="/coming/swap"><img src={MiningSwapIcon} />{t('sidebar.tokenSwap')}</NavLink>
                 </li>
                 <li>
+                    <NavLink className={`nowrap ${location.pathname === '/dhash/buy' ? 'top-curve' : ''} ${location.pathname === '/dhash/buy' ? 'bottom-curve' : ''}`} activeClassName="active" to="/dhash/buy"><img src={DashboardIcon} />{t('v1_BUY')}</NavLink>
+                </li>
+                <li>
                     <NavLink className={`nowrap ${location.pathname === '/coming/swap' ? 'top-curve' : ''} ${location.pathname === '/blog' ? 'bottom-curve' : ''}`} activeClassName="active" to="/coming/dashboard"><img src={DashboardIcon} />{t('sidebar.dashboard')}</NavLink>
                 </li>
                 <li>
