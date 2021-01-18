@@ -186,6 +186,8 @@ export default {
                 governance: 'Governance',
                 create: 'Create Project',
                 blog: 'Blog',
+                buyDHM: 'Buy DHM',
+                farming: 'Farming',
             },
             banner: {
                 title: 'Mining Ecosystem Aggregator',
@@ -610,6 +612,8 @@ export default {
                 governance: '治理社区',
                 create: '发起项目',
                 blog: '博客',
+                buyDHM: '购买 DHM',
+                farming: '流动性挖矿',
             },
             banner: {
                 title: '矿业生态聚合器',

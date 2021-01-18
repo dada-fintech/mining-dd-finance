@@ -17,6 +17,9 @@ import CommunityProjectIcon from 'assets/sidebar/community-project.svg'
 import PlusIcon from 'assets/sidebar/plus.svg'
 import MiningSwapIcon from 'assets/sidebar/mining-swap.svg'
 import DashboardIcon from 'assets/sidebar/dashboard.svg'
+import BuyDHMIcon from 'assets/sidebar/buy-dhm.svg'
+import FarmingIcon from 'assets/sidebar/farming.svg'
+
 // import OverviewIcon from 'assets/sidebar/overview.svg'
 // import QuickSwapIcon from 'assets/sidebar/quick-swap.svg'
 // import GovernanceIcon from 'assets/sidebar/governance.svg'
@@ -66,10 +69,16 @@ export default function AppSidebar(props) {
                     <NavLink className={`nowrap ${location.pathname === '/projects' ? 'bottom-curve' : ''}`} activeClassName="active" to="/community-projects"><img src={CommunityProjectIcon} />{t('sidebar.communityProjects')}</NavLink>
                 </li>
                 <li>
-                    <NavLink className={`nowrap ${location.pathname === '/community-projects' ? 'top-curve' : ''} ${location.pathname === '/coming/swap' ? 'bottom-curve' : ''}`} activeClassName="active" to="/projects"><img src={CryptoMiningIcon} />{t('sidebar.cryptoMining')}</NavLink>
+                    <NavLink className={`nowrap ${location.pathname === '/community-projects' ? 'top-curve' : ''} ${location.pathname === '/buy-dhm' ? 'bottom-curve' : ''}`} activeClassName="active" to="/projects"><img src={CryptoMiningIcon} />{t('sidebar.cryptoMining')}</NavLink>
                 </li>
                 <li>
-                    <NavLink className={`nowrap ${location.pathname === '/projects' ? 'top-curve' : ''} ${location.pathname === '/coming/dashboard' ? 'bottom-curve' : ''}`} activeClassName="active" to="/coming/swap"><img src={MiningSwapIcon} />{t('sidebar.tokenSwap')}</NavLink>
+                    <NavLink className={`nowrap ${location.pathname === '/projects' ? 'top-curve' : ''} ${location.pathname === '/farming' ? 'bottom-curve' : ''}`} activeClassName="active" to="/buy-dhm"><img src={BuyDHMIcon} />{t('sidebar.buyDHM')}</NavLink>
+                </li>
+                <li>
+                    <NavLink className={`nowrap ${location.pathname === '/buy-dhm' ? 'top-curve' : ''} ${location.pathname === '/coming/swap' ? 'bottom-curve' : ''}`} activeClassName="active" to="/farming"><img src={FarmingIcon} />{t('sidebar.farming')}</NavLink>
+                </li>
+                <li>
+                    <NavLink className={`nowrap ${location.pathname === '/farming' ? 'top-curve' : ''} ${location.pathname === '/coming/dashboard' ? 'bottom-curve' : ''}`} activeClassName="active" to="/coming/swap"><img src={MiningSwapIcon} />{t('sidebar.tokenSwap')}</NavLink>
                 </li>
                 <li>
                     <NavLink className={`nowrap ${location.pathname === '/coming/swap' ? 'top-curve' : ''} ${location.pathname === '/blog' ? 'bottom-curve' : ''}`} activeClassName="active" to="/coming/dashboard"><img src={DashboardIcon} />{t('sidebar.dashboard')}</NavLink>

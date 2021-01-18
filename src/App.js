@@ -22,6 +22,9 @@ import Blog from './pages/Blog'
 import CreateProject from './pages/CreateProject'
 import CreateVote from './pages/CreateVote'
 import Coming from './pages/Coming'
+import Farming from './pages/Farming'
+import BuyDHM from './pages/BuyDHM'
+
 
 import enUS from 'antd/lib/locale/en_US';
 import zhCN from 'antd/lib/locale/zh_CN';
@@ -71,6 +74,8 @@ function App() {
                   <Route exact path="/create-vote/:id" component={CreateVote} />
                   <Route exact path="/coming/:page" component={Coming} />
                   <Route exact path="/blog" component={Blog} />
+                  <Route exact path="/farming" component={Farming} />
+                  <Route exact path="/buy-dhm" component={BuyDHM} />
                 </Switch>
               </div>
             </Col>
