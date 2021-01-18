@@ -2,6 +2,9 @@
 .buy {
     text-align: center;
     overflow: hidden;
+    .InputaMount{
+        display: block;
+    }
     .apy {
         margin-top: 32px;
         .earn {
@@ -28,11 +31,11 @@
             font-size: 14px;
             line-height: 20px;
             text-align: center;
-            color: rgba(255, 255, 255, 0.3);
+            color: rgba(21, 22, 61, 0.5);
         }
     }
     .total {
-        margin: 8px auto 32px auto;
+        margin: 32px auto 32px auto;
         .amount {
             font-weight: normal;
             font-size: 36px;
@@ -51,17 +54,18 @@
     @media screen and (min-width: $MobileWidth-M) {
         .buy-content {
             max-width: $MaxWidth;
-            margin: 24px auto 0px auto;
+            margin: 24px auto 32px auto;
             .data {
                 margin: 0 auto;
                 border: 1px solid rgba(255, 255, 255, 0.5);
+                padding: 20px 10px 0;
                 box-sizing: border-box;
                 border-radius: 20px;
                 display: inline-block;
                 .data-border {
                     width: 300px;
                     margin: 5px;
-                    border: 1px solid rgba(255, 255, 255, 0.5);
+                    // border: 1px solid rgba(255, 255, 255, 0.5);
                     padding-bottom: 36px;
                     border-radius: 15px;
                     display: inline-block;
@@ -144,7 +148,7 @@
                     width: 98%;
                     margin: 5px;
                     border: 1px solid rgba(255, 255, 255, 0.5);
-                    padding-bottom: 36px;
+                    padding-bottom: 24px;
                     border-radius: 15px;
                     display: inline-block;
                     .price {

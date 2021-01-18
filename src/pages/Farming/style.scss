@@ -1,3 +1,35 @@
 .farming-page {
-   
+    .farming-item {
+        text-align: center;
+        .icon {
+            width: 80px;
+            margin: 26px auto 18px;
+        }
+        .title {
+            font-size: 24px;
+            line-height: 145%;
+        }
+        .desc {
+            font-size: 14px;
+            line-height: 145%;
+            margin-bottom: 26px;
+        }
+        .ant-btn{
+            width:80%;
+            margin: 0 auto 16px;
+            line-height: 1;
+        }
+        .apy-box {
+            color: #9088a1;
+            padding: 2px 10px;
+            font-size:14px;
+            background: #ffffff;
+            border: 1px solid #c4c4c4;
+            border-radius: 10px;
+            margin: 0 16px 4px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+    }
 }

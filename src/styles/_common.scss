@@ -105,6 +105,60 @@
     }
 }
 
+/*深白按钮*/
+.operation-light-cheese {
+    min-width: 260px;
+    height: 60px;
+    box-sizing: border-box;
+    background: #fcf7df;
+    border-radius: 10px;
+    position: relative;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    text-align: center;
+    border: 4px solid #F7EEDD !important;
+
+    // &::after {
+    //     content: "";
+    //     position: absolute;
+    //     z-index: -10;
+    //     top: -5px;
+    //     left: -5px;
+    //     right: -5px;
+    //     bottom: -5px;
+    //     background: linear-gradient(131.99deg, #FFFFFF 10.18%, rgba(255, 255, 255, 0) 67.86%), radial-gradient(210% 1290.56% at 100% 100%, rgba(241, 191, 94, 0.31) 0%, rgba(255, 168, 0, 0) 100%);
+    //     border-radius: 10px;
+    // }
+    @media screen and (min-width: $MobileWidth-M) {
+        &:hover {
+            height: 60px;
+            box-sizing: border-box;
+            border-radius: 10px;
+            background: #f1eac9;
+            color: #15163d;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 18px;
+            text-align: center;
+            animation-duration: 0.5s;
+        }
+    }
+
+    @media screen and (max-width: $MobileWidth-M) {
+        min-width: $BoxButWidth-M;
+        height: 60px;
+        box-sizing: border-box;
+        border-radius: 10px;
+        background-color: #15163d;
+        color: #ffffff;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+        text-align: center;
+    }
+}
+
 /*白色hover*/
 .operation-lightblue-but {
     min-width: $ButWidth;

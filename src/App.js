@@ -25,6 +25,8 @@ import Coming from './pages/Coming'
 // import Farming from './pages/Farming'
 // import BuyDHM from './pages/BuyDHM'
 // dhash
+import Farming from './pages/Farming';
+
 import Buy from './pages/dhash/buy/buy.jsx';
 import Mine from './pages/dhash/mine/mine.jsx';
 
@@ -113,8 +115,15 @@ function App() {
                                     <Route
                                         exact
                                         path="/farming"
+                                        component={Farming}
+                                    />
+
+                                    <Route
+                                        exact
+                                        path="/farming-detail"
                                         component={Mine}
                                     />
+
                                 </Switch>
                             </div>
                         </Col>
