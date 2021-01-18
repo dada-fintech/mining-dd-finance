@@ -483,8 +483,8 @@ const Mine = () => {
                         <div className="desc">{t('v1_EARN_wBTC')}</div>
                     </div>
 
-                    <div className="brun-content">
-                        <div className="data-item cheese-box">
+                    <div className="mine-content">
+                        <div className="data-item cheese-box box-left">
                             <div className="data">
                                 <div className="data-border">
                                     <div className="text price">
@@ -520,29 +520,7 @@ const Mine = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="rate">
-                            <p className="amount">
-                                {totalRewarded || 0} {REWARD_SYMBOL}
-                            </p>
-                            <p className="text">{t('v1_wBTC_DH_DAY')}</p>
-                            <p className="amount">
-                                {Tools.toThousands(
-                                    Number(btcInfo.amount_pretty) <= 0
-                                        ? 0
-                                        : Number(btcInfo.amount_pretty) || 0
-                                )}
-                                {REWARD_SYMBOL}
-                            </p>
-                            <p className="text">{t('v1_Rewards_Today')}</p>
-                            <p className="amount">
-                                {Tools.toThousands(tokenStaken || 0)}
-                            </p>
-                            <p className="text">{t('v1_Total_Staked')}</p>
-                            <p className="amount">
-                                {isNaN(stakedRate) ? 0 : stakedRate * 100 || 0}%
-                            </p>
-                            <p className="text">{t('v1_Staked_Rate')}</p>
-                        </div>
+
                         <div className="data-item cheese-box">
                             <div className="data">
                                 <div className="data-border">

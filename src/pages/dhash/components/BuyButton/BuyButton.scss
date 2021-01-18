@@ -1,4 +1,4 @@
-@import '../../../../styles//variables';
+@import '../../../../styles/variables';
 
 .BuyButton {
     margin: 0 auto;
@@ -7,10 +7,21 @@
         border: 1px solid #ffffff;
         box-sizing: border-box;
         border-radius: 15px;
-        padding: 5px;
+        padding: 4px;
         display: inline-block;
         margin: 0 auto;
         text-align: center;
+        background: linear-gradient(
+                131.99deg,
+                #ffffff 10.18%,
+                rgba(255, 255, 255, 0) 67.86%
+            ),
+            radial-gradient(
+                210% 1290.56% at 100% 100%,
+                rgba(241, 191, 94, 0.31) 0%,
+                rgba(255, 168, 0, 0) 100%
+            );
+        border-radius: 12px;
     }
 
     @media screen and (max-width: $MobileWidth-M) {

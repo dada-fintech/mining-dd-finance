@@ -20,7 +20,7 @@
 /*深色按钮*/
 .operation-dark-but {
     min-width: $ButWidth;
-    height: 60px;
+    height: 56px;
     border: 1px solid #ffffff;
     box-sizing: border-box;
     border-radius: 10px;
@@ -33,7 +33,7 @@
     @media screen and (min-width: $MobileWidth-M) {
         &:hover {
             min-width: $ButWidth;
-            height: 60px;
+            height: 56px;
             border: 1px solid #ffffff;
             box-sizing: border-box;
             border-radius: 10px;
@@ -49,7 +49,7 @@
 
     @media screen and (max-width: $MobileWidth-M) {
         min-width: $BoxButWidth-M;
-        height: 60px;
+        height: 56px;
         border: 1px solid #ffffff;
         box-sizing: border-box;
         border-radius: 10px;
@@ -64,7 +64,7 @@
 /*深白按钮*/
 .operation-light-but {
     min-width: $ButWidth;
-    height: 60px;
+    height: 56px;
     border: 1px solid #ffffff;
     box-sizing: border-box;
     border-radius: 10px;
@@ -76,7 +76,7 @@
     @media screen and (min-width: $MobileWidth-M) {
         &:hover {
             min-width: $ButWidth;
-            height: 60px;
+            height: 56px;
             border: 1px solid #ffffff;
             box-sizing: border-box;
             border-radius: 10px;
@@ -92,7 +92,7 @@
 
     @media screen and (max-width: $MobileWidth-M) {
         min-width: $BoxButWidth-M;
-        height: 60px;
+        height: 56px;
         border: 1px solid #ffffff;
         box-sizing: border-box;
         border-radius: 10px;
@@ -108,7 +108,7 @@
 /*深白按钮*/
 .operation-light-cheese {
     min-width: 260px;
-    height: 60px;
+    height: 56px;
     box-sizing: border-box;
     background: #fcf7df;
     border-radius: 10px;
@@ -117,7 +117,7 @@
     font-weight: normal;
     font-size: 18px;
     text-align: center;
-    border: 4px solid #F7EEDD !important;
+    border: 4px solid #f7eedd !important;
 
     // &::after {
     //     content: "";
@@ -132,7 +132,7 @@
     // }
     @media screen and (min-width: $MobileWidth-M) {
         &:hover {
-            height: 60px;
+            height: 56px;
             box-sizing: border-box;
             border-radius: 10px;
             background: #f1eac9;
@@ -147,7 +147,7 @@
 
     @media screen and (max-width: $MobileWidth-M) {
         min-width: $BoxButWidth-M;
-        height: 60px;
+        height: 56px;
         box-sizing: border-box;
         border-radius: 10px;
         background-color: #15163d;
@@ -162,7 +162,7 @@
 /*白色hover*/
 .operation-lightblue-but {
     min-width: $ButWidth;
-    height: 60px;
+    height: 56px;
     border: 1px solid #ffffff;
     box-sizing: border-box;
     border-radius: 10px;
@@ -175,7 +175,7 @@
     @media screen and (min-width: $MobileWidth-M) {
         &:hover {
             min-width: $ButWidth;
-            height: 60px;
+            height: 56px;
             border: 1px solid #ffffff;
             box-sizing: border-box;
             border-radius: 10px;
@@ -191,7 +191,7 @@
 
     @media screen and (max-width: $MobileWidth-M) {
         min-width: $BoxButWidth-M;
-        height: 60px;
+        height: 56px;
         border: 1px solid #ffffff;
         box-sizing: border-box;
         border-radius: 10px;
@@ -207,7 +207,7 @@
 /*框呗白色按钮*/
 .operation-lightBox-but {
     min-width: 250px;
-    height: 60px;
+    height: 56px;
     border: 1px solid #ffffff;
     box-sizing: border-box;
     border-radius: 10px;
@@ -219,7 +219,7 @@
     @media screen and (min-width: $MobileWidth-M) {
         &:hover {
             min-width: 250px;
-            height: 60px;
+            height: 56px;
             border: 1px solid #ffffff;
             box-sizing: border-box;
             border-radius: 10px;
@@ -235,7 +235,7 @@
 
     @media screen and (max-width: $MobileWidth-M) {
         min-width: $BoxButWidth-M;
-        height: 60px;
+        height: 56px;
         border: 1px solid #ffffff;
         box-sizing: border-box;
         border-radius: 10px;

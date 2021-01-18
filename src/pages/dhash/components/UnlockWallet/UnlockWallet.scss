@@ -5,13 +5,24 @@
     box-sizing: border-box;
     border-radius: 15px;
     position: absolute;
-    top:0;
-    right:0;
+    top: 0;
+    right: 0;
     left: 0;
     bottom: 0;
     height: 64px;
     margin: auto;
     width: $UnlockWalletButWidth;
+    background: linear-gradient(
+            131.99deg,
+            #ffffff 10.18%,
+            rgba(255, 255, 255, 0) 67.86%
+        ),
+        radial-gradient(
+            210% 1290.56% at 100% 100%,
+            rgba(241, 191, 94, 0.31) 0%,
+            rgba(255, 168, 0, 0) 100%
+        );
+    border-radius: 12px;
     .UnlockWalletpage-content {
         width: 98%;
         height: 60px;
