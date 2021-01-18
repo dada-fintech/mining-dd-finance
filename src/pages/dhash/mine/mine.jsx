@@ -478,16 +478,13 @@ const Mine = () => {
                     ) : (
                         ''
                     )}
-                    <div className="total">
-                        <div className="earn">{t('v1_EARN_wBTC')}</div>
-                        <div className="amount">
-                            {totalRewarded || 0}
-                            {REWARD_SYMBOL}
-                        </div>
-                        <div className="desc">{t('v1_wBTC_DH_DAY')}</div>
+                    <div className="farming-top">
+                        <img src={FarmerIcon} />
+                        <div className="desc">{t('v1_EARN_wBTC')}</div>
                     </div>
+
                     <div className="brun-content">
-                        <div className="data-item">
+                        <div className="data-item cheese-box">
                             <div className="data">
                                 <div className="data-border">
                                     <div className="text price">
@@ -517,13 +514,17 @@ const Mine = () => {
                                         disabled={
                                             disabled || user.dhm_pretty <= 0
                                         }
-                                        butClassName={'operation-lightBox-but'}
+                                        butClassName={'operation-light-cheese'}
                                         onChangeFun={startFun}
                                     />
                                 </div>
                             </div>
                         </div>
                         <div className="rate">
+                            <p className="amount">
+                                {totalRewarded || 0} {REWARD_SYMBOL}
+                            </p>
+                            <p className="text">{t('v1_wBTC_DH_DAY')}</p>
                             <p className="amount">
                                 {Tools.toThousands(
                                     Number(btcInfo.amount_pretty) <= 0
@@ -538,28 +539,26 @@ const Mine = () => {
                             </p>
                             <p className="text">{t('v1_Total_Staked')}</p>
                             <p className="amount">
-                                {isNaN(stakedRate)
-                                    ? 0
-                                    : Tools.toThousands(
-                                          Tools.fmtDec(stakedRate * 100, 2)
-                                      ) || 0}
-                                %
+                                {isNaN(stakedRate) ? 0 : stakedRate * 100 || 0}%
                             </p>
                             <p className="text">{t('v1_Staked_Rate')}</p>
                         </div>
-                        <div className="data-item">
+                        <div className="data-item cheese-box">
                             <div className="data">
                                 <div className="data-border">
                                     <div className="apy">
-                                        <span>{t('v1_APY')}</span>
-                                        <span>
+                                        <div className="value">
                                             {(isNaN(apy)
                                                 ? 0
                                                 : Tools.numFmt(apy * 100, 2)) ||
                                                 0}
                                             %
-                                        </span>
+                                        </div>
+                                        <div className="title">
+                                            {t('v1_APY')}
+                                        </div>
                                     </div>
+                                    <img src={BTCIcon} className="icon" />
                                     <div className="text price">
                                         {t('v1_wBTC_EARNED')}
                                     </div>
@@ -572,17 +571,17 @@ const Mine = () => {
                                             butText={t('v1_CLAIM')}
                                             disabled={rewardToClaim <= 0}
                                             butClassName={
-                                                'operation-lightBox-but'
+                                                'operation-light-cheese'
                                             }
                                             onChangeFun={claimFun}
                                         />
                                     </div>
                                 </div>
                             </div>
-                            <p className="desc">
+                            {/* <p className="desc">
                                 {t('v1_calculated_income_EST')}
                             </p>
-                            <p className="desc">{t('v1_Settlement_date')}</p>
+                            <p className="desc">{t('v1_Settlement_date')}</p> */}
                         </div>
                     </div>
 
@@ -590,7 +589,7 @@ const Mine = () => {
                         loading={stopButLoading}
                         butText={t('v1_STOP')}
                         disabled={userStaked <= 0}
-                        butClassName={'operation-dark-but'}
+                        butClassName={'operation-light-cheese'}
                         onChangeFun={stopFun}
                     />
 

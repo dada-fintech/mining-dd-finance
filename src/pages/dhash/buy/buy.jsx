@@ -21,12 +21,7 @@ import {
     contractTransaction,
     checkApprove,
 } from '../../../utils/ContractTransaction.js';
-import {
-    OFFICIAL_SYMBOL,
-    EXECUTION_TIME,
-    MINERS_STATS,
-    ETHERSCAN_IO,
-} from '../../../constants';
+import { OFFICIAL_SYMBOL, EXECUTION_TIME } from '../../../constants';
 import './buy.scss';
 
 const Buy = () => {
@@ -355,7 +350,7 @@ const Buy = () => {
                         <div className="desc">{t('v1_APY')}</div>
                     </div>
                     <div className="buy-content">
-                        <div className="data">
+                        <div className="data cheese-box">
                             <div className="data-border">
                                 <div className="amount price">
                                     ${currentPrice || 0}
@@ -367,48 +362,30 @@ const Buy = () => {
                                     {available || 0}
                                 </div>
                                 <div className="text">{t('v1_Available')}</div>
+                                <div className="total">
+                                    <div className="amount">
+                                        {Tools.toThousands(totalBurned)}
+                                    </div>
+                                    <div className="text">
+                                        {t('v1_Total_supply')}
+                                    </div>
+                                </div>
                             </div>
+                            <InputaMount
+                                balance={user.usdt_pretty || 0}
+                                maxBalance={balance || 0}
+                                onConfirm={getInputaMountNumber}
+                                sumbol={OFFICIAL_SYMBOL}
+                                balanceSumbol={'USDT'}
+                            />
                         </div>
                     </div>
-
-                    <div className="total">
-                        <div className="amount">
-                            {Tools.toThousands(totalBurned)}
-                        </div>
-                        <div className="text">
-                            <a
-                                href={ETHERSCAN_IO}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                {t('v1_Total_supply')}
-                            </a>
-                        </div>
-
-                        <div className="miners">
-                            <a
-                                href={MINERS_STATS}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                {t('v1_Miners_stats')}
-                            </a>
-                        </div>
-                    </div>
-
-                    <InputaMount
-                        balance={user.usdt_pretty || 0}
-                        maxBalance={balance || 0}
-                        onConfirm={getInputaMountNumber}
-                        sumbol={OFFICIAL_SYMBOL}
-                        balanceSumbol={'USDT'}
-                    />
 
                     <BuyButton
                         loading={buyButLoading}
                         disabled={disabled || user.usdt_pretty <= 0}
                         butText={t('v1_BUY_but')}
-                        butClassName={'operation-light-but'}
+                        butClassName={'operation-light-cheese'}
                         onChangeFun={() => {
                             console.log('ApiAppBuyFun');
                             ApiAppBuyFun();
