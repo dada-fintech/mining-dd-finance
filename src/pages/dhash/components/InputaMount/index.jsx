@@ -22,8 +22,8 @@ const InputaMount = ({
 
     const onChangeMaxBalance = () => {
         // console.log(maxBalance);
-        setVal(maxBalance || balance);
-        onConfirm(maxBalance || balance);
+        setVal(maxBalance);
+        onConfirm(maxBalance);
     };
 
     return (

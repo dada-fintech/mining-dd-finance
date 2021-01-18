@@ -3,6 +3,7 @@ import { Modal } from 'antd';
 import './index.scss';
 import { useMedia } from 'react-use';
 import BuyButton from '../BuyButton/index.jsx';
+import * as Tools from '../../../../utils/Tools';
 
 const BuyModal = ({
     visible,
@@ -32,8 +33,10 @@ const BuyModal = ({
         >
             <div className="buy-modal">
                 <div className="buy-modal-content">
-                    <div className="amount">{amount || 0}</div>
+                    <div className="amount">{Tools.numFmt(amount, 4) || 0}</div>
+                    <div className="wei">{'DHM' || ''}</div>
                     <div className="text">{text || ''}</div>
+
                     <BuyButton
                         butText={butText}
                         disabled={disabled}

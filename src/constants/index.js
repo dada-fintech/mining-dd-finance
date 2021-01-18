@@ -28,3 +28,6 @@ export const REWARD_SYMBOL = 'WBTC';
 export const OFFICIAL_SYMBOL = 'DHM';
 export const BSAE_API_URL = 'https://api-test.dhash.finance';
 export const EXECUTION_TIME = 15000;
+
+export const MINERS_STATS = 'https://wk-m.minebaba.com/monitor?id=2';
+export const ETHERSCAN_IO = 'https://etherscan.io/';

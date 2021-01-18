@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { message, Alert } from 'antd';
-import FarmerIcon from 'assets/sidebar/farming.svg'
-import BTCIcon from 'assets/farming/btc.svg'
+import FarmerIcon from 'assets/sidebar/farming.svg';
+import BTCIcon from 'assets/farming/btc.svg';
 import BuyButton from '../components/BuyButton';
 import InputBoxMount from '../components/InputaMount';
 import UnlockWalletpage from '../components/UnlockWallet/UnlockWalletpage.jsx';
@@ -37,15 +37,12 @@ const Mine = () => {
     const { t } = useTranslation();
     const wallet = useWallet();
     const { account, status } = wallet;
-    const [balance, setBalance] = useState(0);
-    const [totalSupply, setTotalSupply] = useState(0);
     const [amount, setAmount] = useState(0); // 输入框值
     const [stakeButLoading, setStakeButLoading] = useState(false); // stake加载状态
     const [claimButLoading, setClaimButLoading] = useState(false); // claim加载状态
     const [stopButLoading, setStopButLoading] = useState(false); // stop加载状态
     const [apy, setApy] = useState(0); // APY
     const [tokenStaken, setTokenStaken] = useState(0); // 总抵押量
-    const [toClaimBalances, setToClaimBalances] = useState(0); // 可以领取的wBTC
     const [user, setUser] = useState({}); // 用户余额
     const [stakedRate, setStakedRate] = useState(0); // stakedRate // 总质押量/总流通量
     const [userStaked, setUStaked] = useState(0); // 当前用户的质押量
@@ -132,15 +129,23 @@ const Mine = () => {
                                       365
                                   )
                                 : 0
-                            : Tools.div(
+                            : Tools.mul(
                                   Tools.div(
-                                      Tools.mul(
-                                          Number(res.data.total_rewarded),
-                                          Number(res.data.btc_price)
+                                      Tools.div(
+                                          Tools.div(
+                                              Tools.mul(
+                                                  Number(
+                                                      res.data.total_rewarded
+                                                  ),
+                                                  Number(res.data.btc_price)
+                                              ),
+                                              Number(res.data.total_stakes)
+                                          ),
+                                          Number(currentPrice || 6.5)
                                       ),
-                                      Number(res.data.total_stakes)
+                                      Number(res.data.epochs)
                                   ),
-                                  Number(currentPrice || 6.5)
+                                  365
                               )
                     );
                 } else {
@@ -197,6 +202,7 @@ const Mine = () => {
                                 });
                             },
                             () => {
+                                // setIsApprove(0);
                                 setVisible(false);
                             }
                         );
@@ -247,6 +253,9 @@ const Mine = () => {
                         () => {
                             setStopButLoading(false);
                             message.warning(t('v1_Pendding'));
+                            setTimeout(() => {
+                                getApiAppUserBalances();
+                            }, EXECUTION_TIME);
                         },
                         () => {
                             setStopButLoading(false);
@@ -278,6 +287,9 @@ const Mine = () => {
                         () => {
                             setClaimButLoading(false);
                             message.warning(t('v1_Pendding'));
+                            setTimeout(() => {
+                                getApiAppUserBalances();
+                            }, EXECUTION_TIME);
                         },
                         () => {
                             setClaimButLoading(false);
@@ -383,7 +395,6 @@ const Mine = () => {
             })
             .catch((err) => {
                 console.log('发生错误！', err);
-                setTotalSupply(0);
                 return 0;
             });
     };
@@ -467,15 +478,16 @@ const Mine = () => {
                     ) : (
                         ''
                     )}
-                    <div className="farming-top">
-                        <img src={FarmerIcon}/>
-                        <div className="desc">
-                            {t('v1_EARN_wBTC')}
+                    <div className="total">
+                        <div className="earn">{t('v1_EARN_wBTC')}</div>
+                        <div className="amount">
+                            {totalRewarded || 0}
+                            {REWARD_SYMBOL}
                         </div>
+                        <div className="desc">{t('v1_wBTC_DH_DAY')}</div>
                     </div>
-                  
                     <div className="brun-content">
-                        <div className="data-item cheese-box">
+                        <div className="data-item">
                             <div className="data">
                                 <div className="data-border">
                                     <div className="text price">
@@ -505,19 +517,13 @@ const Mine = () => {
                                         disabled={
                                             disabled || user.dhm_pretty <= 0
                                         }
-                                        butClassName={'operation-light-cheese'}
+                                        butClassName={'operation-lightBox-but'}
                                         onChangeFun={startFun}
                                     />
                                 </div>
                             </div>
                         </div>
                         <div className="rate">
-                            <p className="amount">
-                                {totalRewarded || 0} {REWARD_SYMBOL}
-                            </p>
-                            <p className="text">
-                                {t('v1_wBTC_DH_DAY')}
-                            </p>
                             <p className="amount">
                                 {Tools.toThousands(
                                     Number(btcInfo.amount_pretty) <= 0
@@ -532,24 +538,28 @@ const Mine = () => {
                             </p>
                             <p className="text">{t('v1_Total_Staked')}</p>
                             <p className="amount">
-                                {isNaN(stakedRate) ? 0 : stakedRate * 100 || 0}%
+                                {isNaN(stakedRate)
+                                    ? 0
+                                    : Tools.toThousands(
+                                          Tools.fmtDec(stakedRate * 100, 2)
+                                      ) || 0}
+                                %
                             </p>
                             <p className="text">{t('v1_Staked_Rate')}</p>
                         </div>
-                        <div className="data-item cheese-box">
+                        <div className="data-item">
                             <div className="data">
                                 <div className="data-border">
                                     <div className="apy">
-                                    <div className="value">
+                                        <span>{t('v1_APY')}</span>
+                                        <span>
                                             {(isNaN(apy)
                                                 ? 0
                                                 : Tools.numFmt(apy * 100, 2)) ||
                                                 0}
                                             %
+                                        </span>
                                     </div>
-                                    <div className="title">{t('v1_APY')}</div>
-                                    </div>
-                                    <img src={BTCIcon} className="icon"/>
                                     <div className="text price">
                                         {t('v1_wBTC_EARNED')}
                                     </div>
@@ -562,17 +572,17 @@ const Mine = () => {
                                             butText={t('v1_CLAIM')}
                                             disabled={rewardToClaim <= 0}
                                             butClassName={
-                                                'operation-light-cheese'
+                                                'operation-lightBox-but'
                                             }
                                             onChangeFun={claimFun}
                                         />
                                     </div>
                                 </div>
                             </div>
-                            {/* <p className="desc">
+                            <p className="desc">
                                 {t('v1_calculated_income_EST')}
                             </p>
-                            <p className="desc">{t('v1_Settlement_date')}</p> */}
+                            <p className="desc">{t('v1_Settlement_date')}</p>
                         </div>
                     </div>
 
@@ -580,7 +590,7 @@ const Mine = () => {
                         loading={stopButLoading}
                         butText={t('v1_STOP')}
                         disabled={userStaked <= 0}
-                        butClassName={'operation-light-cheese'}
+                        butClassName={'operation-dark-but'}
                         onChangeFun={stopFun}
                     />
 

@@ -2,7 +2,7 @@
 .buy {
     text-align: center;
     overflow: hidden;
-    .InputaMount{
+    .InputaMount {
         display: block;
     }
     .apy {
@@ -18,14 +18,12 @@
             font-size: 36px;
             line-height: 52px;
             text-align: center;
-            letter-spacing: 0.12em;
         }
         .text {
             font-weight: normal;
             font-size: 18px;
             line-height: 34px;
             text-align: center;
-            letter-spacing: 0.12em;
         }
         .desc {
             font-size: 14px;
@@ -41,14 +39,21 @@
             font-size: 36px;
             line-height: 52px;
             text-align: center;
-            letter-spacing: 0.12em;
         }
+
         .text {
             font-weight: normal;
             font-size: 18px;
             line-height: 34px;
             text-align: center;
-            letter-spacing: 0.12em;
+            text-decoration: underline;
+        }
+        .miners {
+            font-size: 16px;
+            text-decoration: underline;
+            a {
+                color: rgba(255, 255, 255, 0.5);
+            }
         }
     }
     @media screen and (min-width: $MobileWidth-M) {
@@ -80,14 +85,12 @@
                         font-size: 36px;
                         line-height: 52px;
                         text-align: center;
-                        letter-spacing: 0.12em;
                     }
                     .text {
                         font-weight: normal;
                         font-size: 18px;
                         line-height: 34px;
                         text-align: center;
-                        letter-spacing: 0.12em;
                     }
                 }
             }
@@ -115,7 +118,7 @@
                     font-size: 36px;
                     line-height: 52px;
                     text-align: center;
-                    letter-spacing: 0.12em;
+
                     color: #15163d;
                 }
                 .text {
@@ -123,7 +126,7 @@
                     font-size: 18px;
                     line-height: 34px;
                     text-align: center;
-                    letter-spacing: 0.12em;
+
                     color: #15163d;
                     margin-bottom: 72px;
                 }
@@ -162,14 +165,12 @@
                         font-size: 36px;
                         line-height: 52px;
                         text-align: center;
-                        letter-spacing: 0.12em;
                     }
                     .text {
                         font-weight: normal;
                         font-size: 18px;
                         line-height: 34px;
                         text-align: center;
-                        letter-spacing: 0.12em;
                     }
                     .claim {
                         margin-top: 105px;
@@ -204,7 +205,7 @@
                     font-size: 36px;
                     line-height: 52px;
                     text-align: center;
-                    letter-spacing: 0.12em;
+
                     color: #15163d;
                 }
                 .text {
@@ -212,7 +213,7 @@
                     font-size: 18px;
                     line-height: 34px;
                     text-align: center;
-                    letter-spacing: 0.12em;
+
                     color: #15163d;
                     margin-bottom: 72px;
                 }

@@ -21,7 +21,12 @@ import {
     contractTransaction,
     checkApprove,
 } from '../../../utils/ContractTransaction.js';
-import { OFFICIAL_SYMBOL, EXECUTION_TIME } from '../../../constants';
+import {
+    OFFICIAL_SYMBOL,
+    EXECUTION_TIME,
+    MINERS_STATS,
+    ETHERSCAN_IO,
+} from '../../../constants';
 import './buy.scss';
 
 const Buy = () => {
@@ -71,34 +76,42 @@ const Buy = () => {
                         res.data.reward.amount !== '-1'
                             ? tokenStaken > 0
                                 ? Tools.mul(
-                                    Tools.div(
-                                        Tools.div(
-                                            Tools.mul(
-                                                Number(
-                                                    res.data.reward
-                                                        .amount_pretty || 0
-                                                ),
-                                                Number(
-                                                    res.data.btc_price || 0
-                                                )
-                                            ),
-                                            Number(currentPrice || 6.5)
-                                        ),
-                                        Number(tokenStaken)
-                                    ),
-                                    365
-                                )
+                                      Tools.div(
+                                          Tools.div(
+                                              Tools.mul(
+                                                  Number(
+                                                      res.data.reward
+                                                          .amount_pretty || 0
+                                                  ),
+                                                  Number(
+                                                      res.data.btc_price || 0
+                                                  )
+                                              ),
+                                              Number(currentPrice || 6.5)
+                                          ),
+                                          Number(tokenStaken)
+                                      ),
+                                      365
+                                  )
                                 : 0
-                            : Tools.div(
-                                Tools.div(
-                                    Tools.mul(
-                                        Number(res.data.total_rewarded),
-                                        Number(res.data.btc_price)
-                                    ),
-                                    Number(res.data.total_stakes)
-                                ),
-                                Number(currentPrice || 6.5)
-                            )
+                            : Tools.mul(
+                                  Tools.div(
+                                      Tools.div(
+                                          Tools.div(
+                                              Tools.mul(
+                                                  Number(
+                                                      res.data.total_rewarded
+                                                  ),
+                                                  Number(res.data.btc_price)
+                                              ),
+                                              Number(res.data.total_stakes)
+                                          ),
+                                          Number(currentPrice || 6.5)
+                                      ),
+                                      Number(res.data.epochs)
+                                  ),
+                                  365
+                              )
                     );
                 } else {
                     setShowBtcInfoErr({
@@ -332,8 +345,8 @@ const Buy = () => {
                             />
                         </div>
                     ) : (
-                            ''
-                        )}
+                        ''
+                    )}
                     <div className="apy">
                         <div className="amount">
                             {(isNaN(apy) ? 0 : Tools.numFmt(apy * 100, 2)) || 0}
@@ -342,7 +355,7 @@ const Buy = () => {
                         <div className="desc">{t('v1_APY')}</div>
                     </div>
                     <div className="buy-content">
-                        <div className="data cheese-box">
+                        <div className="data">
                             <div className="data-border">
                                 <div className="amount price">
                                     ${currentPrice || 0}
@@ -354,28 +367,48 @@ const Buy = () => {
                                     {available || 0}
                                 </div>
                                 <div className="text">{t('v1_Available')}</div>
-                                <div className="total">
-                                    <div className="amount">
-                                        {Tools.toThousands(totalBurned)}
-                                    </div>
-                                    <div className="text">{t('v1_Total_supply')}</div>
-                                </div>
                             </div>
-                            <InputaMount
-                                balance={user.usdt_pretty || 0}
-                                maxBalance={balance || 0}
-                                onConfirm={getInputaMountNumber}
-                                sumbol={OFFICIAL_SYMBOL}
-                                balanceSumbol={'USDT'}
-                            />
                         </div>
                     </div>
+
+                    <div className="total">
+                        <div className="amount">
+                            {Tools.toThousands(totalBurned)}
+                        </div>
+                        <div className="text">
+                            <a
+                                href={ETHERSCAN_IO}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                {t('v1_Total_supply')}
+                            </a>
+                        </div>
+
+                        <div className="miners">
+                            <a
+                                href={MINERS_STATS}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                {t('v1_Miners_stats')}
+                            </a>
+                        </div>
+                    </div>
+
+                    <InputaMount
+                        balance={user.usdt_pretty || 0}
+                        maxBalance={balance || 0}
+                        onConfirm={getInputaMountNumber}
+                        sumbol={OFFICIAL_SYMBOL}
+                        balanceSumbol={'USDT'}
+                    />
 
                     <BuyButton
                         loading={buyButLoading}
                         disabled={disabled || user.usdt_pretty <= 0}
                         butText={t('v1_BUY_but')}
-                        butClassName={'operation-light-cheese'}
+                        butClassName={'operation-light-but'}
                         onChangeFun={() => {
                             console.log('ApiAppBuyFun');
                             ApiAppBuyFun();
@@ -383,21 +416,21 @@ const Buy = () => {
                     />
                 </>
             ) : (
-                        <div className="success">
-                            <div className="success-border">
-                                <div className="amount price">{amount}</div>
-                                <div className="text">{t('v1_Success')}</div>
-                                <BuyButton
-                                    loading={false}
-                                    butText={t('v1_START_MINE')}
-                                    butClassName={'operation-lightblue-but'}
-                                    onChangeFun={() => {
-                                        history.push('/mine');
-                                    }}
-                                />
-                            </div>
-                        </div>
-                    )}
+                <div className="success">
+                    <div className="success-border">
+                        <div className="amount price">{amount}</div>
+                        <div className="text">{t('v1_Success')}</div>
+                        <BuyButton
+                            loading={false}
+                            butText={t('v1_START_MINE')}
+                            butClassName={'operation-lightblue-but'}
+                            onChangeFun={() => {
+                                history.push('/mine');
+                            }}
+                        />
+                    </div>
+                </div>
+            )}
             {/* //amount, text, butText, buyFun */}
             <BuyModal
                 amount={amount}
@@ -406,30 +439,30 @@ const Buy = () => {
                 disabled={modalState !== 3}
                 text={
                     modalState === 0 ||
-                        modalState === 1 ||
-                        modalState === 2 ||
-                        modalState === 4
+                    modalState === 1 ||
+                    modalState === 2 ||
+                    modalState === 4
                         ? t('v1_You_will_buy')
                         : modalState === 3
-                            ? t('v1_Success_s')
-                            : modalState === -1
-                                ? t('v1_Fail')
-                                : ''
+                        ? t('v1_Success_s')
+                        : modalState === -1
+                        ? t('v1_Fail')
+                        : ''
                 }
                 butText={
                     modalState === 0
                         ? t('v1_Approve')
                         : modalState === 1
-                            ? t('v1_authorization')
-                            : modalState === 2
-                                ? t('v1_Pendding')
-                                : modalState === 3
-                                    ? t('v1_START_MINE')
-                                    : modalState === 4
-                                        ? t('v1_BUY_but')
-                                        : modalState === -1
-                                            ? t('v1_Fail')
-                                            : ''
+                        ? t('v1_authorization')
+                        : modalState === 2
+                        ? t('v1_Pendding')
+                        : modalState === 3
+                        ? t('v1_START_MINE')
+                        : modalState === 4
+                        ? t('v1_BUY_but')
+                        : modalState === -1
+                        ? t('v1_Fail')
+                        : ''
 
                     // v1_Approve
                 }

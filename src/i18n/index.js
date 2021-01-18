@@ -503,6 +503,7 @@ export default {
             v1_You_will_staked: 'You will stake',
             v1_switch_network: 'Please switch network to Mainnet',
             v1_Settlement_date: 'The income can be claimed on the T+2 day',
+            v1_Miners_stats: 'Miners Stats',
         },
     },
     zh: {
@@ -996,6 +997,7 @@ export default {
             v1_You_will_staked: '你将质押',
             v1_switch_network: '请将网络切换到主网',
             v1_Settlement_date: '基于EST 5:00结算收益(T+2)',
+            v1_Miners_stats: '矿机状态查看',
         },
     },
 };
