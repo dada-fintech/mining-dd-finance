@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Modal, Input, Button, message } from 'antd'
+import { Modal, Input, Button, message, InputNumber } from 'antd'
 // import VoteStatus from '../../../../components/VoteStatus'
 import { useTranslation } from 'react-i18next'
 import { useWallet } from 'use-wallet'
@@ -13,6 +13,7 @@ export default function AuditModal(props) {
     const [comment, setComment] = useState('')
     const [approveLoading, setApproveLoading] = useState(false)
     const [rejectLoading, setRejectLoading] = useState(false)
+    const [insuranceRate, setInsuranceRate] = useState('')
     const { t } = useTranslation()
 
     const doAudit = (support) => {
@@ -28,7 +29,8 @@ export default function AuditModal(props) {
         axios.post('/project/audit-project', {
             ...params,
             comment: comment,
-            support: support
+            support: support,
+            insurance_rate: (insuranceRate * 100).toString()
         }).then(res => {
             const auditParams = {
                 from: wallet.account,
@@ -46,7 +48,12 @@ export default function AuditModal(props) {
     return (
         <Modal wrapClassName="audit-modal" footer={null} title={t('modal.auditTitle')} visible={true} onCancel={() => { props.onCancel() }}>
             <div className="safe-zone">
+                <div>Comment</div>
                 <Input.TextArea value={comment} onChange={(e) => { setComment(e.target.value) }} placeholder="Leave your comment" className="texts" />
+            </div>
+            <div className="change-rate">
+                <div>Change insurance rate</div>
+                <InputNumber min={0} parser={value => value ? parseInt(value) : ''} onChange={(e)=>{setInsuranceRate(e)}}/> %
             </div>
             <div className="hint" dangerouslySetInnerHTML={{__html: t('modal.auditHint')}}>
             </div>

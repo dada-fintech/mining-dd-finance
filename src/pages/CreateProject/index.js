@@ -688,7 +688,7 @@ export default function CreateProject() {
                 </div>
                 <div className="form-item">
                     <div className="label">{t('createProject.projectStrategy')}</div>
-                    <Input.TextArea autoSize={{ minRows: 6 }} maxLength="140" value={projectInfo.project_strategy} onChange={(e) => { changeProjectInfo('project_strategy', e.target.value) }} />
+                    <Input.TextArea autoSize={{ minRows: 6 }} value={projectInfo.project_strategy} onChange={(e) => { changeProjectInfo('project_strategy', e.target.value) }} />
                     <div className="hint">{t('createProject.projectStrategyHint')}</div>
                 </div>
             </div>}
