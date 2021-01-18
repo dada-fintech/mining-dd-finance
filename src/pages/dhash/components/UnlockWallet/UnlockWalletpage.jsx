@@ -5,7 +5,7 @@ import './UnlockWallet.scss';
 
 const UnlockWalletpage = () => {
     const { t } = useTranslation();
-    const wallet = useWallet;
+    const wallet = useWallet();
     const { connect } = wallet;
     return (
         <div className="UnlockWalletpage">
@@ -21,8 +21,8 @@ const UnlockWalletpage = () => {
                 </div>
             ) : (
                 <div
-                    className="UnlockWalletpage-content"
-                    onChange={() => {
+                    className="UnlockWalletpage-content btn-cheese"
+                    onClick={() => {
                         connect();
                     }}
                 >
