@@ -83,7 +83,7 @@ const Mine = () => {
         ApiAppSellprice()
             .then((res) => {
                 console.log(res);
-                if (res.code == 200) {
+                if (res.code === 200) {
                     setCurrentPrice(Tools.toThousands(res.data.price_pretty));
                 }
             })
@@ -99,7 +99,7 @@ const Mine = () => {
         await ApiLatestepochReward()
             .then((res) => {
                 console.log(res);
-                if (res.code == 200) {
+                if (res.code === 200) {
                     setBtcInfo({
                         btc_price: res.data.btc_price || 0,
                         amount_pretty: res.data.reward.amount_pretty || 0,
@@ -161,7 +161,7 @@ const Mine = () => {
         await ApiAppStake(account, amount)
             .then((res) => {
                 console.log(res);
-                if (res.code == 200) {
+                if (res.code === 200) {
                     if (res.data.txs.length > 1) {
                         setModalState(1);
                         setVisible(true);
@@ -237,7 +237,7 @@ const Mine = () => {
         await ApiAppWithdraw(account)
             .then((res) => {
                 console.log(res);
-                if (res.code == 200) {
+                if (res.code === 200) {
                     contractTransaction(
                         account,
                         res.data.txs[0].contract,
@@ -268,7 +268,7 @@ const Mine = () => {
         await ApiAppClaim(account)
             .then((res) => {
                 console.log(res);
-                if (res.code == 200) {
+                if (res.code === 200) {
                     contractTransaction(
                         account,
                         res.data.txs[0].contract,
@@ -297,7 +297,7 @@ const Mine = () => {
         await ApiAppTotalTakes()
             .then((res) => {
                 console.log(res);
-                if (res.code == 200) {
+                if (res.code === 200) {
                     setTokenStaken(res.data.amount_pretty);
                     getApiAvailable(res.data.amount_pretty);
                     getApiLatestepochReward(res.data.amount_pretty);
@@ -315,7 +315,7 @@ const Mine = () => {
         await ApiUserStaked(account)
             .then((res) => {
                 console.log(res);
-                if (res.code == 200) {
+                if (res.code === 200) {
                     setUStaked(Tools.toThousands(res.data.amount_pretty || 0));
                 }
             })
@@ -330,7 +330,7 @@ const Mine = () => {
         await ApiToClaimBalances(account)
             .then((res) => {
                 console.log(res);
-                if (res.code == 200) {
+                if (res.code === 200) {
                     setRewardToClaim(
                         Tools.toThousands(res.data.amount_pretty || 0)
                     );
@@ -348,7 +348,7 @@ const Mine = () => {
         await ApiTotalRewarded()
             .then((res) => {
                 console.log(res);
-                if (res.code == 200) {
+                if (res.code === 200) {
                     setTotalRewarded(
                         Tools.toThousands(res.data.amount_pretty || 0)
                     );
@@ -366,7 +366,7 @@ const Mine = () => {
         await ApiAppSupply()
             .then((res) => {
                 console.log(res);
-                if (res.code == 200) {
+                if (res.code === 200) {
                     // setAvailable(Tools.toThousands(res.data.amount_pretty));
                     console.log(staken, res.data.amount_pretty);
                     setStakedRate(
@@ -391,7 +391,7 @@ const Mine = () => {
         await ApiAppUserBalances(account)
             .then((res) => {
                 console.log('ApiAppUserBalances:', res);
-                if (res.code == 200) {
+                if (res.code === 200) {
                     setUser(res.data);
                 }
             })
@@ -423,7 +423,7 @@ const Mine = () => {
         return () => {
             clearInterval(timer);
         };
-    }, [isUpdate]);
+    }, [isUpdate, account]);
 
     useEffect(() => {
         if (account && status === 'connected') {
@@ -436,7 +436,7 @@ const Mine = () => {
                     console.log(error);
                 });
         }
-    }, [status]);
+    }, [status, account]);
 
     useEffect(() => {
         console.log(account && status === 'connected');
