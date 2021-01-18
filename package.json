@@ -26,6 +26,7 @@
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",
+    "react-use": "^15.3.8",
     "reactjs-pdf-reader": "^1.0.12",
     "redux": "^4.0.5",
     "use-wallet": "^0.8.0",
