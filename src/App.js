@@ -50,7 +50,7 @@ function App() {
 
     useEffect(() => {
         wallet.connect();
-    }, []);
+    }, [wallet]);
 
     return (
         <ConfigProvider locale={i18n.language === 'en' ? enUS : zhCN}>
