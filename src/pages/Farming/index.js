@@ -32,7 +32,7 @@ export default function Farming() {
                                 Deposit DADA <br />
                                 Earn DHM
                             </div>
-                            <Link to="/dhash/mine">
+                            <Link to="/farming-detail">
                                 <Button className="btn-cheese">Select</Button>
                             </Link>
                             <div className="apy-box">

@@ -19,9 +19,9 @@ import CommunityProjects from './pages/CommunityProjects';
 import Project from './pages/Project';
 import Blog from './pages/Blog';
 // import Projects from './pages/Projects'
-import CreateProject from './pages/CreateProject'
-import CreateVote from './pages/CreateVote'
-import Coming from './pages/Coming'
+import CreateProject from './pages/CreateProject';
+import CreateVote from './pages/CreateVote';
+import Coming from './pages/Coming';
 // import Farming from './pages/Farming'
 // import BuyDHM from './pages/BuyDHM'
 // dhash
@@ -123,7 +123,6 @@ function App() {
                                         path="/farming-detail"
                                         component={Mine}
                                     />
-
                                 </Switch>
                             </div>
                         </Col>
