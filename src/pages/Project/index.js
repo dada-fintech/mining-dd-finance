@@ -351,7 +351,7 @@ export default function Project() {
 
                         {timing > 0 && <Countdown timestamp={timing} done={() => { getInfo() }} />}
                         {/* 一开始审核评议 */}
-                        {project.project_info.status === 'Auditing' && role === 'committee' && <Row>
+                        {( true || (project.project_info.status === 'Auditing' && role === 'committee')) && <Row>
                             <div className="handle-area">
                                 <div className="btn-action" onClick={() => { doAudit() }}><span>{t('project.action.committeeReviews')}</span></div>
                             </div>

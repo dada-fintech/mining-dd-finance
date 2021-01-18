@@ -53,7 +53,7 @@ export default function AuditModal(props) {
             </div>
             <div className="change-rate">
                 <div>Change insurance rate</div>
-                <InputNumber min={0} parser={value => value ? parseInt(value) : ''} onChange={(e)=>{setInsuranceRate(e)}}/> %
+                <InputNumber min={0} value={insuranceRate} onChange={(e)=>{e >= 0 && Number.isInteger(Number(e)) && setInsuranceRate(parseInt(e))}}/> %
             </div>
             <div className="hint" dangerouslySetInnerHTML={{__html: t('modal.auditHint')}}>
             </div>
