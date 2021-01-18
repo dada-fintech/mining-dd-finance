@@ -61,7 +61,7 @@ const Buy = () => {
         await ApiLatestepochReward()
             .then((res) => {
                 console.log(res);
-                if (res.code == 200) {
+                if (res.code === 200) {
                     setBtcInfo(res.data);
                     // 年化收益率 = 当日分发BTC × 当日BTC价格 / 6.5 / 抵押数量 *365
                     // 年化收益率 = 总奖励 * 当日BTC价格 / 总抵押数量 / dhm 价格
@@ -120,7 +120,7 @@ const Buy = () => {
         ApiAppSellprice()
             .then((res) => {
                 // console.log(res);
-                if (res.code == 200) {
+                if (res.code === 200) {
                     setCurrentPrice(Tools.toThousands(res.data.price_pretty));
                 }
             })
@@ -136,7 +136,7 @@ const Buy = () => {
         ApiDhmAvailable()
             .then((res) => {
                 // console.log(res);
-                if (res.code == 200) {
+                if (res.code === 200) {
                     setAvailable(Tools.toThousands(res.data.amount_pretty));
                 }
             })
@@ -152,7 +152,7 @@ const Buy = () => {
         ApiAppSupply()
             .then((res) => {
                 // console.log(res);
-                if (res.code == 200) {
+                if (res.code === 200) {
                     setTotalSupply(res.data.amount_pretty);
                     // Tools.toThousands(res.data.amount_pretty)
                     getApiAppTotalBurnt(res.data.amount_pretty);
@@ -170,7 +170,7 @@ const Buy = () => {
         ApiAppTotalBurnt()
             .then((res) => {
                 console.log(res);
-                if (res.code == 200) {
+                if (res.code === 200) {
                     // 总销毁量
                     setTotalBurned(
                         Tools.sub(totalSupply, res.data.total_pretty || 0)
@@ -189,7 +189,7 @@ const Buy = () => {
         ApiAppUserBalances(account)
             .then((res) => {
                 console.log('ApiAppUserBalances:', res);
-                if (res.code == 200) {
+                if (res.code === 200) {
                     setUser(res.data);
                     setBalance(
                         Tools.fmtDec(
@@ -314,7 +314,7 @@ const Buy = () => {
                     console.log(error);
                 });
         }
-    }, [status]);
+    }, [status, account]);
 
     return (
         <div className="buy">

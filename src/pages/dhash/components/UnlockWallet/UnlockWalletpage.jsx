@@ -5,12 +5,17 @@ import './UnlockWallet.scss';
 
 const UnlockWalletpage = () => {
     const { t } = useTranslation();
-    const { wallet, connect } = useWallet;
+    const wallet = useWallet;
+    const { connect } = wallet;
     return (
         <div className="UnlockWalletpage">
             {!window.web3 ? (
                 <div className="UnlockWalletpage-content">
-                    <a href="https://metamask.io/" target="_blank">
+                    <a
+                        href="https://metamask.io/"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
                         {t('v1_Install_MetaMask')}
                     </a>
                 </div>

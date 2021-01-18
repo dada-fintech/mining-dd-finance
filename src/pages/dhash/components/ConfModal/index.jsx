@@ -1,10 +1,7 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import { Modal } from 'antd';
 import './index.scss';
-import { useWallet } from 'use-wallet';
 import { useMedia } from 'react-use';
-import { useHistory } from 'react-router-dom';
 import BuyButton from '../BuyButton/index.jsx';
 
 const BuyModal = ({
@@ -16,10 +13,7 @@ const BuyModal = ({
     buyButloading,
     disabled,
 }) => {
-    const { t } = useTranslation();
-    const wallet = useWallet();
     const below960 = useMedia('(max-width: 960px)');
-    const history = useHistory();
 
     return (
         <Modal
