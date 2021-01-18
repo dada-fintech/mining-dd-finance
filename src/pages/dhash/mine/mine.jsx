@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { message, Alert } from 'antd';
+import Header from 'components/Header'
 import FarmerIcon from 'assets/sidebar/farming.svg';
 import BTCIcon from 'assets/farming/btc.svg';
 import BuyButton from '../components/BuyButton';
@@ -462,6 +463,8 @@ const Mine = () => {
 
     return (
         <div className="mine-page">
+        <Header hideAction={true} />
+
             {wallet && !account && status !== 'connected' ? (
                 <UnlockWalletpage />
             ) : (

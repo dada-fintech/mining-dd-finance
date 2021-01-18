@@ -39,6 +39,9 @@ export default function Header(props) {
     // if(!role){
     //     role = '123'
     // }
+    useEffect(()=>{
+        wallet.connect()
+    }, [])
 
     return (<header className="header">
         <MenuOutlined className="mobile-menu" onClick={() => { setDrawerVisible(true) }} />

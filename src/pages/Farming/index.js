@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import FarmerIcon from 'assets/sidebar/farming.svg';
+import Header from 'components/Header'
 import DHMIcon from 'assets/farming/dhm.svg';
 
-import Header from 'components/Header';
 import { Row, Col, Button } from 'antd';
 import './style.scss';
 
