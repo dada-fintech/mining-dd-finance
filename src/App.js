@@ -50,11 +50,11 @@ i18n.use(initReactI18next) // passes i18n down to react-i18next
 
 function App() {
     const { i18n } = useTranslation();
-    const wallet = useWallet();
+    // const wallet = useWallet();
 
-    useEffect(() => {
-        wallet.connect();
-    }, [wallet]);
+    // useEffect(() => {
+    //     wallet.connect();
+    // }, [wallet]);
 
     return (
         <ConfigProvider locale={i18n.language === 'en' ? enUS : zhCN}>
