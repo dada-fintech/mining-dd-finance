@@ -137,11 +137,11 @@ li {
 .btn-cheese {
     -webkit-box-align: center;
     align-items: center;
-    background-color: rgb(240, 233, 231);
+    background-color: #fff;
     border: 0px;
     border-radius: 12px;
     box-shadow: rgb(226, 214, 207) 6px 1px 12px, rgb(247, 244, 242) -12px -12px 24px -2px;
-    color: rgb(209, 108, 0);
+    color: #15163D;
     cursor: pointer;
     display: flex;
     font-size: 16px;
@@ -153,15 +153,17 @@ li {
     padding-left: 24px;
     padding-right: 24px;
     width: 100%;
+    transition: background-color .3s;
     &:hover,
     &:focus {
-        color: rgb(209, 108, 0);
-        background:rgb(247, 244, 242);
+        color: #15163D;
+        background-color: rgb(242, 242, 242);
     }
 }
 
 .cheese-box{
-    background: rgb(240, 233, 231);
+    color: #15163D;
+    background: #fff;
     border: 1px solid rgb(226, 214, 207);
     border-radius: 12px;
     box-shadow: rgb(247, 244, 242) 1px 1px 0px inset;
