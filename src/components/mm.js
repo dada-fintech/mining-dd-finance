@@ -7,7 +7,7 @@ import config from 'config'
 async function sendTransaction(transactionParameters, desc, approvedActionParam) {
     // approvedActionParam will be called when approvement is approved
 
-
+    
 
     return new Promise(async (resolve, reject) => {
         await window.ethereum
