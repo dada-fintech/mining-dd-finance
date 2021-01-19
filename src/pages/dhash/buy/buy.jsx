@@ -402,19 +402,20 @@ const Buy = () => {
                                 sumbol={OFFICIAL_SYMBOL}
                                 balanceSumbol={'USDT'}
                             />
+                               <BuyButton
+                                loading={buyButLoading}
+                                disabled={disabled || user.usdt_pretty <= 0}
+                                butText={t('v1_BUY_but')}
+                                butClassName={'dd-lightblue-but'}
+                                onChangeFun={() => {
+                                console.log('ApiAppBuyFun');
+                                ApiAppBuyFun();
+                            }}
+                    />
                         </div>
                     </div>
 
-                    <BuyButton
-                        loading={buyButLoading}
-                        disabled={disabled || user.usdt_pretty <= 0}
-                        butText={t('v1_BUY_but')}
-                        butClassName={'dd-lightblue-but'}
-                        onChangeFun={() => {
-                            console.log('ApiAppBuyFun');
-                            ApiAppBuyFun();
-                        }}
-                    />
+                 
                 </>
             ) : (
                 <div className="success">
