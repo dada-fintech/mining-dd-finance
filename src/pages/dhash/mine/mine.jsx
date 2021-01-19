@@ -541,7 +541,7 @@ const Mine = () => {
                                         disabled={
                                             disabled || user.dhm_pretty <= 0
                                         }
-                                        butClassName={'btn-cheese'}
+                                        butClassName={'btn-blue'}
                                         onChangeFun={startFun}
                                     />
                                 </div>
@@ -575,7 +575,7 @@ const Mine = () => {
                                             loading={claimButLoading}
                                             butText={t('v1_CLAIM')}
                                             disabled={rewardToClaim <= 0}
-                                            butClassName={'btn-cheese'}
+                                            butClassName={'btn-blue'}
                                             onChangeFun={claimFun}
                                         />
                                     </div>
@@ -592,7 +592,7 @@ const Mine = () => {
                         loading={stopButLoading}
                         butText={t('v1_STOP')}
                         disabled={userStaked <= 0}
-                        butClassName={'btn-cheese'}
+                        butClassName={'btn-blue'}
                         onChangeFun={stopFun}
                     />
 

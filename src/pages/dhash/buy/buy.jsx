@@ -392,7 +392,7 @@ const Buy = () => {
                         loading={buyButLoading}
                         disabled={disabled || user.usdt_pretty <= 0}
                         butText={t('v1_BUY_but')}
-                        butClassName={'btn-cheese'}
+                        butClassName={'btn-blue'}
                         onChangeFun={() => {
                             console.log('ApiAppBuyFun');
                             ApiAppBuyFun();
@@ -409,7 +409,7 @@ const Buy = () => {
                             butText={t('v1_START_MINE')}
                             butClassName={'btn-cheese'}
                             onChangeFun={() => {
-                                history.push('/mine');
+                                history.push('/farming-detail');
                             }}
                         />
                     </div>
@@ -456,7 +456,7 @@ const Buy = () => {
                             ApiAppBuyFun();
                             break;
                         case 3:
-                            history.push('/farming');
+                            history.push('/farming-detail');
                             break;
                         case -1:
                             setVisible(false);

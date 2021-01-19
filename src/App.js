@@ -104,11 +104,11 @@ function App() {
                                         component={Buy}
                                     />
 
-                                    <Route
+                                    {/* <Route
                                         exact
                                         path="/farming"
                                         component={Farming}
-                                    />
+                                    /> */}
 
                                     <Route
                                         exact

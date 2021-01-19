@@ -134,6 +134,19 @@ li {
     }
 }
 
+.btn-blue{
+    color: #fff;
+    background: #839CDC;
+    border-radius: 5px;
+    &:hover,
+    &:focus {
+        color: #fff;
+        background: #839CDC;
+    }
+}
+
+
+
 .btn-cheese {
     -webkit-box-align: center;
     align-items: center;

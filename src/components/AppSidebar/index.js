@@ -170,7 +170,7 @@ export default function AppSidebar(props) {
                                     ? 'top-curve'
                                     : ''
                             } ${
-                                location.pathname === '/farming'
+                                location.pathname === '/farming-detail'
                                     ? 'bottom-curve'
                                     : ''
                             }`}
@@ -193,7 +193,7 @@ export default function AppSidebar(props) {
                                     : ''
                             }`}
                             activeClassName="active"
-                            to="/farming"
+                            to="/farming-detail"
                         >
                             <img src={FarmingIcon} alt="" />
                             {t('sidebar.farming')}
@@ -202,7 +202,7 @@ export default function AppSidebar(props) {
                     <li>
                         <NavLink
                             className={`nowrap ${
-                                location.pathname === '/farming'
+                                location.pathname === '/farming-detail'
                                     ? 'top-curve'
                                     : ''
                             } ${
