@@ -40,7 +40,9 @@ export default function Header(props) {
     //     role = '123'
     // }
     useEffect(() => {
-        wallet.connect();
+        if(wallet && wallet.status != 'connected'){
+            wallet.connect();
+        }
     }, []);
     
     return (
