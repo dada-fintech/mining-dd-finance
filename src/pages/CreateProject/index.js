@@ -642,448 +642,1270 @@ export default function CreateProject() {
     // </Select>
 
 
-    return (<div className="create-project-page">
-        <Header breadCrumb={[t('sidebar.cryptoMining'), 'Create DAO']} />
-        <div className="card-board">
-            <ul className="breadcrumb">
-                {sidebarList.map((item, index) => <li key={index} className={(currentStep >= item.step ? 'done' : '')}>
-                    <span>{item.name}</span>
-                </li>)}
-            </ul>
-            {currentStep === 0 && <div className="step-0" dangerouslySetInnerHTML={{ __html: t('createProject.hint') }}>
-            </div>}
-            {currentStep === 1 && <div className="step-1">
-                <div className="h1">{sidebarList[0].name}</div>
-                <div className="form-item">
-                    <div className="label">{t('createProject.managerName')}</div>
-                    <Input value={projectInfo.creater_name} onChange={(e) => { changeProjectInfo('creater_name', e.target.value) }} style={{ width: '360px' }} />
-                    <div className="hint">{t('createProject.managerNameHint')}</div>
-                </div>
-                <div className="form-item">
-                    <div className="label">{t('createProject.managerBio')}</div>
-                    <Input.TextArea autoSize={{ minRows: 6 }} maxLength="140" value={projectInfo.creater_profile} onChange={(e) => { changeProjectInfo('creater_profile', e.target.value) }} />
-                </div>
-                <div className="form-item">
-                    <div className="label ">{t('createProject.projectEmail')}</div>
-                    <Input value={projectInfo.creater_email} onChange={(e) => { changeProjectInfo('creater_email', e.target.value) }} style={{ width: '360px' }} />
-                    <div className="hint">{t('createProject.projectEmailHint')}</div>
-                </div>
-            </div>}
-            {currentStep === 2 && <div className="step-1">
-                <div className="h1">{sidebarList[0].name}</div>
-                <div className="form-item">
-                    <div className="label ">{t('createProject.projectName')}</div>
-                    <Input value={projectInfo.project_name} onChange={(e) => { changeProjectInfo('project_name', e.target.value) }} style={{ width: '360px' }} />
-                    <div className="hint">{t('createProject.projectNameHint')}</div>
-                </div>
-                <div className="form-item">
-                    <div className="label">{t('createProject.projectIntro')}</div>
-                    <Input.TextArea autoSize={{ minRows: 6 }} maxLength="140" placeholder={t('createProject.within140')} value={projectInfo.project_profile} onChange={(e) => { changeProjectInfo('project_profile', e.target.value) }} />
-                    <div className="hint">{t('createProject.projectIntroHint')}</div>
-                </div>
-                <div className="form-item">
-                    <div className="label">{t('createProject.projectDetails')}</div>
-                    <Input.TextArea autoSize={{ minRows: 6 }} value={projectInfo.project_description} onChange={(e) => { changeProjectInfo('project_description', e.target.value) }} />
-                    <div className="hint">{t('createProject.projectDetailsHint')}</div>
-                </div>
-                <div className="form-item">
-                    <div className="label">{t('createProject.projectStrategy')}</div>
-                    <Input.TextArea autoSize={{ minRows: 6 }} value={projectInfo.project_strategy} onChange={(e) => { changeProjectInfo('project_strategy', e.target.value) }} />
-                    <div className="hint">{t('createProject.projectStrategyHint')}</div>
-                </div>
-            </div>}
-            {currentStep === 3 && tempType === 'close' && <div>
-                <div className="h1">{sidebarList[1].name}({t('common.standard')})</div>
-                <div dangerouslySetInnerHTML={{ __html: t('createProject.closeGovernRule') }}></div>
-            </div>}
-            {currentStep === 3 && tempType === 'open' && <div>
-                <div className="h1">{sidebarList[1].name}({t('common.customizable')})</div>
-                <div dangerouslySetInnerHTML={{ __html: t('createProject.openGovernRule') }}></div>
-            </div>}
-            {currentStep === 4 && tempType === 'close' && <div>
-                <div className="h1">{sidebarList[1].name}({t('common.standard')})</div>
-                {i18n.language === 'en' ? <img src="/govern-rule-img-en.svg" className="govern-rule-img" /> : <img src="/govern-rule-img.svg" className="govern-rule-img" />}
-                <Row type="flex" align="middle" style={{ marginBottom: '32px' }}>
-                    <Col md={12}>
-                        <div className="form-item" style={{ marginTop: '0' }}>
-                            <div className="label ">{t('createProject.fundraisingPeriod')}</div>
-                            <DatePicker.RangePicker showTime value={fundraising.start_time && [moment(fundraising.start_time), moment(fundraising.end_time)]} onChange={value => dateRangeChange('fundraising', value)} />
+    return (
+        <div className="create-project-page">
+            <Header breadCrumb={[t('sidebar.cryptoMining'), 'Create DAO']} />
+            <div className="card-board">
+                <ul className="breadcrumb">
+                    {sidebarList.map((item, index) => (
+                        <li
+                            key={index}
+                            className={currentStep >= item.step ? 'done' : ''}
+                        >
+                            <span>{item.name}</span>
+                        </li>
+                    ))}
+                </ul>
+                {currentStep === 0 && (
+                    <div
+                        className="step-0"
+                        dangerouslySetInnerHTML={{
+                            __html: t('createProject.hint'),
+                        }}
+                    ></div>
+                )}
+                {currentStep === 1 && (
+                    <div className="step-1">
+                        <div className="h1">{sidebarList[0].name}</div>
+                        <div className="form-item">
+                            <div className="label">
+                                {t('createProject.managerName')}
+                            </div>
+                            <Input
+                                value={projectInfo.creater_name}
+                                onChange={(e) => {
+                                    changeProjectInfo(
+                                        'creater_name',
+                                        e.target.value
+                                    );
+                                }}
+                                style={{ width: '360px' }}
+                            />
+                            <div className="hint">
+                                {t('createProject.managerNameHint')}
+                            </div>
                         </div>
-                    </Col>
-                    <Col md={6}>
-                        {t('common.rulesBelow')}
-                    </Col>
-                    <Col md={6}>
-                        <div className="form-item" style={{ marginTop: '0' }}>
-                            <div className="label ">{t('createProject.redemptionDate')}</div>
-                            <DatePicker value={projectInfo.income_settlement_time && moment(projectInfo.income_settlement_time)} onChange={value => { value && changeProjectInfo('income_settlement_time', value.valueOf()) }} />
+                        <div className="form-item">
+                            <div className="label">
+                                {t('createProject.managerBio')}
+                            </div>
+                            <Input.TextArea
+                                autoSize={{ minRows: 6 }}
+                                maxLength="140"
+                                value={projectInfo.creater_profile}
+                                onChange={(e) => {
+                                    changeProjectInfo(
+                                        'creater_profile',
+                                        e.target.value
+                                    );
+                                }}
+                            />
                         </div>
-                    </Col>
-                </Row>
-
-
-                {processList.map((item, index) => <>
-                    <div className="assets-rule-item" key={index}>
-                        <div className="asset-id"># {index + 1}</div>
-                        {processList.length > 1 && <Popconfirm title={t('createProject.sureToDelete')} onConfirm={() => { removeProcess(index) }}><CloseCircleOutlined className="remove-btn" /></Popconfirm>}
-                        <Row gutter={24}>
-                            {index === 0 ? <Col md={12}>
-                                <div className="form-item">
-                                    <div className="label ">{t('createProject.unlockDate')} <Tooltip title={t('createProject.unlockDateHover')}><img src={QuestionIcon} /></Tooltip></div>
-                                    <DatePicker disabledDate={current => current && current < moment(fundraising.end_time).add(4, 'days').endOf('day')} value={item.vote_start_time && moment(item.vote_start_time)} onChange={value => { value && changeProcess(index, 'vote_start_time', value.valueOf()); }} />
-                                </div>
-                            </Col> : <Col md={12}>
-                                    <div className="form-item">
-                                        <div className="label ">{t('createProject.votingDate')} <Tooltip title={t('createProject.votingDateHover')}><img src={QuestionIcon} /></Tooltip></div>
-                                        <DatePicker.RangePicker disabledDate={current => current && current < moment(fundraising.end_time).add(5, 'days').endOf('day')} value={item.vote_start_time && [moment(item.vote_start_time), moment(item.vote_end_time)]} onChange={value => { value && changeProcess(index, 'vote_start_time', value[0].valueOf()); value && changeProcess(index, 'vote_end_time', value[1].valueOf()) }} />
+                        <div className="form-item">
+                            <div className="label ">
+                                {t('createProject.projectEmail')}
+                            </div>
+                            <Input
+                                value={projectInfo.creater_email}
+                                onChange={(e) => {
+                                    changeProjectInfo(
+                                        'creater_email',
+                                        e.target.value
+                                    );
+                                }}
+                                style={{ width: '360px' }}
+                            />
+                            <div className="hint">
+                                {t('createProject.projectEmailHint')}
+                            </div>
+                        </div>
+                    </div>
+                )}
+                {currentStep === 2 && (
+                    <div className="step-1">
+                        <div className="h1">{sidebarList[0].name}</div>
+                        <div className="form-item">
+                            <div className="label ">
+                                {t('createProject.projectName')}
+                            </div>
+                            <Input
+                                value={projectInfo.project_name}
+                                onChange={(e) => {
+                                    changeProjectInfo(
+                                        'project_name',
+                                        e.target.value
+                                    );
+                                }}
+                                style={{ width: '360px' }}
+                            />
+                            <div className="hint">
+                                {t('createProject.projectNameHint')}
+                            </div>
+                        </div>
+                        <div className="form-item">
+                            <div className="label">
+                                {t('createProject.projectIntro')}
+                            </div>
+                            <Input.TextArea
+                                autoSize={{ minRows: 6 }}
+                                maxLength="140"
+                                placeholder={t('createProject.within140')}
+                                value={projectInfo.project_profile}
+                                onChange={(e) => {
+                                    changeProjectInfo(
+                                        'project_profile',
+                                        e.target.value
+                                    );
+                                }}
+                            />
+                            <div className="hint">
+                                {t('createProject.projectIntroHint')}
+                            </div>
+                        </div>
+                        <div className="form-item">
+                            <div className="label">
+                                {t('createProject.projectDetails')}
+                            </div>
+                            <Input.TextArea
+                                autoSize={{ minRows: 6 }}
+                                value={projectInfo.project_description}
+                                onChange={(e) => {
+                                    changeProjectInfo(
+                                        'project_description',
+                                        e.target.value
+                                    );
+                                }}
+                            />
+                            <div className="hint">
+                                {t('createProject.projectDetailsHint')}
+                            </div>
+                        </div>
+                        <div className="form-item">
+                            <div className="label">
+                                {t('createProject.projectStrategy')}
+                            </div>
+                            <Input.TextArea
+                                autoSize={{ minRows: 6 }}
+                                value={projectInfo.project_strategy}
+                                onChange={(e) => {
+                                    changeProjectInfo(
+                                        'project_strategy',
+                                        e.target.value
+                                    );
+                                }}
+                            />
+                            <div className="hint">
+                                {t('createProject.projectStrategyHint')}
+                            </div>
+                        </div>
+                    </div>
+                )}
+                {currentStep === 3 && tempType === 'close' && (
+                    <div>
+                        <div className="h1">
+                            {sidebarList[1].name}({t('common.standard')})
+                        </div>
+                        <div
+                            dangerouslySetInnerHTML={{
+                                __html: t('createProject.closeGovernRule'),
+                            }}
+                        ></div>
+                    </div>
+                )}
+                {currentStep === 3 && tempType === 'open' && (
+                    <div>
+                        <div className="h1">
+                            {sidebarList[1].name}({t('common.customizable')})
+                        </div>
+                        <div
+                            dangerouslySetInnerHTML={{
+                                __html: t('createProject.openGovernRule'),
+                            }}
+                        ></div>
+                    </div>
+                )}
+                {currentStep === 4 && tempType === 'close' && (
+                    <div>
+                        <div className="h1">
+                            {sidebarList[1].name}({t('common.standard')})
+                        </div>
+                        {i18n.language === 'en' ? (
+                            <img
+                                src="/govern-rule-img-en.svg"
+                                className="govern-rule-img"
+                            />
+                        ) : (
+                            <img
+                                src="/govern-rule-img.svg"
+                                className="govern-rule-img"
+                            />
+                        )}
+                        <Row
+                            type="flex"
+                            align="middle"
+                            style={{ marginBottom: '32px' }}
+                        >
+                            <Col md={12}>
+                                <div
+                                    className="form-item"
+                                    style={{ marginTop: '0' }}
+                                >
+                                    <div className="label ">
+                                        {t('createProject.fundraisingPeriod')}
                                     </div>
-
-                                </Col>}
-
+                                    <DatePicker.RangePicker
+                                        showTime
+                                        value={
+                                            fundraising.start_time && [
+                                                moment(fundraising.start_time),
+                                                moment(fundraising.end_time),
+                                            ]
+                                        }
+                                        onChange={(value) =>
+                                            dateRangeChange(
+                                                'fundraising',
+                                                value
+                                            )
+                                        }
+                                    />
+                                </div>
+                            </Col>
+                            <Col md={6}>{t('common.rulesBelow')}</Col>
                             <Col md={6}>
-                                <div className="form-item">
-                                    <div className="label ">{t('createProject.shares')} <Tooltip title={t('createProject.sharesHover')}><img src={QuestionIcon} /></Tooltip></div>
-                                    <InputNumber max={index === 0 ? 80 : 100} min={0} formatter={value => `${value ? value : 0} %`} parser={value => parseInt(value)} value={item.unlock_percentage} onChange={e => changeProcess(index, 'unlock_percentage', e)} style={{ width: '180px' }} />
+                                <div
+                                    className="form-item"
+                                    style={{ marginTop: '0' }}
+                                >
+                                    <div className="label ">
+                                        {t('createProject.redemptionDate')}
+                                    </div>
+                                    <DatePicker
+                                        value={
+                                            projectInfo.income_settlement_time &&
+                                            moment(
+                                                projectInfo.income_settlement_time
+                                            )
+                                        }
+                                        onChange={(value) => {
+                                            value &&
+                                                changeProjectInfo(
+                                                    'income_settlement_time',
+                                                    value.valueOf()
+                                                );
+                                        }}
+                                    />
                                 </div>
                             </Col>
                         </Row>
+
+                        {processList.map((item, index) => (
+                            <>
+                                <div className="assets-rule-item" key={index}>
+                                    <div className="asset-id">
+                                        # {index + 1}
+                                    </div>
+                                    {processList.length > 1 && (
+                                        <Popconfirm
+                                            title={t(
+                                                'createProject.sureToDelete'
+                                            )}
+                                            onConfirm={() => {
+                                                removeProcess(index);
+                                            }}
+                                        >
+                                            <CloseCircleOutlined className="remove-btn" />
+                                        </Popconfirm>
+                                    )}
+                                    <Row gutter={24}>
+                                        {index === 0 ? (
+                                            <Col md={12}>
+                                                <div className="form-item">
+                                                    <div className="label ">
+                                                        {t(
+                                                            'createProject.unlockDate'
+                                                        )}{' '}
+                                                        <Tooltip
+                                                            title={t(
+                                                                'createProject.unlockDateHover'
+                                                            )}
+                                                        >
+                                                            <img
+                                                                src={
+                                                                    QuestionIcon
+                                                                }
+                                                            />
+                                                        </Tooltip>
+                                                    </div>
+                                                    <DatePicker
+                                                        disabledDate={(
+                                                            current
+                                                        ) =>
+                                                            current &&
+                                                            current <
+                                                                moment(
+                                                                    fundraising.end_time
+                                                                )
+                                                                    .add(
+                                                                        4,
+                                                                        'days'
+                                                                    )
+                                                                    .endOf(
+                                                                        'day'
+                                                                    )
+                                                        }
+                                                        value={
+                                                            item.vote_start_time &&
+                                                            moment(
+                                                                item.vote_start_time
+                                                            )
+                                                        }
+                                                        onChange={(value) => {
+                                                            value &&
+                                                                changeProcess(
+                                                                    index,
+                                                                    'vote_start_time',
+                                                                    value.valueOf()
+                                                                );
+                                                        }}
+                                                    />
+                                                </div>
+                                            </Col>
+                                        ) : (
+                                            <Col md={12}>
+                                                <div className="form-item">
+                                                    <div className="label ">
+                                                        {t(
+                                                            'createProject.votingDate'
+                                                        )}{' '}
+                                                        <Tooltip
+                                                            title={t(
+                                                                'createProject.votingDateHover'
+                                                            )}
+                                                        >
+                                                            <img
+                                                                src={
+                                                                    QuestionIcon
+                                                                }
+                                                            />
+                                                        </Tooltip>
+                                                    </div>
+                                                    <DatePicker.RangePicker
+                                                        disabledDate={(
+                                                            current
+                                                        ) =>
+                                                            current &&
+                                                            current <
+                                                                moment(
+                                                                    fundraising.end_time
+                                                                )
+                                                                    .add(
+                                                                        5,
+                                                                        'days'
+                                                                    )
+                                                                    .endOf(
+                                                                        'day'
+                                                                    )
+                                                        }
+                                                        value={
+                                                            item.vote_start_time && [
+                                                                moment(
+                                                                    item.vote_start_time
+                                                                ),
+                                                                moment(
+                                                                    item.vote_end_time
+                                                                ),
+                                                            ]
+                                                        }
+                                                        onChange={(value) => {
+                                                            value &&
+                                                                changeProcess(
+                                                                    index,
+                                                                    'vote_start_time',
+                                                                    value[0].valueOf()
+                                                                );
+                                                            value &&
+                                                                changeProcess(
+                                                                    index,
+                                                                    'vote_end_time',
+                                                                    value[1].valueOf()
+                                                                );
+                                                        }}
+                                                    />
+                                                </div>
+                                            </Col>
+                                        )}
+
+                                        <Col md={6}>
+                                            <div className="form-item">
+                                                <div className="label ">
+                                                    {t('createProject.shares')}{' '}
+                                                    <Tooltip
+                                                        title={t(
+                                                            'createProject.sharesHover'
+                                                        )}
+                                                    >
+                                                        <img
+                                                            src={QuestionIcon}
+                                                        />
+                                                    </Tooltip>
+                                                </div>
+                                                <InputNumber
+                                                    max={index === 0 ? 80 : 100}
+                                                    min={0}
+                                                    formatter={(value) =>
+                                                        `${value ? value : 0} %`
+                                                    }
+                                                    parser={(value) =>
+                                                        parseInt(value)
+                                                    }
+                                                    value={
+                                                        item.unlock_percentage
+                                                    }
+                                                    onChange={(e) =>
+                                                        changeProcess(
+                                                            index,
+                                                            'unlock_percentage',
+                                                            e
+                                                        )
+                                                    }
+                                                    style={{ width: '180px' }}
+                                                />
+                                            </div>
+                                        </Col>
+                                    </Row>
+                                    <div className="form-item">
+                                        <div className="label">
+                                            {t('common.description')}
+                                        </div>
+                                        <Input.TextArea
+                                            value={item.description}
+                                            onChange={(e) =>
+                                                changeProcess(
+                                                    index,
+                                                    'description',
+                                                    e.target.value
+                                                )
+                                            }
+                                            autoSize={{ minRows: 6 }}
+                                        />
+                                    </div>
+                                </div>
+                            </>
+                        ))}
+                        <div
+                            className="add-item-box"
+                            onClick={() => {
+                                addProcessList();
+                            }}
+                        >
+                            <PlusCircleOutlined />
+                        </div>
+                    </div>
+                )}
+                {currentStep === 4 && tempType === 'open' && (
+                    <div>
+                        <div className="h1">
+                            {sidebarList[1].name}({t('common.customizable')})
+                        </div>
+                        <div className="form-block">
+                            <div className="form-item">
+                                <div className="label">
+                                    {t('createProject.selectFundraisingMethod')}
+                                </div>
+                                <Radio.Group
+                                    className="btn-tabs"
+                                    value={raisingMethod}
+                                    onChange={(e) =>
+                                        setRaisingMethod(e.target.value)
+                                    }
+                                >
+                                    <Radio.Button value="2">
+                                        {t(
+                                            'createProject.setFundraiseTimeframe'
+                                        )}
+                                    </Radio.Button>
+                                    <Radio.Button value="1">
+                                        {t('createProject.setFundraiseDate')}
+                                    </Radio.Button>
+                                </Radio.Group>
+                                {raisingMethod === '1' && (
+                                    <div className="hint">
+                                        {t(
+                                            'createProject.selectFundraisingMethodHint1'
+                                        )}
+                                    </div>
+                                )}
+                                {raisingMethod === '2' && (
+                                    <div className="hint">
+                                        {t(
+                                            'createProject.selectFundraisingMethodHint2'
+                                        )}
+                                    </div>
+                                )}
+                            </div>
+                            {raisingMethod === '1' && (
+                                <div className="form-item">
+                                    <div className="label ">
+                                        {t('createProject.fundraisingPeriod')}
+                                    </div>
+                                    <DatePicker.RangePicker
+                                        showTime
+                                        value={
+                                            fundraising.start_time && [
+                                                moment(fundraising.start_time),
+                                                moment(fundraising.end_time),
+                                            ]
+                                        }
+                                        onChange={(value) =>
+                                            dateRangeChange(
+                                                'fundraising',
+                                                value
+                                            )
+                                        }
+                                    />
+                                </div>
+                            )}
+                            {raisingMethod === '2' && (
+                                <div className="form-item">
+                                    <Timespan
+                                        timestamp={fundraising.raise_span}
+                                        fieldChange={(value) => {
+                                            changeFundraising(
+                                                'raise_span',
+                                                value
+                                            );
+                                        }}
+                                    />
+                                </div>
+                            )}
+                        </div>
+
+                        <div className="form-block">
+                            <div className="form-item">
+                                <div className="label">
+                                    {t('createProject.selectRedemptionMethod')}
+                                </div>
+                                <Radio.Group
+                                    className="btn-tabs"
+                                    value={repayMethod}
+                                    onChange={(e) =>
+                                        setRepayMethod(e.target.value)
+                                    }
+                                >
+                                    <Radio.Button value="1">
+                                        {t(
+                                            'createProject.selectRedemptionMethodValue1'
+                                        )}
+                                    </Radio.Button>
+                                    {/* <Radio.Button value="2">随还随取</Radio.Button> */}
+                                </Radio.Group>
+                            </div>
+                            {repayMethod === '1' && (
+                                <div className="form-item">
+                                    <div className="label ">
+                                        {t('createProject.redemptionDate')}
+                                    </div>
+                                    <DatePicker
+                                        value={
+                                            projectInfo.income_settlement_time &&
+                                            moment(
+                                                projectInfo.income_settlement_time
+                                            )
+                                        }
+                                        onChange={(value) => {
+                                            value &&
+                                                changeProjectInfo(
+                                                    'income_settlement_time',
+                                                    value.valueOf()
+                                                );
+                                        }}
+                                    />
+                                </div>
+                            )}
+                        </div>
+
+                        <div className="form-block">
+                            <div className="form-item">
+                                <div className="label">
+                                    {t('createProject.selectRepaymentMethod')}
+                                </div>
+                                <Radio.Group
+                                    className="btn-tabs"
+                                    value={withdrawMethod}
+                                    onChange={(e) =>
+                                        setWithdrawMethod(e.target.value)
+                                    }
+                                >
+                                    <Radio.Button value="2">
+                                        {t(
+                                            'createProject.unconditionalRedemption'
+                                        )}
+                                    </Radio.Button>
+                                    <Radio.Button value="1">
+                                        {t(
+                                            'createProject.conditionalRedemption'
+                                        )}
+                                    </Radio.Button>
+                                </Radio.Group>
+                                <div className="hint">
+                                    {withdrawMethod === '1' && (
+                                        <span>
+                                            {t(
+                                                'createProject.selectRepaymentMethodHint'
+                                            )}
+                                        </span>
+                                    )}
+                                    {withdrawMethod === '2' && (
+                                        <span>
+                                            {t(
+                                                'createProject.selectRepaymentMethodHint'
+                                            )}
+                                        </span>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+                {currentStep === 5 && (
+                    <div>
+                        <div className="h1">{sidebarList[2].name}</div>
                         <div className="form-item">
-                            <div className="label">{t('common.description')}</div>
-                            <Input.TextArea value={item.description} onChange={e => changeProcess(index, 'description', e.target.value)} autoSize={{ minRows: 6 }} />
+                            <div className="label ">{t('common.apy')}</div>
+                            <InputNumber
+                                formatter={(value) => `${value ? value : 0} %`}
+                                parser={(value) => parseInt(value)}
+                                value={fundraising.expected_apy}
+                                onChange={(e) =>
+                                    changeFundraising('expected_apy', e)
+                                }
+                                style={{ width: '180px' }}
+                            />
                         </div>
-                    </div>
-                </>)}
-                <div className="add-item-box" onClick={() => { addProcessList() }}>
-                    <PlusCircleOutlined />
-                </div>
-
-            </div>}
-            {currentStep === 4 && tempType === 'open' && <div>
-                <div className="h1">{sidebarList[1].name}({t('common.customizable')})</div>
-                <div className="form-block">
-                    <div className="form-item">
-                        <div className="label">{t('createProject.selectFundraisingMethod')}</div>
-                        <Radio.Group className="btn-tabs" value={raisingMethod} onChange={(e) => setRaisingMethod(e.target.value)}>
-                            <Radio.Button value="2">{t('createProject.setFundraiseTimeframe')}</Radio.Button>
-                            <Radio.Button value="1">{t('createProject.setFundraiseDate')}</Radio.Button>
-                        </Radio.Group>
-                        {raisingMethod === '1' && <div className="hint">
-                            {t('createProject.selectFundraisingMethodHint1')}
-                        </div>}
-                        {raisingMethod === '2' && <div className="hint">
-                            {t('createProject.selectFundraisingMethodHint2')}
-                        </div>}
-
-                    </div>
-                    {raisingMethod === '1' && <div className="form-item">
-                        <div className="label ">{t('createProject.fundraisingPeriod')}</div>
-                        <DatePicker.RangePicker showTime value={fundraising.start_time && [moment(fundraising.start_time), moment(fundraising.end_time)]} onChange={value => dateRangeChange('fundraising', value)} />
-                    </div>}
-                    {raisingMethod === '2' && <div className="form-item">
-                        <Timespan timestamp={fundraising.raise_span} fieldChange={(value) => { changeFundraising('raise_span', value) }} />
-                    </div>}
-                </div>
-
-                <div className="form-block">
-                    <div className="form-item">
-                        <div className="label">{t('createProject.selectRedemptionMethod')}</div>
-                        <Radio.Group className="btn-tabs" value={repayMethod} onChange={(e) => setRepayMethod(e.target.value)}>
-                            <Radio.Button value="1">{t('createProject.selectRedemptionMethodValue1')}</Radio.Button>
-                            {/* <Radio.Button value="2">随还随取</Radio.Button> */}
-                        </Radio.Group>
-                    </div>
-                    {repayMethod === '1' && <div className="form-item">
-                        <div className="label ">{t('createProject.redemptionDate')}</div>
-                        <DatePicker value={projectInfo.income_settlement_time && moment(projectInfo.income_settlement_time)} onChange={value => { value && changeProjectInfo('income_settlement_time', value.valueOf()) }} />
-                    </div>}
-                </div>
-
-                <div className="form-block">
-                    <div className="form-item">
-                        <div className="label">{t('createProject.selectRepaymentMethod')}</div>
-                        <Radio.Group className="btn-tabs" value={withdrawMethod} onChange={(e) => setWithdrawMethod(e.target.value)}>
-                            <Radio.Button value="2">{t('createProject.unconditionalRedemption')}</Radio.Button>
-                            <Radio.Button value="1">{t('createProject.conditionalRedemption')}</Radio.Button>
-                        </Radio.Group>
-                        <div className="hint">
-                            {withdrawMethod === '1' && <span>{t('createProject.selectRepaymentMethodHint')}</span>}
-                            {withdrawMethod === '2' && <span>{t('createProject.selectRepaymentMethodHint')}</span>}
+                        <div className="form-item">
+                            <div className="label">
+                                {t('createProject.fundraisingLimit')}
+                            </div>
+                            <Input
+                                value={fundraising.max_amount}
+                                onChange={(e) =>
+                                    changeFundraising(
+                                        'max_amount',
+                                        e.target.value
+                                    )
+                                }
+                                style={{ width: '300px' }}
+                                suffix={config.usdUnit}
+                            />
+                            <div className="hint">
+                                {t('createProject.fundraisingLimitHint')}
+                            </div>
+                            <div className="hint red">
+                                {t('createProject.fundraisingLimitHint2')}
+                            </div>
                         </div>
+                        {fundraising.max_amount && (
+                            <div className="form-item">
+                                <div className="label ">
+                                    {t('createProject.softCap')}{' '}
+                                    <Tooltip
+                                        title={t('createProject.softCapHover')}
+                                    >
+                                        <img src={QuestionIcon} />
+                                    </Tooltip>
+                                </div>
+                                <Slider
+                                    tipFormatter={(val) => <span>{val}%</span>}
+                                    style={{ width: '360px' }}
+                                    value={fundraising.softtopPercent}
+                                    tooltipVisible={true}
+                                    onChange={(value) => {
+                                        fundraisingSofttopChange(value);
+                                    }}
+                                />
+                                <div className="softtop-value">
+                                    {fundraising.min_amount} {config.usdUnit}
+                                </div>
+                                <div className="hint">
+                                    {t('createProject.fundraisingGoalHint')}
+                                </div>
+                            </div>
+                        )}
                     </div>
-                </div>
-            </div>}
-            {currentStep === 5 && <div>
-                <div className="h1">{sidebarList[2].name}</div>
-                <div className="form-item">
-                    <div className="label ">{t('common.apy')}</div>
-                    <InputNumber formatter={value => `${value ? value : 0} %`} parser={value => parseInt(value)} value={fundraising.expected_apy} onChange={e => changeFundraising('expected_apy', e)} style={{ width: '180px' }} />
-                </div>
-                <div className="form-item">
-                    <div className="label">{t('createProject.fundraisingLimit')}</div>
-                    <Input value={fundraising.max_amount} onChange={e => changeFundraising('max_amount', e.target.value)} style={{ width: '300px' }} suffix={config.usdUnit} />
-                    <div className="hint">
-                        {t('createProject.fundraisingLimitHint')}
-                    </div>
-                    <div className="hint red">
-                        {t('createProject.fundraisingLimitHint2')}
-                    </div>
-                </div>
-                {fundraising.max_amount && <div className="form-item">
-                    <div className="label ">{t('createProject.softCap')} <Tooltip title={t('createProject.softCapHover')}><img src={QuestionIcon} /></Tooltip></div>
-                    <Slider tipFormatter={(val) => (<span>{val}%</span>)} style={{ width: '360px', }} value={fundraising.softtopPercent} tooltipVisible={true} onChange={value => { fundraisingSofttopChange(value) }} />
-                    <div className="softtop-value">{fundraising.min_amount} {config.usdUnit}</div>
-                    <div className="hint">
-                        {t('createProject.fundraisingGoalHint')}
-                    </div>
-                </div>}
-
-            </div>}
-            {currentStep === 6 && <div>
-                <div className="h1">{sidebarList[3].name}</div>
-                <div className="form-item">
-                    <div className="label ">{t('createProject.nameOfToken')}</div>
-                    <Input style={{ width: '360px' }} value={projectInfo.project_token_symbol} onChange={(e) => { changeProjectInfo('project_token_symbol', e.target.value) }} />
-                </div>
-                <div className="form-item">
-                    <div className="label ">{t('createProject.managerAddress')}</div>
-                    <Input style={{ width: '500px' }} value={projectInfo.receiver} onChange={(e) => { changeProjectInfo('receiver', e.target.value) }} />
-                    <div className="hint red">{t('createProject.managerAddressHint')}</div>
-                </div>
-                <div className="form-item">
-                    <div className="label ">{t('createProject.profitAddress')}</div>
-                    <Input style={{ width: '500px' }} value={projectInfo.profit} onChange={(e) => { changeProjectInfo('profit', e.target.value) }} />
-                    <div className="hint red">{t('createProject.profitAddressHint')}</div>
-                </div>
-                <div className="form-item">
-                    <div className="label">{t('createProject.boardMembers')}</div>
-                    {projectInfo.member_address.map((item, index) => <div>
-                        <Input value={item} onChange={(e) => { changeMemberAddress(index, e.target.value) }} style={{ width: '500px', marginBottom: '12px' }} />
-                        {index != projectInfo.member_address.length - 1 && <Popconfirm title={t('createProject.sureToDelete')} onConfirm={() => { removeCouncilMember(index) }}><MinusCircleOutlined className="handle-icon" /></Popconfirm>}
-                        {index == projectInfo.member_address.length - 1 && <PlusCircleOutlined onClick={() => { addCouncilMember() }} className="handle-icon" />}
-                    </div>)}
-
-                    <div className="hint">
-                        {t('createProject.boardMembersHint')}
-                    </div>
-                </div>
-            </div>}
-            {currentStep === 7 && <div className="step-3">
-                <div className="h1">{sidebarList[4].name}</div>
-                <div className="form-item">
-                    <div className="label ">{t('createProject.uploadPlan')}</div>
-                    <Upload {...whitePaperUpload}>
-                        <Button className="btn-white" style={{ padding: '0 44px' }}>{t('common.upload')}</Button>
-                        <span style={{ marginLeft: '12px', color: '#707070' }}>*.pdf</span>
-                    </Upload>
-                    {projectInfo.white_paper && projectInfo.white_paper.file_name && <div className="uploaded-box">
-                        {projectInfo.white_paper.file_name.slice(10)} <CloseCircleOutlined onClick={() => { removeWhitePaper() }} />
-                    </div>}
-                    <div className="hint">
-                        {t('common.pdfRequired')}
-                    </div>
-                </div>
-                <div className="form-item">
-                    <div className="label">{t('createProject.additionalDoc')}</div>
-                    <Upload {...otherUpload}>
-                        <Button className="btn-white" style={{ padding: '0 44px' }}>{t('common.upload')}</Button>
-                    </Upload>
-                    {
-                        projectInfo.other_file && projectInfo.other_file.length > 0 && <div className="uploaded-box">
-                            {projectInfo.other_file.map((item, index) => (
+                )}
+                {currentStep === 6 && (
+                    <div>
+                        <div className="h1">{sidebarList[3].name}</div>
+                        <div className="form-item">
+                            <div className="label ">
+                                {t('createProject.nameOfToken')}
+                            </div>
+                            <Input
+                                style={{ width: '360px' }}
+                                value={projectInfo.project_token_symbol}
+                                onChange={(e) => {
+                                    changeProjectInfo(
+                                        'project_token_symbol',
+                                        e.target.value
+                                    );
+                                }}
+                            />
+                        </div>
+                        <div className="form-item">
+                            <div className="label ">
+                                {t('createProject.managerAddress')}
+                            </div>
+                            <Input
+                                style={{ width: '500px' }}
+                                value={projectInfo.receiver}
+                                onChange={(e) => {
+                                    changeProjectInfo(
+                                        'receiver',
+                                        e.target.value
+                                    );
+                                }}
+                            />
+                            <div className="hint red">
+                                {t('createProject.managerAddressHint')}
+                            </div>
+                        </div>
+                        <div className="form-item">
+                            <div className="label ">
+                                {t('createProject.profitAddress')}
+                            </div>
+                            <Input
+                                style={{ width: '500px' }}
+                                value={projectInfo.profit}
+                                onChange={(e) => {
+                                    changeProjectInfo('profit', e.target.value);
+                                }}
+                            />
+                            <div className="hint red">
+                                {t('createProject.profitAddressHint')}
+                            </div>
+                        </div>
+                        <div className="form-item">
+                            <div className="label">
+                                {t('createProject.boardMembers')}
+                            </div>
+                            {projectInfo.member_address.map((item, index) => (
                                 <div>
-                                    {item.file_name.slice(10)} <CloseCircleOutlined onClick={() => { removeOtherFile(index) }} />
+                                    <Input
+                                        value={item}
+                                        onChange={(e) => {
+                                            changeMemberAddress(
+                                                index,
+                                                e.target.value
+                                            );
+                                        }}
+                                        style={{
+                                            width: '500px',
+                                            marginBottom: '12px',
+                                        }}
+                                    />
+                                    {index !=
+                                        projectInfo.member_address.length -
+                                            1 && (
+                                        <Popconfirm
+                                            title={t(
+                                                'createProject.sureToDelete'
+                                            )}
+                                            onConfirm={() => {
+                                                removeCouncilMember(index);
+                                            }}
+                                        >
+                                            <MinusCircleOutlined className="handle-icon" />
+                                        </Popconfirm>
+                                    )}
+                                    {index ==
+                                        projectInfo.member_address.length -
+                                            1 && (
+                                        <PlusCircleOutlined
+                                            onClick={() => {
+                                                addCouncilMember();
+                                            }}
+                                            className="handle-icon"
+                                        />
+                                    )}
                                 </div>
                             ))}
-                        </div>
-                    }
 
-                    <div className="hint">
-                        {t('createProject.additionalDocHint')}
-                    </div>
-                </div>
-
-
-            </div>}
-            {currentStep === 8 && <div className="step-6">
-                <div className="h1">{sidebarList[5].name}</div>
-                <div className="confirm-box confirm-box-long" style={{ marginBottom: '72px' }}>
-                    <div className="line">
-                        <div className="name">{t('createProject.projectName')}</div>
-                        <div className="value">{projectInfo.project_name}</div>
-                    </div>
-                    <div className="line">
-                        <div className="name">{t('createProject.projectIntro')}</div>
-                        <div className="value">{projectInfo.project_profile}</div>
-                    </div>
-                    <div className="line">
-                        <div className="name">{t('createProject.projectEmail')}</div>
-                        <div className="value">{projectInfo.creater_email}</div>
-                    </div>
-                    <div className="line">
-                        <div className="name">{t('createProject.managerName')}</div>
-                        <div className="value">{projectInfo.creater_name}</div>
-                    </div>
-                    <div className="line">
-                        <div className="name">{t('createProject.managerBio')}</div>
-                        <div className="value">{projectInfo.creater_profile}</div>
-                    </div>
-                    <div className="line">
-                        <div className="name">{t('createProject.projectDetails')}</div>
-                        <div className="value">{projectInfo.project_description}</div>
-                    </div>
-                    <div className="line">
-                        <div className="name">{t('createProject.projectStrategy')}</div>
-                        <div className="value">{projectInfo.project_strategy}</div>
-                    </div>
-                </div>
-                <div className="title">{t('createProject.confirm2')}</div>
-                <div className="confirm-box confirm-box-long" style={{ marginBottom: '72px' }}>
-                    <div className="line">
-                        <div className="name">{t('createProject.tokenName')}</div>
-                        <div className="value">{projectInfo.project_token_symbol}</div>
-                    </div>
-                    {fundraising.start_time && fundraising.end_time && <div className="line">
-                        <div className="name">{t('createProject.fundraisingPeriod')}</div>
-                        <div className="value">{new Date(fundraising.start_time).toLocaleDateString()} - {new Date(fundraising.end_time).toLocaleDateString()}</div>
-                    </div>}
-
-                    <div className="line">
-                        <div className="name">{t('common.apy')}</div>
-                        <div className="value">{fundraising.expected_apy}%</div>
-                    </div>
-                    <div className="line">
-                        <div className="name">{t('createProject.fundraisingGoal')}</div>
-                        <div className="value">{fundraising.min_amount} {config.usdUnit}</div>
-                    </div>
-                    <div className="line">
-                        <div className="name">{t('createProject.fundraisingLimit')}</div>
-                        <div className="value">{fundraising.max_amount} {config.usdUnit}</div>
-                    </div>
-                    <div className="line">
-                        <div className="name">{t('createProject.redemptionDate')}</div>
-                        <div className="value">{new Date(projectInfo.income_settlement_time).toLocaleDateString()}</div>
-                    </div>
-                    <div className="line">
-                        <div className="name">{t('createProject.managerAddress')}</div>
-                        <div className="value"><Tooltip title={projectInfo.receiver}>{projectInfo.receiver}</Tooltip></div>
-                    </div>
-                    <div className="line">
-                        <div className="name">{t('createProject.profitAddress')}</div>
-                        <div className="value"><Tooltip title={projectInfo.profit}>{projectInfo.profit}</Tooltip></div>
-                    </div>
-
-                    {projectInfo.member_address.filter(item => item).length > 0 && <div className="line">
-                        <div className="name">{t('createProject.councilAddress')}</div>
-                        <div className="value">
-                            {projectInfo.member_address.map(item => (
-                                <>
-                                    <Tooltip title={item}>{item}</Tooltip><br />
-                                </>
-                            ))}
-                        </div>
-                    </div>}
-
-                </div>
-
-                {tempType === 'close' && <>
-                    <div className="title">{t('createProject.confirm3')}</div>
-                    {processList.map((item, index) => <>
-                        <div className="process-top">
-                            <div>{t('project.progress')} #{index + 1}</div>
-                            {/* <div>{item.time}</div> */}
-                        </div>
-                        <div className="confirm-box">
-                            <div className="line">
-                                <div className="name">{t('project.unlockingAmount')}</div>
-                                <div className="value">{item.unlock_percentage}%</div>
-                            </div>
-                            {index === 0 ? <div className="line">
-                                <div className="name">{t('createProject.unlockDate')}</div>
-                                <div className="value">{new Date(item.vote_start_time).toLocaleDateString()}</div>
-                            </div> : <div className="line">
-                                    <div className="name">{t('project.voteTime')}</div>
-                                    <div className="value">{new Date(item.vote_start_time).toLocaleDateString()} - {new Date(item.vote_end_time).toLocaleDateString()}</div>
-                                </div>}
-
-                            <div className="line">
-                                <div className="name">{t('project.event')}</div>
-                                <div className="value">{item.description}</div>
+                            <div className="hint">
+                                {t('createProject.boardMembersHint')}
                             </div>
                         </div>
-                    </>)}
-                </>}
-
-
-                <div>
-                    <div className="title" style={{ marginTop: '56px' }}>{t('createProject.additionalDoc')}</div>
-                    <div className="confirm-box">
-                        {projectInfo.white_paper && projectInfo.white_paper.file_name.slice(10)}<br />
-                        {projectInfo.other_file.map(item => <div>
-                            {item && item.file_name.slice(10)}
-                        </div>)}
                     </div>
-                </div>
-
-            </div>}
-
-            {currentStep === 9 && <div className="step-pay">
-                <div className="h1">{sidebarList[6].name}</div>
-                <div>{t('common.yourBill')} <span className="num">{approveBalance}</span> {config.usdUnit}
-                    {dadaApproved ? <div onClick={() => { !createLoading && doPay() }} className="btn-pay"> <span className="text">{t('common.pay')}</span></div>
-                        : <div onClick={() => { !createLoading && doApprove() }} className="btn-pay"> <span className="text">{t('common.approve')} {createLoading && <LoadingOutlined />}</span></div>}
-                </div>
-                <div>{t('common.yourBalance')} <span className="num">{USDTBalance}</span> {config.usdUnit}</div>
-                <div className="hint">
-                    <div>{t('common.billHint1')}</div>
-                    <div>{t('common.billHint2')}</div>
-                </div>
-            </div>}
-            {currentStep === 10 && <div className="step-pay text-center">
-                {payStatus === 'success' && <>
-                    <div className="dada-circle success">
-                        {t('createProject.paySuccess')}
-                    </div>
-                    <div className="pay-hint" dangerouslySetInnerHTML={{ __html: t('createProject.paySuccessHint') }}>
-                    </div>
-                </>}
-
-                {payStatus === 'error' && <>
-                    <div className="dada-circle error">
-                        {t('createProject.payFailed')}
-
-                    </div>
-                    <div className="pay-hint">
-                        {t('createProject.payFailedHint')}
-                    </div>
-                </>}
-
-            </div>}
-            <div className="step-control">
-                <div>
-                    {((currentStep > 0 && currentStep < 10) || payStatus === 'error') && <div onClick={() => { setCurrentStep(prev => prev - 1) }} className="line-btn line-btn-back">{t('common.back')}</div>}
-                </div>
-                {currentStep < 8 && <div>
-                    <div onClick={() => { goNextStep() }} className="line-btn line-btn-next">{t('common.next')}</div>
-                </div>}
-                {currentStep == 8 && <div>
-                    <div onClick={() => { confirmInfo() }} className="btn-confirm"> <span className="text">{t('common.confirmInfo')}</span></div>
-                    {/* <span className="hint hint-gasfee" dangerouslySetInnerHTML={{ __html: t('common.gasFeeHint') }}></span> */}
-                </div>
-                }
-
-                {currentStep == 10 && <div>
-                    <Link to="/projects">
-                        <div className="btn-confirm">
-                            <span className="text">
-                                {t('createProject.backHome')}
-                            </span>
+                )}
+                {currentStep === 7 && (
+                    <div className="step-3">
+                        <div className="h1">{sidebarList[4].name}</div>
+                        <div className="form-item">
+                            <div className="label ">
+                                {t('createProject.uploadPlan')}
+                            </div>
+                            <Upload {...whitePaperUpload}>
+                                <Button
+                                    className="btn-white"
+                                    style={{ padding: '0 44px' }}
+                                >
+                                    {t('common.upload')}
+                                </Button>
+                                <span
+                                    style={{
+                                        marginLeft: '12px',
+                                        color: '#707070',
+                                    }}
+                                >
+                                    *.pdf
+                                </span>
+                            </Upload>
+                            {projectInfo.white_paper &&
+                                projectInfo.white_paper.file_name && (
+                                    <div className="uploaded-box">
+                                        {projectInfo.white_paper.file_name.slice(
+                                            10
+                                        )}{' '}
+                                        <CloseCircleOutlined
+                                            onClick={() => {
+                                                removeWhitePaper();
+                                            }}
+                                        />
+                                    </div>
+                                )}
+                            <div className="hint">
+                                {t('common.pdfRequired')}
+                            </div>
                         </div>
-                    </Link>
+                        <div className="form-item">
+                            <div className="label">
+                                {t('createProject.additionalDoc')}
+                            </div>
+                            <Upload {...otherUpload}>
+                                <Button
+                                    className="btn-white"
+                                    style={{ padding: '0 44px' }}
+                                >
+                                    {t('common.upload')}
+                                </Button>
+                            </Upload>
+                            {projectInfo.other_file &&
+                                projectInfo.other_file.length > 0 && (
+                                    <div className="uploaded-box">
+                                        {projectInfo.other_file.map(
+                                            (item, index) => (
+                                                <div key={index}>
+                                                    {item.file_name.slice(10)}{' '}
+                                                    <CloseCircleOutlined
+                                                        onClick={() => {
+                                                            removeOtherFile(
+                                                                index
+                                                            );
+                                                        }}
+                                                    />
+                                                </div>
+                                            )
+                                        )}
+                                    </div>
+                                )}
 
-                </div>}
+                            <div className="hint">
+                                {t('createProject.additionalDocHint')}
+                            </div>
+                        </div>
+                    </div>
+                )}
+                {currentStep === 8 && (
+                    <div className="step-6">
+                        <div className="h1">{sidebarList[5].name}</div>
+                        <div
+                            className="confirm-box confirm-box-long"
+                            style={{ marginBottom: '72px' }}
+                        >
+                            <div className="line">
+                                <div className="name">
+                                    {t('createProject.projectName')}
+                                </div>
+                                <div className="value">
+                                    {projectInfo.project_name}
+                                </div>
+                            </div>
+                            <div className="line">
+                                <div className="name">
+                                    {t('createProject.projectIntro')}
+                                </div>
+                                <div className="value">
+                                    {projectInfo.project_profile}
+                                </div>
+                            </div>
+                            <div className="line">
+                                <div className="name">
+                                    {t('createProject.projectEmail')}
+                                </div>
+                                <div className="value">
+                                    {projectInfo.creater_email}
+                                </div>
+                            </div>
+                            <div className="line">
+                                <div className="name">
+                                    {t('createProject.managerName')}
+                                </div>
+                                <div className="value">
+                                    {projectInfo.creater_name}
+                                </div>
+                            </div>
+                            <div className="line">
+                                <div className="name">
+                                    {t('createProject.managerBio')}
+                                </div>
+                                <div className="value">
+                                    {projectInfo.creater_profile}
+                                </div>
+                            </div>
+                            <div className="line">
+                                <div className="name">
+                                    {t('createProject.projectDetails')}
+                                </div>
+                                <div className="value">
+                                    {projectInfo.project_description}
+                                </div>
+                            </div>
+                            <div className="line">
+                                <div className="name">
+                                    {t('createProject.projectStrategy')}
+                                </div>
+                                <div className="value">
+                                    {projectInfo.project_strategy}
+                                </div>
+                            </div>
+                        </div>
+                        <div className="title">
+                            {t('createProject.confirm2')}
+                        </div>
+                        <div
+                            className="confirm-box confirm-box-long"
+                            style={{ marginBottom: '72px' }}
+                        >
+                            <div className="line">
+                                <div className="name">
+                                    {t('createProject.tokenName')}
+                                </div>
+                                <div className="value">
+                                    {projectInfo.project_token_symbol}
+                                </div>
+                            </div>
+                            {fundraising.start_time && fundraising.end_time && (
+                                <div className="line">
+                                    <div className="name">
+                                        {t('createProject.fundraisingPeriod')}
+                                    </div>
+                                    <div className="value">
+                                        {new Date(
+                                            fundraising.start_time
+                                        ).toLocaleDateString()}{' '}
+                                        -{' '}
+                                        {new Date(
+                                            fundraising.end_time
+                                        ).toLocaleDateString()}
+                                    </div>
+                                </div>
+                            )}
+
+                            <div className="line">
+                                <div className="name">{t('common.apy')}</div>
+                                <div className="value">
+                                    {fundraising.expected_apy}%
+                                </div>
+                            </div>
+                            <div className="line">
+                                <div className="name">
+                                    {t('createProject.fundraisingGoal')}
+                                </div>
+                                <div className="value">
+                                    {fundraising.min_amount} {config.usdUnit}
+                                </div>
+                            </div>
+                            <div className="line">
+                                <div className="name">
+                                    {t('createProject.fundraisingLimit')}
+                                </div>
+                                <div className="value">
+                                    {fundraising.max_amount} {config.usdUnit}
+                                </div>
+                            </div>
+                            <div className="line">
+                                <div className="name">
+                                    {t('createProject.redemptionDate')}
+                                </div>
+                                <div className="value">
+                                    {new Date(
+                                        projectInfo.income_settlement_time
+                                    ).toLocaleDateString()}
+                                </div>
+                            </div>
+                            <div className="line">
+                                <div className="name">
+                                    {t('createProject.managerAddress')}
+                                </div>
+                                <div className="value">
+                                    <Tooltip title={projectInfo.receiver}>
+                                        {projectInfo.receiver}
+                                    </Tooltip>
+                                </div>
+                            </div>
+                            <div className="line">
+                                <div className="name">
+                                    {t('createProject.profitAddress')}
+                                </div>
+                                <div className="value">
+                                    <Tooltip title={projectInfo.profit}>
+                                        {projectInfo.profit}
+                                    </Tooltip>
+                                </div>
+                            </div>
+
+                            {projectInfo.member_address.filter((item) => item)
+                                .length > 0 && (
+                                <div className="line">
+                                    <div className="name">
+                                        {t('createProject.councilAddress')}
+                                    </div>
+                                    <div className="value">
+                                        {projectInfo.member_address.map(
+                                            (item) => (
+                                                <>
+                                                    <Tooltip title={item}>
+                                                        {item}
+                                                    </Tooltip>
+                                                    <br />
+                                                </>
+                                            )
+                                        )}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+
+                        {tempType === 'close' && (
+                            <>
+                                <div className="title">
+                                    {t('createProject.confirm3')}
+                                </div>
+                                {processList.map((item, index) => (
+                                    <>
+                                        <div className="process-top">
+                                            <div>
+                                                {t('project.progress')} #
+                                                {index + 1}
+                                            </div>
+                                            {/* <div>{item.time}</div> */}
+                                        </div>
+                                        <div className="confirm-box">
+                                            <div className="line">
+                                                <div className="name">
+                                                    {t(
+                                                        'project.unlockingAmount'
+                                                    )}
+                                                </div>
+                                                <div className="value">
+                                                    {item.unlock_percentage}%
+                                                </div>
+                                            </div>
+                                            {index === 0 ? (
+                                                <div className="line">
+                                                    <div className="name">
+                                                        {t(
+                                                            'createProject.unlockDate'
+                                                        )}
+                                                    </div>
+                                                    <div className="value">
+                                                        {new Date(
+                                                            item.vote_start_time
+                                                        ).toLocaleDateString()}
+                                                    </div>
+                                                </div>
+                                            ) : (
+                                                <div className="line">
+                                                    <div className="name">
+                                                        {t('project.voteTime')}
+                                                    </div>
+                                                    <div className="value">
+                                                        {new Date(
+                                                            item.vote_start_time
+                                                        ).toLocaleDateString()}{' '}
+                                                        -{' '}
+                                                        {new Date(
+                                                            item.vote_end_time
+                                                        ).toLocaleDateString()}
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            <div className="line">
+                                                <div className="name">
+                                                    {t('project.event')}
+                                                </div>
+                                                <div className="value">
+                                                    {item.description}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </>
+                                ))}
+                            </>
+                        )}
+
+                        <div>
+                            <div
+                                className="title"
+                                style={{ marginTop: '56px' }}
+                            >
+                                {t('createProject.additionalDoc')}
+                            </div>
+                            <div className="confirm-box">
+                                {projectInfo.white_paper &&
+                                    projectInfo.white_paper.file_name.slice(10)}
+                                <br />
+                                {projectInfo.other_file.map((item, index) => (
+                                    <div key={index}>
+                                        {item && item.file_name.slice(10)}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {currentStep === 9 && (
+                    <div className="step-pay">
+                        <div className="h1">{sidebarList[6].name}</div>
+                        <div>
+                            {t('common.yourBill')}{' '}
+                            <span className="num">{approveBalance}</span>{' '}
+                            {config.usdUnit}
+                            {dadaApproved ? (
+                                <div
+                                    onClick={() => {
+                                        !createLoading && doPay();
+                                    }}
+                                    className="btn-pay"
+                                >
+                                    {' '}
+                                    <span className="text">
+                                        {t('common.pay')}
+                                    </span>
+                                </div>
+                            ) : (
+                                <div
+                                    onClick={() => {
+                                        !createLoading && doApprove();
+                                    }}
+                                    className="btn-pay"
+                                >
+                                    {' '}
+                                    <span className="text">
+                                        {t('common.approve')}{' '}
+                                        {createLoading && <LoadingOutlined />}
+                                    </span>
+                                </div>
+                            )}
+                        </div>
+                        <div>
+                            {t('common.yourBalance')}{' '}
+                            <span className="num">{USDTBalance}</span>{' '}
+                            {config.usdUnit}
+                        </div>
+                        <div className="hint">
+                            <div>{t('common.billHint1')}</div>
+                            <div>{t('common.billHint2')}</div>
+                        </div>
+                    </div>
+                )}
+                {currentStep === 10 && (
+                    <div className="step-pay text-center">
+                        {payStatus === 'success' && (
+                            <>
+                                <div className="dada-circle success">
+                                    {t('createProject.paySuccess')}
+                                </div>
+                                <div
+                                    className="pay-hint"
+                                    dangerouslySetInnerHTML={{
+                                        __html: t(
+                                            'createProject.paySuccessHint'
+                                        ),
+                                    }}
+                                ></div>
+                            </>
+                        )}
+
+                        {payStatus === 'error' && (
+                            <>
+                                <div className="dada-circle error">
+                                    {t('createProject.payFailed')}
+                                </div>
+                                <div className="pay-hint">
+                                    {t('createProject.payFailedHint')}
+                                </div>
+                            </>
+                        )}
+                    </div>
+                )}
+                <div className="step-control">
+                    <div>
+                        {((currentStep > 0 && currentStep < 10) ||
+                            payStatus === 'error') && (
+                            <div
+                                onClick={() => {
+                                    setCurrentStep((prev) => prev - 1);
+                                }}
+                                className="line-btn line-btn-back"
+                            >
+                                {t('common.back')}
+                            </div>
+                        )}
+                    </div>
+                    {currentStep < 8 && (
+                        <div>
+                            <div
+                                onClick={() => {
+                                    goNextStep();
+                                }}
+                                className="line-btn line-btn-next"
+                            >
+                                {t('common.next')}
+                            </div>
+                        </div>
+                    )}
+                    {currentStep == 8 && (
+                        <div>
+                            <div
+                                onClick={() => {
+                                    confirmInfo();
+                                }}
+                                className="btn-confirm"
+                            >
+                                {' '}
+                                <span className="text">
+                                    {t('common.confirmInfo')}
+                                </span>
+                            </div>
+                            {/* <span className="hint hint-gasfee" dangerouslySetInnerHTML={{ __html: t('common.gasFeeHint') }}></span> */}
+                        </div>
+                    )}
+
+                    {currentStep == 10 && (
+                        <div>
+                            <Link to="/projects">
+                                <div className="btn-confirm">
+                                    <span className="text">
+                                        {t('createProject.backHome')}
+                                    </span>
+                                </div>
+                            </Link>
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
-
-
-    </div>)
+    );
 }
