@@ -39,11 +39,10 @@ import { useWallet } from 'use-wallet';
 export default function AppSidebar(props) {
     const { t } = useTranslation();
     const location = useLocation();
-    const {routeChange} = props
     const [showTemplateChoose, setShowTemplateChoose] = useState(false);
     const [hideCreate, setHideCreate] = useState(false);
     const wallet = useWallet();
-    const { ethereum, account } = wallet;
+    // const { ethereum, account } = wallet;
     // const [currentRoute, setCurrentRoute] = useState('');
 
     const changeLanguage = (language) => {
@@ -55,7 +54,6 @@ export default function AppSidebar(props) {
     );
 
     useEffect(() => {
-        routeChange(location.pathname)
         if (
             location.pathname === '/create-project/close' ||
             location.pathname === '/create-project/open'
