@@ -9,6 +9,8 @@ import UnlockWalletpage from '../components/UnlockWallet/UnlockWalletpage';
 import BuyModal from '../components/ConfModal';
 import * as Tools from '../../../utils/Tools';
 import { useWallet } from 'use-wallet';
+import DHMIcon from 'assets/farming/dhm.svg';
+
 import {
     ApiAppBuy,
     ApiAppSellprice,
@@ -354,25 +356,37 @@ const Buy = () => {
                     </div>
                     <div className="buy-content">
                         <div className="data cheese-box">
-                            <div className="data-border ">
-                                <div className="amount price">
+                            <div className="apy-tag">
+                                <div className="value">
+                                 {(isNaN(apy) ? 0 : Tools.numFmt(apy * 100, 2)) || 0} %
+                                </div>
+                                <div className="title">
+                                    <div className="desc">{t('v1_APY')}</div>
+                                </div>
+                            </div>
+                            <div className="available-tag">
+                                <div className="value">
+                                    {available || 0}
+                                </div>
+                                <div className="title">{t('v1_Available')}</div>
+                            </div>
+                           
+                            <div className="data-border">
+                                <img src={DHMIcon} className="coin-icon"/>
+                            <div className="amount price">
                                     ${currentPrice || 0}
                                 </div>
                                 <div className="text">
                                     {t('v1_Current_Price')}
                                 </div>
-                                <div className="amount available">
-                                    {available || 0}
-                                </div>
-                                <div className="text">{t('v1_Available')}</div>
-                                <div className="total">
+                                {/* <div className="total">
                                     <div className="amount">
                                         {Tools.toThousands(totalBurned)}
                                     </div>
                                     <div className="text">
                                         {t('v1_Total_supply')}
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
                             <InputaMount
                                 balance={user.usdt_pretty || 0}

@@ -176,13 +176,10 @@ li {
 
 .cheese-box{
     color: #15163D;
-    background: #fff;
-    border: 1px solid rgb(226, 214, 207);
+    background: #FFFFFF;
+    box-shadow: 6px 6px 12px rgba(166, 146, 110, 0.15);
     border-radius: 12px;
-    box-shadow: rgb(247, 244, 242) 1px 1px 0px inset;
-    display: flex;
-    flex: 1 1 0%;
-    flex-direction: column;
+    position: relative;
 }
 
 .btn-white {
