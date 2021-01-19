@@ -312,3 +312,87 @@
         }
     }
 }
+
+/*DD 蓝色 but*/
+.dd-lightblue-but {
+    min-width: $ButWidth;
+    height: 40px;
+    box-sizing: border-box;
+    background-color: $ddBlueBut;
+    color: #ffffff;
+    border-radius: 5px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    text-align: center;
+    @media screen and (min-width: $MobileWidth-M) {
+        &:hover {
+            min-width: $ButWidth;
+            height: 40px;
+            box-sizing: border-box;
+            border-radius: 5px;
+            background-color: $ddBlueButHover;
+            color: #ffffff;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 18px;
+            text-align: center;
+            animation-duration: 0.5s;
+        }
+    }
+
+    @media screen and (max-width: $MobileWidth-M) {
+        min-width: $BoxButWidth-M;
+        height: 40px;
+        box-sizing: border-box;
+        border-radius: 10px;
+        background-color: $ddBlueBut;
+        color: #ffffff;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+        text-align: center;
+    }
+}
+
+/*DD 粉色 but*/
+.dd-lightpink-but {
+    min-width: $ButWidth;
+    height: 40px;
+    box-sizing: border-box;
+    background-color: $ddPinkBut;
+    color: #ffffff;
+    border-radius: 5px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    text-align: center;
+    @media screen and (min-width: $MobileWidth-M) {
+        &:hover {
+            min-width: $ButWidth;
+            height: 40px;
+            box-sizing: border-box;
+            border-radius: 5px;
+            background-color: $ddPinkButHover;
+            color: #ffffff;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 18px;
+            text-align: center;
+            animation-duration: 0.5s;
+        }
+    }
+
+    @media screen and (max-width: $MobileWidth-M) {
+        min-width: $BoxButWidth-M;
+        height: 40px;
+        box-sizing: border-box;
+        border-radius: 10px;
+        background-color: $ddBlueBut;
+        color: #ffffff;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+        text-align: center;
+    }
+}
