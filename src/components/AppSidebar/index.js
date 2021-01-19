@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Popover } from 'antd';
 import { NavLink, useLocation } from 'react-router-dom';
@@ -39,11 +39,11 @@ import { useWallet } from 'use-wallet';
 export default function AppSidebar(props) {
     const { t } = useTranslation();
     const location = useLocation();
+    const wallet = useWallet();
     const [showTemplateChoose, setShowTemplateChoose] = useState(false);
     const [hideCreate, setHideCreate] = useState(false);
-    const wallet = useWallet();
-    // const { ethereum, account } = wallet;
-    // const [currentRoute, setCurrentRoute] = useState('');
+    const [claimBalance, setClaimBalance] = useState(0);
+    const { ethereum, account } = wallet;
 
     const changeLanguage = (language) => {
         localStorage.setItem('language', language);
@@ -64,36 +64,52 @@ export default function AppSidebar(props) {
         }
     }, [location]);
 
-    // const claimFun = async () => {
-    //     await ClaimContractApi.claim(
-    //         account,
-    //         ethereum,
-    //         () => {
-    //             console.log('err');
-    //         },
-    //         (transactionHash) => {
-    //             console.log('pending', transactionHash);
-    //         },
-    //         () => {
-    //             console.log('receipt');
-    //         }
-    //     );
-    // };
+    const claimFun = async () => {
+        await ClaimContractApi.claim(
+            account,
+            ethereum,
+            (transactionHash) => {
+                console.log('pending', transactionHash);
+            },
+            (receipt) => {
+                console.log('receipt', receipt);
+                setClaimBalance(0);
+            },
+            () => {
+                console.log('err');
+            }
+        );
+    };
 
-    // useEffect(async () => {
-    //     console.log(await ClaimContractApi.getClaimBalance(account));
-    // }, []);
+    useEffect(() => {
+        const getClaimBalance = async () => {
+            await ClaimContractApi.getClaimBalance(account).then((res) => {
+                setClaimBalance(res || 0);
+            });
+        };
+        getClaimBalance();
+    }, [account]);
 
     return (
         <div className="app-sidebar">
             <div className="top">
-                <a href="/" className="top-link">
+                <a
+                    href="/"
+                    className="top-link"
+                    target="_blank"
+                    rel="noreferrer"
+                >
                     {config.network === 'ethereum' ? (
-                        <img src={SidebarLogoEther} className="sidebar-logo" />
+                        <img
+                            src={SidebarLogoEther}
+                            className="sidebar-logo"
+                            alt=""
+                        />
                     ) : (
                         <img
                             src={SidebarLogoBinance}
                             className="sidebar-logo"
+                            alt=""
                         />
                     )}
                 </a>
@@ -110,7 +126,7 @@ export default function AppSidebar(props) {
                                     setShowTemplateChoose(true);
                                 }}
                             >
-                                <img src={PlusIcon} />
+                                <img src={PlusIcon} alt="" />
                                 {t('sidebar.create')}
                             </a>
                         </li>
@@ -125,7 +141,7 @@ export default function AppSidebar(props) {
                             activeClassName="active"
                             to="/community-projects"
                         >
-                            <img src={CommunityProjectIcon} />
+                            <img src={CommunityProjectIcon} alt="" />
                             {t('sidebar.communityProjects')}
                         </NavLink>
                     </li>
@@ -143,7 +159,7 @@ export default function AppSidebar(props) {
                             activeClassName="active"
                             to="/projects"
                         >
-                            <img src={CryptoMiningIcon} />
+                            <img src={CryptoMiningIcon} alt="" />
                             {t('sidebar.cryptoMining')}
                         </NavLink>
                     </li>
@@ -161,7 +177,7 @@ export default function AppSidebar(props) {
                             activeClassName="active"
                             to="/buy-dhm"
                         >
-                            <img src={BuyDHMIcon} />
+                            <img src={BuyDHMIcon} alt="" />
                             {t('sidebar.buyDHM')}
                         </NavLink>
                     </li>
@@ -179,7 +195,7 @@ export default function AppSidebar(props) {
                             activeClassName="active"
                             to="/farming"
                         >
-                            <img src={FarmingIcon} />
+                            <img src={FarmingIcon} alt="" />
                             {t('sidebar.farming')}
                         </NavLink>
                     </li>
@@ -197,7 +213,7 @@ export default function AppSidebar(props) {
                             activeClassName="active"
                             to="/coming/swap"
                         >
-                            <img src={MiningSwapIcon} />
+                            <img src={MiningSwapIcon} alt="" />
                             {t('sidebar.tokenSwap')}
                         </NavLink>
                     </li>
@@ -218,7 +234,7 @@ export default function AppSidebar(props) {
                             activeClassName="active"
                             to="/coming/dashboard"
                         >
-                            <img src={DashboardIcon} />
+                            <img src={DashboardIcon} alt="" />
                             {t('sidebar.dashboard')}
                         </NavLink>
                     </li>
@@ -232,7 +248,7 @@ export default function AppSidebar(props) {
                             activeClassName="active"
                             to="/blog"
                         >
-                            <img src={BlogIcon} />
+                            <img src={BlogIcon} alt="" />
                             {t('sidebar.blog')}
                         </NavLink>
                     </li>
@@ -253,14 +269,20 @@ export default function AppSidebar(props) {
         </ul> */}
             </div>
 
-            {/* <div
-                onClick={() => {
-                    console.log('claim');
-                    claimFun();
-                }}
-            >
-                claim
-            </div> */}
+            {claimBalance > 0 ? (
+                <div className="claim">
+                    <div
+                        className="claim-dada"
+                        onClick={() => {
+                            claimFun();
+                        }}
+                    >
+                        <p>{t('ClaimYourDADA')}</p>
+                    </div>
+                </div>
+            ) : (
+                ''
+            )}
 
             <div className="bottom">
                 <div className="more-links">

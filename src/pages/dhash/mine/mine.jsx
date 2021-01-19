@@ -349,8 +349,8 @@ const Mine = () => {
             .then((res) => {
                 console.log(res);
                 if (res.code === 200) {
-                    setRewardToClaim(
-                        Tools.toThousands(res.data.amount_pretty || 0)
+                    Tools.toThousands(
+                        Tools.fmtDec(res.data.amount_pretty, 8) || 0
                     );
                 }
             })

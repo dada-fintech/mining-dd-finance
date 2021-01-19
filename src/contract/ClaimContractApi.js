@@ -16,8 +16,6 @@ class ClaimContractApi {
             const balance = await contract.methods.can_claim().call({
                 from: address,
             });
-            console.log(balance);
-            console.log(Tools.numDivDecimals(balance, DDDECIMALS));
             return Tools.numDivDecimals(balance, DDDECIMALS);
         } catch (err) {
             console.log(err);
@@ -33,32 +31,35 @@ class ClaimContractApi {
     async claim(
         address = '',
         ethereum,
-        errorFun = () => {},
         pendingFun = () => {},
-        receiptFun = () => {}
+        receiptFun = () => {},
+        errorFun = () => {}
     ) {
         try {
-            console.log(address);
-            const web3c = new web3(ethereum);
-            const contract = new web3c.eth.Contract(claimabi, CLAIMROUTER);
+            const EthereumContract = new web3(ethereum);
+            const contract = new EthereumContract.eth.Contract(
+                claimabi,
+                CLAIMROUTER
+            );
+            
             return contract.methods
                 .claim()
                 .send({
                     from: address,
                 })
-                .on('error', function (error) {
-                    // console.log('error', error);
-                    errorFun();
-                })
                 .on('transactionHash', function (transactionHash) {
                     // console.log('pending...', transactionHash);
-                    // console.log(transactionHash);
                     pendingFun(transactionHash);
                     return transactionHash;
                 })
                 .on('receipt', (receipt) => {
                     // console.log('LptenTokenContract receipt', receipt);
-                    receiptFun();
+                    receiptFun(receipt);
+                    return receipt;
+                })
+                .on('error', function (error) {
+                    // console.log('error', error);
+                    errorFun();
                 });
         } catch (err) {
             console.log(err);
