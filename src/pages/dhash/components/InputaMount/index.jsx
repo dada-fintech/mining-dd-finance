@@ -32,31 +32,33 @@ const InputaMount = ({
                 className="inputaMount-content"
                 style={{ maxWidth: `${width || 310}px` }}
             >
-                <div className="input">
-                    <InputNumber
-                        autoFocus
-                        min={0}
-                        max={maxBalance || balance}
-                        type="number"
-                        defaultValue={''}
-                        placeholder={placeholder}
-                        onChange={(value) => onChangeSetVal(value)}
-                        value={val}
-                    />
-                    <div className="conf">
-                        <div className="max" onClick={onChangeMaxBalance}>
-                            MAX
+                <div className="input-box">
+                    <p className="balance">
+                        {t('v1_Balance_eth', {
+                            x: balance || 0,
+                            x1: balanceSumbol,
+                        })}
+                    </p>
+
+                    <div className="input-number">
+                        <InputNumber
+                            autoFocus
+                            min={0}
+                            max={maxBalance || balance}
+                            type="number"
+                            defaultValue={''}
+                            placeholder={placeholder}
+                            onChange={(value) => onChangeSetVal(value)}
+                            value={val}
+                        />
+                        <div className="conf">
+                            <div className="max" onClick={onChangeMaxBalance}>
+                                MAX
+                            </div>
+                            <span>{sumbol || 'USDT'}</span>
                         </div>
-                        <span>{sumbol || 'USDT'}</span>
                     </div>
                 </div>
-
-                <p className="balance">
-                    {t('v1_Balance_eth', {
-                        x: balance || 0,
-                        x1: balanceSumbol,
-                    })}
-                </p>
             </div>
         </div>
     );

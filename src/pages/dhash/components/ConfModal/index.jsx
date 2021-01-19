@@ -41,7 +41,7 @@ const BuyModal = ({
                         butText={butText}
                         disabled={disabled}
                         loading={buyButloading}
-                        butClassName={'operation-lightblue-but'}
+                        butClassName={'dd-lightblue-but'}
                         onChangeFun={buyFun}
                     />
                 </div>
