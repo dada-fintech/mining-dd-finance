@@ -513,12 +513,12 @@ const Mine = () => {
                     <div className="mine-content">
                         <div className="data-item box-left">
                             <div className="data">
-                                <div className="data-border cheese-box">
-                                    <div className="text price">
-                                        {t('v1_DHM_TOKEN_STAKED')}
-                                    </div>
+                                <div className="data-border cheese-box left-box">
                                     <div className="amount ">
                                         {userStaked || 0}
+                                    </div>
+                                    <div className="text price">
+                                        {t('v1_DHM_TOKEN_STAKED')}
                                     </div>
                                     <div className="start">
                                         <InputBoxMount
@@ -550,7 +550,7 @@ const Mine = () => {
 
                         <div className="data-item ">
                             <div className="data">
-                                <div className="data-border cheese-box">
+                                <div className="data-border cheese-box right-box">
                                     <div className="apy">
                                         <div className="value">
                                             {(isNaN(apy)
@@ -564,11 +564,11 @@ const Mine = () => {
                                         </div>
                                     </div>
                                     <img src={BTCIcon} className="icon" />
+                                    <div className="amount">
+                                        {rewardToClaim || 0}
+                                    </div>
                                     <div className="text price">
                                         {t('v1_wBTC_EARNED')}
-                                    </div>
-                                    <div className="amount ">
-                                        {rewardToClaim || 0}
                                     </div>
                                     <div className="claim">
                                         <BuyButton
