@@ -4,82 +4,93 @@
     overflow: hidden;
     display: inline-block;
     width: 100%;
+    margin-bottom: 20px;
     .inputaMount-content {
         width: 100%;
         max-width: $ButWidth;
         margin: 0 auto;
-        .input {
+        .input-box {
             width: 100%;
-            position: relative;
             display: inline-block;
-            input {
-                width: 100%;
-                height: 46px;
-                border: 1px solid rgba(21, 22, 61, 0.3);
-                box-sizing: border-box;
-                border-radius: 10px;
-                padding: 12px 8px;
-                line-height: 26px;
-                background-color: rgba(255, 255, 255, 0);
-                opacity: 0.8;
-                font-size: 18px;
-                outline: none;
-                -webkit-border-radius: 10px;
-                -moz-border-radius: 10px;
-                -ms-border-radius: 10px;
-                -o-border-radius: 10px;
+            border: 1px solid rgba(144, 136, 161, 0.2);
+            box-sizing: border-box;
+            border-radius: 5px;
+            padding: 5px;
+            position: relative;
+            .balance {
+                font-weight: normal;
+                font-size: 12px;
+                line-height: 20px;
+                text-align: right;
+                color: #9088a1;
             }
-            .ant-input-number {
-                width: 100%;
-                background-color: rgba(255, 255, 255, 0);
-                border: none;
-                height: 50px;
-                border-radius: 15px;
-                box-shadow: none !important;
-                .ant-input-number-handler-wrap {
-                    display: none;
-                }
-            }
-            .conf {
-                position: absolute;
-                top: 0;
-                right: 6px;
-                .max {
-                    width: 60px;
-                    height: 34px;
-                    line-height: 34px;
-                    border: 1px solid rgba(21, 22, 61, 0.3);
+            .input-number {
+                position: relative;
+                margin-top: 12px;
+                input {
+                    position: absolute;
+                    left: 0;
+                    width: calc(100% - 98px);
+                    height: 46px;
                     box-sizing: border-box;
                     border-radius: 10px;
-                    text-align: center;
-                    font-size: 16px;
+                    padding: 12px 8px;
+                    line-height: 26px;
+                    background-color: rgba(255, 255, 255, 0);
                     opacity: 0.8;
-                    display: inline-block;
-                    margin-right: 4px;
-                    cursor: pointer;
-                    color: rgba(21, 22, 61, 0.4);
-                    transition: all .3s;
-                    &:hover {
-                        background-color: white;
-                        color: $DarkColor;
+                    font-size: 18px;
+                    outline: none;
+                    color: #9088a1;
+                    -webkit-border-radius: 10px;
+                    -moz-border-radius: 10px;
+                    -ms-border-radius: 10px;
+                    -o-border-radius: 10px;
+                }
+                .ant-input-number {
+                    width: 100%;
+                    background-color: rgba(255, 255, 255, 0);
+                    border: none;
+                    height: 38px;
+                    border-radius: 15px;
+                    box-shadow: none !important;
+                    .ant-input-number-handler-wrap {
+                        display: none;
                     }
                 }
-                span {
-                    font-size: 18px;
-                    opacity: 0.8;
-                    height: 50px;
-                    line-height: 50px;
-                    color: #15163d;
-                    font-weight: 500;
+                .conf {
+                    position: absolute;
+                    top: 0;
+                    right: 6px;
+                    .max {
+                        line-height: 26px;
+                        padding: 0 6px;
+                        border: 1px solid $BgColor;
+                        box-sizing: border-box;
+                        border-radius: 5px;
+                        text-align: center;
+                        font-size: 16px;
+                        opacity: 0.8;
+                        display: inline-block;
+                        margin-right: 4px;
+                        cursor: pointer;
+                        color: $BgColor;
+                        transition: all 0.3s;
+                        &:hover {
+                            border: 1px solid $ddBlueBut;
+                            background-color: $ddBlueBut;
+                            color: white;
+                        }
+                    }
+                    span {
+                        font-size: 18px;
+                        opacity: 0.8;
+                        height: 50px;
+                        line-height: 50px;
+                        color: #15163d;
+                        font-weight: 500;
+                    }
                 }
             }
-        }
-        .balance {
-            font-weight: normal;
-            font-size: 18px;
-            line-height: 26px;
-            text-align: right;
-            // color: rgba(255, 255, 255, 0.5);
         }
     }
 }
@@ -92,14 +103,14 @@
         width: 100%;
         max-width: $BoxButWidth;
         margin: 0 auto;
-        .input {
+        .input-box {
             width: 100%;
             position: relative;
             display: inline-block;
             input {
                 width: 100%;
                 height: 50px;
-                border: 1px solid rgba(100,100,100, 0.3);
+                border: 1px solid rgba(100, 100, 100, 0.3);
                 box-sizing: border-box;
                 border-radius: 15px;
                 padding: 12px 8px;
@@ -116,7 +127,7 @@
                     width: 60px;
                     height: 34px;
                     line-height: 34px;
-                    border: 1px solid 1px solid rgba(100,100,100, 0.3);
+                    border: 1px solid 1px solid rgba(100, 100, 100, 0.3);
                     box-sizing: border-box;
                     border-radius: 10px;
                     text-align: center;
