@@ -23,7 +23,6 @@ import Coming from './pages/Coming';
 
 // dhash
 import Farming from './pages/Farming';
-import {useLocation, useHistory} from 'react-router-dom'
 
 import Buy from './pages/dhash/buy/buy.jsx';
 import Mine from './pages/dhash/mine/mine.jsx';
@@ -51,7 +50,7 @@ function App() {
   
     return (
         <ConfigProvider locale={i18n.language === 'en' ? enUS : zhCN}>
-            <div className={`App ${i18n.language} ${isCheese ? 'cheese-bg' : ''}`}>
+            <div className={`App ${i18n.language}`}>
                 <Router>
                     <Row>
                         <Col xs={0} lg={4} xxl={3}>
