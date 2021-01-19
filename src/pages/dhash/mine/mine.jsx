@@ -8,7 +8,7 @@ import BuyButton from '../components/BuyButton';
 import InputBoxMount from '../components/InputaMount';
 import UnlockWalletpage from '../components/UnlockWallet/UnlockWalletpage.jsx';
 import { useWallet } from 'use-wallet';
-import UserAddress from 'components/UserAddress'
+import UserAddress from 'components/UserAddress';
 import {
     contractTransaction,
     checkApprove,
@@ -506,7 +506,7 @@ const Mine = () => {
                     ) : (
                         ''
                     )}
-                    {account && <UserAddress address={account}/>}
+                    {account && <UserAddress address={account} />}
                     <div className="farming-top">
                         <img src={FarmerIcon} />
                         <div className="desc">{t('v1_EARN_wBTC')}</div>
@@ -543,7 +543,7 @@ const Mine = () => {
                                         disabled={
                                             disabled || user.dhm_pretty <= 0
                                         }
-                                        butClassName={'btn-blue'}
+                                        butClassName={'dd-lightblue-but'}
                                         onChangeFun={startFun}
                                     />
                                 </div>
@@ -577,7 +577,7 @@ const Mine = () => {
                                             loading={claimButLoading}
                                             butText={t('v1_CLAIM')}
                                             disabled={rewardToClaim <= 0}
-                                            butClassName={'btn-blue'}
+                                            butClassName={'dd-lightblue-but'}
                                             onChangeFun={claimFun}
                                         />
                                     </div>
@@ -594,7 +594,7 @@ const Mine = () => {
                         loading={stopButLoading}
                         butText={t('v1_STOP')}
                         disabled={userStaked <= 0}
-                        butClassName={'btn-blue'}
+                        butClassName={'dd-lightpink-but'}
                         onChangeFun={stopFun}
                     />
 

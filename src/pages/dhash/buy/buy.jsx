@@ -355,27 +355,28 @@ const Buy = () => {
                         </div>
                         <div className="desc">{t('v1_APY')}</div>
                     </div> */}
-                    {account && <UserAddress address={account}/>}
+                    {account && <UserAddress address={account} />}
                     <div className="buy-content">
                         <div className="data cheese-box">
                             <div className="apy-tag">
                                 <div className="value">
-                                 {(isNaN(apy) ? 0 : Tools.numFmt(apy * 100, 2)) || 0} %
+                                    {(isNaN(apy)
+                                        ? 0
+                                        : Tools.numFmt(apy * 100, 2)) || 0}{' '}
+                                    %
                                 </div>
                                 <div className="title">
                                     <div className="desc">{t('v1_APY')}</div>
                                 </div>
                             </div>
                             <div className="available-tag">
-                                <div className="value">
-                                    {available || 0}
-                                </div>
+                                <div className="value">{available || 0}</div>
                                 <div className="title">{t('v1_Available')}</div>
                             </div>
-                           
+
                             <div className="data-border">
-                                <img src={DHMIcon} className="coin-icon"/>
-                            <div className="amount price">
+                                <img src={DHMIcon} className="coin-icon" />
+                                <div className="amount price">
                                     ${currentPrice || 0}
                                 </div>
                                 <div className="text">
@@ -408,7 +409,7 @@ const Buy = () => {
                         loading={buyButLoading}
                         disabled={disabled || user.usdt_pretty <= 0}
                         butText={t('v1_BUY_but')}
-                        butClassName={'btn-blue'}
+                        butClassName={'dd-lightblue-but'}
                         onChangeFun={() => {
                             console.log('ApiAppBuyFun');
                             ApiAppBuyFun();

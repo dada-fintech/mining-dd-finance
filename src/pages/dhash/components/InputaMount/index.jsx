@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { InputNumber, Input } from 'antd';
+import { InputNumber } from 'antd';
 import './index.scss';
 
 const InputaMount = ({
