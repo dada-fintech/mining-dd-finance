@@ -4,36 +4,35 @@
     .InputaMount {
         display: block;
     }
-    .apy-tag{
+    .apy-tag {
         position: absolute;
-        top: 7px;
-        left: 17px;
+        top: 20px;
+        left: 20px;
         text-align: center;
-        .value{
+        .value {
             font-size: 18px;
         }
-        .title{
-            font-size: 12px;
+        .title {
+            font-size: 14px;
             color: rgba(21, 22, 61, 0.5);
         }
-
     }
-    .available-tag{
+    .available-tag {
         position: absolute;
-        top: 7px;
-        right: 23px;
+        top: 20px;
+        right: 20px;
         text-align: center;
-        .value{
+        .value {
             font-size: 18px;
         }
-        .title{
-            font-size: 12px;
+        .title {
+            font-size: 14px;
             text-decoration: underline;
         }
     }
-    .coin-icon{
+    .coin-icon {
         width: 86px;
-        margin: 44px auto 20px;
+        margin: 92px auto 20px;
     }
     .apy {
         margin-top: 32px;
@@ -56,7 +55,7 @@
             text-align: center;
         }
         .desc {
-            opacity: .5;
+            opacity: 0.5;
             font-size: 14px;
             line-height: 20px;
             text-align: center;
@@ -102,11 +101,11 @@
                     width: 300px;
                     margin: 5px;
                     // border: 1px solid rgba(255, 255, 255, 0.5);
-                    padding-bottom: 36px;
+                    padding-bottom: 22px;
                     border-radius: 15px;
                     display: inline-block;
                     .price {
-                        margin-top: 32px;
+                        margin-top: 20px;
                     }
                     .available {
                         margin-top: 24px;
@@ -166,7 +165,7 @@
     }
     @media screen and (max-width: $MobileWidth-M) {
         .buy-content {
-            max-width: 92%;
+            max-width: 98%;
             margin: 24px auto 0px auto;
             display: flex;
             flex-direction: row;
