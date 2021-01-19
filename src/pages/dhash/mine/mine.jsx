@@ -8,6 +8,7 @@ import BuyButton from '../components/BuyButton';
 import InputBoxMount from '../components/InputaMount';
 import UnlockWalletpage from '../components/UnlockWallet/UnlockWalletpage.jsx';
 import { useWallet } from 'use-wallet';
+import UserAddress from 'components/UserAddress'
 import {
     contractTransaction,
     checkApprove,
@@ -505,6 +506,7 @@ const Mine = () => {
                     ) : (
                         ''
                     )}
+                    {account && <UserAddress address={account}/>}
                     <div className="farming-top">
                         <img src={FarmerIcon} />
                         <div className="desc">{t('v1_EARN_wBTC')}</div>

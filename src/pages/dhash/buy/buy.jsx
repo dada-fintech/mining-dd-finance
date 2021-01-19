@@ -10,6 +10,7 @@ import BuyModal from '../components/ConfModal';
 import * as Tools from '../../../utils/Tools';
 import { useWallet } from 'use-wallet';
 import DHMIcon from 'assets/farming/dhm.svg';
+import UserAddress from 'components/UserAddress'
 
 import {
     ApiAppBuy,
@@ -354,6 +355,7 @@ const Buy = () => {
                         </div>
                         <div className="desc">{t('v1_APY')}</div>
                     </div> */}
+                    {account && <UserAddress address={account}/>}
                     <div className="buy-content">
                         <div className="data cheese-box">
                             <div className="apy-tag">

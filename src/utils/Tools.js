@@ -233,3 +233,13 @@ export function numDivDecimals(amount, decimals) {
 export function numDulDecimals(amount, decimals) {
     return mul(Number(amount || 0), Math.pow(10, Number(decimals || 0)));
 }
+
+
+export function copyText(text) {
+    const copied = document.createElement("input");
+    copied.setAttribute("value", text);
+    document.body.appendChild(copied);
+    copied.select();
+    document.execCommand("copy");
+    document.body.removeChild(copied);
+}
