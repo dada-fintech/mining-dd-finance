@@ -33,6 +33,6 @@ export const MINERS_STATS = 'https://wk-m.minebaba.com/monitor?id=2';
 export const ETHERSCAN_IO = 'https://etherscan.io/';
 
 // claim 合约地址
-export const CLAIMROUTER = '0x54559ad7ec464af2fc360b9405412ec8bb0f48ed';
+export const CLAIMROUTER = '0x23e1F12eC38eAba4317E13034aC3d1f48D4A5168';
 // DD 精度
 export const DDDECIMALS = 18;

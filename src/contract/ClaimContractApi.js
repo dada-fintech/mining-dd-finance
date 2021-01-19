@@ -10,17 +10,17 @@ class ClaimContractApi {
      * @param {*}
      * @param {*}
      */
-    async getClaimBalance() {
-        console.log(Wbe3Utils.eth);
+    async getClaimBalance(address = '') {
         try {
             const contract = new Wbe3Utils.eth.Contract(claimabi, CLAIMROUTER);
-            console.log(contract.methods.can_claim());
-            const balance = await contract.methods.can_claim();
+            const balance = await contract.methods.can_claim().call({
+                from: address,
+            });
             console.log(balance);
             console.log(Tools.numDivDecimals(balance, DDDECIMALS));
-            console.log(balance);
-        } catch (e) {
-            console.log(e);
+            return Tools.numDivDecimals(balance, DDDECIMALS);
+        } catch (err) {
+            console.log(err);
             return 0;
         }
     }
@@ -30,29 +30,39 @@ class ClaimContractApi {
      * @param {*}
      * @param {*}
      */
-    async claim() {
+    async claim(
+        address = '',
+        ethereum,
+        errorFun = () => {},
+        pendingFun = () => {},
+        receiptFun = () => {}
+    ) {
         try {
-            const contract = Wbe3Utils.eth.Contract(claimabi, CLAIMROUTER);
-            await contract.methods
-                .can_claim()
-                // .send({
-                //     from: userAddress,
-                // })
-                .on('error', (error) => {
-                    console.log('invoke coreContract.add error: ', error);
-                    return error;
+            console.log(address);
+            const web3c = new web3(ethereum);
+            const contract = new web3c.eth.Contract(claimabi, CLAIMROUTER);
+            return contract.methods
+                .claim()
+                .send({
+                    from: address,
                 })
-                .on('transactionHash', (transactionHash) => {
-                    console.log('coreContract.add pending ', transactionHash);
+                .on('error', function (error) {
+                    // console.log('error', error);
+                    errorFun();
+                })
+                .on('transactionHash', function (transactionHash) {
+                    // console.log('pending...', transactionHash);
+                    // console.log(transactionHash);
+                    pendingFun(transactionHash);
                     return transactionHash;
                 })
                 .on('receipt', (receipt) => {
-                    console.log('coreContract.add receipt', receipt);
-                    return receipt;
+                    // console.log('LptenTokenContract receipt', receipt);
+                    receiptFun();
                 });
-        } catch (e) {
-            console.log(e);
-            return 0;
+        } catch (err) {
+            console.log(err);
+            return false;
         }
     }
 }

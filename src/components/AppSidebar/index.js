@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Popover } from 'antd';
 import { NavLink, useLocation } from 'react-router-dom';
@@ -34,12 +34,15 @@ import WeixinQR from 'assets/qr-code.jpeg';
 import Linkedin from 'assets/socials/linkedin.svg';
 
 import ClaimContractApi from '../../contract/ClaimContractApi';
+import { useWallet } from 'use-wallet';
 
 export default function AppSidebar(props) {
     const { t } = useTranslation();
     const location = useLocation();
     const [showTemplateChoose, setShowTemplateChoose] = useState(false);
     const [hideCreate, setHideCreate] = useState(false);
+    const wallet = useWallet();
+    const { ethereum, account } = wallet;
     // const [currentRoute, setCurrentRoute] = useState('');
 
     const changeLanguage = (language) => {
@@ -62,8 +65,24 @@ export default function AppSidebar(props) {
         }
     }, [location]);
 
+    // const claimFun = async () => {
+    //     await ClaimContractApi.claim(
+    //         account,
+    //         ethereum,
+    //         () => {
+    //             console.log('err');
+    //         },
+    //         (transactionHash) => {
+    //             console.log('pending', transactionHash);
+    //         },
+    //         () => {
+    //             console.log('receipt');
+    //         }
+    //     );
+    // };
+
     // useEffect(async () => {
-    //     console.log(await ClaimContractApi.getClaimBalance());
+    //     console.log(await ClaimContractApi.getClaimBalance(account));
     // }, []);
 
     return (
@@ -234,6 +253,15 @@ export default function AppSidebar(props) {
             <li><Link to="/coming/governance"><img src={GovernanceIcon} />{t('sidebar.governance')}</Link></li>
         </ul> */}
             </div>
+
+            {/* <div
+                onClick={() => {
+                    console.log('claim');
+                    claimFun();
+                }}
+            >
+                claim
+            </div> */}
 
             <div className="bottom">
                 <div className="more-links">

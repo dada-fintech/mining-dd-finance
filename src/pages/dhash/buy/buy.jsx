@@ -236,6 +236,7 @@ const Buy = () => {
                             () => {
                                 checkApprove(account, 'USDT', () => {
                                     console.log('授权成功');
+                                    setModalState(4);
                                     contractTransaction(
                                         account,
                                         res.data.txs[1].contract,
@@ -261,7 +262,6 @@ const Buy = () => {
                             },
                             () => {
                                 setBuyButLoading(false);
-                                // setIsApprove(0);
                                 setVisible(false);
                             }
                         );
@@ -376,7 +376,11 @@ const Buy = () => {
                             </div>
                             <InputaMount
                                 balance={user.usdt_pretty || 0}
-                                maxBalance={balance || 0}
+                                maxBalance={
+                                    balance >= available
+                                        ? available
+                                        : balance || 0
+                                }
                                 onConfirm={getInputaMountNumber}
                                 sumbol={OFFICIAL_SYMBOL}
                                 balanceSumbol={'USDT'}

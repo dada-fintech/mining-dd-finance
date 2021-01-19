@@ -25,6 +25,7 @@ import {
     ApiUserStaked,
     ApiAppSellprice,
     ApiTotalRewarded,
+    ApiAppTotalBurnt,
 } from '../../../services/index.js';
 import {
     REWARD_SYMBOL,
@@ -179,6 +180,7 @@ const Mine = () => {
                             res.data.txs[0].calldata,
                             () => {
                                 checkApprove(account, 'DHM', () => {
+                                    setModalState(4);
                                     contractTransaction(
                                         account,
                                         res.data.txs[1].contract,
@@ -195,16 +197,16 @@ const Mine = () => {
                                             }, EXECUTION_TIME);
                                         },
                                         () => {
-                                            setModalState(-1);
                                             setStakeButLoading(false);
                                             setVisible(false);
+                                            setModalState(-1);
                                         }
                                     );
                                 });
                             },
                             () => {
-                                // setIsApprove(0);
                                 setVisible(false);
+                                setStakeButLoading(false);
                             }
                         );
                     } else {
@@ -314,7 +316,7 @@ const Mine = () => {
                 console.log(res);
                 if (res.code === 200) {
                     setTokenStaken(res.data.amount_pretty);
-                    getApiAvailable(res.data.amount_pretty);
+                    getApiAppTotalBurnt(res.data.amount_pretty);
                     getApiLatestepochReward(res.data.amount_pretty);
                 }
             })
@@ -376,8 +378,23 @@ const Mine = () => {
             });
     };
 
+    // 总校销毁量 total Burned
+    const getApiAppTotalBurnt = async (totalSupply) => {
+        ApiAppTotalBurnt()
+            .then((res) => {
+                console.log(res);
+                if (res.code === 200) {
+                    getApiAvailable(totalSupply, res.data.total_pretty || 0);
+                }
+            })
+            .catch((err) => {
+                console.log('发生错误！', err);
+                return 0;
+            });
+    };
+
     // 流通量
-    const getApiAvailable = async (staken) => {
+    const getApiAvailable = async (staken, totalBurnt) => {
         await ApiAppSupply()
             .then((res) => {
                 console.log(res);
@@ -388,7 +405,13 @@ const Mine = () => {
                         res.data.amount_pretty <= 0
                             ? 0
                             : Tools.fmtDec(
-                                  Tools.div(staken, res.data.amount_pretty),
+                                  Tools.div(
+                                      staken,
+                                      Tools.sub(
+                                          res.data.amount_pretty,
+                                          totalBurnt
+                                      )
+                                  ),
                                   4
                               )
                     );
@@ -601,7 +624,7 @@ const Mine = () => {
                                 : modalState === 3
                                 ? t('v1_BACK')
                                 : modalState === 4
-                                ? t('v1_BUY_but')
+                                ? t('v1_START')
                                 : modalState === -1
                                 ? t('v1_Fail')
                                 : ''
