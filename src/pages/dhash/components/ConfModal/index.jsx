@@ -33,9 +33,9 @@ const BuyModal = ({
         >
             <div className="buy-modal">
                 <div className="buy-modal-content">
+                    <div className="text">{text || ''}</div>
                     <div className="amount">{Tools.numFmt(amount, 4) || 0}</div>
                     <div className="wei">{'DHM' || ''}</div>
-                    <div className="text">{text || ''}</div>
 
                     <BuyButton
                         butText={butText}

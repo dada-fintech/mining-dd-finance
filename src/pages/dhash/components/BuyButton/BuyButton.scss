@@ -11,8 +11,14 @@
         display: inline-block;
         margin: 0 auto;
         text-align: center;
-        .btn-cheese{
+        .btn-cheese {
             width: 300px;
+        }
+        .ant-btn.ant-btn-loading:not([disabled]) {
+            color: $DarkColor;
+        }
+        .ant-btn > .ant-btn-loading-icon {
+            color: #1890ff;
         }
         // background: linear-gradient(
         //         131.99deg,

@@ -96,7 +96,7 @@ const Mine = () => {
     };
 
     // BTC当日价格 昨日分发BTC
-    const getApiLatestepochReward = async (staken) => {
+    const getApiLatestepochReward = async (tokenStaken) => {
         await ApiLatestepochReward()
             .then((res) => {
                 console.log(res);
@@ -258,6 +258,7 @@ const Mine = () => {
                             message.warning(t('v1_Pendding'));
                             setTimeout(() => {
                                 getApiAppUserBalances();
+                                getApiToClaimBalances();
                             }, EXECUTION_TIME);
                         },
                         () => {
@@ -348,8 +349,8 @@ const Mine = () => {
             .then((res) => {
                 console.log(res);
                 if (res.code === 200) {
-                    setRewardToClaim(
-                        Tools.toThousands(res.data.amount_pretty || 0)
+                    Tools.toThousands(
+                        Tools.fmtDec(res.data.amount_pretty, 8) || 0
                     );
                 }
             })
@@ -574,9 +575,7 @@ const Mine = () => {
                                             loading={claimButLoading}
                                             butText={t('v1_CLAIM')}
                                             disabled={rewardToClaim <= 0}
-                                            butClassName={
-                                                'btn-cheese'
-                                            }
+                                            butClassName={'btn-cheese'}
                                             onChangeFun={claimFun}
                                         />
                                     </div>

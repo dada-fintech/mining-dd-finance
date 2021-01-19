@@ -21,7 +21,7 @@
         position: relative;
         // background: #fff;
         &::before {
-            content: "";
+            content: '';
             display: block;
             position: absolute;
             left: 0;
@@ -88,7 +88,8 @@
     }
     .network-switch {
         background: #fcfcfe;
-        box-shadow: inset -1px -1px 1px rgba(0, 0, 0, 0.25), inset 1px 1px 1px rgba(255, 255, 255, 0.25);
+        box-shadow: inset -1px -1px 1px rgba(0, 0, 0, 0.25),
+            inset 1px 1px 1px rgba(255, 255, 255, 0.25);
         border-radius: 20px;
         padding: 8px 16px;
         font-size: 14px;
@@ -135,6 +136,58 @@
             }
         }
     }
+
+    .claim {
+        width: 100%;
+        background-color: white;
+        padding: 0 20px;
+        .claim-dada {
+            cursor: pointer;
+            padding: 2px;
+            background: linear-gradient(
+                    131.99deg,
+                    #15163d 10.18%,
+                    rgba(255, 255, 255, 0) 67.86%
+                ),
+                radial-gradient(
+                    210% 1290.56% at 100% 100%,
+                    rgba(241, 191, 94, 0.31) 0%,
+                    rgba(255, 168, 0, 0) 100%
+                );
+            border-radius: 16px;
+            -webkit-border-radius: 16px;
+            -moz-border-radius: 16px;
+            -ms-border-radius: 16px;
+            -o-border-radius: 16px;
+            p {
+                width: auto;
+                height: 32px;
+                border-radius: 16px;
+                font-size: 14px;
+                align-items: center;
+                display: flex;
+                justify-content: center;
+                color: #15163d;
+                background-color: white;
+                border-image-source: linear-gradient(
+                        96.06deg,
+                        #15163d -17.03%,
+                        rgba(72, 204, 204, 0) 79.76%
+                    ),
+                    linear-gradient(
+                        271.22deg,
+                        #af8686 -14.86%,
+                        rgba(255, 255, 255, 0) 74.69%
+                    );
+
+                -webkit-border-radius: 16px;
+                -moz-border-radius: 16px;
+                -ms-border-radius: 16px;
+                -o-border-radius: 16px;
+            }
+        }
+    }
+
     .bottom {
         height: 100%;
         background: #fff;
