@@ -10,15 +10,15 @@ import LogoBlue from 'assets/logo-blue.svg';
 import NetworkEthereum from 'assets/network-ethereum.svg';
 import NetworkBinance from 'assets/network-binance.svg';
 
-import SidebarLogoEther from "assets/sidebar-logo-ether.svg";
-import SidebarLogoBinance from "assets/sidebar-logo-binance.svg";
-import CryptoMiningIcon from 'assets/sidebar/crypto-mining.svg'
-import CommunityProjectIcon from 'assets/sidebar/community-project.svg'
-import PlusIcon from 'assets/sidebar/plus.svg'
-import MiningSwapIcon from 'assets/sidebar/mining-swap.svg'
-import DashboardIcon from 'assets/sidebar/dashboard.svg'
-import BuyDHMIcon from 'assets/sidebar/buy-dhm.svg'
-import FarmingIcon from 'assets/sidebar/farming.svg'
+import SidebarLogoEther from 'assets/sidebar-logo-ether.svg';
+import SidebarLogoBinance from 'assets/sidebar-logo-binance.svg';
+import CryptoMiningIcon from 'assets/sidebar/crypto-mining.svg';
+import CommunityProjectIcon from 'assets/sidebar/community-project.svg';
+import PlusIcon from 'assets/sidebar/plus.svg';
+import MiningSwapIcon from 'assets/sidebar/mining-swap.svg';
+import DashboardIcon from 'assets/sidebar/dashboard.svg';
+import BuyDHMIcon from 'assets/sidebar/buy-dhm.svg';
+import FarmingIcon from 'assets/sidebar/farming.svg';
 
 // import OverviewIcon from 'assets/sidebar/overview.svg'
 // import QuickSwapIcon from 'assets/sidebar/quick-swap.svg'
@@ -33,12 +33,23 @@ import Weixin from 'assets/socials/weixin.svg';
 import WeixinQR from 'assets/qr-code.jpeg';
 import Linkedin from 'assets/socials/linkedin.svg';
 
+import ClaimContractApi from '../../contract/ClaimContractApi';
+
 export default function AppSidebar(props) {
     const { t } = useTranslation();
     const location = useLocation();
     const [showTemplateChoose, setShowTemplateChoose] = useState(false);
     const [hideCreate, setHideCreate] = useState(false);
     // const [currentRoute, setCurrentRoute] = useState('');
+
+    const changeLanguage = (language) => {
+        localStorage.setItem('language', language);
+        i18n.changeLanguage(language);
+    };
+    const WeixinContent = (
+        <img src={WeixinQR} style={{ width: '140px' }} alt="" />
+    );
+
     useEffect(() => {
         console.log(location.pathname);
         if (
@@ -50,54 +61,172 @@ export default function AppSidebar(props) {
             setHideCreate(false);
         }
     }, [location]);
-    const changeLanguage = (language) => {
-        localStorage.setItem('language', language);
-        i18n.changeLanguage(language);
-    };
-    const WeixinContent = (
-        <img src={WeixinQR} style={{ width: '140px' }} alt="" />
-    );
 
-    return (<div className="app-sidebar">
-        <div className="top">
-            <a href="/" className="top-link">
-                {config.network === 'ethereum' ? <img src={SidebarLogoEther} className="sidebar-logo" /> :
-                    <img src={SidebarLogoBinance} className="sidebar-logo" />}
-            </a>
-            <ul className="nav">
-                {!hideCreate && <li>
-                    <a className={`nowrap ${location.pathname === '/community-projects' ? 'bottom-curve' : ''}`} onClick={() => { setShowTemplateChoose(true) }}>
-                        <img src={PlusIcon} />{t('sidebar.create')}</a>
-                </li>}
-                <li>
-                    <NavLink className={`nowrap ${location.pathname === '/projects' ? 'bottom-curve' : ''}`} activeClassName="active" to="/community-projects"><img src={CommunityProjectIcon} />{t('sidebar.communityProjects')}</NavLink>
-                </li>
-                <li>
-                    <NavLink className={`nowrap ${location.pathname === '/community-projects' ? 'top-curve' : ''} ${location.pathname === '/buy-dhm' ? 'bottom-curve' : ''}`} activeClassName="active" to="/projects"><img src={CryptoMiningIcon} />{t('sidebar.cryptoMining')}</NavLink>
-                </li>
-                <li>
-                    <NavLink className={`nowrap ${location.pathname === '/projects' ? 'top-curve' : ''} ${location.pathname === '/farming' ? 'bottom-curve' : ''}`} activeClassName="active" to="/buy-dhm"><img src={BuyDHMIcon} />{t('sidebar.buyDHM')}</NavLink>
-                </li>
-                <li>
-                    <NavLink className={`nowrap ${location.pathname === '/buy-dhm' ? 'top-curve' : ''} ${location.pathname === '/coming/swap' ? 'bottom-curve' : ''}`} activeClassName="active" to="/farming"><img src={FarmingIcon} />{t('sidebar.farming')}</NavLink>
-                </li>
-                <li>
-                    <NavLink className={`nowrap ${location.pathname === '/farming' ? 'top-curve' : ''} ${location.pathname === '/coming/dashboard' ? 'bottom-curve' : ''}`} activeClassName="active" to="/coming/swap"><img src={MiningSwapIcon} />{t('sidebar.tokenSwap')}</NavLink>
-                </li>
-                {/* <li>
+    // useEffect(async () => {
+    //     console.log(await ClaimContractApi.getClaimBalance());
+    // }, []);
+
+    return (
+        <div className="app-sidebar">
+            <div className="top">
+                <a href="/" className="top-link">
+                    {config.network === 'ethereum' ? (
+                        <img src={SidebarLogoEther} className="sidebar-logo" />
+                    ) : (
+                        <img
+                            src={SidebarLogoBinance}
+                            className="sidebar-logo"
+                        />
+                    )}
+                </a>
+                <ul className="nav">
+                    {!hideCreate && (
+                        <li>
+                            <a
+                                className={`nowrap ${
+                                    location.pathname === '/community-projects'
+                                        ? 'bottom-curve'
+                                        : ''
+                                }`}
+                                onClick={() => {
+                                    setShowTemplateChoose(true);
+                                }}
+                            >
+                                <img src={PlusIcon} />
+                                {t('sidebar.create')}
+                            </a>
+                        </li>
+                    )}
+                    <li>
+                        <NavLink
+                            className={`nowrap ${
+                                location.pathname === '/projects'
+                                    ? 'bottom-curve'
+                                    : ''
+                            }`}
+                            activeClassName="active"
+                            to="/community-projects"
+                        >
+                            <img src={CommunityProjectIcon} />
+                            {t('sidebar.communityProjects')}
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            className={`nowrap ${
+                                location.pathname === '/community-projects'
+                                    ? 'top-curve'
+                                    : ''
+                            } ${
+                                location.pathname === '/buy-dhm'
+                                    ? 'bottom-curve'
+                                    : ''
+                            }`}
+                            activeClassName="active"
+                            to="/projects"
+                        >
+                            <img src={CryptoMiningIcon} />
+                            {t('sidebar.cryptoMining')}
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            className={`nowrap ${
+                                location.pathname === '/projects'
+                                    ? 'top-curve'
+                                    : ''
+                            } ${
+                                location.pathname === '/farming'
+                                    ? 'bottom-curve'
+                                    : ''
+                            }`}
+                            activeClassName="active"
+                            to="/buy-dhm"
+                        >
+                            <img src={BuyDHMIcon} />
+                            {t('sidebar.buyDHM')}
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            className={`nowrap ${
+                                location.pathname === '/buy-dhm'
+                                    ? 'top-curve'
+                                    : ''
+                            } ${
+                                location.pathname === '/coming/swap'
+                                    ? 'bottom-curve'
+                                    : ''
+                            }`}
+                            activeClassName="active"
+                            to="/farming"
+                        >
+                            <img src={FarmingIcon} />
+                            {t('sidebar.farming')}
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            className={`nowrap ${
+                                location.pathname === '/farming'
+                                    ? 'top-curve'
+                                    : ''
+                            } ${
+                                location.pathname === '/coming/dashboard'
+                                    ? 'bottom-curve'
+                                    : ''
+                            }`}
+                            activeClassName="active"
+                            to="/coming/swap"
+                        >
+                            <img src={MiningSwapIcon} />
+                            {t('sidebar.tokenSwap')}
+                        </NavLink>
+                    </li>
+                    {/* <li>
                     <NavLink className={`nowrap ${location.pathname === '/dhash/buy' ? 'top-curve' : ''} ${location.pathname === '/dhash/buy' ? 'bottom-curve' : ''}`} activeClassName="active" to="/dhash/buy"><img src={DashboardIcon} />{t('v1_BUY')}</NavLink>
                 </li> */}
-                <li>
-                    <NavLink className={`nowrap ${location.pathname === '/coming/swap' ? 'top-curve' : ''} ${location.pathname === '/blog' ? 'bottom-curve' : ''}`} activeClassName="active" to="/coming/dashboard"><img src={DashboardIcon} />{t('sidebar.dashboard')}</NavLink>
-                </li>
-                <li>
-                    <NavLink className={`nowrap ${location.pathname === '/coming/dashboard' ? 'top-curve' : ''}`} activeClassName="active" to="/blog"><img src={BlogIcon} />{t('sidebar.blog')}</NavLink>
-                </li>
-                <li>
-                    <a className={`nowrap ${location.pathname === '/blog' ? 'top-curve' : ''}`}></a>
-                </li>
-            </ul>
-            {/* <ul className="nav second">
+                    <li>
+                        <NavLink
+                            className={`nowrap ${
+                                location.pathname === '/coming/swap'
+                                    ? 'top-curve'
+                                    : ''
+                            } ${
+                                location.pathname === '/blog'
+                                    ? 'bottom-curve'
+                                    : ''
+                            }`}
+                            activeClassName="active"
+                            to="/coming/dashboard"
+                        >
+                            <img src={DashboardIcon} />
+                            {t('sidebar.dashboard')}
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            className={`nowrap ${
+                                location.pathname === '/coming/dashboard'
+                                    ? 'top-curve'
+                                    : ''
+                            }`}
+                            activeClassName="active"
+                            to="/blog"
+                        >
+                            <img src={BlogIcon} />
+                            {t('sidebar.blog')}
+                        </NavLink>
+                    </li>
+                    <li>
+                        <a
+                            className={`nowrap ${
+                                location.pathname === '/blog' ? 'top-curve' : ''
+                            }`}
+                        ></a>
+                    </li>
+                </ul>
+                {/* <ul className="nav second">
             <li>
                 <Link to="/coming/overview"><img src={OverviewIcon} />{t('sidebar.overview')}</Link>
             </li>

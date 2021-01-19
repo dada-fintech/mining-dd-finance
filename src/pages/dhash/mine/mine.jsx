@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { message, Alert } from 'antd';
-import Header from 'components/Header'
+import Header from 'components/Header';
 import FarmerIcon from 'assets/sidebar/farming.svg';
 import BTCIcon from 'assets/farming/btc.svg';
 import BuyButton from '../components/BuyButton';
@@ -463,7 +463,7 @@ const Mine = () => {
 
     return (
         <div className="mine-page">
-        <Header hideAction={true} />
+            <Header hideAction={true} />
 
             {wallet && !account && status !== 'connected' ? (
                 <UnlockWalletpage />
@@ -487,9 +487,9 @@ const Mine = () => {
                     </div>
 
                     <div className="mine-content">
-                        <div className="data-item cheese-box box-left">
+                        <div className="data-item  box-left">
                             <div className="data">
-                                <div className="data-border">
+                                <div className="data-border cheese-box">
                                     <div className="text price">
                                         {t('v1_DHM_TOKEN_STAKED')}
                                     </div>
@@ -524,9 +524,9 @@ const Mine = () => {
                             </div>
                         </div>
 
-                        <div className="data-item cheese-box">
+                        <div className="data-item ">
                             <div className="data">
-                                <div className="data-border">
+                                <div className="data-border cheese-box">
                                     <div className="apy">
                                         <div className="value">
                                             {(isNaN(apy)

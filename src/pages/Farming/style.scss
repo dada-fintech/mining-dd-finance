@@ -1,4 +1,19 @@
 .farming-page {
+    .farming-top {
+        .title {
+            font-size: 18px;
+            line-height: 22px;
+            color: #15163d;
+        }
+        .desc {
+            margin-top: 20px;
+            font-size: 14px;
+            line-height: 22%;
+            margin-bottom: 26px;
+            color: #15163d;
+            margin-bottom: 35px;
+        }
+    }
     .farming-item {
         text-align: center;
         .icon {
@@ -6,30 +21,51 @@
             margin: 26px auto 18px;
         }
         .title {
-            font-size: 24px;
-            line-height: 145%;
+            font-size: 18px;
+            line-height: 36px;
+            color: #15163d;
+            font-weight: 500px;
         }
         .desc {
             font-size: 14px;
-            line-height: 145%;
-            margin-bottom: 26px;
+            line-height: 22px;
+            color: #15163d;
         }
-        .ant-btn{
-            width:80%;
+        .ant-btn {
+            width: 80%;
             margin: 0 auto 16px;
             line-height: 1;
+            height: 48px;
         }
         .apy-box {
             color: #9088a1;
-            padding: 2px 10px;
-            font-size:14px;
+            padding: 4px 10px;
+            font-size: 14px;
             background: #ffffff;
             border: 1px solid #c4c4c4;
             border-radius: 10px;
-            margin: 0 16px 4px;
+            margin: 0 16px 6px;
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
+    }
+    .cheese-box {
+        background: #fcf7df;
+        border-radius: 10px;
+        position: relative;
+        border: 4px solid #f7eedd;
+        // &::after {
+        //     content: "";
+        //     position: absolute;
+        //     z-index: -10;
+        //     top: -5px;
+        //     left: -5px;
+        //     right: -5px;
+        //     bottom: -5px;
+        //     background: linear-gradient(131.99deg, #ffffff 10.18%, rgba(255, 255, 255, 0) 67.86%),
+        //         radial-gradient(210% 1290.56% at 100% 100%, rgba(241, 191, 94, 0.31) 0%, rgba(255, 168, 0, 0) 100%);
+        //     border-radius: 10px;
+        // }
     }
 }

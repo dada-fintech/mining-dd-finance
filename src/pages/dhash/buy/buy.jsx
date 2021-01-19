@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import Header from 'components/Header'
+import Header from 'components/Header';
 import { message, Alert } from 'antd';
 import { useHistory } from 'react-router-dom';
 import InputaMount from '../components/InputaMount';
@@ -354,7 +354,7 @@ const Buy = () => {
                     </div>
                     <div className="buy-content">
                         <div className="data cheese-box">
-                            <div className="data-border">
+                            <div className="data-border ">
                                 <div className="amount price">
                                     ${currentPrice || 0}
                                 </div>

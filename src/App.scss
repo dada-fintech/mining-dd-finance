@@ -1,12 +1,32 @@
-@import "~antd/dist/antd.css";
+@import '~antd/dist/antd.css';
 .App {
     word-break: break-all;
     color: #15163d;
-    background: radial-gradient(57.44% 57.44% at 36.11% 100%, #ffebc4 0%, rgba(255, 255, 255, 0) 100%),
-        radial-gradient(50% 66.76% at 23.92% 50%, rgba(131, 156, 220, 0.17) 0%, rgba(255, 255, 255, 0) 100%),
-        radial-gradient(44.76% 114.58% at 100% 58.44%, rgba(255, 229, 137, 0.54) 0%, rgba(255, 255, 255, 0) 100%),
-        radial-gradient(93.02% 109.47% at 0% 0%, rgba(255, 0, 0, 0.25) 0%, rgba(255, 255, 255, 0) 65.72%),
-        radial-gradient(74.31% 190.22% at 100% 0%, rgba(72, 204, 204, 0.21) 0%, rgba(255, 255, 255, 0) 100%);
+    background: radial-gradient(
+            57.44% 57.44% at 36.11% 100%,
+            #ffebc4 0%,
+            rgba(255, 255, 255, 0) 100%
+        ),
+        radial-gradient(
+            50% 66.76% at 23.92% 50%,
+            rgba(131, 156, 220, 0.17) 0%,
+            rgba(255, 255, 255, 0) 100%
+        ),
+        radial-gradient(
+            44.76% 114.58% at 100% 58.44%,
+            rgba(255, 229, 137, 0.54) 0%,
+            rgba(255, 255, 255, 0) 100%
+        ),
+        radial-gradient(
+            93.02% 109.47% at 0% 0%,
+            rgba(255, 0, 0, 0.25) 0%,
+            rgba(255, 255, 255, 0) 65.72%
+        ),
+        radial-gradient(
+            74.31% 190.22% at 100% 0%,
+            rgba(72, 204, 204, 0.21) 0%,
+            rgba(255, 255, 255, 0) 100%
+        );
     @media screen and (max-width: 992px) {
         word-break: unset;
     }
@@ -38,8 +58,10 @@ li {
 }
 
 .container {
-    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Myriad Pro", "Hiragino Sans GB", "Microsoft YaHei",
-        "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Myriad Pro',
+        'Hiragino Sans GB', 'Microsoft YaHei', 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
     width: 100%;
     padding-right: 16px;
     padding-left: 16px;
@@ -165,25 +187,6 @@ li {
         font-size: 18px;
         line-height: 21px;
     }
-}
-
-.cheese-box {
-    background: #fcf7df;
-    border-radius: 10px;
-    position: relative;
-    border: 4px solid #f7eedd;
-    // &::after {
-    //     content: "";
-    //     position: absolute;
-    //     z-index: -10;
-    //     top: -5px;
-    //     left: -5px;
-    //     right: -5px;
-    //     bottom: -5px;
-    //     background: linear-gradient(131.99deg, #ffffff 10.18%, rgba(255, 255, 255, 0) 67.86%),
-    //         radial-gradient(210% 1290.56% at 100% 100%, rgba(241, 191, 94, 0.31) 0%, rgba(255, 168, 0, 0) 100%);
-    //     border-radius: 10px;
-    // }
 }
 
 .input-box {
@@ -426,8 +429,8 @@ img {
             opacity: 1;
         }
         &::after {
-            content: "";
-            background: url("./assets/breadcrumb-arrow.svg") no-repeat;
+            content: '';
+            background: url('./assets/breadcrumb-arrow.svg') no-repeat;
             display: inline-block;
             width: 10px;
             height: 10px;
@@ -450,8 +453,8 @@ img {
             color: #15163d;
         }
         &::after {
-            content: "";
-            background: url("./assets/main-breadcrumb-arrow.svg") no-repeat;
+            content: '';
+            background: url('./assets/main-breadcrumb-arrow.svg') no-repeat;
             display: inline-block;
             width: 10px;
             height: 10px;
@@ -527,7 +530,7 @@ img {
             white-space: nowrap;
         }
         &::before {
-            content: "";
+            content: '';
             position: absolute;
             width: 0;
             height: 100%;

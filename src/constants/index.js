@@ -31,3 +31,8 @@ export const EXECUTION_TIME = 15000;
 
 export const MINERS_STATS = 'https://wk-m.minebaba.com/monitor?id=2';
 export const ETHERSCAN_IO = 'https://etherscan.io/';
+
+// claim 合约地址
+export const CLAIMROUTER = '0x54559ad7ec464af2fc360b9405412ec8bb0f48ed';
+// DD 精度
+export const DDDECIMALS = 18;
