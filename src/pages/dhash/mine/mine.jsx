@@ -487,7 +487,7 @@ const Mine = () => {
                     </div>
 
                     <div className="mine-content">
-                        <div className="data-item  box-left">
+                        <div className="data-item box-left">
                             <div className="data">
                                 <div className="data-border cheese-box">
                                     <div className="text price">
@@ -517,7 +517,7 @@ const Mine = () => {
                                         disabled={
                                             disabled || user.dhm_pretty <= 0
                                         }
-                                        butClassName={'operation-light-cheese'}
+                                        butClassName={'btn-cheese'}
                                         onChangeFun={startFun}
                                     />
                                 </div>
@@ -552,7 +552,7 @@ const Mine = () => {
                                             butText={t('v1_CLAIM')}
                                             disabled={rewardToClaim <= 0}
                                             butClassName={
-                                                'operation-light-cheese'
+                                                'btn-cheese'
                                             }
                                             onChangeFun={claimFun}
                                         />
@@ -570,7 +570,7 @@ const Mine = () => {
                         loading={stopButLoading}
                         butText={t('v1_STOP')}
                         disabled={userStaked <= 0}
-                        butClassName={'operation-light-cheese'}
+                        butClassName={'btn-cheese'}
                         onChangeFun={stopFun}
                     />
 

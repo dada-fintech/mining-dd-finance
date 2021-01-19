@@ -5,9 +5,9 @@ import {
     Redirect,
 } from 'react-router-dom';
 import './App.scss';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import AppSidebar from 'components/AppSidebar';
-import { useWallet } from 'use-wallet';
+// import { useWallet } from 'use-wallet';
 import { Row, Col } from 'antd';
 
 import i18n from 'i18next';
@@ -26,6 +26,7 @@ import Coming from './pages/Coming';
 // import BuyDHM from './pages/BuyDHM'
 // dhash
 import Farming from './pages/Farming';
+import {useLocation, useHistory} from 'react-router-dom'
 
 import Buy from './pages/dhash/buy/buy.jsx';
 import Mine from './pages/dhash/mine/mine.jsx';
@@ -50,19 +51,25 @@ i18n.use(initReactI18next) // passes i18n down to react-i18next
 
 function App() {
     const { i18n } = useTranslation();
+    const [isCheese, setIsCheese] = useState(false)
     // const wallet = useWallet();
 
-    // useEffect(() => {
-    //     wallet.connect();
-    // }, [wallet]);
+    const routeChange = (path) => {
+        if(path === '/farming' || path === '/farming-detail' || path === '/buy-dhm'){
+            setIsCheese(true)
+        }else{
+            setIsCheese(false)
+
+        }
+    }
 
     return (
         <ConfigProvider locale={i18n.language === 'en' ? enUS : zhCN}>
-            <div className={`App ${i18n.language}`}>
+            <div className={`App ${i18n.language} ${isCheese ? 'cheese-bg' : ''}`}>
                 <Router>
                     <Row>
                         <Col xs={0} lg={4} xxl={3}>
-                            <AppSidebar />
+                            <AppSidebar routeChange={(path) => {routeChange(path)}}/>
                         </Col>
                         <Col xs={24} lg={20} xxl={21}>
                             <div className="content-wrapper">

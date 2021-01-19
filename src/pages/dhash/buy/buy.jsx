@@ -452,7 +452,7 @@ const Buy = () => {
                             ApiAppBuyFun();
                             break;
                         case 3:
-                            history.push('/mine');
+                            history.push('/farming');
                             break;
                         case -1:
                             setVisible(false);

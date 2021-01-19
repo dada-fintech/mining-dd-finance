@@ -26,9 +26,8 @@ export default function Farming() {
                             <img src={DHMIcon} className="icon" />
                             <div className="title">Miner Hashrate</div>
                             <div className="desc">
-                                Deposit DADA <br />
+                                Deposit DADA <br />Earn DHM
                             </div>
-                            <div>Earn DHM</div>
                             <Link to="/farming-detail">
                                 <Button className="btn-cheese">Select</Button>
                             </Link>

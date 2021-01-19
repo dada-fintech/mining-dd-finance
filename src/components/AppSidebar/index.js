@@ -38,6 +38,7 @@ import ClaimContractApi from '../../contract/ClaimContractApi';
 export default function AppSidebar(props) {
     const { t } = useTranslation();
     const location = useLocation();
+    const {routeChange} = props
     const [showTemplateChoose, setShowTemplateChoose] = useState(false);
     const [hideCreate, setHideCreate] = useState(false);
     // const [currentRoute, setCurrentRoute] = useState('');
@@ -51,7 +52,7 @@ export default function AppSidebar(props) {
     );
 
     useEffect(() => {
-        console.log(location.pathname);
+        routeChange(location.pathname)
         if (
             location.pathname === '/create-project/close' ||
             location.pathname === '/create-project/open'
