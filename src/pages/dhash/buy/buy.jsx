@@ -347,13 +347,13 @@ const Buy = () => {
                     ) : (
                         ''
                     )}
-                    <div className="apy">
+                    {/* <div className="apy">
                         <div className="amount">
                             {(isNaN(apy) ? 0 : Tools.numFmt(apy * 100, 2)) || 0}
                             %
                         </div>
                         <div className="desc">{t('v1_APY')}</div>
-                    </div>
+                    </div> */}
                     <div className="buy-content">
                         <div className="data cheese-box">
                             <div className="apy-tag">
