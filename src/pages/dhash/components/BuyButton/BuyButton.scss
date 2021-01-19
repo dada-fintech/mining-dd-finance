@@ -4,36 +4,39 @@
     margin: 0 auto;
     text-align: center;
     .BuyButton-content {
-        border: 1px solid #ffffff;
+        // border: 1px solid #ffffff;
         box-sizing: border-box;
         border-radius: 15px;
         padding: 4px;
         display: inline-block;
         margin: 0 auto;
         text-align: center;
-        background: linear-gradient(
-                131.99deg,
-                #ffffff 10.18%,
-                rgba(255, 255, 255, 0) 67.86%
-            ),
-            radial-gradient(
-                210% 1290.56% at 100% 100%,
-                rgba(241, 191, 94, 0.31) 0%,
-                rgba(255, 168, 0, 0) 100%
-            );
-        border-radius: 12px;
+        .btn-cheese{
+            width: 300px;
+        }
+        // background: linear-gradient(
+        //         131.99deg,
+        //         #ffffff 10.18%,
+        //         rgba(255, 255, 255, 0) 67.86%
+        //     ),
+        //     radial-gradient(
+        //         210% 1290.56% at 100% 100%,
+        //         rgba(241, 191, 94, 0.31) 0%,
+        //         rgba(255, 168, 0, 0) 100%
+        //     );
+        // border-radius: 12px;
     }
 
     @media screen and (max-width: $MobileWidth-M) {
         width: 92%;
         margin: 0 auto;
         .BuyButton-content {
-            border: 1px solid #ffffff;
+            // border: 1px solid #ffffff;
             box-sizing: border-box;
-            border-radius: 15px;
+            // border-radius: 15px;
             padding: 5px;
             display: inline-block;
-            width: 98%;
+            // width: 98%;
             margin: 0 auto;
             text-align: center;
         }

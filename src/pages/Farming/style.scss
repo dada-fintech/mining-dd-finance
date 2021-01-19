@@ -1,16 +1,16 @@
 .farming-page {
     .farming-top {
         .title {
-            font-size: 18px;
+            font-size: 20px;
             line-height: 22px;
-            color: #15163d;
+            color: rgb(91, 57, 38);
         }
         .desc {
             margin-top: 20px;
-            font-size: 14px;
+            font-size: 16px;
             line-height: 22%;
             margin-bottom: 26px;
-            color: #15163d;
+            color: rgb(170, 149, 133);
             margin-bottom: 35px;
         }
     }
@@ -23,13 +23,14 @@
         .title {
             font-size: 18px;
             line-height: 36px;
-            color: #15163d;
+            color: rgb(91, 57, 38);
             font-weight: 500px;
         }
         .desc {
             font-size: 14px;
             line-height: 22px;
-            color: #15163d;
+            color: rgb(128, 94, 73);
+
         }
         .ant-btn {
             width: 80%;
@@ -49,23 +50,5 @@
             align-items: center;
             justify-content: space-between;
         }
-    }
-    .cheese-box {
-        background: #fcf7df;
-        border-radius: 10px;
-        position: relative;
-        border: 4px solid #f7eedd;
-        // &::after {
-        //     content: "";
-        //     position: absolute;
-        //     z-index: -10;
-        //     top: -5px;
-        //     left: -5px;
-        //     right: -5px;
-        //     bottom: -5px;
-        //     background: linear-gradient(131.99deg, #ffffff 10.18%, rgba(255, 255, 255, 0) 67.86%),
-        //         radial-gradient(210% 1290.56% at 100% 100%, rgba(241, 191, 94, 0.31) 0%, rgba(255, 168, 0, 0) 100%);
-        //     border-radius: 10px;
-        // }
     }
 }

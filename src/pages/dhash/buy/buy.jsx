@@ -388,7 +388,7 @@ const Buy = () => {
                         loading={buyButLoading}
                         disabled={disabled || user.usdt_pretty <= 0}
                         butText={t('v1_BUY_but')}
-                        butClassName={'operation-light-cheese'}
+                        butClassName={'btn-cheese'}
                         onChangeFun={() => {
                             console.log('ApiAppBuyFun');
                             ApiAppBuyFun();
@@ -403,7 +403,7 @@ const Buy = () => {
                         <BuyButton
                             loading={false}
                             butText={t('v1_START_MINE')}
-                            butClassName={'operation-lightblue-but'}
+                            butClassName={'btn-cheese'}
                             onChangeFun={() => {
                                 history.push('/mine');
                             }}

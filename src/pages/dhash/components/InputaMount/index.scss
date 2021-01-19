@@ -52,12 +52,13 @@
                     box-sizing: border-box;
                     border-radius: 10px;
                     text-align: center;
-                    font-size: 18px;
+                    font-size: 16px;
                     opacity: 0.8;
                     display: inline-block;
                     margin-right: 4px;
                     cursor: pointer;
                     color: rgba(21, 22, 61, 0.4);
+                    transition: all .3s;
                     &:hover {
                         background-color: white;
                         color: $DarkColor;

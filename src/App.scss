@@ -135,21 +135,39 @@ li {
 }
 
 .btn-cheese {
-    background: #fcf7df;
-    border-radius: 10px;
-    position: relative;
-    border: 4px solid #f7eedd;
-    font-size: 20px;
-    color: #a94d4d;
-    height: unset;
+    -webkit-box-align: center;
+    align-items: center;
+    background-color: rgb(240, 233, 231);
+    border: 0px;
+    border-radius: 12px;
+    box-shadow: rgb(226, 214, 207) 6px 1px 12px, rgb(247, 244, 242) -12px -12px 24px -2px;
+    color: rgb(209, 108, 0);
+    cursor: pointer;
+    display: flex;
+    font-size: 16px;
+    font-weight: 700;
+    height: 56px;
+    -webkit-box-pack: center;
+    justify-content: center;
+    outline: none;
+    padding-left: 24px;
+    padding-right: 24px;
+    width: 100%;
     &:hover,
     &:focus {
-        color: #a94d4d;
-        background: #f7f2db;
-        border-radius: 10px;
-        position: relative;
-        border: 4px solid #f7eedd;
+        color: rgb(209, 108, 0);
+        background:rgb(247, 244, 242);
     }
+}
+
+.cheese-box{
+    background: rgb(240, 233, 231);
+    border: 1px solid rgb(226, 214, 207);
+    border-radius: 12px;
+    box-shadow: rgb(247, 244, 242) 1px 1px 0px inset;
+    display: flex;
+    flex: 1 1 0%;
+    flex-direction: column;
 }
 
 .btn-white {

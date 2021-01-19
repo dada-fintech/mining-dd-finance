@@ -1,5 +1,6 @@
 @import '../../../styles/variables';
 .buy {
+    color: rgb(91, 57, 38);
     text-align: center;
     overflow: hidden;
     .InputaMount {
@@ -56,31 +57,14 @@
             }
         }
     }
-    .cheese-box {
-        background: #fcf7df;
-        border-radius: 10px;
-        position: relative;
-        border: 4px solid #f7eedd;
-        // &::after {
-        //     content: "";
-        //     position: absolute;
-        //     z-index: -10;
-        //     top: -5px;
-        //     left: -5px;
-        //     right: -5px;
-        //     bottom: -5px;
-        //     background: linear-gradient(131.99deg, #ffffff 10.18%, rgba(255, 255, 255, 0) 67.86%),
-        //         radial-gradient(210% 1290.56% at 100% 100%, rgba(241, 191, 94, 0.31) 0%, rgba(255, 168, 0, 0) 100%);
-        //     border-radius: 10px;
-        // }
-    }
+ 
     @media screen and (min-width: $MobileWidth-M) {
         .buy-content {
             max-width: $MaxWidth;
             margin: 24px auto 32px auto;
             .data {
                 margin: 0 auto;
-                border: 1px solid rgba(255, 255, 255, 0.5);
+                // border: 1px solid rgba(255, 255, 255, 0.5);
                 padding: 20px 10px 0;
                 box-sizing: border-box;
                 border-radius: 20px;
@@ -159,7 +143,7 @@
             flex-direction: row;
             .data {
                 margin: 0;
-                border: 1px solid rgba(255, 255, 255, 0.5);
+                // border: 1px solid rgba(255, 255, 255, 0.5);
                 box-sizing: border-box;
                 border-radius: 20px;
                 display: inline-block;
@@ -168,7 +152,7 @@
                 .data-border {
                     width: 98%;
                     margin: 5px;
-                    border: 1px solid rgba(255, 255, 255, 0.5);
+                    // border: 1px solid rgba(255, 255, 255, 0.5);
                     padding-bottom: 24px;
                     border-radius: 15px;
                     display: inline-block;
