@@ -16,23 +16,12 @@ export const WHIEPAPER_URL =
     'https://github.com/dhash-mining/whitepapers/blob/main/DHMWhitepaper.pdf';
 
 // contract
-export const CHAINID = 97;
-export const provider =
-    'wss://mainnet.infura.io/ws/v3/89db527f19e14a00902a439ae587a25b';
-export const MetaMask_CONF_URL =
-    'https://data-seed-prebsc-1-s1.binance.org:8545/';
-export const Accounts = 'privateKeys';
+
 export const TIMEOUT = 200000;
 export const INIT_SYMBOL = 'USDT';
 export const REWARD_SYMBOL = 'WBTC';
 export const OFFICIAL_SYMBOL = 'DHM';
-export const BSAE_API_URL = 'https://api-test.dhash.finance';
 export const EXECUTION_TIME = 15000;
 
 export const MINERS_STATS = 'https://wk-m.minebaba.com/monitor?id=2';
 export const ETHERSCAN_IO = 'https://etherscan.io/';
-
-// claim 合约地址
-export const CLAIMROUTER = '0x23e1F12eC38eAba4317E13034aC3d1f48D4A5168';
-// DD 精度
-export const DDDECIMALS = 18;

@@ -556,6 +556,12 @@ export default {
     templateIds: ['1', '2', '3', '4'],
     usdAddress: '0xB2eA07bd51527179a366CBB699aE7164F9B5E509',
     usdUnit: 'BUSD',
+    // dhash base api url
+    BSAE_DHASH_API_URL: 'https://api-test.dhash.finance',
+    // claim 合约地址
+    CLAIMROUTER: '0x23e1F12eC38eAba4317E13034aC3d1f48D4A5168',
+    // DD 精度
+    DDDECIMALS: 18,
 };
 
 // binance mainnet

@@ -1,5 +1,5 @@
 import web3 from 'web3';
-import { CLAIMROUTER, DDDECIMALS } from '../constants/index';
+import Config from '../config'
 import claimabi from './abi/claimabi.json';
 import Wbe3Utils from './Wbe3Utils';
 import * as Tools from '../utils/Tools';
@@ -10,13 +10,13 @@ class ClaimContractApi {
      * @param {*}
      * @param {*}
      */
-    async getClaimBalance(address = '') {
+    async getCanClaim (address = '') {
         try {
-            const contract = new Wbe3Utils.eth.Contract(claimabi, CLAIMROUTER);
-            const balance = await contract.methods.can_claim().call({
+            const contract = new Wbe3Utils.eth.Contract(claimabi, Config.CLAIMROUTER);
+            const canClaim = await contract.methods.can_claim().call({
                 from: address,
             });
-            return Tools.numDivDecimals(balance, DDDECIMALS);
+            return Tools.numDivDecimals(canClaim, Config.DDDECIMALS);
         } catch (err) {
             console.log(err);
             return 0;
@@ -28,20 +28,20 @@ class ClaimContractApi {
      * @param {*}
      * @param {*}
      */
-    async claim(
+    async claim (
         address = '',
         ethereum,
-        pendingFun = () => {},
-        receiptFun = () => {},
-        errorFun = () => {}
+        pendingFun = () => { },
+        receiptFun = () => { },
+        errorFun = () => { }
     ) {
         try {
             const EthereumContract = new web3(ethereum);
             const contract = new EthereumContract.eth.Contract(
                 claimabi,
-                CLAIMROUTER
+                Config.CLAIMROUTER
             );
-            
+
             return contract.methods
                 .claim()
                 .send({

@@ -61,7 +61,7 @@ const Buy = () => {
     });
 
     // BTC当日价格 昨日分发BTC
-    const getApiLatestepochReward = async () => {
+    const getApiLatestepochReward = async (tokenStaken) => {
         await ApiLatestepochReward()
             .then((res) => {
                 console.log(res);
@@ -75,42 +75,42 @@ const Buy = () => {
                         res.data.reward.amount !== '-1'
                             ? tokenStaken > 0
                                 ? Tools.mul(
-                                      Tools.div(
-                                          Tools.div(
-                                              Tools.mul(
-                                                  Number(
-                                                      res.data.reward
-                                                          .amount_pretty || 0
-                                                  ),
-                                                  Number(
-                                                      res.data.btc_price || 0
-                                                  )
-                                              ),
-                                              Number(currentPrice || 6.5)
-                                          ),
-                                          Number(tokenStaken)
-                                      ),
-                                      365
-                                  )
+                                    Tools.div(
+                                        Tools.div(
+                                            Tools.mul(
+                                                Number(
+                                                    res.data.reward
+                                                        .amount_pretty || 0
+                                                ),
+                                                Number(
+                                                    res.data.btc_price || 0
+                                                )
+                                            ),
+                                            Number(currentPrice || 6.5)
+                                        ),
+                                        Number(tokenStaken)
+                                    ),
+                                    365
+                                )
                                 : 0
                             : Tools.mul(
-                                  Tools.div(
-                                      Tools.div(
-                                          Tools.div(
-                                              Tools.mul(
-                                                  Number(
-                                                      res.data.total_rewarded
-                                                  ),
-                                                  Number(res.data.btc_price)
-                                              ),
-                                              Number(res.data.total_stakes)
-                                          ),
-                                          Number(currentPrice || 6.5)
-                                      ),
-                                      Number(res.data.epochs)
-                                  ),
-                                  365
-                              )
+                                Tools.div(
+                                    Tools.div(
+                                        Tools.div(
+                                            Tools.mul(
+                                                Number(
+                                                    res.data.total_rewarded
+                                                ),
+                                                Number(res.data.btc_price)
+                                            ),
+                                            Number(res.data.total_stakes)
+                                        ),
+                                        Number(currentPrice || 6.5)
+                                    ),
+                                    Number(res.data.epochs)
+                                ),
+                                365
+                            )
                     );
                 } else {
                     setShowBtcInfoErr({
@@ -133,7 +133,7 @@ const Buy = () => {
             .then((res) => {
                 // console.log(res);
                 if (res.code === 200) {
-                    setCurrentPrice(Tools.toThousands(res.data.price_pretty));
+                    setCurrentPrice(res.data.price_pretty);
                 }
             })
             .catch((err) => {
@@ -149,7 +149,7 @@ const Buy = () => {
             .then((res) => {
                 // console.log(res);
                 if (res.code === 200) {
-                    setAvailable(Tools.toThousands(res.data.amount_pretty));
+                    setAvailable(res.data.amount_pretty);
                 }
             })
             .catch((err) => {
@@ -166,7 +166,6 @@ const Buy = () => {
                 // console.log(res);
                 if (res.code === 200) {
                     setTotalSupply(res.data.amount_pretty);
-                    // Tools.toThousands(res.data.amount_pretty)
                     getApiAppTotalBurnt(res.data.amount_pretty);
                 }
             })
@@ -203,6 +202,15 @@ const Buy = () => {
                 console.log('ApiAppUserBalances:', res);
                 if (res.code === 200) {
                     setUser(res.data);
+                    console.log(
+                        Tools.fmtDec(
+                            Tools.div(
+                                res.data.usdt_pretty,
+                                currentPrice || 6.5
+                            ),
+                            4
+                        )
+                    );
                     setBalance(
                         Tools.fmtDec(
                             Tools.div(
@@ -346,8 +354,8 @@ const Buy = () => {
                             />
                         </div>
                     ) : (
-                        ''
-                    )}
+                            ''
+                        )}
                     {/* <div className="apy">
                         <div className="amount">
                             {(isNaN(apy) ? 0 : Tools.numFmt(apy * 100, 2)) || 0}
@@ -370,14 +378,14 @@ const Buy = () => {
                                 </div>
                             </div>
                             <div className="available-tag">
-                                <div className="value">{available || 0}</div>
+                                <div className="value">     {Tools.toThousands(available) || 0}</div>
                                 <div className="title">{t('v1_Available')}</div>
                             </div>
 
                             <div className="data-border">
                                 <img src={DHMIcon} className="coin-icon" />
                                 <div className="amount price">
-                                    ${currentPrice || 0}
+                                    ${Tools.toThousands(currentPrice) || 0}
                                 </div>
                                 <div className="text">
                                     {t('v1_Current_Price')}
@@ -394,7 +402,7 @@ const Buy = () => {
                             <InputaMount
                                 balance={user.usdt_pretty || 0}
                                 maxBalance={
-                                    balance >= available
+                                    Tools.GE(balance, available)
                                         ? available
                                         : balance || 0
                                 }
@@ -402,37 +410,37 @@ const Buy = () => {
                                 sumbol={OFFICIAL_SYMBOL}
                                 balanceSumbol={'USDT'}
                             />
-                               <BuyButton
+                            <BuyButton
                                 loading={buyButLoading}
                                 disabled={disabled || user.usdt_pretty <= 0}
                                 butText={t('v1_BUY_but')}
                                 butClassName={'dd-lightblue-but'}
                                 onChangeFun={() => {
-                                console.log('ApiAppBuyFun');
-                                ApiAppBuyFun();
-                            }}
-                    />
+                                    console.log('ApiAppBuyFun');
+                                    ApiAppBuyFun();
+                                }}
+                            />
                         </div>
                     </div>
 
-                 
+
                 </>
             ) : (
-                <div className="success">
-                    <div className="success-border">
-                        <div className="amount price">{amount}</div>
-                        <div className="text">{t('v1_Success')}</div>
-                        <BuyButton
-                            loading={false}
-                            butText={t('v1_START_MINE')}
-                            butClassName={'btn-cheese'}
-                            onChangeFun={() => {
-                                history.push('/farming-detail');
-                            }}
-                        />
-                    </div>
-                </div>
-            )}
+                        <div className="success">
+                            <div className="success-border">
+                                <div className="amount price">{amount}</div>
+                                <div className="text">{t('v1_Success')}</div>
+                                <BuyButton
+                                    loading={false}
+                                    butText={t('v1_START_MINE')}
+                                    butClassName={'btn-cheese'}
+                                    onChangeFun={() => {
+                                        history.push('/farming-detail');
+                                    }}
+                                />
+                            </div>
+                        </div>
+                    )}
             {/* //amount, text, butText, buyFun */}
             <BuyModal
                 amount={amount}
@@ -441,30 +449,30 @@ const Buy = () => {
                 disabled={modalState !== 3}
                 text={
                     modalState === 0 ||
-                    modalState === 1 ||
-                    modalState === 2 ||
-                    modalState === 4
+                        modalState === 1 ||
+                        modalState === 2 ||
+                        modalState === 4
                         ? t('v1_You_will_buy')
                         : modalState === 3
-                        ? t('v1_Success_s')
-                        : modalState === -1
-                        ? t('v1_Fail')
-                        : ''
+                            ? t('v1_Success_s')
+                            : modalState === -1
+                                ? t('v1_Fail')
+                                : ''
                 }
                 butText={
                     modalState === 0
                         ? t('v1_Approve')
                         : modalState === 1
-                        ? t('v1_authorization')
-                        : modalState === 2
-                        ? t('v1_Pendding')
-                        : modalState === 3
-                        ? t('v1_START_MINE')
-                        : modalState === 4
-                        ? t('v1_BUY_but')
-                        : modalState === -1
-                        ? t('v1_Fail')
-                        : ''
+                            ? t('v1_authorization')
+                            : modalState === 2
+                                ? t('v1_Pendding')
+                                : modalState === 3
+                                    ? t('v1_START_MINE')
+                                    : modalState === 4
+                                        ? t('v1_BUY_but')
+                                        : modalState === -1
+                                            ? t('v1_Fail')
+                                            : ''
 
                     // v1_Approve
                 }

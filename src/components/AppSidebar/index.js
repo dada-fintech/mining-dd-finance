@@ -82,14 +82,14 @@ export default function AppSidebar(props) {
     };
 
     useEffect(() => {
-        const getClaimBalance = async () => {
-            await ClaimContractApi.getClaimBalance(account).then((res) => {
+        const getCanClaimFun = async () => {
+            await ClaimContractApi.getCanClaim(account).then((res) => {
                 setClaimBalance(res || 0);
             });
         };
-        getClaimBalance();
+        getCanClaimFun();
     }, [account]);
-
+    
     return (
         <div className="app-sidebar">
             <div className="top">

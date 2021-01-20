@@ -86,7 +86,7 @@ const Mine = () => {
             .then((res) => {
                 console.log(res);
                 if (res.code === 200) {
-                    setCurrentPrice(Tools.toThousands(res.data.price_pretty));
+                    setCurrentPrice(res.data.price_pretty || 0);
                 }
             })
             .catch((err) => {
@@ -97,7 +97,7 @@ const Mine = () => {
     };
 
     // BTC当日价格 昨日分发BTC
-    const getApiLatestepochReward = async (tokenStaken) => {
+    const getApiLatestepochReward = async (staken) => {
         await ApiLatestepochReward()
             .then((res) => {
                 console.log(res);
@@ -112,44 +112,44 @@ const Mine = () => {
                     console.log(res.data.reward.amount !== '-1');
                     setApy(
                         res.data.reward.amount !== '-1'
-                            ? tokenStaken > 0
+                            ? staken > 0
                                 ? Tools.mul(
-                                      Tools.div(
-                                          Tools.div(
-                                              Tools.mul(
-                                                  Number(
-                                                      res.data.reward
-                                                          .amount_pretty || 0
-                                                  ),
-                                                  Number(
-                                                      res.data.btc_price || 0
-                                                  )
-                                              ),
-                                              Number(currentPrice || 6.5)
-                                          ),
-                                          Number(tokenStaken)
-                                      ),
-                                      365
-                                  )
+                                    Tools.div(
+                                        Tools.div(
+                                            Tools.mul(
+                                                Number(
+                                                    res.data.reward
+                                                        .amount_pretty || 0
+                                                ),
+                                                Number(
+                                                    res.data.btc_price || 0
+                                                )
+                                            ),
+                                            Number(currentPrice || 6.5)
+                                        ),
+                                        Number(staken)
+                                    ),
+                                    365
+                                )
                                 : 0
                             : Tools.mul(
-                                  Tools.div(
-                                      Tools.div(
-                                          Tools.div(
-                                              Tools.mul(
-                                                  Number(
-                                                      res.data.total_rewarded
-                                                  ),
-                                                  Number(res.data.btc_price)
-                                              ),
-                                              Number(res.data.total_stakes)
-                                          ),
-                                          Number(currentPrice || 6.5)
-                                      ),
-                                      Number(res.data.epochs)
-                                  ),
-                                  365
-                              )
+                                Tools.div(
+                                    Tools.div(
+                                        Tools.div(
+                                            Tools.mul(
+                                                Number(
+                                                    res.data.total_rewarded
+                                                ),
+                                                Number(res.data.btc_price)
+                                            ),
+                                            Number(res.data.total_stakes)
+                                        ),
+                                        Number(currentPrice || 6.5)
+                                    ),
+                                    Number(res.data.epochs)
+                                ),
+                                365
+                            )
                     );
                 } else {
                     setShowBtcInfoErr({
@@ -259,7 +259,6 @@ const Mine = () => {
                             message.warning(t('v1_Pendding'));
                             setTimeout(() => {
                                 getApiAppUserBalances();
-                                getApiToClaimBalances();
                             }, EXECUTION_TIME);
                         },
                         () => {
@@ -294,6 +293,7 @@ const Mine = () => {
                             message.warning(t('v1_Pendding'));
                             setTimeout(() => {
                                 getApiAppUserBalances();
+                                getApiToClaimBalances();
                             }, EXECUTION_TIME);
                         },
                         () => {
@@ -335,7 +335,7 @@ const Mine = () => {
             .then((res) => {
                 console.log(res);
                 if (res.code === 200) {
-                    setUStaked(Tools.toThousands(res.data.amount_pretty || 0));
+                    setUStaked(res.data.amount_pretty || 0);
                 }
             })
             .catch((err) => {
@@ -350,9 +350,7 @@ const Mine = () => {
             .then((res) => {
                 console.log(res);
                 if (res.code === 200) {
-                    Tools.toThousands(
-                        Tools.fmtDec(res.data.amount_pretty, 8) || 0
-                    );
+                    setRewardToClaim(res.data.amount_pretty || 0);
                 }
             })
             .catch((err) => {
@@ -401,21 +399,20 @@ const Mine = () => {
             .then((res) => {
                 console.log(res);
                 if (res.code === 200) {
-                    // setAvailable(Tools.toThousands(res.data.amount_pretty));
                     console.log(staken, res.data.amount_pretty);
                     setStakedRate(
                         res.data.amount_pretty <= 0
                             ? 0
                             : Tools.fmtDec(
-                                  Tools.div(
-                                      staken,
-                                      Tools.sub(
-                                          res.data.amount_pretty,
-                                          totalBurnt
-                                      )
-                                  ),
-                                  4
-                              )
+                                Tools.div(
+                                    staken,
+                                    Tools.sub(
+                                        res.data.amount_pretty,
+                                        totalBurnt
+                                    )
+                                ),
+                                4
+                            )
                     );
                 }
             })
@@ -493,160 +490,163 @@ const Mine = () => {
             {wallet && !account && status !== 'connected' ? (
                 <UnlockWalletpage />
             ) : (
-                <>
-                    {showBtcInfoErr.code !== 200 ? (
-                        <div className="Alert-err">
-                            <Alert
-                                message={showBtcInfoErr.msg || ''}
-                                type="info"
-                                showIcon
-                                closable
-                            />
+                    <>
+                        {showBtcInfoErr.code !== 200 ? (
+                            <div className="Alert-err">
+                                <Alert
+                                    message={showBtcInfoErr.msg || ''}
+                                    type="info"
+                                    showIcon
+                                    closable
+                                />
+                            </div>
+                        ) : (
+                                ''
+                            )}
+                        {account && <UserAddress address={account} />}
+                        <div className="farming-top">
+                            <img src={FarmerIcon} />
+                            <div className="desc">{t('v1_EARN_wBTC')}</div>
                         </div>
-                    ) : (
-                        ''
-                    )}
-                    {account && <UserAddress address={account} />}
-                    <div className="farming-top">
-                        <img src={FarmerIcon} />
-                        <div className="desc">{t('v1_EARN_wBTC')}</div>
-                    </div>
 
-                    <div className="mine-content">
-                        <div className="data-item box-left">
-                            <div className="data">
-                                <div className="data-border cheese-box left-box">
-                                    <div className="amount ">
-                                        {userStaked || 0}
-                                    </div>
-                                    <div className="text price">
-                                        {t('v1_DHM_TOKEN_STAKED')}
-                                    </div>
-                                    <div className="start">
-                                        <InputBoxMount
-                                            balance={Tools.numFmt(
-                                                user.dhm_pretty || 0,
-                                                4
-                                            )}
-                                            maxBalance={Tools.numFmt(
-                                                user.dhm_pretty || 0,
-                                                4
-                                            )}
-                                            width={'250'}
-                                            onConfirm={getInputaMountNumber}
-                                            sumbol={OFFICIAL_SYMBOL}
+                        <div className="mine-content">
+                            <div className="data-item box-left">
+                                <div className="data">
+                                    <div className="data-border cheese-box left-box">
+                                        <div className="amount ">
+                                            {Tools.toThousands(
+                                                Tools.fmtDec(userStaked, 4)
+                                            ) || 0}
+                                        </div>
+                                        <div className="text price">
+                                            {t('v1_DHM_TOKEN_STAKED')}
+                                        </div>
+                                        <div className="start">
+                                            <InputBoxMount
+                                                balance={Tools.numFmt(
+                                                    user.dhm_pretty || 0,
+                                                    4
+                                                )}
+                                                maxBalance={Tools.numFmt(
+                                                    user.dhm_pretty || 0,
+                                                    4
+                                                )}
+                                                onConfirm={getInputaMountNumber}
+                                                sumbol={OFFICIAL_SYMBOL}
+                                            />
+                                        </div>
+                                        <BuyButton
+                                            loading={stakeButLoading}
+                                            butText={t('v1_START')}
+                                            disabled={
+                                                disabled || user.dhm_pretty <= 0
+                                            }
+                                            butClassName={'dd-lightblue-but'}
+                                            onChangeFun={startFun}
                                         />
                                     </div>
-                                    <BuyButton
-                                        loading={stakeButLoading}
-                                        butText={t('v1_START')}
-                                        disabled={
-                                            disabled || user.dhm_pretty <= 0
-                                        }
-                                        butClassName={'dd-lightblue-but'}
-                                        onChangeFun={startFun}
-                                    />
                                 </div>
                             </div>
-                        </div>
 
-                        <div className="data-item ">
-                            <div className="data">
-                                <div className="data-border cheese-box right-box">
-                                    <div className="apy">
-                                        <div className="value">
-                                            {(isNaN(apy)
-                                                ? 0
-                                                : Tools.numFmt(apy * 100, 2)) ||
-                                                0}
+                            <div className="data-item ">
+                                <div className="data">
+                                    <div className="data-border cheese-box right-box">
+                                        <div className="apy">
+                                            <div className="value">
+                                                {(isNaN(apy)
+                                                    ? 0
+                                                    : Tools.numFmt(apy * 100, 2)) ||
+                                                    0}
                                             %
                                         </div>
-                                        <div className="title">
-                                            {t('v1_APY')}
+                                            <div className="title">
+                                                {t('v1_APY')}
+                                            </div>
+                                        </div>
+                                        <img src={BTCIcon} className="icon" />
+                                        <div className="amount">
+                                            {Tools.toThousands(
+                                                Tools.fmtDec(rewardToClaim, 8) || 0
+                                            )}
+                                        </div>
+                                        <div className="text price">
+                                            {t('v1_wBTC_EARNED')}
+                                        </div>
+                                        <div className="claim">
+                                            <BuyButton
+                                                loading={claimButLoading}
+                                                butText={t('v1_CLAIM')}
+                                                disabled={rewardToClaim <= 0}
+                                                butClassName={'dd-lightblue-but'}
+                                                onChangeFun={claimFun}
+                                            />
                                         </div>
                                     </div>
-                                    <img src={BTCIcon} className="icon" />
-                                    <div className="amount">
-                                        {rewardToClaim || 0}
-                                    </div>
-                                    <div className="text price">
-                                        {t('v1_wBTC_EARNED')}
-                                    </div>
-                                    <div className="claim">
-                                        <BuyButton
-                                            loading={claimButLoading}
-                                            butText={t('v1_CLAIM')}
-                                            disabled={rewardToClaim <= 0}
-                                            butClassName={'dd-lightblue-but'}
-                                            onChangeFun={claimFun}
-                                        />
-                                    </div>
                                 </div>
-                            </div>
-                            {/* <p className="desc">
+                                {/* <p className="desc">
                                 {t('v1_calculated_income_EST')}
                             </p>
                             <p className="desc">{t('v1_Settlement_date')}</p> */}
+                            </div>
                         </div>
-                    </div>
 
-                    <BuyButton
-                        loading={stopButLoading}
-                        butText={t('v1_STOP')}
-                        disabled={userStaked <= 0}
-                        butClassName={'dd-lightpink-but'}
-                        onChangeFun={stopFun}
-                    />
+                        <BuyButton
+                            loading={stopButLoading}
+                            butText={t('v1_STOP')}
+                            disabled={userStaked <= 0}
+                            butClassName={'dd-lightpink-but'}
+                            onChangeFun={stopFun}
+                        />
 
-                    <BuyModal
-                        amount={amount}
-                        visible={visible}
-                        buyButloading={modalState !== 3 && modalState !== -1}
-                        disabled={modalState !== 3}
-                        text={
-                            modalState === 0 ||
-                            modalState === 1 ||
-                            modalState === 2 ||
-                            modalState === 4
-                                ? t('v1_You_will_staked')
-                                : modalState === 3
-                                ? t('v1_Success_s')
-                                : modalState === -1
-                                ? t('v1_Fail')
-                                : ''
-                        }
-                        butText={
-                            modalState === 0
-                                ? t('v1_Approve')
-                                : modalState === 1
-                                ? t('v1_authorization')
-                                : modalState === 2
-                                ? t('v1_Pendding')
-                                : modalState === 3
-                                ? t('v1_BACK')
-                                : modalState === 4
-                                ? t('v1_START')
-                                : modalState === -1
-                                ? t('v1_Fail')
-                                : ''
-
-                            // v1_Approve
-                        }
-                        buyFun={() => {
-                            switch (modalState) {
-                                case 0:
-                                    ApiAppStakeFun();
-                                    break;
-                                default:
-                                    setVisible(false);
-                                    return false;
+                        <BuyModal
+                            amount={amount}
+                            visible={visible}
+                            buyButloading={modalState !== 3 && modalState !== -1}
+                            disabled={modalState !== 3}
+                            text={
+                                modalState === 0 ||
+                                    modalState === 1 ||
+                                    modalState === 2 ||
+                                    modalState === 4
+                                    ? t('v1_You_will_staked')
+                                    : modalState === 3
+                                        ? t('v1_Success_s')
+                                        : modalState === -1
+                                            ? t('v1_Fail')
+                                            : ''
                             }
-                        }}
-                    ></BuyModal>
+                            butText={
+                                modalState === 0
+                                    ? t('v1_Approve')
+                                    : modalState === 1
+                                        ? t('v1_authorization')
+                                        : modalState === 2
+                                            ? t('v1_Pendding')
+                                            : modalState === 3
+                                                ? t('v1_BACK')
+                                                : modalState === 4
+                                                    ? t('v1_START')
+                                                    : modalState === -1
+                                                        ? t('v1_Fail')
+                                                        : ''
 
-                    <p className="clues">{t('v1_automagically_wbtc')}</p>
-                </>
-            )}
+                                // v1_Approve
+                            }
+                            buyFun={() => {
+                                switch (modalState) {
+                                    case 0:
+                                        ApiAppStakeFun();
+                                        break;
+                                    default:
+                                        setVisible(false);
+                                        return false;
+                                }
+                            }}
+                        ></BuyModal>
+
+                        <p className="clues">{t('v1_automagically_wbtc')}</p>
+                    </>
+                )}
         </div>
     );
 };

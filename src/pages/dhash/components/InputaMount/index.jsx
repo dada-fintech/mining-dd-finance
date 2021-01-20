@@ -30,7 +30,7 @@ const InputaMount = ({
         <div className="InputaMount">
             <div
                 className="inputaMount-content"
-                style={{ maxWidth: `${width || 310}px` }}
+                style={{ maxWidth: `${width}px` || '100%' }}
             >
                 <div className="input-box">
                     <p className="balance">

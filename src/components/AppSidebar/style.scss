@@ -5,20 +5,25 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
     .sidebar-logo {
         // margin-bottom: 44px;
     }
+
     a {
         color: #15163d;
     }
+
     .top-link {
         border-radius: 0 20px 0 0;
         background: #fff;
         padding: 16px 0 16px 24px;
         display: block;
     }
+
     .nav {
         position: relative;
+
         // background: #fff;
         &::before {
             content: '';
@@ -29,6 +34,7 @@
             width: 24px;
             background: #fff;
         }
+
         li {
             list-style: none;
             cursor: pointer;
@@ -39,12 +45,15 @@
                 align-items: center;
                 padding: 10px 10px;
                 background: #fff;
+
                 &.top-curve {
                     border-radius: 0 12px 0 0;
                 }
+
                 &.bottom-curve {
                     border-radius: 0 0 12px 0;
                 }
+
                 &.active {
                     // background: url(../../assets/nav-active.svg) no-repeat;
                     background: transparent;
@@ -53,10 +62,12 @@
                     margin-left: -16px;
                 }
             }
+
             img {
                 width: 22px;
                 margin-right: 6px;
             }
+
             .btn-create {
                 border: 1px solid #48cccc;
                 background: rgba(72, 204, 204, 0.7);
@@ -68,8 +79,10 @@
                 font-size: 12px;
             }
         }
+
         &.second {
             margin-top: 44px;
+
             li {
                 img {
                     margin-right: 6px;
@@ -78,14 +91,17 @@
             }
         }
     }
+
     .more-links {
         font-size: 12px;
         margin-bottom: 12px;
+
         a {
             display: block;
             margin-bottom: 8px;
         }
     }
+
     .network-switch {
         background: #fcfcfe;
         box-shadow: inset -1px -1px 1px rgba(0, 0, 0, 0.25),
@@ -96,24 +112,30 @@
         line-height: 18px;
         display: inline-block;
         margin-bottom: 12px;
+
         img {
             height: 30px;
             margin-left: 16px;
         }
+
         a {
             display: inline-block;
             margin-bottom: 0;
+
             img {
                 transition: 0.3s all;
                 height: 0;
             }
         }
+
         &.ethereum {
             color: #839cdc;
         }
+
         &.binance {
             color: #f0b90b;
         }
+
         &:hover {
             a {
                 img {
@@ -122,15 +144,18 @@
             }
         }
     }
+
     .social-icons {
         margin-bottom: 32px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+
         .social-icon {
             width: 24px;
             height: 24px;
             margin-right: 5px;
+
             &:last-child {
                 margin-right: 0;
             }
@@ -141,24 +166,64 @@
         width: 100%;
         background-color: white;
         padding: 0 20px;
+
+        @-webkit-keyframes bilibili {
+            0% {
+                background-position: 0 50%
+            }
+
+            50% {
+                background-position: 100% 50%
+            }
+
+            to {
+                background-position: 0 50%
+            }
+        }
+
+        @keyframes bilibili {
+            0% {
+                background-position: 0 50%
+            }
+
+            50% {
+                background-position: 100% 50%
+            }
+
+            to {
+                background-position: 0 50%
+            }
+        }
+
+
         .claim-dada {
             cursor: pointer;
             padding: 2px;
-            background: linear-gradient(
-                    131.99deg,
+            background: linear-gradient(131.99deg,
                     #15163d 10.18%,
-                    rgba(255, 255, 255, 0) 67.86%
-                ),
-                radial-gradient(
-                    210% 1290.56% at 100% 100%,
+                    rgba(255, 255, 255, 0) 67.86%),
+                radial-gradient(210% 1290.56% at 100% 100%,
                     rgba(241, 191, 94, 0.31) 0%,
-                    rgba(255, 168, 0, 0) 100%
-                );
+                    rgba(255, 168, 0, 0) 100%);
+
+            background: linear-gradient(45deg,
+                    rgba(241, 191, 94, 0.31), #ff9a00 10%,
+                    #d0de21 20%,
+                    #4fdc4a 30%,
+                    #3fdad8 40%,
+                    #2fc9e2 50%,
+                    rgba(255, 255, 255, 0) 60%,
+                    #5f15f2 70%,
+                    #ba0cf8 80%,
+                    #fb07d9 90%,
+                    rgba(255, 168, 0, 0)) 0 0/300% 300%;
+            animation: bilibili 2.5s linear 12s infinite normal none running;
             border-radius: 16px;
             -webkit-border-radius: 16px;
             -moz-border-radius: 16px;
             -ms-border-radius: 16px;
             -o-border-radius: 16px;
+
             p {
                 width: auto;
                 height: 32px;
@@ -169,16 +234,12 @@
                 justify-content: center;
                 color: #15163d;
                 background-color: white;
-                border-image-source: linear-gradient(
-                        96.06deg,
+                border-image-source: linear-gradient(96.06deg,
                         #15163d -17.03%,
-                        rgba(72, 204, 204, 0) 79.76%
-                    ),
-                    linear-gradient(
-                        271.22deg,
+                        rgba(72, 204, 204, 0) 79.76%),
+                    linear-gradient(271.22deg,
                         #af8686 -14.86%,
-                        rgba(255, 255, 255, 0) 74.69%
-                    );
+                        rgba(255, 255, 255, 0) 74.69%);
 
                 -webkit-border-radius: 16px;
                 -moz-border-radius: 16px;
@@ -197,10 +258,12 @@
         border-radius: 0 0 20px 0;
         padding: 32px 24px 16px;
     }
+
     .copyright {
         color: #9088a1;
         text-align: center;
         font-size: 9px;
+
         img {
             margin: 0 auto;
             margin-bottom: 12px;

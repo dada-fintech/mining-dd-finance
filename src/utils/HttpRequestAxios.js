@@ -8,9 +8,10 @@
 
 import axios from 'axios';
 import { message } from 'antd';
+import Config from '../config';
 
 export const HttpRequestAxios = axios.create({
-    baseURL: 'https://api-test.dhash.finance',
+    baseURL: Config.BSAE_DHASH_API_URL,
     timeout: 20000,
 });
 
