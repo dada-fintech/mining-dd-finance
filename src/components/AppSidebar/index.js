@@ -9,9 +9,13 @@ import TemplateChoose from 'components/TemplateChoose';
 import LogoBlue from 'assets/logo-blue.svg';
 import NetworkEthereum from 'assets/network-ethereum.svg';
 import NetworkBinance from 'assets/network-binance.svg';
+import NetworkHeco from 'assets/network-heco.svg';
+
 
 import SidebarLogoEther from 'assets/sidebar-logo-ether.svg';
 import SidebarLogoBinance from 'assets/sidebar-logo-binance.svg';
+import SidebarLogoHeco from 'assets/sidebar-logo-heco.svg';
+
 import CryptoMiningIcon from 'assets/sidebar/crypto-mining.svg';
 import CommunityProjectIcon from 'assets/sidebar/community-project.svg';
 import PlusIcon from 'assets/sidebar/plus.svg';
@@ -99,19 +103,26 @@ export default function AppSidebar(props) {
                     target="_blank"
                     rel="noreferrer"
                 >
-                    {config.network === 'ethereum' ? (
+                    {config.network === 'ethereum' &&
                         <img
                             src={SidebarLogoEther}
                             className="sidebar-logo"
                             alt=""
                         />
-                    ) : (
-                        <img
-                            src={SidebarLogoBinance}
-                            className="sidebar-logo"
-                            alt=""
-                        />
-                    )}
+                    }
+                     {config.network === 'binance' && <img
+                        src={SidebarLogoBinance}
+                        className="sidebar-logo"
+                        alt="" />
+                    }
+                    {config.network === 'heco' && <img
+                        src={SidebarLogoHeco}
+                        className="sidebar-logo"
+                        alt="" />
+                    }
+                    
+                    
+                        
                 </a>
                 <ul className="nav">
                     {!hideCreate && (
@@ -292,28 +303,29 @@ export default function AppSidebar(props) {
                             Network{' '}
                             <img
                                 src={
-                                    config.network === 'ethereum'
-                                        ? NetworkEthereum
-                                        : NetworkBinance
+                                    config.network === 'ethereum' ? NetworkEthereum :
+                                    config.network === 'heco' ? NetworkHeco : NetworkBinance
                                 }
-                                alt=""
                             />
-                            <a
-                                href={
-                                    config.network === 'ethereum'
-                                        ? 'https://mining-binance.dd.finance/'
-                                        : 'https://mining.dd.finance/'
-                                }
+
+                            {config.network !== 'ethereum' && <a
+                                href={'https://dd.finance/'}
                             >
-                                <img
-                                    src={
-                                        config.network === 'ethereum'
-                                            ? NetworkBinance
-                                            : NetworkEthereum
-                                    }
-                                    alt=""
-                                />
-                            </a>
+                                <img src={NetworkEthereum} />
+                            </a>}
+
+                            {config.network !== 'heco' && <a
+                                href={'https://huobi.dd.finance/'}
+                            >
+                                <img src={NetworkHeco} />
+                            </a>}
+
+                            {config.network !== 'binance' && <a
+                                href={'https://mining-binance.dd.finance/'}
+                            >
+                                <img src={NetworkBinance} />
+                            </a>}
+                            
                         </div>
                     )}
                     <a

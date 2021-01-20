@@ -6,6 +6,11 @@
     flex-direction: column;
     justify-content: space-between;
 
+    img{
+        width: auto;
+        display: inline-block;
+    }
+
     .sidebar-logo {
         // margin-bottom: 44px;
     }
@@ -114,8 +119,8 @@
         margin-bottom: 12px;
 
         img {
-            height: 30px;
-            margin-left: 16px;
+            height: 24px;
+            margin-left: 12px;
         }
 
         a {
@@ -136,10 +141,14 @@
             color: #f0b90b;
         }
 
+        &.heco{
+            color: #3F7FFF;
+        }
+
         &:hover {
             a {
                 img {
-                    height: 30px;
+                    height: 24px;
                 }
             }
         }
