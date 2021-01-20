@@ -545,24 +545,24 @@ const commonABI = [
 // }
 
 // binance testnet
-export default {
-    network: 'binance',
-    mode: 'test',
-    provider: 'https://data-seed-prebsc-1-s1.binance.org:8545',
-    chainId: 97,
-    baseURL: 'https://mining-api-test.dd.finance',
-    assetURL: 'https://mining-assets-test.dd.finance',
-    commonABI,
-    templateIds: ['1', '2', '3', '4'],
-    usdAddress: '0xB2eA07bd51527179a366CBB699aE7164F9B5E509',
-    usdUnit: 'BUSD',
-    // dhash base api url
-    BSAE_DHASH_API_URL: 'https://api-test.dhash.finance',
-    // claim 合约地址
-    CLAIMROUTER: '0x23e1F12eC38eAba4317E13034aC3d1f48D4A5168',
-    // DD 精度
-    DDDECIMALS: 18,
-};
+// export default {
+//     network: 'binance',
+//     mode: 'test',
+//     provider: 'https://data-seed-prebsc-1-s1.binance.org:8545',
+//     chainId: 97,
+//     baseURL: 'https://mining-api-test.dd.finance',
+//     assetURL: 'https://mining-assets-test.dd.finance',
+//     commonABI,
+//     templateIds: ['1', '2', '3', '4'],
+//     usdAddress: '0xB2eA07bd51527179a366CBB699aE7164F9B5E509',
+//     usdUnit: 'BUSD',
+//     // dhash base api url
+//     BSAE_DHASH_API_URL: 'https://api-test.dhash.finance',
+//     // claim 合约地址
+//     CLAIMROUTER: '0x23e1F12eC38eAba4317E13034aC3d1f48D4A5168',
+//     // DD 精度
+//     DDDECIMALS: 18,
+// };
 
 // binance mainnet
 // export default {
@@ -581,19 +581,19 @@ export default {
 
 
 // heco mainnet, 这里的具体值待修改
-// export default {
-//     network: 'heco',
-//     mode: 'prod',
-//     provider: 'https://bsc-dataseed.binance.org/',
-//     chainId: 56,
-//     baseURL: 'https://mining-api-binance.dd.finance',
-//     assetURL: 'https://mining-assets-binance.dd.finance',
-//     commonABI,
-//     templateIds: ['1', '2', '3', '4'],
-//     featuredId: '08b90ac9c815f82277463d63152d2822ba192d33fda2d74e2651a505b1678ff6',
-//     usdAddress: '0xe9e7cea3dedca5984780bafc599bd69add087d56',
-//     usdUnit: 'HUSD',
-// }
+export default {
+    network: 'heco',
+    mode: 'prod',
+    provider: 'https://bsc-dataseed.binance.org/',
+    chainId: 56,
+    baseURL: 'https://mining-api-binance.dd.finance',
+    assetURL: 'https://mining-assets-binance.dd.finance',
+    commonABI,
+    templateIds: ['1', '2', '3', '4'],
+    featuredId: '08b90ac9c815f82277463d63152d2822ba192d33fda2d74e2651a505b1678ff6',
+    usdAddress: '0xe9e7cea3dedca5984780bafc599bd69add087d56',
+    usdUnit: 'HUSD',
+}
 
 
 //infura

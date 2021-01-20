@@ -156,7 +156,7 @@ export default function AppSidebar(props) {
                             {t('sidebar.communityProjects')}
                         </NavLink>
                     </li>
-                    <li>
+                    {config.network != 'heco' && <li>
                         <NavLink
                             className={`nowrap ${
                                 location.pathname === '/community-projects'
@@ -173,7 +173,8 @@ export default function AppSidebar(props) {
                             <img src={CryptoMiningIcon} alt="" />
                             {t('sidebar.cryptoMining')}
                         </NavLink>
-                    </li>
+                    </li>}
+                    
                     <li>
                         <NavLink
                             className={`nowrap ${

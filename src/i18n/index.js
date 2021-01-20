@@ -193,7 +193,7 @@ export default {
                 create: 'Create Project',
                 blog: 'Blog',
                 buyDHM: 'Buy DHM',
-                farming: 'Farming',
+                farming: 'DHM Mining',
             },
             banner: {
                 title: 'Mining Ecosystem Aggregator',
