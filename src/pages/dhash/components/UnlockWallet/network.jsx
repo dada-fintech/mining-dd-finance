@@ -3,7 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { Modal } from 'antd';
 import { useWallet } from 'use-wallet';
 import { useMedia } from 'react-use';
-import { CHAINID } from '../../constants';
+// import { CHAINID } from '../../constants';
+import config from 'config'
 import BuyButton from '../BuyButton/index.jsx';
 import './network.scss';
 
@@ -18,7 +19,7 @@ const SwitchNetwork = () => {
             setVisible(false);
         } else {
             if (
-                (chainId && Number(chainId) !== CHAINID) ||
+                (chainId && Number(chainId) !== config.chainId) ||
                 status !== 'connected'
             ) {
                 // 显示网络错误

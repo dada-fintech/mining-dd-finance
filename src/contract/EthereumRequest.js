@@ -1,5 +1,6 @@
 import { message } from 'antd';
-import { CHAINID } from '../constants';
+// import { CHAINID } from '../constants';
+import config from 'config'
 
 export async function sendTransaction(transactionParameters, resFun, errFun) {
     try {
@@ -7,7 +8,7 @@ export async function sendTransaction(transactionParameters, resFun, errFun) {
         await window.ethereum
             .request({
                 method: 'eth_sendTransaction',
-                params: [{ ...transactionParameters, chainId: CHAINID }],
+                params: [{ ...transactionParameters, chainId: config.chainId }],
             })
             .then(async (txHash) => {
                 console.log(txHash);
