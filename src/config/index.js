@@ -573,6 +573,23 @@ export default {
 //     usdUnit: 'BUSD',
 // }
 
+
+// heco mainnet, 这里的具体值待修改
+// export default {
+//     network: 'heco',
+//     mode: 'prod',
+//     provider: 'https://bsc-dataseed.binance.org/',
+//     chainId: 56,
+//     baseURL: 'https://mining-api-heco.dd.finance',
+//     assetURL: 'https://mining-assets-heco.dd.finance',
+//     commonABI,
+//     templateIds: ['1', '2', '3', '4'],
+//     featuredId: '08b90ac9c815f82277463d63152d2822ba192d33fda2d74e2651a505b1678ff6',
+//     usdAddress: '0xe9e7cea3dedca5984780bafc599bd69add087d56',
+//     usdUnit: 'HUSD',
+// }
+
+
 //infura
 // export default {
 //     network: 'ethereum',
