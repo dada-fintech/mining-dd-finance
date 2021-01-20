@@ -577,6 +577,9 @@ const commonABI = [
 //     featuredId: '08b90ac9c815f82277463d63152d2822ba192d33fda2d74e2651a505b1678ff6',
 //     usdAddress: '0xe9e7cea3dedca5984780bafc599bd69add087d56',
 //     usdUnit: 'BUSD',
+//     BSAE_DHASH_API_URL: 'https://api-test.dhash.finance',    // dhash base api url
+//     CLAIMROUTER: '0x23e1F12eC38eAba4317E13034aC3d1f48D4A5168',    // claim 合约地址
+//     DDDECIMALS: 18,    // DD 精度
 // }
 
 
@@ -608,5 +611,7 @@ export default {
 //     templateIds: ['1', '2', '3', '4']
 //     usdAddress: '',
 //     usdUnit: 'USDT',
-
+//     BSAE_DHASH_API_URL: 'https://api-test.dhash.finance',    // dhash base api url
+//     CLAIMROUTER: '0x23e1F12eC38eAba4317E13034aC3d1f48D4A5168',    // claim 合约地址
+//     DDDECIMALS: 18,    // DD 精度
 // }
