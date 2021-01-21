@@ -530,6 +530,7 @@ const commonABI = [
 // template_id 4: moneyDaoFixRaiseFullRelease 定期筹款，全款释放
 
 export default{
+    defaultNetwork: 'test',
     //test(binance)
     test:{
         network: 'binance',

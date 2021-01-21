@@ -313,7 +313,7 @@ export default function AppSidebar(props) {
             <div className="bottom">
                 <div className="more-links">
                     {/** 暂时不显示 */}
-                    { (true || config[network].mode === 'prod') && (
+                    { config[network].mode === 'prod' && (
                         <div className={`network-switch ${network}`}>
                             Network{' '}
                             <img

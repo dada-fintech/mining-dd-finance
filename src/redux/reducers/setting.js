@@ -1,7 +1,8 @@
 import { SWITCH_NETWORK } from '../actionTypes'
+import config from 'config'
 
 const initialState = {
-    network: localStorage.getItem('network') || 'ethereum',
+    network: localStorage.getItem('network') || config.default,
 }
 
 export default function (state = initialState, action) {
