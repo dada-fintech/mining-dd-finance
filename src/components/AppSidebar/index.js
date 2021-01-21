@@ -125,7 +125,7 @@ export default function AppSidebar(props) {
                             alt=""
                         />
                     }
-                     {network === 'binance' && <img
+                     {network === 'binance' || network === 'test' && <img
                         src={SidebarLogoBinance}
                         className="sidebar-logo"
                         alt="" />
