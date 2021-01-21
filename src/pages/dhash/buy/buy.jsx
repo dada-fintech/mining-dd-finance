@@ -61,7 +61,7 @@ const Buy = () => {
     });
 
     // BTC当日价格 昨日分发BTC
-    const getApiLatestepochReward = async (tokenStaken) => {
+    const getApiLatestepochReward = async (staken) => {
         await ApiLatestepochReward()
             .then((res) => {
                 console.log(res);
@@ -73,7 +73,7 @@ const Buy = () => {
                     console.log(res.data.reward.amount !== '-1');
                     setApy(
                         res.data.reward.amount !== '-1'
-                            ? tokenStaken > 0
+                            ? staken > 0
                                 ? Tools.mul(
                                     Tools.div(
                                         Tools.div(
@@ -88,7 +88,7 @@ const Buy = () => {
                                             ),
                                             Number(currentPrice || 6.5)
                                         ),
-                                        Number(tokenStaken)
+                                        Number(staken)
                                     ),
                                     365
                                 )
