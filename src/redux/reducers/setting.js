@@ -2,7 +2,7 @@ import { SWITCH_NETWORK } from '../actionTypes'
 import config from 'config'
 
 const initialState = {
-    network: localStorage.getItem('network') || config.default,
+    network: localStorage.getItem('network') || config.defaultNetwork,
 }
 
 export default function (state = initialState, action) {
