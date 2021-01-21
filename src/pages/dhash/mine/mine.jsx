@@ -258,7 +258,9 @@ const Mine = () => {
                             setStopButLoading(false);
                             message.warning(t('v1_Pendding'));
                             setTimeout(() => {
-                                getApiAppUserBalances();
+                                getApiAppUserBalances(); // 余额
+                                getApiUserStaked(); // 用户质押量
+                                getApiToClaimBalances(); //用户可领取的奖励
                             }, EXECUTION_TIME);
                         },
                         () => {
