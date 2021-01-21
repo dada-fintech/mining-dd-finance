@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Row, Col, Progress } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { toBr } from 'components/utils';
+// import { useSelector } from 'react-redux'
 // import axios from 'utils/axios'
 import Header from 'components/Header';
 import Countdown from 'components/Countdown';
@@ -12,6 +13,7 @@ export default function Projects() {
     // const wallet = useWallet()
     const [projectList, setProjectList] = useState([]);
     // const [allProjects, setAllProjects] = useState([])
+    // const network = useSelector(state => state.setting.network)
 
     const [featuredProject, setFeaturedProject] = useState({});
     const [featuredCountdown, setFeaturedCountdown] = useState(0);
@@ -86,7 +88,7 @@ export default function Projects() {
         //     setProjectList(res.data.slice(0, 3))
         //     setAllProjects(res.data)
         //     var futureProjects = []
-        //     if (config.featuredId) {
+        //     if (config[network].featuredId) {
         //         futureProjects = res.data.filter(item => item.project_uniq_id)
         //     } else {
         //         futureProjects = res.data.filter(item => (item.status == 'canInvest' || item.status == 'raising' || item.status == 'active'))

@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 import axios from 'utils/axios'
 import Header from 'components/Header'
 import Countdown from 'components/Countdown'
+import { useSelector } from 'react-redux'
 import config from 'config'
 
 import './style.scss'
@@ -19,6 +20,8 @@ export default function Projects() {
 
     const [featuredProject, setFeaturedProject] = useState({})
     const [featuredCountdown, setFeaturedCountdown] = useState(0)
+
+    const network = useSelector(state => state.setting.network)
 
     const { i18n, t } = useTranslation()
 
@@ -55,7 +58,7 @@ export default function Projects() {
             setProjectList(res.data.slice(0, 3))
             setAllProjects(res.data)
             var futureProjects = []
-            if (config.featuredId) {
+            if (config[network].featuredId) {
                 futureProjects = res.data.filter(item => item.project_uniq_id)
             } else {
                 futureProjects = res.data.filter(item => (item.status == 'canInvest' || item.status == 'raising' || item.status == 'active'))

@@ -4,6 +4,7 @@ import { Popover } from 'antd';
 import { NavLink, useLocation } from 'react-router-dom';
 import i18n from 'i18next';
 import config from 'config';
+import {useDispatch, useSelector} from 'react-redux'
 import './style.scss';
 import TemplateChoose from 'components/TemplateChoose';
 import LogoBlue from 'assets/logo-blue.svg';
@@ -47,6 +48,9 @@ export default function AppSidebar(props) {
     const [showTemplateChoose, setShowTemplateChoose] = useState(false);
     const [hideCreate, setHideCreate] = useState(false);
     const [claimBalance, setClaimBalance] = useState(0);
+    const network = useSelector(state => state.setting.network)
+    const dispatch = useDispatch()
+
     const { ethereum, account } = wallet;
 
     const changeLanguage = (language) => {
@@ -67,6 +71,16 @@ export default function AppSidebar(props) {
             setHideCreate(false);
         }
     }, [location]);
+
+    const switchNetwork = (network) =>{
+        dispatch({
+            type: 'SWITCH_NETWORK', payload:{
+                network: network
+            }
+        })
+        window.location.reload();
+
+    }
 
     const claimFun = async () => {
         await ClaimContractApi.claim(
@@ -103,19 +117,19 @@ export default function AppSidebar(props) {
                     target="_blank"
                     rel="noreferrer"
                 >
-                    {config.network === 'ethereum' &&
+                    {network === 'ethereum' &&
                         <img
                             src={SidebarLogoEther}
                             className="sidebar-logo"
                             alt=""
                         />
                     }
-                     {config.network === 'binance' && <img
+                     {network === 'binance' && <img
                         src={SidebarLogoBinance}
                         className="sidebar-logo"
                         alt="" />
                     }
-                    {config.network === 'heco' && <img
+                    {network === 'heco' && <img
                         src={SidebarLogoHeco}
                         className="sidebar-logo"
                         alt="" />
@@ -156,7 +170,7 @@ export default function AppSidebar(props) {
                             {t('sidebar.communityProjects')}
                         </NavLink>
                     </li>
-                    {config.network != 'heco' && <li>
+                    {network != 'heco' && <li>
                         <NavLink
                             className={`nowrap ${
                                 location.pathname === '/community-projects'
@@ -299,30 +313,30 @@ export default function AppSidebar(props) {
             <div className="bottom">
                 <div className="more-links">
                     {/** 暂时不显示 */}
-                    {config.mode === 'prod' && (
-                        <div className={`network-switch ${config.network}`}>
+                    { (true || config[network].mode === 'prod') && (
+                        <div className={`network-switch ${network}`}>
                             Network{' '}
                             <img
                                 src={
-                                    config.network === 'ethereum' ? NetworkEthereum :
-                                    config.network === 'heco' ? NetworkHeco : NetworkBinance
+                                    network === 'ethereum' ? NetworkEthereum :
+                                    network === 'heco' ? NetworkHeco : NetworkBinance
                                 }
                             />
 
-                            {config.network !== 'ethereum' && <a
-                                href={'https://dd.finance/'}
+                            {network !== 'ethereum' && <a
+                                onClick={()=>{switchNetwork('ethereum')}}
                             >
                                 <img src={NetworkEthereum} />
                             </a>}
 
-                            {config.network !== 'heco' && <a
-                                href={'https://huobi.dd.finance/'}
+                            {network !== 'heco' && <a
+                                onClick={()=>{switchNetwork('heco')}}
                             >
                                 <img src={NetworkHeco} />
                             </a>}
 
-                            {config.network !== 'binance' && <a
-                                href={'https://mining-binance.dd.finance/'}
+                            {network !== 'binance' && <a
+                                onClick={()=>{switchNetwork('binance')}}
                             >
                                 <img src={NetworkBinance} />
                             </a>}

@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useWallet } from 'use-wallet'
 import axios from 'utils/axios'
 import mm from 'components/mm'
+import { useSelector } from 'react-redux'
 import config from 'config'
 import './style.scss'
 
@@ -11,6 +12,7 @@ export default function RepayModal(props) {
     const params = props.params
     const wallet = useWallet()
     const [loading, setLoading] = useState(false)
+    const network = useSelector(state => state.setting.network)
     const [info, setInfo] = useState({})
     const { t } = useTranslation()
 
@@ -38,7 +40,7 @@ export default function RepayModal(props) {
     return (
         <Modal wrapClassName="repay-modal" footer={null} title={t('modal.repayTitle')} visible={true} onCancel={() => { props.onCancel() }}>
             <div className="hint">
-                {t('modal.youNeedPay')} {info.repay_amount} {config.usdUnit}。
+                {t('modal.youNeedPay')} {info.repay_amount} {config[network].usdUnit}。
             </div>
             <div className="handle-area">
                 <Button loading={loading} className="btn-green" onClick={() => { doRepay() }}>{t('common.confirm')}</Button>

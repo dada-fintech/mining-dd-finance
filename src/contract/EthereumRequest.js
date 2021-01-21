@@ -4,11 +4,14 @@ import config from 'config'
 
 export async function sendTransaction(transactionParameters, resFun, errFun) {
     try {
+
+        const network = localStorage.getItem('network')
+
         // return new Promise(async (resolve, reject) => {
         await window.ethereum
             .request({
                 method: 'eth_sendTransaction',
-                params: [{ ...transactionParameters, chainId: config.chainId }],
+                params: [{ ...transactionParameters, chainId: config[network].chainId }],
             })
             .then(async (txHash) => {
                 console.log(txHash);

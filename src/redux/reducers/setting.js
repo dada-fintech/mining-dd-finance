@@ -1,17 +1,17 @@
-import { SWITCH_ROLE } from '../actionTypes'
+import { SWITCH_NETWORK } from '../actionTypes'
 
 const initialState = {
-    role: localStorage.getItem('role') || 'light',
+    network: localStorage.getItem('network') || 'ethereum',
 }
 
 export default function (state = initialState, action) {
     switch (action.type) {
-        case SWITCH_ROLE: {
-            const { role } = action.payload
-            localStorage.setItem('role', role)
+        case SWITCH_NETWORK: {
+            const { network } = action.payload
+            localStorage.setItem('network', network)
             return {
                 ...state,
-                role: role
+                network: network
             }
         }
         default:
@@ -19,6 +19,6 @@ export default function (state = initialState, action) {
     }
 }
 
-export const switchRole = () => dispatch => {
-    dispatch({ type: 'SWITCH_ROLE' })
+export const switchNetwork = () => dispatch => {
+    dispatch({ type: 'SWITCH_NETWORK' })
 }

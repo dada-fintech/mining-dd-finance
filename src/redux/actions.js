@@ -1,6 +1,6 @@
-import { SWITCH_ROLE } from './actionTypes'
+import { SWITCH_NETWORK } from './actionTypes'
 
-export const switchTheme = role => ({
-    type: SWITCH_ROLE,
-    payload: { role }
+export const switchNetwork= network => ({
+    type: SWITCH_NETWORK,
+    payload: { network }
 })

@@ -6,6 +6,7 @@ import QuestionIcon from 'assets/question.svg'
 import { useParams, Link } from 'react-router-dom'
 import { useWallet } from 'use-wallet'
 import Header from '../../components/Header'
+import { useSelector } from 'react-redux'
 import Timespan from 'components/Timespan'
 
 import moment from 'moment'
@@ -18,7 +19,7 @@ import './style.scss'
 
 export default function CreateProject() {
     const [currentStep, setCurrentStep] = useState(0)
-    const [projectInfo, setProjectInfo] = useState({ member_address: [''], profit_token: config.usdUnit, other_file: [] })
+    const [projectInfo, setProjectInfo] = useState({ member_address: [''], profit_token: config[network].usdUnit, other_file: [] })
     const [fundraising, setFundraising] = useState({})
     const [payStatus, setPayStatus] = useState('')
     const [createLoading, setCreateLoading] = useState(false)
@@ -31,6 +32,7 @@ export default function CreateProject() {
     const [raisingMethod, setRaisingMethod] = useState('2')
     const [repayMethod, setRepayMethod] = useState('1')
     const [withdrawMethod, setWithdrawMethod] = useState('2')
+    const network = useSelector(state => state.setting.network)
 
 
     const { tempType } = useParams()
@@ -136,7 +138,7 @@ export default function CreateProject() {
     }, [])
 
     useEffect(() => {
-        if (config.chainId == 1 && wallet.account) {
+        if (config[network].chainId == 1 && wallet.account) {
             getUSDTBalance()
         }
     }, [wallet.account])
@@ -149,10 +151,10 @@ export default function CreateProject() {
     }, [fundraising.max_amount])
 
     const getUSDTBalance = async () => {
-        let CONTRACT_ADDRESS = config.usdAddress
-        const contract = new web3.eth.Contract(config.commonABI, CONTRACT_ADDRESS)
+        let CONTRACT_ADDRESS = config[network].usdAddress
+        const contract = new web3.eth.Contract(config[network].commonABI, CONTRACT_ADDRESS)
         const result = await contract.methods.balanceOf(wallet.account).call({ from: wallet.account })
-        if (config.usdUnit === 'USDT') {
+        if (config[network].usdUnit === 'USDT') {
             setUSDTBalance(web3.utils.fromWei(result, 'mwei'))
         } else {
             setUSDTBalance(web3.utils.fromWei(result, 'ether'))
@@ -550,15 +552,15 @@ export default function CreateProject() {
                 // delete fundraising.start_time;
                 // delete fundraising.end_time
                 if (withdrawMethod === '1') {
-                    templateId = config.templateIds[0]
+                    templateId = config[network].templateIds[0]
                 } else {
-                    templateId = config.templateIds[1]
+                    templateId = config[network].templateIds[1]
                 }
             } else if (raisingMethod === '1') {
                 if (withdrawMethod === '1') {
-                    templateId = config.templateIds[2]
+                    templateId = config[network].templateIds[2]
                 } else {
-                    templateId = config.templateIds[3]
+                    templateId = config[network].templateIds[3]
                 }
             }
             finalURL += `/project/create-project/${templateId}`
@@ -1295,7 +1297,7 @@ export default function CreateProject() {
                                     )
                                 }
                                 style={{ width: '300px' }}
-                                suffix={config.usdUnit}
+                                suffix={config[network].usdUnit}
                             />
                             <div className="hint">
                                 {t('createProject.fundraisingLimitHint')}
@@ -1324,7 +1326,7 @@ export default function CreateProject() {
                                     }}
                                 />
                                 <div className="softtop-value">
-                                    {fundraising.min_amount} {config.usdUnit}
+                                    {fundraising.min_amount} {config[network].usdUnit}
                                 </div>
                                 <div className="hint">
                                     {t('createProject.fundraisingGoalHint')}
@@ -1621,7 +1623,7 @@ export default function CreateProject() {
                                     {t('createProject.fundraisingGoal')}
                                 </div>
                                 <div className="value">
-                                    {fundraising.min_amount} {config.usdUnit}
+                                    {fundraising.min_amount} {config[network].usdUnit}
                                 </div>
                             </div>
                             <div className="line">
@@ -1629,7 +1631,7 @@ export default function CreateProject() {
                                     {t('createProject.fundraisingLimit')}
                                 </div>
                                 <div className="value">
-                                    {fundraising.max_amount} {config.usdUnit}
+                                    {fundraising.max_amount} {config[network].usdUnit}
                                 </div>
                             </div>
                             <div className="line">
@@ -1781,7 +1783,7 @@ export default function CreateProject() {
                         <div>
                             {t('common.yourBill')}{' '}
                             <span className="num">{approveBalance}</span>{' '}
-                            {config.usdUnit}
+                            {config[network].usdUnit}
                             {dadaApproved ? (
                                 <div
                                     onClick={() => {
@@ -1812,7 +1814,7 @@ export default function CreateProject() {
                         <div>
                             {t('common.yourBalance')}{' '}
                             <span className="num">{USDTBalance}</span>{' '}
-                            {config.usdUnit}
+                            {config[network].usdUnit}
                         </div>
                         <div className="hint">
                             <div>{t('common.billHint1')}</div>

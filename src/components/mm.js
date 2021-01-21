@@ -7,13 +7,12 @@ import config from 'config'
 async function sendTransaction(transactionParameters, desc, approvedActionParam) {
     // approvedActionParam will be called when approvement is approved
 
-    
-
+    const network = localStorage.getItem('network')
     return new Promise(async (resolve, reject) => {
         await window.ethereum
             .request({
                 method: "eth_sendTransaction",
-                params: [{ ...transactionParameters, chainId: config.chainId }],
+                params: [{ ...transactionParameters, chainId: config[network].chainId }],
             })
             .then(async (txHash) => {
                 let previousActionObj = JSON.parse(localStorage.getItem('actionObj')) || {}

@@ -1,1 +1,1 @@
-export const SWITCH_ROLE = "SWITCH_ROLE"
+export const SWITCH_NETWORK = "SWITCH_NETWORK"

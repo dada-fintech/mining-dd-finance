@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { PDFReader } from 'reactjs-pdf-reader';
 import { toBr } from 'components/utils'
 import config from 'config'
@@ -8,6 +9,7 @@ import './style.scss'
 export default function Detail(props) {
     const { t } = useTranslation()
     const { fullDesc, projectInfo, otherFiles, projectId } = props
+    const network = useSelector(state => state.setting.network)
     const [loading, setLoading] = useState(true)
     return (<div className="detail-module">
         <div className="text-line">
@@ -41,7 +43,7 @@ export default function Detail(props) {
                 <div className="box">
                     {otherFiles.map((item, index) => (
                         <div className="box-item-doc" key={index}>
-                            <a target="_blank" href={`${config.assetURL}/${projectId}/${item.file_name}`}>
+                            <a target="_blank" href={`${config[network].assetURL}/${projectId}/${item.file_name}`}>
                                 {item.file_name.slice(10)}
                             </a>
                         </div>

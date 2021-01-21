@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Button } from 'antd'
 import { useWallet } from 'use-wallet'
+import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import ConfirmVote from '../../modals/ConfirmVote'
 import config from 'config'
@@ -20,6 +21,7 @@ import './style.scss'
 export default function Process(props) {
     const { processList, role, id, isTemplate } = props
     const [confirmVoteVisible, setConfirmVoteVisible] = useState(false)
+    const network = useSelector(state => state.setting.network)
     const [currentParams, setCurrentParams] = useState({})
     const wallet = useWallet()
     const { t } = useTranslation()
@@ -100,7 +102,7 @@ export default function Process(props) {
                             <div className="value">{process.unlock_percentage} %</div>
                             <div className="title">{t('project.unlockingPercent')}</div>
                         </div> : <div>
-                                <div className="value">{process.unlock_amount} {config.usdUnit}</div>
+                                <div className="value">{process.unlock_amount} {config[network].usdUnit}</div>
                                 <div className="title">{t('project.unlockingAmount')}</div>
                             </div>}
                     </div>

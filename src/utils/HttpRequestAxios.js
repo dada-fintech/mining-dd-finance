@@ -10,8 +10,10 @@ import axios from 'axios';
 import { message } from 'antd';
 import Config from '../config';
 
+const network = localStorage.getItem('network')
+
 export const HttpRequestAxios = axios.create({
-    baseURL: Config.BSAE_DHASH_API_URL,
+    baseURL: Config[network].BSAE_DHASH_API_URL,
     timeout: 20000,
 });
 
@@ -21,8 +23,8 @@ HttpRequestAxios.interceptors.request.use(
         if (localStorage.getItem('accessToken')) {
             // 判断是否存在accessToken，如果存在的话，则每个http header都加上token
             // let base64Token = 'Basic ' + localStorage.getItem('auth');
-            config.headers.post['Content-Type'] = 'application/json';
-            //config.headers.Authorization = localStorage.getItem('accessToken'); //请求头加上accessToken
+            config[network].headers.post['Content-Type'] = 'application/json';
+            //config[network].headers.Authorization = localStorage.getItem('accessToken'); //请求头加上accessToken
         }
         return config;
     },

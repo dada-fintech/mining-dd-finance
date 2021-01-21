@@ -3,7 +3,9 @@ import React from 'react';
 import config from 'config';
 // import { MetaMask_CONF_URL } from '../constants';
 
-const Wbe3Utils = new Web3(config.provider);
+const network = localStorage.getItem('network')
+
+const Wbe3Utils = new Web3(config[network].provider);
 export default Wbe3Utils;
 
 export const AppContext = React.createContext({

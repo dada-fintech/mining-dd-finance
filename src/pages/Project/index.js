@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import axios from 'utils/axios'
 import AuditModal from './modals/AuditModal'
+import { useSelector } from 'react-redux'
 import AskModal from './modals/AskModal'
 import RepayModal from './modals/RepayModal'
 import { useWallet } from 'use-wallet'
@@ -38,6 +39,7 @@ export default function Project() {
     const [subscribeVisible, setSubscribeVisible] = useState(false)
     const [email, setEmail] = useState('')
     const [myShare, setMyShare] = useState({})
+    const network = useSelector(state => state.setting.network)
 
     // 下一个进程是否在4天内
     // const [nextInFour, setNextInFour] = useState(false)
@@ -172,16 +174,16 @@ export default function Project() {
             }
 
             if (res.data.is_satisfied) {
-                mm.sendTransaction(lockParams, `Lock ${config.usdUnit}`).then(res => {
+                mm.sendTransaction(lockParams, `Lock ${config[network].usdUnit}`).then(res => {
                     setLocklLoading(false)
                     getInfo()
                     getUserInvest()
                 })
             } else {
                 message.info(t('hint.approve'))
-                mm.sendTransaction(approveParams, `Approve spending ${config.usdUnit}`).then(res => {
+                mm.sendTransaction(approveParams, `Approve spending ${config[network].usdUnit}`).then(res => {
                     if (res) {
-                        mm.sendTransaction(lockParams, `Lock ${config.usdUnit}`).then(res => {
+                        mm.sendTransaction(lockParams, `Lock ${config[network].usdUnit}`).then(res => {
                             setLocklLoading(false)
                             getInfo()
                             getUserInvest()
@@ -301,17 +303,17 @@ export default function Project() {
                 </Tooltip>
             </Col>
             <Col xs={24} md={12} lg={8} xl={4}>
-                <Tooltip title={`${project.fundraising.min_amount} ${config.usdUnit}`}>
+                <Tooltip title={`${project.fundraising.min_amount} ${config[network].usdUnit}`}>
                     <div className="info-item">
-                        <div className="value nowrap">{project.fundraising.min_amount} {config.usdUnit}</div>
+                        <div className="value nowrap">{project.fundraising.min_amount} {config[network].usdUnit}</div>
                         <div className="title">{t('common.softCap')}</div>
                     </div>
                 </Tooltip>
             </Col>
             <Col xs={24} md={12} lg={8} xl={4}>
-                <Tooltip title={`${project.fundraising.max_amount} ${config.usdUnit}`}>
+                <Tooltip title={`${project.fundraising.max_amount} ${config[network].usdUnit}`}>
                     <div className="info-item">
-                        <div className="value nowrap">{project.fundraising.max_amount} {config.usdUnit}</div>
+                        <div className="value nowrap">{project.fundraising.max_amount} {config[network].usdUnit}</div>
                         <div className="title">{t('common.fundSize')}</div>
                     </div>
                 </Tooltip>
@@ -357,7 +359,7 @@ export default function Project() {
                             </div>
                         </Row>}
 
-                        {project.project_info.status === 'Active' && role === 'manager' && project.fundraising.money_left > 0 && (project.project_info.template_id == config.templateIds[0] || project.project_info.template_id == config.templateIds[2]) && <Row>
+                        {project.project_info.status === 'Active' && role === 'manager' && project.fundraising.money_left > 0 && (project.project_info.template_id == config[network].templateIds[0] || project.project_info.template_id == config[network].templateIds[2]) && <Row>
                             <div className="handle-area">
                                 <div className="btn-action" onClick={() => { doAsk() }}><span>发起请款</span></div>
                             </div>
@@ -380,17 +382,17 @@ export default function Project() {
                             <div className="handle-area">
                                 <Input style={{ width: '140px', height: '44px' }} addonAfter={
                                     <div className="btn-input-action" onClick={() => { !lockLoading && doLock() }}><span className="text">{t('project.action.invest')} {lockLoading && <LoadingOutlined />
-                                    }</span></div>} value={lockNum} onChange={(event) => { setLockedNum(event.target.value) }} suffix={config.usdUnit} />
+                                    }</span></div>} value={lockNum} onChange={(event) => { setLockedNum(event.target.value) }} suffix={config[network].usdUnit} />
                             </div>
                             <div className="votes-bar">
                                 <div className="done" style={{ width: project.percent + '%' }}>{project.percent}%</div>
                             </div>
                             <div className="votes-info">
                                 <div>
-                                    {t('common.currentRaised')}:{project.fundraising.current_raised_money} {config.usdUnit}
+                                    {t('common.currentRaised')}:{project.fundraising.current_raised_money} {config[network].usdUnit}
                                 </div>
                                 <div>
-                                    {t('common.fundSize')}:{project.fundraising.max_amount} {config.usdUnit}
+                                    {t('common.fundSize')}:{project.fundraising.max_amount} {config[network].usdUnit}
                                 </div>
                             </div>
                             {/* <div className="process-tag" style={{ marginLeft: (project.percent > 50 ? (project.percent - 5) : project.percent) + '%' }}>
@@ -421,7 +423,7 @@ export default function Project() {
 
         <div className="bottom-area">
             <div className="container">
-                {currentTab === 'process' && <ProcessModule id={id} role={role} processList={project.process || []} isTemplate={project.project_info.template_id == config.templateIds[0] || project.project_info.template_id == config.templateIds[2]} />}
+                {currentTab === 'process' && <ProcessModule id={id} role={role} processList={project.process || []} isTemplate={project.project_info.template_id == config[network].templateIds[0] || project.project_info.template_id == config[network].templateIds[2]} />}
                 {currentTab === 'detail' && <DetailModule projectId={id} otherFiles={project.project_info.other_file} fullDesc={project.fullDesc} projectInfo={project.project_info} />}
             </div>
         </div>

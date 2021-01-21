@@ -1,7 +1,10 @@
 import Web3 from "web3";
 import config from 'config'
 
-const web3 = new Web3(config.provider);
+const network = localStorage.getItem('network')
+
+
+const web3 = new Web3(config[network].provider);
 
 export {
     web3

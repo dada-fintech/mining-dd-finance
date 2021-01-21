@@ -11,12 +11,13 @@ class ClaimContractApi {
      * @param {*}
      */
     async getCanClaim (address = '') {
+        const network = localStorage.getItem('network')
         try {
-            const contract = new Wbe3Utils.eth.Contract(claimabi, Config.CLAIMROUTER);
+            const contract = new Wbe3Utils.eth.Contract(claimabi, Config[network].CLAIMROUTER);
             const canClaim = await contract.methods.can_claim().call({
                 from: address,
             });
-            return Tools.numDivDecimals(canClaim, Config.DDDECIMALS);
+            return Tools.numDivDecimals(canClaim, Config[network].DDDECIMALS);
         } catch (err) {
             console.log(err);
             return 0;
@@ -36,10 +37,11 @@ class ClaimContractApi {
         errorFun = () => { }
     ) {
         try {
+            const network = localStorage.getItem('network')
             const EthereumContract = new web3(ethereum);
             const contract = new EthereumContract.eth.Contract(
                 claimabi,
-                Config.CLAIMROUTER
+                Config[network].CLAIMROUTER
             );
 
             return contract.methods

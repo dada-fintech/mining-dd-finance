@@ -10,10 +10,12 @@ import config from 'config';
 import reportWebVitals from './reportWebVitals';
 import './styles/styles.scss';
 
+const {setting} = store.getState()
+
 ReactDOM.render(
     <Provider store={store}>
-        <UseWalletProvider chainId={config.chainId}>
-            <App />
+        <UseWalletProvider chainId={config[setting.network].chainId}>
+            <App foo={setting.network}/>
         </UseWalletProvider>
     </Provider>,
     document.getElementById('root')

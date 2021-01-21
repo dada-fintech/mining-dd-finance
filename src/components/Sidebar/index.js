@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useWallet } from 'use-wallet'
 import mm from 'components/mm'
 import { Button } from 'antd'
+import { useSelector } from 'react-redux'
 import config from 'config'
 // import axios from 'utils/axios'
 import './style.scss'
@@ -11,6 +12,7 @@ export default function Sidebar(props) {
     const { role, myShare, refreshInvestInfo } = props
     // const [myShare, setMyShare] = useState({})
     const [actionLoading, setActionLoading] = useState(false)
+    const network = useSelector(state => state.setting.network)
 
     // const [topInvestList, setTopInvestList] = useState([])
     const { t } = useTranslation()
@@ -65,20 +67,20 @@ export default function Sidebar(props) {
                     {myShare.actual_raised > 0 && <div className="box-item">
                         <div className="progress" style={{ width: (myShare.user_balance / myShare.actual_raised) * 100 + '%' }}></div>
                         <div className="texts">
-                            <div>{((myShare.user_balance / myShare.actual_raised) * 100).toFixed(2)}% ({myShare.user_balance} {config.usdUnit})</div>
+                            <div>{((myShare.user_balance / myShare.actual_raised) * 100).toFixed(2)}% ({myShare.user_balance} {config[network].usdUnit})</div>
                         </div>
                     </div>}
                     {myShare.actual_raised <= 0 && <div className="box-item">
                         <div className="progress" style={{ width: '0%' }}></div>
                         <div className="texts">
-                            <div>0% ({myShare.user_balance} {config.usdUnit})</div>
+                            <div>0% ({myShare.user_balance} {config[network].usdUnit})</div>
                         </div>
                     </div>}
                 </div> */}
                 {<div className="my-share-box">
                     <div className="line">
                         <div>{t('sidebar.myShare')}</div>
-                        <div>{myShare.user_balance || 0} {config.usdUnit}</div>
+                        <div>{myShare.user_balance || 0} {config[network].usdUnit}</div>
                     </div>
                     {myShare.profit_status === 'BonusCanClaim' && <div className="line">
                         <div>{t('sidebar.bonus')}</div>
@@ -86,7 +88,7 @@ export default function Sidebar(props) {
                     </div>}
                     {myShare.profit_status !== 'BonusCanClaim' && <div className="line">
                         <div>{t('sidebar.return')}</div>
-                        <div>{myShare.profit_usdt || 0} {config.usdUnit}</div>
+                        <div>{myShare.profit_usdt || 0} {config[network].usdUnit}</div>
                     </div>}
                     {myShare.profit_status && <div className="line">
                         <div>{t('sidebar.gains')}</div>
@@ -104,7 +106,7 @@ export default function Sidebar(props) {
                         <div className="box-item" key={index}>
                             <div className="progress" style={{ width: (item.amount / myShare.actual_raised) * 100 + '%' }}></div>
                             <div className="texts">
-                                <div>{((item.amount / myShare.actual_raised) * 100).toFixed(2)}% ({item.amount} {config.usdUnit})</div>
+                                <div>{((item.amount / myShare.actual_raised) * 100).toFixed(2)}% ({item.amount} {config[network].usdUnit})</div>
                                 <div>{item.user_addr.slice(0, 4)}...{item.user_addr.slice(-4)}</div>
                             </div>
                         </div>

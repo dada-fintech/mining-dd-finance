@@ -529,89 +529,73 @@ const commonABI = [
 // template_id 3: moneyDaoFixRaise 定期筹款，投票释放
 // template_id 4: moneyDaoFixRaiseFullRelease 定期筹款，全款释放
 
-// export default {
-//     network: 'ethereum',
-//     mode: 'prod',
-//     provider: 'wss://mainnet.infura.io/ws/v3/89db527f19e14a00902a439ae587a25b',
-//     chainId: 1,
-//     baseURL: 'https://mining-api.dd.finance',
-//     assetURL: 'https://mining-assets.dd.finance',
-//     commonABI,
-//     templateIds: ['1', '2', '3', '4'],
-//     //设置了之后，会占用首页广告位
-//     featuredId: 'fd7798d918799f5f1c7cc98a8900feb69d6a8cbb5dc8f036477fc4bca349e405',
-//     usdAddress: '0xdac17f958d2ee523a2206206994597c13d831ec7',
-//     usdUnit: 'USDT',
-// }
+export default{
+    //test(binance)
+    test:{
+        network: 'binance',
+        mode: 'test',
+        provider: 'https://data-seed-prebsc-1-s1.binance.org:8545',
+        chainId: 97,
+        baseURL: 'https://mining-api-test.dd.finance',
+        assetURL: 'https://mining-assets-test.dd.finance',
+        commonABI,
+        templateIds: ['1', '2', '3', '4'],
+        usdAddress: '0xB2eA07bd51527179a366CBB699aE7164F9B5E509',
+        usdUnit: 'BUSD',
+        // dhash base api url
+        BSAE_DHASH_API_URL: 'https://api-test.dhash.finance',
+        // claim 合约地址
+        CLAIMROUTER: '0x23e1F12eC38eAba4317E13034aC3d1f48D4A5168',
+        // DD 精度
+        DDDECIMALS: 18,
+    },
 
-// binance testnet
-// export default {
-//     network: 'binance',
-//     mode: 'test',
-//     provider: 'https://data-seed-prebsc-1-s1.binance.org:8545',
-//     chainId: 97,
-//     baseURL: 'https://mining-api-test.dd.finance',
-//     assetURL: 'https://mining-assets-test.dd.finance',
-//     commonABI,
-//     templateIds: ['1', '2', '3', '4'],
-//     usdAddress: '0xB2eA07bd51527179a366CBB699aE7164F9B5E509',
-//     usdUnit: 'BUSD',
-//     // dhash base api url
-//     BSAE_DHASH_API_URL: 'https://api-test.dhash.finance',
-//     // claim 合约地址
-//     CLAIMROUTER: '0x23e1F12eC38eAba4317E13034aC3d1f48D4A5168',
-//     // DD 精度
-//     DDDECIMALS: 18,
-// };
+    //ethereum
+    ethereum:{
+            network: 'ethereum',
+            mode: 'prod',
+            provider: 'wss://mainnet.infura.io/ws/v3/89db527f19e14a00902a439ae587a25b',
+            chainId: 1,
+            baseURL: 'https://mining-api.dd.finance',
+            assetURL: 'https://mining-assets.dd.finance',
+            commonABI,
+            templateIds: ['1', '2', '3', '4'],
+            //设置了之后，会占用首页广告位
+            featuredId: 'fd7798d918799f5f1c7cc98a8900feb69d6a8cbb5dc8f036477fc4bca349e405',
+            usdAddress: '0xdac17f958d2ee523a2206206994597c13d831ec7',
+            usdUnit: 'USDT',
+    },
+        
+    // binance
+    binance:{
+        network: 'binance',
+        mode: 'prod',
+        provider: 'https://bsc-dataseed.binance.org/',
+        chainId: 56,
+        baseURL: 'https://mining-api-binance.dd.finance',
+        assetURL: 'https://mining-assets-binance.dd.finance',
+        commonABI,
+        templateIds: ['1', '2', '3', '4'],
+        featuredId: '08b90ac9c815f82277463d63152d2822ba192d33fda2d74e2651a505b1678ff6',
+        usdAddress: '0xe9e7cea3dedca5984780bafc599bd69add087d56',
+        usdUnit: 'BUSD',
+        BSAE_DHASH_API_URL: 'https://api-test.dhash.finance',    // dhash base api url
+        CLAIMROUTER: '0x23e1F12eC38eAba4317E13034aC3d1f48D4A5168',    // claim 合约地址
+        DDDECIMALS: 18,    // DD 精度
+    },
 
-// binance mainnet
-// export default {
-//     network: 'binance',
-//     mode: 'prod',
-//     provider: 'https://bsc-dataseed.binance.org/',
-//     chainId: 56,
-//     baseURL: 'https://mining-api-binance.dd.finance',
-//     assetURL: 'https://mining-assets-binance.dd.finance',
-//     commonABI,
-//     templateIds: ['1', '2', '3', '4'],
-//     featuredId: '08b90ac9c815f82277463d63152d2822ba192d33fda2d74e2651a505b1678ff6',
-//     usdAddress: '0xe9e7cea3dedca5984780bafc599bd69add087d56',
-//     usdUnit: 'BUSD',
-//     BSAE_DHASH_API_URL: 'https://api-test.dhash.finance',    // dhash base api url
-//     CLAIMROUTER: '0x23e1F12eC38eAba4317E13034aC3d1f48D4A5168',    // claim 合约地址
-//     DDDECIMALS: 18,    // DD 精度
-// }
-
-
-// heco mainnet, 这里的具体值待修改
-export default {
-    network: 'heco',
-    mode: 'prod',
-    provider: 'https://bsc-dataseed.binance.org/',
-    chainId: 56,
-    baseURL: 'https://mining-api-binance.dd.finance',
-    assetURL: 'https://mining-assets-binance.dd.finance',
-    commonABI,
-    templateIds: ['1', '2', '3', '4'],
-    featuredId: '08b90ac9c815f82277463d63152d2822ba192d33fda2d74e2651a505b1678ff6',
-    usdAddress: '0xe9e7cea3dedca5984780bafc599bd69add087d56',
-    usdUnit: 'HUSD',
+    // huobi
+    heco:{
+        network: 'heco',
+        mode: 'prod',
+        provider: 'https://bsc-dataseed.binance.org/',
+        chainId: 56,
+        baseURL: 'https://mining-api-binance.dd.finance',
+        assetURL: 'https://mining-assets-binance.dd.finance',
+        commonABI,
+        templateIds: ['1', '2', '3', '4'],
+        featuredId: '08b90ac9c815f82277463d63152d2822ba192d33fda2d74e2651a505b1678ff6',
+        usdAddress: '0xe9e7cea3dedca5984780bafc599bd69add087d56',
+        usdUnit: 'HUSD',
+    }
 }
-
-
-//infura
-// export default {
-//     network: 'ethereum',
-//     mode: 'test',
-//     provider: 'https://kovan.infura.io/v3/e468cafc35eb43f0b6bd2ab4c83fa688',
-//     chainId: 42,
-//     baseURL: 'https://mining-api-test.dd.finance',
-//     assetURL: 'https://mining-assets-test.dd.finance',
-//     commonABI,
-//     templateIds: ['1', '2', '3', '4']
-//     usdAddress: '',
-//     usdUnit: 'USDT',
-//     BSAE_DHASH_API_URL: 'https://api-test.dhash.finance',    // dhash base api url
-//     CLAIMROUTER: '0x23e1F12eC38eAba4317E13034aC3d1f48D4A5168',    // claim 合约地址
-//     DDDECIMALS: 18,    // DD 精度
-// }

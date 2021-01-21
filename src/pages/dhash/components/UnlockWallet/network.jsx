@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Modal } from 'antd';
 import { useWallet } from 'use-wallet';
+import { useSelector } from 'react-redux'
 import { useMedia } from 'react-use';
 // import { CHAINID } from '../../constants';
 import config from 'config'
@@ -12,6 +13,7 @@ const SwitchNetwork = () => {
     const { t } = useTranslation();
     const wallet = useWallet();
     const { chainId, status, account } = wallet;
+    const network = useSelector(state => state.setting.network)
     const below960 = useMedia('(max-width: 960px)');
     const [visible, setVisible] = useState(false);
     useEffect(() => {
@@ -19,7 +21,7 @@ const SwitchNetwork = () => {
             setVisible(false);
         } else {
             if (
-                (chainId && Number(chainId) !== config.chainId) ||
+                (chainId && Number(chainId) !== config[network].chainId) ||
                 status !== 'connected'
             ) {
                 // 显示网络错误
