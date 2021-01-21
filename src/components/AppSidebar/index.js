@@ -78,6 +78,7 @@ export default function AppSidebar(props) {
                 network: network
             }
         })
+        // 有些组件是在react体系外的，所以需要reload让它们也重新连接
         window.location.reload();
 
     }
