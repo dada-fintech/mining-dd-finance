@@ -2,12 +2,15 @@
 import { subscribe } from '@nextcloud/event-bus'
 import { watchTransaction } from 'components/utils'
 import config from 'config'
+import store from '../redux/store';
+
+const {setting} = store.getState()
 
 
 async function sendTransaction(transactionParameters, desc, approvedActionParam) {
     // approvedActionParam will be called when approvement is approved
 
-    const network = localStorage.getItem('network')
+    const network = setting.network
     return new Promise(async (resolve, reject) => {
         await window.ethereum
             .request({

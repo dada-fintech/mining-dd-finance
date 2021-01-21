@@ -2,8 +2,10 @@ import Web3 from 'web3';
 import React from 'react';
 import config from 'config';
 // import { MetaMask_CONF_URL } from '../constants';
+import store from '../redux/store';
 
-const network = localStorage.getItem('network')
+const {setting} = store.getState()
+const network = setting.network
 
 const Wbe3Utils = new Web3(config[network].provider);
 export default Wbe3Utils;

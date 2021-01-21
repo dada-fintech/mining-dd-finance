@@ -4,6 +4,10 @@ import claimabi from './abi/claimabi.json';
 import Wbe3Utils from './Wbe3Utils';
 import * as Tools from '../utils/Tools';
 
+import store from '../redux/store';
+
+const {setting} = store.getState()
+
 class ClaimContractApi {
     /**
      * 获取 Claim余额
@@ -11,7 +15,7 @@ class ClaimContractApi {
      * @param {*}
      */
     async getCanClaim (address = '') {
-        const network = localStorage.getItem('network')
+        const network = setting.network
         try {
             const contract = new Wbe3Utils.eth.Contract(claimabi, Config[network].CLAIMROUTER);
             const canClaim = await contract.methods.can_claim().call({
@@ -37,7 +41,7 @@ class ClaimContractApi {
         errorFun = () => { }
     ) {
         try {
-            const network = localStorage.getItem('network')
+            const network = setting.network
             const EthereumContract = new web3(ethereum);
             const contract = new EthereumContract.eth.Contract(
                 claimabi,

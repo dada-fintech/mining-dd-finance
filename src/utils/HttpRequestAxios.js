@@ -10,7 +10,11 @@ import axios from 'axios';
 import { message } from 'antd';
 import Config from '../config';
 
-const network = localStorage.getItem('network')
+import store from '../redux/store';
+
+const {setting} = store.getState()
+
+const network = setting.network
 
 export const HttpRequestAxios = axios.create({
     baseURL: Config[network].BSAE_DHASH_API_URL,

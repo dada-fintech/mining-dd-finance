@@ -1,12 +1,15 @@
 import { message } from 'antd';
 import config from 'config'
 // import { CHAINID } from '../constants';
+import store from '../redux/store';
+
+const {setting} = store.getState()
 
 export async function sendTransaction(transactionParameters, resFun, errFun) {
     try {
         // return new Promise(async (resolve, reject) => {
 
-        const network = localStorage.getItem('network')
+        const network = setting.network
 
         await window.ethereum
             .request({
