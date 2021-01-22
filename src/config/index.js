@@ -546,6 +546,10 @@ export default {
         BSAE_DHASH_API_URL: 'https://api-test.dhash.finance',        // dhash base api url
         CLAIMROUTER: '0x23e1F12eC38eAba4317E13034aC3d1f48D4A5168',        // claim 合约地址
         DDDECIMALS: 18,        // DD 精度
+        INIT_SYMBOL: 'USDT',
+        REWARD_SYMBOL: 'WBTC',
+        OFFICIAL_SYMBOL: 'DHM',
+        BSAE_API_URL: 'https://api.dhash.finance',
     },
 
     //ethereum
@@ -565,6 +569,10 @@ export default {
         BSAE_DHASH_API_URL: 'https://api.dhash.finance',        // dhash base api url
         CLAIMROUTER: '',        // claim 合约地址
         DDDECIMALS: 18,        // DD 精度
+        INIT_SYMBOL: 'USDT',
+        REWARD_SYMBOL: 'WBTC',
+        OFFICIAL_SYMBOL: 'DHM',
+        BSAE_API_URL: 'https://api.dhash.finance',
     },
 
     // binance
@@ -583,6 +591,10 @@ export default {
         BSAE_DHASH_API_URL: 'https://api.dhash.finance',    // dhash base api url
         CLAIMROUTER: '',    // claim 合约地址
         DDDECIMALS: 18,    // DD 精度
+        INIT_SYMBOL: 'USDT',
+        REWARD_SYMBOL: 'WBTC',
+        OFFICIAL_SYMBOL: 'DHM',
+        BSAE_API_URL: 'https://api.dhash.finance',
     },
 
     // huobi
@@ -601,5 +613,9 @@ export default {
         BSAE_DHASH_API_URL: 'https://api.dhash.finance',        // dhash base api url
         CLAIMROUTER: '',        // claim 合约地址
         DDDECIMALS: 18,        // DD 精度
+        INIT_SYMBOL: 'HUSD',
+        REWARD_SYMBOL: 'HBTC',
+        OFFICIAL_SYMBOL: 'DHM',
+        BSAE_API_URL: 'https://api.dhash.finance',
     }
 }

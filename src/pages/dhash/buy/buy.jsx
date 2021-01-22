@@ -11,6 +11,7 @@ import * as Tools from '../../../utils/Tools';
 import { useWallet } from 'use-wallet';
 import DHMIcon from 'assets/farming/dhm.svg';
 import UserAddress from 'components/UserAddress'
+import Config from "../../../config";
 
 import {
     ApiAppBuy,
@@ -408,7 +409,7 @@ const Buy = () => {
                                 }
                                 onConfirm={getInputaMountNumber}
                                 sumbol={OFFICIAL_SYMBOL}
-                                balanceSumbol={'USDT'}
+                                balanceSumbol={Config.INIT_SYMBOL}
                             />
                             <BuyButton
                                 loading={buyButLoading}
