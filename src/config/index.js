@@ -601,8 +601,8 @@ export default {
     heco: {
         network: 'heco',
         mode: 'prod',
-        provider: 'https://bsc-dataseed.binance.org/',
-        chainId: 56,
+        provider: 'https://http-mainnet-node.huobichain.com',
+        chainId: 128,
         baseURL: 'https://mining-api-binance.dd.finance',
         assetURL: 'https://mining-assets-binance.dd.finance',
         commonABI,

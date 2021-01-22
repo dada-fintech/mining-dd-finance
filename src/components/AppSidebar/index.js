@@ -135,12 +135,9 @@ export default function AppSidebar(props) {
                         className="sidebar-logo"
                         alt="" />
                     }
-                    
-                    
-                        
                 </a>
                 <ul className="nav">
-                    {!hideCreate && (
+                    {!hideCreate && network !== 'heco' && (
                         <li>
                             <a
                                 className={`nowrap ${
@@ -157,7 +154,7 @@ export default function AppSidebar(props) {
                             </a>
                         </li>
                     )}
-                    <li>
+                    {network !== 'heco' &&  <li>
                         <NavLink
                             className={`nowrap ${
                                 location.pathname === '/projects'
@@ -170,8 +167,9 @@ export default function AppSidebar(props) {
                             <img src={CommunityProjectIcon} alt="" />
                             {t('sidebar.communityProjects')}
                         </NavLink>
-                    </li>
-                    {network != 'heco' && <li>
+                    </li>}
+                   
+                    {network !== 'heco' && <li>
                         <NavLink
                             className={`nowrap ${
                                 location.pathname === '/community-projects'
@@ -190,7 +188,7 @@ export default function AppSidebar(props) {
                         </NavLink>
                     </li>}
                     
-                    <li>
+                    { network === 'heco' &&  <li>
                         <NavLink
                             className={`nowrap ${
                                 location.pathname === '/projects'
@@ -207,8 +205,9 @@ export default function AppSidebar(props) {
                             <img src={BuyDHMIcon} alt="" />
                             {t('sidebar.buyDHM')}
                         </NavLink>
-                    </li>
-                    <li>
+                    </li>}
+
+                    {network === 'heco' && <li>
                         <NavLink
                             className={`nowrap ${
                                 location.pathname === '/buy-dhm'
@@ -225,7 +224,8 @@ export default function AppSidebar(props) {
                             <img src={FarmingIcon} alt="" />
                             {t('sidebar.farming')}
                         </NavLink>
-                    </li>
+                    </li>}
+
                     <li>
                         <NavLink
                             className={`nowrap ${
@@ -244,9 +244,6 @@ export default function AppSidebar(props) {
                             {t('sidebar.tokenSwap')}
                         </NavLink>
                     </li>
-                    {/* <li>
-                    <NavLink className={`nowrap ${location.pathname === '/dhash/buy' ? 'top-curve' : ''} ${location.pathname === '/dhash/buy' ? 'bottom-curve' : ''}`} activeClassName="active" to="/dhash/buy"><img src={DashboardIcon} />{t('v1_BUY')}</NavLink>
-                </li> */}
                     <li>
                         <NavLink
                             className={`nowrap ${
@@ -279,6 +276,7 @@ export default function AppSidebar(props) {
                             {t('sidebar.blog')}
                         </NavLink>
                     </li>
+
                     <li>
                         <a
                             className={`nowrap ${
@@ -286,6 +284,8 @@ export default function AppSidebar(props) {
                             }`}
                         ></a>
                     </li>
+                    
+                    
                 </ul>
                 {/* <ul className="nav second">
             <li>
@@ -313,7 +313,6 @@ export default function AppSidebar(props) {
 
             <div className="bottom">
                 <div className="more-links">
-                    {/** 暂时不显示 */}
                     { config[network].mode === 'prod' && (
                         <div className={`network-switch ${network}`}>
                             Network{' '}
