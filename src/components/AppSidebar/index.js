@@ -169,7 +169,7 @@ export default function AppSidebar(props) {
                         </NavLink>
                     </li>}
                    
-                    {network !== 'heco' && <li>
+                    {network !== 'heco' && network !== 'ethereum' && <li>net
                         <NavLink
                             className={`nowrap ${
                                 location.pathname === '/community-projects'
