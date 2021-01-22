@@ -34,8 +34,8 @@ const Buy = () => {
     const wallet = useWallet();
     const { account, status } = wallet;
     const history = useHistory();
-    const [balance, setBalance] = useState(0); // USDT转DHM 余额
-    const [currentPrice, setCurrentPrice] = useState(0); // 当前价格
+    const [balance, setBalance] = useState(0); // HUSD转DHM 余额
+    const [currentPrice, setCurrentPrice] = useState(7); // 当前价格
     const [totalBurned, setTotalBurned] = useState(0);
     const [totalSupply, setTotalSupply] = useState(0);
     const [buyState, setBuyState] = useState(false);
@@ -56,7 +56,6 @@ const Buy = () => {
     }); // BTC当日价格 昨日分发BTC
 
     const getInputaMountNumber = useCallback((val) => {
-        // console.log(val);
         setAmount(val);
         setDisabled(val <= 0);
     });
@@ -65,15 +64,14 @@ const Buy = () => {
     const getApiLatestepochReward = async (staken) => {
         await ApiLatestepochReward()
             .then((res) => {
-                console.log(res);
+                // console.log(res);
                 if (res.code === 200) {
                     setBtcInfo(res.data);
                     // 年化收益率 = 当日分发BTC × 当日BTC价格 / 6.5 / 抵押数量 *365
                     // 年化收益率 = 总奖励 * 当日BTC价格 / 总抵押数量 / dhm 价格
                     // 年化收益率 = 总奖励 * 当日BTC价格 / 总抵押数量 / dhm 价格 /epochs * 365
-                    console.log(res.data.reward.amount !== '-1');
                     setApy(
-                        res.data.reward.amount !== '-1'
+                        res.data.reward.amount !== '-1' && res.data.reward.amount !== '0'
                             ? staken > 0
                                 ? Tools.mul(
                                     Tools.div(
@@ -87,7 +85,7 @@ const Buy = () => {
                                                     res.data.btc_price || 0
                                                 )
                                             ),
-                                            Number(currentPrice || 6.5)
+                                            Number(currentPrice || 7)
                                         ),
                                         Number(staken)
                                     ),
@@ -106,7 +104,7 @@ const Buy = () => {
                                             ),
                                             Number(res.data.total_stakes)
                                         ),
-                                        Number(currentPrice || 6.5)
+                                        Number(currentPrice || 7)
                                     ),
                                     Number(res.data.epochs)
                                 ),
@@ -135,6 +133,7 @@ const Buy = () => {
                 // console.log(res);
                 if (res.code === 200) {
                     setCurrentPrice(res.data.price_pretty);
+                    getApiAppUserBalances(res.data.price_pretty)
                 }
             })
             .catch((err) => {
@@ -181,11 +180,11 @@ const Buy = () => {
     const getApiAppTotalBurnt = async (totalSupply) => {
         ApiAppTotalBurnt()
             .then((res) => {
-                console.log(res);
+                // console.log(res);
                 if (res.code === 200) {
                     // 总销毁量
                     setTotalBurned(
-                        Tools.sub(totalSupply, res.data.total_pretty || 0)
+                        Tools.sub(totalSupply || 0, res.data.total_pretty || 0)
                     );
                 }
             })
@@ -200,23 +199,14 @@ const Buy = () => {
     const getApiAppUserBalances = async () => {
         ApiAppUserBalances(account)
             .then((res) => {
-                console.log('ApiAppUserBalances:', res);
+                // console.log('ApiAppUserBalances:', res);
                 if (res.code === 200) {
                     setUser(res.data);
-                    console.log(
-                        Tools.fmtDec(
-                            Tools.div(
-                                res.data.usdt_pretty,
-                                currentPrice || 6.5
-                            ),
-                            4
-                        )
-                    );
                     setBalance(
                         Tools.fmtDec(
                             Tools.div(
                                 res.data.usdt_pretty,
-                                currentPrice || 6.5
+                                currentPrice || 7
                             ),
                             4
                         )
@@ -226,6 +216,7 @@ const Buy = () => {
             .catch((err) => {
                 console.log('发生错误！', err);
                 setUser({});
+                setBalance(0)
                 return 0;
             });
     };
@@ -235,9 +226,7 @@ const Buy = () => {
         setBuyButLoading(true);
         await ApiAppBuy(account, amount)
             .then((res) => {
-                console.log(res.data.txs[0].contract);
                 if (res.code === 200) {
-                    console.log(res.data.txs.length);
                     if (res.data.txs.length > 1) {
                         setModalState(1);
                         setVisible(true);
@@ -246,8 +235,8 @@ const Buy = () => {
                             res.data.txs[0].contract,
                             res.data.txs[0].calldata,
                             () => {
-                                checkApprove(account, 'USDT', () => {
-                                    console.log('授权成功');
+                                checkApprove(account, 'HUSD', () => {
+                                    // console.log('授权成功');
                                     setModalState(4);
                                     contractTransaction(
                                         account,
@@ -308,6 +297,7 @@ const Buy = () => {
             .catch((err) => {
                 console.log('发生错误！', err);
                 setBuyButLoading(false);
+                setVisible(false);
                 return [];
             });
     };
@@ -320,7 +310,7 @@ const Buy = () => {
 
     useEffect(async () => {
         if (account && status === 'connected') {
-            console.log('getApiAppUserBalances');
+            // console.log('getApiAppUserBalances');
             getApiAppUserBalances(); // 用户余额
         }
     }, [account, status]);

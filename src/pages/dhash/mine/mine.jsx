@@ -55,14 +55,13 @@ const Mine = () => {
         code: 200,
         msg: '',
     }); // BTC当日价格 昨日分发BTC
-    const [currentPrice, setCurrentPrice] = useState(0); // 当前价格
+    const [currentPrice, setCurrentPrice] = useState(7); // 当前价格
     const [disabled, setDisabled] = useState(true); // 按钮状态
     const [totalRewarded, setTotalRewarded] = useState(0); // 全网总奖励
     const [visible, setVisible] = useState(false);
     const [isUpdate, setIsUpdate] = useState(false);
     const [modalState, setModalState] = useState(0); // 弹窗 0:授权 1授权中 2交易中 3交易成功 -1交易失败; 4 授权完成
     const getInputaMountNumber = (val) => {
-        console.log(val);
         setAmount(val);
         setDisabled(val <= 0);
     };
@@ -72,7 +71,6 @@ const Mine = () => {
     };
     // CLAIM;
     const claimFun = () => {
-        console.log('CLAIM');
         ApiAppClaimFun();
     };
     // STOP
@@ -84,7 +82,7 @@ const Mine = () => {
     const getApiAppSellprice = async () => {
         ApiAppSellprice()
             .then((res) => {
-                console.log(res);
+                // console.log(res);
                 if (res.code === 200) {
                     setCurrentPrice(res.data.price_pretty || 0);
                 }
@@ -100,7 +98,7 @@ const Mine = () => {
     const getApiLatestepochReward = async (staken) => {
         await ApiLatestepochReward()
             .then((res) => {
-                console.log(res);
+                // console.log(res);
                 if (res.code === 200) {
                     setBtcInfo({
                         btc_price: res.data.btc_price || 0,
@@ -109,9 +107,8 @@ const Mine = () => {
                     // 年化收益率 = 当日分发BTC × 当日BTC价格 / 6.5 / 抵押数量 *365
                     // 年化收益率 = 总奖励 * 当日BTC价格 / 总抵押数量 / dhm 价格
                     // 年化收益率 = 总奖励 * 当日BTC价格 / 总抵押数量 / dhm 价格 /epochs * 365
-                    console.log(res.data.reward.amount !== '-1');
                     setApy(
-                        res.data.reward.amount !== '-1'
+                        res.data.reward.amount !== '-1' && res.data.reward.amount !== '0'
                             ? staken > 0
                                 ? Tools.mul(
                                     Tools.div(
@@ -125,7 +122,7 @@ const Mine = () => {
                                                     res.data.btc_price || 0
                                                 )
                                             ),
-                                            Number(currentPrice || 6.5)
+                                            Number(currentPrice || 7)
                                         ),
                                         Number(staken)
                                     ),
@@ -144,7 +141,7 @@ const Mine = () => {
                                             ),
                                             Number(res.data.total_stakes)
                                         ),
-                                        Number(currentPrice || 6.5)
+                                        Number(currentPrice || 7)
                                     ),
                                     Number(res.data.epochs)
                                 ),
@@ -170,7 +167,7 @@ const Mine = () => {
         setStakeButLoading(true);
         await ApiAppStake(account, amount)
             .then((res) => {
-                console.log(res);
+                // console.log(res);
                 if (res.code === 200) {
                     if (res.data.txs.length > 1) {
                         setModalState(1);
@@ -240,15 +237,17 @@ const Mine = () => {
             })
             .catch((err) => {
                 console.log('发生错误！', err);
-                return {};
+                setStakeButLoading(false);
+                setVisible(false);
+                return false;
             });
     };
-    //
+    // Withdraw
     const ApiAppWithdrawFun = async () => {
         setStopButLoading(true);
         await ApiAppWithdraw(account)
             .then((res) => {
-                console.log(res);
+                // console.log(res);
                 if (res.code === 200) {
                     contractTransaction(
                         account,
@@ -275,7 +274,7 @@ const Mine = () => {
             .catch((err) => {
                 console.log('发生错误！', err);
                 setStopButLoading(false);
-                return {};
+                return false;
             });
     };
 
@@ -284,7 +283,7 @@ const Mine = () => {
         setClaimButLoading(true);
         await ApiAppClaim(account)
             .then((res) => {
-                console.log(res);
+                // console.log(res);
                 if (res.code === 200) {
                     contractTransaction(
                         account,
@@ -310,14 +309,14 @@ const Mine = () => {
             .catch((err) => {
                 console.log('发生错误！', err);
                 setClaimButLoading(false);
-                return {};
+                return false;
             });
     };
     // 总抵押量
     const getApiAppTotalTakes = async () => {
         await ApiAppTotalTakes()
             .then((res) => {
-                console.log(res);
+                // console.log(res);
                 if (res.code === 200) {
                     setTokenStaken(res.data.amount_pretty);
                     getApiAppTotalBurnt(res.data.amount_pretty);
@@ -335,14 +334,14 @@ const Mine = () => {
     const getApiUserStaked = async () => {
         await ApiUserStaked(account)
             .then((res) => {
-                console.log(res);
+                // console.log(res);
                 if (res.code === 200) {
                     setUStaked(res.data.amount_pretty || 0);
                 }
             })
             .catch((err) => {
                 console.log('发生错误！', err);
-                setTokenStaken(0);
+                setUStaked(0);
                 return 0;
             });
     };
@@ -350,14 +349,14 @@ const Mine = () => {
     const getApiToClaimBalances = async () => {
         await ApiToClaimBalances(account)
             .then((res) => {
-                console.log(res);
+                // console.log(res);
                 if (res.code === 200) {
                     setRewardToClaim(res.data.amount_pretty || 0);
                 }
             })
             .catch((err) => {
                 console.log('发生错误！', err);
-                setTokenStaken(0);
+                setRewardToClaim(0);
                 return 0;
             });
     };
@@ -366,7 +365,7 @@ const Mine = () => {
     const getApiTotalRewarded = async () => {
         await ApiTotalRewarded()
             .then((res) => {
-                console.log(res);
+                // console.log(res);
                 if (res.code === 200) {
                     setTotalRewarded(
                         Tools.toThousands(res.data.amount_pretty || 0)
@@ -384,13 +383,14 @@ const Mine = () => {
     const getApiAppTotalBurnt = async (totalSupply) => {
         ApiAppTotalBurnt()
             .then((res) => {
-                console.log(res);
+                // console.log(res);
                 if (res.code === 200) {
                     getApiAvailable(totalSupply, res.data.total_pretty || 0);
                 }
             })
             .catch((err) => {
                 console.log('发生错误！', err);
+                getApiAvailable(0)
                 return 0;
             });
     };
@@ -399,9 +399,8 @@ const Mine = () => {
     const getApiAvailable = async (staken, totalBurnt) => {
         await ApiAppSupply()
             .then((res) => {
-                console.log(res);
+                // console.log(res);
                 if (res.code === 200) {
-                    console.log(staken, res.data.amount_pretty);
                     setStakedRate(
                         res.data.amount_pretty <= 0
                             ? 0
@@ -420,6 +419,7 @@ const Mine = () => {
             })
             .catch((err) => {
                 console.log('发生错误！', err);
+                setStakedRate(0)
                 return 0;
             });
     };
@@ -428,7 +428,7 @@ const Mine = () => {
     const getApiAppUserBalances = async () => {
         await ApiAppUserBalances(account)
             .then((res) => {
-                console.log('ApiAppUserBalances:', res);
+                // console.log('ApiAppUserBalances:', res);
                 if (res.code === 200) {
                     setUser(res.data);
                 }
@@ -477,7 +477,6 @@ const Mine = () => {
     }, [status, account]);
 
     useEffect(() => {
-        console.log(account && status === 'connected');
         if (account && status === 'connected') {
             getApiAppUserBalances(); // 余额
             getApiUserStaked(); // 用户质押量
