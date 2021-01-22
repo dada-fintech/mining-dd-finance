@@ -531,7 +531,7 @@ const commonABI = [
 
 export default {
     // 默认要连接的network
-    defaultNetwork: 'test',
+    defaultNetwork: 'ethereum',
     //test(binance)
     test: {
         network: 'binance',
