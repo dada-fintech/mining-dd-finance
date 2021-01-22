@@ -21,8 +21,8 @@ export const ETHERSCAN_IO = 'https://etherscan.io/';
 export const TIMEOUT = 200000;
 // contract
 export const CHAINID = 128;
-export const INIT_SYMBOL = 'USDT';
-export const REWARD_SYMBOL = 'WBTC';
+export const INIT_SYMBOL = 'HUSD';
+export const REWARD_SYMBOL = 'HBTC';
 export const OFFICIAL_SYMBOL = 'DHM';
 export const EXECUTION_TIME = 15000;
 export const BSAE_API_URL = 'https://api.dhash.finance';

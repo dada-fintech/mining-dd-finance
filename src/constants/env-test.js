@@ -20,11 +20,11 @@ export const ETHERSCAN_IO = 'https://etherscan.io/';
 
 export const TIMEOUT = 200000;
 // contract
-export const CHAINID = 128;
+export const CHAINID = 97;
 export const INIT_SYMBOL = 'USDT';
 export const REWARD_SYMBOL = 'WBTC';
 export const OFFICIAL_SYMBOL = 'DHM';
 export const EXECUTION_TIME = 15000;
 export const BSAE_API_URL = 'https://api.dhash.finance';
 export const MetaMask_CONF_URL =
-    'https://http-mainnet-node.huobichain.com';
+    'https://data-seed-prebsc-1-s1.binance.org:8545/';
