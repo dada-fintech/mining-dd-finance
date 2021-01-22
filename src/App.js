@@ -60,7 +60,7 @@ function App() {
                             <div className="content-wrapper">
                                 <Switch>
                                     <Route exact path="/">
-                                        <Redirect to="/projects" />
+                                        <Redirect to="/blog" />
                                     </Route>
                                     <Route
                                         exact
