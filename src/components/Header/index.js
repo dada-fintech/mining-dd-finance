@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 // import Logo from '../../assets/logo.png'
-import { Tooltip, Drawer } from 'antd';
+import { Tooltip, Drawer, Modal, Button } from 'antd';
 import { useWallet } from 'use-wallet';
 import AppSidebar from 'components/AppSidebar';
 import { MenuOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import config from 'config'
 // import { useDispatch, useSelector } from 'react-redux'
 
 import './style.scss';
@@ -14,6 +16,15 @@ export default function Header(props) {
     const { t } = useTranslation();
     const { role, breadCrumb, hideAction } = props;
     const [drawerVisible, setDrawerVisible] = useState(false);
+    const [networkError, setNetworkError] = useState('')
+    const network = useSelector((state) => state.setting.network);
+
+    const chainIdMapping = {
+        1: 'ETH Mainnet',
+        56: 'BSC Mainnet',
+        128: 'HECO Mainnet',
+        97: 'BSC Testnet'
+    }
 
     // const changeRole = role => {
     //     dispatch({
@@ -39,10 +50,28 @@ export default function Header(props) {
     // if(!role){
     //     role = '123'
     // }
-    useEffect(() => {
+    const connectWallet = () =>{
+        const configChainId = config[network].chainId
+        const walletChainId = parseInt(window.ethereum.chainId)
+
+        if(configChainId != walletChainId){
+            console.log('yoyo')
+            setNetworkError(chainIdMapping[configChainId])
+        }else{
+            setNetworkError('')
+        }
+
+        if(configChainId != 128){
+
+        }
         if(wallet && wallet.status != 'connected'){
             wallet.connect();
         }
+    }
+
+
+    useEffect(() => {
+        connectWallet()
     }, []);
     
     return (
@@ -100,7 +129,7 @@ export default function Header(props) {
                             <a
                                 className="btn-connect"
                                 onClick={() => {
-                                    wallet.connect();
+                                    connectWallet()
                                 }}
                             >
                                 <span className="red-dot"></span>
@@ -121,6 +150,12 @@ export default function Header(props) {
                     <AppSidebar />
                 </Drawer>
             )}
+            {networkError && <Modal visible={true} title="Network Error" footer={null} onCancel={()=>setNetworkError('')}>
+                <div style={{color: '#15163d', marginBottom: '24px', fontSize: '16px'}}>
+                    Please switch network to {networkError}
+                </div>
+                <Button style={{padding: '0 32px'}} className="btn-blue" onClick={()=>setNetworkError('')}>OK</Button>
+            </Modal>}
         </header>
     );
 }

@@ -530,7 +530,8 @@ const commonABI = [
 // template_id 4: moneyDaoFixRaiseFullRelease 定期筹款，全款释放
 
 export default {
-    defaultNetwork: 'heco',
+    // 默认要连接的network
+    defaultNetwork: 'test',
     //test(binance)
     test: {
         network: 'binance',
