@@ -55,12 +55,11 @@ export default function Header(props) {
             const configChainId = config[network].chainId
             const walletChainId = parseInt(window.ethereum.chainId)
     
-            // if(configChainId != walletChainId){
-            //     console.log('yoyo')
-            //     setNetworkError(chainIdMapping[configChainId])
-            // }else{
-            //     setNetworkError('')
-            // }
+            if(configChainId != walletChainId){
+                setNetworkError(chainIdMapping[configChainId])
+            }else{
+                setNetworkError('')
+            }
         
             if(wallet && wallet.status != 'connected'){
                 wallet.connect();
