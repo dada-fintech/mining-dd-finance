@@ -35,6 +35,8 @@ import {
 } from '../../../constants';
 import BuyModal from '../components/ConfModal';
 import './mine.scss';
+import store from '../../../redux/store';
+import Config from "../../../config";
 
 const Mine = () => {
     const { t } = useTranslation();
@@ -65,6 +67,7 @@ const Mine = () => {
         setAmount(val);
         setDisabled(val <= 0);
     };
+    const { setting } = store.getState();
     // START;
     const startFun = () => {
         ApiAppStakeFun();
@@ -532,6 +535,7 @@ const Mine = () => {
                                                     user.dhm_pretty || 0,
                                                     4
                                                 )}
+                                                balanceSumbol={Config[setting.network].OFFICIAL_SYMBOL}
                                                 onConfirm={getInputaMountNumber}
                                                 sumbol={OFFICIAL_SYMBOL}
                                             />

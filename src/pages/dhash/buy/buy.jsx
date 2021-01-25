@@ -28,6 +28,7 @@ import {
 } from '../../../utils/ContractTransaction.js';
 import { OFFICIAL_SYMBOL, EXECUTION_TIME } from '../../../constants';
 import './buy.scss';
+import store from '../../../redux/store';
 
 const Buy = () => {
     const { t } = useTranslation();
@@ -54,6 +55,8 @@ const Buy = () => {
         code: 200,
         msg: '',
     }); // BTC当日价格 昨日分发BTC
+
+    const { setting } = store.getState();
 
     const getInputaMountNumber = useCallback((val) => {
         setAmount(val);
@@ -399,7 +402,7 @@ const Buy = () => {
                                 }
                                 onConfirm={getInputaMountNumber}
                                 sumbol={OFFICIAL_SYMBOL}
-                                balanceSumbol={Config.INIT_SYMBOL}
+                                balanceSumbol={Config[setting.network].INIT_SYMBOL}
                             />
                             <BuyButton
                                 loading={buyButLoading}
