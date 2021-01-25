@@ -7,7 +7,7 @@ import {
 import './App.scss';
 import React from 'react';
 import AppSidebar from 'components/AppSidebar';
-import { Row, Col } from 'antd';
+import { Row, Col, Modal } from 'antd';
 
 import i18n from 'i18next';
 import { initReactI18next, useTranslation } from 'react-i18next';
@@ -46,11 +46,14 @@ i18n.use(initReactI18next) // passes i18n down to react-i18next
     });
 
 function App() {
-    const { i18n } = useTranslation();
+    const { i18n, t } = useTranslation();
   
     return (
         <ConfigProvider locale={i18n.language === 'en' ? enUS : zhCN}>
             <div className={`App ${i18n.language}`}>
+                {/* <Modal title={t('common.maintenanceTitle')} visible={true} footer={null}>
+                    {t('common.maintenanceContent')}
+                </Modal> */}
                 <Router>
                     <Row>
                         <Col xs={0} lg={4} xxl={3}>

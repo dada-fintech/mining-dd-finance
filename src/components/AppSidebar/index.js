@@ -137,7 +137,21 @@ export default function AppSidebar(props) {
                     }
                 </a>
                 <ul className="nav">
-                    {!hideCreate && network !== 'heco' && (
+                    <li>
+                        <NavLink
+                            className={`nowrap ${
+                                location.pathname === '/coming/dashboard'
+                                    ? 'top-curve'
+                                    : ''
+                            }`}
+                            activeClassName="active"
+                            to="/blog"
+                        >
+                            <img src={BlogIcon} alt="" />
+                            {t('sidebar.blog')}
+                        </NavLink>
+                    </li>
+                    {/* {!hideCreate && network !== 'heco' && (
                         <li>
                             <a
                                 className={`nowrap ${
@@ -153,7 +167,7 @@ export default function AppSidebar(props) {
                                 {t('sidebar.create')}
                             </a>
                         </li>
-                    )}
+                    )} */}
                     {/* {network !== 'heco' &&  <li>
                         <NavLink
                             className={`nowrap ${
@@ -169,7 +183,7 @@ export default function AppSidebar(props) {
                         </NavLink>
                     </li>} */}
                    
-                    {network !== 'heco' && network !== 'ethereum' && <li>
+                    {/* {network !== 'heco' && network !== 'ethereum' && <li>
                         <NavLink
                             className={`nowrap ${
                                 location.pathname === '/community-projects'
@@ -186,7 +200,7 @@ export default function AppSidebar(props) {
                             <img src={CryptoMiningIcon} alt="" />
                             {t('sidebar.cryptoMining')}
                         </NavLink>
-                    </li>}
+                    </li>} */}
                     
                     { (network === 'heco' || network === 'ethereum') && <li>
                         <NavLink
@@ -226,7 +240,7 @@ export default function AppSidebar(props) {
                         </NavLink>
                     </li>}
 
-                    <li>
+                    {/* <li>
                         <NavLink
                             className={`nowrap ${
                                 location.pathname === '/farming-detail'
@@ -243,8 +257,8 @@ export default function AppSidebar(props) {
                             <img src={MiningSwapIcon} alt="" />
                             {t('sidebar.tokenSwap')}
                         </NavLink>
-                    </li>
-                    <li>
+                    </li> */}
+                    {/* <li>
                         <NavLink
                             className={`nowrap ${
                                 location.pathname === '/coming/swap'
@@ -261,21 +275,8 @@ export default function AppSidebar(props) {
                             <img src={DashboardIcon} alt="" />
                             {t('sidebar.dashboard')}
                         </NavLink>
-                    </li>
-                    <li>
-                        <NavLink
-                            className={`nowrap ${
-                                location.pathname === '/coming/dashboard'
-                                    ? 'top-curve'
-                                    : ''
-                            }`}
-                            activeClassName="active"
-                            to="/blog"
-                        >
-                            <img src={BlogIcon} alt="" />
-                            {t('sidebar.blog')}
-                        </NavLink>
-                    </li>
+                    </li> */}
+                  
 
                     <li>
                         <a
@@ -313,7 +314,8 @@ export default function AppSidebar(props) {
 
             <div className="bottom">
                 <div className="more-links">
-                    { config[network].mode === 'prod' && (
+                    {/* hide on heco */}
+                    { config[network].mode !== 'prod' && (
                         <div className={`network-switch ${network}`}>
                             Network{' '}
                             <img

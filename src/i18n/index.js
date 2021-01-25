@@ -66,6 +66,8 @@ export default {
                 seconds: 'sec',
                 noProcess: 'No processes yet.',
                 notSameDay: 'You can not choose the same day',
+                maintenanceTitle: 'Maintenance',
+                maintenanceContent: 'Project under maintenance, please wait a moment',
             },
             template: {
                 title: 'Choose a Governing Template',
@@ -571,6 +573,8 @@ export default {
                 seconds: '秒',
                 noProcess: '暂无进程。',
                 notSameDay: '不可选择同一天',
+                maintenanceTitle: '维护中',
+                maintenanceContent: '项目维护中，请稍等片刻',
             },
             template: {
                 title: '请选择一个治理模版',

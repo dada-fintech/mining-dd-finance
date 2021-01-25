@@ -51,21 +51,20 @@ export default function Header(props) {
     //     role = '123'
     // }
     const connectWallet = () =>{
-        const configChainId = config[network].chainId
-        const walletChainId = parseInt(window.ethereum.chainId)
-
-        if(configChainId != walletChainId){
-            console.log('yoyo')
-            setNetworkError(chainIdMapping[configChainId])
-        }else{
-            setNetworkError('')
-        }
-
-        if(configChainId != 128){
-
-        }
-        if(wallet && wallet.status != 'connected'){
-            wallet.connect();
+        if(window.ethereum){
+            const configChainId = config[network].chainId
+            const walletChainId = parseInt(window.ethereum.chainId)
+    
+            // if(configChainId != walletChainId){
+            //     console.log('yoyo')
+            //     setNetworkError(chainIdMapping[configChainId])
+            // }else{
+            //     setNetworkError('')
+            // }
+        
+            if(wallet && wallet.status != 'connected'){
+                wallet.connect();
+            }
         }
     }
 
