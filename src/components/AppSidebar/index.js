@@ -137,20 +137,7 @@ export default function AppSidebar(props) {
                     }
                 </a>
                 <ul className="nav">
-                    <li>
-                        <NavLink
-                            className={`nowrap ${
-                                location.pathname === '/coming/dashboard'
-                                    ? 'top-curve'
-                                    : ''
-                            }`}
-                            activeClassName="active"
-                            to="/blog"
-                        >
-                            <img src={BlogIcon} alt="" />
-                            {t('sidebar.blog')}
-                        </NavLink>
-                    </li>
+                
                     {/* {!hideCreate && network !== 'heco' && (
                         <li>
                             <a
@@ -276,6 +263,20 @@ export default function AppSidebar(props) {
                             {t('sidebar.dashboard')}
                         </NavLink>
                     </li> */}
+                    <li>
+                        <NavLink
+                            className={`nowrap ${
+                                location.pathname === '/coming/dashboard'
+                                    ? 'top-curve'
+                                    : ''
+                            }`}
+                            activeClassName="active"
+                            to="/blog"
+                        >
+                            <img src={BlogIcon} alt="" />
+                            {t('sidebar.blog')}
+                        </NavLink>
+                    </li>
                   
 
                     <li>

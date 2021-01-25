@@ -97,7 +97,7 @@ export default function Blog() {
         <div className="page-desc">
             News, stories, and announcements from DADA.
                     </div>
-        <Row>
+        <Row gutter={{lg: 44}}>
             <Col xs={24} lg={18}>
                 <div className="article-list">
                     {blogList.map((item, index) => (

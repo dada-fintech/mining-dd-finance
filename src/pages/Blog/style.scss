@@ -18,11 +18,11 @@
 
         .article-item {
             display: block;
-            border-top: 1px solid #000;
+            border-top: 1px solid rgba(0,0,0,.2);
             padding: 32px 44px 8px;
 
             &:last-child {
-                border-bottom: 1px solid #000;
+                border-bottom: 1px solid rgba(0,0,0,.2);
             }
 
             .title {
