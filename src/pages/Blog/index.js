@@ -98,7 +98,7 @@ export default function Blog() {
             News, stories, and announcements from DADA.
                     </div>
         <Row gutter={{lg: 44}}>
-            <Col xs={24} lg={18}>
+            <Col xs={24} lg={19}>
                 <div className="article-list">
                     {blogList.map((item, index) => (
                         <div key={index} className="article-item">
@@ -117,7 +117,7 @@ export default function Blog() {
                     ))}
                 </div>
             </Col>
-            <Col xs={0} lg={6}>
+            <Col xs={0} lg={5}>
                 <div className="media-list">
                     <a href="https://www.chainnews.com/u/785055704172.htm" target="_blank">
                         <img src={MediaChainnews} />
