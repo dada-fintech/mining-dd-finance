@@ -63,7 +63,7 @@ function App() {
                             <div className="content-wrapper">
                                 <Switch>
                                     <Route exact path="/">
-                                        <Redirect to="/buy-dhm" />
+                                        <Redirect to="/farming-detail" />
                                     </Route>
                                     <Route
                                         exact
