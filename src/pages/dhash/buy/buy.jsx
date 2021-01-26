@@ -26,7 +26,7 @@ import {
     contractTransaction,
     checkApprove,
 } from '../../../utils/ContractTransaction.js';
-import { OFFICIAL_SYMBOL, EXECUTION_TIME } from '../../../constants';
+import { OFFICIAL_SYMBOL, EXECUTION_TIME, DEFAULT_CURRENT_PRICE } from '../../../constants';
 import './buy.scss';
 import store from '../../../redux/store';
 
@@ -36,7 +36,7 @@ const Buy = () => {
     const { account, status } = wallet;
     const history = useHistory();
     const [balance, setBalance] = useState(0); // HUSD转DHM 余额
-    const [currentPrice, setCurrentPrice] = useState(7); // 当前价格
+    const [currentPrice, setCurrentPrice] = useState(DEFAULT_CURRENT_PRICE); // 当前价格
     const [totalBurned, setTotalBurned] = useState(0);
     const [totalSupply, setTotalSupply] = useState(0);
     const [buyState, setBuyState] = useState(false);
@@ -88,7 +88,7 @@ const Buy = () => {
                                                     res.data.btc_price || 0
                                                 )
                                             ),
-                                            Number(currentPrice || 7)
+                                            Number(currentPrice || DEFAULT_CURRENT_PRICE)
                                         ),
                                         Number(staken)
                                     ),
@@ -107,7 +107,7 @@ const Buy = () => {
                                             ),
                                             Number(res.data.total_stakes)
                                         ),
-                                        Number(currentPrice || 7)
+                                        Number(currentPrice || DEFAULT_CURRENT_PRICE)
                                     ),
                                     Number(res.data.epochs)
                                 ),
@@ -197,9 +197,9 @@ const Buy = () => {
                 return 0;
             });
     };
-
+    
     // 余额
-    const getApiAppUserBalances = async () => {
+    const getApiAppUserBalances = async (price) => {
         ApiAppUserBalances(account)
             .then((res) => {
                 // console.log('ApiAppUserBalances:', res);
@@ -209,7 +209,7 @@ const Buy = () => {
                         Tools.fmtDec(
                             Tools.div(
                                 res.data.usdt_pretty,
-                                currentPrice || 7
+                                price || DEFAULT_CURRENT_PRICE
                             ),
                             4
                         )
@@ -311,12 +311,6 @@ const Buy = () => {
         await getApiAppSupply(); // DHM 硬顶
     };
 
-    useEffect(async () => {
-        if (account && status === 'connected') {
-            // console.log('getApiAppUserBalances');
-            getApiAppUserBalances(); // 用户余额
-        }
-    }, [account, status]);
 
     useEffect(async () => {
         if (account && status === 'connected') {

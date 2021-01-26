@@ -3,69 +3,81 @@
 .mine-page {
     text-align: center;
     overflow: hidden;
+
     // .farming-top{
     //     img{
     //         margin: 16px auto 26px;
     //     }
     // }
-    .cheese-box{
+    .cheese-box {
         padding: 7px 16px 32px;
     }
- 
-    .BuyButton{
+
+    .BuyButton {
         margin-top: 16px;
     }
-    .left-box{
-        .amount{
+
+    .left-box {
+        .amount {
             margin-top: 76px;
             font-size: 44px;
         }
-        .text{
+
+        .text {
             color: rgba(21, 22, 61, 0.5);
         }
     }
-    .right-box{
+
+    .right-box {
         .apy {
             margin-top: 16px;
+
             .value {
                 font-size: 24px;
                 line-height: 145%;
             }
+
             .title {
                 font-size: 14px;
                 line-height: 145%;
                 color: rgba(21, 22, 61, 0.6);
             }
         }
+
         .icon {
             width: 80px;
             margin: 14px auto 22px;
         }
-        .price{
+
+        .price {
             font-size: 24px;
             line-height: 145%;
             color: rgba(21, 22, 61, 0.6);
         }
-        .amount{
+
+        .amount {
             font-size: 48px;
             line-height: 145%;
         }
     }
+
     .total {
         margin-top: 32px;
+
         .earn {
             color: rgba(255, 255, 255, 0.8);
             text-align: center;
             line-height: 20px;
             margin-bottom: 12px;
         }
-     
+
         .text {
             font-weight: normal;
             font-size: 18px;
             line-height: 34px;
             text-align: center;
         }
+
         .desc {
             opacity: 0.5;
             font-size: 14px;
@@ -83,6 +95,7 @@
             overflow: hidden;
             display: flex;
             justify-content: space-around;
+
             .data-item {
                 .data {
                     margin: 0 auto;
@@ -90,6 +103,7 @@
                     border-radius: 20px;
                     height: 100%;
                     display: table-cell;
+
                     .data-border {
                         width: auto;
                         min-width: 330px;
@@ -97,28 +111,32 @@
                         padding-bottom: 24px;
                         border-radius: 15px;
                         display: inline-block;
+
                         // .price {
                         //     margin-top: 32px;
                         // }
                         .available {
                             margin-top: 24px;
                         }
-                     
+
                         .text {
                             font-weight: normal;
                             font-size: 18px;
                             line-height: 34px;
                             text-align: center;
                         }
+
                         .claim {
                             margin-top: 56px;
                         }
+
                         .start {
                             margin-top: 38px;
                         }
-                      
+
                     }
                 }
+
                 .desc {
                     font-weight: normal;
                     font-size: 14px;
@@ -126,6 +144,11 @@
                     margin-top: 13px;
                     text-align: center;
                 }
+
+                .desc:last-child {
+                    margin-top: 0px;
+                }
+
             }
 
             .rate {
@@ -134,12 +157,14 @@
                 overflow: hidden;
                 // float: left;
                 padding-top: 24px;
+
                 .amount {
                     font-weight: normal;
                     font-size: 22px;
                     line-height: 34px;
                     text-align: center;
                 }
+
                 .text {
                     font-weight: normal;
                     font-size: 12px;
@@ -161,6 +186,7 @@
 
             .data-item {
                 margin: 24px auto 45px;
+
                 .data {
                     // border: 1px solid rgba(255, 255, 255, 0.5);
                     box-sizing: border-box;
@@ -176,35 +202,42 @@
                         // border: 1px solid rgba(255, 255, 255, 0.5);
                         border-radius: 15px;
                         display: inline-block;
+
                         // .price {
                         //     margin-top: 32px;
                         // }
                         .available {
                             margin-top: 24px;
                         }
+
                         .amount {
                             font-weight: normal;
                             font-size: 36px;
                             line-height: 52px;
                             text-align: center;
                         }
+
                         .text {
                             font-weight: normal;
                             font-size: 18px;
                             line-height: 34px;
                             text-align: center;
                         }
+
                         .claim {
                             margin-top: 28px;
                         }
+
                         .start {
                             margin-top: 38px;
                         }
+
                         .apy {
                             position: absolute;
                             right: 6px;
                             top: 6px;
                             text-align: center;
+
                             .title {
                                 font-size: 14px;
                                 color: #15163d;
@@ -212,12 +245,14 @@
                                 font-size: 18px;
                                 margin-bottom: 2px;
                             }
+
                             .value {
                                 font-size: 15px;
                             }
                         }
                     }
                 }
+
                 .desc {
                     font-weight: normal;
                     font-size: 14px;
@@ -227,14 +262,17 @@
                     color: rgba(255, 255, 255, 0.5);
                 }
             }
+
             .rate {
                 padding-bottom: 52px;
+
                 .amount {
                     font-weight: normal;
                     font-size: 24px;
                     line-height: 34px;
                     text-align: center;
                 }
+
                 .text {
                     font-weight: normal;
                     font-size: 12px;

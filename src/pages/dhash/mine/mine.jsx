@@ -32,6 +32,7 @@ import {
     REWARD_SYMBOL,
     OFFICIAL_SYMBOL,
     EXECUTION_TIME,
+    DEFAULT_CURRENT_PRICE
 } from '../../../constants';
 import BuyModal from '../components/ConfModal';
 import './mine.scss';
@@ -57,7 +58,7 @@ const Mine = () => {
         code: 200,
         msg: '',
     }); // BTC当日价格 昨日分发BTC
-    const [currentPrice, setCurrentPrice] = useState(7); // 当前价格
+    const [currentPrice, setCurrentPrice] = useState(DEFAULT_CURRENT_PRICE); // 当前价格
     const [disabled, setDisabled] = useState(true); // 按钮状态
     const [totalRewarded, setTotalRewarded] = useState(0); // 全网总奖励
     const [visible, setVisible] = useState(false);
@@ -125,7 +126,7 @@ const Mine = () => {
                                                     res.data.btc_price || 0
                                                 )
                                             ),
-                                            Number(currentPrice || 7)
+                                            Number(currentPrice || DEFAULT_CURRENT_PRICE)
                                         ),
                                         Number(staken)
                                     ),
@@ -144,7 +145,7 @@ const Mine = () => {
                                             ),
                                             Number(res.data.total_stakes)
                                         ),
-                                        Number(currentPrice || 7)
+                                        Number(currentPrice || DEFAULT_CURRENT_PRICE)
                                     ),
                                     Number(res.data.epochs)
                                 ),
@@ -588,10 +589,11 @@ const Mine = () => {
                                         </div>
                                     </div>
                                 </div>
-                                {/* <p className="desc">
-                                {t('v1_calculated_income_EST')}
-                            </p>
-                            <p className="desc">{t('v1_Settlement_date')}</p> */}
+                                
+                                <p className="desc">
+                                    {t('v1_calculated_income_EST')}
+                                </p>
+                                <p className="desc">{t('v1_Settlement_date')}</p>
                             </div>
                         </div>
 

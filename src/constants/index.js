@@ -18,6 +18,7 @@ export const WHIEPAPER_URL =
 export const MINERS_STATS = 'https://wk-m.minebaba.com/monitor?id=2';
 export const ETHERSCAN_IO = 'https://etherscan.io/';
 
+export const DEFAULT_CURRENT_PRICE = 8;
 export const TIMEOUT = 200000;
 // contract
 export const CHAINID = 128;
