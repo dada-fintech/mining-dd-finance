@@ -4,7 +4,7 @@ import { Popover } from 'antd';
 import { NavLink, useLocation } from 'react-router-dom';
 import i18n from 'i18next';
 import config from 'config';
-import {useDispatch, useSelector} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import './style.scss';
 import TemplateChoose from 'components/TemplateChoose';
 import LogoBlue from 'assets/logo-blue.svg';
@@ -41,7 +41,7 @@ import Linkedin from 'assets/socials/linkedin.svg';
 import ClaimContractApi from '../../contract/ClaimContractApi';
 import { useWallet } from 'use-wallet';
 
-export default function AppSidebar(props) {
+export default function AppSidebar (props) {
     const { t } = useTranslation();
     const location = useLocation();
     const wallet = useWallet();
@@ -72,9 +72,9 @@ export default function AppSidebar(props) {
         }
     }, [location]);
 
-    const switchNetwork = (network) =>{
+    const switchNetwork = (network) => {
         dispatch({
-            type: 'SWITCH_NETWORK', payload:{
+            type: 'SWITCH_NETWORK', payload: {
                 network: network
             }
         })
@@ -108,14 +108,14 @@ export default function AppSidebar(props) {
         };
         getCanClaimFun();
     }, [account]);
-    
+
     return (
         <div className="app-sidebar">
             <div className="top">
                 <a
                     href="/"
                     className="top-link"
-                    target="_blank"
+                    // target="_blank"
                     rel="noreferrer"
                 >
                     {network === 'ethereum' &&
@@ -125,7 +125,7 @@ export default function AppSidebar(props) {
                             alt=""
                         />
                     }
-                     {(network === 'binance' || network === 'test') && <img
+                    {(network === 'binance' || network === 'test') && <img
                         src={SidebarLogoBinance}
                         className="sidebar-logo"
                         alt="" />
@@ -137,7 +137,7 @@ export default function AppSidebar(props) {
                     }
                 </a>
                 <ul className="nav">
-                
+
                     {/* {!hideCreate && network !== 'heco' && (
                         <li>
                             <a
@@ -169,7 +169,7 @@ export default function AppSidebar(props) {
                             {t('sidebar.communityProjects')}
                         </NavLink>
                     </li>} */}
-                   
+
                     {/* {network !== 'heco' && network !== 'ethereum' && <li>
                         <NavLink
                             className={`nowrap ${
@@ -188,18 +188,16 @@ export default function AppSidebar(props) {
                             {t('sidebar.cryptoMining')}
                         </NavLink>
                     </li>} */}
-                    
-                    { (network === 'heco' || network === 'ethereum') && <li>
+
+                    {(network === 'heco' || network === 'ethereum') && <li>
                         <NavLink
-                            className={`nowrap ${
-                                location.pathname === '/projects'
-                                    ? 'top-curve'
-                                    : ''
-                            } ${
-                                location.pathname === '/farming-detail'
+                            className={`nowrap ${location.pathname === '/projects'
+                                ? 'top-curve'
+                                : ''
+                                } ${location.pathname === '/farming-detail'
                                     ? 'bottom-curve'
                                     : ''
-                            }`}
+                                }`}
                             activeClassName="active"
                             to="/buy-dhm"
                         >
@@ -210,15 +208,13 @@ export default function AppSidebar(props) {
 
                     {network === 'heco' && <li>
                         <NavLink
-                            className={`nowrap ${
-                                location.pathname === '/buy-dhm'
-                                    ? 'top-curve'
-                                    : ''
-                            } ${
-                                location.pathname === '/coming/swap'
+                            className={`nowrap ${location.pathname === '/buy-dhm'
+                                ? 'top-curve'
+                                : ''
+                                } ${location.pathname === '/coming/swap'
                                     ? 'bottom-curve'
                                     : ''
-                            }`}
+                                }`}
                             activeClassName="active"
                             to="/farming-detail"
                         >
@@ -265,11 +261,10 @@ export default function AppSidebar(props) {
                     </li> */}
                     <li>
                         <NavLink
-                            className={`nowrap ${
-                                location.pathname === '/coming/dashboard'
-                                    ? 'top-curve'
-                                    : ''
-                            }`}
+                            className={`nowrap ${location.pathname === '/coming/dashboard'
+                                ? 'top-curve'
+                                : ''
+                                }`}
                             activeClassName="active"
                             to="/blog"
                         >
@@ -277,17 +272,16 @@ export default function AppSidebar(props) {
                             {t('sidebar.blog')}
                         </NavLink>
                     </li>
-                  
+
 
                     <li>
                         <a
-                            className={`nowrap ${
-                                location.pathname === '/blog' ? 'top-curve' : ''
-                            }`}
+                            className={`nowrap ${location.pathname === '/blog' ? 'top-curve' : ''
+                                }`}
                         ></a>
                     </li>
-                    
-                    
+
+
                 </ul>
                 {/* <ul className="nav second">
             <li>
@@ -310,40 +304,40 @@ export default function AppSidebar(props) {
                     </div>
                 </div>
             ) : (
-                ''
-            )}
+                    ''
+                )}
 
             <div className="bottom">
                 <div className="more-links">
                     {/* hide on heco */}
-                    { config[network].mode !== 'prod' && (
+                    {config[network].mode !== 'prod' && (
                         <div className={`network-switch ${network}`}>
                             Network{' '}
                             <img
                                 src={
                                     network === 'ethereum' ? NetworkEthereum :
-                                    network === 'heco' ? NetworkHeco : NetworkBinance
+                                        network === 'heco' ? NetworkHeco : NetworkBinance
                                 }
                             />
 
                             {network !== 'ethereum' && <a
-                                onClick={()=>{switchNetwork('ethereum')}}
+                                onClick={() => { switchNetwork('ethereum') }}
                             >
                                 <img src={NetworkEthereum} />
                             </a>}
 
                             {network !== 'heco' && <a
-                                onClick={()=>{switchNetwork('heco')}}
+                                onClick={() => { switchNetwork('heco') }}
                             >
                                 <img src={NetworkHeco} />
                             </a>}
 
                             {network !== 'binance' && <a
-                                onClick={()=>{switchNetwork('binance')}}
+                                onClick={() => { switchNetwork('binance') }}
                             >
                                 <img src={NetworkBinance} />
                             </a>}
-                            
+
                         </div>
                     )}
                     <a
