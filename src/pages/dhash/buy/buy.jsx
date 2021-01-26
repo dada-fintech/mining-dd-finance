@@ -197,7 +197,7 @@ const Buy = () => {
                 return 0;
             });
     };
-    
+
     // 余额
     const getApiAppUserBalances = async (price) => {
         ApiAppUserBalances(account)
@@ -238,7 +238,7 @@ const Buy = () => {
                             res.data.txs[0].contract,
                             res.data.txs[0].calldata,
                             () => {
-                                checkApprove(account, 'HUSD', () => {
+                                checkApprove(account, 'USDT', () => {
                                     // console.log('授权成功');
                                     setModalState(4);
                                     contractTransaction(
