@@ -511,7 +511,7 @@ const Mine = () => {
                         {account && <UserAddress address={account} />}
                         <div className="farming-top">
                             <img src={FarmerIcon} />
-                            <div className="desc">{t('v1_EARN_wBTC')}</div>
+                            <div className="desc">{t('v1_EARN_wBTC', { x: Config[setting.network].REWARD_SYMBOL || 'wBTC' })}</div>
                         </div>
 
                         <div className="mine-content">
@@ -576,7 +576,7 @@ const Mine = () => {
                                             )}
                                         </div>
                                         <div className="text price">
-                                            {t('v1_wBTC_EARNED')}
+                                            {t('v1_wBTC_EARNED', { x: Config[setting.network].REWARD_SYMBOL || 'wBTC' })}
                                         </div>
                                         <div className="claim">
                                             <BuyButton
@@ -589,7 +589,7 @@ const Mine = () => {
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <p className="desc">
                                     {t('v1_calculated_income_EST')}
                                 </p>
@@ -651,7 +651,7 @@ const Mine = () => {
                             }}
                         ></BuyModal>
 
-                        <p className="clues">{t('v1_automagically_wbtc')}</p>
+                        <p className="clues">{t('v1_automagically_wbtc', { x: Config[setting.network].REWARD_SYMBOL || 'wBTC' })}</p>
                     </>
                 )}
         </div>
