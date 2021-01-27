@@ -570,7 +570,7 @@ export default {
         usdAddress: '0xdac17f958d2ee523a2206206994597c13d831ec7',
         usdUnit: 'USDT',
         BSAE_DHASH_API_URL: 'https://api.dhash.finance',        // dhash base api url
-        CLAIMROUTER: '',        // claim 合约地址
+        CLAIMROUTER: '0x54559aD7Ec464af2FC360B9405412eC8bB0F48Ed',        // claim 合约地址
         DDDECIMALS: 18,        // DD 精度
         INIT_SYMBOL: 'USDT',
         REWARD_SYMBOL: 'WBTC',
