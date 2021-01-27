@@ -310,7 +310,7 @@ export default function AppSidebar (props) {
             <div className="bottom">
                 <div className="more-links">
                     {/* hide on heco */}
-                    {config[network].mode !== 'prod' && (
+                    {config[network].mode === 'prod' && (
                         <div className={`network-switch ${network}`}>
                             Network{' '}
                             <img
