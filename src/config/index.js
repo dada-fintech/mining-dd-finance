@@ -531,7 +531,7 @@ const commonABI = [
 
 export default {
     // 默认要连接的network，测试环境默认用 test，生产环境默认用 ethereum
-    defaultNetwork: 'heco',
+    defaultNetwork: 'ethereum',
     // 给有二级域名部署用的，默认不用填
     subdomain: '',
     //test(binance)

@@ -49,10 +49,10 @@ export default function Projects() {
         setFeaturedCountdown(countdownTime);
 
         setFeaturedProject({
-            project_name: 'Fractional and frictionless real estate investing',
+            project_name: 'SUPERPOWERS FOR MEDICAL PRACTIONERS',
             project_profile:
-                'This project allows investors around the globe to buy into the Franch real estate market through fully-compliant, fractional, tokenized ownership, with all the proceeds yielded from rental and other uses of the property shared amongst the investors.',
-            img: '/img/projects/1.png',
+                'The market for VR training is growing rapidly worldwide, with a $500 million market for VR simulation training in healthcare, which will grow tenfold to $5 billion in 2 years. Team Gene can explore the global market. We are currently negotiating with medical training centers in the US and France.',
+            img: '/img/projects/11.png',
         });
 
         setProjectList([
