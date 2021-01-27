@@ -49,6 +49,7 @@ const Mine = () => {
     const [stopButLoading, setStopButLoading] = useState(false); // stop加载状态
     const [apy, setApy] = useState(0); // APY
     const [tokenStaken, setTokenStaken] = useState(0); // 总抵押量
+    const [estimatedClaimNum, setEstimatedClaimNum] = useState(0); // 预估claim
     const [user, setUser] = useState({}); // 用户余额
     const [stakedRate, setStakedRate] = useState(0); // stakedRate // 总质押量/总流通量
     const [userStaked, setUStaked] = useState(0); // 当前用户的质押量
@@ -444,6 +445,51 @@ const Mine = () => {
             });
     };
 
+    // claim 随时间增长
+    useEffect(() => {
+        let timers = undefined;
+        const setClaimNumer = (val, dayIncome = 0.02, time = 5000) => {
+            if (Tools.GT(val, 0)) {
+                let maxNumer = Tools.plus(val, dayIncome);  // 当日最大可收益
+                let secondIncome = Number(Tools.div(dayIncome, 86400000));  // 每毫秒收益
+                let date = Tools.plus(new Date(new Date().toLocaleDateString()).getTime(), 28800000) // 上午八点到目前时长毫秒
+                let LengthTime = 0;
+                if (new Date().getTime() <= date) { // 12点以后
+                    LengthTime = Math.abs(Tools.sub(new Date().getTime(), new Date(new Date().toLocaleDateString()).getTime()));
+                    val = Tools.plus(Tools.plus(val, LengthTime * secondIncome), (dayIncome / 3) * 2)
+                    // console.log('12点以后', Tools.sub(new Date().getTime(), new Date(new Date().toLocaleDateString()).getTime()))
+                    // console.log(val)
+                } else { // 12 点前
+                    LengthTime = Tools.sub(new Date().getTime(), date); // 上午八点到目前的收益
+                    val = Tools.plus(val, LengthTime * secondIncome)
+                    // console.log(LengthTime)
+                    // console.log('12点以前', Tools.sub(secondIncome, Tools.sub(date, new Date().getTime())))
+                }
+                var income = val;
+                if (Tools.LT(estimatedClaimNum, maxNumer)) {
+                    timers = setInterval(() => {
+                        income = Number(Tools.plus(income, secondIncome * 1000));
+                        console.log(Tools.fmtDec(income, 10))
+                        setEstimatedClaimNum(Number(Tools.fmtDec(income, 8)))
+                    }, time);
+                } else {
+                    setEstimatedClaimNum(maxNumer);
+                    clearInterval(timers);
+                }
+            } else {
+                // console.log('小于等于0')
+                setEstimatedClaimNum(val)
+            }
+        }
+        if (userStaked > 0) {
+            setClaimNumer(rewardToClaim);
+        }
+
+        return () => {
+            clearInterval(timers);
+        }
+    }, [userStaked]);
+
     // 更新
     useEffect(() => {
         let timer = undefined;
@@ -487,6 +533,7 @@ const Mine = () => {
             getApiToClaimBalances(); //用户可领取的奖励
         }
     }, [account, status]);
+
 
     return (
         <div className="mine-page">
@@ -578,6 +625,11 @@ const Mine = () => {
                                         <div className="text price">
                                             {t('v1_wBTC_EARNED', { x: Config[setting.network].REWARD_SYMBOL || 'wBTC' })}
                                         </div>
+                                        <div className="rewards-today">
+                                            <p> {estimatedClaimNum} {Config[setting.network].REWARD_SYMBOL || 'wBTC'}</p>
+                                            <p> {t("v1_Estimated_RewardsToday")}</p>
+                                        </div>
+
                                         <div className="claim">
                                             <BuyButton
                                                 loading={claimButLoading}

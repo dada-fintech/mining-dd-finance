@@ -507,7 +507,8 @@ export default {
             "v1_not_open_now": "It is not a BUG,just not open yet!",
             "maintenanceTitle": "Maintenance",
             "maintenanceContent": "stay tuned",
-
+            "v1_Estimated_RewardsToday": "Estimated Rewards Today",
+            "v_amount": "{{x}}{{x1}}",
         },
     },
     zh: {
@@ -1005,7 +1006,9 @@ export default {
             "v1_Miners_stats": "矿机状态查看",
             "v1_not_open_now": "暂未开放，敬请期待！",
             "maintenanceTitle": "维护中",
-            "maintenanceContent": "我离开一会儿，马上回来"
+            "maintenanceContent": "我离开一会儿，马上回来",
+            "v1_Estimated_RewardsToday": "今日预计收益",
+            "v_amount": "{{x}}{{x1}}"
         },
     },
 };
