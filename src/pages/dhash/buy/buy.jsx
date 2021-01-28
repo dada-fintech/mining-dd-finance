@@ -31,6 +31,7 @@ import './buy.scss';
 import store from '../../../redux/store';
 
 const Buy = () => {
+    const { setting } = store.getState();
     const { t } = useTranslation();
     const wallet = useWallet();
     const { account, status } = wallet;
@@ -47,7 +48,6 @@ const Buy = () => {
     const [apy, setApy] = useState(0); // APY
     const [available, setAvailable] = useState(0); // 售卖中
     const [user, setUser] = useState({}); // 用户余额
-    const [tokenStaken, setTokenStaken] = useState(0); // 总抵押量
     const [disabled, setDisabled] = useState(true); // 按钮状态
     const [modalState, setModalState] = useState(0); // 弹窗 0:授权 1授权中 2交易中 3交易成功 -1交易失败; 4 授权完成
     const [btcInfo, setBtcInfo] = useState({}); // BTC当日价格 昨日分发BTC
@@ -56,41 +56,39 @@ const Buy = () => {
         msg: '',
     }); // BTC当日价格 昨日分发BTC
 
-    const { setting } = store.getState();
-
     const getInputaMountNumber = useCallback((val) => {
         setAmount(val);
         setDisabled(val <= 0);
     });
-
+    
     // BTC当日价格 昨日分发BTC
-    const getApiLatestepochReward = async (staken) => {
+    const getApiLatestepochReward = async (price) => {
         await ApiLatestepochReward()
             .then((res) => {
                 // console.log(res);
                 if (res.code === 200) {
                     setBtcInfo(res.data);
-                    // 年化收益率 = 当日分发BTC × 当日BTC价格 / 6.5 / 抵押数量 *365
+                    // 年化收益率 = 当日分发BTC × 当日BTC价格 / dhm价格 / 抵押数量 *365
                     // 年化收益率 = 总奖励 * 当日BTC价格 / 总抵押数量 / dhm 价格
                     // 年化收益率 = 总奖励 * 当日BTC价格 / 总抵押数量 / dhm 价格 /epochs * 365
+
                     setApy(
-                        res.data.reward.amount !== '-1' && res.data.reward.amount !== '0'
-                            ? staken > 0
+                        res.data.reward.amount !== '-1' || res.data.reward.amount !== '0'
+                            ? Number(res.data.total_stakes) > 0
                                 ? Tools.mul(
                                     Tools.div(
                                         Tools.div(
                                             Tools.mul(
                                                 Number(
-                                                    res.data.reward
-                                                        .amount_pretty || 0
+                                                    res.data.total_rewarded || 0
                                                 ),
                                                 Number(
                                                     res.data.btc_price || 0
                                                 )
                                             ),
-                                            Number(currentPrice || DEFAULT_CURRENT_PRICE)
+                                            Number(price || DEFAULT_CURRENT_PRICE)
                                         ),
-                                        Number(staken)
+                                        Number(res.data.total_stakes)
                                     ),
                                     365
                                 )
@@ -107,7 +105,7 @@ const Buy = () => {
                                             ),
                                             Number(res.data.total_stakes)
                                         ),
-                                        Number(currentPrice || DEFAULT_CURRENT_PRICE)
+                                        Number(price || DEFAULT_CURRENT_PRICE)
                                     ),
                                     Number(res.data.epochs)
                                 ),
@@ -136,7 +134,8 @@ const Buy = () => {
                 // console.log(res);
                 if (res.code === 200) {
                     setCurrentPrice(res.data.price_pretty);
-                    getApiAppUserBalances(res.data.price_pretty)
+                    getApiAppUserBalances(res.data.price_pretty);
+                    getApiLatestepochReward(res.data.price_pretty);
                 }
             })
             .catch((err) => {
@@ -209,7 +208,7 @@ const Buy = () => {
                         Tools.fmtDec(
                             Tools.div(
                                 res.data.usdt_pretty,
-                                price || DEFAULT_CURRENT_PRICE
+                                price || currentPrice || DEFAULT_CURRENT_PRICE
                             ),
                             4
                         )
@@ -311,16 +310,9 @@ const Buy = () => {
         await getApiAppSupply(); // DHM 硬顶
     };
 
-
     useEffect(async () => {
         if (account && status === 'connected') {
-            Promise.all([getAlldata()])
-                .then((result) => {
-                    getApiLatestepochReward();
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
+            getAlldata();
         }
     }, [status, account]);
 
@@ -356,9 +348,7 @@ const Buy = () => {
                         <div className="data cheese-box">
                             <div className="apy-tag">
                                 <div className="value">
-                                    {(isNaN(apy)
-                                        ? 0
-                                        : Tools.numFmt(apy * 100, 2)) || 0}{' '}
+                                    {(isNaN(apy) ? 0 : Tools.numFmt(apy * 100 * 7.678910, 2)) || 0}
                                     %
                                 </div>
                                 <div className="title">

@@ -40,16 +40,17 @@ import store from '../../../redux/store';
 import Config from "../../../config";
 
 const Mine = () => {
+    const { setting } = store.getState();
     const { t } = useTranslation();
     const wallet = useWallet();
     const { account, status } = wallet;
     const [amount, setAmount] = useState(0); // 输入框值
     const [stakeButLoading, setStakeButLoading] = useState(false); // stake加载状态
+    const [estimatedClaimNum, setEstimatedClaimNum] = useState(0); // 预估claim
     const [claimButLoading, setClaimButLoading] = useState(false); // claim加载状态
     const [stopButLoading, setStopButLoading] = useState(false); // stop加载状态
     const [apy, setApy] = useState(0); // APY
     const [tokenStaken, setTokenStaken] = useState(0); // 总抵押量
-    const [estimatedClaimNum, setEstimatedClaimNum] = useState(0); // 预估claim
     const [user, setUser] = useState({}); // 用户余额
     const [stakedRate, setStakedRate] = useState(0); // stakedRate // 总质押量/总流通量
     const [userStaked, setUStaked] = useState(0); // 当前用户的质押量
@@ -69,7 +70,8 @@ const Mine = () => {
         setAmount(val);
         setDisabled(val <= 0);
     };
-    const { setting } = store.getState();
+
+
     // START;
     const startFun = () => {
         ApiAppStakeFun();
@@ -90,6 +92,7 @@ const Mine = () => {
                 // console.log(res);
                 if (res.code === 200) {
                     setCurrentPrice(res.data.price_pretty || 0);
+                    getApiLatestepochReward(res.data.price_pretty);
                 }
             })
             .catch((err) => {
@@ -100,36 +103,33 @@ const Mine = () => {
     };
 
     // BTC当日价格 昨日分发BTC
-    const getApiLatestepochReward = async (staken) => {
+    const getApiLatestepochReward = async (price) => {
         await ApiLatestepochReward()
             .then((res) => {
                 // console.log(res);
                 if (res.code === 200) {
-                    setBtcInfo({
-                        btc_price: res.data.btc_price || 0,
-                        amount_pretty: res.data.reward.amount_pretty || 0,
-                    });
+                    setBtcInfo(res.data);
                     // 年化收益率 = 当日分发BTC × 当日BTC价格 / 6.5 / 抵押数量 *365
                     // 年化收益率 = 总奖励 * 当日BTC价格 / 总抵押数量 / dhm 价格
                     // 年化收益率 = 总奖励 * 当日BTC价格 / 总抵押数量 / dhm 价格 /epochs * 365
+
                     setApy(
-                        res.data.reward.amount !== '-1' && res.data.reward.amount !== '0'
-                            ? staken > 0
+                        res.data.reward.amount !== '-1' || res.data.reward.amount !== '0'
+                            ? Number(res.data.total_stakes) > 0
                                 ? Tools.mul(
                                     Tools.div(
                                         Tools.div(
                                             Tools.mul(
                                                 Number(
-                                                    res.data.reward
-                                                        .amount_pretty || 0
+                                                    res.data.total_rewarded || 0
                                                 ),
                                                 Number(
                                                     res.data.btc_price || 0
                                                 )
                                             ),
-                                            Number(currentPrice || DEFAULT_CURRENT_PRICE)
+                                            Number(price || DEFAULT_CURRENT_PRICE)
                                         ),
-                                        Number(staken)
+                                        Number(res.data.total_stakes)
                                     ),
                                     365
                                 )
@@ -146,7 +146,7 @@ const Mine = () => {
                                             ),
                                             Number(res.data.total_stakes)
                                         ),
-                                        Number(currentPrice || DEFAULT_CURRENT_PRICE)
+                                        Number(price || DEFAULT_CURRENT_PRICE)
                                     ),
                                     Number(res.data.epochs)
                                 ),
@@ -167,6 +167,7 @@ const Mine = () => {
                 return 0;
             });
     };
+
     // 质押
     const ApiAppStakeFun = async () => {
         setStakeButLoading(true);
@@ -325,7 +326,7 @@ const Mine = () => {
                 if (res.code === 200) {
                     setTokenStaken(res.data.amount_pretty);
                     getApiAppTotalBurnt(res.data.amount_pretty);
-                    getApiLatestepochReward(res.data.amount_pretty);
+
                 }
             })
             .catch((err) => {
@@ -445,6 +446,7 @@ const Mine = () => {
             });
     };
 
+    // claim 随时间增长
     useEffect(() => {
         let timers = undefined;
         if (timers) {
@@ -485,7 +487,7 @@ const Mine = () => {
         }
 
         if (userStaked > 0) {
-            console.log((0.2 / 1000000) * userStaked);
+            // console.log((0.2 / 1000000) * userStaked);
             let mydayIncome = Tools.fmtDec((0.2 / 1000000) * userStaked, 8)
             setClaimNumer(rewardToClaim, mydayIncome);
         }
@@ -498,7 +500,7 @@ const Mine = () => {
     // 更新
     useEffect(() => {
         let timer = undefined;
-        if (!account || !isUpdate) {
+        if (!account || !isUpdate || timer) {
             clearInterval(timer);
             return;
         }
@@ -521,13 +523,7 @@ const Mine = () => {
     useEffect(() => {
         if (account && status === 'connected') {
             getApiTotalRewarded();
-            Promise.all([getApiAppSellprice()])
-                .then((result) => {
-                    getApiAppTotalTakes();
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
+            getApiAppSellprice();
         }
     }, [status, account]);
 
@@ -538,7 +534,6 @@ const Mine = () => {
             getApiToClaimBalances(); //用户可领取的奖励
         }
     }, [account, status]);
-
 
     return (
         <div className="mine-page">
@@ -611,10 +606,7 @@ const Mine = () => {
                                     <div className="data-border cheese-box right-box">
                                         <div className="apy">
                                             <div className="value">
-                                                {(isNaN(apy)
-                                                    ? 0
-                                                    : Tools.numFmt(apy * 100, 2)) ||
-                                                    0}
+                                                {(isNaN(apy) ? 0 : Tools.numFmt(apy * 100 * 7.678910, 2)) || 0}
                                             %
                                         </div>
                                             <div className="title">
