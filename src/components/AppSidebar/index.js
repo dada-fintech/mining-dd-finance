@@ -8,20 +8,19 @@ import { useDispatch, useSelector } from 'react-redux'
 import './style.scss';
 import TemplateChoose from 'components/TemplateChoose';
 import LogoBlue from 'assets/logo-blue.svg';
-import NetworkEthereum from 'assets/network-ethereum.svg';
-import NetworkBinance from 'assets/network-binance.svg';
-import NetworkHeco from 'assets/network-heco.svg';
-
+// import NetworkEthereum from 'assets/network-ethereum.svg';
+// import NetworkBinance from 'assets/network-binance.svg';
+// import NetworkHeco from 'assets/network-heco.svg';
 
 import SidebarLogoEther from 'assets/sidebar-logo-ether.svg';
 import SidebarLogoBinance from 'assets/sidebar-logo-binance.svg';
 import SidebarLogoHeco from 'assets/sidebar-logo-heco.svg';
 
 import CryptoMiningIcon from 'assets/sidebar/crypto-mining.svg';
-import CommunityProjectIcon from 'assets/sidebar/community-project.svg';
+// import CommunityProjectIcon from 'assets/sidebar/community-project.svg';
 import PlusIcon from 'assets/sidebar/plus.svg';
-import MiningSwapIcon from 'assets/sidebar/mining-swap.svg';
-import DashboardIcon from 'assets/sidebar/dashboard.svg';
+// import MiningSwapIcon from 'assets/sidebar/mining-swap.svg';
+// import DashboardIcon from 'assets/sidebar/dashboard.svg';
 import BuyDHMIcon from 'assets/sidebar/buy-dhm.svg';
 import FarmingIcon from 'assets/sidebar/farming.svg';
 
@@ -106,8 +105,12 @@ export default function AppSidebar (props) {
                 setClaimBalance(res || 0);
             });
         };
-        getCanClaimFun();
-    }, [account]);
+        if (network === 'ethereum') {
+            getCanClaimFun();
+        }
+
+
+    }, [account, network]);
 
     return (
         <div className="app-sidebar">
@@ -138,14 +141,13 @@ export default function AppSidebar (props) {
                 </a>
                 <ul className="nav">
 
-                    {!hideCreate && network !== 'heco' && (
+                    {/* {!hideCreate && network !== 'heco' && (
                         <li>
                             <a
-                                className={`nowrap ${
-                                    location.pathname === '/community-projects'
-                                        ? 'bottom-curve'
-                                        : ''
-                                }`}
+                                className={`nowrap ${location.pathname === '/community-projects'
+                                    ? 'bottom-curve'
+                                    : ''
+                                    }`}
                                 onClick={() => {
                                     setShowTemplateChoose(true);
                                 }}
@@ -155,32 +157,29 @@ export default function AppSidebar (props) {
                             </a>
                         </li>
                     )}
-                    {network !== 'heco' &&  <li>
+                    {network !== 'heco' && <li>
                         <NavLink
-                            className={`nowrap ${
-                                location.pathname === '/projects'
-                                    ? 'bottom-curve'
-                                    : ''
-                            }`}
+                            className={`nowrap ${location.pathname === '/projects'
+                                ? 'bottom-curve'
+                                : ''
+                                }`}
                             activeClassName="active"
                             to="/community-projects"
                         >
                             <img src={CommunityProjectIcon} alt="" />
                             {t('sidebar.communityProjects')}
                         </NavLink>
-                    </li>}
+                    </li>}*/}
 
                     {network !== 'heco' && <li>
                         <NavLink
-                            className={`nowrap ${
-                                location.pathname === '/community-projects'
-                                    ? 'top-curve'
-                                    : ''
-                            } ${
-                                location.pathname === '/buy-dhm'
+                            className={`nowrap ${location.pathname === '/community-projects'
+                                ? 'top-curve'
+                                : ''
+                                } ${location.pathname === '/buy-dhm'
                                     ? 'bottom-curve'
                                     : ''
-                            }`}
+                                }`}
                             activeClassName="active"
                             to="/projects"
                         >
@@ -189,7 +188,7 @@ export default function AppSidebar (props) {
                         </NavLink>
                     </li>}
 
-                    {/* {(network === 'heco' || network === 'ethereum') && <li>
+                    {(network === 'heco' || network === 'ethereum') && <li>
                         <NavLink
                             className={`nowrap ${location.pathname === '/projects'
                                 ? 'top-curve'
@@ -204,9 +203,9 @@ export default function AppSidebar (props) {
                             <img src={BuyDHMIcon} alt="" />
                             {t('sidebar.buyDHM')}
                         </NavLink>
-                    </li>} */}
+                    </li>}
 
-                    {/* {network === 'heco' && <li>
+                    {network === 'heco' && <li>
                         <NavLink
                             className={`nowrap ${location.pathname === '/buy-dhm'
                                 ? 'top-curve'
@@ -221,44 +220,40 @@ export default function AppSidebar (props) {
                             <img src={FarmingIcon} alt="" />
                             {t('sidebar.farming')}
                         </NavLink>
-                    </li>} */}
+                    </li>}
 
-                    <li>
+                    {/* <li>
                         <NavLink
-                            className={`nowrap ${
-                                location.pathname === '/farming-detail'
-                                    ? 'top-curve'
-                                    : ''
-                            } ${
-                                location.pathname === '/coming/dashboard'
+                            className={`nowrap ${location.pathname === '/farming-detail'
+                                ? 'top-curve'
+                                : ''
+                                } ${location.pathname === '/coming/dashboard'
                                     ? 'bottom-curve'
                                     : ''
-                            }`}
+                                }`}
                             activeClassName="active"
                             to="/coming/swap"
                         >
                             <img src={MiningSwapIcon} alt="" />
                             {t('sidebar.tokenSwap')}
                         </NavLink>
-                    </li>
-                    <li>
+                    </li> */}
+                    {/* <li>
                         <NavLink
-                            className={`nowrap ${
-                                location.pathname === '/coming/swap'
-                                    ? 'top-curve'
-                                    : ''
-                            } ${
-                                location.pathname === '/blog'
+                            className={`nowrap ${location.pathname === '/coming/swap'
+                                ? 'top-curve'
+                                : ''
+                                } ${location.pathname === '/blog'
                                     ? 'bottom-curve'
                                     : ''
-                            }`}
+                                }`}
                             activeClassName="active"
                             to="/coming/dashboard"
                         >
                             <img src={DashboardIcon} alt="" />
                             {t('sidebar.dashboard')}
                         </NavLink>
-                    </li>
+                    </li> */}
                     <li>
                         <NavLink
                             className={`nowrap ${location.pathname === '/coming/dashboard'
@@ -310,7 +305,7 @@ export default function AppSidebar (props) {
             <div className="bottom">
                 <div className="more-links">
                     {/* hide on heco */}
-                    {config[network].mode === 'prod' && (
+                    {/* {config[network].mode === 'prod' && (
                         <div className={`network-switch ${network}`}>
                             Network{' '}
                             <img
@@ -339,7 +334,7 @@ export default function AppSidebar (props) {
                             </a>}
 
                         </div>
-                    )}
+                    )} */}
                     <a
                         onClick={() => {
                             changeLanguage(

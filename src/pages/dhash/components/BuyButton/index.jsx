@@ -15,7 +15,7 @@ const BuyButton = ({
                 <Button
                     className={butClassName}
                     loading={loading}
-                    disabled={false && disabled}
+                    disabled={disabled}
                     onClick={() => onChangeFun()}
                 >
                     {butText}
