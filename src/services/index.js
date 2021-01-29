@@ -28,7 +28,6 @@ export const ApiAppStake = (address, amount) => {
 
 /**
  * 赎回 DHM claim
- * @param amount 赎回数量
  * @param address 用户地址
  */
 
@@ -37,6 +36,9 @@ export const ApiAppWithdraw = (address) => {
         address,
     }).then((res) => res.data);
 };
+
+
+
 
 /**
  * 回收 DHM
@@ -60,6 +62,14 @@ export const ApiAppClaim = (address) => {
     return HttpRequestAxios.post(`/app/claim?address=${address}`).then(
         (res) => res.data
     );
+};
+
+/**
+ * 领取奖励
+ */
+
+export const ApiPartialclaim = () => {
+    return HttpRequestAxios.post('/app/partialclaim').then((res) => res.data);
 };
 
 /**
@@ -114,7 +124,8 @@ export const ApiAppSupply = () => {
 };
 
 /**
- * DHM 流通量
+ * 用户授权
+ * @param address 用户地址
  */
 
 export const ApiAppAllowances = (address) => {

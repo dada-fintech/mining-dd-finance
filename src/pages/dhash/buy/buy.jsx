@@ -352,7 +352,7 @@ const Buy = () => {
                         <div className="data cheese-box">
                             <div className="apy-tag">
                                 <div className="value">
-                                    {(isNaN(apy) ? 0 : Tools.numFmt(apy * 100 * 7.678910, 2)) || 0}
+                                    {(isNaN(apy) ? 0 : Tools.numFmt(apy * 100 * 2.345678, 2)) || 0}
                                     %
                                 </div>
                                 <div className="title">
