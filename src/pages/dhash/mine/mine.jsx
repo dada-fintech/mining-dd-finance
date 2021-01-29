@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { message, Alert } from 'antd';
+import { message, Alert, Statistic } from 'antd';
 import Header from 'components/Header';
 import FarmerIcon from 'assets/sidebar/farming.svg';
 import BTCIcon from 'assets/farming/btc.svg';
@@ -27,6 +27,7 @@ import {
     ApiAppSellprice,
     ApiTotalRewarded,
     ApiAppTotalBurnt,
+    ApiPartialclaim
 } from '../../../services/index.js';
 import {
     REWARD_SYMBOL,
@@ -44,10 +45,12 @@ const Mine = () => {
     const { t } = useTranslation();
     const wallet = useWallet();
     const { account, status } = wallet;
+    const { Countdown } = Statistic;
     const [amount, setAmount] = useState(0); // 输入框值
     const [stakeButLoading, setStakeButLoading] = useState(false); // stake加载状态
     const [estimatedClaimNum, setEstimatedClaimNum] = useState(0); // 预估claim
     const [claimButLoading, setClaimButLoading] = useState(false); // claim加载状态
+    const [partialButLoading, sePpartialButLoading] = useState(false); // 多次未领取加载状态
     const [stopButLoading, setStopButLoading] = useState(false); // stop加载状态
     const [apy, setApy] = useState(0); // APY
     const [tokenStaken, setTokenStaken] = useState(0); // 总抵押量
@@ -55,7 +58,7 @@ const Mine = () => {
     const [stakedRate, setStakedRate] = useState(0); // stakedRate // 总质押量/总流通量
     const [userStaked, setUStaked] = useState(0); // 当前用户的质押量
     const [rewardToClaim, setRewardToClaim] = useState(0); // 用户可领取的奖励
-    const [btcInfo, setBtcInfo] = useState({}); // BTC当日价格 昨日分发BTC
+    const [btcInfo, setBtcInfo] = useState(0); // BTC当日价格 昨日分发BTC
     const [showBtcInfoErr, setShowBtcInfoErr] = useState({
         code: 200,
         msg: '',
@@ -71,7 +74,8 @@ const Mine = () => {
         setDisabled(val <= 0);
     };
 
-
+    // const [receive, setReceive] = useState(false); // 多期未领取
+    // const [epoch, setEpoch] = useState({ currentEpoch: 0, nextEpoch: 0 }); // 当前epoch，下一个epoch时间
     // START;
     const startFun = () => {
         ApiAppStakeFun();
@@ -108,7 +112,7 @@ const Mine = () => {
             .then((res) => {
                 // console.log(res);
                 if (res.code === 200) {
-                    setBtcInfo(res.data);
+                    setBtcInfo(res.data.reward.amount_pretty);
                     // 年化收益率 = 当日分发BTC × 当日BTC价格 / 6.5 / 抵押数量 *365
                     // 年化收益率 = 总奖励 * 当日BTC价格 / 总抵押数量 / dhm 价格
                     // 年化收益率 = 总奖励 * 当日BTC价格 / 总抵押数量 / dhm 价格 /epochs * 365
@@ -162,7 +166,7 @@ const Mine = () => {
             })
             .catch((err) => {
                 console.log('发生错误！', err);
-                setBtcInfo({});
+                setBtcInfo(0);
                 setApy(0);
                 return 0;
             });
@@ -287,6 +291,7 @@ const Mine = () => {
     // claim
     const ApiAppClaimFun = async () => {
         setClaimButLoading(true);
+
         await ApiAppClaim(account)
             .then((res) => {
                 // console.log(res);
@@ -318,6 +323,45 @@ const Mine = () => {
                 return false;
             });
     };
+
+
+    const ApiPartialclaimFun = async () => {
+        sePpartialButLoading(true);
+        await ApiPartialclaim()
+            .then((res) => {
+                // console.log(res);
+                if (res.code === 200) {
+                    contractTransaction(
+                        account,
+                        res.data.txs[0].contract,
+                        res.data.txs[0].calldata,
+                        () => {
+                            sePpartialButLoading(false);
+                            message.warning(t('v1_Pendding'));
+                            setTimeout(() => {
+                                getApiAppUserBalances();
+                                getApiToClaimBalances();
+                            }, EXECUTION_TIME);
+                        },
+                        () => {
+                            sePpartialButLoading(false);
+                        }
+                    );
+                } else {
+                    sePpartialButLoading(false);
+                    message.warning(t('v1_Failed'));
+                }
+            })
+            .catch((err) => {
+                console.log('发生错误！', err);
+                sePpartialButLoading(false);
+                return false;
+            });
+    };
+
+
+
+
     // 总抵押量
     const getApiAppTotalTakes = async () => {
         await ApiAppTotalTakes()
@@ -355,9 +399,11 @@ const Mine = () => {
     const getApiToClaimBalances = async () => {
         await ApiToClaimBalances(account)
             .then((res) => {
-                // console.log(res);
                 if (res.code === 200) {
                     setRewardToClaim(res.data.amount_pretty || 0);
+                } else if (res.code === 1005) {
+                    console.log('Receive');
+                    // setReceive(true);
                 }
             })
             .catch((err) => {
@@ -527,6 +573,22 @@ const Mine = () => {
         }
     }, [status, account]);
 
+    // useEffect(() => {
+    //     // 当前epoch = 向下取整(当前时间/86400 )
+    //     // 下一个epoch时间 = 当前epoch+1 * 86400
+    //     console.log(Number(new Date().getTime()))
+    //     let timeDay = 1000;
+    //     const currentEpoch = Tools.sub(Math.floor(Tools.div(Number(new Date().getTime()) / 1000, timeDay)), 1611307);
+    //     const nextEpoch = Math.floor(Tools.plus(Tools.sub(Tools.plus(currentEpoch, 1), timeDay * 1000), new Date().getTime()));
+
+    //     setEpoch({ currentEpoch: currentEpoch, nextEpoch: nextEpoch });
+    //     console.log(nextEpoch)
+    // }, []);
+
+    useEffect(() => {
+        getApiAppTotalTakes();
+    }, []);
+
     useEffect(() => {
         if (account && status === 'connected') {
             getApiAppUserBalances(); // 余额
@@ -606,7 +668,7 @@ const Mine = () => {
                                     <div className="data-border cheese-box right-box">
                                         <div className="apy">
                                             <div className="value">
-                                                {(isNaN(apy) ? 0 : Tools.numFmt(apy * 100 * 7.678910, 2)) || 0}
+                                                {(isNaN(apy) ? 0 : Tools.numFmt(apy * 100 * 2.345678, 2)) || 0}
                                             %
                                         </div>
                                             <div className="title">
