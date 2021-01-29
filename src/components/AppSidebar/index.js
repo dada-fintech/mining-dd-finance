@@ -171,7 +171,7 @@ export default function AppSidebar (props) {
                         </NavLink>
                     </li>}*/}
 
-                    {network !== 'heco' && <li>
+                    {/* {network !== 'heco' && <li>
                         <NavLink
                             className={`nowrap ${location.pathname === '/community-projects'
                                 ? 'top-curve'
@@ -186,7 +186,7 @@ export default function AppSidebar (props) {
                             <img src={CryptoMiningIcon} alt="" />
                             {t('sidebar.cryptoMining')}
                         </NavLink>
-                    </li>}
+                    </li>} */}
 
                     {/* {(network === 'heco' || network === 'ethereum') && <li>
                         <NavLink
