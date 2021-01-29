@@ -52,9 +52,9 @@ function App () {
     return (
         <ConfigProvider locale={i18n.language === 'en' ? enUS : zhCN}>
             <div className={`App ${i18n.language}`}>
-                <Modal title={t('common.maintenanceTitle')} visible={true} footer={null}>
+                {/* <Modal title={t('common.maintenanceTitle')} visible={true} footer={null}>
                     {t('common.maintenanceContent')}
-                </Modal>
+                </Modal> */}
                 <Router>
                     <Row>
                         <Col xs={0} lg={4} xxl={3}>
@@ -64,7 +64,7 @@ function App () {
                             <div className="content-wrapper">
                                 <Switch>
                                     <Route exact path="/">
-                                        <Redirect to="/buy-dhm" />
+                                        <Redirect to="/farming-detail" />
                                     </Route>
                                     <Route
                                         exact

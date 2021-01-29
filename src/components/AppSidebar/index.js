@@ -188,7 +188,7 @@ export default function AppSidebar (props) {
                         </NavLink>
                     </li>}
 
-                    {(network === 'heco' || network === 'ethereum') && <li>
+                    {/* {(network === 'heco' || network === 'ethereum') && <li>
                         <NavLink
                             className={`nowrap ${location.pathname === '/projects'
                                 ? 'top-curve'
@@ -203,7 +203,7 @@ export default function AppSidebar (props) {
                             <img src={BuyDHMIcon} alt="" />
                             {t('sidebar.buyDHM')}
                         </NavLink>
-                    </li>}
+                    </li>} */}
 
                     {network === 'heco' && <li>
                         <NavLink
