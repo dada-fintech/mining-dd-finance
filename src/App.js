@@ -9,6 +9,7 @@ import React from 'react';
 import AppSidebar from 'components/AppSidebar';
 import { Row, Col, Modal } from 'antd';
 
+
 import i18n from 'i18next';
 import { initReactI18next, useTranslation } from 'react-i18next';
 import message from './i18n';
@@ -63,7 +64,7 @@ function App () {
                             <div className="content-wrapper">
                                 <Switch>
                                     <Route exact path="/">
-                                        <Redirect to="/community-projects" />
+                                        <Redirect to="/buy-dhm" />
                                     </Route>
                                     <Route
                                         exact

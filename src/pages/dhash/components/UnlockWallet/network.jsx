@@ -3,7 +3,7 @@ import { Modal } from 'antd';
 // import { useWallet } from 'use-wallet';
 import { useMedia } from 'react-use';
 // import { CHAINID } from '../../constants';
-import BuyButton from '../BuyButton/index.tsx';
+import BuyButton from '../BuyButton/index.jsx';
 import './network.scss';
 
 const SwitchNetwork = ({ text, visible = true }) => {

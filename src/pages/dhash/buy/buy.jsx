@@ -13,6 +13,8 @@ import DHMIcon from 'assets/farming/dhm.svg';
 import UserAddress from 'components/UserAddress'
 import Config from "../../../config";
 
+// import Overheated from '../components/ConfModal/Overheated.jsx';
+
 import {
     ApiAppBuy,
     ApiAppSellprice,
@@ -60,7 +62,7 @@ const Buy = () => {
         setAmount(val);
         setDisabled(val <= 0);
     });
-    
+
     // BTC当日价格 昨日分发BTC
     const getApiLatestepochReward = async (price) => {
         await ApiLatestepochReward()
@@ -319,6 +321,8 @@ const Buy = () => {
     return (
         <div className="buy">
             <Header hideAction={true} />
+
+            {/* <Overheated text={t('v1_overheated')} visible={true} /> */}
 
             {wallet && !account ? (
                 <UnlockWalletpage />

@@ -605,7 +605,7 @@ export default {
         network: 'heco',
         mode: 'prod',
         provider: 'https://http-mainnet-node.huobichain.com',
-        chainId: 999,
+        chainId: 128,
         baseURL: 'https://mining-api-binance.dd.finance',
         assetURL: 'https://mining-assets-binance.dd.finance',
         commonABI,

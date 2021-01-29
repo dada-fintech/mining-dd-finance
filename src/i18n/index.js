@@ -509,6 +509,9 @@ export default {
             "maintenanceContent": "stay tuned",
             "v1_Estimated_RewardsToday": "Estimated Rewards Today",
             "v_amount": "{{x}}{{x1}}",
+            "v1_Audit_by": "Audit by",
+            "v1_overheated": "overheated, cooling off！",
+            "deadline": "1611894600000",
         },
     },
     zh: {
@@ -1008,7 +1011,10 @@ export default {
             "maintenanceTitle": "维护中",
             "maintenanceContent": "我离开一会儿，马上回来",
             "v1_Estimated_RewardsToday": "今日预计收益",
-            "v_amount": "{{x}}{{x1}}"
+            "v_amount": "{{x}}{{x1}}",
+            "v1_Audit_by": "Audit by",
+            "v1_overheated": "overheated, cooling off！",
+            "deadline": "1611894600000",
         },
     },
 };
