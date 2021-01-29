@@ -532,19 +532,23 @@ const commonABI = [
 export default {
     // 默认要连接的network，测试环境默认用 test，生产环境默认用 ethereum
     defaultNetwork: 'heco',
-    // 给有二级域名部署用的，默认不用填
-    subdomain: '',
     //test(binance)
     test: {
         network: 'binance',
+        //区分测试环境与生产环境。目前只用在了网络环境切换的判断
         mode: 'test',
         provider: 'https://data-seed-prebsc-1-s1.binance.org:8545',
         chainId: 97,
+        // 后端 api
         baseURL: 'https://mining-api-test.dd.finance',
+        //后端静态资源路径
         assetURL: 'https://mining-assets-test.dd.finance',
+        // 通用ABI
         commonABI,
         templateIds: ['1', '2', '3', '4'],
+        // 不同环境的 usd 地址
         usdAddress: '0xB2eA07bd51527179a366CBB699aE7164F9B5E509',
+        // 不同环境的 usd 单位
         usdUnit: 'BUSD',
         BSAE_DHASH_API_URL: 'https://api-test.dhash.finance',        // dhash base api url
         CLAIMROUTER: '0x23e1F12eC38eAba4317E13034aC3d1f48D4A5168',        // claim 合约地址

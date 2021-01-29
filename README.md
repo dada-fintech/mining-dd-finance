@@ -1,70 +1,59 @@
-# Getting Started with Create React App
+# dd.finance dApp
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 快速使用
 
-## Available Scripts
+1. 下载代码
+`git clone git@github.com:y2labs-0sh/mining-dd-finance.git`
 
-In the project directory, you can run:
+2. 安装依赖
+`yarn install`
 
-### `yarn start`
+3. 开发环境
+`yarn start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+4. 打包代码
+`yarn build`
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+5. 部署代码
+使用第4步生成的`build`文件夹，放到 nginx, apache 等服务器
 
-### `yarn test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 分支管理
 
-### `yarn build`
+- v3: 当前活跃分支，主要在此分支开发和部署
+- pro-cluster: 针对 cluster.dd.finance 的分支
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 技术架构
+项目使用 `create-react-app` 进行基础代码框架搭建，使用 hooks 的方式编写 react 代码。
+- `axios`, 发送请求
+- `react-router-dom`，路由管理
+- `antd`, UI框架
+- `sass`, 样式预编译处理
+- `use-wallet`, 钱包管理
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 包含功能
+1. `/create-project/:type`，创建项目
+2. `/projects/`，查看矿业项目
+3. `/community-projects`，查看社区项目
+4. `/blog`，查看博客
+5. `/buy-dhm`，购买 DHM
+6. `/farming-detail`，进行 DHM 的 stake
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 配置功能
+项目支持 ETH, BSC, HECO 三种环境，针对不同环境要修改不同变量，要修改 `/src/config/index.js` 文件。字段的详细含义已在注释中解释。该配置文件总共有 `test`, `ethereum`, `binance`, `heco` 四个键值，对应着四个不同的环境，其中 `test` 是本地开发测试环境，其余为生产环境，在切换到不同环境时，会采用不同的配置。
 
-### `yarn eject`
+- `defaultNetwork`, 默认要连接的环境，测试环境改为 `test`，同时也会去除掉切换环境的支持（只有生产环境可以切换网络）。生产环境改为`ethereum`, `binance`, `heco` 中的一种，在用户没有选择过网络环境的情况下，默认会使用这三个设置中的一种。
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## 推荐开发和部署环境
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+推荐使用 Node.js v12 及以上版本进行开发。服务器使用 nginx 进行静态文件处理，以下是最基础的nginx参考配置
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```
+server{
+    server_name ${域名};
+    root ${项目打包后的目录};
+    try_files $uri $uri/ /index.html;
+    index index.html;
+}
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
