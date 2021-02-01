@@ -393,14 +393,14 @@ const Buy = () => {
                                 </div>
                             </div>
                             <div className="available-tag">
-                                <div className="value">     {Tools.toThousands(available) || 0}</div>
+                                <div className="value">    {Tools.toThousands(Tools.fmtDec(available || 0, 4))}</div>
                                 <div className="title">{t('v1_Available')}</div>
                             </div>
 
                             <div className="data-border">
                                 <img src={DHMIcon} className="coin-icon" />
                                 <div className="amount price">
-                                    ${Tools.toThousands(currentPrice) || 0}
+                                    ${Tools.toThousands(Tools.fmtDec(currentPrice || 0, 4))}
                                 </div>
                                 <div className="text">
                                     {t('v1_Current_Price')}

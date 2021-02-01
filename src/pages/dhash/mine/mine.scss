@@ -3,6 +3,7 @@
 .mine-page {
     text-align: center;
     overflow: hidden;
+    position: relative;
 
     .epoch-content {
         max-width: 1400px;
@@ -36,7 +37,8 @@
             position: absolute;
             right: 26px;
             top: 32px;
-            
+            box-shadow: 6px 6px 12px rgba(166, 146, 110, 0.15);
+
             @media screen and (max-width: $MobileWidth-M) {
                 top: 0;
             }
@@ -339,7 +341,7 @@
                                 font-size: 14px;
                                 color: #15163d;
                                 line-height: 1;
-                                font-size: 18px;
+                                font-size: 16px;
                                 margin-bottom: 2px;
                             }
 

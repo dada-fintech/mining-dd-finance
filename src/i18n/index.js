@@ -513,7 +513,8 @@ export default {
             "v1_overheated": "overheated, cooling off！",
             "deadline": "1611894600000",
             "v1_CLAIM_IN_BATCHES": "CLAIM IN BATCHES",
-            "v1_EPOCH_IN_PROGRESS": "{{x}} EPOCH IN PROGRESS",
+            "v1_EPOCH_IN_PROGRESS": "{{x}} EPOCH :",
+            "v1_Only_one_stake_epoch": "Only one stake per epoch",
         },
     },
     zh: {
@@ -1017,8 +1018,9 @@ export default {
             "v1_Audit_by": "Audit by",
             "v1_overheated": "overheated, cooling off！",
             "deadline": "1611894600000",
-            "v1_CLAIM_IN_BATCHES": "CLAIM IN BATCHES",
-            "v1_EPOCH_IN_PROGRESS": "{{x}} EPOCH IN PROGRESS",
+            "v1_CLAIM_IN_BATCHES": "分批领取",
+            "v1_EPOCH_IN_PROGRESS": "已运行{{x}}日，下一日:",
+            "v1_Only_one_stake_epoch": "每自然日只能质押一次"
         },
     },
 };

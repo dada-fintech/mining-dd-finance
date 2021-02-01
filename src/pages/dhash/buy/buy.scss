@@ -39,6 +39,7 @@
 
     .coin-icon {
         width: 86px;
+        height: 86px;
         margin: 92px auto 20px;
         display: block;
     }
@@ -105,7 +106,6 @@
 
     @media screen and (min-width: $MobileWidth-M) {
         .buy-content {
-            max-width: $MaxWidth;
             margin: 44px auto 32px auto;
 
             .data {
@@ -158,7 +158,7 @@
             position: absolute;
             left: 50%;
             transform: translate(-50%, 50%);
-            
+
             .success-border {
                 width: 400px;
                 margin: 5px;
@@ -208,6 +208,7 @@
                 display: inline-block;
                 width: 100%;
                 height: 100%;
+                padding: 7px 16px 32px;
 
                 .data-border {
                     width: 98%;
