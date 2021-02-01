@@ -4,14 +4,15 @@
     overflow: hidden;
     box-sizing: border-box;
     border-radius: 15px;
-    position: absolute;
-    top: 0;
+    position: fixed;
+    top: 50%;
     right: 0;
     left: 0;
     bottom: 0;
     height: 64px;
     margin: auto;
     width: $UnlockWalletButWidth;
+
     // background: linear-gradient(
     //         131.99deg,
     //         #ffffff 10.18%,
@@ -32,12 +33,17 @@
         font-size: 18px;
         border-radius: 15px;
         text-align: center;
-        display: flex; /*盒子模型*/
-        flex-direction: row; /*横向*/
-        justify-content: space-around; /*主轴居中*/
-        align-items: center; /*纵轴居中*/
+        display: flex;
+        /*盒子模型*/
+        flex-direction: row;
+        /*横向*/
+        justify-content: space-around;
+        /*主轴居中*/
+        align-items: center;
+        /*纵轴居中*/
         cursor: pointer;
     }
+
     @media screen and (max-width: $MobileWidth-M) {
         overflow: hidden;
         // border: 1px solid #ffffff;
@@ -45,6 +51,7 @@
         // border-radius: 15px;
         // width: 92%;
         margin: 50% auto 0 auto;
+
         .UnlockWalletpage-content {
             // width: 98%;
             height: 64px;
@@ -55,10 +62,14 @@
             font-size: 18px;
             border-radius: 15px;
             text-align: center;
-            display: flex; /*盒子模型*/
-            flex-direction: row; /*横向*/
-            justify-content: space-around; /*主轴居中*/
-            align-items: center; /*纵轴居中*/
+            display: flex;
+            /*盒子模型*/
+            flex-direction: row;
+            /*横向*/
+            justify-content: space-around;
+            /*主轴居中*/
+            align-items: center;
+            /*纵轴居中*/
             cursor: pointer;
         }
     }
