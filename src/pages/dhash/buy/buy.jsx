@@ -208,15 +208,6 @@ const Buy = () => {
                 // console.log('ApiAppUserBalances:', res);
                 if (res.code === 200) {
                     setUser(res.data);
-
-                    console.log(Tools.fmtDec(
-                        Tools.div(
-                            res.data.usdt_pretty,
-                            price || currentPrice || DEFAULT_CURRENT_PRICE
-                        ),
-                        4
-                    ))
-
                     setBalance(
                         Tools.fmtDec(
                             Tools.div(
