@@ -512,6 +512,8 @@ export default {
             "v1_Audit_by": "Audit by",
             "v1_overheated": "overheated, cooling off！",
             "deadline": "1611894600000",
+            "v1_CLAIM_IN_BATCHES": "CLAIM IN BATCHES",
+            "v1_EPOCH_IN_PROGRESS": "{{x}} EPOCH IN PROGRESS",
         },
     },
     zh: {
@@ -1015,6 +1017,8 @@ export default {
             "v1_Audit_by": "Audit by",
             "v1_overheated": "overheated, cooling off！",
             "deadline": "1611894600000",
+            "v1_CLAIM_IN_BATCHES": "CLAIM IN BATCHES",
+            "v1_EPOCH_IN_PROGRESS": "{{x}} EPOCH IN PROGRESS",
         },
     },
 };

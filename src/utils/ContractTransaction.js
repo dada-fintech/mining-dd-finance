@@ -6,29 +6,26 @@
  * @LastEditors:
  */
 
-import { sendTransaction } from './EthereumRequest.js';
+import { sendTransaction } from '../contract/EthereumRequest.js';
 import { ApiAppAllowances } from '../services';
 
 // 发送交易
-export async function contractTransaction(
+export async function contractTransaction (
     account,
     contract,
     calldata,
     resFun,
-    errFun
+    errFun,
+    transaction = false,
+    cancelFun = () => { }
 ) {
     const txnParams = {
         from: account,
         to: contract,
         data: calldata,
     };
-    sendTransaction(txnParams, resFun, errFun)
-        .then((res) => {
-            if (res) {
-                // 成功的处理
-                resFun();
-            }
-        })
+    console.log(transaction)
+    sendTransaction(txnParams, resFun, errFun, transaction, cancelFun)
         .catch((err) => {
             console.log('发生错误！', err);
             errFun();
@@ -37,11 +34,11 @@ export async function contractTransaction(
 }
 
 //检测授权
-export async function checkApprove(account, symbol, resFun) {
+export async function checkApprove (account, symbol, resFun) {
     try {
         ApiAppAllowances(account)
             .then((res) => {
-                console.log(res);
+                // console.log(res); 
                 if (res) {
                     if (
                         symbol === 'USDT' &&

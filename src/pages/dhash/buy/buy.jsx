@@ -59,9 +59,11 @@ const Buy = () => {
     }); // BTC当日价格 昨日分发BTC
 
     const getInputaMountNumber = useCallback((val) => {
+
         setAmount(val);
         setDisabled(val <= 0);
     });
+
 
     // BTC当日价格 昨日分发BTC
     const getApiLatestepochReward = async (price) => {
@@ -82,7 +84,7 @@ const Buy = () => {
                                         Tools.div(
                                             Tools.mul(
                                                 Number(
-                                                    res.data.total_rewarded || 0
+                                                    res.data.reward.amount_pretty || 0
                                                 ),
                                                 Number(
                                                     res.data.btc_price || 0
@@ -206,6 +208,15 @@ const Buy = () => {
                 // console.log('ApiAppUserBalances:', res);
                 if (res.code === 200) {
                     setUser(res.data);
+
+                    console.log(Tools.fmtDec(
+                        Tools.div(
+                            res.data.usdt_pretty,
+                            price || currentPrice || DEFAULT_CURRENT_PRICE
+                        ),
+                        4
+                    ))
+
                     setBalance(
                         Tools.fmtDec(
                             Tools.div(
@@ -225,10 +236,16 @@ const Buy = () => {
             });
     };
 
+    const random = (min, max) => {
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
     // BUY
     const ApiAppBuyFun = async () => {
         setBuyButLoading(true);
-        await ApiAppBuy(account, amount)
+        const max = Tools.GE(balance, available) ? available : balance || 0;
+        const isMax = amount.toString() === max ? true : false;
+
+        await ApiAppBuy(account, isMax ? '-1' : amount)
             .then((res) => {
                 if (res.code === 200) {
                     if (res.data.txs.length > 1) {
@@ -239,47 +256,57 @@ const Buy = () => {
                             res.data.txs[0].contract,
                             res.data.txs[0].calldata,
                             () => {
-                                checkApprove(account, 'USDT', () => {
-                                    // console.log('授权成功');
-                                    setModalState(4);
-                                    contractTransaction(
-                                        account,
-                                        res.data.txs[1].contract,
-                                        res.data.txs[1].calldata,
-                                        () => {
-                                            // setModalnfoState(1);
-                                            setModalState(2);
-                                            message.warning(t('v1_Pendding'));
-                                            setVisible(true);
-                                            setTimeout(() => {
-                                                setModalState(3);
-                                                setBuyButLoading(false);
-                                                setBuyState(true);
-                                            }, EXECUTION_TIME);
-                                        },
-                                        () => {
-                                            setModalState(-1);
+                                setModalState(4);
+                                contractTransaction(
+                                    account,
+                                    res.data.txs[1].contract,
+                                    res.data.txs[1].calldata,
+                                    () => {
+                                        // setModalnfoState(1);
+                                        setModalState(2);
+                                        message.warning(t('v1_Pendding'));
+                                        setTimeout(() => {
+                                            setModalState(3);
                                             setBuyButLoading(false);
-                                            setVisible(false);
-                                        }
-                                    );
-                                });
+                                            setBuyState(true);
+                                        }, EXECUTION_TIME);
+                                    },
+                                    () => {
+                                        setModalState(-1);
+                                        setBuyButLoading(false);
+                                        // setVisible(false);
+                                        message.warning(t('v1_Failed'));
+                                    }, true,
+                                    () => {
+                                        setModalState(4);
+                                        setBuyButLoading(false);
+                                        setVisible(false);
+                                    }
+                                );
                             },
                             () => {
+                                setBuyButLoading(false);
+                                setVisible(false);
+                                setModalState(0);
+                                message.warning(t('v1_Failed'));
+                            },
+                            true,
+                            () => {
+                                setModalState(0);
                                 setBuyButLoading(false);
                                 setVisible(false);
                             }
                         );
                     } else {
+                        setModalState(2);
+                        setVisible(true)
                         contractTransaction(
                             account,
                             res.data.txs[0].contract,
                             res.data.txs[0].calldata,
                             () => {
                                 // setModalnfoState(1);
-                                setModalState(2);
                                 message.warning(t('v1_Pendding'));
-                                setVisible(true);
                                 setTimeout(() => {
                                     setModalState(3);
                                     setBuyButLoading(false);
@@ -288,6 +315,12 @@ const Buy = () => {
                             },
                             () => {
                                 setModalState(-1);
+                                setBuyButLoading(false);
+                                // setVisible(false);
+                                message.warning(t('v1_Failed'));
+                            }, true,
+                            () => {
+                                setModalState(4);
                                 setBuyButLoading(false);
                                 setVisible(false);
                             }
@@ -382,11 +415,11 @@ const Buy = () => {
                                 </div> */}
                             </div>
                             <InputaMount
-                                balance={user.usdt_pretty || 0}
+                                balance={Tools.fmtDec(user.usdt_pretty || 0, 4)}
                                 maxBalance={
                                     Tools.GE(balance, available)
-                                        ? available
-                                        : balance || 0
+                                        ? Tools.fmtDec(available || 0, 4)
+                                        : Tools.fmtDec(balance || 0, 4) || 0
                                 }
                                 onConfirm={getInputaMountNumber}
                                 sumbol={OFFICIAL_SYMBOL}

@@ -620,5 +620,26 @@ export default {
         REWARD_SYMBOL: 'HBTC',
         OFFICIAL_SYMBOL: 'DHM',
         BSAE_API_URL: 'https://api.dhash.finance',
+    },
+    // testent huobi
+    hecoTestent: {
+        network: 'hecoTestent',
+        mode: 'prod',
+        provider: 'https://http-testnet.hecochain.com',
+        chainId: 256,
+        baseURL: 'https://mining-api-binance.dd.finance',
+        assetURL: 'https://mining-assets-binance.dd.finance',
+        commonABI,
+        templateIds: ['1', '2', '3', '4'],
+        featuredId: '08b90ac9c815f82277463d63152d2822ba192d33fda2d74e2651a505b1678ff6',
+        usdAddress: '0xe9e7cea3dedca5984780bafc599bd69add087d56',
+        usdUnit: 'HUSD',
+        BSAE_DHASH_API_URL: 'https://api-test.dhash.finance',        // dhash base api url
+        CLAIMROUTER: '0x54559aD7Ec464af2FC360B9405412eC8bB0F48Ed',        // claim 合约地址
+        DDDECIMALS: 18,        // DD 精度
+        INIT_SYMBOL: 'HUSD',
+        REWARD_SYMBOL: 'HBTC',
+        OFFICIAL_SYMBOL: 'DHM',
+        BSAE_API_URL: 'https://api-test.dhash.finance',
     }
 }

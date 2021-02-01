@@ -59,6 +59,7 @@ const Mine = () => {
     const [userStaked, setUStaked] = useState(0); // 当前用户的质押量
     const [rewardToClaim, setRewardToClaim] = useState(0); // 用户可领取的奖励
     const [btcInfo, setBtcInfo] = useState(0); // BTC当日价格 昨日分发BTC
+    const [isWithdraw, setIsWithdraw] = useState(false); // 是否Claim
     const [showBtcInfoErr, setShowBtcInfoErr] = useState({
         code: 200,
         msg: '',
@@ -74,8 +75,8 @@ const Mine = () => {
         setDisabled(val <= 0);
     };
 
-    // const [receive, setReceive] = useState(false); // 多期未领取
-    // const [epoch, setEpoch] = useState({ currentEpoch: 0, nextEpoch: 0 }); // 当前epoch，下一个epoch时间
+    const [receive, setReceive] = useState(false); // 多期未领取
+    const [epoch, setEpoch] = useState({ currentEpoch: 0, nextEpoch: 0 }); // 当前epoch，下一个epoch时间
     // START;
     const startFun = () => {
         ApiAppStakeFun();
@@ -113,8 +114,7 @@ const Mine = () => {
                 // console.log(res);
                 if (res.code === 200) {
                     setBtcInfo(res.data.reward.amount_pretty);
-                    // 年化收益率 = 当日分发BTC × 当日BTC价格 / 6.5 / 抵押数量 *365
-                    // 年化收益率 = 总奖励 * 当日BTC价格 / 总抵押数量 / dhm 价格
+                    // 年化收益率 = 金日收益 × 当日BTC价格 / dhm 价格 / 总抵押数量 *365
                     // 年化收益率 = 总奖励 * 当日BTC价格 / 总抵押数量 / dhm 价格 /epochs * 365
 
                     setApy(
@@ -125,7 +125,7 @@ const Mine = () => {
                                         Tools.div(
                                             Tools.mul(
                                                 Number(
-                                                    res.data.total_rewarded || 0
+                                                    res.data.reward.amount_pretty || 0
                                                 ),
                                                 Number(
                                                     res.data.btc_price || 0
@@ -175,7 +175,9 @@ const Mine = () => {
     // 质押
     const ApiAppStakeFun = async () => {
         setStakeButLoading(true);
-        await ApiAppStake(account, amount)
+        const max = user.dhm_pretty;
+        const isMax = amount.toString() === max ? true : false;
+        await ApiAppStake(account, isMax ? '-1' : amount)
             .then((res) => {
                 // console.log(res);
                 if (res.code === 200) {
@@ -187,56 +189,75 @@ const Mine = () => {
                             res.data.txs[0].contract,
                             res.data.txs[0].calldata,
                             () => {
-                                checkApprove(account, 'DHM', () => {
-                                    setModalState(4);
-                                    contractTransaction(
-                                        account,
-                                        res.data.txs[1].contract,
-                                        res.data.txs[1].calldata,
-                                        () => {
-                                            // setModalnfoState(1);
-                                            setModalState(2);
-                                            message.warning(t('v1_Pendding'));
-                                            setVisible(true);
-                                            setTimeout(() => {
-                                                setModalState(3);
-                                                setStakeButLoading(false);
-                                                setIsUpdate(true);
-                                            }, EXECUTION_TIME);
-                                        },
-                                        () => {
+                                setModalState(4);
+                                contractTransaction(
+                                    account,
+                                    res.data.txs[1].contract,
+                                    res.data.txs[1].calldata,
+                                    () => {
+                                        // setModalnfoState(1);
+                                        setModalState(2);
+                                        message.warning(t('v1_Pendding'));
+                                        setVisible(true);
+                                        setTimeout(() => {
+                                            setModalState(3);
                                             setStakeButLoading(false);
-                                            setVisible(false);
-                                            setModalState(-1);
-                                        }
-                                    );
-                                });
+                                            setIsUpdate(true);
+                                            getApiAppUserBalances(); // 余额
+                                            getApiUserStaked(); // 用户质押量
+                                        }, EXECUTION_TIME);
+                                    },
+                                    () => {
+                                        setModalState(-1);
+                                        setStakeButLoading(false);
+                                        message.warning(t('v1_Failed'));
+                                    }, true,
+                                    () => {
+                                        setStakeButLoading(false);
+                                        setVisible(false);
+                                        setModalState(4);
+                                    }
+                                );
                             },
                             () => {
                                 setVisible(false);
                                 setStakeButLoading(false);
+                                setModalState(0);
+                                message.warning(t('v1_Failed'));
+                            }, true,
+                            () => {
+                                setStakeButLoading(false);
+                                setVisible(false);
+                                setModalState(0);
                             }
                         );
                     } else {
+                        setModalState(2);
+                        setVisible(true);
                         contractTransaction(
                             account,
                             res.data.txs[0].contract,
                             res.data.txs[0].calldata,
                             () => {
                                 // setModalnfoState(1);
-                                setModalState(2);
                                 message.warning(t('v1_Pendding'));
-                                setVisible(true);
                                 setTimeout(() => {
                                     setModalState(3);
                                     setStakeButLoading(false);
                                     setIsUpdate(true);
+                                    getApiAppUserBalances(); // 余额
+                                    getApiUserStaked(); // 用户质押量
                                 }, EXECUTION_TIME);
                             },
                             () => {
                                 setModalState(-1);
                                 setStakeButLoading(false);
+                                message.warning(t('v1_Failed'));
+                            }, true,
+                            () => {
+                                setStakeButLoading(false);
                                 setVisible(false);
+                                setModalState(4);
                             }
                         );
                     }
@@ -270,8 +291,13 @@ const Mine = () => {
                                 getApiAppUserBalances(); // 余额
                                 getApiUserStaked(); // 用户质押量
                                 getApiToClaimBalances(); //用户可领取的奖励
+                                setIsWithdraw(false);
                             }, EXECUTION_TIME);
                         },
+                        () => {
+                            setStopButLoading(false);
+                            message.warning(t('v1_Failed'));
+                        }, true,
                         () => {
                             setStopButLoading(false);
                         }
@@ -291,7 +317,6 @@ const Mine = () => {
     // claim
     const ApiAppClaimFun = async () => {
         setClaimButLoading(true);
-
         await ApiAppClaim(account)
             .then((res) => {
                 // console.log(res);
@@ -308,6 +333,11 @@ const Mine = () => {
                                 getApiToClaimBalances();
                             }, EXECUTION_TIME);
                         },
+                        () => {
+                            setClaimButLoading(false);
+                            message.warning(t('v1_Failed'));
+                        },
+                        true,
                         () => {
                             setClaimButLoading(false);
                         }
@@ -329,7 +359,6 @@ const Mine = () => {
         sePpartialButLoading(true);
         await ApiPartialclaim()
             .then((res) => {
-                // console.log(res);
                 if (res.code === 200) {
                     contractTransaction(
                         account,
@@ -343,6 +372,10 @@ const Mine = () => {
                                 getApiToClaimBalances();
                             }, EXECUTION_TIME);
                         },
+                        () => {
+                            sePpartialButLoading(false);
+                            message.warning(t('v1_Failed'));
+                        }, true,
                         () => {
                             sePpartialButLoading(false);
                         }
@@ -359,9 +392,6 @@ const Mine = () => {
             });
     };
 
-
-
-
     // 总抵押量
     const getApiAppTotalTakes = async () => {
         await ApiAppTotalTakes()
@@ -370,7 +400,6 @@ const Mine = () => {
                 if (res.code === 200) {
                     setTokenStaken(res.data.amount_pretty);
                     getApiAppTotalBurnt(res.data.amount_pretty);
-
                 }
             })
             .catch((err) => {
@@ -403,7 +432,7 @@ const Mine = () => {
                     setRewardToClaim(res.data.amount_pretty || 0);
                 } else if (res.code === 1005) {
                     console.log('Receive');
-                    // setReceive(true);
+                    setReceive(true);
                 }
             })
             .catch((err) => {
@@ -492,57 +521,6 @@ const Mine = () => {
             });
     };
 
-    // claim 随时间增长
-    useEffect(() => {
-        let timers = undefined;
-        if (timers) {
-            clearInterval(timers);
-        }
-        const setClaimNumer = (val, dayIncome = 0.02, time = 50) => {
-            // if (Tools.GT(val, 0)) {
-            let maxNumer = Tools.plus(val, dayIncome);  // 当日最大可收益
-            let secondIncome = Tools.fmtDec(Tools.div(dayIncome, 86400000), 14);  // 每毫秒收益
-            let date = Tools.plus(new Date(new Date().toLocaleDateString()).getTime(), 28800000) // 上午八点到目前时长毫秒
-            let LengthTime = 0;
-            if (new Date().getTime() <= date) { // 12点以后
-                LengthTime = Math.abs(Tools.sub(new Date().getTime(), new Date(new Date().toLocaleDateString()).getTime()));
-                val = Tools.plus(Tools.plus(Number(val), Number(LengthTime) * Number(secondIncome)), (dayIncome / 3) * 2)
-                // console.log('12点以后', Tools.sub(new Date().getTime(), new Date(new Date().toLocaleDateString()).getTime()))
-                // console.log(val)
-            } else { // 12 点前
-                LengthTime = Tools.sub(new Date().getTime(), date); // 上午八点到目前的收益
-                val = Tools.plus(Number(val), Tools.mul(Number(LengthTime), Number(secondIncome)))
-                // console.log(val)
-                // console.log(secondIncome)
-                // console.log(LengthTime)
-                // console.log('12点以前', Tools.sub(secondIncome, Tools.sub(date, new Date().getTime())))
-            }
-
-            var income = val;
-            if (Tools.LT(estimatedClaimNum, maxNumer)) {
-                timers = setInterval(() => {
-                    income = Tools.plus(Number(income), Number(secondIncome));
-                    // console.log(Number(income).toFixed(14))
-                    setEstimatedClaimNum(Number(income).toFixed(14));
-                }, time);
-            } else {
-                console.log(maxNumer)
-                setEstimatedClaimNum(maxNumer);
-                clearInterval(timers);
-            }
-        }
-
-        if (userStaked > 0) {
-            // console.log((0.2 / 1000000) * userStaked);
-            let mydayIncome = Tools.fmtDec((0.2 / 1000000) * userStaked, 8)
-            setClaimNumer(rewardToClaim, mydayIncome);
-        }
-
-        return () => {
-            clearInterval(timers);
-        }
-    }, [userStaked]);
-
     // 更新
     useEffect(() => {
         let timer = undefined;
@@ -573,17 +551,16 @@ const Mine = () => {
         }
     }, [status, account]);
 
-    // useEffect(() => {
-    //     // 当前epoch = 向下取整(当前时间/86400 )
-    //     // 下一个epoch时间 = 当前epoch+1 * 86400
-    //     console.log(Number(new Date().getTime()))
-    //     let timeDay = 1000;
-    //     const currentEpoch = Tools.sub(Math.floor(Tools.div(Number(new Date().getTime()) / 1000, timeDay)), 1611307);
-    //     const nextEpoch = Math.floor(Tools.plus(Tools.sub(Tools.plus(currentEpoch, 1), timeDay * 1000), new Date().getTime()));
-
-    //     setEpoch({ currentEpoch: currentEpoch, nextEpoch: nextEpoch });
-    //     console.log(nextEpoch)
-    // }, []);
+    useEffect(() => {
+        // 当前epoch = 向下取整(当前时间/86400 )
+        // 下一个epoch时间 = 当前epoch+1 * 86400
+        let timeDay = 86400;
+        let startEpoch = 18649;
+        const currentEpoch = Math.floor(Tools.div(Number(new Date().getTime()) / 1000, timeDay));
+        const epoch = Tools.sub(currentEpoch, startEpoch);
+        const nextEpoch = Math.floor(Tools.mul(Tools.plus(currentEpoch, 1), timeDay * 1000));
+        setEpoch({ currentEpoch: epoch, nextEpoch: nextEpoch });
+    }, []);
 
     useEffect(() => {
         getApiAppTotalTakes();
@@ -597,6 +574,61 @@ const Mine = () => {
         }
     }, [account, status]);
 
+    // claim 随时间增长
+    useEffect(() => {
+        let timers = undefined;
+        if (timers) {
+            clearInterval(timers);
+        }
+        const setClaimNumer = (val, dayIncome = 0.02, time = 50) => {
+            // if (Tools.GT(val, 0)) {
+            let maxNumer = Tools.plus(val, dayIncome);  // 当日最大可收益
+            let secondIncome = Tools.div(dayIncome, 86400000) // 每毫秒收益
+            let date = Tools.plus(new Date(new Date().toLocaleDateString()).getTime(), 28800000) // 上午八点到目前时长毫秒
+            let LengthTime = 0;
+
+            if (!isWithdraw) {
+                if (new Date().getTime() <= date) { // 12点以后
+                    LengthTime = Tools.plus(Math.abs(Tools.sub(new Date().getTime(), new Date(new Date().toLocaleDateString()).getTime())), 57600000);
+                    // val = Tools.plus(Tools.plus(Number(val), Number(LengthTime) * Number(secondIncome)), (dayIncome / 3) * 2)
+                    val = Tools.plus(Number(val), Tools.mul(Number(LengthTime), Number(secondIncome)));
+                    // console.log(val)
+                } else { // 12 点前
+                    LengthTime = Tools.sub(new Date().getTime(), date); // 上午八点到目前的收益
+                    val = Tools.plus(Number(val), Tools.mul(Number(LengthTime), Number(secondIncome)))
+                    // console.log('12点以前', Tools.sub(secondIncome, Tools.sub(date, new Date().getTime())))
+                }
+            } else {
+                val = 0;
+            }
+
+            var income = val;
+            if (Tools.LT(estimatedClaimNum, maxNumer)) {
+                timers = setInterval(() => {
+                    income = Tools.plus(Number(income), Number(secondIncome));
+                    // console.log(Number(income).toFixed(14))
+                    setEstimatedClaimNum(Number(income).toFixed(14));
+                }, time);
+            } else {
+                setEstimatedClaimNum(maxNumer);
+                clearInterval(timers);
+            }
+        }
+
+        if (!isWithdraw && userStaked > 0) {
+            // 用户质押数/全网质押数*当日分发数
+            // console.log((0.2 / 1000000) * userStaked);
+            let mydayIncome = Tools.fmtDec((Number(Tools.div(userStaked, tokenStaken))) * 0.10648791, 8)
+            setClaimNumer(0, mydayIncome);
+        } else {
+            clearInterval(timers);
+        }
+
+        return () => {
+            clearInterval(timers);
+        }
+    }, [userStaked, isWithdraw, tokenStaken]);
+
     return (
         <div className="mine-page">
             <Header hideAction={true} />
@@ -605,6 +637,7 @@ const Mine = () => {
                 <UnlockWalletpage />
             ) : (
                     <>
+
                         {showBtcInfoErr.code !== 200 ? (
                             <div className="Alert-err">
                                 <Alert
@@ -618,6 +651,12 @@ const Mine = () => {
                                 ''
                             )}
                         {account && <UserAddress address={account} />}
+
+                        <div className="epoch-content">
+                            <div className="epoch">
+                                {t('v1_EPOCH_IN_PROGRESS', { x: epoch.currentEpoch || 0 })} &nbsp; <Countdown value={epoch.nextEpoch || 0} format="HH:mm:ss:SSS" />
+                            </div>
+                        </div>
                         <div className="farming-top">
                             <img src={FarmerIcon} />
                             <div className="desc">{t('v1_EARN_wBTC', { x: Config[setting.network].REWARD_SYMBOL || 'wBTC' })}</div>
@@ -637,14 +676,8 @@ const Mine = () => {
                                         </div>
                                         <div className="start">
                                             <InputBoxMount
-                                                balance={Tools.numFmt(
-                                                    user.dhm_pretty || 0,
-                                                    4
-                                                )}
-                                                maxBalance={Tools.numFmt(
-                                                    user.dhm_pretty || 0,
-                                                    4
-                                                )}
+                                                balance={Tools.fmtDec(user.dhm_pretty || 0, 4)}
+                                                maxBalance={Tools.fmtDec(user.dhm_pretty || 0, 4)}
                                                 balanceSumbol={Config[setting.network].OFFICIAL_SYMBOL}
                                                 onConfirm={getInputaMountNumber}
                                                 sumbol={OFFICIAL_SYMBOL}
@@ -678,7 +711,7 @@ const Mine = () => {
                                         <img src={BTCIcon} className="icon" />
                                         <div className="amount">
                                             {Tools.toThousands(
-                                                Tools.fmtDec(rewardToClaim, 8) || 0
+                                                Tools.numFmt(Tools.fmtDec(rewardToClaim || 0, 8), 8) || 0
                                             )}
                                         </div>
                                         <div className="text price">
@@ -715,6 +748,16 @@ const Mine = () => {
                             butClassName={'dd-lightpink-but'}
                             onChangeFun={stopFun}
                         />
+
+                        {receive ? <BuyButton
+                            loading={partialButLoading}
+                            butText={t('v1_CLAIM_IN_BATCHES')}
+                            disabled={false}
+                            butClassName={
+                                'operation-lightBox-but'
+                            }
+                            onChangeFun={ApiPartialclaimFun}
+                        /> : ""}
 
                         <BuyModal
                             amount={amount}

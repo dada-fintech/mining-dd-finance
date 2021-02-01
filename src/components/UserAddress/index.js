@@ -11,7 +11,7 @@ export default function UserAddress (props) {
         copyText(address)
         message.success('Copied')
     }
-
+    
     return <div className="user-address">
         {address} <img src={CopyIcon} className="copy-icon" onClick={()=>{copyAddress()}}/>
     </div>

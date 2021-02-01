@@ -155,15 +155,16 @@
             box-sizing: border-box;
             border-radius: 20px;
             display: inline-block;
-            margin-top: 50%;
-
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, 50%);
+            
             .success-border {
                 width: 400px;
                 margin: 5px;
                 border: 1px solid rgba(255, 255, 255, 0.5);
                 padding-bottom: 36px;
                 border-radius: 15px;
-                display: inline-block;
                 background-color: white;
 
                 .price {

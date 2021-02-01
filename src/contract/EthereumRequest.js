@@ -1,37 +1,74 @@
 import { message } from 'antd';
-// import { CHAINID } from '../constants';
-import config from 'config'
+import Web3 from 'web3';
+import { CHAINID, MetaMask_CONF_URL } from '../constants';
+import Wbe3Utils from './Wbe3Utils';
 
-import store from '../redux/store';
 
-const {setting} = store.getState()
 
-export async function sendTransaction(transactionParameters, resFun, errFun) {
+export async function sendTransaction (transactionParameters, resFun, errFun, transaction = false, cancelFun) {
     try {
-
-        const network = setting.network
-
         // return new Promise(async (resolve, reject) => {
         await window.ethereum
             .request({
                 method: 'eth_sendTransaction',
-                params: [{ ...transactionParameters, chainId: config[network].chainId }],
+                params: [{ ...transactionParameters, chainId: CHAINID }],
             })
             .then(async (txHash) => {
-                console.log(txHash);
-                resFun();
+                // console.log(txHash)
+                if (transaction) {
+                    checkTransactionReceipt(txHash, resFun, errFun);
+                }
             })
             .catch((err) => {
                 switch (err.code) {
                     case 4001:
                         message.error(err.message);
+                        cancelFun();
                         break;
                     default:
+                        message.error(err.message);
+                        cancelFun();
                         console.log(err);
                 }
-                errFun();
             });
         // });
+    } catch (e) {
+        console.log(e);
+        return 0;
+    }
+}
+
+export async function checkTransactionReceipt (txHash, resFun, errFun) {
+    try {
+        const receipt = await getTransactionReceiptPromise(txHash);
+        // console.log(receipt)
+        if (!receipt) {
+            setTimeout(async () => {
+                checkTransactionReceipt(txHash, resFun, errFun);
+            }, 5000);
+        } else {
+            if (receipt && receipt.status) {
+                resFun();
+            } else if (receipt) {
+                // 交易失败
+                errFun();
+            }
+        }
+    } catch (e) {
+        console.log(e);
+        return 0;
+    }
+}
+
+export async function getTransactionReceiptPromise (txHash) {
+    try {
+        return new Promise(((resolve, reject) => {
+            Wbe3Utils.eth.getTransactionReceipt(txHash, function (err, data) {
+                // console.log(err, data, 'get receipt', txHash)
+                if (err !== null) reject(err);
+                else resolve(data);
+            });
+        }));
     } catch (e) {
         console.log(e);
         return 0;

@@ -4,6 +4,66 @@
     text-align: center;
     overflow: hidden;
 
+    .epoch-content {
+        max-width: 1400px;
+        width: 100%;
+        height: 40px;
+        display: flex;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, 0);
+        top: 100px;
+
+        @media screen and (max-width: $MobileWidth-M) {
+            position: relative;
+            margin-bottom: 16px;
+            top: 0;
+            margin-top: 22px;
+        }
+
+        .epoch {
+            background: #FFFFFF;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-sizing: border-box;
+            border-radius: 15px;
+            height: 40px;
+            font-size: 14px;
+            text-align: center;
+            display: flex;
+            max-width: 338px;
+            line-height: 40px;
+            padding: 0 12px;
+            position: absolute;
+            right: 26px;
+            top: 32px;
+            
+            @media screen and (max-width: $MobileWidth-M) {
+                top: 0;
+            }
+
+            .ant-statistic-content {
+                font-size: 14px !important;
+                height: 40px;
+                line-height: 40px;
+
+                .ant-statistic-content-value {
+                    font-size: 14px;
+                }
+            }
+        }
+
+        @media screen and (max-width: 751) {
+            .epoch {
+                max-width: 750px;
+                width: 92%;
+                position: relative;
+                left: 4%;
+            }
+        }
+
+
+    }
+
     // .farming-top{
     //     img{
     //         margin: 16px auto 26px;
@@ -198,7 +258,7 @@
     @media screen and (max-width: $MobileWidth-M) {
         .mine-content {
             max-width: $MaxWidth;
-            width: $BoxContentWidth;
+            width: 100%;
             margin: 34px auto 14px 0;
             display: inline-block;
             flex-direction: row;
@@ -296,7 +356,7 @@
                     line-height: 20px;
                     margin-top: 13px;
                     text-align: center;
-                    color: rgba(255, 255, 255, 0.5);
+                    color: $DarkColor;
                 }
             }
 
