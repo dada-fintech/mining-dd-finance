@@ -18,6 +18,7 @@ import config from 'config'
 import './style.scss'
 
 export default function CreateProject() {
+    const network = useSelector(state => state.setting.network)
     const [currentStep, setCurrentStep] = useState(0)
     const [projectInfo, setProjectInfo] = useState({ member_address: [''], profit_token: config[network].usdUnit, other_file: [] })
     const [fundraising, setFundraising] = useState({})
@@ -32,8 +33,6 @@ export default function CreateProject() {
     const [raisingMethod, setRaisingMethod] = useState('2')
     const [repayMethod, setRepayMethod] = useState('1')
     const [withdrawMethod, setWithdrawMethod] = useState('2')
-    const network = useSelector(state => state.setting.network)
-
 
     const { tempType } = useParams()
 
