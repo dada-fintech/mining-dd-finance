@@ -12,9 +12,7 @@ import { useWallet } from 'use-wallet';
 import DHMIcon from 'assets/farming/dhm.svg';
 import UserAddress from 'components/UserAddress'
 import Config from "../../../config";
-
 // import Overheated from '../components/ConfModal/Overheated.jsx';
-
 import {
     ApiAppBuy,
     ApiAppSellprice,
@@ -24,10 +22,7 @@ import {
     ApiDhmAvailable,
     ApiAppTotalBurnt,
 } from '../../../services/index.js';
-import {
-    contractTransaction,
-    checkApprove,
-} from '../../../utils/ContractTransaction.js';
+import { contractTransaction } from '../../../utils/ContractTransaction.js';
 import { OFFICIAL_SYMBOL, EXECUTION_TIME, DEFAULT_CURRENT_PRICE } from '../../../constants';
 import './buy.scss';
 import store from '../../../redux/store';
@@ -52,7 +47,7 @@ const Buy = () => {
     const [user, setUser] = useState({}); // 用户余额
     const [disabled, setDisabled] = useState(true); // 按钮状态
     const [modalState, setModalState] = useState(0); // 弹窗 0:授权 1授权中 2交易中 3交易成功 -1交易失败; 4 授权完成
-    const [btcInfo, setBtcInfo] = useState({}); // BTC当日价格 昨日分发BTC
+    // const [btcInfo, setBtcInfo] = useState({}); // BTC当日价格 昨日分发BTC
     const [showBtcInfoErr, setShowBtcInfoErr] = useState({
         code: 200,
         msg: '',
@@ -71,10 +66,29 @@ const Buy = () => {
             .then((res) => {
                 // console.log(res);
                 if (res.code === 200) {
-                    setBtcInfo(res.data);
                     // 年化收益率 = 当日分发BTC × 当日BTC价格 / dhm价格 / 抵押数量 *365
-                    // 年化收益率 = 总奖励 * 当日BTC价格 / 总抵押数量 / dhm 价格
                     // 年化收益率 = 总奖励 * 当日BTC价格 / 总抵押数量 / dhm 价格 /epochs * 365
+                    console.log(res.data.reward.amount_pretty, price);
+                    console.log(Number(res.data.total_stakes) > 0)
+                    console.log(
+                        Tools.mul(
+                            Tools.div(
+                                Tools.div(
+                                    Tools.mul(
+                                        Number(
+                                            res.data.reward.amount_pretty || 0
+                                        ),
+                                        Number(
+                                            res.data.btc_price || 0
+                                        )
+                                    ),
+                                    Number(price || DEFAULT_CURRENT_PRICE)
+                                ),
+                                Number(res.data.total_stakes)
+                            ),
+                            365
+                        )
+                    )
 
                     setApy(
                         res.data.reward.amount !== '-1' || res.data.reward.amount !== '0'
@@ -125,7 +139,6 @@ const Buy = () => {
             })
             .catch((err) => {
                 console.log('发生错误！', err);
-                setBtcInfo({});
                 setApy(0);
                 return 0;
             });
@@ -183,14 +196,14 @@ const Buy = () => {
     };
 
     // 总校销毁量 total Burned
-    const getApiAppTotalBurnt = async (totalSupply) => {
+    const getApiAppTotalBurnt = async (supply) => {
         ApiAppTotalBurnt()
             .then((res) => {
                 // console.log(res);
                 if (res.code === 200) {
                     // 总销毁量
                     setTotalBurned(
-                        Tools.sub(totalSupply || 0, res.data.total_pretty || 0)
+                        Tools.sub(supply || totalSupply, res.data.total_pretty || 0)
                     );
                 }
             })
@@ -227,15 +240,11 @@ const Buy = () => {
             });
     };
 
-    const random = (min, max) => {
-        return Math.floor(Math.random() * (max - min)) + min;
-    }
     // BUY
     const ApiAppBuyFun = async () => {
         setBuyButLoading(true);
         const max = Tools.GE(balance, available) ? available : balance || 0;
         const isMax = amount.toString() === max ? true : false;
-
         await ApiAppBuy(account, isMax ? '-1' : amount)
             .then((res) => {
                 if (res.code === 200) {
@@ -336,7 +345,7 @@ const Buy = () => {
         await getApiAppSupply(); // DHM 硬顶
     };
 
-    useEffect(async () => {
+    useEffect(() => {
         if (account && status === 'connected') {
             getAlldata();
         }
@@ -376,7 +385,7 @@ const Buy = () => {
                         <div className="data cheese-box">
                             <div className="apy-tag">
                                 <div className="value">
-                                    {(isNaN(apy) ? 0 : Tools.numFmt(apy * 100 * 2.345678, 2)) || 0}
+                                    {(isNaN(apy) ? 0 : Tools.numFmt(apy * 100, 2)) || 0}
                                     %
                                 </div>
                                 <div className="title">

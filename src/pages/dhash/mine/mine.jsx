@@ -9,10 +9,7 @@ import InputBoxMount from '../components/InputaMount';
 import UnlockWalletpage from '../components/UnlockWallet/UnlockWalletpage.jsx';
 import { useWallet } from 'use-wallet';
 import UserAddress from 'components/UserAddress';
-import {
-    contractTransaction,
-    checkApprove,
-} from '../../../utils/ContractTransaction.js';
+import { contractTransaction } from '../../../utils/ContractTransaction.js';
 import * as Tools from '../../../utils/Tools';
 import {
     ApiAppStake,
@@ -21,16 +18,13 @@ import {
     ApiAppTotalTakes,
     ApiToClaimBalances,
     ApiAppUserBalances,
-    ApiAppSupply,
     ApiLatestepochReward,
     ApiUserStaked,
     ApiAppSellprice,
-    ApiTotalRewarded,
     ApiAppTotalBurnt,
     ApiPartialclaim
 } from '../../../services/index.js';
 import {
-    REWARD_SYMBOL,
     OFFICIAL_SYMBOL,
     EXECUTION_TIME,
     DEFAULT_CURRENT_PRICE
@@ -55,20 +49,15 @@ const Mine = () => {
     const [apy, setApy] = useState(0); // APY
     const [tokenStaken, setTokenStaken] = useState(0); // 总抵押量
     const [user, setUser] = useState({}); // 用户余额
-    const [stakedRate, setStakedRate] = useState(0); // stakedRate // 总质押量/总流通量
     const [userStaked, setUStaked] = useState(0); // 当前用户的质押量
     const [rewardToClaim, setRewardToClaim] = useState(0); // 用户可领取的奖励
-    const [btcInfo, setBtcInfo] = useState(0); // BTC当日价格 昨日分发BTC
     const [isWithdraw, setIsWithdraw] = useState(false); // 是否Claim
     const [showBtcInfoErr, setShowBtcInfoErr] = useState({
         code: 200,
         msg: '',
     }); // BTC当日价格 昨日分发BTC
-    const [currentPrice, setCurrentPrice] = useState(DEFAULT_CURRENT_PRICE); // 当前价格
     const [disabled, setDisabled] = useState(true); // 按钮状态
-    const [totalRewarded, setTotalRewarded] = useState(0); // 全网总奖励
     const [visible, setVisible] = useState(false);
-    const [isUpdate, setIsUpdate] = useState(false);
     const [modalState, setModalState] = useState(0); // 弹窗 0:授权 1授权中 2交易中 3交易成功 -1交易失败; 4 授权完成
     const getInputaMountNumber = (val) => {
         setAmount(val);
@@ -96,14 +85,12 @@ const Mine = () => {
             .then((res) => {
                 // console.log(res);
                 if (res.code === 200) {
-                    setCurrentPrice(res.data.price_pretty || 0);
                     getApiLatestepochReward(res.data.price_pretty);
                 }
             })
             .catch((err) => {
                 console.log('发生错误！', err);
-                setCurrentPrice(0);
-                return 0;
+                return false;
             });
     };
 
@@ -113,7 +100,6 @@ const Mine = () => {
             .then((res) => {
                 // console.log(res);
                 if (res.code === 200) {
-                    setBtcInfo(res.data.reward.amount_pretty);
                     // 年化收益率 = 金日收益 × 当日BTC价格 / dhm 价格 / 总抵押数量 *365
                     // 年化收益率 = 总奖励 * 当日BTC价格 / 总抵押数量 / dhm 价格 /epochs * 365
 
@@ -166,7 +152,6 @@ const Mine = () => {
             })
             .catch((err) => {
                 console.log('发生错误！', err);
-                setBtcInfo(0);
                 setApy(0);
                 return 0;
             });
@@ -202,9 +187,10 @@ const Mine = () => {
                                         setTimeout(() => {
                                             setModalState(3);
                                             setStakeButLoading(false);
-                                            setIsUpdate(true);
+                                            getApiAppTotalTakes();
                                             getApiAppUserBalances(); // 余额
                                             getApiUserStaked(); // 用户质押量
+                                            getApiToClaimBalances(); //用户可领取的奖励
                                         }, EXECUTION_TIME);
                                     },
                                     () => {
@@ -244,9 +230,10 @@ const Mine = () => {
                                 setTimeout(() => {
                                     setModalState(3);
                                     setStakeButLoading(false);
-                                    setIsUpdate(true);
+                                    getApiAppTotalTakes();
                                     getApiAppUserBalances(); // 余额
                                     getApiUserStaked(); // 用户质押量
+                                    getApiToClaimBalances(); //用户可领取的奖励
                                 }, EXECUTION_TIME);
                             },
                             () => {
@@ -399,7 +386,6 @@ const Mine = () => {
                 // console.log(res);
                 if (res.code === 200) {
                     setTokenStaken(res.data.amount_pretty);
-                    getApiAppTotalBurnt(res.data.amount_pretty);
                 }
             })
             .catch((err) => {
@@ -442,69 +428,6 @@ const Mine = () => {
             });
     };
 
-    // 全网总奖励
-    const getApiTotalRewarded = async () => {
-        await ApiTotalRewarded()
-            .then((res) => {
-                // console.log(res);
-                if (res.code === 200) {
-                    setTotalRewarded(
-                        Tools.toThousands(res.data.amount_pretty || 0)
-                    );
-                }
-            })
-            .catch((err) => {
-                console.log('发生错误！', err);
-                setTotalRewarded(0);
-                return 0;
-            });
-    };
-
-    // 总校销毁量 total Burned
-    const getApiAppTotalBurnt = async (totalSupply) => {
-        ApiAppTotalBurnt()
-            .then((res) => {
-                // console.log(res);
-                if (res.code === 200) {
-                    getApiAvailable(totalSupply, res.data.total_pretty || 0);
-                }
-            })
-            .catch((err) => {
-                console.log('发生错误！', err);
-                getApiAvailable(0)
-                return 0;
-            });
-    };
-
-    // 流通量
-    const getApiAvailable = async (staken, totalBurnt) => {
-        await ApiAppSupply()
-            .then((res) => {
-                // console.log(res);
-                if (res.code === 200) {
-                    setStakedRate(
-                        res.data.amount_pretty <= 0
-                            ? 0
-                            : Tools.fmtDec(
-                                Tools.div(
-                                    staken,
-                                    Tools.sub(
-                                        res.data.amount_pretty,
-                                        totalBurnt
-                                    )
-                                ),
-                                4
-                            )
-                    );
-                }
-            })
-            .catch((err) => {
-                console.log('发生错误！', err);
-                setStakedRate(0)
-                return 0;
-            });
-    };
-
     // 余额
     const getApiAppUserBalances = async () => {
         await ApiAppUserBalances(account)
@@ -521,32 +444,8 @@ const Mine = () => {
             });
     };
 
-    // 更新
-    useEffect(() => {
-        let timer = undefined;
-        if (!account || !isUpdate || timer) {
-            clearInterval(timer);
-            return;
-        }
-
-        if (!timer || isUpdate) {
-            timer = setInterval(() => {
-                getApiAppTotalTakes();
-                if (account) {
-                    getApiAppUserBalances(); // 余额
-                    getApiUserStaked(); // 用户质押量
-                    getApiToClaimBalances(); //用户可领取的奖励
-                }
-            }, 5000);
-        }
-        return () => {
-            clearInterval(timer);
-        };
-    }, [isUpdate, account]);
-
     useEffect(() => {
         if (account && status === 'connected') {
-            getApiTotalRewarded();
             getApiAppSellprice();
         }
     }, [status, account]);
@@ -554,11 +453,11 @@ const Mine = () => {
     useEffect(() => {
         // 当前epoch = 向下取整(当前时间/86400 )
         // 下一个epoch时间 = 当前epoch+1 * 86400
-        let timeDay = 86400;
-        let startEpoch = 18649;
-        const currentEpoch = Math.floor(Tools.div(Number(new Date().getTime()) / 1000, timeDay));
-        const epoch = Tools.sub(currentEpoch, startEpoch);
-        const nextEpoch = Math.floor(Tools.mul(Tools.plus(currentEpoch, 1), timeDay * 1000));
+        const TimeLength = 86400;
+        const StartEpoch = 18649;
+        const currentEpoch = Math.floor(Tools.div(Number(new Date().getTime()) / 1000, TimeLength));
+        const epoch = Tools.sub(currentEpoch, StartEpoch);
+        const nextEpoch = Math.floor(Tools.mul(Tools.plus(currentEpoch, 1), TimeLength * 1000));
         setEpoch({ currentEpoch: epoch, nextEpoch: nextEpoch });
     }, []);
 
@@ -701,7 +600,7 @@ const Mine = () => {
                                     <div className="data-border cheese-box right-box">
                                         <div className="apy">
                                             <div className="value">
-                                                {(isNaN(apy) ? 0 : Tools.numFmt(apy * 100 * 2.345678, 2)) || 0}
+                                                {(isNaN(apy) ? 0 : Tools.numFmt(apy * 100, 2)) || 0}
                                             %
                                         </div>
                                             <div className="title">
