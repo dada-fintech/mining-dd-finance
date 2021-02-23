@@ -531,10 +531,10 @@ const commonABI = [
 
 export default {
     // 默认要连接的network，测试环境默认用 test，生产环境默认用 ethereum
-    defaultNetwork: 'ethereum',
+    defaultNetwork: 'test',
     //test(binance)
     test: {
-        network: 'binance',
+        network: 'test',
         //区分测试环境与生产环境。目前只用在了网络环境切换的判断
         mode: 'test',
         provider: 'https://data-seed-prebsc-1-s1.binance.org:8545',

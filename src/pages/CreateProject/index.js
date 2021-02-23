@@ -931,6 +931,7 @@ export default function CreateProject() {
                                                             )}
                                                         >
                                                             <img
+                                                                className="question-icon"
                                                                 src={
                                                                     QuestionIcon
                                                                 }
@@ -984,6 +985,7 @@ export default function CreateProject() {
                                                             )}
                                                         >
                                                             <img
+                                                                className="question-icon"
                                                                 src={
                                                                     QuestionIcon
                                                                 }
@@ -1046,6 +1048,7 @@ export default function CreateProject() {
                                                         )}
                                                     >
                                                         <img
+                                                            className="question-icon"
                                                             src={QuestionIcon}
                                                         />
                                                     </Tooltip>
@@ -1312,7 +1315,7 @@ export default function CreateProject() {
                                     <Tooltip
                                         title={t('createProject.softCapHover')}
                                     >
-                                        <img src={QuestionIcon} />
+                                        <img className="question-icon" src={QuestionIcon} />
                                     </Tooltip>
                                 </div>
                                 <Slider

@@ -223,7 +223,7 @@ export default function CreateVote() {
                 </div>
                 <div className="confirm-box">
                     <div className="form-item">
-                        <div className="label">{t('createVote.votingPeriod')} <Tooltip title="投票期限无法更改，合约创建时开始生效。公示期：24小时，投票期：24小时-96小时。"><img src={QuestionIcon} /></Tooltip></div>
+                        <div className="label">{t('createVote.votingPeriod')} <Tooltip title="投票期限无法更改，合约创建时开始生效。公示期：24小时，投票期：24小时-96小时。"><img className="question-icon" src={QuestionIcon} /></Tooltip></div>
                         <div>
                             {moment().add(1, 'days').format('MMMM Do YYYY')} - {moment().add(4, 'days').format('MMMM Do YYYY')}
                         </div>
@@ -298,7 +298,7 @@ export default function CreateVote() {
                 <div className="h1">{t('createVote.mainTitle')}</div>
                 <div className="confirm-box">
                     <div className="form-item">
-                        <div className="label">{t('createVote.votingPeriod')} <Tooltip title="投票期限无法更改，合约创建时开始生效。公示期：24小时，投票期：24小时-96小时。"><img src={QuestionIcon} /></Tooltip></div>
+                        <div className="label">{t('createVote.votingPeriod')} <Tooltip title="投票期限无法更改，合约创建时开始生效。公示期：24小时，投票期：24小时-96小时。"><img className="question-icon" src={QuestionIcon} /></Tooltip></div>
                         <div>{moment().add(1, 'days').format('MMMM Do YYYY')} - {moment().add(4, 'days').format('MMMM Do YYYY')}</div>
                     </div>
                     <div className="form-item">
