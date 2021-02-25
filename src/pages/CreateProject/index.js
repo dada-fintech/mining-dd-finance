@@ -137,7 +137,7 @@ export default function CreateProject() {
     }, [])
 
     useEffect(() => {
-        if (config[network].chainId == 1 && wallet.account) {
+        if (wallet.account) {
             getUSDTBalance()
         }
     }, [wallet.account])
