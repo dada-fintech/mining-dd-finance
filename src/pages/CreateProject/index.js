@@ -155,7 +155,10 @@ export default function CreateProject() {
         const result = await contract.methods.balanceOf(wallet.account).call({ from: wallet.account })
         if (config[network].usdUnit === 'USDT') {
             setUSDTBalance(web3.utils.fromWei(result, 'mwei'))
-        } else {
+        } else if(network === 'test') {
+            // 测试环境用的BUSD的进度是6
+            setUSDTBalance(web3.utils.fromWei(result, 'mwei'))
+        }else{
             setUSDTBalance(web3.utils.fromWei(result, 'ether'))
         }
     }
