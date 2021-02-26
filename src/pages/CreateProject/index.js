@@ -393,8 +393,8 @@ export default function CreateProject() {
 
         if (currentStep === 5) {
 
-            if (!fundraising.expected_apy) {
-                message.error(customHint || '请填写预期APY')
+            if (fundraising.expected_apy < 0) {
+                message.error(customHint || '预期APY最小为0')
                 return false
             }
 
@@ -859,6 +859,20 @@ export default function CreateProject() {
                                     </div>
                                     <DatePicker.RangePicker
                                         showTime
+                                        disabledDate={(
+                                            current
+                                        ) =>
+                                            current &&
+                                            current <
+                                                moment()
+                                                    .add(
+                                                        5,
+                                                        'days'
+                                                    )
+                                                    .endOf(
+                                                        'day'
+                                                    )
+                                        }
                                         value={
                                             fundraising.start_time && [
                                                 moment(fundraising.start_time),
@@ -1157,6 +1171,20 @@ export default function CreateProject() {
                                     </div>
                                     <DatePicker.RangePicker
                                         showTime
+                                        disabledDate={(
+                                            current
+                                        ) =>
+                                            current &&
+                                            current <
+                                                moment()
+                                                    .add(
+                                                        5,
+                                                        'days'
+                                                    )
+                                                    .endOf(
+                                                        'day'
+                                                    )
+                                        }
                                         value={
                                             fundraising.start_time && [
                                                 moment(fundraising.start_time),
