@@ -1,13 +1,12 @@
 // import { web3 } from '~/components/web3'
 import { subscribe } from '@nextcloud/event-bus'
-import { watchTransaction } from 'components/utils'
+import { watchTransaction, getTransactionReceiptPromise } from 'components/utils'
 import config from 'config'
 import store from '../redux/store';
+import { ApiSavetransaction } from '../services';
+const { setting } = store.getState();
 
-const {setting} = store.getState()
-
-
-async function sendTransaction(transactionParameters, desc, approvedActionParam) {
+async function sendTransaction (transactionParameters, desc, approvedActionParam, id = '') {
     // approvedActionParam will be called when approvement is approved
 
     const network = setting.network
@@ -18,6 +17,7 @@ async function sendTransaction(transactionParameters, desc, approvedActionParam)
                 params: [{ ...transactionParameters, chainId: config[network].chainId }],
             })
             .then(async (txHash) => {
+
                 let previousActionObj = JSON.parse(localStorage.getItem('actionObj')) || {}
                 previousActionObj[txHash] = {
                     desc: desc,
@@ -28,8 +28,9 @@ async function sendTransaction(transactionParameters, desc, approvedActionParam)
                 subscribe(txHash, (val) => {
                     resolve(val)
                 })
+                console.log(id, txHash, 'get receipt')
+                watchTransaction(txHash, id);
 
-                watchTransaction(txHash)
             })
             .catch((error) => {
                 resolve(false)

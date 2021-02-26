@@ -8,6 +8,7 @@ import { useWallet } from 'use-wallet'
 import Header from '../../components/Header'
 import { useSelector } from 'react-redux'
 import Timespan from 'components/Timespan'
+import { ApiSavetransaction } from '../../services';
 
 import moment from 'moment'
 import axios from 'utils/axios'
@@ -17,7 +18,7 @@ import config from 'config'
 
 import './style.scss'
 
-export default function CreateProject() {
+export default function CreateProject () {
     const network = useSelector(state => state.setting.network)
     const [currentStep, setCurrentStep] = useState(0)
     const [projectInfo, setProjectInfo] = useState({ member_address: [''], profit_token: config[network].usdUnit, other_file: [] })
@@ -33,6 +34,8 @@ export default function CreateProject() {
     const [raisingMethod, setRaisingMethod] = useState('2')
     const [repayMethod, setRepayMethod] = useState('1')
     const [withdrawMethod, setWithdrawMethod] = useState('2')
+
+    const [success, setSuccess] = useState({}) // 创建结果
 
     const { tempType } = useParams()
 
@@ -155,10 +158,10 @@ export default function CreateProject() {
         const result = await contract.methods.balanceOf(wallet.account).call({ from: wallet.account })
         if (config[network].usdUnit === 'USDT') {
             setUSDTBalance(web3.utils.fromWei(result, 'mwei'))
-        } else if(network === 'test') {
+        } else if (network === 'test') {
             // 测试环境用的BUSD的进度是6
             setUSDTBalance(web3.utils.fromWei(result, 'mwei'))
-        }else{
+        } else {
             setUSDTBalance(web3.utils.fromWei(result, 'ether'))
         }
     }
@@ -461,13 +464,13 @@ export default function CreateProject() {
         name: 'file',
         action: 'https://mining-api.dd.finance/project/upload',
         showUploadList: false,
-        beforeUpload(file) {
+        beforeUpload (file) {
             if (file.type !== 'application/pdf') {
                 message.error('Only PDF format is supported')
                 return false
             }
         },
-        onChange(info) {
+        onChange (info) {
             notification.open({
                 key: info.file.name,
                 message: `Uploading ${info.file.name}`,
@@ -498,7 +501,7 @@ export default function CreateProject() {
         action: 'https://mining-api.dd.finance/project/upload',
         showUploadList: false,
         multiple: true,
-        onChange(info) {
+        onChange (info) {
             notification.open({
                 key: info.file.name,
                 message: `Uploading ${info.file.name}`,
@@ -575,6 +578,8 @@ export default function CreateProject() {
         finalInfo.project_info.creater_addr = wallet.account
 
         axios.post(finalURL, finalInfo).then(res => {
+            console.log(res)
+            setSuccess(res.data || {})
             setDadaApproved(res.data.is_satisfied)
             setApproveBalance(res.data.approve_balance)
             setCallData(res.data.call_contract)
@@ -607,6 +612,7 @@ export default function CreateProject() {
             txnParams,
             'Approve',
         ).then(res => {
+            console.log(res);
             setCreateLoading(false)
             if (res) {
                 doPay()
@@ -622,11 +628,17 @@ export default function CreateProject() {
         }
         setCreateLoading(true)
 
+        console.log(success.sid, 'get receipt')
         mm.sendTransaction(
             txnParams,
-            'Paying'
-        ).then(res => {
+            'Paying',
+            "",
+            success.sid ? success.sid : ''
+        ).then(async res => {
             setCreateLoading(false)
+            console.log(res);
+
+
             if (res) {
                 clearStorage()
                 setPayStatus('success')
@@ -839,11 +851,11 @@ export default function CreateProject() {
                                 className="govern-rule-img"
                             />
                         ) : (
-                            <img
-                                src="/govern-rule-img.svg"
-                                className="govern-rule-img"
-                            />
-                        )}
+                                <img
+                                    src="/govern-rule-img.svg"
+                                    className="govern-rule-img"
+                                />
+                            )}
                         <Row
                             type="flex"
                             align="middle"
@@ -864,14 +876,14 @@ export default function CreateProject() {
                                         ) =>
                                             current &&
                                             current <
-                                                moment()
-                                                    .add(
-                                                        5,
-                                                        'days'
-                                                    )
-                                                    .endOf(
-                                                        'day'
-                                                    )
+                                            moment()
+                                                .add(
+                                                    5,
+                                                    'days'
+                                                )
+                                                .endOf(
+                                                    'day'
+                                                )
                                         }
                                         value={
                                             fundraising.start_time && [
@@ -961,16 +973,16 @@ export default function CreateProject() {
                                                         ) =>
                                                             current &&
                                                             current <
-                                                                moment(
-                                                                    fundraising.end_time
+                                                            moment(
+                                                                fundraising.end_time
+                                                            )
+                                                                .add(
+                                                                    4,
+                                                                    'days'
                                                                 )
-                                                                    .add(
-                                                                        4,
-                                                                        'days'
-                                                                    )
-                                                                    .endOf(
-                                                                        'day'
-                                                                    )
+                                                                .endOf(
+                                                                    'day'
+                                                                )
                                                         }
                                                         value={
                                                             item.vote_start_time &&
@@ -990,31 +1002,31 @@ export default function CreateProject() {
                                                 </div>
                                             </Col>
                                         ) : (
-                                            <Col md={12}>
-                                                <div className="form-item">
-                                                    <div className="label ">
-                                                        {t(
-                                                            'createProject.votingDate'
-                                                        )}{' '}
-                                                        <Tooltip
-                                                            title={t(
-                                                                'createProject.votingDateHover'
-                                                            )}
-                                                        >
-                                                            <img
-                                                                className="question-icon"
-                                                                src={
-                                                                    QuestionIcon
-                                                                }
-                                                            />
-                                                        </Tooltip>
-                                                    </div>
-                                                    <DatePicker.RangePicker
-                                                        disabledDate={(
-                                                            current
-                                                        ) =>
-                                                            current &&
-                                                            current <
+                                                <Col md={12}>
+                                                    <div className="form-item">
+                                                        <div className="label ">
+                                                            {t(
+                                                                'createProject.votingDate'
+                                                            )}{' '}
+                                                            <Tooltip
+                                                                title={t(
+                                                                    'createProject.votingDateHover'
+                                                                )}
+                                                            >
+                                                                <img
+                                                                    className="question-icon"
+                                                                    src={
+                                                                        QuestionIcon
+                                                                    }
+                                                                />
+                                                            </Tooltip>
+                                                        </div>
+                                                        <DatePicker.RangePicker
+                                                            disabledDate={(
+                                                                current
+                                                            ) =>
+                                                                current &&
+                                                                current <
                                                                 moment(
                                                                     fundraising.end_time
                                                                 )
@@ -1025,35 +1037,35 @@ export default function CreateProject() {
                                                                     .endOf(
                                                                         'day'
                                                                     )
-                                                        }
-                                                        value={
-                                                            item.vote_start_time && [
-                                                                moment(
-                                                                    item.vote_start_time
-                                                                ),
-                                                                moment(
-                                                                    item.vote_end_time
-                                                                ),
-                                                            ]
-                                                        }
-                                                        onChange={(value) => {
-                                                            value &&
-                                                                changeProcess(
-                                                                    index,
-                                                                    'vote_start_time',
-                                                                    value[0].valueOf()
-                                                                );
-                                                            value &&
-                                                                changeProcess(
-                                                                    index,
-                                                                    'vote_end_time',
-                                                                    value[1].valueOf()
-                                                                );
-                                                        }}
-                                                    />
-                                                </div>
-                                            </Col>
-                                        )}
+                                                            }
+                                                            value={
+                                                                item.vote_start_time && [
+                                                                    moment(
+                                                                        item.vote_start_time
+                                                                    ),
+                                                                    moment(
+                                                                        item.vote_end_time
+                                                                    ),
+                                                                ]
+                                                            }
+                                                            onChange={(value) => {
+                                                                value &&
+                                                                    changeProcess(
+                                                                        index,
+                                                                        'vote_start_time',
+                                                                        value[0].valueOf()
+                                                                    );
+                                                                value &&
+                                                                    changeProcess(
+                                                                        index,
+                                                                        'vote_end_time',
+                                                                        value[1].valueOf()
+                                                                    );
+                                                            }}
+                                                        />
+                                                    </div>
+                                                </Col>
+                                            )}
 
                                         <Col md={6}>
                                             <div className="form-item">
@@ -1176,14 +1188,14 @@ export default function CreateProject() {
                                         ) =>
                                             current &&
                                             current <
-                                                moment()
-                                                    .add(
-                                                        5,
-                                                        'days'
-                                                    )
-                                                    .endOf(
-                                                        'day'
-                                                    )
+                                            moment()
+                                                .add(
+                                                    5,
+                                                    'days'
+                                                )
+                                                .endOf(
+                                                    'day'
+                                                )
                                         }
                                         value={
                                             fundraising.start_time && [
@@ -1440,28 +1452,28 @@ export default function CreateProject() {
                                     />
                                     {index !=
                                         projectInfo.member_address.length -
-                                            1 && (
-                                        <Popconfirm
-                                            title={t(
-                                                'createProject.sureToDelete'
-                                            )}
-                                            onConfirm={() => {
-                                                removeCouncilMember(index);
-                                            }}
-                                        >
-                                            <MinusCircleOutlined className="handle-icon" />
-                                        </Popconfirm>
-                                    )}
+                                        1 && (
+                                            <Popconfirm
+                                                title={t(
+                                                    'createProject.sureToDelete'
+                                                )}
+                                                onConfirm={() => {
+                                                    removeCouncilMember(index);
+                                                }}
+                                            >
+                                                <MinusCircleOutlined className="handle-icon" />
+                                            </Popconfirm>
+                                        )}
                                     {index ==
                                         projectInfo.member_address.length -
-                                            1 && (
-                                        <PlusCircleOutlined
-                                            onClick={() => {
-                                                addCouncilMember();
-                                            }}
-                                            className="handle-icon"
-                                        />
-                                    )}
+                                        1 && (
+                                            <PlusCircleOutlined
+                                                onClick={() => {
+                                                    addCouncilMember();
+                                                }}
+                                                className="handle-icon"
+                                            />
+                                        )}
                                 </div>
                             ))}
 
@@ -1700,24 +1712,24 @@ export default function CreateProject() {
 
                             {projectInfo.member_address.filter((item) => item)
                                 .length > 0 && (
-                                <div className="line">
-                                    <div className="name">
-                                        {t('createProject.councilAddress')}
+                                    <div className="line">
+                                        <div className="name">
+                                            {t('createProject.councilAddress')}
+                                        </div>
+                                        <div className="value">
+                                            {projectInfo.member_address.map(
+                                                (item) => (
+                                                    <>
+                                                        <Tooltip title={item}>
+                                                            {item}
+                                                        </Tooltip>
+                                                        <br />
+                                                    </>
+                                                )
+                                            )}
+                                        </div>
                                     </div>
-                                    <div className="value">
-                                        {projectInfo.member_address.map(
-                                            (item) => (
-                                                <>
-                                                    <Tooltip title={item}>
-                                                        {item}
-                                                    </Tooltip>
-                                                    <br />
-                                                </>
-                                            )
-                                        )}
-                                    </div>
-                                </div>
-                            )}
+                                )}
                         </div>
 
                         {tempType === 'close' && (
@@ -1759,21 +1771,21 @@ export default function CreateProject() {
                                                     </div>
                                                 </div>
                                             ) : (
-                                                <div className="line">
-                                                    <div className="name">
-                                                        {t('project.voteTime')}
-                                                    </div>
-                                                    <div className="value">
-                                                        {new Date(
-                                                            item.vote_start_time
-                                                        ).toLocaleDateString()}{' '}
+                                                    <div className="line">
+                                                        <div className="name">
+                                                            {t('project.voteTime')}
+                                                        </div>
+                                                        <div className="value">
+                                                            {new Date(
+                                                                item.vote_start_time
+                                                            ).toLocaleDateString()}{' '}
                                                         -{' '}
-                                                        {new Date(
-                                                            item.vote_end_time
-                                                        ).toLocaleDateString()}
+                                                            {new Date(
+                                                                item.vote_end_time
+                                                            ).toLocaleDateString()}
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            )}
+                                                )}
 
                                             <div className="line">
                                                 <div className="name">
@@ -1830,19 +1842,19 @@ export default function CreateProject() {
                                     </span>
                                 </div>
                             ) : (
-                                <div
-                                    onClick={() => {
-                                        !createLoading && doApprove();
-                                    }}
-                                    className="btn-pay"
-                                >
-                                    {' '}
-                                    <span className="text">
-                                        {t('common.approve')}{' '}
-                                        {createLoading && <LoadingOutlined />}
-                                    </span>
-                                </div>
-                            )}
+                                    <div
+                                        onClick={() => {
+                                            !createLoading && doApprove();
+                                        }}
+                                        className="btn-pay"
+                                    >
+                                        {' '}
+                                        <span className="text">
+                                            {t('common.approve')}{' '}
+                                            {createLoading && <LoadingOutlined />}
+                                        </span>
+                                    </div>
+                                )}
                         </div>
                         <div>
                             {t('common.yourBalance')}{' '}
@@ -1889,15 +1901,15 @@ export default function CreateProject() {
                     <div>
                         {((currentStep > 0 && currentStep < 10) ||
                             payStatus === 'error') && (
-                            <div
-                                onClick={() => {
-                                    setCurrentStep((prev) => prev - 1);
-                                }}
-                                className="line-btn line-btn-back"
-                            >
-                                {t('common.back')}
-                            </div>
-                        )}
+                                <div
+                                    onClick={() => {
+                                        setCurrentStep((prev) => prev - 1);
+                                    }}
+                                    className="line-btn line-btn-back"
+                                >
+                                    {t('common.back')}
+                                </div>
+                            )}
                     </div>
                     {currentStep < 8 && (
                         <div>

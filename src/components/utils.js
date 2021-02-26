@@ -3,6 +3,7 @@ import { web3 } from 'components/web3'
 import mm from "components/mm";
 import { emit } from '@nextcloud/event-bus'
 import { CheckOutlined, LoadingOutlined, CloseCircleOutlined } from '@ant-design/icons';
+import { ApiSavetransaction } from '../services';
 
 const toBr = (str) => {
     if (str) {
@@ -22,7 +23,7 @@ const getTokenBalance = (balanceList, target) => {
 
 const debounce = (fn, delay, immediate) => {
     let timerId;
-    function debouncedFn(...args) {
+    function debouncedFn (...args) {
         return new Promise(resolve => {
             if (timerId !== undefined) {
                 clearTimeout(timerId);
@@ -55,23 +56,27 @@ const sleep = (ms) => {
     return new Promise(resolve => setTimeout(resolve, ms))
 }
 
-function getTransactionReceiptPromise(hash) {
+export const getTransactionReceiptPromise = (hash, id = '', submitTx = (() => { })) => {
     // here we just promisify getTransactionReceipt function for convenience
     return new Promise(((resolve, reject) => {
         web3.eth.getTransactionReceipt(hash, function (err, data) {
-            console.log(err, data, 'get receipt')
+            console.log(data, 'get receipt')
+
+            if (data) {
+                submitTx(hash, id);
+            }
             if (err !== null) reject(err);
             else resolve(data);
         });
     }));
 }
 
-const getTxReceipt = async (txHash) => {
-    const receipt = await getTransactionReceiptPromise(txHash)
+const getTxReceipt = async (txHash, submitTx = (() => { })) => {
+    const receipt = await getTransactionReceiptPromise(txHash, submitTx)
     return receipt
 }
 
-const watchTransaction = async (txHash) => {
+const watchTransaction = async (txHash, id) => {
     const actionObj = JSON.parse(localStorage.getItem('actionObj'))
     const currentAction = actionObj[txHash]
     const msgTitle = '链上确认中' || 'Waiting for confirmation'
@@ -93,6 +98,17 @@ const watchTransaction = async (txHash) => {
         if (receipt) {
             if (receipt.status) {
                 emit(txHash, true)
+
+
+                console.log(id, txHash, 'get receipt')
+                if (id) {
+                    ApiSavetransaction(txHash, id).then((res) => {
+                        console.log(res)
+                    }).catch((err) => {
+                        console.log(err)
+                    })
+                }
+
 
                 notification.success({
                     message: 'Success',
@@ -136,5 +152,5 @@ export {
     getTokenBalance,
     watchTransaction,
     getTxReceipt,
-    debounce,
+    debounce
 }
