@@ -459,7 +459,7 @@ export default function CreateProject() {
 
     const whitePaperUpload = {
         name: 'file',
-        action: 'https://mining-api.dd.finance/project/upload',
+        action: `${config[network].baseURL}/project/upload`,
         showUploadList: false,
         beforeUpload(file) {
             if (file.type !== 'application/pdf') {
