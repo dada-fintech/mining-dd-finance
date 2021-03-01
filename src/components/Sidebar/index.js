@@ -8,7 +8,7 @@ import config from 'config'
 // import axios from 'utils/axios'
 import './style.scss'
 
-export default function Sidebar(props) {
+export default function Sidebar (props) {
     const { role, myShare, refreshInvestInfo } = props
     // const [myShare, setMyShare] = useState({})
     const [actionLoading, setActionLoading] = useState(false)

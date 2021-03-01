@@ -1,16 +1,14 @@
 import { message } from 'antd';
 // import { CHAINID } from '../constants';
 import config from 'config'
-
+import { ApiSavetransaction } from '../services';
 import store from '../redux/store';
 
-const {setting} = store.getState()
+const { setting } = store.getState()
 
-export async function sendTransaction(transactionParameters, resFun, errFun) {
+export async function sendTransaction (transactionParameters, resFun, errFun, id = '') {
     try {
-
         const network = setting.network
-
         // return new Promise(async (resolve, reject) => {
         await window.ethereum
             .request({
@@ -19,6 +17,11 @@ export async function sendTransaction(transactionParameters, resFun, errFun) {
             })
             .then(async (txHash) => {
                 console.log(txHash);
+                await ApiSavetransaction.apply(txHash, id).then((res) => {
+                    console.log(res)
+                }).catch((err) => {
+                    console.log(err)
+                })
                 resFun();
             })
             .catch((err) => {

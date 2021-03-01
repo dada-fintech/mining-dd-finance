@@ -178,3 +178,11 @@ export const ApiTotalRewarded = () => {
 export const ApiDhmAvailable = () => {
     return HttpRequestAxios.get('/app/dhmavailable').then((res) => res.data);
 };
+
+/**
+ * 保存交易
+ */
+
+export const ApiSavetransaction = (tx, sid) => {
+    return HttpRequestAxios.post('/console/submit_tx', { "sid": sid, "tx": tx }).then((res) => res.data);
+};
