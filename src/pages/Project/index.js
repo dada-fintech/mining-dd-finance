@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Row, Col, Input, message, Modal, Button, Tooltip } from 'antd'
-import {
-    LoadingOutlined,
-} from '@ant-design/icons';
+import { LoadingOutlined } from '@ant-design/icons';
 import { useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import axios from 'utils/axios'
@@ -24,8 +22,9 @@ import config from 'config'
 
 import './style.scss'
 
-export default function Project() {
+export default function Project () {
     const [currentTab, setCurrentTab] = useState('process')
+    const network = useSelector(state => state.setting.network)
     const [project, setProject] = useState({ fundraising: {}, project_info: {} })
     const [lockNum, setLockedNum] = useState('')
     // const [contract, setContract] = useState('')
@@ -39,7 +38,6 @@ export default function Project() {
     const [subscribeVisible, setSubscribeVisible] = useState(false)
     const [email, setEmail] = useState('')
     const [myShare, setMyShare] = useState({})
-    const network = useSelector(state => state.setting.network)
 
     // 下一个进程是否在4天内
     // const [nextInFour, setNextInFour] = useState(false)
@@ -133,7 +131,7 @@ export default function Project() {
             setProject({
                 ...res.data,
                 percent: parseInt((res.data.fundraising.current_raised_money / res.data.fundraising.max_amount) * 100),
-                fullDesc: `https://mining-api.dd.finance/project/download/${res.data.project_info.project_uniq_id}/${res.data.project_info.white_paper.file_name}`
+                fullDesc: `${config[network].baseURL}/project/download/${res.data.project_info.project_uniq_id}/${res.data.project_info.white_paper.file_name}`
             })
             //判断下一个进程是否在4天内
             // const allFutureProcess = res.data.process.filter(item => item.status === 'Future')

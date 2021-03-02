@@ -29,3 +29,6 @@ export const EXECUTION_TIME = 15000;
 export const BSAE_API_URL = 'https://api.dhash.finance';
 export const MetaMask_CONF_URL =
     'https://http-mainnet-node.huobichain.com';
+
+export const PRO_UPLoadURL = 'https://mining-api.dd.finance/project/upload';
+export const TEST_UPLoadURL = 'https://mining-api-test.dd.finance/project/upload';

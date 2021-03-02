@@ -8,7 +8,6 @@ import { useWallet } from 'use-wallet'
 import Header from '../../components/Header'
 import { useSelector } from 'react-redux'
 import Timespan from 'components/Timespan'
-import { ApiSavetransaction } from '../../services';
 
 import moment from 'moment'
 import axios from 'utils/axios'
@@ -498,7 +497,7 @@ export default function CreateProject () {
 
     const otherUpload = {
         name: 'file',
-        action: 'https://mining-api.dd.finance/project/upload',
+        action: `${config[network].baseURL}/project/upload`,
         showUploadList: false,
         multiple: true,
         onChange (info) {

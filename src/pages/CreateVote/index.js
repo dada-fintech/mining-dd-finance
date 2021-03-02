@@ -4,16 +4,20 @@ import QuestionIcon from 'assets/question.svg'
 import { useWallet } from 'use-wallet'
 import mm from 'components/mm'
 import moment from 'moment'
+import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { PlusCircleOutlined, CloseCircleOutlined, LoadingOutlined } from '@ant-design/icons'
-
+import { TEST_UPLoadURL, PRO_UPLoadURL } from '../../constants';
 import axios from 'utils/axios'
 import { useParams } from 'react-router-dom'
 import Header from 'components/Header'
 
 import './style.scss'
 
-export default function CreateVote() {
+export default function CreateVote () {
+    const network = useSelector(state => state.setting.network)
+    console.log(network);
+
     const [currentStep, setCurrentStep] = useState(0)
     const [processList, setProcessList] = useState([])
     const [projectInfo, setProjectInfo] = useState({})
@@ -141,10 +145,10 @@ export default function CreateVote() {
 
     const otherUpload = {
         name: 'file',
-        action: 'https://mining-api.dd.finance/project/upload',
+        action: network === 'test' ? TEST_UPLoadURL : PRO_UPLoadURL,
         showUploadList: false,
         multiple: true,
-        onChange(info) {
+        onChange (info) {
             // if (info.file.status !== 'uploading') {
             //     console.log(info.file, info.fileList);
             // }

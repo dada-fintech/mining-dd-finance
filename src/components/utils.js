@@ -3,7 +3,7 @@ import { web3 } from 'components/web3'
 import mm from "components/mm";
 import { emit } from '@nextcloud/event-bus'
 import { CheckOutlined, LoadingOutlined, CloseCircleOutlined } from '@ant-design/icons';
-import { ApiSavetransaction } from '../services';
+import axios from 'utils/axios'
 
 const toBr = (str) => {
     if (str) {
@@ -97,18 +97,16 @@ const watchTransaction = async (txHash, id) => {
 
         if (receipt) {
             if (receipt.status) {
-                emit(txHash, true)
-
-
-                console.log(id, txHash, 'get receipt')
+                emit(txHash, true);
                 if (id) {
-                    ApiSavetransaction(txHash, id).then((res) => {
+                    axios.post('/console/submit_tx', { sid: id, tx: txHash }).then(res => {
                         console.log(res)
-                    }).catch((err) => {
+                    }).catch(err => {
                         console.log(err)
+                    }).finally(() => {
+                        // clearStorage()
                     })
                 }
-
 
                 notification.success({
                     message: 'Success',
