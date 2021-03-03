@@ -47,7 +47,7 @@ export default {
                 softCap: 'Softcap',
                 currentStage: 'Current Stage',
                 nextStage: 'Next Stage',
-                currentRaised: 'Current Raised',
+                currentRaised: 'Current Funding',
                 role: 'Role',
                 changePlan: 'Change Plan',
                 rulesBelow: 'Enter rules below',
@@ -509,6 +509,7 @@ export default {
             "maintenanceContent": "stay tuned",
             "v1_Estimated_RewardsToday": "Estimated Rewards Today",
             "v_amount": "{{x}}{{x1}}",
+            "Fundraising": "Fundraising in process",
         },
     },
     zh: {

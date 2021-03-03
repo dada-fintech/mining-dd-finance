@@ -8,10 +8,9 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import config from 'config'
 // import { useDispatch, useSelector } from 'react-redux'
-
 import './style.scss';
 
-export default function Header(props) {
+export default function Header (props) {
     const wallet = useWallet();
     const { t } = useTranslation();
     const { role, breadCrumb, hideAction } = props;
@@ -50,23 +49,18 @@ export default function Header(props) {
     // if(!role){
     //     role = '123'
     // }
-    const connectWallet = () =>{
-        if(window.ethereum){
+    const connectWallet = () => {
+        if (window.ethereum) {
             const configChainId = config[network].chainId
             const walletChainId = parseInt(window.ethereum.chainId)
-    
-            if(configChainId != walletChainId){
+            if (configChainId !== walletChainId) {
                 setNetworkError(chainIdMapping[configChainId])
-            }else{
-                setNetworkError('')
             }
-        
-            if(wallet && wallet.status != 'connected'){
+            if (wallet && wallet.status !== 'connected') {
                 wallet.connect();
             }
         }
     }
-
 
     useEffect(() => {
         connectWallet()
@@ -105,15 +99,15 @@ export default function Header(props) {
                                 {role === 'manager'
                                     ? t('project.role.manager')
                                     : role === 'committee'
-                                    ? t('project.role.committee')
-                                    : role === 'invester'
-                                    ? t('project.role.supporter')
-                                    : t('project.role.visitor')}
+                                        ? t('project.role.committee')
+                                        : role === 'invester'
+                                            ? t('project.role.supporter')
+                                            : t('project.role.visitor')}
                                 <div className="title">{t('common.role')}</div>
                             </div>
                         ) : (
-                            ''
-                        )}
+                                ''
+                            )}
                         {wallet.status === 'connected' ? (
                             <Tooltip title={wallet.account}>
                                 {wallet.account && (
@@ -124,16 +118,16 @@ export default function Header(props) {
                                 )}
                             </Tooltip>
                         ) : (
-                            <a
-                                className="btn-connect"
-                                onClick={() => {
-                                    connectWallet()
-                                }}
-                            >
-                                <span className="red-dot"></span>
-                                {t('common.connectWallet')}
-                            </a>
-                        )}
+                                <a
+                                    className="btn-connect"
+                                    onClick={() => {
+                                        connectWallet()
+                                    }}
+                                >
+                                    <span className="red-dot"></span>
+                                    {t('common.connectWallet')}
+                                </a>
+                            )}
                     </nav>
                 </>
             )}
@@ -148,12 +142,13 @@ export default function Header(props) {
                     <AppSidebar />
                 </Drawer>
             )}
-            {networkError && <Modal visible={true} title="Network Error" footer={null} onCancel={()=>setNetworkError('')}>
-                <div style={{color: '#15163d', marginBottom: '24px', fontSize: '16px'}}>
+
+            {networkError !== '' ? <Modal visible={true} title="Network Error" footer={null} onCancel={() => setNetworkError('')}>
+                <div style={{ color: '#15163d', marginBottom: '24px', fontSize: '16px' }}>
                     Please switch network to {networkError}
                 </div>
-                <Button style={{padding: '0 32px'}} className="btn-blue" onClick={()=>setNetworkError('')}>OK</Button>
-            </Modal>}
+                <Button style={{ padding: '0 32px' }} className="btn-blue" onClick={() => setNetworkError('')}>OK</Button>
+            </Modal> : ""}
         </header>
     );
 }

@@ -6,7 +6,7 @@
     flex-direction: column;
     justify-content: space-between;
 
-    img{
+    img {
         width: auto;
         display: inline-block;
     }
@@ -68,6 +68,22 @@
                 }
             }
 
+            span {
+                display: flex;
+                align-items: center;
+                padding: 10px 10px;
+                background: #fff;
+                cursor: pointer;
+
+                &.active {
+                    // background: url(../../assets/nav-active.svg) no-repeat;
+                    background: transparent;
+                    border-radius: 200px 0 0 200px;
+                    border-left: 14px solid #fff;
+                    margin-left: -16px;
+                }
+            }
+
             img {
                 width: 22px;
                 margin-right: 6px;
@@ -101,9 +117,20 @@
         font-size: 12px;
         margin-bottom: 12px;
 
+        span {
+            cursor: pointer;
+        }
+
         a {
             display: block;
             margin-bottom: 8px;
+        }
+
+        .flag {
+            font-size: 14px;
+            width: 24px;
+            height: 24px;
+            margin-left: 6px;
         }
     }
 
@@ -141,7 +168,7 @@
             color: #f0b90b;
         }
 
-        &.heco{
+        &.heco {
             color: #3F7FFF;
         }
 

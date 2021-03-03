@@ -11,25 +11,18 @@ import LogoBlue from 'assets/logo-blue.svg';
 import NetworkEthereum from 'assets/network-ethereum.svg';
 import NetworkBinance from 'assets/network-binance.svg';
 import NetworkHeco from 'assets/network-heco.svg';
-
-
 import SidebarLogoEther from 'assets/sidebar-logo-ether.svg';
 import SidebarLogoBinance from 'assets/sidebar-logo-binance.svg';
 import SidebarLogoHeco from 'assets/sidebar-logo-heco.svg';
-
 import CryptoMiningIcon from 'assets/sidebar/crypto-mining.svg';
 import CommunityProjectIcon from 'assets/sidebar/community-project.svg';
 import PlusIcon from 'assets/sidebar/plus.svg';
 import MiningSwapIcon from 'assets/sidebar/mining-swap.svg';
 import DashboardIcon from 'assets/sidebar/dashboard.svg';
-import BuyDHMIcon from 'assets/sidebar/buy-dhm.svg';
-import FarmingIcon from 'assets/sidebar/farming.svg';
-
 // import OverviewIcon from 'assets/sidebar/overview.svg'
 // import QuickSwapIcon from 'assets/sidebar/quick-swap.svg'
 // import GovernanceIcon from 'assets/sidebar/governance.svg'
 import BlogIcon from 'assets/sidebar/blog.svg';
-
 import Twiiter from 'assets/socials/twitter.svg';
 import Discord from 'assets/socials/discord.svg';
 import Medium from 'assets/socials/medium.svg';
@@ -37,6 +30,9 @@ import Telegram from 'assets/socials/telegram.svg';
 import Weixin from 'assets/socials/weixin.svg';
 import WeixinQR from 'assets/qr-code.jpeg';
 import Linkedin from 'assets/socials/linkedin.svg';
+
+import ChinaFlag from 'assets/chinaflag.svg';
+import UsFlag from 'assets/usflag.svg';
 
 import ClaimContractApi from '../../contract/ClaimContractApi';
 import { useWallet } from 'use-wallet';
@@ -137,31 +133,28 @@ export default function AppSidebar (props) {
                     }
                 </a>
                 <ul className="nav">
-
                     {!hideCreate && network !== 'heco' && (
                         <li>
-                            <a
-                                className={`nowrap ${
-                                    location.pathname === '/community-projects'
-                                        ? 'bottom-curve'
-                                        : ''
-                                }`}
+                            <span
+                                className={`nowrap ${location.pathname === '/community-projects'
+                                    ? 'bottom-curve'
+                                    : ''
+                                    }`}
                                 onClick={() => {
                                     setShowTemplateChoose(true);
                                 }}
                             >
                                 <img src={PlusIcon} alt="" />
                                 {t('sidebar.create')}
-                            </a>
+                            </span>
                         </li>
                     )}
-                    {network !== 'heco' &&  <li>
+                    {network !== 'heco' && <li>
                         <NavLink
-                            className={`nowrap ${
-                                location.pathname === '/projects'
-                                    ? 'bottom-curve'
-                                    : ''
-                            }`}
+                            className={`nowrap ${location.pathname === '/projects'
+                                ? 'bottom-curve'
+                                : ''
+                                }`}
                             activeClassName="active"
                             to="/community-projects"
                         >
@@ -172,15 +165,13 @@ export default function AppSidebar (props) {
 
                     {network !== 'heco' && <li>
                         <NavLink
-                            className={`nowrap ${
-                                location.pathname === '/community-projects'
-                                    ? 'top-curve'
-                                    : ''
-                            } ${
-                                location.pathname === '/buy-dhm'
+                            className={`nowrap ${location.pathname === '/community-projects'
+                                ? 'top-curve'
+                                : ''
+                                } ${location.pathname === '/buy-dhm'
                                     ? 'bottom-curve'
                                     : ''
-                            }`}
+                                }`}
                             activeClassName="active"
                             to="/projects"
                         >
@@ -225,15 +216,13 @@ export default function AppSidebar (props) {
 
                     <li>
                         <NavLink
-                            className={`nowrap ${
-                                location.pathname === '/farming-detail'
-                                    ? 'top-curve'
-                                    : ''
-                            } ${
-                                location.pathname === '/coming/dashboard'
+                            className={`nowrap ${location.pathname === '/farming-detail'
+                                ? 'top-curve'
+                                : ''
+                                } ${location.pathname === '/coming/dashboard'
                                     ? 'bottom-curve'
                                     : ''
-                            }`}
+                                }`}
                             activeClassName="active"
                             to="/coming/swap"
                         >
@@ -243,15 +232,13 @@ export default function AppSidebar (props) {
                     </li>
                     <li>
                         <NavLink
-                            className={`nowrap ${
-                                location.pathname === '/coming/swap'
-                                    ? 'top-curve'
-                                    : ''
-                            } ${
-                                location.pathname === '/blog'
+                            className={`nowrap ${location.pathname === '/coming/swap'
+                                ? 'top-curve'
+                                : ''
+                                } ${location.pathname === '/blog'
                                     ? 'bottom-curve'
                                     : ''
-                            }`}
+                                }`}
                             activeClassName="active"
                             to="/coming/dashboard"
                         >
@@ -275,10 +262,10 @@ export default function AppSidebar (props) {
 
 
                     <li>
-                        <a
+                        <span
                             className={`nowrap ${location.pathname === '/blog' ? 'top-curve' : ''
                                 }`}
-                        ></a>
+                        ></span>
                     </li>
 
 
@@ -318,37 +305,38 @@ export default function AppSidebar (props) {
                                     network === 'ethereum' ? NetworkEthereum :
                                         network === 'heco' ? NetworkHeco : NetworkBinance
                                 }
+                                alt=""
                             />
 
-                            {network !== 'ethereum' && <a
+                            {network !== 'ethereum' && <span
                                 onClick={() => { switchNetwork('ethereum') }}
                             >
-                                <img src={NetworkEthereum} />
-                            </a>}
+                                <img src={NetworkEthereum} alt="" />
+                            </span>}
 
-                            {network !== 'heco' && <a
+                            {network !== 'heco' && <span
                                 onClick={() => { switchNetwork('heco') }}
                             >
-                                <img src={NetworkHeco} />
-                            </a>}
+                                <img src={NetworkHeco} alt="" />
+                            </span>}
 
-                            {network !== 'binance' && <a
+                            {network !== 'binance' && <span
                                 onClick={() => { switchNetwork('binance') }}
                             >
-                                <img src={NetworkBinance} />
-                            </a>}
+                                <img src={NetworkBinance} alt="" />
+                            </span>}
 
                         </div>
                     )}
-                    <a
+                    <span
                         onClick={() => {
                             changeLanguage(
                                 i18n.language === 'en' ? 'zh' : 'en'
                             );
                         }}
                     >
-                        {i18n.language === 'en' ? '简体中文' : 'English'}
-                    </a>
+                        {i18n.language === 'en' ? <> English <img src={UsFlag} className="flag" alt="" /> </> : <> 简体中文 < img src={ChinaFlag} className="flag" alt="" /> </>}
+                    </span>
                     <a
                         href={
                             i18n.language === 'en'
@@ -356,6 +344,7 @@ export default function AppSidebar (props) {
                                 : 'https://doc.dd.finance'
                         }
                         target="_blank"
+                        rel="noreferrer"
                     >
                         {t('homepage.footer.documentation')}
                     </a>
@@ -363,28 +352,30 @@ export default function AppSidebar (props) {
                     <a href="mainto:media@dd.finance">media@dd.finance</a>
                 </div>
                 <div className="social-icons">
-                    <a target="_blank" href="https://twitter.com/FinanceDada">
+                    <a target="_blank" href="https://twitter.com/FinanceDada" rel="noreferrer" >
                         <img src={Twiiter} className="social-icon" alt="" />
                     </a>
-                    <a target="_blank" href="https://discord.gg/KgT7j6YvPK">
+                    <a target="_blank" href="https://discord.gg/KgT7j6YvPK" rel="noreferrer" >
                         <img src={Discord} className="social-icon" alt="" />
                     </a>
-                    <a target="_blank" href="https://ddfinance.medium.com/">
+                    <a target="_blank" href="https://ddfinance.medium.com/" rel="noreferrer" >
                         <img src={Medium} className="social-icon" alt="" />
                     </a>
                     <a
                         target="_blank"
+                        rel="noreferrer"
                         href="https://t.me/joinchat/AAAAAEVqGZbYVB7eR7qFlg"
                     >
                         <img src={Telegram} className="social-icon" alt="" />
                     </a>
-                    <a target="_blank">
+                    <span>
                         <Popover content={WeixinContent}>
                             <img src={Weixin} className="social-icon" alt="" />
                         </Popover>
-                    </a>
+                    </span>
                     <a
                         target="_blank"
+                        rel="noreferrer"
                         href="https://www.linkedin.com/company/dadafinance/"
                     >
                         <img src={Linkedin} className="social-icon" alt="" />

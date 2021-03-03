@@ -245,8 +245,8 @@ export default function Project () {
     const statusMapping = {
         'Auditing': isEn ? 'Auditing' : '委员会审核中',
         'Future': isEn ? 'Project Coming Soon' : '项目即将到来',
-        'Raising': isEn ? 'Fundraising in Prcess' : '正在筹款',
-        'PayingInsurance': isEn ? 'Depositing to the Reserve' : '支付押金',
+        'Raising': isEn ? 'In Mid of Fundraising' : '正在筹款',
+        'PayingInsurance': isEn ? 'Fundraising in Process' : '支付押金',
         'Active': isEn ? 'Active' : '进行中',
         'Rolling': isEn ? 'Voting On-going' : '正在投票',
         'AllPhasesDone': isEn ? 'Governance completed. Waiting for the Redemption' : '项目计划完成，等待获取报酬',
@@ -266,17 +266,18 @@ export default function Project () {
 
     return (<div className="project-page">
 
-        <Header role={role} breadCrumb={[t('sidebar.cryptoMining'), project.project_info.project_name]} />
+        <Header role={role} breadCrumb={[t('sidebar.communityProjects'), project.project_info.project_name]} />
         <div className="brief-info">
             <div className="title">{project.project_info.project_name}</div>
-            <div className="date">
+            {/* <div className="date">
                 {new Date(project.project_info.income_settlement_time).toLocaleDateString()}
                 <div className="hint">{t('createProject.redemptionDate')}</div>
-            </div>
+            </div> */}
             <Button className="btn-green" onClick={() => { setEmail(''); setSubscribeVisible(true) }}>{t('sidebar.subscribe')}</Button>
         </div>
+
         <Row gutter={24}>
-            <Col xs={24} md={12} lg={8} xl={4}>
+            {/* <Col xs={24} md={12} lg={8} xl={4}>
                 <Tooltip title={`${project.fundraising.expected_apy} %`}>
                     <div className="info-item">
                         <div className="value nowrap">{project.fundraising.expected_apy}%</div>
@@ -299,12 +300,12 @@ export default function Project () {
                         <div className="title">{t('common.repaymentModel')}</div>
                     </div>
                 </Tooltip>
-            </Col>
+            </Col> */}
             <Col xs={24} md={12} lg={8} xl={4}>
                 <Tooltip title={`${project.fundraising.min_amount} ${config[network].usdUnit}`}>
                     <div className="info-item">
                         <div className="value nowrap">{project.fundraising.min_amount} {config[network].usdUnit}</div>
-                        <div className="title">{t('common.softCap')}</div>
+                        <div className="title">{t('createProject.softCap')}</div>
                     </div>
                 </Tooltip>
             </Col>
@@ -312,7 +313,7 @@ export default function Project () {
                 <Tooltip title={`${project.fundraising.max_amount} ${config[network].usdUnit}`}>
                     <div className="info-item">
                         <div className="value nowrap">{project.fundraising.max_amount} {config[network].usdUnit}</div>
-                        <div className="title">{t('common.fundSize')}</div>
+                        <div className="title">{t('project.hardCap')}</div>
                     </div>
                 </Tooltip>
             </Col>
@@ -320,7 +321,7 @@ export default function Project () {
                 <Tooltip title={statusMapping[project.project_info.status]}>
                     <div className="info-item">
                         <div className="value nowrap">{statusMapping[project.project_info.status]}</div>
-                        <div className="title">{t('project.status')}</div>
+                        <div className="title">{t('Fundraising')}</div>
                     </div>
                 </Tooltip>
             </Col>
@@ -390,7 +391,7 @@ export default function Project () {
                                     {t('common.currentRaised')}:{project.fundraising.current_raised_money} {config[network].usdUnit}
                                 </div>
                                 <div>
-                                    {t('common.fundSize')}:{project.fundraising.max_amount} {config[network].usdUnit}
+                                    {t('common.fundSize')}:{project.fundraising.max_amount.toFixed(2)} {config[network].usdUnit}
                                 </div>
                             </div>
                             {/* <div className="process-tag" style={{ marginLeft: (project.percent > 50 ? (project.percent - 5) : project.percent) + '%' }}>

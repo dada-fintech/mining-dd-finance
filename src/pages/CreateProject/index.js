@@ -8,13 +8,11 @@ import { useWallet } from 'use-wallet'
 import Header from '../../components/Header'
 import { useSelector } from 'react-redux'
 import Timespan from 'components/Timespan'
-
 import moment from 'moment'
 import axios from 'utils/axios'
 import mm from 'components/mm'
 import web3 from 'components/web3'
 import config from 'config'
-
 import './style.scss'
 
 export default function CreateProject () {
@@ -24,15 +22,14 @@ export default function CreateProject () {
     const [fundraising, setFundraising] = useState({})
     const [payStatus, setPayStatus] = useState('')
     const [createLoading, setCreateLoading] = useState(false)
-
     const [processList, setProcessList] = useState([{}, {}])
     const [approveBalance, setApproveBalance] = useState(0)
     const [dadaApproved, setDadaApproved] = useState(false)
     const [callData, setCallData] = useState(false)
     const [USDTBalance, setUSDTBalance] = useState(0)
-    const [raisingMethod, setRaisingMethod] = useState('2')
-    const [repayMethod, setRepayMethod] = useState('1')
-    const [withdrawMethod, setWithdrawMethod] = useState('2')
+    const [raisingMethod, setRaisingMethod] = useState(localStorage.getItem('raisingMethod') || '2')
+    const [repayMethod, setRepayMethod] = useState(localStorage.getItem('repayMethod') || '1')
+    const [withdrawMethod, setWithdrawMethod] = useState(localStorage.getItem('withdrawMethod') || '2')
 
     const [success, setSuccess] = useState({}) // 创建结果
 
@@ -108,9 +105,9 @@ export default function CreateProject () {
         const projectInfo = JSON.parse(localStorage.getItem('projectInfo'))
         const fundraising = JSON.parse(localStorage.getItem('fundraising'))
         const processList = JSON.parse(localStorage.getItem('processList'))
-        const raisingMethod = JSON.parse(localStorage.getItem('raisingMethod'))
-        const repayMethod = JSON.parse(localStorage.getItem('repayMethod'))
-        const withdrawMethod = JSON.parse(localStorage.getItem('withdrawMethod'))
+        // const raisingMethod = JSON.parse(localStorage.getItem('raisingMethod'))
+        // const repayMethod = JSON.parse(localStorage.getItem('repayMethod'))
+        // const withdrawMethod = JSON.parse(localStorage.getItem('withdrawMethod'))
 
         if (projectInfo) {
             setProjectInfo(projectInfo)
@@ -165,14 +162,14 @@ export default function CreateProject () {
         }
     }
 
-    useEffect(() => {
-        localStorage.setItem('projectInfo', JSON.stringify(projectInfo))
-        localStorage.setItem('fundraising', JSON.stringify(fundraising))
-        localStorage.setItem('processList', JSON.stringify(processList))
-        localStorage.setItem('raisingMethod', raisingMethod)
-        localStorage.setItem('repayMethod', repayMethod)
-        localStorage.setItem('withdrawMethod', withdrawMethod)
-    }, [fundraising, processList, projectInfo, raisingMethod, repayMethod, withdrawMethod])
+    // useEffect(() => {
+    //     localStorage.setItem('projectInfo', JSON.stringify(projectInfo))
+    //     localStorage.setItem('fundraising', JSON.stringify(fundraising))
+    //     localStorage.setItem('processList', JSON.stringify(processList))
+    //     localStorage.setItem('raisingMethod', raisingMethod)
+    //     localStorage.setItem('repayMethod', repayMethod)
+    //     localStorage.setItem('withdrawMethod', withdrawMethod)
+    // }, [fundraising, processList, projectInfo, raisingMethod, repayMethod, withdrawMethod])
 
     const changeProjectInfo = (name, value) => {
         setProjectInfo(prev => {
@@ -567,14 +564,13 @@ export default function CreateProject () {
                     templateId = config[network].templateIds[3]
                 }
             }
-            finalURL += `/project/create-project/${templateId}`
+            finalURL += `/project/create-project/${templateId}`;
         }
 
-        finalInfo.fundraising.expected_apy = String(finalInfo.fundraising.expected_apy)
-        finalInfo.fundraising.min_amount = String(finalInfo.fundraising.min_amount)
-        finalInfo.fundraising.max_amount = String(finalInfo.fundraising.max_amount)
-
-        finalInfo.project_info.creater_addr = wallet.account
+        finalInfo.fundraising.expected_apy = String(finalInfo.fundraising.expected_apy || 0)
+        finalInfo.fundraising.min_amount = String(finalInfo.fundraising.min_amount || 0)
+        finalInfo.fundraising.max_amount = String(finalInfo.fundraising.max_amount || 0)
+        finalInfo.project_info.creater_addr = wallet.account || ''
 
         axios.post(finalURL, finalInfo).then(res => {
             console.log(res)
@@ -591,13 +587,14 @@ export default function CreateProject () {
     }
 
     const clearStorage = () => {
-        localStorage.setItem('projectInfo', null)
-        localStorage.setItem('fundraising', null)
-        localStorage.setItem('processList', null)
-        localStorage.setItem('currentStep', null)
-        localStorage.setItem('raisingMethod', null)
-        localStorage.setItem('repayMethod', null)
-        localStorage.setItem('withdrawMethod', null)
+        localStorage.setItem('projectInfo', null);
+        localStorage.setItem('fundraising', null);
+        localStorage.setItem('processList', null);
+        localStorage.setItem('currentStep', null);
+
+        localStorage.setItem('raisingMethod', '2');
+        localStorage.setItem('repayMethod', '1');
+        localStorage.setItem('withdrawMethod', '2');
     }
 
     const doApprove = async () => {
@@ -625,9 +622,7 @@ export default function CreateProject () {
             to: callData[1].contract_addr,
             data: callData[1].call_data
         }
-        setCreateLoading(true)
-
-        console.log(success.sid, 'get receipt')
+        setCreateLoading(true);
         mm.sendTransaction(
             txnParams,
             'Paying',
@@ -636,10 +631,8 @@ export default function CreateProject () {
         ).then(async res => {
             setCreateLoading(false)
             console.log(res);
-
-
             if (res) {
-                clearStorage()
+                clearStorage();
                 setPayStatus('success')
                 setCurrentStep(prev => prev + 1)
             } else {
@@ -1145,6 +1138,8 @@ export default function CreateProject () {
                                     {t('createProject.selectFundraisingMethod')}
                                 </div>
                                 <Radio.Group
+                                    defaultValue="2"
+                                    defaultChecked
                                     className="btn-tabs"
                                     value={raisingMethod}
                                     onChange={(e) =>
@@ -1319,6 +1314,7 @@ export default function CreateProject () {
                         <div className="form-item">
                             <div className="label ">{t('common.apy')}</div>
                             <InputNumber
+                                min="0"
                                 formatter={(value) => `${value ? value : 0} %`}
                                 parser={(value) => parseInt(value)}
                                 value={fundraising.expected_apy}
@@ -1659,7 +1655,7 @@ export default function CreateProject () {
                             <div className="line">
                                 <div className="name">{t('common.apy')}</div>
                                 <div className="value">
-                                    {fundraising.expected_apy}%
+                                    {fundraising.expected_apy || 0}%
                                 </div>
                             </div>
                             <div className="line">
