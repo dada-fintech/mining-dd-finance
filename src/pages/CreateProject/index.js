@@ -841,11 +841,13 @@ export default function CreateProject () {
                             <img
                                 src="/govern-rule-img-en.svg"
                                 className="govern-rule-img"
+                                alt=""
                             />
                         ) : (
                                 <img
                                     src="/govern-rule-img.svg"
                                     className="govern-rule-img"
+                                    alt=""
                                 />
                             )}
                         <Row
@@ -956,6 +958,7 @@ export default function CreateProject () {
                                                                 src={
                                                                     QuestionIcon
                                                                 }
+                                                                alt=""
                                                             />
                                                         </Tooltip>
                                                     </div>
@@ -1010,6 +1013,7 @@ export default function CreateProject () {
                                                                     src={
                                                                         QuestionIcon
                                                                     }
+                                                                    alt=""
                                                                 />
                                                             </Tooltip>
                                                         </div>
@@ -1071,6 +1075,7 @@ export default function CreateProject () {
                                                         <img
                                                             className="question-icon"
                                                             src={QuestionIcon}
+                                                            alt=""
                                                         />
                                                     </Tooltip>
                                                 </div>
@@ -1353,7 +1358,7 @@ export default function CreateProject () {
                                     <Tooltip
                                         title={t('createProject.softCapHover')}
                                     >
-                                        <img className="question-icon" src={QuestionIcon} />
+                                        <img className="question-icon" src={QuestionIcon} alt="" />
                                     </Tooltip>
                                 </div>
                                 <Slider

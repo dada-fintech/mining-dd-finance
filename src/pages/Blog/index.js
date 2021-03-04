@@ -89,7 +89,7 @@ const blogList = [
     },
 ]
 
-export default function Blog() {
+export default function Blog () {
     return (<div className={`blog-page`}>
 
         <Header hideAction={true} />
@@ -97,7 +97,7 @@ export default function Blog() {
         <div className="page-desc">
             News, stories, and announcements from DADA.
                     </div>
-        <Row gutter={{lg: 44}}>
+        <Row gutter={{ lg: 44 }}>
             <Col xs={24} lg={19}>
                 <div className="article-list">
                     {blogList.map((item, index) => (
@@ -119,17 +119,17 @@ export default function Blog() {
             </Col>
             <Col xs={0} lg={5}>
                 <div className="media-list">
-                    <a href="https://www.chainnews.com/u/785055704172.htm" target="_blank">
-                        <img src={MediaChainnews} />
+                    <a href="https://www.chainnews.com/u/785055704172.htm" target="_blank" rel="noreferrer">
+                        <img src={MediaChainnews} alt="" />
                     </a>
-                    <a href="https://www.odaily.com/post/5160033" target="_blank">
-                        <img src={MediaOdaily} />
+                    <a href="https://www.odaily.com/post/5160033" target="_blank" rel="noreferrer">
+                        <img src={MediaOdaily} alt="" />
                     </a>
-                    <a href="https://www.theblockcrypto.com/post/84781/bulk-preorders-bitcoin-miners-spring-2021" target="_blank">
-                        <img src={MediaTheblock} />
+                    <a href="https://www.theblockcrypto.com/post/84781/bulk-preorders-bitcoin-miners-spring-2021" target="_blank" rel="noreferrer">
+                        <img src={MediaTheblock} alt="" />
                     </a>
-                    <a href="https://www.sosob.com/hot/26028.html" target="_blank">
-                        <img src={MediaSosob} />
+                    <a href="https://www.sosob.com/hot/26028.html" target="_blank" rel="noreferrer">
+                        <img src={MediaSosob} alt="" />
                     </a>
                 </div>
             </Col>

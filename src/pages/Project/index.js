@@ -19,7 +19,6 @@ import Countdown from 'components/Countdown'
 import config from 'config'
 // import { toBr } from 'components/utils'
 // import Timer from 'react-compound-timer'
-
 import './style.scss'
 
 export default function Project () {
@@ -46,13 +45,14 @@ export default function Project () {
     const wallet = useWallet()
     const { id } = useParams()
     const { t, i18n } = useTranslation()
-    useEffect(async () => {
+    useEffect(() => {
         getInfo()
         // committee： 委员会成员，审核项目
         // manager： 理事会，有权限去更改计划
         // invester： 普通投资者
+        // other code
         if (wallet.account) {
-            getUserInvest()
+            getUserInvest();
             axios.post('/project/user-role', {
                 project_uniq_id: id,
                 user_addr: wallet.account
@@ -61,7 +61,8 @@ export default function Project () {
                 setRole(role)
             })
         }
-    }, [wallet.account])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [wallet.account, id])
 
     useEffect(() => {
         // 这里计算倒计时时间
@@ -357,7 +358,7 @@ export default function Project () {
                             </div>
                         </Row>}
 
-                        {project.project_info.status === 'Active' && role === 'manager' && project.fundraising.money_left > 0 && (project.project_info.template_id == config[network].templateIds[0] || project.project_info.template_id == config[network].templateIds[2]) && <Row>
+                        {project.project_info.status === 'Active' && role === 'manager' && project.fundraising.money_left > 0 && (project.project_info.template_id === config[network].templateIds[0] || project.project_info.template_id == config[network].templateIds[2]) && <Row>
                             <div className="handle-area">
                                 <div className="btn-action" onClick={() => { doAsk() }}><span>发起请款</span></div>
                             </div>

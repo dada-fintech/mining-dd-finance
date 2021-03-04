@@ -11,7 +11,7 @@ import './style.scss'
 import LogoBlue from "../../assets/logo-blue.svg";
 
 export default function ProjectFooter () {
-    const { t } = useTranslation()
+    const { t } = useTranslation();
     const weixinContent = (<img src={WeixinQR} style={{ width: '140px' }} alt="" />)
 
     return (<div className="project-footer">
@@ -44,11 +44,11 @@ export default function ProjectFooter () {
                         <a target="_blank" href="https://t.me/joinchat/AAAAAEVqGZbYVB7eR7qFlg" rel="noreferrer">
                             <img src={Telegram} className="social-icon" alt="" />
                         </a>
-                        <a target="_blank" rel="noreferrer">
+                        <span>
                             <Popover content={weixinContent}>
                                 <img src={Weixin} className="social-icon" alt="" />
                             </Popover>
-                        </a>
+                        </span>
                     </div>
                 </Col>
 

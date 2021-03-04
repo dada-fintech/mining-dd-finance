@@ -5,21 +5,20 @@ import { Input } from 'antd'
 
 import './style.scss'
 
-export default function Timespan(props) {
+export default function Timespan (props) {
     const { t } = useTranslation()
-    const { fieldChange, timestamp } = props
+    const { fieldChange } = props;
     const [days, setDays] = useState('')
     const [hours, setHours] = useState('')
     const [minutes, setMinutes] = useState('')
     const [seconds, setSeconds] = useState('')
 
-    useEffect(()=>{
+    useEffect(() => {
         //todo, 初始化数据
-
     }, [])
 
     useEffect(() => {
-        let finalTime = 0
+        let finalTime = 0;
         if (days) {
             finalTime += days * 24 * 60 * 60 * 1000
         }
@@ -32,13 +31,15 @@ export default function Timespan(props) {
         if (seconds) {
             finalTime += seconds * 1000
         }
-        fieldChange(finalTime)
+        // other code
+        fieldChange(finalTime);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [days, hours, minutes, seconds])
 
 
     const timeChange = (value, field) => {
         const isClear = !value
-        const parsedValue = isClear ? '' : parseInt(value)
+        const parsedValue = isClear ? '' : parseInt(value);
 
         if (isClear || Number.isInteger(parseInt(value))) {
             switch (field) {
@@ -50,6 +51,8 @@ export default function Timespan(props) {
                     (isClear || parsedValue < 60) && setMinutes(parsedValue); break;
                 case 'seconds':
                     (isClear || parsedValue < 60) && setSeconds(parsedValue); break;
+                default:
+                    return false;
             }
         }
     }

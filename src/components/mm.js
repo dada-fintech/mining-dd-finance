@@ -5,7 +5,7 @@ import config from 'config'
 import store from '../redux/store';
 const { setting } = store.getState();
 
-async function sendTransaction (transactionParameters, desc, approvedActionParam, id = '') {
+const sendTransaction = async (transactionParameters, desc, approvedActionParam, id = '') => {
     // approvedActionParam will be called when approvement is approved
     const network = setting.network;
     return new Promise(async (resolve, reject) => {
@@ -44,7 +44,5 @@ async function sendTransaction (transactionParameters, desc, approvedActionParam
 
 
 
-export default {
-    sendTransaction
-}
+export default { sendTransaction }
 

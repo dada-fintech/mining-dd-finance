@@ -3,9 +3,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     .logo {
         width: 80px;
     }
+
     .mobile-menu {
         display: none;
     }
@@ -19,62 +21,78 @@
         padding: 0 32px;
         border-radius: 5px;
     }
+
     nav {
         display: flex;
         align-items: center;
+
         .role {
             display: inline-block;
             font-size: 16px;
             margin-left: 16px;
             line-height: 1;
             text-align: center;
+
             .title {
                 font-size: 12px;
                 margin-top: 4px;
                 color: #9088a1;
             }
         }
-        a {
+
+        span {
             font-size: 16px;
             color: #000;
             font-weight: 800;
             vertical-align: middle;
             margin-left: 16px;
             padding: 8px 4px;
+            cursor: pointer;
         }
     }
+
     @media screen and (max-width: 992px) {
         .mobile-menu {
             display: block;
             font-size: 24px;
         }
     }
+
     @media screen and (max-width: 768px) {
         .main-breadcrumb {
             display: none;
         }
+
         .container {
             width: 98%;
         }
+
         .logo {
             width: 52px;
         }
+
         nav {
             text-align: right;
-            a {
+
+            span {
                 font-size: 14px;
                 margin-left: 8px;
+                cursor: pointer;
+
                 &:hover {
                     font-size: 14px;
                 }
+
                 .en & {
                     font-size: 12px;
                     margin-left: 4px;
                 }
             }
+
             .hint {
                 display: none;
             }
+
             .mobile-hint {
                 display: block;
             }

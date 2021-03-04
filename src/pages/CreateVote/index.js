@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Row, Col, Input, Upload, message, DatePicker, InputNumber, Popconfirm, Tooltip, notification } from 'antd'
+import { Button, Input, Upload, message, DatePicker, InputNumber, Popconfirm, Tooltip, notification } from 'antd'
 import QuestionIcon from 'assets/question.svg'
 import { useWallet } from 'use-wallet'
 import mm from 'components/mm'
@@ -21,13 +21,13 @@ export default function CreateVote () {
     const [currentStep, setCurrentStep] = useState(0)
     const [processList, setProcessList] = useState([])
     const [projectInfo, setProjectInfo] = useState({})
-    const [fundraising, setFundraising] = useState({})
+    // const [fundraising, setFundraising] = useState({})
     const [description, setDescription] = useState('')
     const [changeLoading, setChangeLoading] = useState(false)
     const wallet = useWallet()
 
     const { t, i18n } = useTranslation()
-    const { id } = useParams()
+    const { id } = useParams();
 
     const isEn = i18n.language === 'en'
 
@@ -53,9 +53,9 @@ export default function CreateVote () {
             }
             setProcessList(res.data.process)
             setProjectInfo(res.data.project_info)
-            setFundraising(res.data.fundraising)
+            // setFundraising(res.data.fundraising)
         })
-    }, [])
+    }, [id])
 
     const changeProjectInfo = (name, value) => {
         setProjectInfo(prev => {
@@ -227,7 +227,7 @@ export default function CreateVote () {
                 </div>
                 <div className="confirm-box">
                     <div className="form-item">
-                        <div className="label">{t('createVote.votingPeriod')} <Tooltip title="投票期限无法更改，合约创建时开始生效。公示期：24小时，投票期：24小时-96小时。"><img className="question-icon" src={QuestionIcon} /></Tooltip></div>
+                        <div className="label">{t('createVote.votingPeriod')} <Tooltip title="投票期限无法更改，合约创建时开始生效。公示期：24小时，投票期：24小时-96小时。"><img className="question-icon" src={QuestionIcon} alt="" /></Tooltip></div>
                         <div>
                             {moment().add(1, 'days').format('MMMM Do YYYY')} - {moment().add(4, 'days').format('MMMM Do YYYY')}
                         </div>
@@ -302,7 +302,7 @@ export default function CreateVote () {
                 <div className="h1">{t('createVote.mainTitle')}</div>
                 <div className="confirm-box">
                     <div className="form-item">
-                        <div className="label">{t('createVote.votingPeriod')} <Tooltip title="投票期限无法更改，合约创建时开始生效。公示期：24小时，投票期：24小时-96小时。"><img className="question-icon" src={QuestionIcon} /></Tooltip></div>
+                        <div className="label">{t('createVote.votingPeriod')} <Tooltip title="投票期限无法更改，合约创建时开始生效。公示期：24小时，投票期：24小时-96小时。"><img className="question-icon" src={QuestionIcon} alt="" /></Tooltip></div>
                         <div>{moment().add(1, 'days').format('MMMM Do YYYY')} - {moment().add(4, 'days').format('MMMM Do YYYY')}</div>
                     </div>
                     <div className="form-item">
@@ -359,7 +359,7 @@ export default function CreateVote () {
                 {currentStep < 2 && <div>
                     <div onClick={() => { goNextStep() }} className="line-btn line-btn-next">{t('common.next')}</div>
                 </div>}
-                {currentStep == 2 && <div>
+                {currentStep === 2 && <div>
                     <div onClick={() => { !changeLoading && confirmInfo() }} className="btn-confirm"><span className="text">{t('common.confirmInfo')} {changeLoading && <LoadingOutlined />}</span> </div>
                     {/* <span className="hint hint-gasfee">{t('common.gasFeeHint')}</span> */}
                 </div>}

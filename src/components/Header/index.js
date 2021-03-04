@@ -63,9 +63,11 @@ export default function Header (props) {
     }
 
     useEffect(() => {
+        // other code
         connectWallet()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-    
+
     return (
         <header className="header">
             <MenuOutlined
@@ -111,14 +113,14 @@ export default function Header (props) {
                         {wallet.status === 'connected' ? (
                             <Tooltip title={wallet.account}>
                                 {wallet.account && (
-                                    <a className="btn-connect">
+                                    <span className="btn-connect">
                                         <span className="green-dot"></span>
                                         {t('common.walletConnected')}
-                                    </a>
+                                    </span>
                                 )}
                             </Tooltip>
                         ) : (
-                                <a
+                                <span
                                     className="btn-connect"
                                     onClick={() => {
                                         connectWallet()
@@ -126,7 +128,7 @@ export default function Header (props) {
                                 >
                                     <span className="red-dot"></span>
                                     {t('common.connectWallet')}
-                                </a>
+                                </span>
                             )}
                     </nav>
                 </>

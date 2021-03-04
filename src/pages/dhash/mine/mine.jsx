@@ -9,30 +9,10 @@ import InputBoxMount from '../components/InputaMount';
 import UnlockWalletpage from '../components/UnlockWallet/UnlockWalletpage.jsx';
 import { useWallet } from 'use-wallet';
 import UserAddress from 'components/UserAddress';
-import {
-    contractTransaction,
-    checkApprove,
-} from '../../../utils/ContractTransaction.js';
+import { contractTransaction, checkApprove } from '../../../utils/ContractTransaction.js';
 import * as Tools from '../../../utils/Tools';
-import {
-    ApiAppStake,
-    ApiAppWithdraw,
-    ApiAppClaim,
-    ApiAppTotalTakes,
-    ApiToClaimBalances,
-    ApiAppUserBalances,
-    ApiAppSupply,
-    ApiLatestepochReward,
-    ApiUserStaked,
-    ApiAppSellprice,
-    ApiTotalRewarded,
-    ApiAppTotalBurnt,
-} from '../../../services/index.js';
-import {
-    OFFICIAL_SYMBOL,
-    EXECUTION_TIME,
-    DEFAULT_CURRENT_PRICE
-} from '../../../constants';
+import { ApiAppStake, ApiAppWithdraw, ApiAppClaim, ApiAppTotalTakes, ApiToClaimBalances, ApiAppUserBalances, ApiAppSupply, ApiLatestepochReward, ApiUserStaked, ApiAppSellprice, ApiTotalRewarded, ApiAppTotalBurnt } from '../../../services/index.js';
+import { OFFICIAL_SYMBOL, EXECUTION_TIME, DEFAULT_CURRENT_PRICE } from '../../../constants';
 import BuyModal from '../components/ConfModal';
 import './mine.scss';
 import store from '../../../redux/store';
@@ -54,10 +34,7 @@ const Mine = () => {
     const [userStaked, setUStaked] = useState(0); // 当前用户的质押量
     const [rewardToClaim, setRewardToClaim] = useState(0); // 用户可领取的奖励
     const [btcInfo, setBtcInfo] = useState({}); // BTC当日价格 昨日分发BTC
-    const [showBtcInfoErr, setShowBtcInfoErr] = useState({
-        code: 200,
-        msg: '',
-    }); // BTC当日价格 昨日分发BTC
+    const [showBtcInfoErr, setShowBtcInfoErr] = useState({ code: 200, msg: '' }); // BTC当日价格 昨日分发BTC
     const [currentPrice, setCurrentPrice] = useState(DEFAULT_CURRENT_PRICE); // 当前价格
     const [disabled, setDisabled] = useState(true); // 按钮状态
     const [totalRewarded, setTotalRewarded] = useState(0); // 全网总奖励
@@ -561,7 +538,7 @@ const Mine = () => {
                             )}
                         {account && <UserAddress address={account} />}
                         <div className="farming-top">
-                            <img src={FarmerIcon} />
+                            <img src={FarmerIcon} alt="" />
                             <div className="desc">{t('v1_EARN_wBTC', { x: Config[setting.network].REWARD_SYMBOL || 'wBTC' })}</div>
                         </div>
 
@@ -620,7 +597,7 @@ const Mine = () => {
                                                 {t('v1_APY')}
                                             </div>
                                         </div>
-                                        <img src={BTCIcon} className="icon" />
+                                        <img src={BTCIcon} className="icon" alt="" />
                                         <div className="amount">
                                             {Tools.toThousands(
                                                 Tools.fmtDec(rewardToClaim, 8) || 0

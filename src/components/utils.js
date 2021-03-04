@@ -14,7 +14,7 @@ const toBr = (str) => {
 const getTokenBalance = (balanceList, target) => {
     let result = 0
     balanceList.forEach((balance) => {
-        if (balance.symbol == target) {
+        if (balance.symbol === target) {
             result = balance.balance / Math.pow(10, balance.decimals);
         }
     });

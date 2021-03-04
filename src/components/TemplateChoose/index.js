@@ -51,9 +51,9 @@ export default function TemplateChoose (props) {
                         <div className="type">
                             {t('common.standard')}
                         </div>
-                        <a onClick={() => goPage('close')}>
+                        <span onClick={() => goPage('close')}>
                             <Button className="btn-blue">{t('template.select')}</Button>
-                        </a>
+                        </span>
                     </div>
                     <div className="desc">
                         {t('template.close.desc')}

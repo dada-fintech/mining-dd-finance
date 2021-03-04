@@ -240,7 +240,7 @@ export default function Projects () {
                 </div>
             )
             }
-
+            
             {projectList && <div className="project-list">
                 <Row gutter={28}>
                     {projectList &&
