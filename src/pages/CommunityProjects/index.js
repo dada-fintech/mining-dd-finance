@@ -11,39 +11,40 @@ import './style.scss';
 
 export default function Projects () {
     // const wallet = useWallet()
+    const { t } = useTranslation();
     const [projectList, setProjectList] = useState([]);
-    const projectList1 = [
-        {
-            project_name: 'Parisian apartment in Arr 10',
-            project_profile:
-                'This beautiful apartment is 96 m2. The flat is very luminous, calm and has 2 different balconies. There is also a separate kitchen fully equipped, one restroom and an independent cabinets.',
-            raise_start_time: 1639118700000,
-            project_end_time: 1639377900000,
-            img: '/img/projects/2.png',
-        },
-        {
-            project_name: 'Mall in Abuja',
-            project_profile:
-                'The next flagship mall project in Abuja. This covers 20.000 square meters of area, and the mall will attract 200 luxury stores from all over the world to take residence in the Mall. The life span of the project would be ... Read More',
-            raise_start_time: 1609639200000,
-            project_end_time: 1610503200000,
-            img: '/img/projects/3.png',
-        },
-        {
-            project_name: 'Dubai Skyscrapper Office Space',
-            project_profile:
-                'Office space in the hottest area of Dubai for sale. 2.000 square meters in total. It can be divided into 10 offices with individual ventilation... Read More',
-            raise_start_time: 1609490700000,
-            project_end_time: 1609663500000,
-            img: '/img/projects/4.png',
-        },
-    ]
+    // const projectList1 = [
+    //     {
+    //         project_name: 'Parisian apartment in Arr 10',
+    //         project_profile:
+    //             'This beautiful apartment is 96 m2. The flat is very luminous, calm and has 2 different balconies. There is also a separate kitchen fully equipped, one restroom and an independent cabinets.',
+    //         raise_start_time: 1639118700000,
+    //         project_end_time: 1639377900000,
+    //         img: '/img/projects/2.png',
+    //     },
+    //     {
+    //         project_name: 'Mall in Abuja',
+    //         project_profile:
+    //             'The next flagship mall project in Abuja. This covers 20.000 square meters of area, and the mall will attract 200 luxury stores from all over the world to take residence in the Mall. The life span of the project would be ... Read More',
+    //         raise_start_time: 1609639200000,
+    //         project_end_time: 1610503200000,
+    //         img: '/img/projects/3.png',
+    //     },
+    //     {
+    //         project_name: 'Dubai Skyscrapper Office Space',
+    //         project_profile:
+    //             'Office space in the hottest area of Dubai for sale. 2.000 square meters in total. It can be divided into 10 offices with individual ventilation... Read More',
+    //         raise_start_time: 1609490700000,
+    //         project_end_time: 1609663500000,
+    //         img: '/img/projects/4.png',
+    //     },
+    // ]
     // const [allProjects, setAllProjects] = useState([])
     // const network = useSelector(state => state.setting.network)
 
     const [featuredProject, setFeaturedProject] = useState({});
-    const [featuredCountdown, setFeaturedCountdown] = useState(new Date('2021-02-12').valueOf() - new Date().valueOf());
-
+    // const [featuredCountdown, setFeaturedCountdown] = useState(new Date('2021-02-12').valueOf() - new Date().valueOf());
+    const featuredCountdown = new Date('2021-02-12').valueOf() - new Date().valueOf();
     const initializeProject = {
         // project_name: 'SUPERPOWERS FOR MEDICAL PRACTIONERS',
         // project_profile:
@@ -51,7 +52,7 @@ export default function Projects () {
         img: '/img/projects/11.png',
     }
 
-    const { i18n, t } = useTranslation();
+
 
     // const isEn = i18n.language === 'en'
     // const statusMapping = {
@@ -132,6 +133,9 @@ export default function Projects () {
             // } else {
             //     setFeaturedProject('')
             // }
+        }).catch((err) => {
+            console.log(err);
+            setProjectList([]);
         })
     }, []);
 
@@ -240,7 +244,7 @@ export default function Projects () {
                 </div>
             )
             }
-            
+
             {projectList && <div className="project-list">
                 <Row gutter={28}>
                     {projectList &&

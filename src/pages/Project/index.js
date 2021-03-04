@@ -92,7 +92,7 @@ export default function Project () {
             }
         }
         if (status === 'AllPhaseDone') {
-            result = project.project_info.income_settlement_time - dateNow
+            result = project.project_info.income_settlement_time - dateNow;
             nextStatusValue = 'Repaying'
         }
         if (status === 'ReplanNoticing') {

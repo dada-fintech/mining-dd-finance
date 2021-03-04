@@ -96,22 +96,23 @@ export default function Blog () {
         <div className="page-title">DADA Blog</div>
         <div className="page-desc">
             News, stories, and announcements from DADA.
-                    </div>
+        </div>
+
         <Row gutter={{ lg: 44 }}>
             <Col xs={24} lg={19}>
                 <div className="article-list">
                     {blogList.map((item, index) => (
                         <div key={index} className="article-item">
-                            <a target="_blank" className="title" href={item.link}>{item.title}</a>
+                            <a target="_blank" rel="noreferrer" className="title" href={item.link}>{item.title}</a>
                             <div className="main-text">
-                                {item.img && <img src={item.img} />}
+                                {item.img && <img src={item.img} alt="" />}
                                 <div className="text">
                                     {item.desc}
                                 </div>
                             </div>
                             <div className="source">
                                 From {mediaMapping[item.source] && mediaMapping[item.source].link}
-                                {mediaMapping[item.source] && mediaMapping[item.source].img && <img src={mediaMapping[item.source].img} />}
+                                {mediaMapping[item.source] && mediaMapping[item.source].img && <img src={mediaMapping[item.source].img} alt="" />}
                             </div>
                         </div>
                     ))}

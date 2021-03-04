@@ -46,11 +46,12 @@ export default function Project () {
     const wallet = useWallet()
     const { id } = useParams()
     const { t, i18n } = useTranslation()
-    useEffect(async () => {
-        getInfo()
+    useEffect(() => {
+        getInfo();
         // committee： 委员会成员，审核项目
         // manager： 理事会，有权限去更改计划
         // invester： 普通投资者
+        // other code
         if (wallet.account) {
             getUserInvest()
             axios.post('/project/user-role', {
@@ -61,6 +62,7 @@ export default function Project () {
                 setRole(role)
             })
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [wallet.account])
 
     useEffect(() => {
