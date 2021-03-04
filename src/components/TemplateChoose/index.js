@@ -7,9 +7,9 @@ import TimeIcon from 'assets/time.svg'
 // import i18n from 'i18next'
 import './style.scss'
 
-export default function TemplateChoose(props) {
+export default function TemplateChoose (props) {
     const { t, i18n } = useTranslation()
-    const history = useHistory()
+    const history = useHistory();
     const { onCancel } = props
     const clearStorage = () => {
         localStorage.setItem('projectInfo', null)
@@ -22,8 +22,8 @@ export default function TemplateChoose(props) {
     }
 
     const goPage = (tempType) => {
-        clearStorage()
-        onCancel()
+        clearStorage();
+        onCancel();
         history.push(`/create-project/${tempType}`)
     }
 
@@ -36,9 +36,9 @@ export default function TemplateChoose(props) {
                         <div className="type">
                             {t('common.customizable')}
                         </div>
-                        <a onClick={() => goPage('open')}>
+                        <span onClick={() => goPage('open')}>
                             <Button className="btn-blue">{t('template.select')}</Button>
-                        </a>
+                        </span>
                     </div>
                     <div className="desc">
                         {t('template.open.desc')}
@@ -70,7 +70,7 @@ export default function TemplateChoose(props) {
                             <div className="title">
                                 {t('template.fundraisingRules')}
                             </div>
-                            <img src={TimeIcon} />
+                            <img src={TimeIcon} alt="" />
                             <div className="text">
                                 {t('template.open.1')}
                             </div>
@@ -79,7 +79,7 @@ export default function TemplateChoose(props) {
                             <div className="title">
                                 {t('template.unlockRules')}
                             </div>
-                            <img src={TimeIcon} />
+                            <img src={TimeIcon} alt="" />
                             <div className="text">
                                 {t('template.open.2')}
                             </div>
@@ -88,7 +88,7 @@ export default function TemplateChoose(props) {
                             <div className="title">
                                 {t('template.redemptionRules')}
                             </div>
-                            <img src={TimeIcon} />
+                            <img src={TimeIcon} alt="" />
                             <div className="text">
                                 {t('template.open.3')}
                             </div>
@@ -101,7 +101,7 @@ export default function TemplateChoose(props) {
                             {/* <div className="title">
                                 {t('template.fundraisingRules')}
                             </div> */}
-                            <img src={DoubleCheckIcon} />
+                            <img src={DoubleCheckIcon} alt="" />
                             <div className="text">
                                 {t('template.close.1')}
                             </div>
@@ -110,20 +110,19 @@ export default function TemplateChoose(props) {
                             {/* <div className="title">
                                 {t('template.unlockRules')}
                             </div> */}
-                            <img src={DoubleCheckIcon} />
+                            <img src={DoubleCheckIcon} alt="" />
                             <div className="text">
                                 {t('template.close.2')}
-
                             </div>
                         </div>
+
                         <div className="line">
                             {/* <div className="title">
                                 {t('template.redemptionRules')}
                             </div> */}
-                            <img src={DoubleCheckIcon} />
+                            <img src={DoubleCheckIcon} alt="" />
                             <div className="text">
                                 {t('template.close.3')}
-
                             </div>
                         </div>
                     </div>

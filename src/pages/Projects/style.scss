@@ -3,31 +3,35 @@
         padding: 32px 48px;
         margin: 40px auto;
         border-radius: 12px;
-        background: radial-gradient(
-                96.13% 96.13% at 51.49% 100%,
+        background: radial-gradient(96.13% 96.13% at 51.49% 100%,
                 rgba(0, 255, 71, 0.07) 0%,
-                rgba(255, 255, 255, 0) 100%
-            ),
+                rgba(255, 255, 255, 0) 100%),
             radial-gradient(61.88% 432.18% at 100% 100%, rgba(0, 224, 255, 0.152) 0%, rgba(255, 255, 255, 0) 100%),
             radial-gradient(118.75% 118.75% at 50% 0%, rgba(255, 0, 0, 0.094) 0%, rgba(255, 255, 255, 0) 100%),
             linear-gradient(79.39deg, rgba(82, 0, 255, 0.116) 0%, rgba(255, 255, 255, 0) 67.77%),
             radial-gradient(93.88% 162.44% at 0% 0%, rgba(249, 0, 239, 0.124) 0%, rgba(196, 196, 196, 0) 100%);
-        .featured-left{
+
+        .featured-left {
             height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
+
         .title {
             font-size: 24px;
             margin-bottom: 12px;
         }
+
         .countdown {
             margin: 16px auto 0;
         }
+
         .desc {
-            font-size: 14px 18px;
+            font-size: 14px;
+            line-height: 20px;
         }
+
         .progress-bar {
             margin: 20px auto 0;
         }
@@ -45,14 +49,17 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
             border-radius: 7px;
         }
+
         .homepage-banner {
             width: 80%;
             margin: 0 auto;
             display: block;
         }
     }
+
     .project-list {
         margin: 40px auto;
+
         .project-item {
             display: block;
             padding: 16px 24px;
@@ -62,10 +69,12 @@
             border: 1px solid #ece6b6;
             background: #fff;
             color: #15163d;
+
             .project-name {
                 font-size: 18px;
                 margin-bottom: 12px;
             }
+
             .desc {
                 font-size: 14px;
                 margin-bottom: 12px;
@@ -73,9 +82,11 @@
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
+
             .progress-bar {
                 margin: 16px auto;
             }
+
             .join-btn {
                 color: #15163d;
                 font-size: 18px;
@@ -87,12 +98,14 @@
                 box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
                 border-radius: 7px;
             }
+
             .date-wrapper {
                 display: flex;
                 align-items: top;
                 justify-content: space-between;
                 margin: 24px auto 0;
                 font-size: 12px;
+
                 .date-title {
                     text-align: center;
                     color: #9088a1;
@@ -104,20 +117,27 @@
 
     .all-projects {
         margin: 40px auto;
+
         .ant-table-wrapper {
             overflow: hidden;
             border-radius: 8px;
-            .ant-table-thead > tr > th {
+
+            .ant-table {
+                padding: 18px 12px;
+            }
+
+            .ant-table-thead>tr>th {
                 background: #fff;
             }
+
+
             .apy {
                 color: #289747;
             }
         }
     }
 
-    @media screen and (max-width: 992px) {
-    }
-    @media screen and (max-width: 768px) {
-    }
+    @media screen and (max-width: 992px) {}
+
+    @media screen and (max-width: 768px) {}
 }

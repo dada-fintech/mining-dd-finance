@@ -45,9 +45,9 @@ export default function Projects () {
     const [featuredCountdown, setFeaturedCountdown] = useState(0);
 
     const initializeProject = {
-        project_name: 'SUPERPOWERS FOR MEDICAL PRACTIONERS',
-        project_profile:
-            'The market for VR training is growing rapidly worldwide, with a $500 million market for VR simulation training in healthcare, which will grow tenfold to $5 billion in 2 years. Team Gene can explore the global market. We are currently negotiating with medical training centers in the US and France.',
+        // project_name: 'SUPERPOWERS FOR MEDICAL PRACTIONERS',
+        // project_profile:
+        //     'The market for VR training is growing rapidly worldwide, with a $500 million market for VR simulation training in healthcare, which will grow tenfold to $5 billion in 2 years. Team Gene can explore the global market. We are currently negotiating with medical training centers in the US and France.',
         img: '/img/projects/11.png',
     }
 
@@ -97,10 +97,10 @@ export default function Projects () {
             })
             // console.log(specialProject[0]);
             setFeaturedProject(specialProject[0] || {
-                project_name: 'SUPERPOWERS FOR MEDICAL PRACTIONERS',
-                project_profile:
-                    'The market for VR training is growing rapidly worldwide, with a $500 million market for VR simulation training in healthcare, which will grow tenfold to $5 billion in 2 years. Team Gene can explore the global market. We are currently negotiating with medical training centers in the US and France.',
-                img: '/img/projects/11.png',
+                // project_name: 'SUPERPOWERS FOR MEDICAL PRACTIONERS',
+                // project_profile:
+                //     'The market for VR training is growing rapidly worldwide, with a $500 million market for VR simulation training in healthcare, which will grow tenfold to $5 billion in 2 years. Team Gene can explore the global market. We are currently negotiating with medical training centers in the US and France.',
+                // img: '/img/projects/11.png',
             })
 
             // expected_apy
@@ -206,16 +206,9 @@ export default function Projects () {
                     <Row>
                         <Col xs={24} md={20} lg={14} xl={10}>
                             <div className="title">
-                                {featuredProject.project_name || initializeProject.name}
+                                {featuredProject.project_name || initializeProject.name || ""}
                             </div>
-                            <div
-                                className="desc"
-                                dangerouslySetInnerHTML={{
-                                    __html: toBr(
-                                        featuredProject.project_profile || initializeProject.project_profile
-                                    ),
-                                }}
-                            ></div>
+                            <div className="desc" style={{ lineHeight: '20px', minHeight: '120px' }} >{featuredProject.project_profile || initializeProject.project_profile || ""} </div>
                             {featuredCountdown > 0 && (
                                 <Countdown timestamp={featuredCountdown} />
                             )}
@@ -225,8 +218,8 @@ export default function Projects () {
                                         strokeColor="#4CC16D"
                                         status="active"
                                         percent={(
-                                            (featuredProject.current_raised_money /
-                                                featuredProject.max_amount) *
+                                            (featuredProject.current_raised_money || 0 /
+                                                featuredProject.max_amount || 0) *
                                             100
                                         ).toFixed(0)}
                                         className="progress-bar"
@@ -234,8 +227,8 @@ export default function Projects () {
                                 )}
                             <Link
                                 className="join-btn"
-                                to={"/project/special/" + featuredProject.project_uniq_id}
-                                key={featuredProject.project_uniq_id}
+                                to={"/project/special/" + featuredProject.project_uniq_id || ""}
+                                key={featuredProject.project_uniq_id || ""}
                             >
                                 {t("common.viewProject")}
                             </Link>
@@ -245,9 +238,11 @@ export default function Projects () {
                             </Col> */}
                     </Row>
                 </div>
-            )}
+            )
+            }
 
             <div className="project-list">
+
                 <Row gutter={28}>
                     {projectList &&
                         projectList.map((item, index) => (
@@ -318,6 +313,6 @@ export default function Projects () {
                         ))}
                 </Row>
             </div>
-        </div>
+        </div >
     );
 }

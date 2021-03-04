@@ -20,12 +20,17 @@
             font-size: 24px;
             margin-bottom: 12px;
         }
+
         .countdown {
             margin: 16px auto 0;
         }
+
         .desc {
-            font-size: 14px 18px;
+            font-size: 14px;
+            line-height: 20px;
+            min-height: 120px;
         }
+
         .progress-bar {
             margin: 20px auto 0;
         }
@@ -44,13 +49,16 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
             border-radius: 7px;
         }
+
         .homepage-banner {
             margin: 0 auto;
             display: block;
         }
     }
+
     .project-list {
         margin: 40px auto;
+
         .project-item {
             display: block;
             padding: 16px 24px;
@@ -63,10 +71,12 @@
             background-position: center top;
             background-size: cover;
             background-repeat: no-repeat;
+
             .project-name {
                 font-size: 18px;
                 margin-bottom: 12px;
             }
+
             .desc {
                 font-size: 14px;
                 margin-bottom: 12px;
@@ -74,9 +84,11 @@
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
+
             .progress-bar {
                 margin: 16px auto;
             }
+
             .join-btn {
                 cursor: pointer;
                 color: #15163d;
@@ -89,12 +101,14 @@
                 box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
                 border-radius: 7px;
             }
+
             .date-wrapper {
                 display: flex;
                 align-items: top;
                 justify-content: space-between;
                 margin: 24px auto 0;
                 font-size: 12px;
+
                 .date-title {
                     text-align: center;
                     color: #9088a1;
@@ -106,20 +120,26 @@
 
     .all-projects {
         margin: 40px auto;
+
         .ant-table-wrapper {
             overflow: hidden;
             border-radius: 8px;
-            .ant-table-thead > tr > th {
+
+            .ant-table {
+                padding: 18px 12px;
+            }
+
+            .ant-table-thead>tr>th {
                 background: #fff;
             }
+
             .apy {
                 color: #289747;
             }
         }
     }
 
-    @media screen and (max-width: 992px) {
-    }
-    @media screen and (max-width: 768px) {
-    }
+    @media screen and (max-width: 992px) {}
+
+    @media screen and (max-width: 768px) {}
 }
