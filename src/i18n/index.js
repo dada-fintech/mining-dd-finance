@@ -241,7 +241,7 @@ export default {
                     manager: 'Fund Manager',
                     supporter: 'Fund Constituent',
                     committee: 'Committee Member',
-                    visitor: 'Visitor',
+                    visitor: 'Investor',
                 },
                 category: {
                     ongoing: 'On-going',

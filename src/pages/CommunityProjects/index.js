@@ -42,7 +42,7 @@ export default function Projects () {
     // const network = useSelector(state => state.setting.network)
 
     const [featuredProject, setFeaturedProject] = useState({});
-    const [featuredCountdown, setFeaturedCountdown] = useState(0);
+    const [featuredCountdown, setFeaturedCountdown] = useState(new Date('2021-02-12').valueOf() - new Date().valueOf());
 
     const initializeProject = {
         // project_name: 'SUPERPOWERS FOR MEDICAL PRACTIONERS',
@@ -77,9 +77,8 @@ export default function Projects () {
     // }
 
     useEffect(() => {
-        const countdownTime =
-            new Date('2021-02-12').valueOf() - new Date().valueOf();
-        setFeaturedCountdown(countdownTime);
+        // const countdownTime = new Date('2021-02-12').valueOf() - new Date().valueOf();
+        // setFeaturedCountdown(countdownTime);
 
         // featuredProject({
         //     project_name: 'SUPERPOWERS FOR MEDICAL PRACTIONERS',
@@ -87,7 +86,6 @@ export default function Projects () {
         //         'The market for VR training is growing rapidly worldwide, with a $500 million market for VR simulation training in healthcare, which will grow tenfold to $5 billion in 2 years. Team Gene can explore the global market. We are currently negotiating with medical training centers in the US and France.',
         //     img: '/img/projects/11.png',
         // });
-
 
         axios.get('/project/list').then(res => {
             const specialProject = res.data.filter(item => {
@@ -208,7 +206,9 @@ export default function Projects () {
                             <div className="title">
                                 {featuredProject.project_name || initializeProject.name || ""}
                             </div>
-                            <div className="desc" style={{ lineHeight: '20px', minHeight: '120px' }} >{featuredProject.project_profile || initializeProject.project_profile || ""} </div>
+                            <div className="desc" dangerouslySetInnerHTML={{
+                                __html: toBr(featuredProject.project_profile || initializeProject.project_profile || ""),
+                            }}></div>
                             {featuredCountdown > 0 && (
                                 <Countdown timestamp={featuredCountdown} />
                             )}
@@ -241,8 +241,7 @@ export default function Projects () {
             )
             }
 
-            <div className="project-list">
-
+            {projectList && <div className="project-list">
                 <Row gutter={28}>
                     {projectList &&
                         projectList.map((item, index) => (
@@ -264,12 +263,10 @@ export default function Projects () {
                                     <div className="project-name nowrap">
                                         {item.project_name}
                                     </div>
-                                    <div
-                                        className="desc"
-                                        dangerouslySetInnerHTML={{
-                                            __html: toBr(item.project_profile),
-                                        }}
-                                    ></div>
+
+                                    <div className="desc" dangerouslySetInnerHTML={{
+                                        __html: toBr(item.project_profile || ""),
+                                    }}></div>
                                     {(item.status === 'raising' ||
                                         item.status === 'canInvest') && (
                                             <Progress
@@ -312,7 +309,8 @@ export default function Projects () {
                             </Col>
                         ))}
                 </Row>
-            </div>
+            </div>}
+
         </div >
     );
 }

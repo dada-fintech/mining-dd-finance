@@ -6,7 +6,7 @@ Decimal.set({ toExpNeg: -30, toExpPos: 30 });
  * 科学计数法转换
  * @param {*} val
  */
-export function numToStr(val) {
+export function numToStr (val) {
     return Decimal(val).valueOf();
 }
 
@@ -16,7 +16,7 @@ export function numToStr(val) {
  * @param {*} val
  * @returns
  */
-export function numFmt(val, dn = 2) {
+export function numFmt (val, dn = 2) {
     let obj = String(val);
     // 修复第一个字符是小数点 的情况.
     if (obj !== '' && obj.substring(0, 1) === '.') obj = '0.';
@@ -36,7 +36,7 @@ export function numFmt(val, dn = 2) {
 }
 
 // 格式化 固定小数位-截取
-export function fmtDec(num, dec = 8) {
+export function fmtDec (num, dec = 8) {
     const temp = parseFloat(num);
     const m = temp.toExponential().match(/\d(?:\.(\d*))?e([+-]\d+)/);
     const decTemp = dec || Math.max(0, (m[1] || '').length - m[2]);
@@ -46,7 +46,7 @@ export function fmtDec(num, dec = 8) {
     );
 }
 // 格式化 固定小数位-进位
-export function fmtDecCeil(num, dec = 8) {
+export function fmtDecCeil (num, dec = 8) {
     const temp = parseFloat(num);
     const m = temp.toExponential().match(/\d(?:\.(\d*))?e([+-]\d+)/);
     const decTemp = dec || Math.max(0, (m[1] || '').length - m[2]);
@@ -56,7 +56,7 @@ export function fmtDecCeil(num, dec = 8) {
 }
 
 // 格式化 固定小数位-截取
-export function fmtDecFixed(num, dec = 2) {
+export function fmtDecFixed (num, dec = 2) {
     const temp = parseFloat(num);
     if (dec === 0) {
         return temp.toFixed(0);
@@ -70,23 +70,22 @@ export function fmtDecFixed(num, dec = 2) {
     );
 }
 
-export function FloorInter(num0, num1) {
+export function FloorInter (num0, num1) {
     //num0 代表传递的小数，第二个参数是保留到小数点几位，100是2位，1000是3位
     return Math.floor(num0 * num1) / num1;
 }
 
-export function fmtToFixed(num, dec = 2) {
+export function fmtToFixed (num, dec = 2) {
     return Decimal(num).toFixed(dec);
 }
 
-export function toNumber(val) {
+export function toNumber (val) {
     return Decimal(val).toNumber();
 }
 
-export function toFixedExtend(num, dec = 2) {
+export function toFixedExtend (num, dec = 2) {
     const times = Math.pow(10, dec);
-    const des = num * times + 0.5;
-    des = parseInt(des, 10) / times;
+    const des = parseInt(num * times + 0.5, 10) / times;
     return des + '';
 }
 
@@ -95,7 +94,7 @@ export function toFixedExtend(num, dec = 2) {
  * @param {*} v1
  * @param {*} v2
  */
-export function sub(v1, v2) {
+export function sub (v1, v2) {
     return Decimal.sub(v1, v2).valueOf();
 }
 /**
@@ -103,7 +102,7 @@ export function sub(v1, v2) {
  * @param {*} v1
  * @param {*} v2
  */
-export function plus(v1, v2) {
+export function plus (v1, v2) {
     return Decimal.add(v1, v2).valueOf();
 }
 /**
@@ -111,7 +110,7 @@ export function plus(v1, v2) {
  * @param {*} v1
  * @param {*} v2
  */
-export function mul(v1, v2) {
+export function mul (v1, v2) {
     return Decimal.mul(Number(v1), Number(v2)).valueOf();
 }
 /**
@@ -119,28 +118,28 @@ export function mul(v1, v2) {
  * @param {*} v1
  * @param {*} v2
  */
-export function div(v1, v2) {
+export function div (v1, v2) {
     return Decimal.div(Number(v1 || 0), Number(v2 || 0)).valueOf();
 }
 
 // 等于
-export function EQ(val, compareVal) {
+export function EQ (val, compareVal) {
     return Decimal(val).eq(compareVal);
 }
 // 大于
-export function GT(val, compareVal) {
+export function GT (val, compareVal) {
     return Decimal(val).gt(compareVal);
 }
 // 大于等于
-export function GE(val, compareVal) {
+export function GE (val, compareVal) {
     return Decimal(val).gte(compareVal);
 }
 // 小于
-export function LT(val, compareVal) {
+export function LT (val, compareVal) {
     return Decimal(val).lt(compareVal);
 }
 // 小于等于
-export function LE(val, compareVal) {
+export function LE (val, compareVal) {
     return Decimal(val).lte(compareVal);
 }
 
@@ -165,7 +164,7 @@ export const getUrlVariable = (variable) => {
     }
 };
 
-export function fmtZero(value) {
+export function fmtZero (value) {
     return value < 10 ? '0' + value : value;
 }
 
@@ -174,7 +173,7 @@ export function fmtZero(value) {
  * @param {*} start
  * @param {*} end
  */
-export function diffDayHour(start, end) {
+export function diffDayHour (start, end) {
     const diff = end - start;
     const diffSeconds = diff / 1000;
     const D = Math.floor(diffSeconds / 24 / 60 / 60);
@@ -183,8 +182,8 @@ export function diffDayHour(start, end) {
     return `${fmtZero(D)}D ${fmtZero(H)}H`;
 }
 
-export function fmtShowTime(diffSeconds) {
-    function fmtZero(value) {
+export function fmtShowTime (diffSeconds) {
+    function fmtZero (value) {
         return value < 10 ? '0' + value : value;
     }
     if (diffSeconds > 60 * 60 * 24) {
@@ -203,14 +202,14 @@ export function fmtShowTime(diffSeconds) {
  * 三位一逗号,保留小数点后面数字
  */
 
-export function toThousands(num) {
+export function toThousands (num) {
     return parseFloat(num).toLocaleString();
 }
 
 /**
  * 用户地址前三位，后四位
  */
-export function substringTx(num) {
+export function substringTx (num) {
     const numLength = num.length;
     return `${num.substring(0, 6)}...${num.substring(
         numLength - 4,
@@ -222,7 +221,7 @@ export function substringTx(num) {
  * 根据精度 缩小倍数
  */
 
-export function numDivDecimals(amount, decimals) {
+export function numDivDecimals (amount, decimals) {
     return div(Number(amount || 0), Math.pow(10, Number(decimals || 0)));
 }
 
@@ -230,12 +229,12 @@ export function numDivDecimals(amount, decimals) {
  * 根据精度 放大倍数
  */
 
-export function numDulDecimals(amount, decimals) {
+export function numDulDecimals (amount, decimals) {
     return mul(Number(amount || 0), Math.pow(10, Number(decimals || 0)));
 }
 
 
-export function copyText(text) {
+export function copyText (text) {
     const copied = document.createElement("input");
     copied.setAttribute("value", text);
     document.body.appendChild(copied);

@@ -29,7 +29,6 @@ import {
     ApiAppTotalBurnt,
 } from '../../../services/index.js';
 import {
-    REWARD_SYMBOL,
     OFFICIAL_SYMBOL,
     EXECUTION_TIME,
     DEFAULT_CURRENT_PRICE
