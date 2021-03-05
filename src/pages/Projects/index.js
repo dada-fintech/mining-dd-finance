@@ -10,7 +10,6 @@ import Header from "components/Header";
 import Countdown from "components/Countdown";
 import { useSelector } from "react-redux";
 import config from "config";
-
 import "./style.scss";
 
 export default function Projects () {
@@ -29,9 +28,7 @@ export default function Projects () {
         payingInsurance: isEn ? "Depositing to the Reserve" : "支付押金",
         active: isEn ? "Active" : "进行中",
         rolling: isEn ? "Voting On-going" : "正在投票",
-        allPhasesDone: isEn
-            ? "Governance completed. Waiting for the Redemption"
-            : "项目计划完成，等待获取报酬",
+        allPhasesDone: isEn ? "Governance completed. Waiting for the Redemption" : "项目计划完成，等待获取报酬",
         repaying: isEn ? "Users are Receiving the Redemption" : "用户获取回报",
         finished: isEn ? "Governance completed" : "项目已完成",
         refunding: isEn ? "Refunding" : "退款中",
@@ -45,7 +42,7 @@ export default function Projects () {
         // front end defined
         empty: isEn ? "None" : "无",
     };
-
+    
     useEffect(() => {
         axios.get("/project/list").then((res) => {
             // setProjectList(res.data.filter(item => item.status == 'canInvest'))
@@ -72,7 +69,7 @@ export default function Projects () {
                         item.status === "active"
                 );
             }
-            
+
             if (futureProjects.length > 0) {
                 setFeaturedProject(futureProjects[0]);
                 const status = futureProjects[0].status;
