@@ -2,6 +2,15 @@
     .header {
         justify-content: flex-end;
     }
+    .farm-img{
+        width: 16px;
+        height: 16px;
+        margin-right: 6px;
+    }
+    .btn-blue{
+        box-shadow: none;
+
+    }
     .table-list {
         border-radius: 8px;
         overflow: hidden;
@@ -24,9 +33,9 @@
             }
         }
         .ant-table-wrapper {
-            .ant-table{
-                padding: 12px 16px;
-            }
+            // .ant-table{
+            //     padding: 12px 16px;
+            // }
             .ant-table-thead > tr > th {
                 background: #fff;
             }

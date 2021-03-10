@@ -229,7 +229,7 @@ export default function AppSidebar(props) {
               to="/farm-rank"
             >
               <img src={DashboardIcon} alt="" />
-              Farm Rank
+              {t('sidebar.farmRank')}
             </NavLink>
           </li>
           {/* <li>

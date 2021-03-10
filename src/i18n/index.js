@@ -68,6 +68,7 @@ export default {
                 notSameDay: 'You can not choose the same day',
                 maintenanceTitle: 'Maintenance',
                 maintenanceContent: 'Project under maintenance, please wait a moment',
+                output: 'Output',
             },
             template: {
                 title: 'Choose a Governing Template',
@@ -196,6 +197,7 @@ export default {
                 blog: 'Blog',
                 buyDHM: 'Buy DHM',
                 farming: 'DHM Mining',
+                farmRank: 'Farm Rank'
             },
             banner: {
                 title: 'Mining Ecosystem Aggregator',
@@ -257,6 +259,19 @@ export default {
                     repay: 'Repay',
                     invest: 'Invest',
                 },
+            },
+            farmRank:{
+                farm: 'Farm',
+                pair: 'Pair',
+                tvl: 'TVL',
+                apy: 'APY',
+                goFarm: 'Go Farm',
+                inputAsset: 'Input Asset',
+                outputAsset: 'Output Asset',
+                calculateTitle: 'Impermanent Loss Calculation',
+                assetPair: 'Asset1/Asset2',
+                inputPrice: 'Input Price',
+                goalPrice: 'Goal Price'
             },
             createProject: {
                 hint: `<div class="h1">Create a New Project</div>
@@ -579,6 +594,7 @@ export default {
                 notSameDay: '不可选择同一天',
                 maintenanceTitle: '维护中',
                 maintenanceContent: '项目维护中，请稍等片刻',
+                output: '输出',
             },
             template: {
                 title: '请选择一个治理模版',
@@ -708,6 +724,7 @@ export default {
                 blog: '博客',
                 buyDHM: '购买 DHM',
                 farming: '流动性挖矿',
+                farmRank: '矿池排名'
             },
             banner: {
                 title: '矿业生态聚合器',
@@ -769,6 +786,19 @@ export default {
                     repay: '项目回款',
                     invest: '投资',
                 },
+            },
+            farmRank:{
+                farm: '矿池',
+                pair: '交易对',
+                tvl: '锁仓量',
+                apy: 'APY',
+                goFarm: '去矿池',
+                inputAsset: '输入资产',
+                outputAsset: '输出资产',
+                calculateTitle: '无常损失计算工具',
+                assetPair: '资产1/资产2',
+                inputPrice: '对价',
+                goalPrice: '目标价格'
             },
             createProject: {
                 hint: `<div class="h1">现在开始创建一个项目</div>
