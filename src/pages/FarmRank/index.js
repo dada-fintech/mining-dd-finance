@@ -33,10 +33,10 @@ export default function FarmRank() {
 
   useEffect(() => {
     const output1Raw = new BN(initPrice).div(goalPrice).sqrt().abs()
-    const output1PercentRaw = new BN(output1Raw).minus(asset1).div(asset1)
+    const output1PercentRaw = new BN(output1Raw).minus(asset1).div(asset1).times(100)
 
     const output2Raw = new BN(asset1).times(asset2).div(output1Raw)
-    const output2PercentRaw = output2Raw.minus(asset2).div(asset2)
+    const output2PercentRaw = output2Raw.minus(asset2).div(asset2).times(100)
 
     setOutputAsset1(output1Raw.toFixed(2))
     setOutputAsset1Percent(output1PercentRaw.toFixed(2))
@@ -144,11 +144,11 @@ export default function FarmRank() {
               </div>
               <div className="form-item">
                 <div className="form-label">Output Asset 1</div>
-                <div className="form-value">{outputAsset1} <span className="percent green">{outputAsset1Percent}%</span></div>
+                <div className="form-value">{outputAsset1} <span className={`percent ${outputAsset1Percent > 0 ? 'green' : 'red'}`}>{outputAsset1Percent}%</span></div>
               </div>
               <div className="form-item">
                 <div className="form-label">Output Asset 2</div>
-                <div className="form-value">{outputAsset2} <span className="percent red">{outputAsset2Percent}%</span></div>
+                <div className="form-value">{outputAsset2} <span className={`percent ${outputAsset2Percent > 0 ? 'green' : 'red'}`}>{outputAsset2Percent}%</span></div>
               </div>
             </div>
           </div>
