@@ -32,7 +32,7 @@ export default function FarmRank() {
   }, [asset1, initPrice])
 
   useEffect(() => {
-    const output1Raw = new BN(initPrice).div(goalPrice).sqrt().abs()
+    const output1Raw = new BN(initPrice).div(goalPrice).sqrt().abs().times(asset1)
     const output1PercentRaw = new BN(output1Raw).minus(asset1).div(asset1).times(100)
 
     const output2Raw = new BN(asset1).times(asset2).div(output1Raw)
@@ -128,7 +128,7 @@ export default function FarmRank() {
               </div>
               <div className="form-item">
                 <div className="form-label">Input Assset 2</div>
-                <div className="form-value">{asset2}</div>
+                <div className="form-value">{asset2 || 0}</div>
               </div>
               <div className="form-item">
                 <div className="form-label">Input Price(Asset1/Asset2)</div>
@@ -144,11 +144,11 @@ export default function FarmRank() {
               </div>
               <div className="form-item">
                 <div className="form-label">Output Asset 1</div>
-                <div className="form-value">{outputAsset1} <span className={`percent ${outputAsset1Percent > 0 ? 'green' : 'red'}`}>{outputAsset1Percent}%</span></div>
+                <div className="form-value">{isNaN(outputAsset1) ? 0 : outputAsset1} {!isNaN(outputAsset1Percent) && <span className={`percent ${outputAsset1Percent > 0 ? 'green' : 'red'}`}>{outputAsset1Percent}%</span>}</div>
               </div>
               <div className="form-item">
                 <div className="form-label">Output Asset 2</div>
-                <div className="form-value">{outputAsset2} <span className={`percent ${outputAsset2Percent > 0 ? 'green' : 'red'}`}>{outputAsset2Percent}%</span></div>
+                <div className="form-value">{isNaN(outputAsset2) ? 0 : outputAsset2} {!isNaN(outputAsset2Percent) && <span className={`percent ${outputAsset2Percent > 0 ? 'green' : 'red'}`}>{outputAsset2Percent || 0}%</span>}</div>
               </div>
             </div>
           </div>
