@@ -21,6 +21,8 @@ import Blog from './pages/Blog';
 import CreateProject from './pages/CreateProject';
 import CreateVote from './pages/CreateVote';
 import Coming from './pages/Coming';
+import FarmRank from './pages/FarmRank';
+
 
 // dhash
 // import Farming from './pages/Farming';
@@ -118,6 +120,11 @@ function App () {
                                         exact
                                         path="/farming-detail"
                                         component={Mine}
+                                    />
+                                    <Route
+                                        exact
+                                        path="/farm-rank"
+                                        component={FarmRank}
                                     />
                                 </Switch>
                             </div>
