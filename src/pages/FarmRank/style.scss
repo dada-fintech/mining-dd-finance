@@ -3,9 +3,16 @@
         justify-content: flex-end;
     }
     .farm-img{
-        width: 16px;
-        height: 16px;
-        margin-right: 6px;
+        width: 20px;
+        height: 20px;
+        background: #fff;
+        border: solid 2px #fff;
+        border-radius: 50%;
+        &:last-child{
+            margin-left: -6px;
+            margin-right: 12px;
+            z-index: 10;
+        }
     }
     .btn-blue{
         box-shadow: none;
