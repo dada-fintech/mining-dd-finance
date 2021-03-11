@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col, Table, Button, Input } from "antd";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import axios from "utils/axios";
 import Header from "components/Header";
 import { useSelector } from "react-redux";
+import { CaretDownOutlined } from '@ant-design/icons'
 import BN from 'bignumber.js'
-import config from "config";
+// import config from "config";
 import "./style.scss";
 
 export default function FarmRank() {
@@ -88,20 +88,18 @@ export default function FarmRank() {
         <span>{record.tokens.map((token, index) => (<span>{token.symbol}{index !== record.tokens.length - 1 && '-'}</span>))}</span>
       </span>)
     },
-    // {
-    //   title: "Earn",
-    //   dataIndex: "earn",
-    //   key: "earn",
-    // },
     {
       title: t('farmRank.tvl'),
       dataIndex: "tvl",
       key: "tvl",
+      sorter: (a, b) => {
+        return parseFloat(a.tvl.replace(/[\$\,]/g, '')) - parseFloat(b.tvl.replace(/[\$\,]/g, ''))
+      }
     },
     {
       title: t('farmRank.apy'),
       dataIndex: "yearAPY",
-      key: "yearAPY",
+      key: "yearAPY"
     },
     {
       title: " ",
