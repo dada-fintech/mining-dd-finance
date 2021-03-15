@@ -42,7 +42,7 @@ export default function Projects () {
         // front end defined
         empty: isEn ? "None" : "无",
     };
-    
+
     useEffect(() => {
         axios.get("/project/list").then((res) => {
             // setProjectList(res.data.filter(item => item.status == 'canInvest'))

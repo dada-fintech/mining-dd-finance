@@ -510,6 +510,8 @@ export default {
             "v1_Estimated_RewardsToday": "Estimated Rewards Today",
             "v_amount": "{{x}}{{x1}}",
             "Fundraising": "Fundraising in process",
+            "Upcoming_Projects": "Upcoming Projects",
+            "Upcoming_Pools": "Upcoming Pools",
         },
     },
     zh: {
@@ -1009,7 +1011,9 @@ export default {
             "maintenanceTitle": "维护中",
             "maintenanceContent": "我离开一会儿，马上回来",
             "v1_Estimated_RewardsToday": "今日预计收益",
-            "v_amount": "{{x}}{{x1}}"
+            "v_amount": "{{x}}{{x1}}",
+            "Upcoming_Projects": "即将到来的项目",
+            "Upcoming_Pools": "即将开放的 IDO",
         },
     },
 };

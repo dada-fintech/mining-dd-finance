@@ -30,6 +30,9 @@ import enUS from 'antd/lib/locale/en_US';
 import zhCN from 'antd/lib/locale/zh_CN';
 import { ConfigProvider } from 'antd';
 
+//CryptoMining 
+import CryptoMining from './pages/CryptoMining';
+
 const language = localStorage.getItem('language') || (navigator.language === 'zh-CN' ? 'zh' : 'en');
 i18n.use(initReactI18next) // passes i18n down to react-i18next
     .init({
@@ -118,6 +121,12 @@ function App () {
                                         exact
                                         path="/farming-detail"
                                         component={Mine}
+                                    />
+
+                                    <Route
+                                        exact
+                                        path="/crypto"
+                                        component={CryptoMining}
                                     />
                                 </Switch>
                             </div>
