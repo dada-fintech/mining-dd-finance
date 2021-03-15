@@ -144,7 +144,7 @@ const CryptoMining = () => {
                                     <div className="item">
                                         <span>{item.name || ""}</span>
                                         <img className="network" src={item.network} alt="" />
-                                        <img src={item.logo || ""} alt="" />
+                                        <img className="logo" src={item.logo || ""} alt="" />
                                         <div>{item.opentime ? `start in ${item.opentime} days - Register Now` : "Whitelist open - Register Now"}</div>
                                     </div>
                                 </a>
