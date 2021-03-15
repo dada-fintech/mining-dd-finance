@@ -19,7 +19,8 @@ import CommunityProjectIcon from "assets/sidebar/community-project.svg";
 import PlusIcon from "assets/sidebar/plus.svg";
 import MiningSwapIcon from "assets/sidebar/mining-swap.svg";
 import DashboardIcon from "assets/sidebar/dashboard.svg";
-import OverviewIcon from 'assets/sidebar/overview.svg'
+import IDOListIcon from "assets/sidebar/idolisticon.svg";
+// import OverviewIcon from 'assets/sidebar/overview.svg'
 // import QuickSwapIcon from 'assets/sidebar/quick-swap.svg'
 // import GovernanceIcon from 'assets/sidebar/governance.svg'
 import BlogIcon from "assets/sidebar/blog.svg";
@@ -30,6 +31,9 @@ import Telegram from "assets/socials/telegram.svg";
 import Weixin from "assets/socials/weixin.svg";
 import WeixinQR from "assets/qr-code.jpeg";
 import Linkedin from "assets/socials/linkedin.svg";
+
+
+
 
 import ChinaFlag from "assets/chinaflag.svg";
 import UsFlag from "assets/usflag.svg";
@@ -222,8 +226,8 @@ export default function AppSidebar (props) {
                             activeClassName="active"
                             to="/crypto"
                         >
-                            <img src={OverviewIcon} alt="" />
-                            {t('IDO')}
+                            <img src={IDOListIcon} alt="" />
+                            {t('IDOList')}
                         </NavLink>
                     </li>
 

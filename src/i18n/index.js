@@ -260,7 +260,7 @@ export default {
                     invest: 'Invest',
                 },
             },
-            farmRank:{
+            farmRank: {
                 farm: 'Farm',
                 pair: 'Pair',
                 tvl: 'TVL',
@@ -527,6 +527,7 @@ export default {
             "Fundraising": "Fundraising in process",
             "Upcoming_Projects": "Upcoming Projects",
             "Upcoming_Pools": "Upcoming Pools",
+            IDOList: "IDO list"
         },
     },
     zh: {
@@ -789,7 +790,7 @@ export default {
                     invest: '投资',
                 },
             },
-            farmRank:{
+            farmRank: {
                 farm: '矿池',
                 pair: '交易对',
                 tvl: '锁仓量',
@@ -1044,6 +1045,7 @@ export default {
             "v_amount": "{{x}}{{x1}}",
             "Upcoming_Projects": "即将到来的项目",
             "Upcoming_Pools": "即将开放的 IDO",
+            IDOList: "IDO 列表"
         },
     },
 };
