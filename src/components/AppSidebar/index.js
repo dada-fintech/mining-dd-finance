@@ -222,9 +222,9 @@ export default function AppSidebar (props) {
 
                     <li>
                         <NavLink
-                            className={`nowrap ${location.pathname === "/crypto" ? "top-curve" : ""}`}
+                            className={`nowrap ${location.pathname === "/ido" ? "top-curve" : ""}`}
                             activeClassName="active"
-                            to="/crypto"
+                            to="/ido"
                         >
                             <img src={IDOListIcon} alt="" />
                             {t('IDOList')}

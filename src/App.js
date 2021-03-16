@@ -125,7 +125,7 @@ function App () {
                                     />
                                     <Route
                                         exact
-                                        path="/crypto"
+                                        path="/ido"
                                         component={CryptoMining}
                                     />
                                     <Route
