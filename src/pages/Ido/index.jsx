@@ -10,7 +10,6 @@ import orbits from '../../assets/logo/orbits.png';
 import IMpermax from '../../assets/logo/IMpermax.png';
 import scaleswap from '../../assets/logo/scaleswap.png';
 
-
 import binance from '../../assets/network/binance.png';
 import Ethereum from '../../assets/network/Ethereum.png';
 import heco from '../../assets/network/heco.png';
@@ -21,7 +20,7 @@ import crypto3 from '../../assets/crypto/3.png';
 import crypto4 from '../../assets/crypto/4.png';
 import crypto5 from '../../assets/crypto/5.png';
 
-const CryptoMining = () => {
+const IdoList = () => {
     const { t } = useTranslation();
     // const wallet = useWallet();
     // const { account, status } = wallet;
@@ -324,4 +323,4 @@ const CryptoMining = () => {
     );
 };
 
-export default CryptoMining;
+export default IdoList;
