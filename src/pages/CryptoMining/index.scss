@@ -1,0 +1,192 @@
+.crypto-mining {
+    overflow: hidden;
+    padding-bottom: 44px;
+
+    .crypto-mining-title {
+        border-bottom: 2px solid rgba(171, 171, 171, 0.5);
+        line-height: 66px;
+        display: flex;
+        font-size: 18px;
+        align-items: center;
+        width: 100%;
+        margin: 0 22px;
+
+        @media (min-width: 576px) {
+            margin: 0;
+        }
+    }
+
+    .crypto-mining-list {
+
+        .item {
+            margin: 35px 22px 0 22px;
+            background: rgba(0, 0, 0, 0.06);
+
+            border-radius: 15px;
+            padding: 12px 12px 32px 12px;
+            position: relative;
+
+            span {
+                font-weight: bold;
+                font-size: 14px;
+                line-height: 20px;
+                color: #000000;
+                margin-bottom: 12px;
+            }
+
+            .network {
+                position: absolute;
+                right: 6px;
+                top: 6px;
+                width: 30px;
+            }
+
+            .logo {
+                height: 32px;
+                width: auto;
+                display: flex;
+                align-items: center;
+                border-radius: 15px;
+                margin: 8px 12px 0;
+            }
+            
+            div {
+                padding: 0 20px;
+                height: 40px;
+                background: #FFEC78;
+                border-radius: 10px;
+                font-size: 14px;
+                line-height: 40px;
+                text-align: center;
+                color: #000000;
+                margin: 22px 10px 0 10px;
+
+            }
+
+            &:hover {
+                box-shadow: 2px 4px 11px rgba(232, 195, 213, 0.1);
+            }
+        }
+    }
+
+
+    .upcoming-pools-list {
+
+        .item {
+            overflow: hidden;
+            background: #FFFFFF;
+            border: 1px solid #3F7FFF;
+            box-sizing: border-box;
+            border-radius: 10px;
+            padding: 30px 28px 36px 28px;
+            margin: 38px 22px 0 22px;
+
+            .top {
+                display: flex;
+                justify-content: space-between;
+
+                img {
+                    width: 66px;
+                    height: 66px;
+                    display: inline-block;
+                    border-radius: 10px;
+                    -webkit-border-radius: 10px;
+                    -moz-border-radius: 10px;
+                    -ms-border-radius: 10px;
+                    -o-border-radius: 10px;
+                }
+
+                span {
+                    height: 34px;
+                    background: #B8D0FF;
+                    border-radius: 5px;
+                    color: #3F7FFF;
+                    font-size: 14px;
+                    text-align: center;
+                    line-height: 34px;
+                    padding: 0 20px;
+                }
+            }
+
+            .name {
+                font-weight: 500;
+                font-size: 18px;
+                line-height: 30px;
+                color: #000000;
+                margin-top: 8px;
+
+            }
+
+            .raise {
+                font-size: 14px;
+                line-height: 18px;
+                color: #000000;
+            }
+
+            .raise-data {
+                font-size: 12px;
+                line-height: 16px;
+                color: #3F7FFF;
+            }
+
+            .data-list {
+                margin-top: 6px;
+                overflow: hidden;
+                display: flex;
+                flex-wrap: wrap;
+                align-content: flex-start;
+
+                .data-list-item {
+                    flex: 0 0 32%;
+                    box-sizing: border-box;
+                }
+
+                .data-list-item:nth-child(2) {
+                    margin-left: 2%;
+                    text-align: center;
+                }
+
+                .data-list-item:nth-child(3) {
+                    margin-left: 2%;
+                    text-align: right;
+
+                }
+            }
+
+
+            &:hover {
+                border: 1px solid #DE6605;
+                box-sizing: border-box;
+                box-shadow: 4px 4px 4px #E9E2DD;
+            }
+        }
+
+
+
+
+    }
+
+    @media (max-width: 576px) {
+        .crypto-mining-list {
+            .item {
+                margin: 22px 6px 0 6px;
+                padding: 12px 10px;
+            }
+        }
+
+        .upcoming-pools-list {
+            .item {
+                margin: 22px 6px 0 6px;
+                padding: 12px 10px;
+
+                .top {
+                    span {
+                        font-size: 12px;
+                        padding: 0 2px;
+                    }
+                }
+            }
+        }
+
+    }
+}

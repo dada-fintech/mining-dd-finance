@@ -1,6 +1,6 @@
-yarn build
+sudo yarn build
 ssh df "
-  rm -rf /var/www/mining-test-dd-finance
+  sudo rm -rf /var/www/mining-test-dd-finance
   exit
 "
 chmod -R 775 ./build

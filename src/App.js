@@ -23,7 +23,6 @@ import CreateVote from './pages/CreateVote';
 import Coming from './pages/Coming';
 import FarmRank from './pages/FarmRank';
 
-
 // dhash
 // import Farming from './pages/Farming';
 import Buy from './pages/dhash/buy/buy.jsx';
@@ -31,6 +30,9 @@ import Mine from './pages/dhash/mine/mine.jsx';
 import enUS from 'antd/lib/locale/en_US';
 import zhCN from 'antd/lib/locale/zh_CN';
 import { ConfigProvider } from 'antd';
+
+//CryptoMining 
+import CryptoMining from './pages/CryptoMining';
 
 const language = localStorage.getItem('language') || (navigator.language === 'zh-CN' ? 'zh' : 'en');
 i18n.use(initReactI18next) // passes i18n down to react-i18next
@@ -120,6 +122,11 @@ function App () {
                                         exact
                                         path="/farming-detail"
                                         component={Mine}
+                                    />
+                                    <Route
+                                        exact
+                                        path="/crypto"
+                                        component={CryptoMining}
                                     />
                                     <Route
                                         exact
