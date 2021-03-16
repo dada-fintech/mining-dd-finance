@@ -19,6 +19,9 @@ import crypto2 from '../../assets/crypto/2.png';
 import crypto3 from '../../assets/crypto/3.png';
 import crypto4 from '../../assets/crypto/4.png';
 import crypto5 from '../../assets/crypto/5.png';
+import Konomi from '../../assets/logo/Konomi.png';
+import Shyft from '../../assets/logo/Shyft.svg';
+import WATA from '../../assets/logo/WATA.svg';
 
 const IdoList = () => {
     const { t } = useTranslation();
@@ -213,6 +216,227 @@ const IdoList = () => {
             PlatformsURL: "https://www.polkastarter.com/",
             network: Ethereum,
             Access: "Private"
+        }, {
+            logo: "https://illuvium.io/home/coming-soon@2x.png",
+            websiteUrl: "https://illuvium.io/",
+            url: "https://illuvium.io/",
+            opentime: getPpentime(1617033600),
+            name: "Illuvium",
+            raise: "",
+            minAllocation: "",
+            MaxAllocation: "",
+            Platforms: "",
+            PlatformsURL: "",
+            network: Ethereum,
+            Access: ""
+        }, {
+            logo: "https://conv.finance/img/brand/logo-decentral-invert@1.5x.png",
+            websiteUrl: "https://conv.finance/",
+            url: "https://conv.finance/",
+            opentime: getPpentime(1616601600),
+            name: "Convergence Finance",
+            raise: "",
+            minAllocation: "",
+            MaxAllocation: "",
+            Platforms: "Polkastarter",
+            PlatformsURL: "https://www.polkastarter.com/",
+            network: Ethereum,
+            Access: ""
+        }, {
+            logo: "https://mdt.io/_nuxt/img/mdt_logo-horizontal-en.9551daf.png",
+            websiteUrl: "https://mdt.io/",
+            url: "https://mdt.io/",
+            opentime: "TBA",
+            name: "MeasurableData",
+            raise: "",
+            minAllocation: "",
+            MaxAllocation: "",
+            Platforms: "Polkastarter",
+            PlatformsURL: "https://www.polkastarter.com/",
+            network: binance,
+            Access: ""
+        }, {
+            logo: "https://www.oxygen.org/img/logo.svg",
+            websiteUrl: "https://www.oxygen.org/",
+            url: "https://www.oxygen.org/",
+            opentime: getPpentime(1615824000),
+            name: "Oxygen",
+            raise: "",
+            minAllocation: "",
+            MaxAllocation: "",
+            Platforms: "Polkastarter",
+            PlatformsURL: "https://www.polkastarter.com/",
+            network: Ethereum, /* solana */
+            Access: ""
+        }, {
+            logo: "https://avatars.githubusercontent.com/u/67821563?s=200&v=4",
+            websiteUrl: "https://anchorprotocol.com/",
+            url: "https://anchorprotocol.com/",
+            opentime: getPpentime(1615824000),
+            name: "Visor Finance",
+            raise: "",
+            minAllocation: "",
+            MaxAllocation: "",
+            Platforms: "Balancer",
+            PlatformsURL: "https://balancer.exchange/#/swap",
+            network: Ethereum,
+            Access: ""
+        }, {
+            logo: Konomi,
+            websiteUrl: "https://www.konomi.network/#/",
+            url: "https://www.konomi.network/#/",
+            opentime: getPpentime(1615824000),
+            name: "KonomiNetwork",
+            raise: "",
+            minAllocation: "",
+            MaxAllocation: "",
+            Platforms: "Polkastarter",
+            PlatformsURL: "https://www.polkastarter.com/",
+            network: Ethereum,  /* Polkadot */
+            Access: ""
+        }, {
+            logo: "https://d33wubrfki0l68.cloudfront.net/2b8fbf1e6c2cda240a9a5252ff23940e7899235d/00ebe/logo_white.svg",
+            websiteUrl: "https://polkafoundry.com/",
+            url: "https://polkafoundry.com/",
+            opentime: getPpentime(1615824000),
+            name: "PolkaFoundry",
+            raise: "",
+            minAllocation: "",
+            MaxAllocation: "",
+            Platforms: "Polkastarter",
+            PlatformsURL: "https://www.polkastarter.com/",
+            network: Ethereum,
+            Access: ""
+        }, {
+            logo: "https://www.dafiprotocol.io/images/DAFI-Logo.png",
+            websiteUrl: "https://www.dafiprotocol.io/#",
+            url: "https://www.dafiprotocol.io/#",
+            opentime: getPpentime(1615824000),
+            name: "DafiProtocol",
+            raise: "",
+            minAllocation: "",
+            MaxAllocation: "",
+            Platforms: "MakerDAO",
+            PlatformsURL: "https://daomaker.com/",
+            network: Ethereum,
+            Access: ""
+        }, {
+            logo: "https://casper.network/static/logo-color-e34c65d51e0d215db55ec930da51ac7a.png",
+            websiteUrl: "https://casper.network/",
+            url: "https://casper.network/",
+            opentime: getPpentime(1616428800),
+            name: "Casper Network",
+            raise: "",
+            minAllocation: "",
+            MaxAllocation: "",
+            Platforms: "Coinlist",
+            PlatformsURL: "https://coinlist.co/casper",
+            network: Ethereum,
+            Access: ""
+        }, {
+            logo: "https://lbp.insurace.io/img/logo.632de044.svg",
+            websiteUrl: "https://lbp.insurace.io/",
+            url: "https://lbp.insurace.io/",
+            opentime: getPpentime(1615910400),
+            name: "InsurAce",
+            raise: "",
+            minAllocation: "",
+            MaxAllocation: "",
+            Platforms: "Rinkeby",
+            PlatformsURL: "https://rinkeby.insurace.io/#/dash",
+            network: Ethereum,
+            Access: ""
+        }, {
+            logo: "https://stater.co/wp-content/uploads/2020/09/mobile-logo.png",
+            websiteUrl: "https://stater.co/",
+            url: "https://stater.co/",
+            opentime: getPpentime(1615910400),
+            name: "Stater",
+            raise: "",
+            minAllocation: "",
+            MaxAllocation: "",
+            Platforms: "Trustswap",
+            PlatformsURL: "https://dashboard.trustswap.org/app/launchpads",
+            network: Ethereum,
+            Access: ""
+        }, {
+            logo: "https://miro.medium.com/max/552/1*zO0Jim7I5hffP8Q_9y9b5g.jpeg",
+            websiteUrl: "https://dorafactory.org/",
+            url: "https://dorafactory.org/",
+            opentime: "TBA",
+            name: "DoraFactory",
+            raise: "",
+            minAllocation: "",
+            MaxAllocation: "",
+            Platforms: "",
+            PlatformsURL: "",
+            network: Ethereum,
+            Access: ""
+        }, {
+            logo: "https://miro.medium.com/fit/c/96/96/1*BEamN9l0B7saYGCBFKenmg.png",
+            websiteUrl: "https://fei.money/",
+            url: "https://fei.money/",
+            opentime: getPpentime(1616342400),
+            name: "Fei Protocol",
+            raise: "",
+            minAllocation: "",
+            MaxAllocation: "",
+            Platforms: "",
+            PlatformsURL: "",
+            network: Ethereum,
+            Access: ""
+        }, {
+            logo: Shyft,
+            websiteUrl: "https://www.shyft.network/",
+            url: "https://www.shyft.network/",
+            opentime: getPpentime(1616515200),
+            name: "Shyft Network",
+            raise: "",
+            minAllocation: "",
+            MaxAllocation: "",
+            Platforms: "Polkastarter",
+            PlatformsURL: "https://www.polkastarter.com/",
+            network: Ethereum,
+            Access: ""
+        }, {
+            logo: "https://cash.tech/wp-content/uploads/2021/02/cash-tech-logo-color.svg",
+            websiteUrl: "https://cash.tech/",
+            url: "https://cash.tech/",
+            opentime: "TBA",
+            name: "Cash Tech",
+            raise: "",
+            minAllocation: "",
+            MaxAllocation: "",
+            Platforms: "DuckSTARTER",
+            PlatformsURL: "https://duckstarter.io/",
+            network: Ethereum,
+            Access: ""
+        }, {
+            logo: "https://xend.finance/assets/images/xf-logo.png",
+            websiteUrl: "https://xend.finance/",
+            url: "https://xend.finance/",
+            opentime: getPpentime(1616425200),
+            name: "Xend Finance",
+            raise: "",
+            minAllocation: "",
+            MaxAllocation: "",
+            Platforms: "Balancer",
+            PlatformsURL: "https://balancer.exchange/",
+            network: binance,
+            Access: ""
+        }, {
+            logo: WATA,
+            websiteUrl: "https://WATA.Finance/",
+            url: "https://WATA.Finance/",
+            opentime: "Active",
+            name: "WATA",
+            raise: "",
+            minAllocation: "",
+            MaxAllocation: "",
+            Platforms: "",
+            PlatformsURL: "",
+            network: heco,
+            Access: ""
         }
 
     ]
