@@ -213,7 +213,7 @@ export default function AppSidebar (props) {
                                 } ${location.pathname === "/coming/dashboard" ? "bottom-curve" : ""
                                 }`}
                             activeClassName="active"
-                            to="/coming/swap"
+                            to="/token-swap"
                         >
                             <img src={MiningSwapIcon} alt="" />
                             {t("sidebar.tokenSwap")}
@@ -234,7 +234,7 @@ export default function AppSidebar (props) {
 
                     <li>
                         <NavLink
-                            className={`nowrap ${location.pathname === "/coming-swap" ? "top-curve" : ""
+                            className={`nowrap ${location.pathname === "/token-swap" ? "top-curve" : ""
                                 } ${location.pathname === "/blog" ? "bottom-curve" : ""}`}
                             activeClassName="active"
                             to="/farm-rank"

@@ -1,32 +1,12 @@
-@import '~antd/dist/antd.css';
+@import "~antd/dist/antd.css";
 .App {
     word-break: break-all;
     color: #15163d;
-    background: radial-gradient(
-            57.44% 57.44% at 36.11% 100%,
-            #ffebc4 0%,
-            rgba(255, 255, 255, 0) 100%
-        ),
-        radial-gradient(
-            50% 66.76% at 23.92% 50%,
-            rgba(131, 156, 220, 0.17) 0%,
-            rgba(255, 255, 255, 0) 100%
-        ),
-        radial-gradient(
-            44.76% 114.58% at 100% 58.44%,
-            rgba(255, 229, 137, 0.54) 0%,
-            rgba(255, 255, 255, 0) 100%
-        ),
-        radial-gradient(
-            93.02% 109.47% at 0% 0%,
-            rgba(255, 0, 0, 0.25) 0%,
-            rgba(255, 255, 255, 0) 65.72%
-        ),
-        radial-gradient(
-            74.31% 190.22% at 100% 0%,
-            rgba(72, 204, 204, 0.21) 0%,
-            rgba(255, 255, 255, 0) 100%
-        );
+    background: radial-gradient(57.44% 57.44% at 36.11% 100%, #ffebc4 0%, rgba(255, 255, 255, 0) 100%),
+        radial-gradient(50% 66.76% at 23.92% 50%, rgba(131, 156, 220, 0.17) 0%, rgba(255, 255, 255, 0) 100%),
+        radial-gradient(44.76% 114.58% at 100% 58.44%, rgba(255, 229, 137, 0.54) 0%, rgba(255, 255, 255, 0) 100%),
+        radial-gradient(93.02% 109.47% at 0% 0%, rgba(255, 0, 0, 0.25) 0%, rgba(255, 255, 255, 0) 65.72%),
+        radial-gradient(74.31% 190.22% at 100% 0%, rgba(72, 204, 204, 0.21) 0%, rgba(255, 255, 255, 0) 100%);
     @media screen and (max-width: 992px) {
         word-break: unset;
     }
@@ -58,10 +38,8 @@ li {
 }
 
 .container {
-    font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Myriad Pro',
-        'Hiragino Sans GB', 'Microsoft YaHei', 'Segoe UI', 'Roboto', 'Oxygen',
-        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-        sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Myriad Pro", "Hiragino Sans GB", "Microsoft YaHei",
+        "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     width: 100%;
     padding-right: 16px;
     padding-left: 16px;
@@ -93,6 +71,17 @@ li {
     &:focus {
         color: #fff;
         background: #3dab9a;
+    }
+}
+
+.btn-disabled {
+    color: #9088a1;
+    background: rgba(144, 136, 161, 0.3);
+    border: none;
+    &:hover,
+    &:focus {
+        color: #9088a1;
+        background: rgba(144, 136, 161, 0.3);
     }
 }
 
@@ -134,18 +123,16 @@ li {
     }
 }
 
-.btn-blue{
+.btn-blue {
     color: #fff;
-    background: #839CDC;
+    background: #839cdc;
     border-radius: 5px;
     &:hover,
     &:focus {
         color: #fff;
-        background: #839CDC;
+        background: #839cdc;
     }
 }
-
-
 
 .btn-cheese {
     -webkit-box-align: center;
@@ -154,7 +141,7 @@ li {
     border: 0px;
     border-radius: 12px;
     box-shadow: rgb(226, 214, 207) 6px 1px 12px, rgb(247, 244, 242) -12px -12px 24px -2px;
-    color: #15163D;
+    color: #15163d;
     cursor: pointer;
     display: flex;
     font-size: 16px;
@@ -166,23 +153,23 @@ li {
     padding-left: 24px;
     padding-right: 24px;
     width: 100%;
-    transition: background-color .3s;
+    transition: background-color 0.3s;
     &:hover,
     &:focus {
-        color: #15163D;
+        color: #15163d;
         background-color: rgb(242, 242, 242);
     }
 }
 
-.cheese-box{
-    color: #15163D;
-    background: #FFFFFF;
+.cheese-box {
+    color: #15163d;
+    background: #ffffff;
     box-shadow: 6px 6px 12px rgba(166, 146, 110, 0.15);
     border-radius: 12px;
     position: relative;
 }
 
-.question-icon{
+.question-icon {
     width: 14px;
     vertical-align: text-bottom;
 }
@@ -464,8 +451,8 @@ img {
             opacity: 1;
         }
         &::after {
-            content: '';
-            background: url('./assets/breadcrumb-arrow.svg') no-repeat;
+            content: "";
+            background: url("./assets/breadcrumb-arrow.svg") no-repeat;
             display: inline-block;
             width: 10px;
             height: 10px;
@@ -488,8 +475,8 @@ img {
             color: #15163d;
         }
         &::after {
-            content: '';
-            background: url('./assets/main-breadcrumb-arrow.svg') no-repeat;
+            content: "";
+            background: url("./assets/main-breadcrumb-arrow.svg") no-repeat;
             display: inline-block;
             width: 10px;
             height: 10px;
@@ -565,7 +552,7 @@ img {
             white-space: nowrap;
         }
         &::before {
-            content: '';
+            content: "";
             position: absolute;
             width: 0;
             height: 100%;

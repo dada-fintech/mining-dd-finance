@@ -539,6 +539,8 @@ export default {
         mode: 'test',
         provider: 'https://data-seed-prebsc-1-s1.binance.org:8545',
         chainId: 97,
+        // dd.finance 后端URL
+        ddURL: 'https://aggre.haowa.io',
         // 后端 api
         baseURL: 'https://mining-api-test.dd.finance',
         //后端静态资源路径
@@ -565,6 +567,7 @@ export default {
         mode: 'prod',
         provider: 'wss://mainnet.infura.io/ws/v3/89db527f19e14a00902a439ae587a25b',
         chainId: 1,
+        ddURL: 'https://aggre.haowa.io',
         baseURL: 'https://mining-api.dd.finance',
         assetURL: 'https://mining-assets.dd.finance',
         commonABI,
@@ -588,6 +591,7 @@ export default {
         mode: 'prod',
         provider: 'https://bsc-dataseed.binance.org/',
         chainId: 56,
+        ddURL: 'https://aggre.haowa.io',
         baseURL: 'https://mining-api-binance.dd.finance',
         assetURL: 'https://mining-assets-binance.dd.finance',
         commonABI,
@@ -610,6 +614,7 @@ export default {
         mode: 'prod',
         provider: 'https://http-mainnet-node.huobichain.com',
         chainId: 128,
+        ddURL: 'https://aggre.haowa.io',
         baseURL: 'https://mining-api-binance.dd.finance',
         assetURL: 'https://mining-assets-binance.dd.finance',
         commonABI,
