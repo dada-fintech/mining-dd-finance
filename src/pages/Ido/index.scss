@@ -20,13 +20,13 @@
 
         .item {
             margin: 35px 22px 0 22px;
-            background: rgba(0, 0, 0, 0.06);
-
+            background: rgba(131, 156, 220, 0.24);
             border-radius: 15px;
-            padding: 12px 12px 32px 12px;
+            padding: 20px 18px 32px 18px;
             position: relative;
 
-            span {
+            .name {
+
                 font-weight: bold;
                 font-size: 14px;
                 line-height: 20px;
@@ -34,10 +34,32 @@
                 margin-bottom: 12px;
             }
 
+            .days {
+                height: 24px;
+                border-radius: 5px;
+                color: #3F7FFF;
+                line-height: 24px;
+                text-align: center;
+                background: #B8D0FF;
+                padding: 0 24px;
+                float: right;
+            }
+
+            .active {
+                height: 24px;
+                border-radius: 5px;
+                line-height: 24px;
+                text-align: center;
+                color: #4BC16C;
+                background: #CEF1D8;
+                padding: 0 24px;
+                float: right;
+            }
+
             .network {
                 position: absolute;
                 right: 6px;
-                top: 6px;
+                bottom: 6px;
                 width: 30px;
             }
 
@@ -46,10 +68,9 @@
                 width: auto;
                 display: flex;
                 align-items: center;
-                border-radius: 15px;
-                margin: 8px 12px 0;
+                margin: 14px 12px 0;
             }
-            
+
             div {
                 padding: 0 20px;
                 height: 40px;
@@ -59,7 +80,7 @@
                 line-height: 40px;
                 text-align: center;
                 color: #000000;
-                margin: 22px 10px 0 10px;
+                margin: 22px 24px 0 24px;
 
             }
 

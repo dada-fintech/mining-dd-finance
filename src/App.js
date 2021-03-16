@@ -32,7 +32,8 @@ import enUS from "antd/lib/locale/en_US";
 import zhCN from "antd/lib/locale/zh_CN";
 import { ConfigProvider } from "antd";
 
-//CryptoMining
+//CryptoMining 
+import IdoList from './pages/Ido';
 import CryptoMining from "./pages/CryptoMining";
 
 const language =
@@ -98,18 +99,29 @@ function App() {
                                         component={Farming}
                                     /> */}
 
-                  <Route exact path="/farming-detail" component={Mine} />
-                  <Route exact path="/crypto" component={CryptoMining} />
-                  <Route exact path="/farm-rank" component={FarmRank} />
-                  <Route exact path="/token-swap" component={TokenSwap} />
-                </Switch>
-              </div>
-            </Col>
-          </Row>
-        </Router>
-      </div>
-    </ConfigProvider>
-  );
+                                    <Route
+                                        exact
+                                        path="/farming-detail"
+                                        component={Mine}
+                                    />
+                                    <Route
+                                        exact
+                                        path="/ido"
+                                        component={IdoList}
+                                    />
+                                    <Route
+                                        exact
+                                        path="/farm-rank"
+                                        component={FarmRank}
+                                    />
+                                </Switch>
+                            </div>
+                        </Col>
+                    </Row>
+                </Router>
+            </div>
+        </ConfigProvider>
+    );
 }
 
 export default App;
