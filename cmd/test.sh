@@ -1,4 +1,4 @@
-sudo yarn build
+yarn build
 ssh df "
   sudo rm -rf /var/www/mining-test-dd-finance
   exit

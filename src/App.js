@@ -34,7 +34,7 @@ import { ConfigProvider } from "antd";
 
 //CryptoMining 
 import IdoList from './pages/Ido';
-import CryptoMining from "./pages/CryptoMining";
+// import CryptoMining from "./pages/CryptoMining";
 
 const language =
   localStorage.getItem("language") ||
