@@ -540,7 +540,7 @@ export default {
         provider: 'https://data-seed-prebsc-1-s1.binance.org:8545',
         chainId: 97,
         // dd.finance 后端URL
-        ddURL: 'https://aggre.haowa.io',
+        ddURL: 'https://aggre-test.haowa.io',
         // 后端 api
         baseURL: 'https://mining-api-test.dd.finance',
         //后端静态资源路径
