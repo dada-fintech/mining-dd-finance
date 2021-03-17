@@ -527,7 +527,9 @@ export default {
             "Fundraising": "Fundraising in process",
             "Upcoming_Projects": "Upcoming Projects",
             "Upcoming_Pools": "Upcoming Pools",
-            IDOList: "IDO list"
+            "IDOList": "IDO list",
+            "Active_Projects": "Active Projects",
+            "Finished_Projects": "Finished Projects",
         },
     },
     zh: {
@@ -1045,7 +1047,10 @@ export default {
             "v_amount": "{{x}}{{x1}}",
             "Upcoming_Projects": "即将到来的项目",
             "Upcoming_Pools": "即将开放的 IDO",
-            IDOList: "IDO 列表"
+            "IDOList": "IDO 列表",
+            "Active_Projects": "活动项目",
+            "Finished_Projects": "完成项目",
+            'finish': "● Finish"
         },
     },
 };

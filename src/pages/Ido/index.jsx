@@ -1,14 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 // import { useWallet } from 'use-wallet';
 import { Empty, Row, Col } from 'antd';
 import * as Tools from '../../utils/Tools';
 import './index.scss';
-import merchdao from '../../assets/logo/merchdao.png';
-import oddz from '../../assets/logo/oddz.png';
+import Header from '../../components/Header'
 import orbits from '../../assets/logo/orbits.png';
-import IMpermax from '../../assets/logo/IMpermax.png';
-import scaleswap from '../../assets/logo/scaleswap.png';
+import scaleswap from '../../assets/logo/scaleswap.svg';
 
 import binance from '../../assets/network/binance.png';
 import Ethereum from '../../assets/network/Ethereum.png';
@@ -19,84 +17,119 @@ import crypto2 from '../../assets/crypto/2.png';
 import crypto3 from '../../assets/crypto/3.png';
 import crypto4 from '../../assets/crypto/4.png';
 import crypto5 from '../../assets/crypto/5.png';
-import Konomi from '../../assets/logo/Konomi.png';
-import Shyft from '../../assets/logo/Shyft.svg';
-import WATA from '../../assets/logo/WATA.svg';
+
+import dafiprotocol from '../../assets/logo/dafiprotocol.svg';
+import merchdao from '../../assets/logo/merchdao.svg';
+import oddz from '../../assets/logo/oddz.svg';
+import cook from '../../assets/logo/cook.svg';
+import XendFinance from '../../assets/logo/XendFinance.svg';
+import impermax from '../../assets/logo/impermax.svg';
+import decentralInvert from '../../assets/logo/decentral-invert.svg';
+import Navigation from '../../assets/logo/Navigation.svg';
+import dorafactory from '../../assets/logo/dorafactory.svg';
+import konomi from '../../assets/logo/konomi.svg';
+import lepricon from '../../assets/logo/lepricon.svg';
+import stater from '../../assets/logo/stater.svg';
+import Tidal from '../../assets/logo/Tidal.svg';
+import casper from '../../assets/logo/casper.svg';
+import Oxygen from '../../assets/logo/Oxygen.svg';
+import illuvium from '../../assets/logo/illuvium.svg';
+import cash from '../../assets/logo/cash.svg';
+import mdt from '../../assets/logo/mdt.png';
+
+
 
 const IdoList = () => {
     const { t } = useTranslation();
     // const wallet = useWallet();
     // const { account, status } = wallet;
+
+    const [tabindex, setTabindex] = useState(1);
+
+    const [upcomingProjects, setUpcomingProjects] = useState([]);
+    const [activeProjects, setActiveProjects] = useState(1);
+    const [finishedProjects, setFinishedProjects] = useState(1);
+
+
     const getPpentime = (time) => {
-        if (time === 'TBA') {
-            return 'TBA';
+        if (isNaN(time)) {
+            return time;
         } else if (Tools.sub(time, Tools.div(new Date().getTime(), 1000)) >= 0) {
             return Math.ceil(Tools.sub(time, Tools.div(new Date().getTime(), 1000)) / 86400);
         } else {
             return 0;
         }
     }
+    const onSwitchTab = (index) => {
+        setTabindex(index || 1)
+    }
+
     const UpcomingProjects = [
         {
-            url: "https://lepricon.io/",
+            projectsUrl: "https://lepricon.io/",
             name: "Lepricon",
             opentime: getPpentime(1615910400),
+            networkname: 'ETH',
             network: Ethereum,
-            Platforms: "Poolz",
-            PlatformsURL: "https://www.poolz.finance/",
-            logo: "https://lepricon.io/wp-content/uploads/2021/01/logo-lepricon.png"
+            platforms: "Poolz",
+            platformsURL: "https://www.poolz.finance/",
+            logo: lepricon,
+            status: ""
         },
-        // {
-        //     url: "https://deeper.network/",
-        //     name: "Deeper network",
-        //     opentime: getPpentime(1615910400),
-        //     network: Ethereum,
-        //     logo: "https://deeper.network/public/img/logo.30e301cf.png"
-        // },
         {
-            url: "https://merchdao.com/",
+            projectsUrl: "https://merchdao.com/",
             name: "MerchDao",
             opentime: getPpentime(1616774400),
+            networkname: 'ETH',
             network: Ethereum,
             Platforms: "Poolz",
             PlatformsURL: "https://www.poolz.finance/",
-            logo: merchdao
+            logo: merchdao,
+            status: ""
         },
         {
-            url: "https://www.cook.finance/",
+            projectsUrl: "https://www.cook.finance/",
             name: "Cook finance",
             opentime: getPpentime(1617033600),
+            networkname: 'ETH',
             network: Ethereum,
             Platforms: "Poolz",
             PlatformsURL: "https://www.poolz.finance/",
-            logo: "https://www.cook.finance/wp-content/uploads/2020/12/Cook_logo-main-new.svg"
+            logo: cook,
+            status: ""
         },
         {
-            url: "https://rage.fan/",
+            projectsUrl: "https://rage.fan/",
             name: "Rage Fan",
             opentime: getPpentime(1615910400),
+            networkname: 'ETH',
             network: Ethereum,
             Platforms: "Poolz",
             PlatformsURL: "https://www.poolz.finance/",
-            logo: "https://rage.fan/images/logo/RF-logo-dark.svg"
+            logo: "https://rage.fan/images/logo/RF-logo-dark.svg",
+            status: ""
         },
         {
-            url: "https://seedify.fund/",
+            projectsUrl: "https://seedify.fund/",
             name: "Seedify Fund",
             opentime: "TBA",
+            networkname: 'BSC',
             network: binance,
             Platforms: "",
             PlatformsURL: "",
-            logo: "https://seedify.fund/wp-content/uploads/2021/01/Asset-7.png"
+            logo: "https://gblobscdn.gitbook.com/spaces%2F-MRhr_ARLx2Wm7kT5ceC%2Favatar-1611382639284.png?alt=media",
+            status: ""
         },
         {
-            url: "https://oddz.fi/",
+            projectsUrl: "https://oddz.fi/",
             name: "Oddz Finance",
             opentime: getPpentime(1615996800),
+            networkname: 'ETH',
             network: Ethereum,
             Platforms: "Polkastarter",
             PlatformsURL: "https://www.polkastarter.com/",
-            logo: oddz
+            logo: oddz,
+            status: ""
         },
         // {
         //     url: "https://orbits.finance/",
@@ -108,13 +141,15 @@ const IdoList = () => {
         //     logo: orbits
         // },
         {
-            url: "https://scaleswap.io/",
+            projectsUrl: "https://scaleswap.io/",
             name: "Scaleswap",
             opentime: getPpentime(1615996800),
+            networkname: 'ETH',
             network: Ethereum,
             Platforms: "",
             PlatformsURL: "",
-            logo: scaleswap
+            logo: scaleswap,
+            status: ""
         },
         // {
         //     url: "https://illuvium.io/ ",
@@ -126,35 +161,41 @@ const IdoList = () => {
         //     logo: oddz
         // },
         {
-            url: "https://www.tidal.finance/",
+            projectsUrl: "https://www.tidal.finance/",
             name: "Tidal",
             opentime: getPpentime(1616601600),
+            networkname: 'ETH',
             network: Ethereum,
             Platforms: "Balancer",
             PlatformsURL: "https://balancer.exchange/",
-            logo: 'https://www.tidal.finance/assets/img/logo.png'
+            logo: Tidal,
+            status: ""
         },
         {
-            url: "http://chocoswap.org/",
+            projectsUrl: "http://chocoswap.org/",
             name: "Vanilla",
             opentime: getPpentime(1616601600),
+            networkname: 'HECO',
             network: heco,
             Platforms: "",
             PlatformsURL: "",
-            logo: 'http://chocoswap.org/uploads/allimg/20201026/1-20102620591O16.png'
+            logo: 'http://chocoswap.org/uploads/allimg/20201026/1-20102620591O16.png',
+            status: ""
         },
         {
-            url: "https://impermax.finance/",
+            projectsUrl: "https://impermax.finance/",
             name: "Impermax",
             opentime: getPpentime(1616601600),
+            networkname: 'ETH',
             network: Ethereum,
             Platforms: "",
             PlatformsURL: "",
-            logo: IMpermax
+            logo: impermax,
+            status: ""
         },
         {
             logo: crypto1,
-            websiteUrl: "https://blockchaincuties.com/",
+            projectsUrl: "https://blockchaincuties.com/",
             opentime: getPpentime(1615824000),
             name: "Blockchain Cuties",
             raise: "$440k",
@@ -162,39 +203,45 @@ const IdoList = () => {
             MaxAllocation: "TBA",
             Platforms: "Polkastarter",
             PlatformsURL: "https://www.polkastarter.com/",
+            networkname: 'ETH',
             network: Ethereum,
             Access: "Private",
+            status: ""
         },
-        // {
-        //     logo: crypto2,
-        //     websiteUrl: "https://www.konomi.network/",
-        //     opentime: getPpentime(1615824000),
-        //     name: "Konomi Network",
-        //     raise: "$200k",
-        //     minAllocation: "0",
-        //     MaxAllocation: "TBA",
-        //     Platforms: "Polkastarter",
-        //     PlatformsURL: "https://www.polkastarter.com/",
-        //     network: Ethereum,
-        //     Access: "Private"
-
-        // },
-        // {
-        //     logo: crypto3,
-        //     websiteUrl: "https://oddz.fi/",
-        //     opentime: getPpentime(1615996800),
-        //     name: "Oddz Finance",
-        //     raise: "$150k",
-        //     minAllocation: "0",
-        //     MaxAllocation: "TBA",
-        //     Platforms: "Polkastarter",
-        //     PlatformsURL: "https://www.polkastarter.com/",
-        //     network: Ethereum,
-        //     Access: "Private"
-        // },
         {
-            logo: crypto4,
-            websiteUrl: "https://www.shyft.network/",
+            logo: konomi,
+            projectsUrl: "https://www.konomi.network/",
+            opentime: getPpentime(1615824000),
+            name: "Konomi Network",
+            raise: "$200k",
+            minAllocation: "0",
+            MaxAllocation: "TBA",
+            Platforms: "Polkastarter",
+            PlatformsURL: "https://www.polkastarter.com/",
+            networkname: 'ETH',
+            network: Ethereum,
+            Access: "Private",
+            status: ""
+
+        },
+        {
+            logo: crypto3,
+            projectsUrl: "https://oddz.fi/",
+            opentime: getPpentime(1615996800),
+            name: "Oddz Finance",
+            raise: "$150k",
+            minAllocation: "0",
+            MaxAllocation: "TBA",
+            Platforms: "Polkastarter",
+            PlatformsURL: "https://www.polkastarter.com/",
+            networkname: 'ETH',
+            network: Ethereum,
+            Access: "Private",
+            status: ""
+        },
+        {
+            logo: Navigation,
+            projectsUrl: "https://www.shyft.network/",
             opentime: getPpentime(1616515200),
             name: "Shyft Network",
             raise: "TBA",
@@ -202,11 +249,13 @@ const IdoList = () => {
             MaxAllocation: "TBA",
             Platforms: "Polkastarter",
             PlatformsURL: "https://www.polkastarter.com/",
+            networkname: 'ETH',
             network: Ethereum,
-            Access: "Private"
+            Access: "Private",
+            status: ""
         }, {
-            logo: crypto5,
-            websiteUrl: "https://conv.finance/",
+            logo: decentralInvert,
+            projectsUrl: "https://conv.finance/",
             opentime: getPpentime(1616601600),
             name: "Convergence Finance",
             raise: "TBA",
@@ -214,11 +263,13 @@ const IdoList = () => {
             MaxAllocation: "TBA",
             Platforms: "Polkastarter",
             PlatformsURL: "https://www.polkastarter.com/",
+            networkname: 'ETH',
             network: Ethereum,
-            Access: "Private"
+            Access: "Private",
+            status: "",
         }, {
-            logo: "https://illuvium.io/home/coming-soon@2x.png",
-            websiteUrl: "https://illuvium.io/",
+            logo: illuvium,
+            projectsUrl: "https://illuvium.io/",
             url: "https://illuvium.io/",
             opentime: getPpentime(1617033600),
             name: "Illuvium",
@@ -227,37 +278,26 @@ const IdoList = () => {
             MaxAllocation: "",
             Platforms: "",
             PlatformsURL: "",
+            networkname: 'ETH',
             network: Ethereum,
             Access: ""
         }, {
-            logo: "https://conv.finance/img/brand/logo-decentral-invert@1.5x.png",
-            websiteUrl: "https://conv.finance/",
-            url: "https://conv.finance/",
-            opentime: getPpentime(1616601600),
-            name: "Convergence Finance",
-            raise: "",
-            minAllocation: "",
-            MaxAllocation: "",
-            Platforms: "Polkastarter",
-            PlatformsURL: "https://www.polkastarter.com/",
-            network: Ethereum,
-            Access: ""
-        }, {
-            logo: "https://mdt.io/_nuxt/img/mdt_logo-horizontal-en.9551daf.png",
-            websiteUrl: "https://mdt.io/",
+            logo: mdt,
+            projectsUrl: "https://mdt.io/",
             url: "https://mdt.io/",
-            opentime: "TBA",
+            opentime: "Trading",
             name: "MeasurableData",
             raise: "",
             minAllocation: "",
             MaxAllocation: "",
             Platforms: "Polkastarter",
             PlatformsURL: "https://www.polkastarter.com/",
+            networkname: 'BSC',
             network: binance,
             Access: ""
         }, {
-            logo: "https://www.oxygen.org/img/logo.svg",
-            websiteUrl: "https://www.oxygen.org/",
+            logo: Oxygen,
+            projectsUrl: "https://www.oxygen.org/",
             url: "https://www.oxygen.org/",
             opentime: getPpentime(1615824000),
             name: "Oxygen",
@@ -266,37 +306,26 @@ const IdoList = () => {
             MaxAllocation: "",
             Platforms: "Polkastarter",
             PlatformsURL: "https://www.polkastarter.com/",
+            networkname: 'ETH',
             network: Ethereum, /* solana */
             Access: ""
         }, {
             logo: "https://avatars.githubusercontent.com/u/67821563?s=200&v=4",
-            websiteUrl: "https://anchorprotocol.com/",
+            projectsUrl: "https://anchorprotocol.com/",
             url: "https://anchorprotocol.com/",
-            opentime: getPpentime(1615824000),
+            opentime: 'Trading',
             name: "Visor Finance",
             raise: "",
             minAllocation: "",
             MaxAllocation: "",
             Platforms: "Balancer",
             PlatformsURL: "https://balancer.exchange/#/swap",
+            networkname: 'ETH',
             network: Ethereum,
             Access: ""
         }, {
-            logo: Konomi,
-            websiteUrl: "https://www.konomi.network/#/",
-            url: "https://www.konomi.network/#/",
-            opentime: getPpentime(1615824000),
-            name: "KonomiNetwork",
-            raise: "",
-            minAllocation: "",
-            MaxAllocation: "",
-            Platforms: "Polkastarter",
-            PlatformsURL: "https://www.polkastarter.com/",
-            network: Ethereum,  /* Polkadot */
-            Access: ""
-        }, {
             logo: "https://d33wubrfki0l68.cloudfront.net/2b8fbf1e6c2cda240a9a5252ff23940e7899235d/00ebe/logo_white.svg",
-            websiteUrl: "https://polkafoundry.com/",
+            projectsUrl: "https://polkafoundry.com/",
             url: "https://polkafoundry.com/",
             opentime: getPpentime(1615824000),
             name: "PolkaFoundry",
@@ -305,11 +334,12 @@ const IdoList = () => {
             MaxAllocation: "",
             Platforms: "Polkastarter",
             PlatformsURL: "https://www.polkastarter.com/",
+            networkname: 'ETH',
             network: Ethereum,
             Access: ""
         }, {
-            logo: "https://www.dafiprotocol.io/images/DAFI-Logo.png",
-            websiteUrl: "https://www.dafiprotocol.io/#",
+            logo: dafiprotocol,
+            projectsUrl: "https://www.dafiprotocol.io/#",
             url: "https://www.dafiprotocol.io/#",
             opentime: getPpentime(1615824000),
             name: "DafiProtocol",
@@ -318,11 +348,12 @@ const IdoList = () => {
             MaxAllocation: "",
             Platforms: "MakerDAO",
             PlatformsURL: "https://daomaker.com/",
+            networkname: 'ETH',
             network: Ethereum,
             Access: ""
         }, {
-            logo: "https://casper.network/static/logo-color-e34c65d51e0d215db55ec930da51ac7a.png",
-            websiteUrl: "https://casper.network/",
+            logo: casper,
+            projectsUrl: "https://casper.network/",
             url: "https://casper.network/",
             opentime: getPpentime(1616428800),
             name: "Casper Network",
@@ -331,11 +362,12 @@ const IdoList = () => {
             MaxAllocation: "",
             Platforms: "Coinlist",
             PlatformsURL: "https://coinlist.co/casper",
+            networkname: 'ETH',
             network: Ethereum,
             Access: ""
         }, {
             logo: "https://lbp.insurace.io/img/logo.632de044.svg",
-            websiteUrl: "https://lbp.insurace.io/",
+            projectsUrl: "https://lbp.insurace.io/",
             url: "https://lbp.insurace.io/",
             opentime: getPpentime(1615910400),
             name: "InsurAce",
@@ -344,11 +376,12 @@ const IdoList = () => {
             MaxAllocation: "",
             Platforms: "Rinkeby",
             PlatformsURL: "https://rinkeby.insurace.io/#/dash",
+            networkname: 'ETH',
             network: Ethereum,
             Access: ""
         }, {
-            logo: "https://stater.co/wp-content/uploads/2020/09/mobile-logo.png",
-            websiteUrl: "https://stater.co/",
+            logo: stater,
+            projectsUrl: "https://stater.co/",
             url: "https://stater.co/",
             opentime: getPpentime(1615910400),
             name: "Stater",
@@ -357,11 +390,12 @@ const IdoList = () => {
             MaxAllocation: "",
             Platforms: "Trustswap",
             PlatformsURL: "https://dashboard.trustswap.org/app/launchpads",
+            networkname: 'ETH',
             network: Ethereum,
             Access: ""
         }, {
-            logo: "https://miro.medium.com/max/552/1*zO0Jim7I5hffP8Q_9y9b5g.jpeg",
-            websiteUrl: "https://dorafactory.org/",
+            logo: dorafactory,
+            projectsUrl: "https://dorafactory.org/",
             url: "https://dorafactory.org/",
             opentime: "TBA",
             name: "DoraFactory",
@@ -370,11 +404,12 @@ const IdoList = () => {
             MaxAllocation: "",
             Platforms: "",
             PlatformsURL: "",
+            networkname: 'ETH',
             network: Ethereum,
             Access: ""
         }, {
             logo: "https://miro.medium.com/fit/c/96/96/1*BEamN9l0B7saYGCBFKenmg.png",
-            websiteUrl: "https://fei.money/",
+            projectsUrl: "https://fei.money/",
             url: "https://fei.money/",
             opentime: getPpentime(1616342400),
             name: "Fei Protocol",
@@ -383,24 +418,12 @@ const IdoList = () => {
             MaxAllocation: "",
             Platforms: "",
             PlatformsURL: "",
+            networkname: 'ETH',
             network: Ethereum,
             Access: ""
         }, {
-            logo: Shyft,
-            websiteUrl: "https://www.shyft.network/",
-            url: "https://www.shyft.network/",
-            opentime: getPpentime(1616515200),
-            name: "Shyft Network",
-            raise: "",
-            minAllocation: "",
-            MaxAllocation: "",
-            Platforms: "Polkastarter",
-            PlatformsURL: "https://www.polkastarter.com/",
-            network: Ethereum,
-            Access: ""
-        }, {
-            logo: "https://cash.tech/wp-content/uploads/2021/02/cash-tech-logo-color.svg",
-            websiteUrl: "https://cash.tech/",
+            logo: cash,
+            projectsUrl: "https://cash.tech/",
             url: "https://cash.tech/",
             opentime: "TBA",
             name: "Cash Tech",
@@ -409,11 +432,12 @@ const IdoList = () => {
             MaxAllocation: "",
             Platforms: "DuckSTARTER",
             PlatformsURL: "https://duckstarter.io/",
+            networkname: 'ETH',
             network: Ethereum,
             Access: ""
         }, {
-            logo: "https://xend.finance/assets/images/xf-logo.png",
-            websiteUrl: "https://xend.finance/",
+            logo: XendFinance,
+            projectsUrl: "https://xend.finance/",
             url: "https://xend.finance/",
             opentime: getPpentime(1616425200),
             name: "Xend Finance",
@@ -422,11 +446,12 @@ const IdoList = () => {
             MaxAllocation: "",
             Platforms: "Balancer",
             PlatformsURL: "https://balancer.exchange/",
+            networkname: 'BSC',
             network: binance,
             Access: ""
         }, {
-            logo: WATA,
-            websiteUrl: "https://WATA.Finance/",
+            logo: 'https://gblobscdn.gitbook.com/spaces%2F-MVEfjwhFMMyQDunAxHo%2Favatar-1615182753449.png?alt=media', // WATA
+            projectsUrl: "https://WATA.Finance/",
             url: "https://WATA.Finance/",
             opentime: "Active",
             name: "WATA",
@@ -435,106 +460,116 @@ const IdoList = () => {
             MaxAllocation: "",
             Platforms: "",
             PlatformsURL: "",
+            networkname: 'HECO',
             network: heco,
             Access: ""
         }
-
     ]
-    const UpcomingPools = [
-        {
-            logo: crypto1,
-            websiteUrl: "https://blockchaincuties.com/",
-            opentime: getPpentime(1615824000),
-            name: "Blockchain Cuties",
-            raise: "$440k",
-            minAllocation: "0",
-            MaxAllocation: "TBA",
-            Platforms: "Polkastarter",
-            PlatformsURL: "https://www.polkastarter.com/",
-            network: Ethereum,
-            Access: "Private",
-        },
-        {
-            logo: crypto2,
-            websiteUrl: "https://www.konomi.network/",
-            opentime: getPpentime(1615824000),
-            name: "Konomi Network",
-            raise: "$200k",
-            minAllocation: "0",
-            MaxAllocation: "TBA",
-            Platforms: "Polkastarter",
-            PlatformsURL: "https://www.polkastarter.com/",
-            network: Ethereum,
-            Access: "Private"
 
-        },
-        {
-            logo: crypto3,
-            websiteUrl: "https://oddz.fi/",
-            opentime: getPpentime(1615996800),
-            name: "Oddz Finance",
-            raise: "$150k",
-            minAllocation: "0",
-            MaxAllocation: "TBA",
-            Platforms: "Polkastarter",
-            PlatformsURL: "https://www.polkastarter.com/",
-            network: Ethereum,
-            Access: "Private"
-        },
-        {
-            logo: crypto4,
-            websiteUrl: "https://www.shyft.network/",
-            opentime: getPpentime(1616515200),
-            name: "Shyft Network",
-            raise: "TBA",
-            minAllocation: "0",
-            MaxAllocation: "TBA",
-            Platforms: "Polkastarter",
-            PlatformsURL: "https://www.polkastarter.com/",
-            network: Ethereum,
-            Access: "Private"
-        }, {
-            logo: crypto5,
-            websiteUrl: "https://conv.finance/",
-            opentime: getPpentime(1616601600),
-            name: "Convergence Finance",
-            raise: "TBA",
-            minAllocation: "0",
-            MaxAllocation: "TBA",
-            Platforms: "Polkastarter",
-            PlatformsURL: "https://www.polkastarter.com/",
-            network: Ethereum,
-            Access: "Private"
-        }
-    ]
+
+    useEffect(() => {
+
+        setUpcomingProjects(UpcomingProjects.filter(item => {
+            return item.opentime === "TBA" || item.opentime > 0
+        }).map(item => {
+            return item
+        }));
+        setActiveProjects(UpcomingProjects.filter(item => {
+            return item.opentime === "Active" || item.opentime <= 0
+        }).map(item => {
+            return item
+        }));
+        setFinishedProjects(UpcomingProjects.filter(item => {
+            return item.opentime === "Trading"
+        }).map(item => {
+            return item
+        }));
+
+    }, [])
 
 
 
     return (
         <div className="crypto-mining">
-            <div className="crypto-mining-title">
-                {t('Upcoming_Projects')}
+            <Header hideAction={true} />
+
+            <div className="crypto-mining-tab">
+                <div className={tabindex === 1 ? 'active' : ""} onClick={() => onSwitchTab(1)}>{t('Upcoming_Projects')}</div>
+                <div className={tabindex === 2 ? 'active' : ""} onClick={() => onSwitchTab(2)}>{t('Active_Projects')}</div>
+                <div className={tabindex === 3 ? 'active' : ""} onClick={() => onSwitchTab(3)}>{t('Finished_Projects')}</div>
             </div>
             <div className="crypto-mining-list">
 
-                {UpcomingProjects && UpcomingProjects.length ? <Row>
-                    {UpcomingProjects.map((item, index) => {
-                        return (
-                            <Col key={index} xs={{ span: 24 }} sm={{ span: 12 }} lg={{ span: 8 }}>
-                                <a href={item.url} target="_blank" rel="noreferrer" >
+                {tabindex === 1 ? <>
+                    {upcomingProjects && upcomingProjects.length ? <Row>
+                        {upcomingProjects.map((item, index) => {
+                            return (
+                                <Col key={index} xs={{ span: 24 }} sm={{ span: 12 }} lg={{ span: 8 }}>
                                     <div className="item">
-                                        <span className="name">{item.name || ""}</span>
-                                        {item.opentime > 0 ? <span className="days">{item.opentime}Days</span> : <span className="active">Active</span>}
-                                        <img className="network" src={item.network} alt="" />
-                                        <img className="logo" src={item.logo || ""} alt="" />
 
-                                        <div>{item.Platforms !== "" ? 'IDO Launch' : item.opentime > 0 ? ' Whitelist - Register Now' : "Public sales"}</div>
+                                        <img className="logo" src={item.logo || ""} alt="" />
+                                        {item.opentime === 'TBA' ? <span className="days">TBA</span> : item.opentime > 0 ? <span className="days">{item.opentime}Days</span> : <span className="active">Active</span>}
+                                        <img className="network" src={item.network} alt="" />
+                                        <p className="name">{item.name || ""}</p>
+                                        <p className="network-name">{item.networkname}</p>
+                                        {item.projectsUrl && item.PlatformsURL ? <div className="multiple">
+                                            <a href={item.PlatformsURL} target="_blank" rel="noreferrer"><div>IDO Launch</div></a>
+                                            <a href={item.projectsUrl} target="_blank" rel="noreferrer"><div>website</div></a>
+                                        </div> : <a href={item.projectsUrl ? item.projectsUrl : item.PlatformsURL} target="_blank" rel="noreferrer"><div className="Asingle">IDO Launch</div></a>}
+                                        {/* <div className="Asingle">IDO Launch</div> */}
+
+                                        {/* <div>{item.Platforms !== "" ? 'IDO Launch' : item.opentime > 0 ? ' Whitelist - Register Now' : "Public sales"}</div> */}
                                     </div>
-                                </a>
-                            </Col>
-                        )
-                    })}
-                </Row> : <Empty />}
+                                </Col>
+                            )
+                        })}
+                    </Row> : <Empty style={{ margin: '60px auto' }} />}
+                </> : ""}
+
+                {tabindex === 2 ? <>
+                    {activeProjects && activeProjects.length ? <Row>
+                        {activeProjects.map((item, index) => {
+                            return (
+                                <Col key={index} xs={{ span: 24 }} sm={{ span: 12 }} lg={{ span: 8 }}>
+                                    <div className="item">
+                                        <img className="logo" src={item.logo || ""} alt="" />
+                                        <span className="active">● Active</span>
+                                        <img className="network" src={item.network} alt="" />
+                                        <p className="name">{item.name || ""}</p>
+                                        <p className="network-name">{item.networkname}</p>
+                                        {item.projectsUrl && item.PlatformsURL ? <div className="multiple">
+                                            <a href={item.PlatformsURL} target="_blank" rel="noreferrer"><div>IDO Launch</div></a>
+                                            <a href={item.projectsUrl} target="_blank" rel="noreferrer"><div>website</div></a>
+                                        </div> : <a href={item.projectsUrl ? item.projectsUrl : item.PlatformsURL} target="_blank" rel="noreferrer"><div className="Asingle">IDO Launch</div></a>}
+                                    </div>
+                                </Col>
+                            )
+                        })}
+                    </Row> : <Empty style={{ margin: '60px auto' }} />}
+                </> : ""}
+
+                {tabindex === 3 ? <>
+                    {finishedProjects && finishedProjects.length ? <Row>
+                        {finishedProjects.map((item, index) => {
+                            return (
+                                <Col key={index} xs={{ span: 24 }} sm={{ span: 12 }} lg={{ span: 8 }}>
+                                    <div className="item">
+                                        <img className="logo" src={item.logo || ""} alt="" />
+                                        <div className="finish">{t('finish')}</div>
+                                        <img className="network" src={item.network} alt="" />
+                                        <p className="name">{item.name || ""}</p>
+                                        <p className="network-name">{item.networkname}</p>
+                                        {item.projectsUrl && item.PlatformsURL ? <div className="multiple">
+                                            <a href={item.PlatformsURL} target="_blank" rel="noreferrer"><div>IDO Launch</div></a>
+                                            <a href={item.projectsUrl} target="_blank" rel="noreferrer"><div>website</div></a>
+                                        </div> : <a href={item.projectsUrl ? item.projectsUrl : item.PlatformsURL} target="_blank" rel="noreferrer"><div className="Asingle">IDO Launch</div></a>}
+                                    </div>
+                                </Col>
+                            )
+                        })}
+                    </Row> : <Empty style={{ margin: '60px auto' }} />}
+                </> : ""}
+
 
 
             </div>

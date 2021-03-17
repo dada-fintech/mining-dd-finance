@@ -2,28 +2,50 @@
     overflow: hidden;
     padding-bottom: 44px;
 
-    .crypto-mining-title {
-        border-bottom: 2px solid rgba(171, 171, 171, 0.5);
-        line-height: 66px;
-        display: flex;
-        font-size: 18px;
-        align-items: center;
-        width: 100%;
-        margin: 0 22px;
 
-        @media (min-width: 576px) {
-            margin: 0;
+
+    .crypto-mining-tab {
+        padding: 24px 0;
+        border-bottom: 2px solid rgba(171, 171, 171, 0.5);
+
+        div {
+            background: #FFFFFF;
+            box-shadow: 2px 4px 11px rgba(232, 195, 213, 0.3);
+            border-radius: 10px;
+            text-align: center;
+            height: 40px;
+            line-height: 40px;
+            padding: 0 20px;
+            display: inline-block;
+            margin-right: 12px;
+            cursor: pointer;
+        }
+
+        .active {
+            background: #FFEC78;
         }
     }
 
     .crypto-mining-list {
+        display: flex;
+        flex-wrap: wrap;
+        align-content: flex-start;
+        justify-content: space-between;
+
+        .ant-row {
+            width: 100%;
+        }
 
         .item {
-            margin: 35px 22px 0 22px;
-            background: rgba(131, 156, 220, 0.24);
+            margin: 24px 22px 0 22px;
+            margin-top: 24px;
+            background: #FFFFFF;
+            box-shadow: 2px 4px 11px rgba(232, 195, 213, 0.3);
             border-radius: 15px;
-            padding: 20px 18px 32px 18px;
+            padding: 26px;
             position: relative;
+            box-sizing: border-box;
+
 
             .name {
 
@@ -31,7 +53,8 @@
                 font-size: 14px;
                 line-height: 20px;
                 color: #000000;
-                margin-bottom: 12px;
+                margin-top: 5px;
+                flex: none;
             }
 
             .days {
@@ -56,22 +79,40 @@
                 float: right;
             }
 
+            .finish {
+                height: 24px;
+                border-radius: 5px;
+                line-height: 24px;
+                text-align: center;
+                color: #9E9E9E;
+                background: #E4E4E4;
+                padding: 0 24px;
+                float: right;
+            }
+
             .network {
                 position: absolute;
-                right: 6px;
-                bottom: 6px;
-                width: 30px;
+                right: 8px;
+                bottom: 4px;
+                width: 14px;
+            }
+
+            .network-name {
+                font-size: 14px;
+                line-height: 16px;
+                color: rgba(0, 0, 0, 0.5);
+                margin-bottom: 10px;
             }
 
             .logo {
-                height: 32px;
-                width: auto;
+                height: 60px;
+                width: 60px;
                 display: flex;
                 align-items: center;
-                margin: 14px 12px 0;
+                display: inline-block;
             }
 
-            div {
+            .Asingle {
                 padding: 0 20px;
                 height: 40px;
                 background: #FFEC78;
@@ -80,7 +121,31 @@
                 line-height: 40px;
                 text-align: center;
                 color: #000000;
-                margin: 22px 24px 0 24px;
+
+            }
+
+            .multiple {
+                display: flex;
+                flex-wrap: wrap;
+                align-content: flex-start;
+                justify-content: space-between;
+
+                a {
+                    flex: 0 0 48%;
+                    box-sizing: border-box;
+                    background: #FFEC78;
+                    border-radius: 10px;
+                    font-size: 14px;
+                    line-height: 40px;
+                    padding: 0 20px;
+                    height: 40px;
+                    text-align: center;
+                    color: #000000;
+
+                    &:last-child() {
+                        margin-left: 4%;
+                    }
+                }
 
             }
 
@@ -88,6 +153,8 @@
                 box-shadow: 2px 4px 11px rgba(232, 195, 213, 0.1);
             }
         }
+
+
     }
 
 

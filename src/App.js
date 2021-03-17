@@ -1,8 +1,8 @@
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Redirect,
 } from "react-router-dom";
 import "./App.scss";
 import React from "react";
@@ -37,63 +37,63 @@ import IdoList from './pages/Ido';
 // import CryptoMining from "./pages/CryptoMining";
 
 const language =
-  localStorage.getItem("language") ||
-  (navigator.language === "zh-CN" ? "zh" : "en");
+    localStorage.getItem("language") ||
+    (navigator.language === "zh-CN" ? "zh" : "en");
 i18n
-  .use(initReactI18next) // passes i18n down to react-i18next
-  .init({
-    resources: message,
-    lng: language,
-    fallbackLng: "zh",
-    interpolation: {
-      escapeValue: false,
-    },
-  });
+    .use(initReactI18next) // passes i18n down to react-i18next
+    .init({
+        resources: message,
+        lng: language,
+        fallbackLng: "zh",
+        interpolation: {
+            escapeValue: false,
+        },
+    });
 
-function App() {
-  const { i18n } = useTranslation();
+function App () {
+    const { i18n } = useTranslation();
 
-  return (
-    <ConfigProvider locale={i18n.language === "en" ? enUS : zhCN}>
-      <div className={`App ${i18n.language}`}>
-        {/* <Modal title={t('common.maintenanceTitle')} visible={true} footer={null}>
+    return (
+        <ConfigProvider locale={i18n.language === "en" ? enUS : zhCN}>
+            <div className={`App ${i18n.language}`}>
+                {/* <Modal title={t('common.maintenanceTitle')} visible={true} footer={null}>
                     {t('common.maintenanceContent')}
                 </Modal> */}
-        <Router>
-          <Row>
-            <Col xs={0} lg={4} xxl={3}>
-              <AppSidebar />
-            </Col>
-            <Col xs={24} lg={20} xxl={21}>
-              <div className="content-wrapper">
-                <Switch>
-                  <Route exact path="/">
-                    <Redirect to="/community-projects" />
-                  </Route>
-                  <Route
-                    exact
-                    path="/community-projects"
-                    component={CommunityProjects}
-                  />
-                  <Route exact path="/projects" component={Projects} />
-                  <Route
-                    exact
-                    path="/project/special/:id"
-                    component={specialProject}
-                  />
-                  <Route exact path="/project/:id" component={Project} />
-                  <Route
-                    exact
-                    path="/create-project/:tempType"
-                    component={CreateProject}
-                  />
-                  <Route exact path="/create-vote/:id" component={CreateVote} />
-                  <Route exact path="/coming/:page" component={Coming} />
-                  <Route exact path="/blog" component={Blog} />
+                <Router>
+                    <Row>
+                        <Col xs={0} lg={4} xxl={3}>
+                            <AppSidebar />
+                        </Col>
+                        <Col xs={24} lg={20} xxl={21}>
+                            <div className="content-wrapper">
+                                <Switch>
+                                    <Route exact path="/">
+                                        <Redirect to="/community-projects" />
+                                    </Route>
+                                    <Route
+                                        exact
+                                        path="/community-projects"
+                                        component={CommunityProjects}
+                                    />
+                                    <Route exact path="/projects" component={Projects} />
+                                    <Route
+                                        exact
+                                        path="/project/special/:id"
+                                        component={specialProject}
+                                    />
+                                    <Route exact path="/project/:id" component={Project} />
+                                    <Route
+                                        exact
+                                        path="/create-project/:tempType"
+                                        component={CreateProject}
+                                    />
+                                    <Route exact path="/create-vote/:id" component={CreateVote} />
+                                    <Route exact path="/coming/:page" component={Coming} />
+                                    <Route exact path="/blog" component={Blog} />
 
-                  <Route exact path="/buy-dhm" component={Buy} />
+                                    <Route exact path="/buy-dhm" component={Buy} />
 
-                  {/* <Route
+                                    {/* <Route
                                         exact
                                         path="/farming"
                                         component={Farming}
