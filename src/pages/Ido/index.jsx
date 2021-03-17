@@ -36,6 +36,7 @@ import Oxygen from '../../assets/logo/Oxygen.svg';
 import illuvium from '../../assets/logo/illuvium.svg';
 import cash from '../../assets/logo/cash.svg';
 import mdt from '../../assets/logo/mdt.png';
+import polkafoundry from '../../assets/logo/polkafoundry.svg';
 
 
 
@@ -324,7 +325,7 @@ const IdoList = () => {
             network: Ethereum,
             Access: ""
         }, {
-            logo: "https://d33wubrfki0l68.cloudfront.net/2b8fbf1e6c2cda240a9a5252ff23940e7899235d/00ebe/logo_white.svg",
+            logo: polkafoundry,
             projectsUrl: "https://polkafoundry.com/",
             url: "https://polkafoundry.com/",
             opentime: getPpentime(1615824000),
@@ -515,7 +516,7 @@ const IdoList = () => {
                                         {item.projectsUrl && item.PlatformsURL ? <div className="multiple">
                                             <a href={item.PlatformsURL} target="_blank" rel="noreferrer"><div>IDO Launch</div></a>
                                             <a href={item.projectsUrl} target="_blank" rel="noreferrer"><div>website</div></a>
-                                        </div> : <a href={item.projectsUrl ? item.projectsUrl : item.PlatformsURL} target="_blank" rel="noreferrer"><div className="Asingle">IDO Launch</div></a>}
+                                        </div> : <a href={item.projectsUrl ? item.projectsUrl : item.PlatformsURL} target="_blank" rel="noreferrer"><div className="Asingle">website</div></a>}
                                         {/* <div className="Asingle">IDO Launch</div> */}
 
                                         {/* <div>{item.Platforms !== "" ? 'IDO Launch' : item.opentime > 0 ? ' Whitelist - Register Now' : "Public sales"}</div> */}
@@ -540,7 +541,7 @@ const IdoList = () => {
                                         {item.projectsUrl && item.PlatformsURL ? <div className="multiple">
                                             <a href={item.PlatformsURL} target="_blank" rel="noreferrer"><div>IDO Launch</div></a>
                                             <a href={item.projectsUrl} target="_blank" rel="noreferrer"><div>website</div></a>
-                                        </div> : <a href={item.projectsUrl ? item.projectsUrl : item.PlatformsURL} target="_blank" rel="noreferrer"><div className="Asingle">IDO Launch</div></a>}
+                                        </div> : <a href={item.projectsUrl ? item.projectsUrl : item.PlatformsURL} target="_blank" rel="noreferrer"><div className="Asingle">website</div></a>}
                                     </div>
                                 </Col>
                             )
@@ -562,7 +563,7 @@ const IdoList = () => {
                                         {item.projectsUrl && item.PlatformsURL ? <div className="multiple">
                                             <a href={item.PlatformsURL} target="_blank" rel="noreferrer"><div>IDO Launch</div></a>
                                             <a href={item.projectsUrl} target="_blank" rel="noreferrer"><div>website</div></a>
-                                        </div> : <a href={item.projectsUrl ? item.projectsUrl : item.PlatformsURL} target="_blank" rel="noreferrer"><div className="Asingle">IDO Launch</div></a>}
+                                        </div> : <a href={item.projectsUrl ? item.projectsUrl : item.PlatformsURL} target="_blank" rel="noreferrer"><div className="Asingle">website</div></a>}
                                     </div>
                                 </Col>
                             )
