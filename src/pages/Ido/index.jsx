@@ -225,21 +225,21 @@ const IdoList = () => {
             status: ""
 
         },
-        {
-            logo: crypto3,
-            projectsUrl: "https://oddz.fi/",
-            opentime: getPpentime(1615996800),
-            name: "Oddz Finance",
-            raise: "$150k",
-            minAllocation: "0",
-            MaxAllocation: "TBA",
-            Platforms: "Polkastarter",
-            PlatformsURL: "https://www.polkastarter.com/",
-            networkname: 'ETH',
-            network: Ethereum,
-            Access: "Private",
-            status: ""
-        },
+        // {
+        //     logo: crypto3,
+        //     projectsUrl: "https://oddz.fi/",
+        //     opentime: getPpentime(1615996800),
+        //     name: "Oddz Finance",
+        //     raise: "$150k",
+        //     minAllocation: "0",
+        //     MaxAllocation: "TBA",
+        //     Platforms: "Polkastarter",
+        //     PlatformsURL: "https://www.polkastarter.com/",
+        //     networkname: 'ETH',
+        //     network: Ethereum,
+        //     Access: "Private",
+        //     status: ""
+        // },
         {
             logo: Navigation,
             projectsUrl: "https://www.shyft.network/",

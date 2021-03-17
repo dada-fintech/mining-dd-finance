@@ -232,7 +232,7 @@ export default function AppSidebar (props) {
                     </li>
 
 
-                    <li>
+                    {/* <li>
                         <NavLink
                             className={`nowrap ${location.pathname === "/token-swap" ? "top-curve" : ""
                                 } ${location.pathname === "/blog" ? "bottom-curve" : ""}`}
@@ -242,7 +242,7 @@ export default function AppSidebar (props) {
                             <img src={DashboardIcon} alt="" />
                             {t('sidebar.farmRank')}
                         </NavLink>
-                    </li>
+                    </li> */}
 
                     {/* <li>
             <NavLink
