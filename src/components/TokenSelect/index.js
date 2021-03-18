@@ -12,6 +12,7 @@ export default function TokenSelect(props) {
   const [loadingList, setLoadingList] = useState(false);
   const selectToken = (token) => {
     onSelect(tokenSelectType, token);
+    setSearch('')
     onCancel();
   };
 
@@ -32,12 +33,13 @@ export default function TokenSelect(props) {
       wrapClassName="token-select-modal"
       visible={tokenSelectType}
       footer={null}
-      onCancel={onCancel}
+      onCancel={()=> { setSearch(''); onCancel();}}
     >
       <div className="title">Select a token</div>
       <Input
         className="search-input"
         placeholder="Search for a token"
+        value={search}
         onChange={(e) => setSearch(e.target.value.toLowerCase())}
       />
 
