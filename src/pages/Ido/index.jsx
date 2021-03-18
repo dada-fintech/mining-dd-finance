@@ -37,6 +37,10 @@ import illuvium from '../../assets/logo/illuvium.svg';
 import cash from '../../assets/logo/cash.svg';
 import mdt from '../../assets/logo/mdt.png';
 import polkafoundry from '../../assets/logo/polkafoundry.svg';
+import moonedge from '../../assets/logo/moonedge.svg';
+import Swirl from '../../assets/logo/Swirl.png';
+import ORAO from '../../assets/logo/ORAO.png';
+import FMGallery from '../../assets/logo/FM Gallery.png';
 
 
 
@@ -463,6 +467,76 @@ const IdoList = () => {
             PlatformsURL: "",
             networkname: 'HECO',
             network: heco,
+            Access: ""
+        }, {
+            logo: 'http://slinkyfinance.xyz/img/logo2.svg', // Slinky
+            projectsUrl: "http://slinkyfinance.xyz/",
+            url: "http://slinkyfinance.xyz/",
+            opentime: getPpentime(1616169600),
+            name: "Slinky",
+            raise: "",
+            minAllocation: "",
+            MaxAllocation: "",
+            Platforms: "",
+            PlatformsURL: "",
+            networkname: 'BSC',
+            network: binance,
+            Access: ""
+        }, {
+            logo: moonedge, // Moonedge
+            projectsUrl: "https://moonedge.finance/",
+            url: "https://moonedge.finance/",
+            opentime: "TBA",
+            name: "Moonedge",
+            raise: "",
+            minAllocation: "",
+            MaxAllocation: "",
+            Platforms: "",
+            PlatformsURL: "",
+            networkname: 'ETH', // Polkadot
+            network: Ethereum,
+            Access: ""
+        }, {
+            logo: Swirl, // Swirl
+            projectsUrl: "https://swirl.cash/",
+            url: "https://swirl.cash/",
+            opentime: "Active",
+            name: "Swirl",
+            raise: "",
+            minAllocation: "",
+            MaxAllocation: "",
+            Platforms: "wault",
+            PlatformsURL: "https://launchpad.wault.finance/",
+            networkname: 'BSC',
+            network: binance,
+            Access: ""
+        }, {
+            logo: ORAO, // ORAO
+            projectsUrl: "https://orao.network/",
+            url: "https://orao.network/",
+            opentime: "TBA",
+            name: "ORAO",
+            raise: "",
+            minAllocation: "",
+            MaxAllocation: "",
+            Platforms: "",
+            PlatformsURL: "",
+            networkname: 'ETH',
+            network: Ethereum,
+            Access: ""
+        }, {
+            logo: FMGallery, // FM Gallery
+            projectsUrl: "http://wah.art/",
+            url: "http://wah.art/",
+            opentime: getPpentime(1616342400),
+            name: "FM Gallery",
+            raise: "",
+            minAllocation: "",
+            MaxAllocation: "",
+            Platforms: "poolz",
+            PlatformsURL: "https://poolz.finance/",
+            networkname: 'ETH',
+            network: Ethereum,
             Access: ""
         }
     ]
