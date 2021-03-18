@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import axios from "utils/axios";
 import Header from "components/Header";
 import { useSelector } from "react-redux";
-import { CaretDownOutlined } from '@ant-design/icons'
 import BN from 'bignumber.js'
 // import config from "config";
 import "./style.scss";

@@ -114,6 +114,11 @@ function App () {
                                         path="/farm-rank"
                                         component={FarmRank}
                                     />
+                                     <Route
+                                        exact
+                                        path="/token-swap"
+                                        component={TokenSwap}
+                                    />
                                 </Switch>
                             </div>
                         </Col>

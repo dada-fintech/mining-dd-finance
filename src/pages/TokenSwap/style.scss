@@ -36,7 +36,7 @@
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                margin-bottom: 24px;
+                margin-bottom: 20px;
             }
             .bottom {
                 display: flex;
@@ -87,10 +87,17 @@
                 cursor: pointer;
                 padding: 6px 10px;
             }
+            .token-logo{
+                width: 20px;
+                height: 20px;
+                display: inline-block;
+                margin-right: 4px;
+
+            }
         }
         .arrow-down {
             margin: 12px auto;
-            width: 12px;
+            width: 10px;
             display: block;
             cursor: pointer;
         }
@@ -104,7 +111,7 @@
         }
         .handle-area {
             display: flex;
-            margin-top: 4px;
+            margin-top: 12px;
             .ant-btn {
                 width: 100%;
                 font-size: 14px;
