@@ -531,7 +531,7 @@ const commonABI = [
 
 export default {
     // 默认要连接的network，测试环境默认用 test，生产环境默认用 ethereum
-    defaultNetwork: 'ethereum',
+    defaultNetwork: 'test',
     //test(binance)
     test: {
         network: 'test',
@@ -565,7 +565,7 @@ export default {
     ethereum: {
         network: 'ethereum',
         mode: 'prod',
-        provider: 'wss://mainnet.infura.io/ws/v3/89db527f19e14a00902a439ae587a25b',
+        provider: 'wss://mainnet.infura.io/ws/v3/7c062453c3b64a02b9b402d4bde13674',
         chainId: 1,
         ddURL: 'https://aggre.haowa.io',
         baseURL: 'https://mining-api.dd.finance',

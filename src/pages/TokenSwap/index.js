@@ -42,7 +42,7 @@ export default function TokenSwap() {
       return balance;
     }
     const tokenBalance = await ddAxios.post("/account/balances", {
-      address: wallet.account || "0x104f010851236afA2c56974a2Ec84ED8C9bF364f",
+      address: wallet.account,
       tokens: [tokenSymbol],
     });
     return tokenBalance.data.token_balances[tokenSymbol][0];
