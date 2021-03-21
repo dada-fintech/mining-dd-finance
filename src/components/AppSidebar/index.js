@@ -158,7 +158,7 @@ export default function AppSidebar (props) {
                             </NavLink>
                         </li>
                     )}
-
+{/* 
                     {network !== "heco" && (
                         <li>
                             <NavLink
@@ -171,7 +171,7 @@ export default function AppSidebar (props) {
                                 {t("sidebar.cryptoMining")}
                             </NavLink>
                         </li>
-                    )}
+                    )} */}
 
                     {/* {(network === 'heco' || network === 'ethereum') && <li>
                         <NavLink
@@ -207,7 +207,7 @@ export default function AppSidebar (props) {
                         </NavLink>
                     </li>} */}
 
-                    <li>
+                    {/* <li>
                         <NavLink
                             className={`nowrap ${location.pathname === "/farming-detail" ? "top-curve" : ""
                                 } ${location.pathname === "/coming/dashboard" ? "bottom-curve" : ""
@@ -218,7 +218,7 @@ export default function AppSidebar (props) {
                             <img src={MiningSwapIcon} alt="" />
                             {t("sidebar.tokenSwap")}
                         </NavLink>
-                    </li>
+                    </li> */}
 
                     <li>
                         <NavLink
