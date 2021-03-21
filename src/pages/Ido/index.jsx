@@ -41,6 +41,7 @@ import moonedge from '../../assets/logo/moonedge.svg';
 import Swirl from '../../assets/logo/Swirl.png';
 import ORAO from '../../assets/logo/ORAO.png';
 import FMGallery from '../../assets/logo/FM Gallery.png';
+import deeper from '../../assets/logo/deeper.png';
 
 
 
@@ -535,6 +536,62 @@ const IdoList = () => {
             MaxAllocation: "",
             Platforms: "poolz",
             PlatformsURL: "https://poolz.finance/",
+            networkname: 'ETH',
+            network: Ethereum,
+            Access: ""
+        }, {
+            logo: "https://opensea.io/static/images/logos/opensea-logo.png",
+            projectsUrl: "https://opensea.io/",
+            url: "https://opensea.io/",
+            opentime: "TBA",
+            name: "OpenSea",
+            raise: "",
+            minAllocation: "",
+            MaxAllocation: "",
+            Platforms: "",
+            PlatformsURL: "",
+            networkname: 'ETH',
+            network: Ethereum,
+            Access: ""
+        }, {
+            logo: "https://www.stonedefi.io/images/logo1.png", 
+            projectsUrl: "https://www.stonedefi.io/",
+            url: "https://www.stonedefi.io/",
+            opentime: getPpentime(1616428800),
+            name: "Stone",
+            raise: "",
+            minAllocation: "",
+            MaxAllocation: "",
+            Platforms: "Bounce",
+            PlatformsURL: "https://stonedefi.medium.com/introducing-stone-defi-x-bounce-certified-ido-whitelist-a4f28d15cb03",
+            networkname: 'ETH',
+            network: Ethereum,
+            Access: ""
+        }, {
+            logo: deeper, 
+            projectsUrl: "https://deeper.network/",
+            url: "https://deeper.network/",
+            opentime: getPpentime(1616342400),
+            name: "Deeper",
+            raise: "",
+            minAllocation: "",
+            MaxAllocation: "",
+            Platforms: "Flybit",
+            PlatformsURL: "https://deeper.network/publicsalelanding",
+            networkname: 'ETH',
+            network: Ethereum,
+            Access: ""
+        }, {
+            logo: "https://dehive.finance/img/head_icon_2.svg",
+            projectsUrl: "https://dehive.finance/",
+            url: "https://dehive.finance/",
+            opentime: getPpentime(1616572800),
+            name: "Dehive",
+            raise: "",
+            minAllocation: "",
+            MaxAllocation: "",
+            Platforms: "Dehive",
+            PlatformsURL: "https://dehive.finance/tokensale",
             networkname: 'ETH',
             network: Ethereum,
             Access: ""
