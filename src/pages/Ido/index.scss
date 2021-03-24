@@ -258,6 +258,30 @@
     }
 
     @media (max-width: 576px) {
+        .crypto-mining-tab {
+            padding: 24px 0;
+            border-bottom: 2px solid rgba(171, 171, 171, 0.5);
+
+            div {
+                box-shadow: 2px 4px 11px rgba(232, 195, 213, 0.3);
+                border-radius: 10px;
+                text-align: center;
+                height: 40px;
+                line-height: 40px;
+                padding: 0 10px;
+                display: inline-block;
+                margin-right: 12px;
+                cursor: pointer;
+                font-size: 12px;
+                width: calc(50% - 12px);
+                margin-bottom: 12px;
+            }
+
+            .active {
+                background: #FFEC78;
+            }
+        }
+
         .crypto-mining-list {
             .item {
                 margin: 22px 6px 0 6px;
