@@ -13,10 +13,7 @@ import Ethereum from '../../assets/network/Ethereum.png';
 import heco from '../../assets/network/heco.png';
 
 import crypto1 from '../../assets/crypto/1.jpeg';
-import crypto2 from '../../assets/crypto/2.png';
-import crypto3 from '../../assets/crypto/3.png';
-import crypto4 from '../../assets/crypto/4.png';
-import crypto5 from '../../assets/crypto/5.png';
+
 
 import dafiprotocol from '../../assets/logo/dafiprotocol.svg';
 import merchdao from '../../assets/logo/merchdao.svg';
@@ -42,7 +39,8 @@ import Swirl from '../../assets/logo/Swirl.png';
 import ORAO from '../../assets/logo/ORAO.png';
 import FMGallery from '../../assets/logo/FM Gallery.png';
 import deeper from '../../assets/logo/deeper.png';
-
+import blindboxes from '../../assets/logo/Blindboxes.jpeg';
+import kickpad from '../../assets/logo/Kickpad.svg';
 
 
 const IdoList = () => {
@@ -403,7 +401,7 @@ const IdoList = () => {
             logo: dorafactory,
             projectsUrl: "https://dorafactory.org/",
             url: "https://dorafactory.org/",
-            opentime: "TBA",
+            opentime: "Trading",
             name: "DoraFactory",
             raise: "",
             minAllocation: "",
@@ -554,7 +552,7 @@ const IdoList = () => {
             network: Ethereum,
             Access: ""
         }, {
-            logo: "https://www.stonedefi.io/images/logo1.png", 
+            logo: "https://www.stonedefi.io/images/logo1.png",
             projectsUrl: "https://www.stonedefi.io/",
             url: "https://www.stonedefi.io/",
             opentime: getPpentime(1616428800),
@@ -568,7 +566,7 @@ const IdoList = () => {
             network: Ethereum,
             Access: ""
         }, {
-            logo: deeper, 
+            logo: deeper,
             projectsUrl: "https://deeper.network/",
             url: "https://deeper.network/",
             opentime: getPpentime(1616342400),
@@ -595,7 +593,80 @@ const IdoList = () => {
             networkname: 'ETH',
             network: Ethereum,
             Access: ""
+        },
+        {
+            logo: blindboxes,
+            projectsUrl: "https://blindboxes.io/",
+            url: "https://blindboxes.io/",
+            opentime: getPpentime(1616688000),
+            name: "Blindboxes",
+            raise: "",
+            minAllocation: "",
+            MaxAllocation: "",
+            Platforms: "BSCpad",
+            PlatformsURL: "https://bscpad.medium.com/blind-boxes-bles-a-gamified-marketplace-for-nfts-e6f24c193e",
+            networkname: 'BSC',
+            network: binance,
+            Access: ""
+        }, {
+            logo: kickpad,
+            projectsUrl: "https://thekickpad.com/",
+            url: "https://thekickpad.com/",
+            opentime: getPpentime(1616688000),
+            name: "Kickpad",
+            raise: "",
+            minAllocation: "",
+            MaxAllocation: "",
+            Platforms: "",
+            PlatformsURL: "",
+            networkname: 'BSC',
+            network: binance,
+            Access: ""
+        }, {
+            logo: "https://gamyfi.xyz/static/site/gmdx.png",
+            projectsUrl: "https://gamyfi.xyz/",
+            url: "https://gamyfi.xyz/",
+            opentime: getPpentime(1616947200),
+            name: "GamyFi",
+            raise: "",
+            minAllocation: "",
+            MaxAllocation: "",
+            Platforms: "DODO",
+            PlatformsURL: "https://app.dodoex.io/",
+            networkname: 'ETH',
+            network: Ethereum,
+            Access: ""
+        }, {
+            logo: "https://bosonprotocol.io/images/logo.png",
+            projectsUrl: "https://bosonprotocol.io/",
+            url: "https://bosonprotocol.io/",
+            opentime: getPpentime(1617292800),
+            name: "BOSON Protocol",
+            raise: "",
+            minAllocation: "",
+            MaxAllocation: "",
+            Platforms: "",
+            PlatformsURL: "",
+            networkname: 'ETH',
+            network: Ethereum,
+            Access: ""
+        },
+        {
+            logo: "https://qintarcoin.org/wp-content/uploads/2020/09/one-part-of-logo.png",
+            projectsUrl: "https://qintarcoin.org/#tokensale",
+            url: "https://qintarcoin.org/#tokensale",
+            opentime: "Active",
+            name: "QINTAR",
+            raise: "",
+            minAllocation: "",
+            MaxAllocation: "",
+            Platforms: "",
+            PlatformsURL: "",
+            networkname: 'ETH',
+            network: Ethereum,
+            Access: ""
         }
+
     ]
 
 
