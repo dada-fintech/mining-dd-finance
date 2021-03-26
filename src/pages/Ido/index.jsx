@@ -116,7 +116,7 @@ const IdoList = () => {
         {
             projectsUrl: "https://seedify.fund/",
             name: "Seedify Fund",
-            opentime: "TBA",
+            opentime: "Active",
             networkname: 'BSC',
             network: binance,
             Platforms: "",
